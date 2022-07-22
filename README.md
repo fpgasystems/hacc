@@ -70,7 +70,7 @@ We use [Ansible](/docs/definitions.md/#ansible) for managing Xilinx’s tools ve
   </tr>
 </tbody>
 <tfoot><tr><td colspan="5">&#9675; Existing release.</td></tr></tfoot>
-<tfoot><tr><td colspan="5">&#9679; Existing release installed on cluster.</td></tr></tfoot>
+<tfoot><tr><td colspan="5">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
 </table>
 
 
