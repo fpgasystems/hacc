@@ -5,4 +5,12 @@
 </p>
 
 # Infrastructure
-ETH’s Systems Group HACC is comprised of high-​end servers, Xilinx Alveo accelerator cardscall and high-​speed networking. Each Alveo card has two connections to a 100Gbps network switch to allow exploration of arbitrary network topologies for distributed computing.
+ETH’s Systems Group HACC is comprised of high-​end servers, Xilinx Alveo and Versal accelerator cards, and high-​speed networking. Each Alveo card has two connections to a 100 GbE network switch to allow exploration of arbitrary network topologies for distributed computing.
+
+## Servers
+Bla bla
+
+## Xilinx accelerator cards
+Bla bla
+
+## Networking
