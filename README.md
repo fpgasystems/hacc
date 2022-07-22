@@ -8,9 +8,7 @@
 <a href="https://systems.ethz.ch/research/data-processing-on-modern-hardware/alveo-fpga-cluster.html">
 <img src="https://systems.ethz.ch/_jcr_content/orgbox/image.imageformat.logo.1091186870.svg" align="center" width="350">
 </a>
-<h1>
-  Alveo Cluster
-</h1>
+
 <a href="https://www.xilinx.com/support/university/XUP-HACC.html">Heterogenous Accelerated Compute Clusters (HACC) Program</a>
 </td></tr></table>
 
