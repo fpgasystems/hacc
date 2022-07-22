@@ -7,7 +7,9 @@
 # Definitions
 
 ## Ansible
-The [Red Hat Ansible Automation Platform](https://www.ansible.com) is an orchestrated and open-source tool for software provisioning, configuration management, and application-deployment enabling infrastructure as code—including its own YAML-based declarative language enabling infrastructure as code.
+The [Red Hat Ansible Automation Platform](https://www.ansible.com) is an orchestrated and open-source tool for software provisioning, configuration management, and application-deployment. Ansible uses its own YAML-based declarative language enabling infrastructure as code. 
+
+[Ansible Managed HACC 🔒](https://gitlab.inf.ethz.ch/OU-SYSTEMS/alveo-cluster/-/blob/main/docs/ansible-managed-hacc.md)
 
 ## YAML
 YAML is a human-readable data-serialization language commonly used for configuration files and in applications where data is being stored or transmitted. 
