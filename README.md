@@ -24,7 +24,7 @@ The Heterogeneous Accelerated Compute Clusters (HACC) program is a special initi
 * [Utilities](docs/utilities.md)
 
 # Releases
-We use [Ansible](/docs/definitions.md/#ansible) for upgrading Xilinx tools according to the [XRT realease schedule](https://github.com/Xilinx/XRT/releases).
+We use [Ansible](/docs/definitions.md/#ansible) for managing Xilinx’s tools versioning according to the [XRT realease schedule](https://github.com/Xilinx/XRT/releases).
 
 <table class="tg">
 <thead>
