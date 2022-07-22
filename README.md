@@ -14,18 +14,17 @@
 <a href="https://www.xilinx.com/support/university/XUP-HACC.html">Heterogenous Accelerated Compute Clusters (HACC) Program</a>
 </td></tr></table>
 
-The Heterogeneous Accelerated Compute Clusters (HACC) program is a special initiative to support novel research in adaptive compute acceleration for high performance computing (HPC). The scope of the program is broad and encompasses systems, architecture, tools and applications. Five HACCs have been established at some of world’s most prestigious universities. HACCs will be equipped with the latest Xilinx technology for adaptive compute acceleration. Each cluster is specially configured to enable some of the world’s foremost academic teams to conduct state-of-the-art HPC research.
-
-The first of the HACCs is installed at ETH Zurich in Switzerland.
+The Heterogeneous Accelerated Compute Clusters (HACC) program is a special initiative to support novel research in adaptive compute acceleration for high performance computing (HPC). The scope of the program is broad and encompasses systems, architecture, tools and applications. Five HACCs have been established at some of world’s most prestigious universities. HACCs will be equipped with the latest Xilinx technology for adaptive compute acceleration. Each cluster is specially configured to enable some of the world’s foremost academic teams to conduct state-of-the-art HPC research. The first of the HACCs was installed at ETH Zurich in Switzerland in XXXX.
 
 ## Sections
 * [Ansible Managed HACC](docs/ansible-managed-hacc.md)
+* [Definitions](docs/definitions.md)
 * [Infrastructure](docs/infrastructure.md)
 * [Inventory](docs/inventory.md)
 * [Utilities](docs/utilities.md)
 
 # Releases
-The Ansible described infrastructure implemented on this repository (see [Ansible Managed HACC](docs/ansible-managed-hacc.md) section) follows [AMD-Xilinx’s XRT realease schedule](https://github.com/Xilinx/XRT/releases):
+We use [Ansible](/docs/definitions.md/#ansible) for upgrading Xilinx tools according to the [XRT realease schedule](https://github.com/Xilinx/XRT/releases).
 
 <table class="tg">
 <thead>
