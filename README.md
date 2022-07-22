@@ -24,14 +24,14 @@ The Heterogeneous Accelerated Compute Clusters (HACC) program is a special initi
 * [Utilities](docs/utilities.md)
 
 # Releases
-We use [Ansible](/docs/definitions.md/#ansible) for managing Xilinx’s tools versioning according to the [XRT realease schedule](https://github.com/Xilinx/XRT/releases).
+We use [Ansible](/docs/definitions.md/#ansible) for managing Xilinx’s tools versioning according to [XRT’s release schedule](https://github.com/Xilinx/XRT/releases). All servers equipped with an FPGA are associated with a unique software version, including XRT’s Xilinx Board Utility (xbutil), Xilinx tools (Vivado, Vitis, Vitis_HLS), and the flashable partitions. 
 
 <table class="tg">
 <thead>
   <tr style="text-align:center">
     <th class="tg-0pky" rowspan="2"><div align="center">Cluster</div></th>
-    <th class="tg-0pky" colspan="3" style="text-align:center"><div align="center">Ansible (XRT) releases</div></th>
-    <th class="tg-c3ow" rowspan="2">Base shell installed on cluster</th>
+    <th class="tg-0pky" colspan="3" style="text-align:center"><div align="center">Release</div></th>
+    <th class="tg-c3ow" rowspan="2">Flashable partition running on FPGA</th>
   </tr>
   <tr>
     <th class="tg-0pky" style="text-align:center">2021.1</th>
