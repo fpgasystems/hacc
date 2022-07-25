@@ -17,9 +17,9 @@
 The Heterogeneous Accelerated Compute Clusters (HACC) program is a special initiative to support novel research in adaptive compute acceleration for high performance computing (HPC). The scope of the program is broad and encompasses systems, architecture, tools and applications. Five HACCs have been established at some of world’s most prestigious universities. HACCs will be equipped with the latest Xilinx technology for adaptive compute acceleration. Each cluster is specially configured to enable some of the world’s foremost academic teams to conduct state-of-the-art HPC research. The first of the HACCs was installed at ETH Zurich in Switzerland in XXXX.
 
 ## Sections
-* [Definitions](docs/definitions.md)
 * [Infrastructure](docs/infrastructure.md)
 * [User tools](docs/utilities.md)
+* [Vocabulary](docs/vocabulary.md)
 
 # Releases
 We use [Ansible](/docs/definitions.md/#ansible) for managing Xilinx’s tools versioning according to [XRT’s release schedule](https://github.com/Xilinx/XRT/releases). All servers equipped with an FPGA are associated with a unique software version, including XRT’s Xilinx Board Utility (xbutil), Xilinx tools (Vivado, Vitis, Vitis_HLS), and the flashable partitions (or base shell) running on the FPGA.
