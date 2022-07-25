@@ -4,7 +4,7 @@
 <a href="https://github.com/fpgasystems/hacc">Back</a> | Next
 </p>
 
-# Definitions
+# Vocabulary
 
 ## Ansible
 The [Red Hat Ansible Automation Platform](https://www.ansible.com) is an orchestrated and open-source tool for software provisioning, configuration management, and application-deployment. Ansible uses its own YAML-based declarative language enabling infrastructure as code. 
