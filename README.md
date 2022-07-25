@@ -17,8 +17,8 @@
 The Heterogeneous Accelerated Compute Clusters (HACC) program is a special initiative to support novel research in adaptive compute acceleration for high performance computing (HPC). The scope of the program is broad and encompasses systems, architecture, tools and applications. Five HACCs have been established at some of world’s most prestigious universities. HACCs will be equipped with the latest Xilinx technology for adaptive compute acceleration. Each cluster is specially configured to enable some of the world’s foremost academic teams to conduct state-of-the-art HPC research. The first of the HACCs was installed at ETH Zurich in Switzerland in XXXX.
 
 ## Sections
+* [CLI](docs/CLI.md)
 * [Infrastructure](docs/infrastructure.md)
-* [User tools](docs/utilities.md)
 * [Vocabulary](docs/vocabulary.md)
 
 # Releases
