@@ -5,3 +5,8 @@
 </p>
 
 # Accessing the cluster
+Access to Linux systems from outside the ETH network is possible but subject to restrictions by the firewall. For accessing the HACC, two different methods are possible.
+
+## Jump host
+
+## VPN
