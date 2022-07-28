@@ -4,5 +4,10 @@
 <a href="https://github.com/fpgasystems/hacc">Back</a> | Next
 </p>
 
-# User tools
-Bla
+# CLI
+Systems Group’s CLI brings Systems Group’s FPGA deployments to your terminal. Free and open source. Here is the list of commands:
+
+* [flash_bitstream]()
+
+## flash_bitstream
+
