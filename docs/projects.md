@@ -11,7 +11,7 @@ SG’s scientific staff uses ETHZ’s HACC to develop, test, and ship their appl
 *SG’s projects are developed with HACC.*
 
 ## ACCL: Accelerated Collective Communication Library
-ACCL is designed to enable compute kernels resident in FPGA fabric to communicate directly under host supervision but without requiring data movement between the FPGA and host. Instead, ACCL uses Vitis-compatible TCP and UDP stacks to connect FPGAs directly over Ethernet at up to 100 Gbps on Alveo cards.
+ACCL enables computing kernels resident in the FPGA fabric to communicate directly under host supervision without requiring data movement between the FPGA and host. Instead, ACCL uses Vitis-compatible TCP and UDP stacks to connect FPGAs directly over Ethernet at up to 100 Gbps on Alveo cards.
 
 [See ACCL on GitHub.](https://github.com/Xilinx/ACCL)
 
@@ -25,7 +25,17 @@ Transactional memory attempts to simplify concurrent programming by allowing a g
 
 [See on GitHub.](https://github.com/rbshi/dlm)
 
-## EasyNet
+## Road Runner: a high-performance TCP/IP network stack
+Road Runner provides a 100 GbE TCP/IP interface based on Xilinx’s open-source and out-of-the-box Vitis components. The complementary logic building Road Runner ensures that such components are integrated on the FPGA without degrading its performance. As we can see in the diagram above, Road Runner is the communication layer for the EasyNet and ACCL libraries. Such libraries use high-level language primitives to saturate Vitis’s network interface achieving very low latency.
+
+[See Road Runner on GitHub.](https://github.com/fpgasystems/Vitis_with_100Gbps_TCP-IP)
+
+## EasyNet: 100 GbE network for HLS
+EasyNet provides a set of MPI-like communication primitives for both point-to-point and collective operations (host-to-FPGA or FPGA-to-FPGA) as a High Level Synthesis (HLS) library. Such primitives saturate a 100 Gbps link and our collective primitives achieve low latency.
+
+we first show how to integrate an open-source 100 Gbps TCP/IP stack into a state-of-the-art FPGA development framework (Xilinx Vitis) without degrading its performance. Our point-to-point primitives saturate a 100 Gbps link and our collective primitives achieve low latency. With our approach, developers can write hardware kernels in high level languages with the network abstracted away behind standard interfaces.
+
+
 
 [See EasyNet on GitHub.](https://github.com/fpgasystems/Vitis_with_100Gbps_TCP-IP)
 
