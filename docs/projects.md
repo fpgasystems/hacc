@@ -7,7 +7,8 @@
 # Projects
 SG’s scientific staff uses ETHZ’s HACC to develop, test, and ship their applications. As a multi-core and FPGA cluster, the HACC allows research in distributed systems, databases, cloud computing, and hardware acceleration of data science. With Coyote, SG’s more relevant research project, we work on adapting traditional system software components (OS, databases, networking) to run on FPGAs.
 
-![SG’s projects developed with HACC.](../imgs/projects.png "SG’s projects developed with HACC.")
+![SG’s projects are developed with HACC.](../imgs/projects.png "SG’s projects are developed with HACC.")
+*SG’s projects are developed with HACC.*
 
 ## ACCL: Accelerated Collective Communication Library
 ACCL is designed to enable compute kernels resident in FPGA fabric to communicate directly under host supervision but without requiring data movement between the FPGA and host. Instead, ACCL uses Vitis-compatible TCP and UDP stacks to connect FPGAs directly over Ethernet at up to 100 Gbps on Alveo cards.
