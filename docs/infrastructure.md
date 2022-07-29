@@ -14,3 +14,10 @@ Bla bla
 Bla bla
 
 ## Networking
+
+## Summary
+
+         Servers    Number of FPGAs    DPS DPSs   DRAM    HBM    Notes
+
+U55C       EPYC           10           xx xx        x      8GB    
+U250       Intel          10           xx xx        x      -    -alveo-u250-05 and alveo-u250-06 are not accessible via JTAG
