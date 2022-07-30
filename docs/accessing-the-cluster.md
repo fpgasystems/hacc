@@ -10,3 +10,7 @@ Access to Linux systems from outside the ETH network is possible but subject to 
 ## Jump host
 
 ## VPN
+
+
+https://scicomp.ethz.ch/wiki/Accessing_the_cluster
+https://scicomp.ethz.ch/wiki/Accessing_the_clusters#VPN
