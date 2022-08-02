@@ -5,9 +5,23 @@
 </p>
 
 # CLI
-Systems Group’s CLI brings Systems Group’s FPGA deployments to your terminal. Free and open source. Here is the list of commands:
+SG’s CLI (sg) brings Systems Group’s FPGA designs accessible from your HACC terminal. 
 
-* [flash_bitstream]()
+## sg
+Work seamlessly with XRT from the command line.
 
-## flash_bitstream
+### Core commands
 
+* [sg hot_plug_boot](#sg-hotplugboot)
+* [sg flash_bitstream](#sg-flashbitstream)
+
+### sg hot_plug_boot
+
+### sg flash_bitstream
+```
+sg flash_bitstream [flags]
+```
+
+### Options
+
+### Examples
