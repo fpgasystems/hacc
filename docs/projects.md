@@ -5,10 +5,10 @@
 </p>
 
 # Projects
-SG’s scientific staff uses ETHZ’s HACC to develop, test, and ship their applications. As a multi-core and FPGA cluster, the HACC allows research in distributed systems, databases, cloud computing, and hardware acceleration of data science. With Coyote, SG’s more relevant research project, we work on adapting traditional system software components (OS, databases, networking) to run on FPGAs.
+FSG’s scientific staff uses ETHZ’s HACC to develop, test, and ship their applications. As a multi-core and FPGA cluster, the HACC allows research in distributed systems, databases, cloud computing, and hardware acceleration of data science. With Coyote, FSG’s more relevant research project, we work on adapting traditional system software components (OS, databases, networking) to run on FPGAs.
 
-![SG develops, tests, and ships its research projects using HACC infrastructure.](../imgs/projects.png "SG develops, tests, and ships its research projects using HACC infrastructure.")
-*SG develops, tests, and ships its research projects using HACC infrastructure.*
+![FSG develops, tests, and ships its research projects using HACC infrastructure.](../imgs/projects.png "FSG develops, tests, and ships its research projects using HACC infrastructure.")
+*FSG develops, tests, and ships its research projects using HACC infrastructure.*
 
 ## ACCL: Accelerated Collective Communication Library
 ACCL enables computing kernels resident in the FPGA fabric to communicate directly under host supervision without requiring data movement between the FPGA and host. Instead, ACCL uses [Road Runner](#road-runner-a-high-performance-tcpip-network-stack) (a Vitis-compatible TCP and UDP stacks) to connect FPGAs directly over Ethernet at up to 100 GbE on Alveo cards.
@@ -16,7 +16,7 @@ ACCL enables computing kernels resident in the FPGA fabric to communicate direct
 [See ACCL on GitHub.](https://github.com/Xilinx/ACCL)
 
 ## CLI
-SG CLI brings Systems Group’s FPGA designs to your terminal.
+FSG CLI brings FPGA Systems Group’s designs to your terminal.
 
 [See CLI on GitHub.](https://github.com/fpgasystems/hacc/blob/main/docs/CLI.md)
 

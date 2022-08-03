@@ -5,7 +5,7 @@
 </p>
 
 # CLI
-SG CLI brings Systems Group’s FPGA designs to your terminal.
+FSG CLI brings FPGA Systems Group’s designs to your terminal.
 
 ## sg
 Work seamlessly with XRT from the command line.
