@@ -13,10 +13,10 @@ Flash a bitstream using Vivado
 
 ## sg flash_bitstream vivado
 <code>
-  &nbsp; sg flash_bitstream vivado [flags]
+  sg flash_bitstream vivado [flags]
 </code>
 <p>
-  &nbsp; &nbsp; &nbsp; &nbsp; Flash a bitstream of your choice
+  &nbsp; &nbsp; Flash a bitstream of your choice
 </p>
 
 ### Options
