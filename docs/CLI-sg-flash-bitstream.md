@@ -12,18 +12,19 @@ Flash a bitstream using Vivado
 * [sg flash_bitstream coyote]()
 
 ## sg flash_bitstream vivado
-```
-sg flash_bitstream vivado [flags]
-```
-&nbsp; &nbsp; Flash a bitstream of your choice
+<code>
+  &nbsp; sg flash_bitstream vivado [flags]
+</code>
+<p>
+  &nbsp; &nbsp; &nbsp; &nbsp; Flash a bitstream of your choice
+</p>
 
 ### Options
-
 <code>
   &nbsp; -b, --bit <string>
 </code>
 <p>
-  &nbsp; &nbsp; &nbsp; &nbsp; Specifies the path for your .bit and .ltx files
+  &nbsp; &nbsp; &nbsp; &nbsp; Specifies the path to your .bit and .ltx files
 </p>
 
 
