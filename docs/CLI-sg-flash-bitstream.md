@@ -30,9 +30,6 @@ Flash a bitstream using Vivado
 ### Examples
 ```
 $ sg flash_bitstream vivado -b /mnt/scratch/hacc/bit/hello_world.bit
+$ sg flash_bitstream vivado -b /mnt/scratch/hacc/bit/hello_world.bit
+$ sg flash_bitstream vivado -b /mnt/scratch/hacc/bit/hello_world.bit
 ```
-
-<code>
-  $ sg flash_bitstream vivado -b /mnt/scratch/hacc/bit/hello_world.bit
-  $ sg flash_bitstream vivado -b /mnt/scratch/hacc/bit/hello_world.bit
-</code>
