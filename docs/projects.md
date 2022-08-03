@@ -25,15 +25,15 @@ Coyote is an open source, portable, configurable *shell* for FPGAs which provide
 
 [See Coyote on GitHub.](https://github.com/fpgasystems/Coyote)
 
-## EasyNet: 100 GbE network for HLS
-EasyNet provides a set of MPI-like communication primitives for both point-to-point and collective operations (host-to-FPGA or FPGA-to-FPGA) as a High Level Synthesis (HLS) library. Such primitives are written to saturate the 100 GbE TCP/IP interface provided by [Road Runner](#road-runner-a-high-performance-tcpip-network-stack) achieve very low latency and allowing developers to write hardware kernels with the network abstracted away behind standard interfaces.
-
-[See EasyNet on GitHub.](https://github.com/fpgasystems/Vitis_with_100Gbps_TCP-IP)
-
 ### Hardware Transaction Processing for multi-channel memory node
 Transactional memory attempts to simplify concurrent programming by allowing a group of load and store instructions to execute in an atomic way. It is a concurrency control mechanism analogous to database transactions controlling access to shared memory in concurrent computing. Transactional memory systems provide high-level abstraction as an alternative to low-level thread synchronization. Building a hardware transaction processing layer for the multi-channel memory node is valuable.
 
 [See on GitHub.](https://github.com/rbshi/dlm)
+
+## EasyNet: 100 GbE network for HLS
+EasyNet provides a set of MPI-like communication primitives for both point-to-point and collective operations (host-to-FPGA or FPGA-to-FPGA) as a High Level Synthesis (HLS) library. Such primitives are written to saturate the 100 GbE TCP/IP interface provided by [Road Runner](#road-runner-a-high-performance-tcpip-network-stack) achieve very low latency and allowing developers to write hardware kernels with the network abstracted away behind standard interfaces.
+
+[See EasyNet on GitHub.](https://github.com/fpgasystems/Vitis_with_100Gbps_TCP-IP)
 
 ## Road Runner: a high-performance TCP/IP network stack
 Road Runner provides a 100 GbE TCP/IP and UDP interfaces based on Xilinx’s open-source and out-of-the-box Vitis components. The complementary logic building Road Runner ensures that such components are integrated on the FPGA without degrading its performance. As we can see in the diagram above, Road Runner is the communication layer for the [EasyNet](#easynet-100-gbe-network-for-hls) and [ACCL](#accl-accelerated-collective-communication-library) libraries. Such libraries use high-level language primitives to saturate Vitis’s network interface achieving very low latency.
