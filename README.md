@@ -20,13 +20,13 @@ The first of the HACCs was assigned to [Prof. Dr. Gustavo Alonso’s](https://pe
 
 ## Sections
 * [Accessing the cluster](docs/accessing-the-cluster.md)
-* [CLI](docs/CLI.md)
+* [CLI](docs/CLI.md#cli)
 * [Infrastructure](docs/infrastructure.md)
 * [Projects](docs/projects.md)
 * [Vocabulary](docs/vocabulary.md)
 
 # Releases
-We use [Ansible](/docs/definitions.md/#ansible) for managing Xilinx’s tools versioning according to [XRT’s release schedule](https://github.com/Xilinx/XRT/releases). All servers equipped with an FPGA are associated with a unique software version, including XRT’s Xilinx Board Utility (xbutil), Xilinx tools (Vivado, Vitis, Vitis_HLS), and the flashable partitions (or base shell) running on the FPGA.
+We use [Ansible](docs/vocabulary.md#ansible) for managing Xilinx’s tools versioning according to [XRT’s release schedule](https://github.com/Xilinx/XRT/releases). All servers equipped with an FPGA are associated with a unique software version, including XRT’s Xilinx Board Utility (xbutil), Xilinx tools (Vivado, Vitis, Vitis_HLS), and the flashable partitions (or base shell) running on the FPGA.
 
 <table class="tg">
 <thead>
