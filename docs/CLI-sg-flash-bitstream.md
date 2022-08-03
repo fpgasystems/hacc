@@ -5,7 +5,7 @@
 </p>
 
 # sg flash_bitstream
-Flash a bitstream using Vivado.
+Flash a bitstream using Vivado
 
 * [sg flash_bitstream xrt]()
 * [sg flash_bitstream vivado](#sg-flashbitstream-vivado)
@@ -15,7 +15,7 @@ Flash a bitstream using Vivado.
 ```
 sg flash_bitstream vivado [flags]
 ```
-Flash a bitstream of your choice.
+&nbsp; &nbsp; Flash a bitstream of your choice
 
 ### Options
 &nbsp; &nbsp; -b, --bit <string>...
