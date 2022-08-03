@@ -22,7 +22,7 @@ Work seamlessly with XRT from the command line.
 ```
 --version
 ```
-&nbsp; &nbsp; &nbsp; Show sg version
+&nbsp; &nbsp; Show sg version
 
 ### Examples
 ```

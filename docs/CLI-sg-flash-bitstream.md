@@ -7,7 +7,18 @@
 # sg flash_bitstream
 Flash a bitstream using Vivado.
 
-## Commands
-* [sg flash_bitstream vivado]()
+* [sg flash_bitstream vivado](#sg-flashbitstream-vivado)
 * [sg flash_bitstream coyote]()
 * [sg flash_bitstream xrt]()
+
+## sg flash_bitstream vivado
+```
+sg flash_bitstream vivado [flags]
+```
+Flash a bitstream of your choice.
+
+### Options
+&nbsp; &nbsp; Options...
+
+### Examples
+&nbsp; &nbsp; Examples...
