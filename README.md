@@ -19,11 +19,11 @@ The Heterogeneous Accelerated Compute Clusters (HACC) program is a special initi
 The first of the HACCs was assigned to [Prof. Dr. Gustavo Alonso’s](https://people.inf.ethz.ch/alonso/) *FPGA* Systems Group (SG) at ETH Zürich (ETHZ) in Switzerland in 2020.
 
 ## Sections
-* [Accessing the cluster](docs/accessing-the-cluster.md)
+* [Accessing the cluster](docs/accessing-the-cluster.md#accessing-the-cluster)
 * [CLI](docs/CLI.md#cli)
-* [Infrastructure](docs/infrastructure.md)
-* [Projects](docs/projects.md)
-* [Vocabulary](docs/vocabulary.md)
+* [Infrastructure](docs/infrastructure.md#infrastructure)
+* [Projects](docs/projects.md#projects)
+* [Vocabulary](docs/vocabulary.md#vocabulary)
 
 # Releases
 We use [Ansible](docs/vocabulary.md#ansible) for managing Xilinx’s tools versioning according to [XRT’s release schedule](https://github.com/Xilinx/XRT/releases). All servers equipped with an FPGA are associated with a unique software version, including XRT’s Xilinx Board Utility (xbutil), Xilinx tools (Vivado, Vitis, Vitis_HLS), and the flashable partitions (or base shell) running on the FPGA.
