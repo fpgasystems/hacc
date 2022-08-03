@@ -12,11 +12,11 @@ Work seamlessly with XRT from the command line.
 
 ### Core commands
 
-* [sg flash_bitstream](./CLI-sg-flash-bitstream.md) 
+* [sg program](./CLI-sg-program.md) 
 
 ### Action commands
 
-* [sg hot_plug_boot]()
+* [sg rescan]()
 * [sg examine]()
 
 ### Options
@@ -24,7 +24,7 @@ Work seamlessly with XRT from the command line.
   --version
 </code>
 <p>
-  &nbsp; &nbsp; Show sg version
+  &nbsp; &nbsp; Show sg version.
 </p>
 
 ### Examples
