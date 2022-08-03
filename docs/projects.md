@@ -31,7 +31,7 @@ Transactional memory attempts to simplify concurrent programming by allowing a g
 [See on GitHub.](https://github.com/rbshi/dlm)
 
 ## EasyNet: 100 GbE network for HLS
-EasyNet provides a set of MPI-like communication primitives for both point-to-point and collective operations (host-to-FPGA or FPGA-to-FPGA) as a High Level Synthesis (HLS) library. Such primitives are written to saturate the 100 GbE TCP/IP interface provided by [Road Runner](#road-runner-a-high-performance-tcpip-network-stack) achieve very low latency and allowing developers to write hardware kernels with the network abstracted away behind standard interfaces.
+EasyNet provides a set of MPI-like communication primitives for both point-to-point and collective operations (host-to-FPGA or FPGA-to-FPGA) as a High Level Synthesis (HLS) library. Such primitives are written to saturate the 100 GbE TCP/IP interface provided by [Road Runner](#road-runner-a-high-performance-tcpip-network-stack) achieving very low latency. EasyNet allows developers to write hardware kernels with the network abstracted away behind standard interfaces.
 
 [See EasyNet on GitHub.](https://github.com/fpgasystems/Vitis_with_100Gbps_TCP-IP)
 
