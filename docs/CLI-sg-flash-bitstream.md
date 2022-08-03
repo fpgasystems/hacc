@@ -21,16 +21,18 @@ Flash a bitstream using Vivado
 
 ### Options
 <code>
-  &nbsp; -b, --bit <string>
+  -b, --bit <string>
 </code>
 <p>
-  &nbsp; &nbsp; &nbsp; &nbsp; Specifies the path to your .bit and .ltx files
+  &nbsp; &nbsp; Specifies the path to your .bit and .ltx files
 </p>
-
-
-
 
 ### Examples
 ```
 $ sg flash_bitstream vivado -b /mnt/scratch/hacc/bit/hello_world.bit
 ```
+
+<code>
+  $ sg flash_bitstream vivado -b /mnt/scratch/hacc/bit/hello_world.bit
+  $ sg flash_bitstream vivado -b /mnt/scratch/hacc/bit/hello_world.bit
+</code>
