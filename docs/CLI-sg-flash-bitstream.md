@@ -18,8 +18,18 @@ sg flash_bitstream vivado [flags]
 &nbsp; &nbsp; Flash a bitstream of your choice
 
 ### Options
-&nbsp; &nbsp; -b, --bit <string>...
-&nbsp; &nbsp; &nbsp; &nbsp; Specifies the path for your .bit and .ltx files
+
+<code>
+  &nbsp; -b, --bit <string>
+</code>
+<p>
+  &nbsp; &nbsp; &nbsp; &nbsp; Specifies the path for your .bit and .ltx files
+</p>
+
+
+
 
 ### Examples
-&nbsp; &nbsp; sg flash_bitstream vivado -b /mnt/scratch/hacc/bit/hello_world.bit
+```
+$ sg flash_bitstream vivado -b /mnt/scratch/hacc/bit/hello_world.bit
+```
