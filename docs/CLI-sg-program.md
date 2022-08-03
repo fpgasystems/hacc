@@ -5,7 +5,7 @@
 </p>
 
 # sg program
-Flash a bitstream using Vivado
+Flash a bitstream using Vivado.
 
 * [sg program xrt]()
 * [sg program vivado](#sg-program-vivado)
@@ -16,7 +16,7 @@ Flash a bitstream using Vivado
   sg program vivado [flags]
 </code>
 <p>
-  &nbsp; &nbsp; Flash a bitstream of your choice
+  &nbsp; &nbsp; Flash a bitstream of your choice.
 </p>
 
 ### Options
@@ -24,7 +24,7 @@ Flash a bitstream using Vivado
   -b, --bit <string>
 </code>
 <p>
-  &nbsp; &nbsp; Specifies the path to your .bit and .ltx files
+  &nbsp; &nbsp; Specifies the path to your .bit and .ltx files.
 </p>
 
 ### Examples
