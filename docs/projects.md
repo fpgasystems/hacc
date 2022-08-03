@@ -1,7 +1,7 @@
 <div id="readme" class="Box-body readme blob js-code-block-container">
 <article class="markdown-body entry-content p-3 p-md-6" itemprop="text">
 <p align="right">
-<a href="https://github.com/fpgasystems/hacc">Back</a> | Next
+<a href="https://github.com/fpgasystems/hacc#sections">Back</a> | Next
 </p>
 
 # Projects
@@ -14,6 +14,11 @@ SG’s scientific staff uses ETHZ’s HACC to develop, test, and ship their appl
 ACCL enables computing kernels resident in the FPGA fabric to communicate directly under host supervision without requiring data movement between the FPGA and host. Instead, ACCL uses [Road Runner](#road-runner-a-high-performance-tcpip-network-stack) (a Vitis-compatible TCP and UDP stacks) to connect FPGAs directly over Ethernet at up to 100 GbE on Alveo cards.
 
 [See ACCL on GitHub.](https://github.com/Xilinx/ACCL)
+
+## CLI
+SG CLI brings Systems Group’s FPGA designs to your terminal.
+
+[See CLI on GitHub.](https://github.com/fpgasystems/hacc/blob/main/docs/CLI.md)
 
 ## Coyote
 Coyote is an open source, portable, configurable *shell* for FPGAs which provides a full suite of OS abstractions, working with the host OS. Coyote supports secure spatial and temporal multiplexing of the FPGA between tenants, virtual memory, communication, and memory management inside a uniform execution environment. The overhead of Coyote is small, and the performance benefit is significant, but more importantly, it allows us to reflect on whether importing OS abstractions wholesale to FPGAs is the best way forward.
@@ -34,5 +39,3 @@ Transactional memory attempts to simplify concurrent programming by allowing a g
 Road Runner provides a 100 GbE TCP/IP and UDP interfaces based on Xilinx’s open-source and out-of-the-box Vitis components. The complementary logic building Road Runner ensures that such components are integrated on the FPGA without degrading its performance. As we can see in the diagram above, Road Runner is the communication layer for the [EasyNet](#easynet-100-gbe-network-for-hls) and [ACCL](#accl-accelerated-collective-communication-library) libraries. Such libraries use high-level language primitives to saturate Vitis’s network interface achieving very low latency.
 
 [See Road Runner on GitHub.](https://github.com/fpgasystems/Vitis_with_100Gbps_TCP-IP)
-
-We are working to make all the deployments described here available through our CLI.
