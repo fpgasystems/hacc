@@ -7,29 +7,29 @@
 # CLI
 FSG CLI brings FPGA Systems Group’s designs to your terminal.
 
-## sg
+## fsg
 Work seamlessly with XRT from the command line.
 
 ### Core commands
 
-* [sg program](./CLI-sg-program.md) 
+* [fsg program](./CLI-fsg-program.md) 
 
 ### Action commands
 
-* [sg rescan]()
-* [sg examine]()
+* [fsg rescan]()
+* [fsg examine]()
 
 ### Options
 <code>
   --version
 </code>
 <p>
-  &nbsp; &nbsp; Shows sg version.
+  &nbsp; &nbsp; Shows fsg version.
 </p>
 
 ### Examples
 ```
-$ sg program ...
-$ sg program ...
-$ sg program ...
+$ fsg program ...
+$ fsg program ...
+$ fsg program ...
 ```
