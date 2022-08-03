@@ -16,7 +16,8 @@ Work seamlessly with XRT from the command line.
 
 ### Action commands
 
-* [sg hot_plug_boot](#sg-hotplugboot)
+* [sg hot_plug_boot]()
+* [sg examine]()
 
 ### Options
 ```

@@ -7,9 +7,9 @@
 # sg flash_bitstream
 Flash a bitstream using Vivado.
 
+* [sg flash_bitstream xrt]()
 * [sg flash_bitstream vivado](#sg-flashbitstream-vivado)
 * [sg flash_bitstream coyote]()
-* [sg flash_bitstream xrt]()
 
 ## sg flash_bitstream vivado
 ```
@@ -18,7 +18,8 @@ sg flash_bitstream vivado [flags]
 Flash a bitstream of your choice.
 
 ### Options
-&nbsp; &nbsp; Options...
+&nbsp; &nbsp; -b, --bit <string>...
+&nbsp; &nbsp; &nbsp; &nbsp; Specifies the path for your .bit and .ltx files
 
 ### Examples
-&nbsp; &nbsp; Examples...
+&nbsp; &nbsp; sg flash_bitstream vivado -b /mnt/scratch/hacc/bit/hello_world.bit
