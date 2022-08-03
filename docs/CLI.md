@@ -20,10 +20,12 @@ Work seamlessly with XRT from the command line.
 * [sg examine]()
 
 ### Options
-```
---version
-```
-&nbsp; &nbsp; Show sg version
+<code>
+  --version
+</code>
+<p>
+  &nbsp; &nbsp; Show sg version
+</p>
 
 ### Examples
 ```
