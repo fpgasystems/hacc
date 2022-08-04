@@ -5,12 +5,12 @@
 </p>
 
 # Infrastructure
-FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking. Each accelerator card has two connections to a 100 GbE TOR switch to allow exploration of arbitrary network topologies for distributed computing.
+FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking. Each accelerator card has all of its QSFP28 interfaces connected to a 100 GbE TOR switch to allow exploration of arbitrary network topologies for distributed computing.
 
 ![FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking..](../imgs/infrastructure.png "FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking..")
 *FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking.*
 
-Additionally, we are offering a development server with development and bitstream compilation purposes.
+Additionally, we are offering a build server with development and bitstream compilation purposes.
 
 ## High-end servers
 
