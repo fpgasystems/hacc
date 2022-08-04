@@ -5,12 +5,12 @@
 </p>
 
 # Infrastructure
-FSG HACC is comprised of high-​end servers, Xilinx Alveo and Versal accelerator cards, and high-​speed networking. Each Alveo card has two connections to a 100 GbE network switch to allow exploration of arbitrary network topologies for distributed computing.
+FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking. Each accelerator card has two connections to a 100 GbE TOR switch to allow exploration of arbitrary network topologies for distributed computing.
 
-![FSG HACC is comprised of high-​end servers, Xilinx Alveo and Versal accelerator cards, and high-​speed networking..](../imgs/infrastructure.png "FSG HACC is comprised of high-​end servers, Xilinx Alveo and Versal accelerator cards, and high-​speed networking..")
-*FSG HACC is comprised of high-​end servers, Xilinx Alveo and Versal accelerator cards, and high-​speed networking..*
+![FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking..](../imgs/infrastructure.png "FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking..")
+*FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking.*
 
-## Servers
+## High-end servers
 Bla bla
 
 ## Xilinx accelerator cards
