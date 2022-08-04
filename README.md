@@ -21,6 +21,7 @@ The first of the HACCs was assigned to [Prof. Dr. Gustavo Alonso’s](https://pe
 ## Sections
 * [Accessing the cluster](docs/accessing-the-cluster.md#accessing-the-cluster)
 * [CLI](docs/CLI.md#cli)
+* [Features](docs/features.md#features)
 * [Infrastructure](docs/infrastructure.md#infrastructure)
 * [Projects](docs/projects.md#projects)
 * [Vocabulary](docs/vocabulary.md#vocabulary)
