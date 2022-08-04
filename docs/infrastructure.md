@@ -10,11 +10,33 @@ FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and 
 ![FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking..](../imgs/infrastructure.png "FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking..")
 *FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking.*
 
+Additionally, we are offering a development server with development and bitstream compilation purposes.
+
 ## High-end servers
-Bla bla
+
+### Build
+Bla
+
+### U50D 
+
+### U55C 
+
+### U250
+
+### U280
 
 ## Xilinx accelerator cards
-Bla bla
+
+### Build
+Bla
+
+### U50D 
+
+### U55C 
+
+### U250
+
+### U280
 
 ## Networking
 
