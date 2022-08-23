@@ -10,9 +10,9 @@
 
 ## Hot-plug boot
 
-## Managed
-We manage our HACC fully automatic: there is no room for manual administration. By using Ansible, we can be sure that the cluster configuration is homogeneous and reproducible. We can re-install and set up from scratch—without other interaction—each of the servers in our cluster in about an hour. Such a process includes installing all Xilinx tools, the deployment and development platforms, the base shells' programming, and the servers' cold boot. In addition, the YAML-based playbooks and tasks allow us to inherently document servers and cluster setup.
+## Ansible managed
+We manage our HACC fully automatic: there is no room for manual administration. By using [Ansible](docs/vocabulary.md#ansible), we can be sure that the cluster configuration is homogeneous and reproducible. We can re-install and set up from scratch—without other interaction—all of the servers in our cluster in about an hour. Such a process includes installing not only the operating system and Debian packages but also all Xilinx tools, the deployment and development platforms, the base shells’ programming (with a handled servers’ cold boot), and networking configuration. In addition, the YAML-based playbooks and tasks allow us to inherently document servers and cluster setup.
 
-This allows us to easily follow Xilinx’s tools versioning release schedule as mentioned in [Releases](../README.md/#releases).
+Thanks to Ansible we are able to easily follow Xilinx’s tools versioning release schedule as mentioned in [Releases](../README.md/#releases).
 
 ## You are welcome
