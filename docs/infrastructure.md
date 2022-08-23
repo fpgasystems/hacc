@@ -15,126 +15,126 @@ Additionally, we are offering a build server with development and bitstream comp
 ## Inventory
 The following table gives an overview of FSG’s HACC resources: 
 
-<table class="tg">
+<table>
 <thead>
   <tr>
-    <th class="tg-c3ow" rowspan="2">Cluster</th>
-    <th class="tg-c3ow" colspan="4">High-end servers</th>
-    <th class="tg-c3ow" colspan="3">Xilinx accelerator card</th>
-    <th class="tg-baqh" colspan="6">FPGA</th>
+    <th rowspan="2">Cluster</th>
+    <th colspan="4">High-end servers</th>
+    <th colspan="3">Xilinx accelerator card</th>
+    <th colspan="6">FPGA</th>
   </tr>
   <tr>
-    <th class="tg-c3ow">Family</th>
-    <th class="tg-c3ow">Memory</th>
-    <th class="tg-c3ow">CPU</th>
-    <th class="tg-c3ow">SSD</th>
-    <th class="tg-c3ow">Family</th>
-    <th class="tg-c3ow">DDR</th>
-    <th class="tg-c3ow">FPGA</th>
-    <th class="tg-baqh">LUTs</th>
-    <th class="tg-baqh">Registers</th>
-    <th class="tg-baqh">DSPs</th>
-    <th class="tg-baqh">DRAM</th>
-    <th class="tg-baqh">BRAM</th>
-    <th class="tg-baqh">HBM</th>
+    <th>Family</th>
+    <th>Memory</th>
+    <th>CPU</th>
+    <th>SSD</th>
+    <th>Family</th>
+    <th>DDR</th>
+    <th>FPGA</th>
+    <th>LUTs</th>
+    <th>Registers</th>
+    <th>DSPs</th>
+    <th>DRAM</th>
+    <th>BRAM</th>
+    <th>HBM</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td class="tg-0lax">Build</td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
+    <td>Build</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
-    <td class="tg-0pky">U250</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky">xx</td>
-    <td class="tg-0pky">x</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky">Alveo U250</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
+    <td>U250</td>
+    <td></td>
+    <td>xx</td>
+    <td>x</td>
+    <td></td>
+    <td>Alveo U250</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
-    <td class="tg-0pky">U280</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky">xx</td>
-    <td class="tg-0pky">x</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky">Alveo U280</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
+    <td>U280</td>
+    <td></td>
+    <td>xx</td>
+    <td>x</td>
+    <td></td>
+    <td>Alveo U280</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
-    <td class="tg-0pky">U50D</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky">xx</td>
-    <td class="tg-0pky">x</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky">Alveo U50D</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
+    <td>U50D</td>
+    <td></td>
+    <td>xx</td>
+    <td>x</td>
+    <td></td>
+    <td>Alveo U50D</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
-    <td class="tg-0pky">U55C</td>
-    <td class="tg-0pky">xx</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky">Alveo U55C</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
+    <td>U55C</td>
+    <td>xx</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>Alveo U55C</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
-    <td class="tg-0pky">Versal</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky">Versal VCK5000</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"></td>
+    <td>Versal</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>Versal VCK5000</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
 </tbody>
 </table>
