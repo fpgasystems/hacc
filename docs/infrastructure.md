@@ -18,28 +18,44 @@ The following table gives an overview of FSG’s HACC resources:
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky" rowspan="2">Cluster</th>
-    <th class="tg-0pky" colspan="4">High-end servers</th>
+    <th class="tg-c3ow" rowspan="2">Cluster</th>
+    <th class="tg-c3ow" colspan="4">High-end servers</th>
     <th class="tg-c3ow" colspan="3">Xilinx accelerator card</th>
-    <th class="tg-0lax" colspan="6">FPGA</th>
+    <th class="tg-baqh" colspan="6">FPGA</th>
   </tr>
   <tr>
-    <th class="tg-0pky">Family</th>
-    <th class="tg-0pky">Memory</th>
-    <th class="tg-0pky">CPU</th>
-    <th class="tg-0pky">SSD</th>
-    <th class="tg-0pky">Family</th>
-    <th class="tg-0pky">DDR</th>
-    <th class="tg-0pky">FPGA</th>
-    <th class="tg-0lax">LUTs</th>
-    <th class="tg-0lax">Registers</th>
-    <th class="tg-0lax">DSPs</th>
-    <th class="tg-0lax">DRAM</th>
-    <th class="tg-0lax">BRAM</th>
-    <th class="tg-0lax">HBM</th>
+    <th class="tg-c3ow">Family</th>
+    <th class="tg-c3ow">Memory</th>
+    <th class="tg-c3ow">CPU</th>
+    <th class="tg-c3ow">SSD</th>
+    <th class="tg-c3ow">Family</th>
+    <th class="tg-c3ow">DDR</th>
+    <th class="tg-c3ow">FPGA</th>
+    <th class="tg-baqh">LUTs</th>
+    <th class="tg-baqh">Registers</th>
+    <th class="tg-baqh">DSPs</th>
+    <th class="tg-baqh">DRAM</th>
+    <th class="tg-baqh">BRAM</th>
+    <th class="tg-baqh">HBM</th>
   </tr>
 </thead>
 <tbody>
+  <tr>
+    <td class="tg-0lax">Build</td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+  </tr>
   <tr>
     <td class="tg-0pky">U250</td>
     <td class="tg-0pky"></td>
