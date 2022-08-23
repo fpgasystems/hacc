@@ -1,7 +1,7 @@
 <div id="readme" class="Box-body readme blob js-code-block-container">
 <article class="markdown-body entry-content p-3 p-md-6" itemprop="text">
 <p align="right">
-<a href="https://github.com/fpgasystems/hacc/blob/main/README.md#sections">Back</a>
+<a href="https://github.com/fpgasystems/hacc/blob/main/README.md">Back</a>
 </p>
 
 # Infrastructure
@@ -12,23 +12,19 @@ FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and 
 
 Additionally, we are offering a build server with development and bitstream compilation purposes.
 
-## High-end servers
+## Inventory
+The following table gives an overview of FSG’s HACC resources: 
 
-### Build
-Bla
 
-### U50D 
 
-### U55C 
 
-### U250
+Remember that each high-end server exposes **only one Xilinx accelerator card to the user.**
 
-### U280
+## AMD high-end servers
+
+### El model
 
 ## Xilinx accelerator cards
-
-### Build
-Bla
 
 ### U50D 
 
@@ -40,9 +36,8 @@ Bla
 
 ## Networking
 
-## Summary
+## Limitations
 
-         Servers    Number of FPGAs    DPS DPSs   DRAM    HBM    Notes
-
-U55C       EPYC           10           xx xx        x      8GB    
-U250       Intel          10           xx xx        x      -    -alveo-u250-05 and alveo-u250-06 are not accessible via JTAG
+* Els servidors son virtualitzats
+* Els servidors comparteixen XXX
+* Els servidors XXXX no tenen JTAG
