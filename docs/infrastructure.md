@@ -19,43 +19,106 @@ The following table gives an overview of FSG’s HACC resources:
 <thead>
   <tr>
     <th class="tg-0pky" rowspan="2">Cluster</th>
-    <th class="tg-0pky" colspan="3">Releases</th>
-    <th class="tg-c3ow" rowspan="2">Base and/or shell</th>
+    <th class="tg-0pky" colspan="4">High-end servers</th>
+    <th class="tg-c3ow" colspan="3">Xilinx accelerator card</th>
+    <th class="tg-0lax" colspan="6">FPGA</th>
   </tr>
   <tr>
-    <th class="tg-0pky">2021.1</th>
-    <th class="tg-0pky">2021.2</th>
-    <th class="tg-0pky">2022.1</th>
+    <th class="tg-0pky">Family</th>
+    <th class="tg-0pky">Memory</th>
+    <th class="tg-0pky">CPU</th>
+    <th class="tg-0pky">SSD</th>
+    <th class="tg-0pky">Family</th>
+    <th class="tg-0pky">DDR</th>
+    <th class="tg-0pky">FPGA</th>
+    <th class="tg-0lax">LUTs</th>
+    <th class="tg-0lax">Registers</th>
+    <th class="tg-0lax">DSPs</th>
+    <th class="tg-0lax">DRAM</th>
+    <th class="tg-0lax">BRAM</th>
+    <th class="tg-0lax">HBM</th>
   </tr>
 </thead>
 <tbody>
-  <tr>
-    <td class="tg-0pky">U50D</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky">xx</td>
-    <td class="tg-0pky">x</td>
-    <td class="tg-0pky">xilinx_u50_gen3x16_xdma_201920_3</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">U55C</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky">xx</td>
-    <td class="tg-0pky">x</td>
-    <td class="tg-0pky">xilinx_u55c_gen3x16_xdma_base_2</td>
-  </tr>
   <tr>
     <td class="tg-0pky">U250</td>
     <td class="tg-0pky"></td>
     <td class="tg-0pky">xx</td>
     <td class="tg-0pky">x</td>
-    <td class="tg-0pky">xilinx_u250_gen3x16_base_3<br>xilinx_u250_gen3x16_xdma_shell_3_1<br></td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">Alveo U250</td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
   </tr>
   <tr>
     <td class="tg-0pky">U280</td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">xx</td>
+    <td class="tg-0pky">x</td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">Alveo U280</td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">U50D</td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">xx</td>
+    <td class="tg-0pky">x</td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">Alveo U50D</td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">U55C</td>
     <td class="tg-0pky">xx</td>
     <td class="tg-0pky"></td>
     <td class="tg-0pky"></td>
-    <td class="tg-0pky">xilinx_u280_xdma_201920_3</td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">Alveo U55C</td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Versal</td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">Versal VCK5000</td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
   </tr>
 </tbody>
 </table>
