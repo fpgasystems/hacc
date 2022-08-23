@@ -14,9 +14,9 @@
 <a href="https://www.xilinx.com/support/university/XUP-HACC.html">Heterogenous Accelerated Compute Clusters (HACC) Program</a>
 </td></tr></table>
 
-The Heterogeneous Accelerated Compute Clusters (HACC) program is a special initiative to support novel research in adaptive compute acceleration for high performance computing (HPC). The scope of the program is broad and encompasses systems, architecture, tools and applications. Five HACCs have been established at some of world’s most prestigious universities. HACCs will be equipped with the latest Xilinx technology for adaptive compute acceleration. Each cluster is specially configured to enable some of the world’s foremost academic teams to conduct state-of-the-art HPC research. 
+The Heterogeneous Accelerated Compute Clusters (HACC) program is a special initiative to support novel research in adaptive compute acceleration for high performance computing (HPC). The scope of the program is broad and encompasses systems, architecture, tools and applications. HACCs will be equipped with the latest Xilinx technology for adaptive compute acceleration.  
 
-The first of the HACCs was assigned to [Prof. Dr. Gustavo Alonso’s](https://people.inf.ethz.ch/alonso/) *FPGA* Systems Group (FSG) at ETH Zürich (ETHZ) in Switzerland in 2020.
+Five HACCs have been established at some of world’s most prestigious universities (including the ETH Zürich in Switzerland) and world’s foremost academic teams to conduct state-of-the-art HPC research. The first of them was assigned to [Prof. Dr. Gustavo Alonso’s](https://people.inf.ethz.ch/alonso/) *FPGA* Systems Group (FSG) in 2020.
 
 ## Sections
 * [Accessing the cluster](docs/accessing-the-cluster.md#accessing-the-cluster)
