@@ -12,7 +12,126 @@ FSG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high
 
 Additionally, we are offering a build server with development and bitstream compilation purposes. The following table gives an overview of FSG’s HACC resources: 
 
-Virtex Ultrascale+ HBM
+<table>
+<thead>
+  <tr>
+    <th rowspan="2">Cluster</th>
+    <th colspan="4">High-end servers</th>
+    <th colspan="3">Xilinx accelerator card</th>
+    <th>FPGA</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Family</th>
+    <th>Memory</th>
+    <th>CPU</th>
+    <th>SSD</th>
+    <th>Family</th>
+    <th>DDR</th>
+    <th>FPGA</th>
+    <th>LUTs</th>
+    <th>Registers</th>
+    <th>DSPs</th>
+    <th>RAM</th>
+    <th>HBM</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Build</td>
+    <td>PowerEdge R740</td>
+    <td>394 GB</td>
+    <td>80</td>
+    <td>3 TB</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>U250</td>
+    <td>PowerEdge R740</td>
+    <td>128 GB</td>
+    <td>16</td>
+    <td>200/300 GB</td>
+    <td>Alveo U250</td>
+    <td>64 GB</td>
+    <td>Virtex Ultrascale+</td>
+    <td>1’728 K</td>
+    <td>3’456 K</td>
+    <td>12’288</td>
+    <td>1’280 UltraRAM</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>U280</td>
+    <td>PowerEdge R740</td>
+    <td>128 GB</td>
+    <td>16</td>
+    <td>200/300 GB</td>
+    <td>Alveo U280</td>
+    <td>32 GB</td>
+    <td>Virtex Ultrascale+ HBM</td>
+    <td>1’304 K</td>
+    <td>2’607 K</td>
+    <td>9’024</td>
+    <td>2’016 BRAM<br>960 UltraRAM</td>
+    <td>8 GB</td>
+  </tr>
+  <tr>
+    <td>U50D</td>
+    <td>AMD EPYC 7302</td>
+    <td>64 GB</td>
+    <td>32</td>
+    <td>480 GB</td>
+    <td>Alveo U50D</td>
+    <td>-</td>
+    <td>?</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>U55C</td>
+    <td>AMD EPYC 7302</td>
+    <td>64 GB</td>
+    <td>32</td>
+    <td>1.2 TB</td>
+    <td>Alveo U55C</td>
+    <td>-</td>
+    <td>Virtex Ultrascale+ HBM</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Versal</td>
+    <td>PowerEdge R740</td>
+    <td>128 GB</td>
+    <td>16</td>
+    <td>200 GB</td>
+    <td>Versal VCK5000</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
 
 Remember that each high-end server exposes **only one Xilinx accelerator card to the user.**
 
