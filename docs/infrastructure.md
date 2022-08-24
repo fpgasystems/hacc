@@ -18,11 +18,7 @@ Additionally, we are offering a build server with development and bitstream comp
     <th rowspan="2">Cluster</th>
     <th colspan="4">High-end servers</th>
     <th colspan="3">Xilinx accelerator card</th>
-    <th>FPGA</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th colspan="5">FPGA/ACAP</th>
   </tr>
   <tr>
     <th>Family</th>
@@ -31,12 +27,12 @@ Additionally, we are offering a build server with development and bitstream comp
     <th>SSD</th>
     <th>Family</th>
     <th>DDR</th>
-    <th>FPGA</th>
+    <th>FPGA/ACAP</th>
     <th>LUTs</th>
     <th>Registers</th>
     <th>DSPs</th>
     <th>RAM</th>
-    <th>HBM</th>
+    <th>HBM2</th>
   </tr>
 </thead>
 <tbody>
@@ -67,7 +63,7 @@ Additionally, we are offering a build server with development and bitstream comp
     <td>1’728 K</td>
     <td>3’456 K</td>
     <td>12’288</td>
-    <td>1’280 UltraRAM</td>
+    <td>UltraRAM: 368.0 Mb</td>
     <td>-</td>
   </tr>
   <tr>
@@ -82,7 +78,7 @@ Additionally, we are offering a build server with development and bitstream comp
     <td>1’304 K</td>
     <td>2’607 K</td>
     <td>9’024</td>
-    <td>2’016 BRAM<br>960 UltraRAM</td>
+    <td>-BRAM: 70.9 Mb<br>-UltraRAM: 270.0 Mb</td>
     <td>8 GB</td>
   </tr>
   <tr>
@@ -94,11 +90,11 @@ Additionally, we are offering a build server with development and bitstream comp
     <td>Alveo U50D</td>
     <td>-</td>
     <td>?</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>872 K</td>
+    <td>1’743 K</td>
+    <td>5’952</td>
+    <td>-Distributed RAM: 24.6 Mb<br>-BRAM: 47.3 Mb<br>-UltraRAM: 180.0 Mb</td>
+    <td>8 GB</td>
   </tr>
   <tr>
     <td>U55C</td>
@@ -109,11 +105,11 @@ Additionally, we are offering a build server with development and bitstream comp
     <td>Alveo U55C</td>
     <td>-</td>
     <td>Virtex Ultrascale+ HBM</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>1’304 K</td>
+    <td>2’607 K</td>
+    <td>9’024</td>
+    <td>-Distributed RAM: 36.7 Mb<br>-BRAM: 70.9 Mb<br>-UltraRAM: 270.0 Mb</td>
+    <td>16 GB</td>
   </tr>
   <tr>
     <td>Versal</td>
