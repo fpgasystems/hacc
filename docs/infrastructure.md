@@ -59,7 +59,7 @@ Additionally, we are offering a build server with development and bitstream comp
     <td>200/300 GB</td>
     <td>Alveo U250</td>
     <td>64 GB</td>
-    <td>Virtex Ultrascale+</td>
+    <td>VU13P</td>
     <td>1’728 K</td>
     <td>3’456 K</td>
     <td>12’288</td>
@@ -74,7 +74,7 @@ Additionally, we are offering a build server with development and bitstream comp
     <td>200/300 GB</td>
     <td>Alveo U280</td>
     <td>32 GB</td>
-    <td>Virtex Ultrascale+ HBM</td>
+    <td>VU37P</td>
     <td>1’304 K</td>
     <td>2’607 K</td>
     <td>9’024</td>
@@ -89,7 +89,7 @@ Additionally, we are offering a build server with development and bitstream comp
     <td>480 GB</td>
     <td>Alveo U50D</td>
     <td>-</td>
-    <td>?</td>
+    <td>VU35P</td>
     <td>872 K</td>
     <td>1’743 K</td>
     <td>5’952</td>
@@ -104,7 +104,7 @@ Additionally, we are offering a build server with development and bitstream comp
     <td>1.2 TB</td>
     <td>Alveo U55C</td>
     <td>-</td>
-    <td>Virtex Ultrascale+ HBM</td>
+    <td>VU47P</td>
     <td>1’304 K</td>
     <td>2’607 K</td>
     <td>9’024</td>
@@ -128,6 +128,7 @@ Additionally, we are offering a build server with development and bitstream comp
   </tr>
 </tbody>
 </table>
+*FSG HACC resources. On the FPGA/ACAP column, VU stands for Xilinx Virtex Ultrascale+*
 
 Remember that each high-end server exposes **only one Xilinx accelerator card to the user.**
 
@@ -137,7 +138,8 @@ Remember that each high-end server exposes **only one Xilinx accelerator card to
 
 ## Xilinx accelerator cards
 
-### U50D 
+### Xilinx Virtex Ultrascale+
+ 
 
 ### U55C 
 
