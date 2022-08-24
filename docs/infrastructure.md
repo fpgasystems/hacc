@@ -5,7 +5,7 @@
 </p>
 
 # Infrastructure
-FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking. Each accelerator card has all of its QSFP28 interfaces connected to a 100 GbE TOR switch to allow exploration of arbitrary network topologies for distributed computing.
+FSG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking. Each accelerator card has all of its QSFP28 interfaces connected to a 100 GbE TOR switch to allow exploration of arbitrary network topologies for distributed computing.
 
 ![FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking..](../imgs/infrastructure.png "FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking..")
 *FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking.*
@@ -39,10 +39,10 @@ Additionally, we are offering a build server with development and bitstream comp
 <tbody>
   <tr>
     <td>Build</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>PowerEdge R740</td>
+    <td>394 GB</td>
+    <td>80</td>
+    <td>3 TB</td>
     <td></td>
     <td></td>
     <td></td>
@@ -55,10 +55,10 @@ Additionally, we are offering a build server with development and bitstream comp
   </tr>
   <tr>
     <td>U250</td>
-    <td></td>
-    <td>xx</td>
-    <td>x</td>
-    <td></td>
+    <td>PowerEdge R740</td>
+    <td>128 GB</td>
+    <td>16</td>
+    <td>200/300 GB</td>
     <td>Alveo U250</td>
     <td></td>
     <td></td>
@@ -71,10 +71,10 @@ Additionally, we are offering a build server with development and bitstream comp
   </tr>
   <tr>
     <td>U280</td>
-    <td></td>
-    <td>xx</td>
-    <td>x</td>
-    <td></td>
+    <td>PowerEdge R740</td>
+    <td>128 GB</td>
+    <td>16</td>
+    <td>200/300 GB</td>
     <td>Alveo U280</td>
     <td></td>
     <td></td>
@@ -87,10 +87,10 @@ Additionally, we are offering a build server with development and bitstream comp
   </tr>
   <tr>
     <td>U50D</td>
-    <td></td>
-    <td>xx</td>
-    <td>x</td>
-    <td></td>
+    <td>AMD EPYC 7302</td>
+    <td>64 GB</td>
+    <td>32</td>
+    <td>480 GB</td>
     <td>Alveo U50D</td>
     <td></td>
     <td></td>
@@ -103,10 +103,10 @@ Additionally, we are offering a build server with development and bitstream comp
   </tr>
   <tr>
     <td>U55C</td>
-    <td>xx</td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>AMD EPYC 7302</td>
+    <td>64 GB</td>
+    <td>32</td>
+    <td>1.2 TB</td>
     <td>Alveo U55C</td>
     <td></td>
     <td></td>
@@ -119,10 +119,10 @@ Additionally, we are offering a build server with development and bitstream comp
   </tr>
   <tr>
     <td>Versal</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>PowerEdge R740</td>
+    <td>128 GB</td>
+    <td>16</td>
+    <td>200 GB</td>
     <td>Versal VCK5000</td>
     <td></td>
     <td></td>
@@ -138,9 +138,9 @@ Additionally, we are offering a build server with development and bitstream comp
 
 Remember that each high-end server exposes **only one Xilinx accelerator card to the user.**
 
-## AMD high-end servers
+## High-end servers
 
-### El model
+### AMD EPYC
 
 ## Xilinx accelerator cards
 
