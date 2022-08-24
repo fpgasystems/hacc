@@ -9,9 +9,9 @@
 <img src="https://systems.ethz.ch/_jcr_content/orgbox/image.imageformat.logo.1091186870.svg" align="center" width="350">
 </a>
 <h1>
-  HACC
+  Heterogenous Accelerated Compute Cluster
 </h1>
-<a href="https://www.xilinx.com/support/university/XUP-HACC.html">Heterogenous Accelerated Compute Clusters (HACC) Program</a>
+<a href="https://www.xilinx.com/support/university/XUP-HACC.html">AMD Xilinx University Program</a>
 </td></tr></table>
 
 The Heterogeneous Accelerated Compute Clusters (HACC) program is a unique initiative to support novel research in adaptive compute acceleration for high-performance computing (HPC). The scope of the program is broad and encompasses systems, architecture, tools, and applications. HACCs are equipped with the latest Xilinx technology for adaptive compute acceleration.
