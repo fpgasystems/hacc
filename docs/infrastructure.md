@@ -128,6 +128,7 @@ Additionally, we are offering a build server with development and bitstream comp
   </tr>
 </tbody>
 </table>
+
 *FSG HACC resources. On the FPGA/ACAP column, VU stands for Xilinx Virtex Ultrascale+*
 
 Remember that each high-end server exposes **only one Xilinx accelerator card to the user.**
@@ -139,13 +140,7 @@ Remember that each high-end server exposes **only one Xilinx accelerator card to
 ## Xilinx accelerator cards
 
 ### Xilinx Virtex Ultrascale+
- 
-
-### U55C 
-
-### U250
-
-### U280
+Virtex UltraScale+ devices provide the highest performance and integration capabilities in a 14nm/16nm FinFET node. Xilinx 3rd generation 3D ICs use stacked silicon interconnect (SSI) technology to break through the limitations of Moore’s law and deliver the highest signal processing and serial I/O bandwidth to satisfy the most demanding design requirements. It also provides registered inter-die routing lines enabling >600 MHz operation, with abundant and flexible clocking to deliver a virtual monolithic design experience. As the industry's most capable FPGA family, the devices are ideal for compute-intensive applications ranging from 1+Tb/s networking, machine learning, to radar/early-warning systems.
 
 ## Networking
 
