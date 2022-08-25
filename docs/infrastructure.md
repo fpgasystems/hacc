@@ -5,12 +5,12 @@
 </p>
 
 # Infrastructure
-FSG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking. Each accelerator card has all of its QSFP28 interfaces connected to a 100 GbE TOR switch to allow exploration of arbitrary network topologies for distributed computing. Additionally, we are offering a build server with development and bitstream compilation purposes. <!-- Our HACC is provisioned and managed based on [Infrastructure as Code](../docs/vocabulary.md#infrastructure-as-code) using [Ansible](../docs/vocabulary.md#ansible). -->
+FSG HACC comprises high-end servers, Xilinx accelerator cards, and high-speed networking. Each accelerator card has all of its Ethernet interfaces connected to a 100 GbE leaf switch to allow exploration of arbitrary network topologies for distributed computing. Additionally, we are offering a build server with development and bitstream compilation purposes. <!-- Our HACC is provisioned and managed based on [Infrastructure as Code](../docs/vocabulary.md#infrastructure-as-code) using [Ansible](../docs/vocabulary.md#ansible). -->
 
 The following figure and table give an overview of FSG HACC resources: 
 
-![FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking..](../imgs/infrastructure.png "FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking..")
-*FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking.*
+![FSG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.](../imgs/infrastructure.png "FSG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.")
+*FSG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.*
 
 <table>
 <thead>
@@ -147,12 +147,22 @@ Virtex UltraScale+ devices provide the highest performance and integration capab
 * [Alveo U55C](https://www.xilinx.com/applications/data-center/high-performance-computing/u55c.html)
 * [Versal VCK5000](https://www.xilinx.com/products/boards-and-kits/vck5000.html)
 
-## High-speed networking
+## Networking
 
-Describe network hardware. With fiber cables...
+### High-speed networking
+For the **data network** connectivity, we are using a [spine-leaf architecture](../docs/vocabulary.md#spine-leaf-architecture) where the L2 leaf layer is build with 100 GbE [Cisco Nexus 9336c FX2](https://www.cisco.com/c/en/us/products/switches/nexus-9336c-fx2-switch/index.html) switches and fiber-optic cables. The following figure gives an overview of FSG HACC networking: 
 
+![Data network spine-leaf architecture.](../imgs/spine-leaf.png "Data network spine-leaf architecture.")
+*Data network spine-leaf architecture.*
 
+### Remote management 
+In addition to the data or high-speed 
 
+### Access network
+In addition to the data or high-speed 
+
+## JTAG - USB connectivity
+In addition to the data or high-speed 
 
 ## Known limitations
 For more details about any of these known limitations, please contact [jmoyapaya@ethz.ch](mailto:jmoyapaya@ethz.ch).
