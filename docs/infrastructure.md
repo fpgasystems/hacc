@@ -5,7 +5,7 @@
 </p>
 
 # Infrastructure
-FSG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking. Each accelerator card has all of its QSFP28 interfaces connected to a 100 GbE TOR switch to allow exploration of arbitrary network topologies for distributed computing. Additionally, we are offering a build server with development and bitstream compilation purposes. Our HACC is provisioned and managed based on [Infrastructure as Code](../docs/vocabulary.md#infrastructure-as-code) using [Ansible](../docs/vocabulary.md#ansible).
+FSG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking. Each accelerator card has all of its QSFP28 interfaces connected to a 100 GbE TOR switch to allow exploration of arbitrary network topologies for distributed computing. Additionally, we are offering a build server with development and bitstream compilation purposes. <!-- Our HACC is provisioned and managed based on [Infrastructure as Code](../docs/vocabulary.md#infrastructure-as-code) using [Ansible](../docs/vocabulary.md#ansible). -->
 
 The following figure and table give an overview of FSG HACC resources: 
 
@@ -154,8 +154,8 @@ Describe network hardware. With fiber cables...
 
 
 
-## Limitations
+## Known limitations
+For more details about any of these known limitations, please contact [jmoyapaya@ethz.ch](mailto:jmoyapaya@ethz.ch).
 
-* Els servidors son virtualitzats
-* Els servidors comparteixen XXX
-* Els servidors XXXX no tenen JTAG
+* The servers of the U250 and U280 clusters, as well as the Versal server, are virtualized. For some of those, the 100 GbE NICs are shared and might impact your designs. 
+* Not all servers in the U250 cluster are Vivado workflow enabled (as they do not have a USB - JTAG connection). The same is true for the Versal server.
