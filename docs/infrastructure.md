@@ -150,7 +150,7 @@ Virtex UltraScale+ devices provide the highest performance and integration capab
 ## Networking
 
 ### High-speed networking
-For the **data network** connectivity, we are using a [spine-leaf architecture](../docs/vocabulary.md#spine-leaf-architecture) where the L2 leaf layer is build with 100 GbE [Cisco Nexus 9336c FX2](https://www.cisco.com/c/en/us/products/switches/nexus-9336c-fx2-switch/index.html) switches and fiber-optic cables. The following figure gives an overview of FSG HACC networking: 
+For the **data network** connectivity, we are using a [spine-leaf architecture](../docs/vocabulary.md#spine-leaf-architecture) where the L2 leaf layer is build with 100 GbE [Cisco Nexus 9336c FX2](https://www.cisco.com/c/en/us/products/switches/nexus-9336c-fx2-switch/index.html) switches and fiber-optic cables:
 
 ![Data network spine-leaf architecture.](../imgs/spine-leaf.png "Data network spine-leaf architecture.")
 *Data network spine-leaf architecture.*
