@@ -137,7 +137,6 @@ The following figure and table give an overview of FSG HACC resources:
 EPYC is the world’s highest-performing x86 server processor with faster performance for cloud, enterprise, and HPC workloads. To learn more about them, please refer to the [AMD EPYC processors website](https://www.amd.com/en/processors/epyc-server-cpu-family) and its [data sheet.](https://www.amd.com/system/files/documents/amd-epyc-7003-series-datasheet.pdf)
 
 ## Xilinx accelerator cards
-
 ### Virtex Ultrascale+
 Virtex UltraScale+ devices provide the highest performance and integration capabilities in a 14nm/16nm FinFET node. It also provides registered inter-die routing lines enabling >600 MHz operation, with abundant and flexible clocking to deliver a virtual monolithic design experience. As the industry’s most capable FPGA family, the devices are ideal for compute-intensive applications ranging from 1+Tb/s networking and machine learning to radar/early-warning systems.
 
@@ -147,21 +146,20 @@ Virtex UltraScale+ devices provide the highest performance and integration capab
 * [Alveo U55C](https://www.xilinx.com/applications/data-center/high-performance-computing/u55c.html)
 * [Versal VCK5000](https://www.xilinx.com/products/boards-and-kits/vck5000.html)
 
-## Networking
+### USB - JTAG connectivity
+In addition to the data or high-speed 
 
+## Networking
 ### High-speed networking
 For the **data network** connectivity, we are using a [spine-leaf architecture](../docs/vocabulary.md#spine-leaf-architecture) where the L2 leaf layer is build with 100 GbE [Cisco Nexus 9336c FX2](https://www.cisco.com/c/en/us/products/switches/nexus-9336c-fx2-switch/index.html) switches and fiber-optic cables:
 
 ![Data network spine-leaf architecture.](../imgs/spine-leaf.png "Data network spine-leaf architecture.")
 *Data network spine-leaf architecture.*
 
-### Remote management 
+### Remote management network
 In addition to the data or high-speed 
 
 ### Access network
-In addition to the data or high-speed 
-
-## JTAG - USB connectivity
 In addition to the data or high-speed 
 
 ## Known limitations
