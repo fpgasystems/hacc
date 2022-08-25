@@ -7,7 +7,7 @@
 # Vocabulary
 
 ## Agile
-Agile is an iterative project management and software development approach that helps teams deliver value to their customers faster and with fewer headaches. Instead of betting everything on a long-term launch, an agile team provides work in small but consumable increments. Requirements, plans, and results are evaluated continuously, so teams have a natural mechanism for responding to change quickly. 
+Agile is an iterative project management and software development approach that helps teams deliver value to their customers faster and with fewer headaches. Instead of betting everything on a long-term launch, an agile team provides work in small but consumable increments. Requirements, plans, and results are evaluated continuously, so teams have a natural mechanism for responding to change quickly. Frameworks such as Scrum or [Shape up](https://basecamp.com/shapeup) are examples of Agile methodologies. 
 
 ## Ansible
 The [Red Hat Ansible Automation Platform](https://www.ansible.com) is an orchestrated and open-source tool for software provisioning, configuration management, and application-deployment. Ansible uses its own YAML-based declarative language enabling [infrastructure as code](#infrastructure-as-code). 
