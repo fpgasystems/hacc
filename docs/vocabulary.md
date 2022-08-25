@@ -16,7 +16,7 @@ The [Red Hat Ansible Automation Platform](https://www.ansible.com) is an orchest
 DevOps is a set of practices that combines software development (Dev) and IT operations (Ops). It aims to shorten the systems development life cycle and provide continuous delivery with high software quality. Several DevOps aspects came from the Agile methodology.
 
 ## Infrastructure as Code
-Infrastructure as Code (IaC) is the process of managing and provisioning computer data centers through machine-readable definition files rather than physical hardware configuration or interactive configuration tools. The IT infrastructure managed by this process comprises physical equipment, such as bare-metal servers, virtual machines, and associated configuration resources. The definitions may be in a version control system.
+Infrastructure as Code (IaC) is the process of provisioning and managing computer data centers through machine-readable definition files rather than physical hardware configuration or interactive configuration tools. The IT infrastructure managed by this process comprises physical equipment, such as bare-metal servers, virtual machines, and associated configuration resources. The definitions may be in a version control system.
 
 ### Tools
 There are many tools that fulfill infrastructure automation capabilities and use IaC. Broadly speaking, any framework or tool that performs changes or configures infrastructure declaratively or imperatively based on a programmatic approach can be considered IaC. FSG HACC uses [Ansible](#ansible) for defining the cluster infrastructure.

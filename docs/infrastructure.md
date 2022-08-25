@@ -5,12 +5,12 @@
 </p>
 
 # Infrastructure
-FSG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking. Each accelerator card has all of its QSFP28 interfaces connected to a 100 GbE TOR switch to allow exploration of arbitrary network topologies for distributed computing.
+FSG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking. Each accelerator card has all of its QSFP28 interfaces connected to a 100 GbE TOR switch to allow exploration of arbitrary network topologies for distributed computing. Additionally, we are offering a build server with development and bitstream compilation purposes. Our HACC is provisioned and managed based on [Infrastructure as Code](../docs/vocabulary.md#infrastructure-as-code) using [Ansible](../docs/vocabulary.md#ansible).
+
+The following figure and table give an overview of FSG HACC resources: 
 
 ![FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking..](../imgs/infrastructure.png "FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking..")
 *FSG HACC is comprised of AMD high-​end servers, Xilinx accelerator cards, and high-​speed networking.*
-
-Additionally, we are offering a build server with development and bitstream compilation purposes. The following table gives an overview of FSG HACC resources: 
 
 <table>
 <thead>
@@ -129,9 +129,7 @@ Additionally, we are offering a build server with development and bitstream comp
 </tbody>
 </table>
 
-*FSG HACC resources. On the FPGA/ACAP column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale).*
-
-Remember that each high-end server exposes **only one Xilinx accelerator card to the user.**
+*FSG HACC resources. On the FPGA/ACAP column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale). Remember that each high-end server exposes **only one Xilinx accelerator card to the user.***
 
 ## High-end servers
 
