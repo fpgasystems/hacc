@@ -12,7 +12,7 @@ The following figure and table give an overview of FSG HACC resources:
 ![FSG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.](../imgs/infrastructure.png "FSG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.")
 *FSG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.*
 
-<font size="2">
+<font size=2>
 <table>
 <thead>
   <tr>
