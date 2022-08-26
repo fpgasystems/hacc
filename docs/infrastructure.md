@@ -12,8 +12,10 @@ The following figure and table give an overview of FSG HACC resources:
 ![FSG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.](../imgs/infrastructure.png "FSG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.")
 *FSG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.*
 
-<font size=2>
-<table>
+![FSG HACC resources. On the FPGA/ACAP column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale). Remember that each high-end server exposes only one Xilinx accelerator card to the user.](../imgs/infrastructure-table.png "FSG HACC resources. On the FPGA/ACAP column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale). Remember that each high-end server exposes only one Xilinx accelerator card to the user.")
+*FSG HACC resources. On the FPGA/ACAP column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale). Remember that each high-end server exposes **only one Xilinx accelerator card to the user.***
+
+<!-- <table>
 <thead>
   <tr>
     <th rowspan="2">Cluster</th>
@@ -128,10 +130,7 @@ The following figure and table give an overview of FSG HACC resources:
     <td></td>
   </tr>
 </tbody>
-</table>
-</font>
-
-*FSG HACC resources. On the FPGA/ACAP column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale). Remember that each high-end server exposes **only one Xilinx accelerator card to the user.***
+</table> -->
 
 ## High-end servers
 ### AMD EPYC
