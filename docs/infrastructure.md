@@ -155,16 +155,14 @@ For the **data network** connectivity, we are using a [spine-leaf architecture](
 ![Data network spine-leaf architecture.](../imgs/spine-leaf.png "Data network spine-leaf architecture.")
 *Data network spine-leaf architecture.*
 
-On the server side, the CPU NICs are [ConnectX-5](https://www.nvidia.com/en-us/networking/ethernet/connectx-5/) adaptors. As shown in the first figure, only one of Mellanox’s cards interface is connected to the corresponding leaf switch (see [Known limitation](#known-limitations)), whereas both QSFP28 FPGA connectors are directly attached. 
+On the server side, the CPU NICs are [ConnectX-5](https://www.nvidia.com/en-us/networking/ethernet/connectx-5/) adaptors. As shown in the first figure, only one of Mellanox’s cards interface is connected to the corresponding leaf switch (see [Known limitations](#known-limitations)), whereas both QSFP28 FPGA connectors are directly attached. 
 
 ### Management network
 We refer to the management network as the infrastructure allowing our IT administrators to manage, deploy, update and monitor our cluster **remotely.**
 
 ### Access network
-In addition to the data or high-speed 
+The access network is the infrastructure that allows secure remote access to our **users** through SSH.
 
 ## Known limitations
-For more details about any of these known limitations, please contact [jmoyapaya@ethz.ch](mailto:jmoyapaya@ethz.ch).
-
 * The servers of the U250 and U280 clusters, as well as the Versal server, are virtualized. For some of those, the 100 GbE NICs are shared and might impact your designs. 
 * Not all servers in the U250 cluster are Vivado workflow enabled (as they do not have a USB - JTAG connection). The same is true for the Versal server.
