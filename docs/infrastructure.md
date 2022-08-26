@@ -146,7 +146,7 @@ Virtex UltraScale+ devices provide the highest performance and integration capab
 * [Versal VCK5000](https://www.xilinx.com/products/boards-and-kits/vck5000.html)
 
 ### USB - JTAG connectivity
-The USB - JTAG connection allows Vivado workflow developers to interact directly with the FPGA by downloading bitstreams or updating memory content.
+The USB - JTAG connection allows granted users to interact directly with the FPGA by downloading bitstreams or updating memory content. The correct setup and access of a USB - JTAG connection is essential for Vivado workflow developers.
 
 ## Networking
 ### Data network
