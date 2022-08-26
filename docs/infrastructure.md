@@ -153,7 +153,7 @@ For our **high-speed networking** data network, we are using a [spine-leaf archi
 ![Data network spine-leaf architecture.](../imgs/spine-leaf.png "Data network spine-leaf architecture.")
 *Data network spine-leaf architecture.*
 
-On the server side, the CPU NICs are [ConnectX-5](https://www.nvidia.com/en-us/networking/ethernet/connectx-5/) adaptors. As shown in the first figure, only one of Mellanox’s cards interface is connected to the corresponding leaf switch (see [Known limitations](#known-limitations)), whereas both QSFP28 FPGA connectors are directly attached. 
+On the server side, the CPU NICs are [ConnectX-5](https://www.nvidia.com/en-us/networking/ethernet/connectx-5/) adaptors. As shown in the first figure, only one of cards interface is connected to the corresponding leaf switch (see [Known limitations](#known-limitations)), whereas both QSFP28 FPGA connectors are directly attached. 
 
 ### Management network
 We refer to the management network as the infrastructure allowing our IT administrators to manage, deploy, update and monitor our cluster **remotely.**
