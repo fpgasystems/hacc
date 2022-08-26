@@ -132,7 +132,6 @@ The following figure and table give an overview of FSG HACC resources:
 *FSG HACC resources. On the FPGA/ACAP column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale). Remember that each high-end server exposes **only one Xilinx accelerator card to the user.***
 
 ## High-end servers
-
 ### AMD EPYC
 EPYC is the world’s highest-performing x86 server processor with faster performance for cloud, enterprise, and HPC workloads. To learn more about it, please refer to the [AMD EPYC processors website](https://www.amd.com/en/processors/epyc-server-cpu-family) and its [data sheet.](https://www.amd.com/system/files/documents/amd-epyc-7003-series-datasheet.pdf)
 
@@ -158,8 +157,8 @@ For the **data network** connectivity, we are using a [spine-leaf architecture](
 
 On the server side, the CPU NICs are [ConnectX-5](https://www.nvidia.com/en-us/networking/ethernet/connectx-5/) adaptors. As shown in the first figure, only one of Mellanox’s cards interface is connected to the corresponding leaf switch (see [Known limitation](#known-limitations)), whereas both QSFP28 FPGA connectors are directly attached. 
 
-### Remote management network
-In addition to the data or high-speed 
+### Management network
+We refer to the management network as the infrastructure allowing our IT administrators to manage, deploy, update and monitor our cluster **remotely.**
 
 ### Access network
 In addition to the data or high-speed 
