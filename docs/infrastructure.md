@@ -146,7 +146,7 @@ Virtex UltraScale+ devices provide the highest performance and integration capab
 * [Versal VCK5000](https://www.xilinx.com/products/boards-and-kits/vck5000.html)
 
 ### USB - JTAG connectivity
-The USB - JTAG connection allows Vivado developers to interact directly with the FPGA by downloading bitstreams or updating memory content.
+The USB - JTAG connection allows Vivado workflow developers to interact directly with the FPGA by downloading bitstreams or updating memory content.
 
 ## Networking
 ### Data network
@@ -164,6 +164,6 @@ We refer to the management network as the infrastructure allowing our IT adminis
 The access network is the infrastructure that allows secure remote access to our **users** through SSH.
 
 ## Known limitations
-* The servers of the U250 and U280 clusters, as well as the Versal server, are virtualized. For some of those, the 100 GbE NICs are shared and might impact your designs. 
+* The U250 and U280 servers—as well as the Versal—are virtualized. For some of those, the 100 GbE NICs are shared and might impact your designs. 
 * Not all servers in the U250 cluster are Vivado workflow enabled (as they do not have a USB - JTAG connection). The same is true for the Versal server.
-* None of the QSFP28 FPGA interfaces are directly connected (they are connected to the leaf switches).
+* None of the QSFP28 FPGA interfaces are directly connected: they are always connected to corresponding leaf switch.
