@@ -150,8 +150,8 @@ The USB - JTAG connection allows granted users to interact directly with the FPG
 ### Data network
 For our **high-speed networking** data network, we are using a [spine-leaf architecture](../docs/vocabulary.md#spine-leaf-architecture) where the L2 leaf layer is built with 100 GbE [Cisco Nexus 9336c FX2](https://www.cisco.com/c/en/us/products/switches/nexus-9336c-fx2-switch/index.html) switches and fiber-optic cables:
 
-![Data network spine-leaf architecture.](../imgs/spine-leaf.png "Data network spine-leaf architecture.")
-*Data network spine-leaf architecture.*
+![Spine-leaf data network architecture.](../imgs/spine-leaf.png "Spine-leaf data network architecture.")
+*Spine-leaf data network architecture.*
 
 On the server side, the CPU NICs are [ConnectX-5](https://www.nvidia.com/en-us/networking/ethernet/connectx-5/) adaptors. As shown in the first figure, only one of cards interface is connected to the corresponding leaf switch (see [Known limitations](#known-limitations)), whereas both QSFP28 FPGA connectors are directly attached. 
 

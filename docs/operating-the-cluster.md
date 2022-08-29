@@ -8,12 +8,18 @@
 
 <!-- We manage our HACC fully automatic: there is no room for manual administration. By using [Ansible](docs/vocabulary.md#ansible),  -->
 
-Our HACC is provisioned and managed based on [Infrastructure as Code](../docs/vocabulary.md#infrastructure-as-code) using [Ansible](../docs/vocabulary.md#ansible).
+Our HACC is provisioned and managed based on [Infrastructure as Code](../docs/vocabulary.md#infrastructure-as-code) and [Ansible](../docs/vocabulary.md#ansible). With such an approach we can be sure that the cluster configuration is homogeneous and reproducible—so we can reset the whole infrastructure to a defined state at any time. In fact, we can re-install and set up from scratch—without other interaction—all of the servers in our cluster in about an hour. 
+
+The following figure shows a simplified model of HACC’s Ansible automation platform:
+
+![Ansible Automation Platform (AAP).](../imgs/ansible.png "Ansible Automation Platform (AAP).")
+*Ansible Automation Platform (AAP).*
+
+The playbooks and task definning our cluster are grouped into two diferenciated parts. The first one is for definning the infrastructure itself and relates to the OS installation (including the definitions of partition sizes and similar lower-level attributes), Debian packages installation, and network setup. The second part of the IaC files relate to the PaaS side of the service as we take care of the installation of all the software required for our users would need to develop their heterogeneous accelerated applications, including: XRT’s Xilinx Board Utility (xbutil), Xilinx tools (Vivado, Vitis_HLS, Vitis), and the flashable partitions (or base shell) running on the FPGA. Thanks to Ansible we are able to easily follow Xilinx’s tools versioning release schedule as mentioned in [Releases](../README.md/#releases).
+
+<!-- Such a process includes installing not only the operating system and Debian packages but also all Xilinx tools, the deployment and development platforms, the base shells’ programming (with a handled servers’ cold boot), and networking configuration. In addition, the YAML-based playbooks and tasks allow us to inherently document servers and cluster setup.
 
 
-we can be sure that the cluster configuration is homogeneous and reproducible. We can re-install and set up from scratch—without other interaction—all of the servers in our cluster in about an hour. Such a process includes installing not only the operating system and Debian packages but also all Xilinx tools, the deployment and development platforms, the base shells’ programming (with a handled servers’ cold boot), and networking configuration. In addition, the YAML-based playbooks and tasks allow us to inherently document servers and cluster setup.
-
-Thanks to Ansible we are able to easily follow Xilinx’s tools versioning release schedule as mentioned in [Releases](../README.md/#releases).
 
 ------------
 
@@ -34,4 +40,4 @@ ANSIBLE makes the operation of the cluster easier ==> is the tool we choose beca
 
 -Public cloud? Private cloud? Managed cloud?
 -Networking architecture? What happens when we do SSH to the cluster but then the Mellanox and IPs are in another LAN?
--Ansible reference model?
+-Ansible reference model? -->
