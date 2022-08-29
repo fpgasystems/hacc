@@ -8,14 +8,17 @@
 
 <!-- We manage our HACC fully automatic: there is no room for manual administration. By using [Ansible](docs/vocabulary.md#ansible),  -->
 
-Our HACC is provisioned and managed based on [Infrastructure as Code](../docs/vocabulary.md#infrastructure-as-code) and [Ansible](../docs/vocabulary.md#ansible). With such an approach we can be sure that the cluster configuration is homogeneous and reproducible—so we can reset the whole infrastructure to a defined state at any time. In fact, we can re-install and set up from scratch—without other interaction—all of the servers in our cluster in about an hour. 
+Our HACC is provisioned and managed based on [Infrastructure as Code](../docs/vocabulary.md#infrastructure-as-code) and [Ansible](../docs/vocabulary.md#ansible). With such an approach we can guarantee that the cluster configuration is homogeneous and reproducible—so we can reset the whole infrastructure to a defined state at any time. In fact, we can re-install and set up from scratch—without other interaction—all of the servers in our cluster in about an hour. 
 
 The following figure shows a simplified model of HACC’s Ansible automation platform:
 
 ![Ansible Automation Platform (AAP).](../imgs/ansible.png "Ansible Automation Platform (AAP).")
 *Ansible Automation Platform (AAP).*
 
-The playbooks and task definning our cluster are grouped into two diferenciated parts. The first one is for definning the infrastructure itself and relates to the OS installation (including the definitions of partition sizes and similar lower-level attributes), Debian packages installation, and network setup. The second part of the IaC files relate to the PaaS side of the service as we take care of the installation of all the software required for our users would need to develop their heterogeneous accelerated applications, including: XRT’s Xilinx Board Utility (xbutil), Xilinx tools (Vivado, Vitis_HLS, Vitis), and the flashable partitions (or base shell) running on the FPGA. Thanks to Ansible we are able to easily follow Xilinx’s tools versioning release schedule as mentioned in [Releases](../README.md/#releases).
+The playbooks defining our cluster are grouped into two categories: IaaS and PaaS. We refer the IaaS playbooks to the YAML files describing the infrastructure and related to the OS installation (including the definitions of partition sizes and similar lower-level attributes), networking setup, and Debian packages installation. With the PaaS playbooks, we take care of installing the software that allows our users to develop their heterogeneous accelerated applications. Thanks to Ansible, we can easily follow Xilinx’s tools versioning release schedule as mentioned in [Releases](../README.md/#releases).
+
+
+<!-- The playbooks and task definning our cluster are grouped into two categories: IaaS and PaaS. We refer to the IaaS playbooks to those definning the infrastructure itself and related to the OS installation (including the definitions of partition sizes and similar lower-level attributes), networking setup, and Debian packages installation. With the PaaS playbooks we take care of the the software allowing our users to develop their heterogeneous accelerated applications, including XRT’s Xilinx Board Utility (xbutil), Xilinx tools (Vivado, Vitis_HLS, Vitis), the flashable partitions (or base shell) running on the FPGA, and any other sort of user tools we programed ourserlves. Thanks to Ansible we are able to easily follow Xilinx’s tools versioning release schedule as mentioned in [Releases](../README.md/#releases). -->
 
 <!-- Such a process includes installing not only the operating system and Debian packages but also all Xilinx tools, the deployment and development platforms, the base shells’ programming (with a handled servers’ cold boot), and networking configuration. In addition, the YAML-based playbooks and tasks allow us to inherently document servers and cluster setup.
 
