@@ -15,10 +15,17 @@ The [Red Hat Ansible Automation Platform (AAP)](https://www.ansible.com) is an o
 ### AAP
 The *Ansible Automation Platform* (AAP) is a product that includes enterprise level features and integrates many tools of the Ansible ecosystem like the ansible-core, awx, galaxyNG, and so on.
 
+## Deployment types
+### Infrastructure as a service (IaaS)
+Introduced in 2012 by Oracle, infrastructure as a service (IaaS) is a cloud computing service model through which computing resources are hosted in a public, private, or hybrid cloud and provided on-demand to the final users.
+
+### Platform as a service (PaaS)
+Platform as a service (PaaS) is a category of cloud computing services that allows customers to provision, instantiate, run, and manage a modular bundle comprising a computing platform and one or more applications, without the complexity of building and maintaining the infrastructure typically associated with developing and launching the application(s); and to allow developers to create, develop, and package such software bundles.
+
 ## DevOps 
 DevOps is a set of practices that combines software development (Dev) and IT operations (Ops). It aims to shorten the systems development life cycle and provide continuous delivery with high software quality. Several DevOps aspects came from the [Agile](#agile) methodology. <!-- https://en.wikipedia.org/wiki/DevOps -->
 
-## Infrastructure as Code
+## Infrastructure as code (IaC)
 Infrastructure as Code (IaC) is the process of provisioning and managing computer data centers through machine-readable definition files rather than physical hardware configuration or interactive configuration tools. The IT infrastructure managed by this process comprises physical equipment, such as bare-metal servers, virtual machines, and associated configuration resources. The definitions may be in a version control system.
 
 ### Tools
