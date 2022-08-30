@@ -11,6 +11,12 @@
 ## Hot-plug boot
 
 ## Managed
+We use [Infrastructure as Code (IaC)](../docs/vocabulary.md#infrastructure-as-code-iac) and [Ansible](../docs/vocabulary.md#ansible) to [operate the cluster](../docs/operating-the-cluster.md) efficiently. Under the scope of a [DevOps]() methodology, we achieve the following: <!-- https://docs.microsoft.com/en-us/devops/deliver/what-is-infrastructure-as-code -->
 
+* Continuos delivery,
+* Avoid manual configuration to enforce consistency,
+* Use declarative definition files helping to document the cluster,
+* Easily follow Xilinx’s tools versioning release schedule as mentioned in [Releases](../README.md/#releases), and
+* Deliver stable tests environments rapidly at scale.
 
 ## You are welcome

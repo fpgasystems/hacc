@@ -25,8 +25,10 @@ Platform as a service (PaaS) is a category of cloud computing services that allo
 ## DevOps 
 DevOps is a set of practices that combines software development (Dev) and IT operations (Ops). It aims to shorten the systems development life cycle and provide continuous delivery with high software quality. Several DevOps aspects came from the [Agile](#agile) methodology. <!-- https://en.wikipedia.org/wiki/DevOps -->
 
-## Infrastructure as code (IaC)
-Infrastructure as code (IaC) is the process of provisioning and managing computer data centers through machine-readable definition files rather than physical hardware configuration or interactive configuration tools. The IT infrastructure managed by this process comprises physical equipment, such as bare-metal servers, virtual machines, and associated configuration resources. The definitions may be in a version control system.
+## Infrastructure as Code (IaC)
+Infrastructure as Code (IaC) is the process of provisioning and managing computer data centers through machine-readable definition files rather than physical hardware configuration or interactive configuration tools. The IT infrastructure managed by this process comprises physical equipment, such as bare-metal servers, virtual machines, and associated configuration resources. The definitions may be in a version control system.
+
+<!-- Infrastructure as code (IaC) uses [DevOps](#devops) methodology and versioning with a descriptive model to define and deploy infrastructure, such as networks, virtual machines, load balancers, and connection topologies. Just as the same source code always generates the same binary, an IaC model generates the same environment every time it deploys—specially when the source code is in a version control system. IaC is a key DevOps practice and a component of continuous delivery. With IaC, DevOps teams can work together with a unified set of practices and tools to deliver applications and their supporting infrastructure rapidly and reliably at scale. https://docs.microsoft.com/en-us/devops/deliver/what-is-infrastructure-as-code -->
 
 ### Tools
 There are many tools that fulfill infrastructure automation capabilities and use IaC. Broadly speaking, any framework or tool that performs changes or configures infrastructure declaratively or imperatively based on a programmatic approach can be considered IaC. FSG HACC uses [Ansible](#ansible) for defining the cluster infrastructure.
