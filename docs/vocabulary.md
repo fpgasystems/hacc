@@ -42,8 +42,6 @@ There are many tools that fulfill infrastructure automation capabilities and use
 ### Relation to DevOps
 IaC can be a key attribute of enabling best practices in [DevOps](#devops)–developers become more involved in defining configuration and Ops teams get involved earlier in the development process. Tools that utilize IaC bring visibility to the state and configuration of servers and ultimately provide the visibility to users within the enterprise, aiming to bring teams together to maximize their efforts.
 
-## Shape up
-
 ## Spine-leaf architecture 
 A spine-leaf architecture is data center network topology that consists of two switching layers—a spine and leaf. The leaf layer consists of access switches that aggregate traffic from servers and connect directly into the spine or network core. Spine switches interconnect all leaf switches in a full-mesh topology. <!-- https://www.arubanetworks.com/faq/what-is-spine-leaf-architecture/ -->
 
