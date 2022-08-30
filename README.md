@@ -24,6 +24,7 @@ Five HACCs have been established at some of the world’s most prestigious unive
 * [Features](docs/features.md#features)
 * [Get started](https://www.amd-haccs.io/get-started.html)
 * [Infrastructure](docs/infrastructure.md#infrastructure)
+* [Known limitations](docs/known-limitations.md#known-limitations)
 * [Operating the cluster](docs/operating-the-cluster.md#operating-the-cluster)
 * [Projects](docs/projects.md#projects)
 * [Vocabulary](docs/vocabulary.md#vocabulary)
