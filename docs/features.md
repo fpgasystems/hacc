@@ -12,7 +12,7 @@
 Thanks to our hot-plug boot process, we are able to transition between the Vitis and Vivado workflows without the need of rebooting the system.
 
 ## Managed
-We use [Infrastructure as Code (IaC)](../docs/vocabulary.md#infrastructure-as-code-iac) and [Ansible](../docs/vocabulary.md#ansible) to [operate the cluster](../docs/operating-the-cluster.md) efficiently. Under the scope of a [DevOps](../docs/vocabulary.md#devops) methodology, we achieve the following: <!-- https://docs.microsoft.com/en-us/devops/deliver/what-is-infrastructure-as-code -->
+We use [Infrastructure as Code (IaC)](../docs/vocabulary.md#infrastructure-as-code-iac) and [Ansible Automation Platform (AAP)](../docs/vocabulary.md#ansible-automation-platform-aap) to [operate the cluster](../docs/operating-the-cluster.md) efficiently. Under the scope of a [DevOps](../docs/vocabulary.md#devops) methodology, we achieve the following: <!-- https://docs.microsoft.com/en-us/devops/deliver/what-is-infrastructure-as-code -->
 
 * Continuos delivery,
 * Avoid manual configuration to enforce consistency,

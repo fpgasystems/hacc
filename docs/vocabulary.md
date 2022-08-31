@@ -9,8 +9,8 @@
 ## Agile 
 Agile is an iterative project management and software development approach that helps teams deliver value to their customers faster and with fewer headaches. Instead of betting everything on a long-term launch, an agile team provides work in small but consumable increments. Requirements, plans, and results are evaluated continuously, so teams have a natural mechanism for responding to change quickly. Frameworks such as [Shape up](https://basecamp.com/shapeup) or [DevOps](#devops) are considered part of Agile methodologies. <!-- https://www.atlassian.com/agile -->
 
-## Ansible
-The [Red Hat Ansible Automation Platform (AAP)](https://www.ansible.com) is an orchestrated and open-source tool for software provisioning, configuration management, and application-deployment automation. Ansible uses its own [YAML](#yaml)-based declarative language enabling [infrastructure as code](#infrastructure-as-code-iac).
+## Ansible Automation Platform (AAP)
+The Red Hat [Ansible Automation Platform (AAP)](https://www.ansible.com) is an orchestrated and open-source tool for software provisioning, configuration management, and application-deployment automation. Ansible uses its own [YAML](#yaml)-based declarative language enabling [infrastructure as code](#infrastructure-as-code-iac).
 
 ## Deployment types
 ### Infrastructure as a service (IaaS)
