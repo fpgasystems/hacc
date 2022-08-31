@@ -23,10 +23,10 @@ Platform as a service (PaaS) is a category of cloud computing services that allo
 DevOps is a set of practices that combines software development (Dev) and IT operations (Ops). It aims to shorten the systems development life cycle and provide continuous delivery with high software quality. Several DevOps aspects came from the [Agile](#agile) methodology. <!-- https://en.wikipedia.org/wiki/DevOps -->
 
 ## Hot-plug boot
-We refer to the hot-plug boot as the process that allows us to transition Xilinx Alveo Cards from the Vitis to Vivado workflows or vice-versa. The critical aspect of the process is to use Linux capabilities to re-enumerate PCI devices on the fly without the need for cold or warm rebooting of the system.
+We refer to the hot-plug boot as the process that allows us to transition Xilinx accelerator cards from the Vitis to Vivado workflows or vice-versa. The critical aspect of the process is to use Linux capabilities to re-enumerate PCI devices on the fly without the need for cold or warm rebooting of the system.
 
 ### Cold boot
-The process of powering off and on the machine to completely reload the operating system and reset all the hardware peripherals (including all PCI devices). In the context of Xilinx Alveo Cards, a cold boot causes to pull the flashable partitions (or base shell) from the card’s PROM into the programmable logic. This would be an opration required to revert a server to the Vitis workflow.
+The process of powering off and on the machine to completely reload the operating system and reset all the hardware peripherals (including all PCI devices). In the context of Xilinx Alveo Cards, a cold boot causes to pull the flashable partitions (or base shell) from the card’s PROM into the programmable logic. This operation is required to revert a server to the Vitis workflow.
 
 ### Warm boot
 A warm boot restarts the system without the need to interrupt the power. In the context of Xilinx Alveo Cards, a warm boot would be required to re-enumarate the number of PCI functions without restoring the base shell. A warm boot would be required to bring a server to the Vivado workflow.
