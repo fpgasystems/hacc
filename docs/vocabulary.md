@@ -29,7 +29,7 @@ We refer to the hot-plug boot as the process that allows us to transition Xilinx
 The process of powering off and on the machine to completely reload the operating system and reset all the hardware peripherals (including all PCI devices). In the context of Xilinx Alveo Cards, a cold boot causes to pull the flashable partitions (or base shell) from the card’s PROM into the programmable logic. This operation is required to revert a server to the Vitis workflow.
 
 ### Warm boot
-A warm boot restarts the system without the need to interrupt the power. In the context of Xilinx Alveo Cards, a warm boot would be required to re-enumarate the number of PCI functions without restoring the base shell. A warm boot would be required to bring a server to the Vivado workflow.
+A warm boot restarts the system without the need to interrupt the power. In the context of Xilinx Alveo Cards, a warm boot would be required to re-enumarate the number of PCI functions without restoring the base shell. This operation is required to bring a server to the Vivado workflow.
 
 ## Infrastructure as Code (IaC)
 Infrastructure as Code (IaC) is the process of provisioning and managing computer data centers through machine- and human-readable [YAML](#yaml) definition files—rather than physical hardware configuration or interactive configuration tools. The IT infrastructure managed by this process comprises physical equipment, such as bare-metal servers, virtual machines, and associated configuration resources. The definitions may be in a version control system.
