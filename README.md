@@ -5,7 +5,7 @@
 </p>
 
 <table align="center"><tr><td align="center" width="9999">
-<a href="https://systems.ethz.ch/research/data-processing-on-modern-hardware/alveo-fpga-cluster.html">
+<!-- <a href="https://systems.ethz.ch/research/data-processing-on-modern-hardware/alveo-fpga-cluster.html"> -->
 <img src="https://systems.ethz.ch/_jcr_content/orgbox/image.imageformat.logo.1091186870.svg" align="center" width="350">
 </a>
 <h1>
