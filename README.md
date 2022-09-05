@@ -30,7 +30,7 @@
 
 Under the scope of the <a href="https://www.xilinx.com/support/university/XUP-HACC.html">AMD Xilinx University Program</a>, the <a href="https://www.amd-haccs.io">Heterogeneous Accelerated Compute Clusters (HACCs)</a> is a unique initiative to support novel research in adaptive compute acceleration for high-performance computing (HPC). The scope of the program is broad and encompasses systems, architecture, tools, and applications. HACCs are equipped with the latest AMD high-end servers and Xilinx technology for adaptive compute acceleration.
 
-Five HACCs have been established at some of the world’s most prestigious universities and academic teams to conduct state-of-the-art HPC research. The first of these was assigned to [Prof. Dr. Gustavo Alonso](https://people.inf.ethz.ch/alonso/) of the [Institute for Platform Computing - Systems Group (SG)](https://systems.ethz.ch) at the Swiss Federal Institute of Technology Zurich (ETH Zürich) in 2020.
+Five HACCs have been established at some of the world’s most prestigious universities and academic teams to conduct state-of-the-art HPC research. The first of these was assigned to [Prof. Dr. Gustavo Alonso](https://people.inf.ethz.ch/alonso/) of the [Institute for Platform Computing - Systems Group (SG)](https://systems.ethz.ch) at the [Swiss Federal Institute of Technology Zurich (ETH Zürich)](https://ethz.ch/en.html) in 2020.
 
 
 ## Sections
