@@ -5,19 +5,19 @@
 </p>
 
 # CLI
-FSG CLI brings FPGA Systems Group’s designs to your terminal.
+SG CLI brings FPGA Systems Group’s designs to your terminal.
 
 ## fsg
 Work seamlessly with XRT from the command line.
 
 ### Core commands
 
-* [fsg program](./CLI-fsg-program.md) 
+* [sg program](./CLI-sg-program.md) 
 
 ### Action commands
 
-* [fsg rescan]()
-* [fsg examine]()
+* [sg rescan]()
+* [sg examine]()
 
 ### Options
 <code>
@@ -29,7 +29,7 @@ Work seamlessly with XRT from the command line.
 
 ### Examples
 ```
-$ fsg program ...
-$ fsg program ...
-$ fsg program ...
+$ sg program ...
+$ sg program ...
+$ sg program ...
 ```

@@ -4,16 +4,16 @@
 <a href="https://github.com/fpgasystems/hacc/blob/main/docs/CLI.md#cli">Back</a>
 </p>
 
-# fsg program
+# sg program
 Flash a bitstream using Vivado.
 
-* [fsg program xrt]()
-* [fsg program vivado](#fsg-program-vivado)
-* [fsg program coyote]()
+* [sg program xrt]()
+* [sg program vivado](#sg-program-vivado)
+* [sg program coyote]()
 
-## fsg program vivado
+## sg program vivado
 <code>
-  fsg program vivado [flags]
+  sg program vivado [flags]
 </code>
 <p>
   &nbsp; &nbsp; Flash a bitstream of your choice.
@@ -29,7 +29,7 @@ Flash a bitstream using Vivado.
 
 ### Examples
 ```
-$ fsg program vivado -b /mnt/scratch/hacc/bit/hello_world.bit
-$ fsg program vivado -b /mnt/scratch/hacc/bit/hello_world.bit
-$ fsg program vivado -b /mnt/scratch/hacc/bit/hello_world.bit
+$ sg program vivado -b /mnt/scratch/hacc/bit/hello_world.bit
+$ sg program vivado -b /mnt/scratch/hacc/bit/hello_world.bit
+$ sg program vivado -b /mnt/scratch/hacc/bit/hello_world.bit
 ```
