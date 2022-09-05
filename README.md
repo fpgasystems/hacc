@@ -4,8 +4,12 @@
 <a href="https://ethz.ch/en.html">ETH Zürich</a>
 </p>
 
+<p align="center">
+<img src="https://systems.ethz.ch/_jcr_content/orgbox/image.imageformat.logo.1091186870.svg" align="center" width="350">
+</p>
+
 <!-- <table align="center"> -->
-<tr>
+<tr align="center">
 <td align="center" width="9999">
 <img src="https://systems.ethz.ch/_jcr_content/orgbox/image.imageformat.logo.1091186870.svg" align="center" width="350">
 
