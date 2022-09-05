@@ -1,5 +1,5 @@
-<div id="readme" class="Box-body readme blob js-code-block-container">
-<article class="markdown-body entry-content p-3 p-md-6" itemprop="text">
+<!-- <div id="readme" class="Box-body readme blob js-code-block-container">
+<article class="markdown-body entry-content p-3 p-md-6" itemprop="text"> -->
 <p align="right">
 <a href="https://ethz.ch/en.html">ETH Zürich</a>
 </p>
@@ -12,7 +12,7 @@
   Heterogenous Accelerated Compute Cluster
 </h1>
 
-<!-- <table align="center"> -->
+<!-- <table align="center"> 
 <tr align="center">
 <td align="center" width="9999">
 <img src="https://systems.ethz.ch/_jcr_content/orgbox/image.imageformat.logo.1091186870.svg" align="center" width="350">
@@ -24,7 +24,7 @@
 <a href="https://systems.ethz.ch">Institute for Computing Platforms - Systems Group</a>
 </td>
 </tr>
-<!-- </table> -->
+</table> -->
 
 Under the scope of the <a href="https://www.xilinx.com/support/university/XUP-HACC.html">AMD Xilinx University Program</a>, the <a href="https://www.amd-haccs.io">Heterogeneous Accelerated Compute Clusters (HACCs)</a> is a unique initiative to support novel research in adaptive compute acceleration for high-performance computing (HPC). The scope of the program is broad and encompasses systems, architecture, tools, and applications. HACCs are equipped with the latest AMD high-end servers and Xilinx technology for adaptive compute acceleration.
 
