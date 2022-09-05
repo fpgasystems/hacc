@@ -4,9 +4,12 @@
 <a href="https://ethz.ch/en.html">ETH Zürich</a>
 </p>
 
-<table align="center"><tr><td align="center" width="9999">
+<table align="center">
+<tr>
+<td align="center" width="9999">
 <img src="https://systems.ethz.ch/_jcr_content/orgbox/image.imageformat.logo.1091186870.svg" align="center" width="350">
-</a>
+
+
 <h1>
   Heterogenous Accelerated Compute Cluster
 </h1>
