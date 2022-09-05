@@ -8,6 +8,10 @@
 <img src="https://systems.ethz.ch/_jcr_content/orgbox/image.imageformat.logo.1091186870.svg" align="center" width="350">
 </p>
 
+<h1 align="center">
+  Heterogenous Accelerated Compute Cluster
+</h1>
+
 <!-- <table align="center"> -->
 <tr align="center">
 <td align="center" width="9999">
