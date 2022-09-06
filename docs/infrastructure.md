@@ -9,8 +9,10 @@ SG HACC comprises high-end servers, Xilinx accelerator cards, and high-speed net
 
 The following figure and table give an overview of SG HACC resources:
 
-![SG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking. On the FPGA/ACAP column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale). Remember that each high-end server exposes only one Xilinx accelerator card to the user.](../imgs/infrastructure.png "SG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking. On the FPGA/ACAP column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale). Remember that each high-end server exposes only one Xilinx accelerator card to the user.")
-*SG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking. On the FPGA/ACAP column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale). Remember that each high-end server exposes **only one Xilinx accelerator card to the user.***
+![SG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking. On the FPGA/ACAP column, VU stands for Virtex Ultrascale+. Remember that each high-end server exposes only one Xilinx accelerator card to the user.](../imgs/infrastructure.png "SG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking. On the FPGA/ACAP column, VU stands for Virtex Ultrascale+.")
+*SG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking. On the FPGA/ACAP column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale).*
+
+We are offering twenty-four Alveo data center accelerator cards and one Versal card. Remember that each high-end server exposes **only one Xilinx accelerator card to the user.**
 
 <!-- <table>
 <thead>
