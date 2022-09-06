@@ -153,6 +153,7 @@ Versal ACAPs deliver unparalleled application- and system-level value for cloud,
 The following table gives an overview of SG HACC resources:
 
 ![SG HACC resources.](../imgs/resources.png "SG HACC resources.")
+*SG HACC resources.*
 
 ## Networking
 ### Management network
