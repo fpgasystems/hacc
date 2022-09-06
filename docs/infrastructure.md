@@ -141,6 +141,10 @@ Virtex UltraScale+ devices provide the highest performance and integration capab
 * [Alveo U280](https://www.xilinx.com/products/boards-and-kits/alveo/u280.html)
 * [Alveo U50D](https://www.xilinx.com/products/boards-and-kits/alveo/u50.html)
 * [Alveo U55C](https://www.xilinx.com/applications/data-center/high-performance-computing/u55c.html)
+
+## Versal ACAP
+Versal ACAPs deliver unparalleled application- and system-level value for cloud, network, and edge applications​. The disruptive 7nm architecture combines heterogeneous compute engines with a breadth of hardened memory and interfacing technologies for superior performance/watt over competing 10nm FPGAs.
+
 * [Versal VCK5000](https://www.xilinx.com/products/boards-and-kits/vck5000.html)
 
 ### USB - JTAG connectivity
