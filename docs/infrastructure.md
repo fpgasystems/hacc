@@ -155,8 +155,8 @@ The following table gives an overview of SG HACC resources:
 
 ## Networking
 
-![Management, access and data network.](../imgs/networking.png "Management, access and data network.")
-*Management, access and data network.*
+![Management, access and data networks.](../imgs/networking.png "Management, access and data networks.")
+*Management, access and data networks.*
 
 ### Management network
 We refer to the management network as the infrastructure allowing our IT administrators to manage, deploy, update and monitor our cluster **remotely.**
