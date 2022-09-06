@@ -7,8 +7,6 @@
 # Infrastructure
 SG HACC comprises high-end servers, Xilinx accelerator cards, and high-speed networking. Each accelerator card has all of its Ethernet interfaces connected to a 100 GbE leaf switch to allow exploration of arbitrary network topologies for distributed computing. Additionally, we are offering a build server with development and bitstream compilation purposes. <!-- Our HACC is provisioned and managed based on [Infrastructure as Code](../docs/vocabulary.md#infrastructure-as-code) using [Ansible](../docs/vocabulary.md#ansible). -->
 
-The following figure and table give an overview of SG HACC resources:
-
 ![SG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking. On the FPGA/ACAP column, VU stands for Virtex Ultrascale+. Remember that each high-end server exposes only one Xilinx accelerator card to the user.](../imgs/infrastructure.png "SG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking. On the FPGA/ACAP column, VU stands for Virtex Ultrascale+.")
 *SG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking. On the FPGA/ACAP column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale).*
 
