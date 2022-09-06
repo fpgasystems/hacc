@@ -131,11 +131,11 @@ We are offering twenty-four Alveo data center accelerator cards and one Versal c
 </tbody>
 </table> -->
 
-## High-end servers
+## High-end servers and Xilinx accelerator cards
 ### AMD EPYC
 EPYC is the world’s highest-performing x86 server processor with faster performance for cloud, enterprise, and HPC workloads. To learn more about it, please refer to the [AMD EPYC processors website](https://www.amd.com/en/processors/epyc-server-cpu-family) and its [data sheet.](https://www.amd.com/system/files/documents/amd-epyc-7003-series-datasheet.pdf)
 
-## Xilinx accelerator cards
+<!-- ## Xilinx accelerator cards -->
 ### Virtex Ultrascale+
 Virtex UltraScale+ devices provide the highest performance and integration capabilities in a 14nm/16nm FinFET node. It also provides registered inter-die routing lines enabling >600 MHz operation, with abundant and flexible clocking to deliver a virtual monolithic design experience. As the industry’s most capable FPGA family, the devices are ideal for compute-intensive applications ranging from 1+Tb/s networking and machine learning to radar/early-warning systems.
 
@@ -149,8 +149,10 @@ Versal ACAPs deliver unparalleled application- and system-level value for cloud,
 
 * [Versal VCK5000](https://www.xilinx.com/products/boards-and-kits/vck5000.html)
 
-### USB - JTAG connectivity
-The USB - JTAG connection allows granted users to interact directly with the FPGA by downloading bitstreams or updating memory content. The correct setup and access of a USB - JTAG connection is essential for Vivado workflow developers.
+### Summary
+The following table gives an overview of SG HACC resources:
+
+![SG HACC resources.](../imgs/resources.png "SG HACC resources.")
 
 ## Networking
 ### Management network
@@ -166,3 +168,6 @@ For our **high-speed networking** data network, we are using a [spine-leaf archi
 *Spine-leaf data network architecture.*
 
 On the server side, the CPU NICs are [ConnectX-5](https://www.nvidia.com/en-us/networking/ethernet/connectx-5/) adaptors. As shown in the first figure, only one of cards interface is connected to the corresponding leaf switch (see [Known limitations](#known-limitations)), whereas both QSFP28 FPGA connectors are directly attached.
+
+## USB - JTAG connectivity
+The USB - JTAG connection allows granted users to interact directly with the FPGA by downloading bitstreams or updating memory content. The correct setup and access of a USB - JTAG connection is essential for Vivado workflow developers.
