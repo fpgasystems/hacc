@@ -7,15 +7,25 @@
 # First steps
 This guideline will guide you through the required steps to deploy, build, and run a [Hello, world!](../docs/vocabulary.md#hello-world) example running on SG HACC Alveo cards. In this case, the *Hello, world!* program reduces to a simple vector addition describing how to use HLS kernels in the Vitis workflow [[1]](#references). We will cover the following sections:
 
-* [Accessing the cluster](#accessing-the-cluster)
+* [Setting your passwords](#setting-your-passwords)
+* [Setting your secure remote access](#setting-your-remote-secure-access)
 * [Booking a server](#booking-a-server)
 * [Validating Xilinx accelerator cards](#validating-xilinx-accelerator-cards) 
 * [HLS vector addition](#hls-vector-addition)
 
 Before continuing, please make sure you have been already accepted on ETH Zürich HACC program and you have a valid user account. In any other case, please visit [Get started](https://www.amd-haccs.io/get-started.html).
 
-## Accessing the cluster
-You must be connected to the ETH Zürich network to access the cluster. If this is not the case, you will need to properly establish a remote connection either through a [jump host](#jump-host) [[2]](#references) or [virtual private network (VPN)](#virtual-private-network-vpn).
+## Setting your passwords
+Once your ETH account has been created, you will need to generate two different passwords: an LDAP/Active directory password and a RADIUS password. The first one is part of your main ETH credentials; the *remote authentication dial-in user service (RADIUS)* password is used for [setting your remote secure access](#setting-your-remote-secure-access). Please, follow these steps to generate them:
+
+1. Visit the [ETH Zürich Web Center](https://iam.password.ethz.ch/authentication/login_en.html),
+2. Click on *Forgot your password* to receive a temporal password to use with Web Center,
+3. Log in to ETH Zürich Web Center and click on *Self service/Change password*,
+4. Select the *LDAPS* and *Active Directory* checkboxes and introduce your new password, and
+5. Select the *Radius* checkboxe and introduce your new password.
+
+## Setting your remote secure access
+You must be connected to the ETH network to access the cluster. If this is not the case, you first need to establish a secure remote connection—either through a [jump host](#jump-host) [[2]](#references) or a [virtual private network (VPN)](#virtual-private-network-vpn)—before being able to use the HACC servers.
 
 ### Jump host
 To make use of ETH’s jumphost, please follow these steps:
@@ -39,10 +49,11 @@ Host *.ethz.ch !jumphost.inf.ethz.ch
 2. Access a server on SG HACC, i.e.: ```ssh ETHUSER@alveo-build-01.ethz.ch```
 
 #### Limitations
-* Please note that for this to work, you have to include ```.ethz.ch``` on the server name. 
+* Please note that for this to work, you must include ```.ethz.ch``` in the server name. 
 * The jump host is only intended for forwarding SSH sessions, not for running computations or storing data. Disk space for the home directory is limited to 2MB.
 
 ### Virtual private network (VPN)
+In order to create a VPN 
 
 https://scicomp.ethz.ch/wiki/Accessing_the_cluster
 https://scicomp.ethz.ch/wiki/Accessing_the_clusters#VPN
