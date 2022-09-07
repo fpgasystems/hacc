@@ -22,7 +22,7 @@ Once your ETH account has been created, you will need to generate two different 
 2. Click on *Forgot your password* to receive a temporal password to use with [Web Center](https://iam.password.ethz.ch/authentication/login_en.html),
 3. Log in to [Web Center](https://iam.password.ethz.ch/authentication/login_en.html) and click on *Self service/Change password*,
 4. Select the *LDAPS* and *Active Directory* checkboxes and introduce your new password, and
-5. Select the *Radius* checkboxe and introduce your new password.
+5. Select the *Radius* checkbox and introduce your new password.
 
 ## Setting your remote secure access
 You must be connected to the ETH network to access the cluster. If this is not the case, you first need to establish a secure remote connection—either through a [jump host](#jump-host) [[2]](#references) or a [virtual private network (VPN)](#virtual-private-network-vpn)—before being able to use the HACC servers.
@@ -48,13 +48,24 @@ Host *.ethz.ch !jumphost.inf.ethz.ch
 
 2. Access a server on SG HACC, i.e.: ```ssh ETHUSER@alveo-build-01.ethz.ch```. 
 
-Please note that for the proposed ssh-configuration file, you must include ```.ethz.ch``` when you try to log in to the server. 
+**Please note that for the proposed ssh-configuration file, you must include ```.ethz.ch``` when you try to log in to the server.**
 
 ### Virtual private network (VPN)
-In order to create a VPN 
+To create your virtual private network connection, please use the following on your favourite VPN client: 
 
-https://scicomp.ethz.ch/wiki/Accessing_the_cluster
-https://scicomp.ethz.ch/wiki/Accessing_the_clusters#VPN
+* ETH employees:
+    * Server address: ```sslvpn.ethz.ch```
+    * Account name: ```ETHUSER@staff-net.ethz.ch```
+    * Password: ```RADIUS password```
+    * Shared secret: ```ETHZ.STAFF-NET.VPN```
+    * Group name: ```staff-net```
+
+* ETH students:
+    * Server address: ```sslvpn.ethz.ch```
+    * Account name: ```ETHUSER@student-net.ethz.ch```
+    * Password: ```RADIUS password```
+    * Shared secret: ```ETHZ.STUDENT-NET.VPN```
+    * Group name: ```student-net```
 
 ## Booking a server
 
@@ -65,3 +76,7 @@ https://scicomp.ethz.ch/wiki/Accessing_the_clusters#VPN
 ## References
 * [1] [Hello World (HLS C/C++ Kernel)](https://github.com/Xilinx/Vitis_Accel_Examples/tree/master/hello_world)
 * [2] [Remote Access by Secure Shell (SSH) using a jump host](https://www.isg.inf.ethz.ch/Main/HelpRemoteAccessSSH)
+
+
+https://scicomp.ethz.ch/wiki/Accessing_the_cluster
+https://scicomp.ethz.ch/wiki/Accessing_the_clusters#VPN
