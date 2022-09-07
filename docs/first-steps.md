@@ -46,10 +46,9 @@ Host *.ethz.ch !jumphost.inf.ethz.ch
     ProxyJump jumphost.inf.ethz.ch
 ```
 
-2. Access a server on SG HACC, i.e.: ```ssh ETHUSER@alveo-build-01.ethz.ch```. Please note that for the ssh-configuration file above, you must include ```.ethz.ch``` when you try to log in to the server. 
+2. Access a server on SG HACC, i.e.: ```ssh ETHUSER@alveo-build-01.ethz.ch```. 
 
-#### Limitations
-* 
+Please note that for the proposed ssh-configuration file, you must include ```.ethz.ch``` when you try to log in to the server. 
 
 ### Virtual private network (VPN)
 In order to create a VPN 
