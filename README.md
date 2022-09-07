@@ -39,6 +39,7 @@ Five HACCs have been established at some of world’s most prestigious universit
 * [CLI](docs/CLI.md#cli)
 * [Features](docs/features.md#features)
 * [Get started](https://www.amd-haccs.io/get-started.html)
+* [Hello, world!](docs/hello-world.md#hello-world)
 * [Infrastructure](docs/infrastructure.md#infrastructure)
 * [Known limitations](docs/known-limitations.md#known-limitations)
 * [Operating the cluster](docs/operating-the-cluster.md#operating-the-cluster)
