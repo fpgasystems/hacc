@@ -7,7 +7,7 @@
 # CLI
 SG CLI brings FPGA Systems Group’s designs to your terminal.
 
-## fsg
+## sg
 Work seamlessly with XRT from the command line.
 
 ### Core commands
