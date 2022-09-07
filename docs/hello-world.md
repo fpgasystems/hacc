@@ -15,7 +15,7 @@ We will cover the following sections:
 Before continuing, please make sure you have been already accepted on ETH Zürich HACC program and you have a valid user account. In any other case, please visit [Get started](https://www.amd-haccs.io/get-started.html).
 
 ## Accessing the cluster
-Access to Linux systems from outside the ETH network is possible but subject to restrictions by the firewall. For accessing the HACC, two different methods are possible.
+You must be connected to the ETH Zurich network to access the cluster. If this is not the case, you will need to use a [jump host](#jump-host) or set up a [VPN](#vpn) connection.
 
 ## Jump host
 
