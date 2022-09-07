@@ -17,8 +17,6 @@ Before continuing, please make sure you have been already accepted on ETH Züric
 ## Accessing the cluster
 You must be connected to the ETH Zürich network to access the cluster. If this is not the case, you will need to properly establish a remote connection either through a [jump host](#jump-host) [[2]](#references) or [virtual private network (VPN)](#virtual-private-network-vpn).
 
-There are two ways to achieve this: using a  or setting up a [VPN](#vpn) connection.
-
 ### Jump host
 To make use of ETH’s jumphost, please follow these steps:
 
@@ -41,7 +39,7 @@ Host *.ethz.ch !jumphost.inf.ethz.ch
 2. Access a server on SG HACC, i.e.: ```ssh ETHUSER@alveo-build-01.ethz.ch```
 
 #### Limitations
-* Please note that for this to work, you have to type the domain name ```.ethz.ch```. 
+* Please note that for this to work, you have to include ```.ethz.ch``` on the server name. 
 * The jump host is only intended for forwarding SSH sessions, not for running computations or storing data. Disk space for the home directory is limited to 2MB.
 
 ### Virtual private network (VPN)
