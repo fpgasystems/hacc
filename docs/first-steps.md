@@ -19,7 +19,7 @@ You must be connected to the ETH Zürich network to access the cluster. If this 
 
 There are two ways to achieve this: using a  or setting up a [VPN](#vpn) connection.
 
-## Jump host
+### Jump host
 To make use of ETH’s jumphost, please follow these steps:
 
 1. Edit your ```~/.ssh/config``` file by adding the following lines:
@@ -40,11 +40,11 @@ Host *.ethz.ch !jumphost.inf.ethz.ch
 
 2. Access a server on SG HACC, i.e.: ```ssh ETHUSER@alveo-build-01.ethz.ch```
 
-### Limitations
+#### Limitations
 * Please note that for this to work, you have to type the domain name ```.ethz.ch```. 
 * The jump host is only intended for forwarding SSH sessions, not for running computations or storing data. Disk space for the home directory is limited to 2MB.
 
-## Virtual private network (VPN)
+### Virtual private network (VPN)
 
 https://scicomp.ethz.ch/wiki/Accessing_the_cluster
 https://scicomp.ethz.ch/wiki/Accessing_the_clusters#VPN
