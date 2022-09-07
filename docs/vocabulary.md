@@ -22,6 +22,9 @@ Platform as a service (PaaS) is a category of cloud computing services that allo
 ## DevOps 
 DevOps is a set of practices that combines software development (Dev) and IT operations (Ops). It aims to shorten the systems development life cycle and provide continuous delivery with high software quality. Several DevOps aspects came from the [Agile](#agile) methodology. <!-- https://en.wikipedia.org/wiki/DevOps -->
 
+## Hello, world!
+A *Hello, world!* program is a piece of code in most general-purpose programming languages used to illustrate a language's basic syntax. "Hello, World!" programs are often the first a student learns to write in a given language. They can also be used as a sanity check to ensure all the required software is correctly installed and its operator understands how to use it.
+
 ## Hot-plug boot
 We refer to the hot-plug boot as the process that allows us to transition Xilinx accelerator cards from the Vitis to Vivado workflows or vice-versa. The critical aspect of the process is to use Linux capabilities to re-enumerate PCI devices on the fly without the need for cold or warm rebooting of the system.
 
