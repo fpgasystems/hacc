@@ -28,9 +28,7 @@ Once your ETH account has been created, you will need to generate two different 
 You must be connected to the ETH network to access the cluster. If this is not the case, you first need to establish a secure remote connection—either through a [jump host](#jump-host) [[2]](#references) or a [virtual private network (VPN)](#virtual-private-network-vpn)—before being able to use the HACC servers.
 
 ### Jump host
-To make use of ETH’s jumphost, please follow these steps:
-
-1. Edit your ```~/.ssh/config``` file by adding the following lines:
+To make use of ETH’s jumphost, first you would need to edit your ```~/.ssh/config``` file by adding the following lines:
 
 ```
 # Remote Access by Secure Shell (SSH) - ETHZ
@@ -46,9 +44,7 @@ Host *.ethz.ch !jumphost.inf.ethz.ch
     ProxyJump jumphost.inf.ethz.ch
 ```
 
-2. Access a server on SG HACC, i.e.: ```ssh ETHUSER@alveo-build-01.ethz.ch```. 
-
-**Please note that for the proposed ssh-configuration file, you must include ```.ethz.ch``` when you try to log in to the server.**
+After that, you should be able to access HACC servers with SSH, for instance: ```ssh ETHUSER@alveo-build-01.ethz.ch```. **Please note that for the proposed ssh-configuration file, you must include** ```.ethz.ch``` **when you try to log in to the server.**
 
 ### Virtual private network (VPN)
 To create your virtual private network connection, please use the following on your favourite VPN client: 
