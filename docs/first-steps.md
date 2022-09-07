@@ -18,9 +18,9 @@ Before continuing, please make sure you have been already accepted on ETH Züric
 ## Setting your passwords
 Once your ETH account has been created, you will need to generate two different passwords: an LDAP/Active directory password and a RADIUS password. The first one is part of your main ETH credentials; the *remote authentication dial-in user service (RADIUS)* password is used for [setting your remote secure access](#setting-your-remote-secure-access). Please, follow these steps to generate them:
 
-1. Visit the [ETH Zürich Web Center](https://iam.password.ethz.ch/authentication/login_en.html),
-2. Click on *Forgot your password* to receive a temporal password to use with Web Center,
-3. Log in to ETH Zürich Web Center and click on *Self service/Change password*,
+1. Visit the ETH Zürich [Web Center](https://iam.password.ethz.ch/authentication/login_en.html),
+2. Click on *Forgot your password* to receive a temporal password to use with [Web Center](https://iam.password.ethz.ch/authentication/login_en.html),
+3. Log in to [Web Center](https://iam.password.ethz.ch/authentication/login_en.html) and click on *Self service/Change password*,
 4. Select the *LDAPS* and *Active Directory* checkboxes and introduce your new password, and
 5. Select the *Radius* checkboxe and introduce your new password.
 
@@ -46,11 +46,10 @@ Host *.ethz.ch !jumphost.inf.ethz.ch
     ProxyJump jumphost.inf.ethz.ch
 ```
 
-2. Access a server on SG HACC, i.e.: ```ssh ETHUSER@alveo-build-01.ethz.ch```
+2. Access a server on SG HACC, i.e.: ```ssh ETHUSER@alveo-build-01.ethz.ch```. Please note that for the ssh-configuration file above, you must include ```.ethz.ch``` when you try to log in to the server. 
 
 #### Limitations
-* Please note that for this to work, you must include ```.ethz.ch``` in the server name. 
-* The jump host is only intended for forwarding SSH sessions, not for running computations or storing data. Disk space for the home directory is limited to 2MB.
+* 
 
 ### Virtual private network (VPN)
 In order to create a VPN 
