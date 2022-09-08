@@ -95,7 +95,7 @@ Once you are logged into a server, you should be able to validate server’s acc
 
 You are ready to go! **After validating the Xilinx accelerator card, we recommend you to check out the [Examples](../docs/examples.md) section.**
 
-### Reverting to Vitis mode
+### Reverting to Vitis workflow
 hereeeeee!!!
 
 ## References
