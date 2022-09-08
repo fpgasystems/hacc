@@ -23,7 +23,7 @@ Once your ETH account has been created, you will need to generate two different 
 4. Select the *LDAPS* and *Active Directory* checkboxes and introduce your new password, and
 5. Select the *Radius* checkbox and introduce your new password.
 
-![Setting your passwords.](../imgs/passwords.png) "Setting your passwords.")
+![Setting your passwords.](../imgs/passwords.png "Setting your passwords.")
 *Setting your passwords.*
 
 ## Setting your remote secure access
