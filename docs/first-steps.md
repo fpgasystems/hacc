@@ -84,8 +84,8 @@ We would like you to follow the [Booking system rules](../docs/booking-system-ru
 ### Accessing a server
 After [booking a server](#booking-a-server)—and assuming you are connected to ETH network via VPN— you should be able to access it using ssh, i.e.: ```ssh jmoyapaya@alveo-u50d-05```. Please remember that for accessing a server you should also use your **main LDAP/Active directory password**:
 
-![Accessing a server.](../imgs/accessing-a-server.gif "Accessing a server.")
-*BooAccessingking a server.*
+![Accessing a server.](../imgs/accessing-a-server.png "Accessing a server.")
+*Accessingking a server.*
 
 
 
