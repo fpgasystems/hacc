@@ -88,11 +88,15 @@ After [booking a server](#booking-a-server)—and assuming you are connected to 
 *Accessing a server.*
 
 ## Validating a Xilinx accelerator card
+Once you are logged into a server, you should be able to validate server’s accelerator card with ```xbutil validate --device```:
 
 ![Validating a Xilinx accelerator card.](../imgs/validating-a-xilinx-accelerator-card.png "Validating a Xilinx accelerator card.")
 *Validating a Xilinx accelerator card.*
 
 You are ready to go! **After validating the Xilinx accelerator card, we recommend you to check out the [Examples](../docs/examples.md) section.**
+
+### Reverting to Vitis mode
+hereeeeee!!!
 
 ## References
 * [1] [Remote Access by Secure Shell (SSH) using a jump host](https://www.isg.inf.ethz.ch/Main/HelpRemoteAccessSSH)
