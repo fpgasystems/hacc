@@ -5,13 +5,12 @@
 </p>
 
 # First steps
-This guide will help you set up your HACC account, access one of our servers, and validate one of the Xilinx accelerator cards. We will cover the following sections:
+This guide will help you set up your HACC account, booking and accessing a server, and validate server’s Xilinx accelerator card. We will cover the following sections:
 
 * [Setting your passwords](#setting-your-passwords)
 * [Setting your secure remote access](#setting-your-remote-secure-access)
-* [Booking a server](#booking-a-server)
-* [Validating Xilinx accelerator cards](#validating-xilinx-accelerator-cards) 
-* [HLS vector addition](#hls-vector-addition)
+* [Booking and accessing a server](#booking-and-accessing-a-server)
+* [Validating a Xilinx accelerator card](#validating-a-xilinx-accelerator-card) 
 
 Before continuing, please make sure you have been already accepted on ETH Zürich HACC program and you have a valid user account. In any other case, please visit [Get started](https://www.amd-haccs.io/get-started.html).
 
@@ -63,13 +62,14 @@ To create your virtual private network connection, please use the following on y
     * Shared secret: ```ETHZ.STUDENT-NET.VPN```
     * Group name: ```student-net```
 
-## Booking a server
+## Booking and accessing a server
 
-## Validating Xilinx accelerator cards
+## Validating a Xilinx accelerator card
+
+**After validating the Xilinx accelerator card, we recommend you to check out the [Examples](../docs/examples.md) section.**
 
 ## References
 * [1] [Remote Access by Secure Shell (SSH) using a jump host](https://www.isg.inf.ethz.ch/Main/HelpRemoteAccessSSH)
 
-
-https://scicomp.ethz.ch/wiki/Accessing_the_cluster
-https://scicomp.ethz.ch/wiki/Accessing_the_clusters#VPN
+<!-- https://scicomp.ethz.ch/wiki/Accessing_the_cluster
+https://scicomp.ethz.ch/wiki/Accessing_the_clusters#VPN -->
