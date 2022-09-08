@@ -5,7 +5,7 @@
 </p>
 
 # First steps
-This guideline will guide you through the required steps to deploy, build, and run a [Hello, world!](../docs/vocabulary.md#hello-world) example running on SG HACC Alveo cards. In this case, the *Hello, world!* program reduces to a simple vector addition describing how to use HLS kernels in the Vitis workflow [[1]](#references). We will cover the following sections:
+This guide will help you set up your HACC account, access one of our servers, and validate one of the Xilinx accelerator cards. We will cover the following sections:
 
 * [Setting your passwords](#setting-your-passwords)
 * [Setting your secure remote access](#setting-your-remote-secure-access)
@@ -25,7 +25,7 @@ Once your ETH account has been created, you will need to generate two different 
 5. Select the *Radius* checkbox and introduce your new password.
 
 ## Setting your remote secure access
-You must be connected to the ETH network to access the cluster. If this is not the case, you first need to establish a secure remote connection—either through a [jump host](#jump-host) [[2]](#references) or a [virtual private network (VPN)](#virtual-private-network-vpn)—before being able to use the HACC servers.
+You must be connected to the ETH network to access the cluster. If this is not the case, you first need to establish a secure remote connection—either through a [jump host](#jump-host) [[1]](#references) or a [virtual private network (VPN)](#virtual-private-network-vpn)—before being able to use the HACC servers.
 
 ### Jump host
 To make use of ETH’s jumphost, first you would need to edit your ```~/.ssh/config``` file by adding the following lines:
@@ -67,11 +67,8 @@ To create your virtual private network connection, please use the following on y
 
 ## Validating Xilinx accelerator cards
 
-## HLS vector addition
-
 ## References
-* [1] [Hello World (HLS C/C++ Kernel)](https://github.com/Xilinx/Vitis_Accel_Examples/tree/master/hello_world)
-* [2] [Remote Access by Secure Shell (SSH) using a jump host](https://www.isg.inf.ethz.ch/Main/HelpRemoteAccessSSH)
+* [1] [Remote Access by Secure Shell (SSH) using a jump host](https://www.isg.inf.ethz.ch/Main/HelpRemoteAccessSSH)
 
 
 https://scicomp.ethz.ch/wiki/Accessing_the_cluster
