@@ -87,14 +87,12 @@ After [booking a server](#booking-a-server)—and assuming you are connected to 
 ![Accessing a server.](../imgs/accessing-a-server.png "Accessing a server.")
 *Accessing a server.*
 
-
-
 ## Validating a Xilinx accelerator card
 
 ![Validating a Xilinx accelerator card.](../imgs/validating-a-xilinx-accelerator-card.png "Validating a Xilinx accelerator card.")
 *Validating a Xilinx accelerator card.*
 
-**After validating the Xilinx accelerator card, we recommend you to check out the [Examples](../docs/examples.md) section.**
+You are ready to go! **After validating the Xilinx accelerator card, we recommend you to check out the [Examples](../docs/examples.md) section.**
 
 ## References
 * [1] [Remote Access by Secure Shell (SSH) using a jump host](https://www.isg.inf.ethz.ch/Main/HelpRemoteAccessSSH)
