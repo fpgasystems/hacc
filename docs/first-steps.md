@@ -82,6 +82,11 @@ We would like you to follow the [Booking system rules](../docs/booking-system-ru
 *Booking a server.*
 
 ### Accessing a server
+After [booking a server](#booking-a-server), you should be able to access it using ssh, i.e.: ```ssh jmoyapaya@alveo-u50d-05.ethz.ch```. Please remember that for accessing a server you should also use your **main LDAP/Active directory password**:
+
+
+
+
 
 ## Validating a Xilinx accelerator card
 
