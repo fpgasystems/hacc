@@ -23,6 +23,9 @@ Once your ETH account has been created, you will need to generate two different 
 4. Select the *LDAPS* and *Active Directory* checkboxes and introduce your new password, and
 5. Select the *Radius* checkbox and introduce your new password.
 
+![Setting your passwords.](../imgs/passwords.png) "Setting your passwords.")
+*Setting your passwords.*
+
 ## Setting your remote secure access
 You must be connected to the ETH network to access the cluster. If this is not the case, you first need to establish a secure remote connection—either through a [jump host](#jump-host) [[1]](#references) or a [virtual private network (VPN)](#virtual-private-network-vpn)—before being able to use the HACC servers.
 
