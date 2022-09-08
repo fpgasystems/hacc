@@ -76,6 +76,9 @@ Please, follow these steps to book a server:
 
 We would like you to follow the [Booking system rules](../docs/booking-system-rules.md) while you work with the cluster.
 
+![Booking a server.](../imgs/booking-system.png) "Booking a server.")
+*Booking a server.*
+
 ### Accessing a server
 
 ## Validating a Xilinx accelerator card
