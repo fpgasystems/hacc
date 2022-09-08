@@ -5,3 +5,11 @@
 </p>
 
 # Booking system rules
+The HACCs are a collaborative hub, therefore many people may want access to the same limited resources. The following simple rules should help:
+
+1. We kindly ask users to limit the bookings to the shortest period. 
+2. Release the booking as soon as possible if you finish early; other users may be waiting.
+3. The default maximum booking time is 5 hours. 
+4. Note that you can book resources into the future if you need the hardware at a particular point in time.
+5. Don’t assume there will be limited demand for an HACC during the night: other users in different time zones may want to access the HACC at different times of the day.
+6. Do not systematically extend your booking times: if you predict that your experiments will require longer, submit a request to research_clusters@amd.com outlining your needs so we can arrange a plan for it.

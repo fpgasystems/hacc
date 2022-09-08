@@ -51,7 +51,7 @@ After that, you should be able to access HACC servers with SSH, for instance: ``
 ### Virtual private network (VPN)
 To create your virtual private network connection, please use the following on your favourite VPN client: 
 
-* ETH employees:
+* ETH employees and guest accounts:
     * Server address: ```sslvpn.ethz.ch```
     * Account name: ```ETHUSER@staff-net.ethz.ch```
     * Password: ```RADIUS password```
@@ -70,9 +70,11 @@ After configuring our passwords and virtual private network connection, the next
 
 ### Booking a server
 Please, follow these steps to book a server:
+
 1. Log in into the [HACC booking system](https://alveo-booking.ethz.ch/login.php) using your **main LDAP/Active directory password**,
 2. Once you are on the *Dashoboard* page, please click on *New booking*,
-3. 
+3. Select the *Time range,* the *Boards* or servers you wish to book, along with a mandatory *Comment* referring to your research activites, and
+4. Press the *Book* button.
 
 We would like you to follow the [Booking system rules](../docs/booking-system-rules.md) while you work with the cluster.
 
