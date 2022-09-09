@@ -6,6 +6,6 @@
 
 # Examples
 
-The following are out of the box examples that aim to be good examples to develop accelerated application using SG HACC.
+The following are *out-of-the-box* examples that aim to be a good starting point to develop your accelerated applications using SG HACC.
 
 * [Hello, world!](../vitis_workflow_examples/hello_world/README.md)
