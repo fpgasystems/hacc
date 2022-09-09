@@ -8,6 +8,13 @@
 
 ## CLI
 
+
+With SG CLI you can easily get benefit of:
+
+* User functions that help you to build your accelerated applications using SG HACC,
+* Build and deploy EasyNet, or
+* Build and deploy Coyote (among many other things).
+
 ## Vitis and Vivado workflows
 Thanks to our [hot-plug boot](/vocabulary.md#hot-plug-boot) process, we are able to transition between the Vitis and Vivado workflows without the need of rebooting the system.
 
@@ -21,3 +28,6 @@ We use [Infrastructure as Code (IaC)](../docs/vocabulary.md#infrastructure-as-co
 * Deliver stable tests environments rapidly at scale.
 
 ## You are welcome
+
+
+be used as a sanity check to ensure computer software intended to compile or run source code is correctly installed, and that its operator understands how to use it.
