@@ -96,7 +96,10 @@ Once you are logged into a server, you should be able to validate server’s acc
 You are ready to go! **After validating the Xilinx accelerator card, we recommend you to check out the [Examples](../docs/examples.md) section.**
 
 ### Reverting to Vitis workflow
-hereeeeee!!!
+It is possible that when you log on to a server, you may find that the previous user has left the server in *Vivado mode.* In such a situation, you have the opportunity to revert the server to work again with the Vitis workflow by following the instructions on the screen:
+
+![Reverting to Vitis workflow.](../imgs/revertint-to-vitis-workflow.png "Reverting to Vitis workflow.")
+*Reverting to Vitis workflow.*
 
 ## References
 * [1] [Remote Access by Secure Shell (SSH) using a jump host](https://www.isg.inf.ethz.ch/Main/HelpRemoteAccessSSH)
