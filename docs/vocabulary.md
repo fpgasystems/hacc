@@ -48,5 +48,7 @@ IaC can be a key attribute of enabling best practices in [DevOps](#devops)–dev
 ## Spine-leaf architecture 
 A spine-leaf architecture is data center network topology that consists of two switching layers—a spine and leaf. The leaf layer consists of access switches that aggregate traffic from servers and connect directly into the spine or network core. Spine switches interconnect all leaf switches in a full-mesh topology. <!-- https://www.arubanetworks.com/faq/what-is-spine-leaf-architecture/ -->
 
+## Vitis and Vivado workflows
+
 ## YAML
 YAML is a human-readable data-serialization language commonly used for configuration files and in applications where data is being stored or transmitted. 
