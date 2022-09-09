@@ -170,7 +170,11 @@ For our **high-speed networking** data network, we are using a [spine-leaf archi
 ![Spine-leaf data network architecture.](../imgs/spine-leaf.png "Spine-leaf data network architecture.")
 *Spine-leaf data network architecture.*
 
-On the server side, the CPU NICs are [ConnectX-5](https://www.nvidia.com/en-us/networking/ethernet/connectx-5/) adaptors. As shown in the first figure, only one of cards interface is connected to the corresponding leaf switch (see [Known limitations](#known-limitations)), whereas both QSFP28 FPGA connectors are directly attached.
+On the server side, the CPU NICs are [ConnectX-5](https://www.nvidia.com/en-us/networking/ethernet/connectx-5/) adaptors. As shown in the first figure, only one of cards interface is connected to the corresponding leaf switch (see [Known limitations](#known-limitations)), whereas both QSFP28 FPGA connectors are directly attached. For a given SERVERNAME, the following are valid IP addresses (interfaces):
+
+* SERVERNAME-mallanox-0 (mlx0)
+* SERVERNAME-fpga-0 (fpga0)
+* SERVERNAME-fpga-1 (fpga1)
 
 ## USB - JTAG connectivity
 The USB - JTAG connection allows granted users to interact directly with the FPGA by downloading bitstreams or updating memory content. The correct setup and access of a USB - JTAG connection is essential for Vivado workflow developers.
