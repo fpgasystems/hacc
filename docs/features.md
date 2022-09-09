@@ -26,6 +26,9 @@ We use [Infrastructure as Code (IaC)](../docs/vocabulary.md#infrastructure-as-co
 * Deliver stable tests environments rapidly at scale.
 
 ## You are welcome
+We are glad and welcome you every time you login to one of our servers. Behind the scenes, our *welcome_msg* script performs the following functions:
 
-
-be used as a sanity check to ensure computer software intended to compile or run source code is correctly installed, and that its operator understands how to use it.
+* Runs a sanity check to verify the correct functioning of the operating system, as well as hardware and software related to Xilinx accelerators,
+* Helps you to choose your environement regarding [Vitis and Vivado workflows](#vitis-and-vivado-workflows),
+* It gives you derived information regarding the active *Xilinx release branch, tools, and flashable partitions running on FPGA,* as well as the network information that might be relevant for your accelerated applications,
+* *Et cetera.*
