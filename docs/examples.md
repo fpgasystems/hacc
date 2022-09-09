@@ -8,4 +8,4 @@
 
 The following are out of the box examples that aim to be good examples to develop accelerated application using SG HACC.
 
-* [Hello, world!](../docs/hello-world.md)
+* [Hello, world!](../vitis_workflow_examples/hello_world/README.md)
