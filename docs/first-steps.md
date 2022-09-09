@@ -98,7 +98,7 @@ You are ready to go! **After validating the Xilinx accelerator card, we recommen
 ### Reverting to Vitis workflow
 It is possible that when you log on to a server, you may find that the previous user has left the server in *Vivado mode.* In such a situation, you have the opportunity to revert the server to work again with the Vitis workflow by following the instructions on the screen:
 
-![Reverting to Vitis workflow.](../imgs/reverting-to-vitits-workflow "Reverting to Vitis workflow.")
+![Reverting to Vitis workflow.](../imgs/reverting-to-vitits-workflow.png "Reverting to Vitis workflow.")
 *Reverting to Vitis workflow is based on the [hot-plug boot](/vocabulary.md#hot-plug-boot) process.*
 
 ## References
