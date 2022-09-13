@@ -10,8 +10,8 @@
 With SG [CLI](/projects.md#cli), you can easily:
 
 * Make use of *out-of-the-box* user functions that help you to build your accelerated applications using SG HACC,
-* Deploy, build and make your designs based on [EasyNet](/projects.md#easynet-100-gbe-network-for-hls), or
-* Deploy, build and make your designs based on [Coyote](/projects.md#coyote) (among many other things).
+* Deploy, build and make your designs based on [EasyNet](./projects.md#easynet-100-gbe-network-for-hls), or
+* Deploy, build and make your designs based on [Coyote](./projects.md#coyote) (among many other things).
 
 ## Vitis and Vivado workflows
 Thanks to our [hot-plug boot](./vocabulary.md#hot-plug-boot) process, we are able to transition between the [Vitis and Vivado workflows](./vocabulary.md#vitis-and-vivado-workflows) without the need of rebooting the system.
