@@ -14,7 +14,7 @@ With SG [CLI](/projects.md#cli), you can easily:
 * Deploy, build and make your designs based on [Coyote](./projects.md#coyote) (among many other things).
 
 ## Vitis and Vivado workflows
-Thanks to our [hot-plug boot](./vocabulary.md#hot-plug-boot) process, we are able to transition between the [Vitis and Vivado workflows](./vocabulary.md#vitis-and-vivado-workflows) without the need of rebooting the system.
+Thanks to our [hot-plug boot](./vocabulary.md#hot-plug-boot) process, we are able to transition between the [Vivado and Vitis workflows](./vocabulary.md#vivado-and-vitis-workflows) without the need of rebooting the system.
 
 ## Managed
 We use [Infrastructure as Code (IaC)](./vocabulary.md#infrastructure-as-code-iac) and [Ansible Automation Platform (AAP)](.vocabulary.md#ansible-automation-platform-aap) to [operate the cluster](../docs/operating-the-cluster.md) efficiently. Under the scope of a [DevOps](.vocabulary.md#devops) methodology, we achieve the following: <!-- https://docs.microsoft.com/en-us/devops/deliver/what-is-infrastructure-as-code -->

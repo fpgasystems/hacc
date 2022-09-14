@@ -48,7 +48,14 @@ IaC can be a key attribute of enabling best practices in [DevOps](#devops)–dev
 ## Spine-leaf architecture 
 A spine-leaf architecture is data center network topology that consists of two switching layers—a spine and leaf. The leaf layer consists of access switches that aggregate traffic from servers and connect directly into the spine or network core. Spine switches interconnect all leaf switches in a full-mesh topology. <!-- https://www.arubanetworks.com/faq/what-is-spine-leaf-architecture/ -->
 
-## Vitis and Vivado workflows
+## Vivado and Vitis workflows
+Vivado offers a hardware-centric approach to designing hardware, while Vitis offers a software-centric approach to developing *both* hardware and software. These perspectives are best represented by the languages used to make things with the two tools. <!-- https://digilent.com/blog/whats-different-between-vivado-and-vitis/-->
+
+### Vivado workflow
+Vivado is for creating hardware designs that run in an FPGA. These either consist of a set of hardware description language (HDL, typically Verilog or VHDL) files, or of a block design, which can include a variety of pre-built IP blocks (which at their core abstract away pre-written HDL). If a design includes a processor, Vitis will also be required to write the program to run on the processor, as Vivado only handles the programmable logic.
+
+### Vitis workflow
+Vitis is for writing software to run in an FPGA, and is the combination of a couple of different Xilinx tools, including what was Xilinx SDK, Vivado High-Level Synthesis (HLS), and SDSoC. The functionality of each of these is now merged together under Vitis. 
 
 ## YAML
 YAML is a human-readable data-serialization language commonly used for configuration files and in applications where data is being stored or transmitted. 
