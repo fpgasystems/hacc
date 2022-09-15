@@ -5,7 +5,7 @@
 </p>
 
 # Who does what
-The following people are relevant for our [Heterogeneous Compute Accelerated Cluster (HACC).](https://www.amd-haccs.io)
+The following people are relevant for our [Heterogeneous Compute Accelerated Cluster (HACC)](https://www.amd-haccs.io) project.
 
 ## AMD Xilinx University Program (XUP) coordinators
 * [Gustavo Alonso](https://systems.ethz.ch/people/profile.gustavo-alonso.html), Systems Group leader, ETH Zürich 
