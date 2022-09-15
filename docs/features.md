@@ -7,7 +7,7 @@
 # Features
 
 ## CLI
-With SG [CLI](/projects.md#cli), you can easily:
+With SG [CLI](../CLI/README.md#cli), you can easily:
 
 * Make use of *out-of-the-box* [Examples](./examples.md) and user functions that help you to build your accelerated applications,
 * Deploy, build and design using any of our shipped [Applications](./applications.md)—including, for example, [EasyNet](./projects.md#easynet-100-gbe-network-for-hls) or [Coyote](./projects.md#coyote).
