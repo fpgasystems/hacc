@@ -16,7 +16,7 @@ With SG [CLI](../CLI/README.md#cli), you can easily:
 Thanks to our [hot-plug boot](./vocabulary.md#hot-plug-boot) process, we are able to transition between the [Vivado and Vitis workflows](./vocabulary.md#vivado-and-vitis-workflows) without the need of rebooting the system.
 
 ## Managed
-We use [Infrastructure as Code (IaC)](./vocabulary.md#infrastructure-as-code-iac) and [Ansible Automation Platform (AAP)](./vocabulary.md#ansible-automation-platform-aap) to [operate the cluster](../docs/operating-the-cluster.md) efficiently. Under the scope of a [DevOps](./vocabulary.md#devops) methodology, we achieve the following: <!-- https://docs.microsoft.com/en-us/devops/deliver/what-is-infrastructure-as-code -->
+We use [Infrastructure as Code (IaC)](./vocabulary.md#infrastructure-as-code-iac) and [Ansible Automation Platform (AAP)](./vocabulary.md#ansible-automation-platform-aap) to [operate the cluster](../docs/operating-the-cluster.md#operating-the-cluster) efficiently. Under the scope of a [DevOps](./vocabulary.md#devops) methodology, we achieve the following: <!-- https://docs.microsoft.com/en-us/devops/deliver/what-is-infrastructure-as-code -->
 
 * Continuos delivery,
 * Avoid manual configuration to enforce consistency,
