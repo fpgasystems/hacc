@@ -17,7 +17,7 @@ The following people are relevant for our [Heterogeneous Compute Accelerated Clu
 ### AMD
 * [Ken O’brien](https://www.linkedin.com/in/ken-o-brien-338807185/?originalSubdomain=ie), Senior member of technical staff software engineering, [ACCL](./projects.md#accl-accelerated-collective-communication-library)
 
-### ETH Zürich
+### ETH Zürich Systems Group
 * [Dario Korolija](https://systems.ethz.ch/people/profile.MjUyNDEz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [Coyote](./projects.md#coyote), [Farview](./projects.md#farview)
 * [Dimitrios Koutsoukos](https://systems.ethz.ch/people/profile.MjM5MDk0.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [Modularis](./projects.md#modularis)
 * [Javier Moya](https://systems.ethz.ch/people/profile.Mjk5NjU5.TGlzdC8zODkxLDEyOTU2NDI2OTI=.html), Senior scientist, [CLI](./projects.md#cli) 
