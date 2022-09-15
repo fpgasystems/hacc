@@ -36,7 +36,7 @@ Five HACCs have been established at some of world’s most prestigious universit
 
 ## Sections
 * [Applications](docs/applications.md#applications)
-* [Booking system rules](docs/booking-system-rules.md#booking-system-rules)
+* [Booking system](docs/booking-system.md#booking-system)
 * [CLI](./CLI/README.md#cli)
 * [Examples](docs/examples.md#examples)
 * [Features](docs/features.md#features)

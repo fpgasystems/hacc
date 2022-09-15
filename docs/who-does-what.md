@@ -19,9 +19,10 @@ The following people are relevant for our [Heterogeneous Compute Accelerated Clu
 ### ETH Zürich Systems Group
 * [Dario Korolija](https://systems.ethz.ch/people/profile.MjUyNDEz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [Coyote](./projects.md#coyote), [Farview](./projects.md#farview)
 * [Dimitrios Koutsoukos](https://systems.ethz.ch/people/profile.MjM5MDk0.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [Modularis](./projects.md#modularis)
+* [Fabio Maschi](https://systems.ethz.ch/people/profile.MjU0MTQy.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [Booking system]
 * [Javier Moya](https://systems.ethz.ch/people/profile.Mjk5NjU5.TGlzdC8zODkxLDEyOTU2NDI2OTI=.html), Senior scientist, [CLI](./projects.md#cli) 
 * [Runbin Shi](https://systems.ethz.ch/people/profile.Mjg2NjY4.TGlzdC8zODg5LDEyOTU2NDI2OTI=.html), Postdoctoral researcher, [Hardware transaction processing for multi-channel memory node](./projects.md#hardware-transaction-processing-for-multi-channel-memory-node)  
-* [Zhe](https://systems.ethz.ch/people/profile.MjMxODkz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [EasyNet](./projects.md#easynet-100-gbe-network-for-hls)
+* [Zhenhao He](https://systems.ethz.ch/people/profile.MjMxODkz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [EasyNet](./projects.md#easynet-100-gbe-network-for-hls)
 
 <!-- ## Systems Group Heterogeneous Compute Accelerated Cluster (SG HACC) project
 * [Javier Moya](https://systems.ethz.ch/people/profile.Mjk5NjU5.TGlzdC8zODkxLDEyOTU2NDI2OTI=.html), Hardware acceleration, Project leader  -->

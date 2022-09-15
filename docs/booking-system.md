@@ -4,7 +4,9 @@
 <a href="https://github.com/fpgasystems/hacc/blob/main/README.md">Back</a>
 </p>
 
-# Booking system rules
+# Booking system 
+
+# Booking rules
 The HACCs are a collaborative hub; many people may want access to the same limited resources. The following simple rules should help:
 
 1. We kindly ask users to limit the bookings to the shortest period. 
