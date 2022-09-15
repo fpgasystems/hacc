@@ -46,6 +46,7 @@ Five HACCs have been established at some of world’s most prestigious universit
 * [Operating the cluster](docs/operating-the-cluster.md#operating-the-cluster)
 * [Projects](docs/projects.md#projects)
 * [Vocabulary](docs/vocabulary.md#vocabulary)
+* [Who does what](docs/who-does-what.md#who-does-what)
 
 # Releases
 We use [Ansible Automation Platform (AAP)](docs/vocabulary.md#ansible-automation-platform-aap) for managing Xilinx’s tools versioning according to [XRT’s release schedule](https://github.com/Xilinx/XRT/releases). All servers equipped with an FPGA are associated with a unique software version, including XRT’s Xilinx Board Utility (xbutil), Xilinx tools (Vivado, Vitis_HLS, Vitis), and the flashable partitions (or base shell) running on the FPGA.
