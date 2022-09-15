@@ -13,7 +13,6 @@ Our scientific staff uses SG HACC to develop, test, and ship their applications.
 The following applications are available through SG HACC [CLI](../CLI/README.md#cli) [UNDER DEVELOPMENT]:
 
 * [ACCL: Accelerated Collective Communication Library](#accl-accelerated-collective-communication-library)
-* [CLI](#cli)
 * [Coyote](#coyote)
 * [EasyNet: 100 GbE network for HLS](#easynet-100-gbe-network-for-hls)
 * [Farview](#farview)
@@ -25,11 +24,6 @@ The following applications are available through SG HACC [CLI](../CLI/README.md#
 ACCL enables computing kernels resident in the FPGA fabric to communicate directly under host supervision without requiring data movement between the FPGA and host. Instead, ACCL uses [Road Runner](#road-runner-a-high-performance-tcpip-network-stack) (a Vitis-compatible TCP and UDP stacks) to connect FPGAs directly over Ethernet at up to 100 GbE on Alveo cards.
 
 [See ACCL on GitHub.](https://github.com/Xilinx/ACCL)
-
-## CLI
-SG CLI brings FPGA Systems Group’s designs to your terminal.
-
-[See CLI on GitHub.](https://github.com/fpgasystems/hacc/blob/main/docs/CLI.md)
 
 ## Coyote
 Coyote is an open source, portable, configurable *shell* for FPGAs which provides a full suite of OS abstractions, working with the host OS. Coyote supports secure spatial and temporal multiplexing of the FPGA between tenants, virtual memory, communication, a range of shared networking (RDMA or [Road Runner’s](#road-runner-a-high-performance-tcpip-network-stack) high-performance TCP/IP stack), and memory management inside a uniform execution environment. The overhead of Coyote is small, and the performance benefit is significant, but more importantly, it allows us to reflect on whether importing OS abstractions wholesale to FPGAs is the best way forward.
