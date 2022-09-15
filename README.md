@@ -35,6 +35,7 @@ HACCs are equipped with the latest Xilinx hardware and software technologies for
 Five HACCs have been established at some of world’s most prestigious universities. The first of them was assigned to [Prof. Dr. Gustavo Alonso](https://people.inf.ethz.ch/alonso/) of the [Institute for Platform Computing - Systems Group (SG)](https://systems.ethz.ch) at the [Swiss Federal Institute of Technology Zurich (ETH Zürich)](https://ethz.ch/en.html) in 2020.
 
 ## Sections
+* [Applications](docs/applications.md#applications)
 * [Booking system rules](docs/booking-system-rules.md#booking-system-rules)
 * [CLI](./CLI/README.md#cli)
 * [Examples](docs/examples.md#examples)
@@ -44,7 +45,6 @@ Five HACCs have been established at some of world’s most prestigious universit
 * [Infrastructure](docs/infrastructure.md#infrastructure)
 * [Known limitations](docs/known-limitations.md#known-limitations)
 * [Operating the cluster](docs/operating-the-cluster.md#operating-the-cluster)
-* [Projects](docs/projects.md#projects)
 * [Vocabulary](docs/vocabulary.md#vocabulary)
 * [Who does what](docs/who-does-what.md#who-does-what)
 
