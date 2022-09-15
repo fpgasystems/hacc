@@ -9,15 +9,14 @@
 ## CLI
 With SG [CLI](/projects.md#cli), you can easily:
 
-* Make use of *out-of-the-box* user functions that help you to build your accelerated applications using SG HACC,
-* Deploy, build and make your designs based on [EasyNet](./projects.md#easynet-100-gbe-network-for-hls), or
-* Deploy, build and make your designs based on [Coyote](./projects.md#coyote) (among many other things).
+* Make use of *out-of-the-box* [Examples](./examples.md) and user functions that help you to build your accelerated applications,
+* Deploy, build and design using any of our shipped [Applications](./applications.md)—including, for example, [EasyNet](./projects.md#easynet-100-gbe-network-for-hls) or [Coyote](./projects.md#coyote).
 
 ## Vitis and Vivado workflows
 Thanks to our [hot-plug boot](./vocabulary.md#hot-plug-boot) process, we are able to transition between the [Vivado and Vitis workflows](./vocabulary.md#vivado-and-vitis-workflows) without the need of rebooting the system.
 
 ## Managed
-We use [Infrastructure as Code (IaC)](./vocabulary.md#infrastructure-as-code-iac) and [Ansible Automation Platform (AAP)](.vocabulary.md#ansible-automation-platform-aap) to [operate the cluster](../docs/operating-the-cluster.md) efficiently. Under the scope of a [DevOps](.vocabulary.md#devops) methodology, we achieve the following: <!-- https://docs.microsoft.com/en-us/devops/deliver/what-is-infrastructure-as-code -->
+We use [Infrastructure as Code (IaC)](./vocabulary.md#infrastructure-as-code-iac) and [Ansible Automation Platform (AAP)](./vocabulary.md#ansible-automation-platform-aap) to [operate the cluster](../docs/operating-the-cluster.md) efficiently. Under the scope of a [DevOps](./vocabulary.md#devops) methodology, we achieve the following: <!-- https://docs.microsoft.com/en-us/devops/deliver/what-is-infrastructure-as-code -->
 
 * Continuos delivery,
 * Avoid manual configuration to enforce consistency,
@@ -29,6 +28,6 @@ We use [Infrastructure as Code (IaC)](./vocabulary.md#infrastructure-as-code-iac
 We are glad and welcome you every time you login to one of our servers. Behind the scenes, our *welcome_msg* script performs the following functions:
 
 * Runs a sanity check to verify the correct functioning of the operating system, as well as hardware and software related to Xilinx accelerators,
-* Helps you to choose your environement regarding [Vitis and Vivado workflows](#vitis-and-vivado-workflows),
+* Helps you to choose your environement regarding [Vivado and Vitis workflows](./vocabulary.md#vivado-and-vitis-workflows),
 * It gives you derived information regarding the active *Xilinx release branch, tools, and flashable partitions running on FPGA,* as well as the network information that might be relevant for your accelerated applications,
 * *Et cetera.*
