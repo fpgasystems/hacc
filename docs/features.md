@@ -10,7 +10,8 @@
 With SG [CLI](../CLI/README.md#cli), you can easily:
 
 * Make use of *out-of-the-box* [Examples](./examples.md#examples) and user functions that help you to build your accelerated applications,
-* Deploy, build and design using any of our shipped [Applications](./applications.md#applications)—including, for example, [EasyNet](./applications.md#easynet-100-gbe-network-for-hls).
+* Deploy, build and design using any of our shipped [Applications](./applications.md#applications),
+* *Et cetera.*
 
 ## Vitis and Vivado workflows
 Thanks to our [hot-plug boot](./vocabulary.md#hot-plug-boot) process, we are able to transition between the [Vivado and Vitis workflows](./vocabulary.md#vivado-and-vitis-workflows) without the need of rebooting the system.
