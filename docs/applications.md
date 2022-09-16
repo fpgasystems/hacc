@@ -26,29 +26,21 @@ ACCL enables computing kernels resident in the FPGA fabric to communicate direct
 [See ACCL on GitHub.](https://github.com/Xilinx/ACCL)
 
 ## Coyote
-Coyote is an open source, portable, configurable *shell* for FPGAs which provides a full suite of OS abstractions, working with the host OS. Coyote supports secure spatial and temporal multiplexing of the FPGA between tenants, virtual memory, communication, a range of shared networking (RDMA or [Road Runner’s](#road-runner-a-high-performance-tcpip-network-stack) high-performance TCP/IP stack), and memory management inside a uniform execution environment. The overhead of Coyote is small, and the performance benefit is significant, but more importantly, it allows us to reflect on whether importing OS abstractions wholesale to FPGAs is the best way forward.
+Coyote is an open source, portable, configurable *shell* for FPGAs which provides a full suite of OS abstractions, working with the host OS. Coyote supports secure spatial and temporal multiplexing of the FPGA between tenants, virtual memory, communication, a range of shared networking (RDMA or [Road Runner’s](#road-runner-a-high-performance-tcpip-network-stack) high-performance TCP/IP stack), and memory management inside a uniform execution environment. The overhead of Coyote is small, and the performance benefit is significant, but more importantly, it allows us to reflect on whether importing OS abstractions wholesale to FPGAs is the best way forward. [See Coyote on GitHub.](https://github.com/fpgasystems/Coyote)
 
-[See Coyote on GitHub.](https://github.com/fpgasystems/Coyote)
+### Hardware Transaction Processing for multi-channel memory node
+Transactional memory attempts to simplify concurrent programming by allowing a group of load and store instructions to execute in an atomic way. It is a concurrency control mechanism analogous to database transactions controlling access to shared memory in concurrent computing. Transactional memory systems provide high-level abstraction as an alternative to low-level thread synchronization. Building a hardware transaction processing layer for the multi-channel memory node is valuable. [See on GitHub.](https://github.com/rbshi/dlm)
 
 ## EasyNet: 100 GbE network for HLS
-EasyNet provides a set of MPI-like communication primitives for both point-to-point and collective operations (host-to-FPGA or FPGA-to-FPGA) as a High Level Synthesis (HLS) library. Such primitives are written to saturate the 100 GbE TCP/IP interface provided by [Road Runner](#road-runner-a-high-performance-tcpip-network-stack) achieving very low latency. EasyNet allows developers to write hardware kernels with the network abstracted away behind standard interfaces.
-
-[See EasyNet on GitHub.](https://github.com/fpgasystems/Vitis_with_100Gbps_TCP-IP)
+EasyNet provides a set of MPI-like communication primitives for both point-to-point and collective operations (host-to-FPGA or FPGA-to-FPGA) as a High Level Synthesis (HLS) library. Such primitives are written to saturate the 100 GbE TCP/IP interface provided by [Road Runner](#road-runner-a-high-performance-tcpip-network-stack) achieving very low latency. EasyNet allows developers to write hardware kernels with the network abstracted away behind standard interfaces. [See EasyNet on GitHub.](https://github.com/fpgasystems/Vitis_with_100Gbps_TCP-IP)
 
 <!-- ## Farview
 Cloud deployments disaggregate storage from compute, providing more flexibility to both the storage and compute layers. **Farview**—a disaggregated memory solution for databases—is an FPGA-based smart NIC design making DRAM available as a disaggregated, network attached memory module capable of performing data processing at line rate over data streams to/from disaggregated memory, operating as a remote buffer cache with operator offloading capabilities in heterogeneous clusters. This project builds on [Coyote](#coyote)-RDMA implementations. -->
 
 <!-- https://systems.ethz.ch/news-and-events/news/2022/01/dario-korolija-presents-farview-at-cidr-2022-work-done-in-collaboration-with-hpe.html-->
 
-## Hardware Transaction Processing for multi-channel memory node
-Transactional memory attempts to simplify concurrent programming by allowing a group of load and store instructions to execute in an atomic way. It is a concurrency control mechanism analogous to database transactions controlling access to shared memory in concurrent computing. Transactional memory systems provide high-level abstraction as an alternative to low-level thread synchronization. Building a hardware transaction processing layer for the multi-channel memory node is valuable. This project builds on [Coyote](#coyote).
-
-[See on GitHub.](https://github.com/rbshi/dlm)
-
 <!-- ## Modularis
 The enormous quantity of data produced every day together with advances in data analytics has led to a proliferation of data management and analysis systems. Typically, these systems are built around highly specialized monolithic operators optimized for the underlying hardware. While effective in the short term, such an approach makes the operators cumbersome to port and adapt, which is increasingly required due to the speed at which algorithms and hardware evolve. **Modularis**—an execution layer for data analytics over based on sub-operators—takes benefit of heterogeneous distributed platforms to resembling traditional database operators but at a finer granularity. This project builds on [Coyote](#coyote)-RDMA implementations.  -->
 
 ## Road Runner: a high-performance TCP/IP network stack
-Road Runner provides a 100 GbE TCP/IP and UDP interfaces based on Xilinx’s open-source and out-of-the-box Vitis components. The complementary logic building Road Runner ensures that such components are integrated on the FPGA without degrading its performance. As we can see in the diagram above, Road Runner is the communication layer for the [EasyNet](#easynet-100-gbe-network-for-hls) and [ACCL](#accl-accelerated-collective-communication-library)—and integrates with [Coyote](#coyote) too. 
-
-[See Road Runner on GitHub.](https://github.com/fpgasystems/Vitis_with_100Gbps_TCP-IP)
+Road Runner provides a 100 GbE TCP/IP and UDP interfaces based on Xilinx’s open-source and out-of-the-box Vitis components. The complementary logic building Road Runner ensures that such components are integrated on the FPGA without degrading its performance. As we can see in the diagram above, Road Runner is the communication layer for the [EasyNet](#easynet-100-gbe-network-for-hls) and [ACCL](#accl-accelerated-collective-communication-library)—and integrates with [Coyote](#coyote) too.
