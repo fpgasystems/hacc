@@ -66,19 +66,19 @@ To create your virtual private network connection, please use the following on y
     * Group name: ```student-net```
 
 ## Booking and accessing a server
-After configuring our passwords and virtual private network connection, the next step would be to book a server in the cluster using the [HACC booking system](https://alveo-booking.ethz.ch/login.php) and accessing it. **Please remember that you must be connected to the ETH network to access the booking system.**
+After configuring our passwords and virtual private network connection, the next step would be to reserve a server through the [booking system](https://alveo-booking.ethz.ch/login.php) and then access it. **Please remember that you must be connected to the ETH network to make use of the booking system.**
 
 ### Booking a server
 Please, follow these steps to book a server:
 
-1. Log in into the [HACC booking system](https://alveo-booking.ethz.ch/login.php) using your **main LDAP/Active directory password**,
+1. Log in into the [booking system](https://alveo-booking.ethz.ch/login.php) using your **main LDAP/Active directory password**,
 2. Once you are on the *Dashoboard* page, please click on *New booking*,
 3. Select the *Time range,* the *Boards* or servers you wish to book, along with a mandatory *Comment* referring to your research activites, and
 4. Press the *Book* button.
 
-We would like you to follow the [Booking system rules](../docs/booking-system-rules.md) while you work with the cluster.
+We would like you to follow the [booking rules](../docs/booking-system.md#booking-rules) while you work with the cluster.
 
-![Booking a server.](../imgs/booking-system.png "Booking a server.")
+![Booking a server.](../imgs/booking-a-server.png "Booking a server.")
 *Booking a server.*
 
 ### Accessing a server

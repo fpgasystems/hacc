@@ -5,6 +5,13 @@
 </p>
 
 # Booking system 
+Before connecting to any HACC servers, you must make a reservation through the [booking system](https://alveo-booking.ethz.ch/login.php). To use the booking system, please remember the following:
+
+* You must be connected to the ETH network in order to access it, and
+* Use your **main LDAP/Active directory password** as a part of your credentials.
+
+![Booking system.](../imgs/booking-system.png "Booking system.")
+*Booking system.*
 
 ## Booking rules
 The HACCs are a collaborative hub; many people may want access to the same limited resources. The following simple rules should help:
