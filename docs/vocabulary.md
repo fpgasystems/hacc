@@ -1,7 +1,7 @@
 <div id="readme" class="Box-body readme blob js-code-block-container">
 <article class="markdown-body entry-content p-3 p-md-6" itemprop="text">
 <p align="right">
-<a href="https://github.com/fpgasystems/hacc/blob/main/README.md">Back</a>
+<a href="https://github.com/fpgasystems/hacc/blob/main/README.md#sections">Back</a>
 </p>
 
 # Vocabulary
@@ -11,6 +11,9 @@ Agile is an iterative project management and software development approach that 
 
 ## Ansible Automation Platform (AAP)
 The Red Hat [Ansible Automation Platform (AAP)](https://www.ansible.com) is an orchestrated and open-source tool for software provisioning, configuration management, and application-deployment automation. Ansible uses its own [YAML](#yaml)-based declarative language enabling [infrastructure as code](#infrastructure-as-code-iac).
+
+## DCIM
+Data center infrastructure management (DCIM) is the integration of information technology (IT) and facility management disciplines to centralize monitoring, management and intelligent capacity planning of a data center's critical systems.
 
 ## Deployment types
 ### Infrastructure as a service (IaaS)

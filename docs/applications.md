@@ -40,10 +40,10 @@ Cloud deployments disaggregate storage from compute, providing more flexibility 
 
 <!-- https://systems.ethz.ch/news-and-events/news/2022/01/dario-korolija-presents-farview-at-cidr-2022-work-done-in-collaboration-with-hpe.html-->
 
-<!-- ## Hardware Transaction Processing for multi-channel memory node
+## Hardware Transaction Processing for multi-channel memory node
 Transactional memory attempts to simplify concurrent programming by allowing a group of load and store instructions to execute in an atomic way. It is a concurrency control mechanism analogous to database transactions controlling access to shared memory in concurrent computing. Transactional memory systems provide high-level abstraction as an alternative to low-level thread synchronization. Building a hardware transaction processing layer for the multi-channel memory node is valuable. This project builds on [Coyote](#coyote).
 
-[See on GitHub.](https://github.com/rbshi/dlm) -->
+[See on GitHub.](https://github.com/rbshi/dlm)
 
 <!-- ## Modularis
 The enormous quantity of data produced every day together with advances in data analytics has led to a proliferation of data management and analysis systems. Typically, these systems are built around highly specialized monolithic operators optimized for the underlying hardware. While effective in the short term, such an approach makes the operators cumbersome to port and adapt, which is increasingly required due to the speed at which algorithms and hardware evolve. **Modularis**—an execution layer for data analytics over based on sub-operators—takes benefit of heterogeneous distributed platforms to resembling traditional database operators but at a finer granularity. This project builds on [Coyote](#coyote)-RDMA implementations.  -->
