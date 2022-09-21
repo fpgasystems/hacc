@@ -5,9 +5,10 @@
 </p>
 
 # Hello, world!
-FPGAs’ *Hello, world!* is a simple two-vector addition problem—to be solved in the programmable logic. For didactic purposes, the load/compute/store coding style is applied to different combinations of host code and kernel’s description languages like HLS C/C++ [[1]](#references), OpenCL [[2]](#references), or RTL [[3]](#references).
+FPGAs’ *Hello, world!* is a simple two-vector addition problem—to be solved in the programmable logic. For didactic purposes, the load/compute/store coding style is applied to different combinations of host code and kernel’s description languages like HLS C/C++ [[2]](#references), OpenCL [[3]](#references), or RTL [[4]](#references).
 
 ## References
-* [[1] Hello World (HLS C/C++ Kernel)](https://github.com/Xilinx/Vitis_Accel_Examples/tree/master/hello_world)
-* [[2] Hello World (OpenCL Kernel)](https://github.com/Xilinx/Vitis_Accel_Examples/tree/master/ocl_kernels/cl_helloworld)
-* [[3] Vadd Simple (RTL Kernel)](https://github.com/Xilinx/Vitis_Accel_Examples/tree/master/rtl_kernels/rtl_vadd)
+* [[1] Compilation and execution](https://xilinx.github.io/Vitis_Accel_Examples/2022.1/html/compile_execute.html)
+* [[2] Hello World (HLS C/C++ Kernel)](https://github.com/Xilinx/Vitis_Accel_Examples/tree/master/hello_world)
+* [[3] Hello World (OpenCL Kernel)](https://github.com/Xilinx/Vitis_Accel_Examples/tree/master/ocl_kernels/cl_helloworld)
+* [[4] Vadd Simple (RTL Kernel)](https://github.com/Xilinx/Vitis_Accel_Examples/tree/master/rtl_kernels/rtl_vadd)
