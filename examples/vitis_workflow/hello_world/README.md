@@ -5,10 +5,9 @@
 </p>
 
 # Hello, world!
-In this example we will deploy, build, and run a [Hello, world!](../docs/vocabulary.md#hello-world) accelerated application running on an Alveo card. In this case, the *Hello, world!* program reduces to a simple vector addition describing how to use HLS kernels in the Vitis workflow [[1]](#references).
-
-## HLS vector addition
-In our first accelerated application we will simply create an application adding two vectors [[1]](#references).
+FPGAs’ *Hello, world!* is a simple two-vector addition problem—to be solved in the programmable logic. For didactic purposes, the load/compute/store coding style is applied to different combinations of host code and kernel’s description languages like HLS C/C++ [[1]](#references), OpenCL [[2]](#references), or RTL [[3]](#references).
 
 ## References
-* [1] [Hello World (HLS C/C++ Kernel)](https://github.com/Xilinx/Vitis_Accel_Examples/tree/master/hello_world)
+* [[1] Hello World (HLS C/C++ Kernel)](https://github.com/Xilinx/Vitis_Accel_Examples/tree/master/hello_world)
+* [[2] Hello World (OpenCL Kernel)](https://github.com/Xilinx/Vitis_Accel_Examples/tree/master/ocl_kernels/cl_helloworld)
+* [[3] Vadd Simple (RTL Kernel)](https://github.com/Xilinx/Vitis_Accel_Examples/tree/master/rtl_kernels/rtl_vadd)
