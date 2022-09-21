@@ -6,14 +6,14 @@
 
 # Examples
 
-The following are *out-of-the-box* examples that aim to be a good starting point to develop your accelerated applications using SG HACC.
-
-## Vitis workflow
-It is primarily recommended to start with the [Hello, world!](../docs/vocabulary.md#hello-world) example which makes the new users aware about the basic structure of a Vitis based application. The following steps are independent of the application you choose to deploy [[1]](#references).
+The following are *out-of-the-box* examples that aim to be a good starting point to develop your accelerated applications using SG HACC. 
 
 ### Compilation
 
-### Applications
+## Vitis workflow
+It is primarily recommended to start with the [Hello, world!](../docs/vocabulary.md#hello-world) example which makes the new users aware about the basic structure of a Vitis based application. All the examples make use of a compilation and execution process [[2]](#references) ...
+
+<!-- The following steps are independent of the application you choose to deploy [[1]](#references). -->
 
 * [Hello, world!](./vitis_workflow/hello_world/README.md)
 
