@@ -14,7 +14,8 @@ It is primarily recommended to start with [Hello, world!](./vocabulary.md#hello-
 ### Compilation
 
 ### Applications
-* [Hello, world!](/vitis_workflow/hello_world/README.md)
+
+* [Hello, world!](./vitis_workflow/hello_world/README.md)
 
 ## References
 * [[1] Compilation and execution](https://xilinx.github.io/Vitis_Accel_Examples/2022.1/html/compile_execute.html)
