@@ -38,7 +38,7 @@ Five HACCs have been established at some of world’s most prestigious universit
 * [Applications](docs/applications.md#applications)
 * [Booking system](docs/booking-system.md#booking-system)
 * [CLI](./CLI/README.md#cli)
-* [Examples](docs/examples.md#examples)
+* [Examples](/examples/README.md#examples)
 * [Features](docs/features.md#features)
 * [First steps](docs/first-steps.md#first-steps)
 * [Get started](https://www.amd-haccs.io/get-started.html)
