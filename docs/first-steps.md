@@ -55,14 +55,14 @@ To create your virtual private network connection, please use the following on y
     * Server address: ```sslvpn.ethz.ch```
     * Account name: ```ETHUSER@staff-net.ethz.ch```
     * Password: ```RADIUS password```
-    * Shared secret: ```ETHZ.STAFF-NET.VPN```
+    * Shared secret: *According to received information*
     * Group name: ```staff-net```
 
 * ETH students:
     * Server address: ```sslvpn.ethz.ch```
     * Account name: ```ETHUSER@student-net.ethz.ch```
     * Password: ```RADIUS password```
-    * Shared secret: ```ETHZ.STUDENT-NET.VPN```
+    * Shared secret: *According to received information*
     * Group name: ```student-net```
 
 ## Booking and accessing a server
