@@ -17,12 +17,12 @@ The following people are relevant for our [Heterogeneous Compute Accelerated Clu
 * [Ken O’brien](https://www.linkedin.com/in/ken-o-brien-338807185/?originalSubdomain=ie), Senior member of technical staff software engineering, [ACCL](./applications.md#accl-accelerated-collective-communication-library)
 
 ### ETH Zürich Systems Group
-* [Dario Korolija](https://systems.ethz.ch/people/profile.MjUyNDEz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [Coyote](./applications.md#coyote)
+* [Dario Korolija](https://systems.ethz.ch/people/profile.MjUyNDEz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [Coyote](./applications.md#coyote) project leader
 * [Dimitrios Koutsoukos](https://systems.ethz.ch/people/profile.MjM5MDk0.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, IT coordinator
 * [Fabio Maschi](https://systems.ethz.ch/people/profile.MjU0MTQy.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [Booking system](./booking-system.md#booking-system)
-* [Javier Moya](https://systems.ethz.ch/people/profile.Mjk5NjU5.TGlzdC8zODkxLDEyOTU2NDI2OTI=.html), Senior scientist, [CLI](./applications.md#cli) 
-* [Runbin Shi](https://systems.ethz.ch/people/profile.Mjg2NjY4.TGlzdC8zODg5LDEyOTU2NDI2OTI=.html), Postdoctoral researcher, [Hardware transaction processing for multi-channel memory node](./applications.md#hardware-transaction-processing-for-multi-channel-memory-node)  
-* [Zhenhao He](https://systems.ethz.ch/people/profile.MjMxODkz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [EasyNet](./applications.md#easynet-100-gbe-network-for-hls)
+* [Javier Moya](https://systems.ethz.ch/people/profile.Mjk5NjU5.TGlzdC8zODkxLDEyOTU2NDI2OTI=.html), Senior scientist, HACC coordinator, [CLI](./applications.md#cli) 
+* [Runbin Shi](https://systems.ethz.ch/people/profile.Mjg2NjY4.TGlzdC8zODg5LDEyOTU2NDI2OTI=.html), Postdoctoral researcher, [Hardware transaction processing for multi-channel memory node](./applications.md#hardware-transaction-processing-for-multi-channel-memory-node) project leader
+* [Zhenhao He](https://systems.ethz.ch/people/profile.MjMxODkz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [EasyNet](./applications.md#easynet-100-gbe-network-for-hls) project leader
 
 <!-- ## Systems Group Heterogeneous Compute Accelerated Cluster (SG HACC) project
 * [Javier Moya](https://systems.ethz.ch/people/profile.Mjk5NjU5.TGlzdC8zODkxLDEyOTU2NDI2OTI=.html), Hardware acceleration, Project leader  -->
