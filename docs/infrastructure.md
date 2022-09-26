@@ -150,6 +150,15 @@ Versal ACAPs deliver unparalleled application- and system-level value for cloud,
 ### Server names
 The following list gives an overview of ETHZ-HACC server names:
 
+| Cluster | # instances | Booking | Names              | Examples                            |
+|---------|-------------|---------|--------------------|-------------------------------------|
+| Build   | 1           | No      | alveo-build-01     | ssh USERNAME@alveo-build-01.ethz.ch |
+| U250    | 6           | Yes     | alveo-u250-[01:06] | ssh USERNAME@alveo-u250-01.ethz.ch  |
+| U280    | 4           | Yes     | alveo-u280-[01:04] | ssh USERNAME@alveo-u280-01.ethz.ch  |
+| U50D    | 4           | Yes     | alveo-u50d-[01:04] | ssh USERNAME@alveo-u50d-01.ethz.ch  |
+| U55C    | 10          | Yes     | alveo-u55c-[01:10] | ssh USERNAME@alveo-u55c-01.ethz.ch  |
+| Versal  | 1           | Yes     | versal-vck5000-01  | ssh USERNAME@versal-vck5000.ethz.ch |
+
 ![ETHZ-HACC server names.](../imgs/server-names.png "ETHZ-HACC server names.")
 *ETHZ-HACC server names.*
 
