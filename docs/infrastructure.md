@@ -5,10 +5,10 @@
 </p>
 
 # Infrastructure
-SG HACC comprises high-end servers, Xilinx accelerator cards, and high-speed networking. Each accelerator card has all of its Ethernet interfaces connected to a 100 GbE leaf switch to allow exploration of arbitrary network topologies for distributed computing. Additionally, we are offering a build server with development and bitstream compilation purposes. <!-- Our HACC is provisioned and managed based on [Infrastructure as Code](../docs/vocabulary.md#infrastructure-as-code) using [Ansible](../docs/vocabulary.md#ansible). -->
+ETHZ-HACC comprises high-end servers, Xilinx accelerator cards, and high-speed networking. Each accelerator card has all of its Ethernet interfaces connected to a 100 GbE leaf switch to allow exploration of arbitrary network topologies for distributed computing. Additionally, we are offering a build server with development and bitstream compilation purposes. <!-- Our HACC is provisioned and managed based on [Infrastructure as Code](../docs/vocabulary.md#infrastructure-as-code) using [Ansible](../docs/vocabulary.md#ansible). -->
 
-![SG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.](../imgs/infrastructure.png "SG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.")
-*SG HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.*
+![ETHZ-HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.](../imgs/infrastructure.png "ETHZ-HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.")
+*ETHZ-HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.*
 
 We are offering twenty-four Alveo data center accelerator cards and one Versal card. Remember that each high-end server exposes **only one Xilinx accelerator card to the user.**
 
@@ -147,11 +147,17 @@ Versal ACAPs deliver unparalleled application- and system-level value for cloud,
 
 * [Versal VCK5000](https://www.xilinx.com/products/boards-and-kits/vck5000.html)
 
-### Summary
-The following table gives an overview of SG HACC resources:
+### Server names
+The following list gives an overview of ETHZ-HACC server names:
 
-![SG HACC resources.](../imgs/resources.png "SG HACC resources.")
-*SG HACC resources. On the FPGA/ACAP column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale).*
+![ETHZ-HACC server names.](../imgs/server-names.png "ETHZ-HACC server names.")
+*ETHZ-HACC server names.*
+
+### Resources
+The following table gives an overview of ETHZ-HACC resources:
+
+![ETHZ-HACC resources.](../imgs/resources.png "ETHZ-HACC resources.")
+*ETHZ-HACC resources. On the FPGA/ACAP column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale).*
 
 ## Networking
 
