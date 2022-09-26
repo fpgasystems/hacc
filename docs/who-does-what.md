@@ -24,9 +24,6 @@ The following people are relevant for our [Heterogeneous Compute Accelerated Clu
 * [Runbin Shi](https://systems.ethz.ch/people/profile.Mjg2NjY4.TGlzdC8zODg5LDEyOTU2NDI2OTI=.html), Postdoctoral researcher, [Hardware transaction processing for multi-channel memory node](./applications.md#hardware-transaction-processing-for-multi-channel-memory-node) project leader
 * [Zhenhao He](https://systems.ethz.ch/people/profile.MjMxODkz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [EasyNet](./applications.md#easynet-100-gbe-network-for-hls) project leader
 
-<!-- ## Systems Group Heterogeneous Compute Accelerated Cluster (SG HACC) project
-* [Javier Moya](https://systems.ethz.ch/people/profile.Mjk5NjU5.TGlzdC8zODkxLDEyOTU2NDI2OTI=.html), Hardware acceleration, Project leader  -->
-
 ## Operations *(IT Service Group)*
 * [Dejan Jovanovic](https://www.isg.inf.ethz.ch/Main/DejanJovanovic), [DCIM](./vocabulary.md#dcim)
 * [Manuel Maestinger](https://www.isg.inf.ethz.ch/Main/ManuelMaestinger), Linux systems

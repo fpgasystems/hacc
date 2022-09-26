@@ -5,12 +5,12 @@
 </p>
 
 # Applications
-Our scientific staff uses SG HACC to develop, test, and ship their applications. As a multi-core and FPGA cluster, the HACC allows research in distributed systems, databases, cloud computing, and hardware acceleration of data science. With Coyote—one of our most relevant research projects—we work on adapting traditional system software components (OS, networking, databases) to run on FPGAs.
+Our scientific staff uses ETHZ-HACC to develop, test, and ship their applications. As a multi-core and FPGA cluster, the HACC allows research in distributed systems, databases, cloud computing, and hardware acceleration of data science. With Coyote—one of our most relevant research projects—we work on adapting traditional system software components (OS, networking, databases) to run on FPGAs.
 
-![Our scientific staff uses SG HACC to develop, test, and ship their applications.](../imgs/applications.png "Our scientific staff uses SG HACC to develop, test, and ship their applications.")
-*Our scientific staff uses SG HACC to develop, test, and ship their applications.*
+![Our scientific staff uses ETHZ-HACC to develop, test, and ship their applications.](../imgs/applications.png "Our scientific staff uses ETHZ-HACC to develop, test, and ship their applications.")
+*Our scientific staff uses ETHZ-HACC to develop, test, and ship their applications.*
 
-The following applications are available through SG HACC [CLI](../CLI/README.md#cli) [UNDER DEVELOPMENT]:
+The following applications are available through ETHZ-HACC [CLI](../CLI/README.md#cli) [UNDER DEVELOPMENT]:
 
 * [ACCL: Accelerated Collective Communication Library](#accl-accelerated-collective-communication-library)
 * [Coyote](#coyote)
