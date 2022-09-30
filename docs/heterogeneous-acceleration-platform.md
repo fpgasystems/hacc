@@ -4,7 +4,7 @@
 <a href="https://github.com/fpgasystems/hacc#sections">Back</a>
 </p>
 
-# Applications
+# Heterogeneous acceleration platform
 Our scientific staff uses ETHZ-HACC to develop, test, and ship their applications. As a multi-core and FPGA cluster, the HACC allows research in distributed systems, databases, cloud computing, and hardware acceleration of data science. With Coyote—one of our most relevant research projects—we work on adapting traditional system software components (OS, networking, databases) to run on FPGAs.
 
 ![Our scientific staff uses ETHZ-HACC to develop, test, and ship their applications.](../imgs/applications.png "Our scientific staff uses ETHZ-HACC to develop, test, and ship their applications.")
