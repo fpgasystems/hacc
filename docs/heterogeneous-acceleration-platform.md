@@ -10,11 +10,11 @@ As a multi-core, GPU and FPGA cluster, ETHZ-HACC allows research in distributed 
 ![Heterogeneous acceleration platform.](../imgs/heterogeneous-acceleration-platform.png "Heterogeneous acceleration platform.")
 *Heterogeneous acceleration platform.*
 
-The following applications are available through ETHZ-HACC [CLI](../CLI/README.md#cli) [UNDER DEVELOPMENT]:
+<!-- The following applications are available through ETHZ-HACC [CLI](../CLI/README.md#cli) [UNDER DEVELOPMENT]:
 
 * [ACCL: Accelerated Collective Communication Library](#accl-accelerated-collective-communication-library)
 * [Coyote](#coyote)
-* [EasyNet: 100 GbE network for HLS](#easynet-100-gbe-network-for-hls)
+* [EasyNet: 100 GbE network for HLS](#easynet-100-gbe-network-for-hls) -->
 <!-- * [Farview](#farview)
 * [Hardware Transaction Processing for multi-channel memory node](#hardware-transaction-processing-for-multi-channel-memory-node)
 * [Modularis](#modularis)
