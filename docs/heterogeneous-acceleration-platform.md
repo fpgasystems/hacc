@@ -5,7 +5,7 @@
 </p>
 
 # Heterogeneous acceleration platform
-As a multi-core, GPU and FPGA cluster, ETHZ-HACC allows research in distributed systems, databases, cloud computing, and hardware acceleration of data science. With Coyote and EasyNet we are working on adapting traditional system and software components (OS, networking, databases) to run on FPGAs providing a platform to develop accelerated application easily.
+As a multi-core, GPU, and FPGA cluster, ETHZ-​HACC allows research in distributed systems, databases, cloud computing, and hardware acceleration of data science. With [Coyote](https://https//github.com/fpgasystems/Coyote) and [EasyNet](https://github.com/fpgasystems/Vitis_with_100Gbps_TCP-IP), we are adapting traditional system and software components (OS, networking, databases) to run on FPGAs, providing a platform to develop accelerated applications quickly.
 
 ![Heterogeneous acceleration platform.](../imgs/heterogeneous-acceleration-platform.png "Heterogeneous acceleration platform.")
 *Heterogeneous acceleration platform.*
