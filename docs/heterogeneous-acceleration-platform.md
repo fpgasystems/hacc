@@ -5,10 +5,10 @@
 </p>
 
 # Heterogeneous acceleration platform
-Our scientific staff uses ETHZ-HACC to develop, test, and ship their applications. As a multi-core and FPGA cluster, the HACC allows research in distributed systems, databases, cloud computing, and hardware acceleration of data science. With Coyote—one of our most relevant research projects—we work on adapting traditional system software components (OS, networking, databases) to run on FPGAs.
+As a multi-core, GPU and FPGA cluster, ETHZ-HACC allows research in distributed systems, databases, cloud computing, and hardware acceleration of data science. With Coyote and EasyNet we are working on adapting traditional system and software components (OS, networking, databases) to run on FPGAs providing a platform to develop accelerated application easily.
 
-![Our scientific staff uses ETHZ-HACC to develop, test, and ship their applications.](../imgs/applications.png "Our scientific staff uses ETHZ-HACC to develop, test, and ship their applications.")
-*Our scientific staff uses ETHZ-HACC to develop, test, and ship their applications.*
+![Heterogeneous acceleration platform.](../imgs/heterogeneous-acceleration-platform.png "Heterogeneous acceleration platform.")
+*Heterogeneous acceleration platform.*
 
 The following applications are available through ETHZ-HACC [CLI](../CLI/README.md#cli) [UNDER DEVELOPMENT]:
 
