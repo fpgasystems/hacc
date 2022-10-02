@@ -22,7 +22,7 @@ The following people are relevant for our [Heterogeneous Compute Accelerated Clu
 * [Fabio Maschi](https://systems.ethz.ch/people/profile.MjU0MTQy.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [Booking system](./booking-system.md#booking-system)
 * [Javier Moya](https://systems.ethz.ch/people/profile.Mjk5NjU5.TGlzdC8zODkxLDEyOTU2NDI2OTI=.html), Senior scientist, HACC coordinator, [CLI](./applications.md#cli) 
 * [Runbin Shi](https://systems.ethz.ch/people/profile.Mjg2NjY4.TGlzdC8zODg5LDEyOTU2NDI2OTI=.html), Postdoctoral researcher, [Hardware transaction processing for multi-channel memory node](./applications.md#hardware-transaction-processing-for-multi-channel-memory-node) project leader
-* [Zhenhao He](https://systems.ethz.ch/people/profile.MjMxODkz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [EasyNet](./applications.md#easynet-100-gbe-network-for-hls) project leader
+* [Zhenhao He](https://systems.ethz.ch/people/profile.MjMxODkz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [EasyNet](./applications.md#easynet-100-gbe-network-for-hls) project leader, [ACCL](./applications.md#accl-accelerated-collective-communication-library)
 
 ## Operations *(IT Service Group)*
 * [Dejan Jovanovic](https://www.isg.inf.ethz.ch/Main/DejanJovanovic), [DCIM](./vocabulary.md#dcim)
