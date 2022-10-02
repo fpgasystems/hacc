@@ -5,7 +5,7 @@
 </p> -->
 
 # CLI
-SG CLI brings FPGA Systems Group’s designs to your terminal.
+ETHZ-HACC CLI brings Systems Group’s designs to your terminal.
 
 ## sg
 Work seamlessly with XRT from the command line.
