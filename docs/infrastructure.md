@@ -165,6 +165,16 @@ Versal ACAPs deliver unparalleled application- and system-level value for cloud,
 
 * [Versal VCK5000](https://www.xilinx.com/products/boards-and-kits/vck5000.html)
 
+### Storage
+Each HACC users can store data on the following directories:
+* /home/USERNAME: directory on an NFS drive accessible by USERNAME from any the HACC servers.
+* /mnt/scratch: directory on an NFS drive accessible by all users from any of the HACC servers.
+* /local/home/USERNAME/: directory on the local server drive accessible by USERNAME on the HACC server.
+* /tmp: directory on the local server drive accessible by all users on the HACC server. Its content is removed every time the server is restarted.   
+
+### USB - JTAG connectivity
+The USB - JTAG connection allows granted users to interact directly with the FPGA by downloading bitstreams or updating memory content. The correct setup and access of a USB - JTAG connection is essential developers using working with [Vivado workflow](./vocabulary.md#vivado-workflow).
+
 ## Networking
 
 ![Management, access and data networks.](../imgs/networking.png "Management, access and data networks.")
@@ -187,6 +197,3 @@ On the server side, the CPU NICs are [ConnectX-5](https://www.nvidia.com/en-us/n
 * SERVERNAME-mallanox-0
 * SERVERNAME-fpga-0
 * SERVERNAME-fpga-1
-
-## USB - JTAG connectivity
-The USB - JTAG connection allows granted users to interact directly with the FPGA by downloading bitstreams or updating memory content. The correct setup and access of a USB - JTAG connection is essential for Vivado workflow developers.
