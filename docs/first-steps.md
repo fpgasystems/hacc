@@ -87,6 +87,8 @@ After [booking a server](#booking-a-server)—and assuming you are connected to 
 ![Accessing a server.](../imgs/accessing-a-server.png "Accessing a server.")
 *Accessing a server.*
 
+You can also make use of **X11 forwarding** if you need to run graphical applications on the remote server (for instance, Vivado). For this, please add a -X after the ssh command, i.e.: ```ssh -X jmoyapaya@alveo-u50d-05```).
+
 ## Validating a Xilinx accelerator card
 Once you are logged into a server, you should be able to validate server’s accelerator card with ```xbutil validate --device```:
 
