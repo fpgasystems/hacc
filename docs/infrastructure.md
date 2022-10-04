@@ -10,7 +10,7 @@ ETHZ-HACC comprises high-end servers, Xilinx accelerator cards, and high-speed n
 ![ETHZ-HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.](../imgs/infrastructure.png "ETHZ-HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.")
 *ETHZ-HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.*
 
-We are offering twenty-four Alveo data center accelerator cards and one Versal card. Remember that each high-end server exposes **only one Xilinx accelerator card to the user.** The following tables give an overview of ETHZ-HACC server names and its resources:
+We are offering twenty-four Alveo data center accelerator cards and one Versal card. Remember that each high-end server exposes **only one Xilinx accelerator card to the user.** The following tables give an overview of ETHZ-HACC **server names** and their **resources:**
 
 <!-- | Cluster | # instances | Booking | Names              | Examples                            |
 |---------|-------------|---------|--------------------|-------------------------------------|
