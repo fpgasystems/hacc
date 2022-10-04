@@ -147,7 +147,10 @@ Versal ACAPs deliver unparalleled application- and system-level value for cloud,
 
 * [Versal VCK5000](https://www.xilinx.com/products/boards-and-kits/vck5000.html)
 
-### Server names
+## Building cluster
+We are offering a building cluster for development and bitstream compilation purposes. Multiple users can access this machine simultaneously without booking it first. Please only use the HACC build servers if you do not have access to similar resources at your research institution: too many users running large jobs on this machine will likely cause builds to run slowly—or sometimes to fail. Also, avoid using the build servers for debugging or simulating your hardware.
+
+## Server names and resources
 The following list gives an overview of ETHZ-HACC server names:
 
 <!-- | Cluster | # instances | Booking | Names              | Examples                            |
@@ -162,7 +165,6 @@ The following list gives an overview of ETHZ-HACC server names:
 ![ETHZ-HACC server names.](../imgs/server-names.png "ETHZ-HACC server names.")
 *ETHZ-HACC server names.*
 
-### Resources
 The following table gives an overview of ETHZ-HACC resources:
 
 ![ETHZ-HACC resources.](../imgs/resources.png "ETHZ-HACC resources.")
