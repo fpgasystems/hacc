@@ -12,7 +12,7 @@ The following people are relevant for our [Heterogeneous Compute Accelerated Clu
 * [Javier Moya](https://systems.ethz.ch/people/profile.Mjk5NjU5.TGlzdC8zODkxLDEyOTU2NDI2OTI=.html), Systems Group HACC project leader, ETH Zürich 
 * [Mario Ruiz](https://www.linkedin.com/in/mario-ruiz-noguera/), [Xilinx University Program](https://www.xilinx.com/support/university/XUP-HACC.html) coordinator, AMD
 
-## Applications
+## Heterogeneous acceleration platform 
 ### AMD
 * [Ken O’brien](https://www.linkedin.com/in/ken-o-brien-338807185/?originalSubdomain=ie), Senior member of technical staff software engineering, [ACCL](./applications.md#accl-accelerated-collective-communication-library)
 
