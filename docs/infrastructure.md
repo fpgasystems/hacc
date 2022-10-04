@@ -12,6 +12,27 @@ ETHZ-HACC comprises high-end servers, Xilinx accelerator cards, and high-speed n
 
 We are offering twenty-four Alveo data center accelerator cards and one Versal card. Remember that each high-end server exposes **only one Xilinx accelerator card to the user.**
 
+## Server names
+The following list gives an overview of ETHZ-HACC server names:
+
+<!-- | Cluster | # instances | Booking | Names              | Examples                            |
+|---------|-------------|---------|--------------------|-------------------------------------|
+| Build   | 1           | No      | alveo-build-01     | ssh USERNAME@alveo-build-01.ethz.ch |
+| U250    | 6           | Yes     | alveo-u250-[01:06] | ssh USERNAME@alveo-u250-01.ethz.ch  |
+| U280    | 4           | Yes     | alveo-u280-[01:04] | ssh USERNAME@alveo-u280-01.ethz.ch  |
+| U50D    | 4           | Yes     | alveo-u50d-[01:04] | ssh USERNAME@alveo-u50d-01.ethz.ch  |
+| U55C    | 10          | Yes     | alveo-u55c-[01:10] | ssh USERNAME@alveo-u55c-01.ethz.ch  |
+| Versal  | 1           | Yes     | versal-vck5000-01  | ssh USERNAME@versal-vck5000.ethz.ch | -->
+
+![ETHZ-HACC server names.](../imgs/server-names.png "ETHZ-HACC server names.")
+*ETHZ-HACC server names.*
+
+## Resources
+The following table gives an overview of ETHZ-HACC resources:
+
+![ETHZ-HACC resources.](../imgs/resources.png "ETHZ-HACC resources.")
+*ETHZ-HACC resources. On the FPGA/ACAP column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale).*
+
 <!-- <table>
 <thead>
   <tr>
@@ -129,6 +150,9 @@ We are offering twenty-four Alveo data center accelerator cards and one Versal c
 </tbody>
 </table> -->
 
+## Building cluster
+We are offering a building cluster for development and bitstream compilation purposes. Multiple users can access this machine simultaneously without booking it first. Please only use the HACC build servers if you do not have access to similar resources at your research institution: too many users running large jobs on this machine will likely cause builds to run slowly—or sometimes to fail. Also, avoid using the build servers for debugging or simulating your hardware.
+
 ## High-end servers and Xilinx accelerator cards
 ### AMD EPYC
 EPYC is the world’s highest-performing x86 server processor with faster performance for cloud, enterprise, and HPC workloads. To learn more about it, please refer to the [AMD EPYC processors website](https://www.amd.com/en/processors/epyc-server-cpu-family) and its [data sheet.](https://www.amd.com/system/files/documents/amd-epyc-7003-series-datasheet.pdf)
@@ -146,29 +170,6 @@ Virtex UltraScale+ devices provide the highest performance and integration capab
 Versal ACAPs deliver unparalleled application- and system-level value for cloud, network, and edge applications​. The disruptive 7nm architecture combines heterogeneous compute engines with a breadth of hardened memory and interfacing technologies for superior performance/watt over competing 10nm FPGAs.
 
 * [Versal VCK5000](https://www.xilinx.com/products/boards-and-kits/vck5000.html)
-
-## Building cluster
-We are offering a building cluster for development and bitstream compilation purposes. Multiple users can access this machine simultaneously without booking it first. Please only use the HACC build servers if you do not have access to similar resources at your research institution: too many users running large jobs on this machine will likely cause builds to run slowly—or sometimes to fail. Also, avoid using the build servers for debugging or simulating your hardware.
-
-## Server names and resources
-The following list gives an overview of ETHZ-HACC server names:
-
-<!-- | Cluster | # instances | Booking | Names              | Examples                            |
-|---------|-------------|---------|--------------------|-------------------------------------|
-| Build   | 1           | No      | alveo-build-01     | ssh USERNAME@alveo-build-01.ethz.ch |
-| U250    | 6           | Yes     | alveo-u250-[01:06] | ssh USERNAME@alveo-u250-01.ethz.ch  |
-| U280    | 4           | Yes     | alveo-u280-[01:04] | ssh USERNAME@alveo-u280-01.ethz.ch  |
-| U50D    | 4           | Yes     | alveo-u50d-[01:04] | ssh USERNAME@alveo-u50d-01.ethz.ch  |
-| U55C    | 10          | Yes     | alveo-u55c-[01:10] | ssh USERNAME@alveo-u55c-01.ethz.ch  |
-| Versal  | 1           | Yes     | versal-vck5000-01  | ssh USERNAME@versal-vck5000.ethz.ch | -->
-
-![ETHZ-HACC server names.](../imgs/server-names.png "ETHZ-HACC server names.")
-*ETHZ-HACC server names.*
-
-The following table gives an overview of ETHZ-HACC resources:
-
-![ETHZ-HACC resources.](../imgs/resources.png "ETHZ-HACC resources.")
-*ETHZ-HACC resources. On the FPGA/ACAP column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale).*
 
 ## Networking
 
