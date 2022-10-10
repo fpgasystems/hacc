@@ -8,9 +8,11 @@
 The following people are relevant for our [Heterogeneous Compute Accelerated Cluster (HACC)](https://www.amd-haccs.io) project.
 
 ## AMD Xilinx University Program (XUP) coordinators
+* [Cathal McCabe](https://www.linkedin.com/in/cathalmccabe/), [Xilinx University Program](https://www.xilinx.com/support/university/XUP-HACC.html) Manager EMEA, AMD
 * [Gustavo Alonso](https://systems.ethz.ch/people/profile.gustavo-alonso.html), Systems Group leader, ETH Zürich 
 * [Javier Moya](https://systems.ethz.ch/people/profile.Mjk5NjU5.TGlzdC8zODkxLDEyOTU2NDI2OTI=.html), Systems Group HACC project leader, ETH Zürich 
 * [Mario Ruiz](https://www.linkedin.com/in/mario-ruiz-noguera/), [Xilinx University Program](https://www.xilinx.com/support/university/XUP-HACC.html) coordinator, AMD
+* [Michaela Blott](https://www.linkedin.com/in/michaelablott/?originalSubdomain=ie), Senior Fellow, AMD
 
 ## Heterogeneous acceleration platform 
 ### AMD
