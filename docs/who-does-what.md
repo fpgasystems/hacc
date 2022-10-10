@@ -5,7 +5,7 @@
 </p>
 
 # Who does what
-The following people are relevant for our ETHZ-Heterogeneous Compute Accelerated Cluster (HACC)project.
+The following people are relevant for our ETHZ-Heterogeneous Compute Accelerated Cluster (ETHZ-HACC) project.
 
 ## AMD Xilinx University Program (XUP) coordinators
 * [Cathal McCabe](https://www.linkedin.com/in/cathalmccabe/), [Xilinx University Program](https://www.xilinx.com/support/university/XUP-HACC.html) Manager EMEA, AMD
