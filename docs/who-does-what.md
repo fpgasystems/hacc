@@ -14,7 +14,7 @@ The following people are relevant for our ETHZ-Heterogeneous Compute Accelerated
 * [Mario Ruiz](https://www.linkedin.com/in/mario-ruiz-noguera/), [Xilinx University Program](https://www.xilinx.com/support/university/XUP-HACC.html) coordinator, AMD
 * [Michaela Blott](https://www.linkedin.com/in/michaelablott/?originalSubdomain=ie), Senior Fellow, AMD
 
-## Heterogeneous acceleration platform 
+## [Hardware acceleration platform](./hardware-acceleration-platform.md)
 ### AMD
 * [Ken O’brien](https://www.linkedin.com/in/ken-o-brien-338807185/?originalSubdomain=ie), Senior member of technical staff software engineering, [ACCL](./applications.md#accl-accelerated-collective-communication-library)
 
