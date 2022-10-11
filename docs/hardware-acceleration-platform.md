@@ -4,13 +4,13 @@
 <a href="https://github.com/fpgasystems/hacc#sections">Back</a>
 </p>
 
-# Heterogeneous hardware acceleration platform
+# Hardware acceleration platform
 <!-- As a multi-core, GPU, and FPGA cluster, ETHZ-​HACC allows research in distributed systems, databases, cloud computing, and hardware acceleration of data science. Internally, we are using ETHZ-HACC to conduct extensive research projects like [Coyote](https://https//github.com/fpgasystems/Coyote) or [EasyNet](https://github.com/fpgasystems/Vitis_with_100Gbps_TCP-IP). In such projects, we adapt essential computer functions and networking primitives to run directly on FPGAs, which can then interact with CPUs or GPUs *vis-à-vis.* An excellent example is [FleetRec](https://github.com/fpgasystems/GPU-FPGA-Recommendation-System): a large-scale recommendation application using GPUs and FPGAs running EasyNet. On the other hand, our command-line interpreter [CLI](https://github.com/fpgasystems/hacc/blob/main/CLI/README.md#cli) makes all of our research advances available to ETHZ-HACC users, enabling them to develop their accelerated applications more quickly. -->
 
 As a multi-core, GPU, and FPGA cluster, ETHZ-​HACC allows research in distributed systems, databases, cloud computing, and hardware acceleration of data science. Internally, we are using ETHZ-HACC to conduct extensive research to assemble an [Infrastructure for heterogeneous architectures and hardware acceleration](https://systems.ethz.ch/research/data-processing-on-modern-hardware/smart-networks.html). All our advances  are open-source and offered as a design platform through our command-line interpreter [CLI](https://github.com/fpgasystems/hacc/blob/main/CLI/README.md#cli). With this initiative, we hope that ETHZ-HACC users will be able to develop their accelerated applications more quickly.
 
-![Heterogeneous hardware acceleration platform.](../imgs/heterogeneous-acceleration-platform.png "Heterogeneous hardware acceleration platform.")
-*Heterogeneous hardware acceleration platform.*
+![Hardware acceleration platform.](../imgs/hardware-acceleration-platform.png "Hardware acceleration platform.")
+*Hardware acceleration platform.*
 
 
 <!-- The following applications are available through ETHZ-HACC [CLI](../CLI/README.md#cli) [UNDER DEVELOPMENT]:

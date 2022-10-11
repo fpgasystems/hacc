@@ -41,7 +41,7 @@ Five HACCs have been established at some of world’s most prestigious universit
 * [Features](docs/features.md#features)
 * [First steps](docs/first-steps.md#first-steps)
 * [Get started](https://www.amd-haccs.io/get-started.html)
-* [Heterogeneous hardware acceleration platform](docs/heterogeneous-hardware-acceleration-platform.md#heterogeneous-hardware-acceleration-platform)
+* [Hardware acceleration platform](docs/hardware-acceleration-platform.md#hardware-acceleration-platform)
 * [Infrastructure](docs/infrastructure.md#infrastructure)
 * [Known limitations](docs/known-limitations.md#known-limitations)
 * [Operating the cluster](docs/operating-the-cluster.md#operating-the-cluster)
