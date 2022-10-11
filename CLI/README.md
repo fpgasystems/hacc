@@ -7,29 +7,35 @@
 # CLI
 ETHZ-HACC CLI brings Systems Group’s designs to your terminal.
 
-## sg
-Work seamlessly with XRT from the command line.
+## sgutil
 
 ### Core commands
 
-* [sg program](./docs/sg-program.md#sg-program) 
+* [sgutil program](./docs/sgutil-program.md#sgutil-program)
+* [sgutil validate](./docs/sgutil-validate.md#sg-validate)
 
 ### Action commands
 
-* [sg rescan]()
-* [sg examine]()
+* [sgutil rescan]()
+* [sgutil examine]()
 
 ### Options
+<code>
+  --help
+</code>
+<p>
+  &nbsp; &nbsp; Shows sgutil help.
+</p>
+
 <code>
   --version
 </code>
 <p>
-  &nbsp; &nbsp; Shows fsg version.
+  &nbsp; &nbsp; Shows sgutil version.
 </p>
 
 ### Examples
 ```
-$ sg program ...
-$ sg program ...
-$ sg program ...
+$ sgutil --help
+$ sgutil validate openmpi
 ```
