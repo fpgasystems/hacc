@@ -88,10 +88,10 @@ We use [Ansible Automation Platform (AAP)](docs/vocabulary.md#ansible-automation
   </tr>
   <tr>
     <td class="tg-0pky"><div align="center">U280</div></td>
+    <td class="tg-0pky" align="center">&#9675;</td>
+    <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky">xilinx_u280_xdma_201920_3</td>
+    <td class="tg-0pky">xilinx_u280_gen3x16_xdma_base_1</td>
   </tr>
   <tr>
     <td class="tg-0pky"><div align="center">Versal</div></td>
