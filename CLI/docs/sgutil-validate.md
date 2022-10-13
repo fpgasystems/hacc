@@ -7,7 +7,25 @@
 # sgutil validate
 Validates HACC infrastructure.
 
+* [sgutil validate iperf](#sgutil-validate-iperf)
 * [sgutil validate mpi](#sgutil-validate-mpi)
+
+## sgutil validate iperf
+<code>
+  sgutil validate iperf [options]
+</code>
+<p>
+  &nbsp; &nbsp; Validates iperf amongst the machines you have previosly booked.
+</p>
+
+### Options
+&nbsp; &nbsp; This command has no options.
+<!-- <code>
+  -p, --process <string>
+</code>
+<p>
+  &nbsp; &nbsp; Specifies the number of processes to be stablished between the local and remote nodes.
+</p> -->
 
 ## sgutil validate mpi
 <code>
@@ -26,7 +44,10 @@ Validates HACC infrastructure.
   &nbsp; &nbsp; Specifies the number of processes to be stablished between the local and remote nodes.
 </p> -->
 
-### Examples
+## Examples
+```
+$ sgutil validate iperf
+```
 ```
 $ sgutil validate mpi
 ```
