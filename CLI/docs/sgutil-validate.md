@@ -5,7 +5,7 @@
 </p>
 
 # sgutil validate
-Validates HACC infrastructure.
+Validates the basic HACC infrastructure functionality.
 
 * [sgutil validate iperf](#sgutil-validate-iperf)
 * [sgutil validate mpi](#sgutil-validate-mpi)
