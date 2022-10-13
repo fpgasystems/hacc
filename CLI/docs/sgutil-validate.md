@@ -7,25 +7,26 @@
 # sgutil validate
 Validates HACC infrastructure.
 
-* [sgutil validate openmpi](#sgutil-validate-openmpi)
+* [sgutil validate mpi](#sgutil-validate-mpi)
 
-## sgutil validate openmpi
+## sgutil validate mpi
 <code>
-  sgutil validate openmpi [flags]
+  sgutil validate mpi [options]
 </code>
 <p>
-  &nbsp; &nbsp; Validates OpenMPI amongst the machines you have previosly booked.
+  &nbsp; &nbsp; Validates MPICH amongst the machines you have previosly booked.
 </p>
 
 ### Options
-<code>
+&nbsp; &nbsp; This command has no options.
+<!-- <code>
   -p, --process <string>
 </code>
 <p>
   &nbsp; &nbsp; Specifies the number of processes to be stablished between the local and remote nodes.
-</p>
+</p> -->
 
 ### Examples
 ```
-$ sgutil validate openmpi -p 2
+$ sgutil validate mpi
 ```
