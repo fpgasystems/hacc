@@ -27,6 +27,11 @@ Validates HACC infrastructure.
   &nbsp; &nbsp; Specifies the number of processes to be stablished between the local and remote nodes.
 </p> -->
 
+### Examples
+```
+$ sgutil validate iperf
+```
+
 ## sgutil validate mpi
 <code>
   sgutil validate mpi [options]
@@ -44,10 +49,7 @@ Validates HACC infrastructure.
   &nbsp; &nbsp; Specifies the number of processes to be stablished between the local and remote nodes.
 </p> -->
 
-## Examples
-```
-$ sgutil validate iperf
-```
+### Examples
 ```
 $ sgutil validate mpi
 ```
