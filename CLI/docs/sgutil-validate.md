@@ -15,7 +15,7 @@ Validates the basic HACC infrastructure functionality.
   sgutil validate iperf [flags]
 </code>
 <p>
-  &nbsp; &nbsp; Validates iperf amongst the machines you have previosly booked. The Number of parallel client threads to run is four by default.
+  &nbsp; &nbsp; Measures HACC network performance. The number of parallel client threads to run is four by default.
 </p>
 
 ### Flags
