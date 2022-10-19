@@ -12,13 +12,13 @@ Validates the basic HACC infrastructure functionality.
 
 ## sgutil validate iperf
 <code>
-  sgutil validate iperf [options]
+  sgutil validate iperf [flags]
 </code>
 <p>
   &nbsp; &nbsp; Validates iperf amongst the machines you have previosly booked. The Number of parallel client threads to run is four by default.
 </p>
 
-### Options
+### Flags
 <code>
   -P, --parallel <string>
 </code>
@@ -34,14 +34,14 @@ $ sgutil validate iperf -P 6
 
 ## sgutil validate mpi
 <code>
-  sgutil validate mpi [options]
+  sgutil validate mpi [flags]
 </code>
 <p>
   &nbsp; &nbsp; Validates MPICH amongst the machines you have previosly booked.
 </p>
 
-### Options
-&nbsp; &nbsp; This command has no options.
+### Flags
+&nbsp; &nbsp; This command has no flags.
 <!-- <code>
   -p, --process <string>
 </code>
