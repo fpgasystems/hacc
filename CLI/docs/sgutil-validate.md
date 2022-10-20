@@ -20,6 +20,12 @@ Validates the basic HACC infrastructure functionality.
 
 ### Flags
 <code>
+  -b, --bandwidth <string>
+</code>
+<p>
+  &nbsp; &nbsp; Bandwidth to send at in bits/sec or packets per second.
+</p>
+<code>
   -P, --parallel <string>
 </code>
 <p>
@@ -29,6 +35,7 @@ Validates the basic HACC infrastructure functionality.
 ### Examples
 ```
 $ sgutil validate iperf
+$ sgutil validate iperf -b 100M
 $ sgutil validate iperf -P 6
 ```
 
