@@ -26,17 +26,35 @@ Validates the basic HACC infrastructure functionality.
   &nbsp; &nbsp; Bandwidth to send at in bits/sec or packets per second.
 </p>
 <code>
+  -h, --help <string>
+</code>
+<p>
+  &nbsp; &nbsp; Help to use this application.
+</p>
+<code>
   -P, --parallel <string>
 </code>
 <p>
   &nbsp; &nbsp; Number of parallel client threads to run.
 </p>
+<code>
+  -t, --time <string>
+</code>
+<p>
+  &nbsp; &nbsp; Time in seconds to transmit for.
+</p>
+<code>
+  -u, --udp <string>
+</code>
+<p>
+  &nbsp; &nbsp; Use UDP rather than TCP.
+</p>
 
 ### Examples
 ```
 $ sgutil validate iperf
-$ sgutil validate iperf -b 100M
 $ sgutil validate iperf -P 6
+$ sgutil validate iperf -b 900M -u
 ```
 
 ## sgutil validate mpi
