@@ -9,8 +9,8 @@
 ## CLI
 With SG [CLI](../CLI/README.md#cli), you can easily:
 
-* Make use of *out-of-the-box* [Examples](./examples.md#examples) and user functions that help you to build your accelerated applications,
-* Deploy, build and design using any of our shipped [Applications](./applications.md#applications),
+* Make use of *out-of-the-box* [Examples](../examples/README.md#examples) and user functions that help you to build your accelerated applications,
+* Deploy, build and design using any of our shipped applications,
 * *Et cetera.*
 
 ## Vitis and Vivado workflows
