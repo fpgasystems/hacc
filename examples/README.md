@@ -8,6 +8,9 @@
 
 The following are *out-of-the-box* examples that aim to be a good starting point to develop your accelerated applications on ETHZ-HACC. 
 
+## Infrastructure
+* [Networking validation with iperf](./iperf/README.md)
+
 ## Vitis workflow
 It is primarily recommended to start with the *[Hello, world!](../docs/vocabulary.md#hello-world)* example which makes the new users aware about the basic structure of a Vitis based application. 
 
