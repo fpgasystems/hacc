@@ -22,6 +22,9 @@ If you don’t have such keys ready, the ```sgutil validate iperf``` command wil
 
 ## U50D
 
+![sgutil validate iperf for U50D cluster.](./U50D.png "sgutil validate iperf for U50D cluster.")
+*sgutil validate iperf for U50D cluster.*
+
 ## U55C
 
 ## Inter-cluster measurements
