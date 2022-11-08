@@ -9,11 +9,6 @@ With ```sgutil validate iperf```, we are using our HACC CLI to measure the maxim
 
 The following sections show measurements for the different clusters (U250, U280, U50D, U55C) and between them—assuming the first node of each group as representative. Before starting, please have a look at the [Prerequisites](#prerrequisites).
 
-## Prerrequisites
-Each user must have valid authentication key pairs for SSH. Such key pairs are used for automating logins, single sign-on, and for authenticating hosts—and are required for using CLI’s iperf validation scripts. If you have a valid key pair already generated in ```~/.ssh```, please be sure your public pair is added to authorized keys: ```cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys```
-
-If you don’t have such keys ready, the ```sgutil validate iperf``` command will do that for you automatically.
-
 ## U250
 The following table has been derived after booking the **six** U250 servers that are available in the HACC:
 
@@ -21,6 +16,10 @@ The following table has been derived after booking the **six** U250 servers that
 *sgutil validate iperf for U250 cluster.*
 
 ## U280
+The following table has been derived after booking the **four** U280 servers that are available in the HACC:
+
+![sgutil validate iperf for U280 cluster.](./U280.png "sgutil validate iperf for U280 cluster.")
+*sgutil validate iperf for U280 cluster.*
 
 ## U50D
 The following table has been derived after booking the **four** U50D servers that are available in the HACC:
@@ -35,3 +34,8 @@ The following table has been derived after booking the **ten** U55C servers that
 *sgutil validate iperf for U55C cluster.*
 
 ## Inter-cluster measurements
+
+## Prerrequisites
+Each user must have valid authentication key pairs for SSH. Such key pairs are used for automating logins, single sign-on, and for authenticating hosts—and are required for using CLI’s iperf validation scripts. If you have a valid key pair already generated in ```~/.ssh```, please be sure your public pair is added to authorized keys: ```cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys```
+
+If you don’t have such keys ready, the ```sgutil validate iperf``` command will do that for you automatically.
