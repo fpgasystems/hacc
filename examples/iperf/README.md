@@ -10,9 +10,7 @@ With ```sgutil validate iperf```, we are using our HACC CLI to measure the maxim
 The following sections show measurements for the different clusters (U250, U280, U50D, U55C) and between them—assuming the first node of each group as representative. Before starting, please have a look at the [Prerequisites](#prerrequisites).
 
 ## Prerrequisites
-Each user must have valid authentication key pairs for SSH. Such key pairs are used for automating logins, single sign-on, and for authenticating hosts—and are required for using CLI’s iperf validation scripts. If you have a valid key pair already generated in ```~/.ssh```, please be sure your public pair is added to authorized keys:
-
-```cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys```
+Each user must have valid authentication key pairs for SSH. Such key pairs are used for automating logins, single sign-on, and for authenticating hosts—and are required for using CLI’s iperf validation scripts. If you have a valid key pair already generated in ```~/.ssh```, please be sure your public pair is added to authorized keys: ```cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys```
 
 If you don’t have such keys ready, the ```sgutil validate iperf``` command will do that for you automatically.
 
@@ -21,6 +19,7 @@ If you don’t have such keys ready, the ```sgutil validate iperf``` command wil
 ## U280
 
 ## U50D
+The following table has been derived after booking the four U50D servers that are available in the HACC:
 
 ![sgutil validate iperf for U50D cluster.](./U50D.png "sgutil validate iperf for U50D cluster.")
 *sgutil validate iperf for U50D cluster.*
