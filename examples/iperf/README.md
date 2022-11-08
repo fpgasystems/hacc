@@ -16,4 +16,12 @@ Each user must have valid authentication key pairs for SSH. Such key pairs are u
 
 If you don’t have such keys ready, the ```sgutil validate iperf``` command will do that for you automatically.
 
+## U250
+
+## U280
+
 ## U50D
+
+## U55C
+
+## Inter-cluster measurements
