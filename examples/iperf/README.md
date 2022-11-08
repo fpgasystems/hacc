@@ -15,7 +15,7 @@ Each user must have valid authentication key pairs for SSH. Such key pairs are u
 If you don’t have such keys ready, the ```sgutil validate iperf``` command will do that for you automatically.
 
 ## U250
-The following table has been derived after booking the six U250 servers that are available in the HACC:
+The following table has been derived after booking the **six** U250 servers that are available in the HACC:
 
 ![sgutil validate iperf for U250 cluster.](./U250.png "sgutil validate iperf for U250 cluster.")
 *sgutil validate iperf for U250 cluster.*
@@ -23,11 +23,15 @@ The following table has been derived after booking the six U250 servers that are
 ## U280
 
 ## U50D
-The following table has been derived after booking the four U50D servers that are available in the HACC:
+The following table has been derived after booking the **four** U50D servers that are available in the HACC:
 
 ![sgutil validate iperf for U50D cluster.](./U50D.png "sgutil validate iperf for U50D cluster.")
 *sgutil validate iperf for U50D cluster.*
 
 ## U55C
+The following table has been derived after booking the **ten** U55C servers that are available in the HACC:
+
+![sgutil validate iperf for U55C cluster.](./U55C.png "sgutil validate iperf for U250 cluster.")
+*sgutil validate iperf for U55C cluster.*
 
 ## Inter-cluster measurements
