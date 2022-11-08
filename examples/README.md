@@ -6,9 +6,8 @@
 
 # Examples
 
-The following are *out-of-the-box* examples that aim to be a good starting point to develop your accelerated applications on ETHZ-HACC. 
+The following are *out-of-the-box* examples that aim to be a good starting point to develop your accelerated applications on ETHZ-HACC. The first set of examples should help HACC developers to validate the underlying infrastructure using CLIS’s ```sgutil validate```:
 
-## Infrastructure
 * [Networking validation with iperf](./iperf/README.md)
 
 ## Vitis workflow
