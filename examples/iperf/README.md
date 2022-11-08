@@ -35,6 +35,9 @@ The following table has been derived after booking the **ten** U55C servers that
 
 ## Inter-cluster measurements
 
+![sgutil validate iperf between clusters.](./inter-cluster.png "sgutil validate iperf between clusters.")
+*sgutil validate iperf between clusters.*
+
 ## Prerrequisites
 Each user must have valid authentication key pairs for SSH. Such key pairs are used for automating logins, single sign-on, and for authenticating hosts—and are required for using CLI’s iperf validation scripts. If you have a valid key pair already generated in ```~/.ssh```, please be sure your public pair is added to authorized keys: ```cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys```
 
