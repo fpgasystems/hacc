@@ -9,6 +9,7 @@
 ## CLI
 With SG [CLI](../CLI/README.md#cli), you can easily:
 
+* Validate the infrastructure (see [Infrastructure validation](../validation/iperf/README.md)),
 * Make use of *out-of-the-box* [Examples](../examples/README.md#examples) and user functions that help you to build your accelerated applications,
 * Deploy, build and design using any of our shipped applications,
 * *Et cetera.*
