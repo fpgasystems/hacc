@@ -6,7 +6,7 @@
 
 # Infrastructure validation
 
-The following validate the underlying infrastructure using CLIS’s ```sgutil validate```:
+The following are guided experiments that help you to validate ETHZ-HACC’s infrastructure—setting along a baseline of the performance that should always be met. These experiments are based on CLIS’s ```sgutil validate``` commands.
 
 * [Networking validation with iperf](../validation/iperf/README.md)
 * [Networking validation with EasyNet](../validation/easynet/README.md)
