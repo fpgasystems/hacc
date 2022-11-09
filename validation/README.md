@@ -8,6 +8,6 @@
 
 The following validate the underlying infrastructure using CLIS’s ```sgutil validate```:
 
-* [Networking validation with iperf](../examples/iperf/README.md)
-* [Networking validation with EasyNet](../examples/iperf/README.md)
+* [Networking validation with iperf](../validation/iperf/README.md)
+* [Networking validation with EasyNet](../validation/easynet/README.md)
 
