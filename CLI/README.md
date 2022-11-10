@@ -8,6 +8,9 @@
 ETHZ-HACC CLI brings Systems Group’s designs to your terminal.
 
 ## sgutil
+<code>
+  sgutil [commands [arguments [flags]] [--help] [--version] 
+</code>
 
 ### Commands
 
@@ -16,7 +19,7 @@ ETHZ-HACC CLI brings Systems Group’s designs to your terminal.
 * [rescan]()
 * [examine]()
 
-### Options
+<!-- ### Options -->
 <code>
   -h, --help
 </code>
@@ -35,4 +38,5 @@ ETHZ-HACC CLI brings Systems Group’s designs to your terminal.
 ```
 $ sgutil -h
 $ sgutil --version
+$ sgutil validate
 ```
