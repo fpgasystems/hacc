@@ -27,7 +27,7 @@ If the public key **~/.ssh/id_rsa.pub** is not present, *sgutil validate iperf* 
 *Message passing interface validation with mpich.*
 
 ## Results
-In this experiment, we have reserved five servers (alveo-u55c-01 to alveo-u55c-05) where alveo-u55c-01 is the local instance connecting to the remotes (as we can see in the [hosts file](#hosts-file)). **Please, remember that** ```sgutil validate iperf``` **sets -n (the number of processes to use) to two.** This means that each remote server will execute two copies of the compiled MPI program (please, refer to the [mpi_hello.c source code](#mpi_helloc-source-code)).
+In this experiment, we have reserved five servers (alveo-u55c-01 to alveo-u55c-05) where alveo-u55c-01 is the local instance connecting to the remotes. **Please, remember that** ```sgutil validate iperf``` **sets -n (the number of processes to use) to two.** This means that each remote server will execute two copies of the compiled MPI program (please, refer to the [hosts file](#hosts-file) and [mpi_hello.c source code](#mpi_helloc-source-code)).
 
 ## Background materials
 
