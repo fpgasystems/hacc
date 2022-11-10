@@ -10,8 +10,9 @@
   sgutil validate iperf [flags]
 </code>
 <p>
-  &nbsp; &nbsp; Measures HACC network performance. The number of parallel client threads to run is four by default.
+  &nbsp; &nbsp; Measures HACC network performance. 
 </p>
+<!-- The number of parallel client threads to run is four by default. -->
 
 ### Flags
 <code>

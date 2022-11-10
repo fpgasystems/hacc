@@ -29,6 +29,7 @@
 
 ### Examples
 ```
+$ sgutil validate mpi -h
 $ sgutil validate mpi
 $ sgutil validate mpi -n 5
 ```
