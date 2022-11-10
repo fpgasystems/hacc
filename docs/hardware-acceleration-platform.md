@@ -1,8 +1,8 @@
-<!-- <div id="readme" class="Box-body readme blob js-code-block-container">
+<div id="readme" class="Box-body readme blob js-code-block-container">
 <article class="markdown-body entry-content p-3 p-md-6" itemprop="text">
 <p align="right">
-<a href="https://github.com/fpgasystems/hacc#sections">Back</a>
-</p> -->
+<a href="https://github.com/fpgasystems/hacc">Back to top</a>
+</p>
 
 # Hardware acceleration platform
 <!-- As a multi-core, GPU, and FPGA cluster, ETHZ-​HACC allows research in distributed systems, databases, cloud computing, and hardware acceleration of data science. Internally, we are using ETHZ-HACC to conduct extensive research projects like [Coyote](https://https//github.com/fpgasystems/Coyote) or [EasyNet](https://github.com/fpgasystems/Vitis_with_100Gbps_TCP-IP). In such projects, we adapt essential computer functions and networking primitives to run directly on FPGAs, which can then interact with CPUs or GPUs *vis-à-vis.* An excellent example is [FleetRec](https://github.com/fpgasystems/GPU-FPGA-Recommendation-System): a large-scale recommendation application using GPUs and FPGAs running EasyNet. On the other hand, our command-line interpreter [CLI](https://github.com/fpgasystems/hacc/blob/main/CLI/README.md#cli) makes all of our research advances available to ETHZ-HACC users, enabling them to develop their accelerated applications more quickly. -->
