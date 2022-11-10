@@ -38,3 +38,10 @@
 <p>
   &nbsp; &nbsp; Validates MPI.
 </p> -->
+
+### Examples
+```
+$ sgutil validate -h
+$ sgutil validate iperf
+$ sgutil validate mpi
+```
