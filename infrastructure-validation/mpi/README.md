@@ -29,20 +29,14 @@ If the public key **~/.ssh/id_rsa.pub** is not present, *sgutil validate iperf* 
 ## Results
 In this experiment, we have reserved five servers (alveo-u55c-01 to alveo-u55c-05) where alveo-u55c-01 is the local instance connecting to the remotes. **Please, remember that** ```sgutil validate iperf``` **sets -n (the number of processes to use) to two.** This means that each remote server will execute two copies of the compiled MPI program—so the local server receives results from a total of eight processors:
 
-![Results.](./infrastructure-validation-mpi-results.png "Results.")
-*Results.*
+![CLI command (left), hosts file and MPI call (middle), and results (right).](./infrastructure-validation-mpi-results.png "CLI command (left), hosts file and MPI call (middle), and results (right).")
+*CLI command (left), hosts file and MPI call (middle), and results (right).*
 
 ## Background materials
 
-### hosts file
-```
-alveo-u55c-02-mellanox-0:2
-alveo-u55c-03-mellanox-0:2
-alveo-u55c-04-mellanox-0:2
-alveo-u55c-05-mellanox-0:2
-```
+### MPI program source code
+The following is the source code of the MPI program which is compiled on the local server and executed on the remote servers specified on the [hosts file](#hosts-file):
 
-### mpi_hello.c source code
 ```c
 #include <mpi.h>
 #include <stdio.h>
@@ -63,4 +57,12 @@ int main(int argc, char** argv) {
 
 	MPI_Finalize(); // finish MPI environment
 }
+```
+
+### hosts file
+```
+alveo-u55c-02-mellanox-0:2
+alveo-u55c-03-mellanox-0:2
+alveo-u55c-04-mellanox-0:2
+alveo-u55c-05-mellanox-0:2
 ```
