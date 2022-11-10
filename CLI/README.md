@@ -1,23 +1,20 @@
-<!-- <div id="readme" class="Box-body readme blob js-code-block-container">
+<div id="readme" class="Box-body readme blob js-code-block-container">
 <article class="markdown-body entry-content p-3 p-md-6" itemprop="text">
 <p align="right">
-<a href="https://github.com/fpgasystems/hacc/blob/main/README.md">Back</a>
-</p> -->
+<a href="https://github.com/fpgasystems/hacc#readme">Back to top</a>
+</p>
 
 # CLI
 ETHZ-HACC CLI brings Systems Group’s designs to your terminal.
 
 ## sgutil
 
-### Core commands
+### Commands
 
-* [sgutil program](./docs/sgutil-program.md#sgutil-program)
-* [sgutil validate](./docs/sgutil-validate.md#sg-validate)
-
-### Action commands
-
-* [sgutil rescan]()
-* [sgutil examine]()
+* [program](./docs/sgutil-program.md#sgutil-program)
+* [validate](./docs/sgutil-validate.md#sg-validate)
+* [rescan]()
+* [examine]()
 
 ### Options
 <code>
@@ -28,7 +25,7 @@ ETHZ-HACC CLI brings Systems Group’s designs to your terminal.
 </p>
 
 <code>
-  --version
+  -v, --version
 </code>
 <p>
   &nbsp; &nbsp; Reports CLI version.
