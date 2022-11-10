@@ -5,7 +5,7 @@
 </p>
 
 # Networking validation with iperf
-In this experiment, we are using CLI’s [sgutil validate iperf](../../CLI/docs/sgutil-validate.md#sgutil-validate-iperf) command to actively measure the maximum achievable bandwidth on the ETHZ-HACC network.
+In this experiment, we are using CLI’s [sgutil validate iperf](../../CLI/docs/sgutil-validate-iperf.md#sgutil-validate-iperf) command to actively measure the maximum achievable bandwidth on the ETHZ-HACC network.
 
 ### Prerrequisites
 * You must have a valid authentication key pairs for SSH in your **~/.ssh** directory, and
