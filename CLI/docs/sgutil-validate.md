@@ -4,13 +4,13 @@
 <a href="https://github.com/fpgasystems/hacc/blob/main/CLI/README.md#cli">Back</a>
 </p>
 
-# sgutil validate
+## sgutil validate
 Validates the basic HACC infrastructure functionality.
 
 * [sgutil validate iperf](./sgutil-validate-iperf.md)
 * [sgutil validate mpi](./sgutil-validate-mpi.md)
 
-## Options
+### Options
 <code>
   -h, --help
 </code>
