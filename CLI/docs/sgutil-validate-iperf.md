@@ -4,9 +4,7 @@
 <a href="https://github.com/fpgasystems/hacc/blob/main/CLI/README.md#cli">Back</a>
 </p>
 
-# sgutil validate iperf
-Measures HACC network performance.
-
+## sgutil validate iperf
 <code>
   sgutil validate iperf [flags]
 </code>
@@ -14,7 +12,7 @@ Measures HACC network performance.
   &nbsp; &nbsp; Measures HACC network performance. The number of parallel client threads to run is four by default.
 </p>
 
-## Flags
+### Flags
 <code>
   -b, --bandwidth <string>
 </code>

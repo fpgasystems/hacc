@@ -10,7 +10,7 @@ Validates the basic HACC infrastructure functionality.
 * [sgutil validate iperf](./sgutil-validate-iperf.md)
 * [sgutil validate mpi](./sgutil-validate-mpi.md)
 
-### Options
+### Arguments
 <code>
   -h, --help
 </code>
