@@ -23,11 +23,11 @@ If the public key **~/.ssh/id_rsa.pub** is not present, *sgutil validate iperf* 
 2. Login to the server you want to set as the iperf server—all others will be the clients for the experiment,
 3. Run ```sgutil validate mpi``` and wait for the results.
 
-## Results
-In this experiment, we have reserved five servers (alveo-u55c-01 to alveo-u55c-05) where alveo-u55c-01 is the local instance connecting to the remotes (as we can see in the [hosts file](#hosts-file)). **Please, remember that** ```sgutil validate iperf``` **sets -n (the number of processes to use) to two.** This means that each remote server will execute two copies of the compiled MPI program (please, refer to the [mpi_hello.c source code](#mpi_helloc-source-code)).
-
 ![Message passing interface validation with mpich.](./infrastructure-validation-mpi.png "Message passing interface validation with mpich.")
 *Message passing interface validation with mpich.*
+
+## Results
+In this experiment, we have reserved five servers (alveo-u55c-01 to alveo-u55c-05) where alveo-u55c-01 is the local instance connecting to the remotes (as we can see in the [hosts file](#hosts-file)). **Please, remember that** ```sgutil validate iperf``` **sets -n (the number of processes to use) to two.** This means that each remote server will execute two copies of the compiled MPI program (please, refer to the [mpi_hello.c source code](#mpi_helloc-source-code)).
 
 ## Background materials
 
