@@ -10,4 +10,5 @@ The following are guided experiments that help you to validate ETHZ-HACC’s inf
 
 * [Networking validation with iperf](../infrastructure-validation/iperf/README.md)
 * [Networking validation with EasyNet](../infrastructure-validation/easynet/README.md)
+* [Message passing interface validation with mpich](../infrastructure-validation/mpi/README.md)
 
