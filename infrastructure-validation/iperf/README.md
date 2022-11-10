@@ -24,7 +24,7 @@ If the public key **~/.ssh/id_rsa.pub** is not present, *sgutil validate iperf* 
 3. Run ```sgutil validate iperf``` and wait for the results.
 
 ## Results
-To provide a baseline, we repeated the same experiment for the different clusters (e.g., when we reserved all six machines for cluster U250) and also to verify the inter-cluster network (when we booked one server from each cluster). **Please, remember that ```sgutil validate iperf``` sets -P (the number of parallel client threads to run) to four.**
+To provide a baseline, we repeated the same experiment for the different clusters (e.g., when we reserved all six machines for cluster U250) and also to verify the inter-cluster network (when we booked one server from each cluster). **Please, remember that** ```sgutil validate iperf``` **sets -P (the number of parallel client threads to run) to four.**
 
 ### U250
 The following table has been derived after booking the **six** U250 servers that are available in the HACC:
