@@ -14,15 +14,21 @@
 </p>
 
 ### Flags
-&nbsp; &nbsp; This command has no flags.
-<!-- <code>
-  -p, --process <string>
+<code>
+  -h, --help <string>
 </code>
 <p>
-  &nbsp; &nbsp; Specifies the number of processes to be stablished between the local and remote nodes.
-</p> -->
+  &nbsp; &nbsp; Help to use iperf validation.
+</p>
+<code>
+  -n, --processes <string>
+</code>
+<p>
+  &nbsp; &nbsp; Specify the number of processes to use.
+</p>
 
 ### Examples
 ```
 $ sgutil validate mpi
+$ sgutil validate mpi -n 5
 ```
