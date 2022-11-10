@@ -10,12 +10,24 @@ Validates the basic HACC infrastructure functionality.
 * [sgutil validate iperf](./sgutil-validate-iperf.md)
 * [sgutil validate mpi](./sgutil-validate-mpi.md)
 
-
-
 ## Options
 <code>
   -h, --help
 </code>
 <p>
-  &nbsp; &nbsp; Shows sgutil help.
+  &nbsp; &nbsp; Help to use this command.
+</p>
+
+<code>
+  iperf
+</code>
+<p>
+  &nbsp; &nbsp; Measures HACC network performance.
+</p>
+
+<code>
+  mpi
+</code>
+<p>
+  &nbsp; &nbsp; Validates MPI.
 </p>
