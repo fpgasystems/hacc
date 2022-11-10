@@ -36,6 +36,6 @@ ETHZ-HACC CLI brings Systems Group’s designs to your terminal.
 
 ### Examples
 ```
-$ sgutil --help
-$ sgutil validate openmpi
+$ sgutil -h
+$ sgutil --version
 ```
