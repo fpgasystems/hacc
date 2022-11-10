@@ -19,7 +19,7 @@ $ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 If the public key **~/.ssh/id_rsa.pub** is not present, *sgutil validate iperf* will run the commands above for you automatically.
 
 ## Experiment
-1. Use the booking system to reserve the servers you wish to validate,
+1. Use the [booking system](https://alveo-booking.ethz.ch/login.php) to reserve the servers you wish to validate,
 2. Login to the server you want to set as the iperf server—all others will be the clients for the experiment,
 3. Run ```sgutil validate iperf``` and wait for the results.
 
