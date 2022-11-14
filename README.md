@@ -46,6 +46,7 @@ Five HACCs have been established at some of world’s most prestigious universit
 * [Infrastructure validation](./infrastructure-validation/README.md#infrastructure-validation)
 * [Known limitations](docs/known-limitations.md#known-limitations)
 * [Operating the cluster](docs/operating-the-cluster.md#operating-the-cluster)
+* [Technical support](docs/technical-support.md)
 * [Vocabulary](docs/vocabulary.md#vocabulary)
 * [Who does what](docs/who-does-what.md#who-does-what)
 
