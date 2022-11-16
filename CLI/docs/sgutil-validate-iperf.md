@@ -7,7 +7,7 @@
 ## sgutil validate iperf
 
 <code>
-  sgutil validate iperf [flags]
+  sgutil validate iperf [flags] [--help]
 </code>
 <p>
   &nbsp; &nbsp; Measures HACC network performance. 

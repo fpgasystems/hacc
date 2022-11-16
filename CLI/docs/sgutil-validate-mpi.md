@@ -7,7 +7,7 @@
 ## sgutil validate mpi
 
 <code>
-  sgutil validate mpi [flags]
+  sgutil validate mpi [flags] [--help]
 </code>
 <p>
   &nbsp; &nbsp; Validates MPI.
