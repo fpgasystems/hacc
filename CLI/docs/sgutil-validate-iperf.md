@@ -40,17 +40,11 @@
   &nbsp; &nbsp; Use UDP rather than TCP.
 </p>
 
-<p>
-  &nbsp; &nbsp;
-</p>
 <code>
   -h, --help <string>
 </code>
 <p>
   &nbsp; &nbsp; Help to use iperf validation.
-</p>
-<p>
-  &nbsp; &nbsp;
 </p>
 
 ### Examples

@@ -21,17 +21,11 @@
   &nbsp; &nbsp; Specify the number of processes to use.
 </p>
 
-<p>
-  &nbsp; &nbsp;
-</p>
 <code>
   -h, --help <string>
 </code>
 <p>
   &nbsp; &nbsp; Help to use mpi validation.
-</p>
-<p>
-  &nbsp; &nbsp;
 </p>
 
 ### Examples
