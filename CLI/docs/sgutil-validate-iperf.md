@@ -22,12 +22,6 @@
   &nbsp; &nbsp; Bandwidth to send at in bits/sec or packets per second.
 </p>
 <code>
-  -h, --help <string>
-</code>
-<p>
-  &nbsp; &nbsp; Help to use iperf validation.
-</p>
-<code>
   -P, --parallel <string>
 </code>
 <p>
@@ -44,6 +38,19 @@
 </code>
 <p>
   &nbsp; &nbsp; Use UDP rather than TCP.
+</p>
+
+<p>
+  &nbsp; &nbsp;
+</p>
+<code>
+  -h, --help <string>
+</code>
+<p>
+  &nbsp; &nbsp; Help to use iperf validation.
+</p>
+<p>
+  &nbsp; &nbsp;
 </p>
 
 ### Examples

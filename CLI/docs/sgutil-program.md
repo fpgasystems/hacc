@@ -27,6 +27,19 @@ Flash a bitstream using Vivado.
   &nbsp; &nbsp; Specifies the path to your .bit and .ltx files.
 </p>
 
+<p>
+  &nbsp; &nbsp;
+</p>
+<code>
+  -h, --help <string>
+</code>
+<p>
+  &nbsp; &nbsp; Help to use iperf validation (change).
+</p>
+<p>
+  &nbsp; &nbsp;
+</p>
+
 ### Examples
 ```
 $ sg program vivado -b /mnt/scratch/hacc/bit/hello_world.bit
