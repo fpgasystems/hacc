@@ -10,7 +10,7 @@
   sgutil get device [flags] [--help]
 </code>
 <p>
-  &nbsp; &nbsp; Retreives L2 information from the server/s.
+  &nbsp; &nbsp; Retreives FPGA device name from the server/s.
 </p>
 <!-- The number of parallel client threads to run is four by default. -->
 
