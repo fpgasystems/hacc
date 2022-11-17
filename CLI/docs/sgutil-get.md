@@ -30,8 +30,6 @@
 ### Examples
 ```
 $ sgutil get -h
-$ sgutil get device
 $ sgutil get ip
-$ sgutil get mac
 $ sgutil get serial
 ```
