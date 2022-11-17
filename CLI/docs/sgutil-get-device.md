@@ -19,7 +19,7 @@
   -w, --word <string>
 </code>
 <p>
-  &nbsp; &nbsp; Filters L2 information according to regexp expression.
+  &nbsp; &nbsp; Filters FPGA device name according to regexp expression.
 </p>
 
 <code>
