@@ -4,7 +4,7 @@
 <a href="https://github.com/fpgasystems/hacc/blob/main/CLI/docs/sgutil-get.md#sgutil-get">Back to sgutil get</a>
 </p>
 
-## sgutil get device
+## sgutil get serial
 
 <code>
   sgutil get serial [flags] [--help]
