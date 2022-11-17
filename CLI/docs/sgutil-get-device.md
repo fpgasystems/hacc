@@ -32,5 +32,5 @@
 ### Examples
 ```
 $ sgutil get device
-$ sgutil get device -w alveo-u50d-03
+$ sgutil get device -w u250
 ```
