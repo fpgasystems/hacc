@@ -27,23 +27,11 @@
   &nbsp; &nbsp; Help to use this command.
 </p>
 
-<!-- <code>
-  iperf
-</code>
-<p>
-  &nbsp; &nbsp; Measures HACC network performance.
-</p>
-
-<code>
-  mpi
-</code>
-<p>
-  &nbsp; &nbsp; Validates MPI.
-</p> -->
-
 ### Examples
 ```
-$ sgutil validate -h
-$ sgutil validate iperf
-$ sgutil validate mpi
+$ sgutil get -h
+$ sgutil get device
+$ sgutil get ip
+$ sgutil get mac
+$ sgutil get serial
 ```
