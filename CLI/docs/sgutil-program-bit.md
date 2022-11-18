@@ -18,14 +18,21 @@
   -d, --device <string>
 </code>
 <p>
-  &nbsp; &nbsp; FPGA device name (see sgutil get device).
+  &nbsp; &nbsp; Specifies FPGA’s device name (see sgutil get device).
+</p>
+
+<code>
+  -b, --bitstream <string>
+</code>
+<p>
+  &nbsp; &nbsp; Programs the bitstream .bit to the specified device.
 </p>
 
 <code>
   -s, --serial <string>
 </code>
 <p>
-  &nbsp; &nbsp; FPGA serial number (see sgutil get serial).
+  &nbsp; &nbsp; Specifies FPGA’s serial number (see sgutil get serial).
 </p>
 
 <code>
