@@ -32,7 +32,7 @@
   -h, --help <string>
 </code>
 <p>
-  &nbsp; &nbsp; Help to use mpi validation.
+  &nbsp; &nbsp; Help to program a bitstream.
 </p>
 
 ### Examples
