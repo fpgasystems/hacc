@@ -5,38 +5,28 @@
 </p>
 
 # sg program
-Flash a bitstream using Vivado.
 
-* [sg program xrt]()
-* [sg program vivado](#sg-program-vivado)
-* [sg program coyote]()
-
-## sg program vivado
 <code>
-  sg program vivado [flags]
+  sgutil program [arguments [flags]] [--help]
 </code>
 <p>
-  &nbsp; &nbsp; Flash a bitstream of your choice.
+  &nbsp; &nbsp; Downloads the accelerated program or driver to a given device.
 </p>
 
-### Options
-<code>
-  -b, --bit <string>
-</code>
-<p>
-  &nbsp; &nbsp; Specifies the path to your .bit and .ltx files.
-</p>
+### Arguments
+
+* [bit](./sgutil-program-bit.md)
+* [drv](./sgutil-program-drv.md)
 
 <code>
-  -h, --help <string>
+  -h, --help
 </code>
 <p>
-  &nbsp; &nbsp; Help to use iperf validation (change).
+  &nbsp; &nbsp; Help to use this command.
 </p>
 
 ### Examples
 ```
-$ sg program vivado -b /mnt/scratch/hacc/bit/hello_world.bit
-$ sg program vivado -b /mnt/scratch/hacc/bit/hello_world.bit
-$ sg program vivado -b /mnt/scratch/hacc/bit/hello_world.bit
+$ sgutil program bit -h
+$ sgutil program drv -h
 ```
