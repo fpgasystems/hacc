@@ -10,7 +10,7 @@
   sgutil program bit [flags] [--help]
 </code>
 <p>
-  &nbsp; &nbsp; Programs an FPGA bitstream (.bit) to a given device.
+  &nbsp; &nbsp; Programs an FPGA bitstream to a given device.
 </p>
 
 ### Flags
