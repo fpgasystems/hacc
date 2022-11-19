@@ -15,8 +15,8 @@
 
 ### Arguments
 
-* [bit](./sgutil-program-bit.md)
-* [drv](./sgutil-program-drv.md)
+* [vitis](./sgutil-program-vitis.md)
+* [vivado](./sgutil-program-vivado.md)
 
 <code>
   -h, --help
