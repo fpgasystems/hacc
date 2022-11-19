@@ -27,6 +27,6 @@
 
 ### Examples
 ```
-$ sgutil program bit -h
-$ sgutil program drv -h
+$ sgutil program vitis -h
+$ sgutil program vivado -h
 ```
