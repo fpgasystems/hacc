@@ -36,6 +36,13 @@
 </p>
 
 <code>
+  -r, --revert <string>
+</code>
+<p>
+  &nbsp; &nbsp; Return the specified device to the Vitis workflow.
+</p>
+
+<code>
   -s, --serial <string>
 </code>
 <p>
