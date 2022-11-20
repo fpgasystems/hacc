@@ -4,7 +4,7 @@
 <a href="https://github.com/fpgasystems/hacc/blob/main/CLI/README.md#cli">Back to CLI</a>
 </p>
 
-# sg program
+# sgutil program
 
 <code>
   sgutil program [arguments [flags]] [--help]
