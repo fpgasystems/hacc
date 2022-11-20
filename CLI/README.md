@@ -5,7 +5,7 @@
 </p>
 
 # CLI
-ETHZ-HACC CLI brings Systems Group’s designs to your terminal.
+ETHZ-HACC CLI brings Systems Group’s designs to your terminal and allows you to use [Vivado and Vitis workflows](../docs/vocabulary.md#vivado-and-vitis-workflows) seamlessly.
 
 ## sgutil
 <code>
@@ -17,8 +17,7 @@ ETHZ-HACC CLI brings Systems Group’s designs to your terminal.
 * [get](./docs/sgutil-get.md#sgutil-get)
 * [program](./docs/sgutil-program.md#sgutil-program)
 * [validate](./docs/sgutil-validate.md#sg-validate)
-* [rescan]()
-* [examine]()
+* [examine](prints-fpga-sn-and-names-on-the-server)
 
 <!-- ### Options -->
 <code>

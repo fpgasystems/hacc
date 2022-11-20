@@ -36,6 +36,13 @@
 </p>
 
 <code>
+  -t, --target <string>
+</code>
+<p>
+  &nbsp; &nbsp; Binary compilation target (sw_emu, hw_emu, hw).
+</p>
+
+<code>
   -h, --help <string>
 </code>
 <p>
