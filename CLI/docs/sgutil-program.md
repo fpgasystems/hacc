@@ -15,8 +15,8 @@
 
 ### Arguments
 
-* [vitis](./sgutil-program-vitis.md)
 * [vivado](./sgutil-program-vivado.md)
+* [vitis](./sgutil-program-vitis.md)
 
 <code>
   -h, --help
@@ -27,6 +27,6 @@
 
 ### Examples
 ```
-$ sgutil program vitis -h
 $ sgutil program vivado -h
+$ sgutil program vitis -h
 ```
