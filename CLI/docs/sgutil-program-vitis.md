@@ -46,7 +46,7 @@
   -h, --help <string>
 </code>
 <p>
-  &nbsp; &nbsp; Help to program a bitstream.
+  &nbsp; &nbsp; Help to program a binary.
 </p>
 
 ### Examples
