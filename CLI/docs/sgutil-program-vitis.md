@@ -10,7 +10,7 @@
   sgutil program vitis [flags] [--help]
 </code>
 <p>
-  &nbsp; &nbsp; Programs a Vitis FPGA-bitstream to a given device.
+  &nbsp; &nbsp; Programs a Vitis FPGA-binary to a given device.
 </p>
 
 ### Flags
