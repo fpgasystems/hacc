@@ -4,30 +4,16 @@
 <a href="https://github.com/fpgasystems/hacc/blob/main/CLI/docs/sgutil-program.md#sgutil-program">Back to sgutil program</a>
 </p>
 
-## sgutil program vivado
+## sgutil program revert
 
 <code>
-  sgutil program vivado [flags] [--help]
+  sgutil program revert [flags] [--help]
 </code>
 <p>
-  &nbsp; &nbsp; Programs a Vivado FPGA-bitstream to a given device.
+  &nbsp; &nbsp; Returns the specified device to the Vitis workflow.
 </p>
 
 ### Flags
-<code>
-  -b, --bitstream <string>
-</code>
-<p>
-  &nbsp; &nbsp; Programs a .bit bitstream to the specified device.
-</p>
-
-<code>
-  -d, --driver <string>
-</code>
-<p>
-  &nbsp; &nbsp; Installs an FPGA driver on the server.
-</p>
-
 <code>
   -n, --name <string>
 </code>
@@ -51,6 +37,5 @@
 
 ### Examples
 ```
-$ sgutil program vivado -b ~/my_projects/hello_world/hello_world.bit -d ~/my_projects/hello_world/hello_world_drv.ko
-$ sgutil program vivado -d xcu50_u55n_0 -s 500202A20DQAA -b ~/my_projects/hello_world/hello_world.bit -d ~/my_projects/hello_world/hello_world_drv.ko
+$ sgutil program revert
 ```
