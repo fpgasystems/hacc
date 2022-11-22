@@ -16,15 +16,15 @@ The following people are relevant for our ETHZ-Heterogeneous Compute Accelerated
 
 ## [Hardware acceleration platform](./hardware-acceleration-platform.md)
 ### AMD
-* [Ken O’brien](https://www.linkedin.com/in/ken-o-brien-338807185/?originalSubdomain=ie), Senior member of technical staff software engineering, [ACCL](./applications.md#accl-accelerated-collective-communication-library)
+* [Ken O’brien](https://www.linkedin.com/in/ken-o-brien-338807185/?originalSubdomain=ie), Senior member of technical staff software engineering, [ACCL](https://systems.ethz.ch/research/data-processing-on-modern-hardware/hardware-acceleration-infrastructure.html#accl)
 
 ### ETH Zürich Systems Group
-* [Dario Korolija](https://systems.ethz.ch/people/profile.MjUyNDEz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [Coyote](./applications.md#coyote) project leader
+* [Dario Korolija](https://systems.ethz.ch/people/profile.MjUyNDEz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [Coyote](https://systems.ethz.ch/research/data-processing-on-modern-hardware/hardware-acceleration-infrastructure.html#coyote) project leader
 * [Dimitrios Koutsoukos](https://systems.ethz.ch/people/profile.MjM5MDk0.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, IT coordinator
 * [Fabio Maschi](https://systems.ethz.ch/people/profile.MjU0MTQy.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [Booking system](./booking-system.md#booking-system)
 * [Javier Moya](https://systems.ethz.ch/people/profile.Mjk5NjU5.TGlzdC8zODkxLDEyOTU2NDI2OTI=.html), Senior scientist, HACC coordinator, [CLI](../CLI/README.md#cli) project leader
 * [Runbin Shi](https://systems.ethz.ch/people/profile.Mjg2NjY4.TGlzdC8zODg5LDEyOTU2NDI2OTI=.html), Postdoctoral researcher, [Hardware-​centric Transaction Processing for Distributed Memory](./applications.md#hardware-transaction-processing-for-multi-channel-memory-node) project leader
-* [Zhenhao He](https://systems.ethz.ch/people/profile.MjMxODkz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [EasyNet](./applications.md#easynet-100-gbe-network-for-hls) project leader, [ACCL](./applications.md#accl-accelerated-collective-communication-library)
+* [Zhenhao He](https://systems.ethz.ch/people/profile.MjMxODkz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [ACCL](https://systems.ethz.ch/research/data-processing-on-modern-hardware/hardware-acceleration-infrastructure.html#accl) and [EasyNet](https://systems.ethz.ch/research/data-processing-on-modern-hardware/hardware-acceleration-infrastructure.html#easynet) project leader
 
 ## Operations *(IT Service Group)*
 * [Dejan Jovanovic](https://www.isg.inf.ethz.ch/Main/DejanJovanovic), [DCIM](./vocabulary.md#dcim)
