@@ -32,10 +32,11 @@
   -h, --help <string>
 </code>
 <p>
-  &nbsp; &nbsp; Help to program a bitstream.
+  &nbsp; &nbsp; Help to revert a device.
 </p>
 
 ### Examples
 ```
+$ sgutil program revert -h
 $ sgutil program revert
 ```
