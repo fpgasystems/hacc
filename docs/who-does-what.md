@@ -23,7 +23,7 @@ The following people are relevant for our ETHZ-Heterogeneous Compute Accelerated
 * [Dimitrios Koutsoukos](https://systems.ethz.ch/people/profile.MjM5MDk0.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, IT coordinator
 * [Fabio Maschi](https://systems.ethz.ch/people/profile.MjU0MTQy.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [Booking system](./booking-system.md#booking-system)
 * [Javier Moya](https://systems.ethz.ch/people/profile.Mjk5NjU5.TGlzdC8zODkxLDEyOTU2NDI2OTI=.html), Senior scientist, HACC coordinator, [CLI](../CLI/README.md#cli) project leader
-* [Runbin Shi](https://systems.ethz.ch/people/profile.Mjg2NjY4.TGlzdC8zODg5LDEyOTU2NDI2OTI=.html), Postdoctoral researcher, [Hardware-​centric Transaction Processing for Distributed Memory](./applications.md#hardware-transaction-processing-for-multi-channel-memory-node) project leader
+* [Runbin Shi](https://systems.ethz.ch/people/profile.Mjg2NjY4.TGlzdC8zODg5LDEyOTU2NDI2OTI=.html), Postdoctoral researcher, [Hardware-​centric Transaction Processing for Distributed Memory](https://systems.ethz.ch/research/data-processing-on-modern-hardware/database-acceleration.html#hardware-centric) project leader
 * [Zhenhao He](https://systems.ethz.ch/people/profile.MjMxODkz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [ACCL](https://systems.ethz.ch/research/data-processing-on-modern-hardware/hardware-acceleration-infrastructure.html#accl) and [EasyNet](https://systems.ethz.ch/research/data-processing-on-modern-hardware/hardware-acceleration-infrastructure.html#easynet) project leader
 
 ## Operations *(IT Service Group)*
