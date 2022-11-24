@@ -29,6 +29,13 @@
 </p>
 
 <code>
+  -l, --ltx <string>
+</code>
+<p>
+  &nbsp; &nbsp; Specifies a .ltx debug probes file.
+</p>
+
+<code>
   -n, --name <string>
 </code>
 <p>
