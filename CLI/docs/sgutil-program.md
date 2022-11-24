@@ -17,8 +17,8 @@
 
 * [rescan](./sgutil-program-rescan.md#sgutil-program-rescan)
 * [revert](./sgutil-program-revert.md#sgutil-program-revert)
-* [vivado](./sgutil-program-vivado.md#sgutil-program-vivado)
 * [vitis](./sgutil-program-vitis.md#sgutil-program-vitis)
+* [vivado](./sgutil-program-vivado.md#sgutil-program-vivado)
 
 <code>
   -h, --help
