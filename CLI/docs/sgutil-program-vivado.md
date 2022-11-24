@@ -58,6 +58,6 @@
 
 ### Examples
 ```
-$ sgutil program vivado -b ~/my_projects/hello_world/hello_world.bit -d ~/my_projects/hello_world/hello_world_drv.ko
-$ sgutil program vivado -d xcu50_u55n_0 -s 500202A20DQAA -b ~/my_projects/hello_world/hello_world.bit -d ~/my_projects/hello_world/hello_world_drv.ko
+$ sgutil program vivado -b my_bitstream.bit -d my_driver.ko
+$ sgutil program vivado -d xcu50_u55n_0 -s 500202A20DQAA -b my_bitstream.bit -d my_driver.ko
 ```
