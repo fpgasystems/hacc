@@ -28,8 +28,8 @@ DevOps is a set of practices that combines software development (Dev) and IT ope
 ## Hello, world!
 A *Hello, world!* program is a piece of code in most general-purpose programming languages used to illustrate a language's basic syntax. Such programs are often the first a student learns to write in a given language. They can also be used as a sanity check to ensure all the required software is correctly installed and its operator understands how to use it.
 
-## Hot-plug boot
-We refer to the hot-plug boot as the process that allows us to transition Xilinx accelerator cards from the Vitis to Vivado workflows or vice-versa. The critical aspect of the process is to use Linux capabilities to re-enumerate PCI devices on the fly without the need for cold or warm rebooting of the system.
+## PCI hot-plug 
+We refer to the PCIe hot-plug as the process that allows us to transition Xilinx accelerator cards from the Vitis to Vivado workflows or vice-versa. The critical aspect of the process is to use Linux capabilities to re-enumerate PCI devices on the fly without the need for cold or warm rebooting of the system.
 
 ### Cold boot
 The process of powering off and on the machine to completely reload the operating system and reset all the hardware peripherals (including all PCI devices). In the context of Xilinx Alveo Cards, a cold boot causes to pull the flashable partitions (or base shell) from the card’s PROM into the programmable logic. This operation is required to revert a server to the Vitis workflow.
