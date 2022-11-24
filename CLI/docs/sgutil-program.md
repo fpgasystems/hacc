@@ -15,6 +15,7 @@
 
 ### Arguments
 
+* [rescan](./sgutil-program-rescan.md)
 * [revert](./sgutil-program-revert.md)
 * [vivado](./sgutil-program-vivado.md)
 * [vitis](./sgutil-program-vitis.md)
