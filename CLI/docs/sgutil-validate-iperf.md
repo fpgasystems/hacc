@@ -22,7 +22,7 @@
   &nbsp; &nbsp; Bandwidth to send at in bits/sec or packets per second.
 </p>
 <code>
-  -P, --parallel <string>
+  -p, --parallel <string>
 </code>
 <p>
   &nbsp; &nbsp; Number of parallel client threads to run.
@@ -50,6 +50,6 @@
 ### Examples
 ```
 $ sgutil validate iperf
-$ sgutil validate iperf -P 6
+$ sgutil validate iperf -p 6
 $ sgutil validate iperf -b 900M -u
 ```

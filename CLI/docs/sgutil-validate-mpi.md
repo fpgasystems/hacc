@@ -15,7 +15,7 @@
 
 ### Flags
 <code>
-  -n, --processes <string>
+  -p, --processes <string>
 </code>
 <p>
   &nbsp; &nbsp; Specify the number of processes to use.
@@ -32,5 +32,5 @@
 ```
 $ sgutil validate mpi -h
 $ sgutil validate mpi
-$ sgutil validate mpi -n 5
+$ sgutil validate mpi -p 5
 ```
