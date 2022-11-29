@@ -14,7 +14,7 @@
 </p>
 
 ### Flags
-<code>
+<!-- <code>
   -b, --binary <string>
 </code>
 <p>
@@ -26,6 +26,13 @@
 </code>
 <p>
   &nbsp; &nbsp; FPGA's device name. See <a href="https://github.com/fpgasystems/hacc/blob/main/CLI/docs/sgutil-get-device.md">sgutil get device</a>.
+</p> -->
+
+<code>
+  -p, --project <string>
+</code>
+<p>
+  &nbsp; &nbsp; Specifies your Vitis project name.
 </p>
 
 <code>
