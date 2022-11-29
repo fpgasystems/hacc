@@ -28,6 +28,6 @@
 ### Examples
 ```
 $ sgutil new -h
-$ sgutil vitis
-$ sgutil vivado
+$ sgutil new vitis
+$ sgutil new vivado
 ```
