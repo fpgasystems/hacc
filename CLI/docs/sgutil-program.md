@@ -10,7 +10,7 @@
   sgutil program [arguments [flags]] [--help]
 </code>
 <p>
-  &nbsp; &nbsp; Downloads the accelerated program or driver to a given device.
+  &nbsp; &nbsp; Downloads the accelerated application or driver to a given device.
 </p>
 
 ### Arguments
