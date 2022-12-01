@@ -16,7 +16,7 @@
 ### Arguments
 
 * [vitis](./sgutil-run-vitis.md)
-* [vivado]()
+* vivado
 
 <code>
   -h, --help

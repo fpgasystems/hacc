@@ -40,13 +40,6 @@
   &nbsp; &nbsp; Help to use this command.
 </p>
 
-<code>
-  -h, --help
-</code>
-<p>
-  &nbsp; &nbsp; Help to use this command.
-</p>
-
 ### Examples
 ```
 $ sgutil run vitis -p hello_world -t hw
