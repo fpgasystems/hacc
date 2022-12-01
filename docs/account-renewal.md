@@ -6,7 +6,7 @@
 
 # Account renewal
 
-The guest account expires after one year. A month before the deadline, you will receive an email reminder. If you plan to keep using the ETHZ-HACC, please write back to [javier.moyapaya@inf.ethz.ch](mailto:javier.moyapaya@inf.ethz.ch) like the one in the picture below:
+The guest account expires after one year. A month before the deadline, you will receive an email reminder. If you plan to keep using the ETHZ-HACC, please write back to [javier.moyapaya@inf.ethz.ch](mailto:javier.moyapaya@inf.ethz.ch) an email like the one in the picture below:
 
 ![Account renewal.](../imgs/account-renewal.png "Account renewal.")
 *Account renewal.*
