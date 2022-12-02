@@ -15,7 +15,7 @@
 
 ### Arguments
 
-* [vitis](./sgutil-program-vitis.md#sgutil-program-vitis)
+* [vitis](./sgutil-build-vitis.md#sgutil-build-vitis)
 * vivado
 
 <code>
