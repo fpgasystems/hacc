@@ -58,6 +58,5 @@
 
 ### Examples
 ```
-$ sgutil program vitis -b ~/my_projects/hello_world/hello_world.xclbin
-$ sgutil program vitis -d xcu50_u55n_0 -s 500202A20DQAA -b ~/my_projects/hello_world/hello_world.xclbin
+$ sgutil program vitis -u ~/my_projects/vitis/hello_world/build_dir.hw.xilinx_u55c_gen3x16_xdma_3_202210_1/vadd.xclbin
 ```
