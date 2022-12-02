@@ -4,7 +4,7 @@
 <a href="https://github.com/fpgasystems/hacc/blob/main/CLI/docs/sgutil-build.md#sgutil-build">Back to sgutil build</a>
 </p>
 
-## sgutil program vitis
+## sgutil build vitis
 
 <code>
   sgutil build vitis [flags] [--help]
