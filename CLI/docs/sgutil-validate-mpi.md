@@ -25,7 +25,7 @@
   -h, --help <string>
 </code>
 <p>
-  &nbsp; &nbsp; Help to use mpi validation.
+  &nbsp; &nbsp; Help to use MPI validation.
 </p>
 
 ### Examples
