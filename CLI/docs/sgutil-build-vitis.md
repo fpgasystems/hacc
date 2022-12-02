@@ -58,6 +58,5 @@
 
 ### Examples
 ```
-$ sgutil build vitis -b ~/my_projects/hello_world/hello_world.xclbin
-$ sgutil build vitis -d xcu50_u55n_0 -s 500202A20DQAA -b ~/my_projects/hello_world/hello_world.xclbin
+$ sgutil build vitis -p hello_world -t hw_emu
 ```
