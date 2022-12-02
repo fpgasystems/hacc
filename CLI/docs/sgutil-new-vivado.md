@@ -19,13 +19,6 @@
   &nbsp; &nbsp; This command has no flags.
 </p>
 
-<code>
-  -h, --help <string>
-</code>
-<p>
-  &nbsp; &nbsp; Help to use this command.
-</p>
-
 ### Examples
 ```
 $ sgutil new vivado
