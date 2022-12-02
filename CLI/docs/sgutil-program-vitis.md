@@ -28,12 +28,12 @@
   &nbsp; &nbsp; FPGA's device name. See <a href="https://github.com/fpgasystems/hacc/blob/main/CLI/docs/sgutil-get-device.md">sgutil get device</a>.
 </p> -->
 
-<code>
+<!-- <code>
   -p, --project <string>
 </code>
 <p>
   &nbsp; &nbsp; Specifies your Vitis project name.
-</p>
+</p> -->
 
 <code>
   -s, --serial <string>
@@ -43,10 +43,10 @@
 </p>
 
 <code>
-  -t, --target <string>
+  -u, --user <string>
 </code>
 <p>
-  &nbsp; &nbsp; Binary compilation target (sw_emu, hw_emu, hw).
+  &nbsp; &nbsp; The name (and path) of the xclbin to be loaded.
 </p>
 
 <code>
