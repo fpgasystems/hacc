@@ -27,6 +27,6 @@
 
 ### Examples
 ```
-$ sgutil program vivado -h
-$ sgutil program vitis -h
+$ sgutil build vivado -h
+$ sgutil build vitis -h
 ```
