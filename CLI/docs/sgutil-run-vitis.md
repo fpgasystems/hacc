@@ -24,7 +24,7 @@
   -s, --serial
 </code>
 <p>
-  &nbsp; &nbsp; FPGA's serial number See sgutil get serial.
+  &nbsp; &nbsp; FPGA's serial number. See sgutil get serial.
 </p>
 <code>
   -t, --target
