@@ -34,7 +34,6 @@
 <p>
   &nbsp; &nbsp; Specifies your Vitis project name.
 </p>
-
 <code>
   -s, --serial <string>
 </code>
@@ -42,12 +41,12 @@
   &nbsp; &nbsp; FPGA's serial number. See <a href="https://github.com/fpgasystems/hacc/blob/main/CLI/docs/sgutil-get-serial.md">sgutil get serial</a>.
 </p>
 
-<code>
+<!-- <code>
   -t, --target <string>
 </code>
 <p>
   &nbsp; &nbsp; Binary compilation target (sw_emu, hw_emu, hw).
-</p>
+</p> -->
 
 <code>
   -h, --help <string>
