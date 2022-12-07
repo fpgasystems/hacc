@@ -15,6 +15,7 @@
 
 ### Arguments
 
+* [coyote](./sgutil-build-coyote.md#sgutil-build-coyote)
 * [vitis](./sgutil-build-vitis.md#sgutil-build-vitis)
 * vivado
 
