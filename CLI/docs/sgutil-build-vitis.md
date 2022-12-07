@@ -14,20 +14,6 @@
 </p>
 
 ### Flags
-<!-- <code>
-  -b, --binary <string>
-</code>
-<p>
-  &nbsp; &nbsp; Programs an .xclbin binary to the specified device.
-</p>
-
-<code>
-  -n, --name <string>
-</code>
-<p>
-  &nbsp; &nbsp; FPGA's device name. See <a href="https://github.com/fpgasystems/hacc/blob/main/CLI/docs/sgutil-get-device.md">sgutil get device</a>.
-</p> -->
-
 <code>
   -p, --project <string>
 </code>
@@ -41,11 +27,6 @@
   &nbsp; &nbsp; FPGA's serial number. See <a href="https://github.com/fpgasystems/hacc/blob/main/CLI/docs/sgutil-get-serial.md">sgutil get serial</a>.
 </p>
 
-<code>
-</code>
-<p>
-  &nbsp; &nbsp; 
-</p>
 <code>
   -h, --help <string>
 </code>

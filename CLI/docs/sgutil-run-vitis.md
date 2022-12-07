@@ -28,11 +28,6 @@
 </p>
 
 <code>
-</code>
-<p>
-  &nbsp; &nbsp;
-</p>
-<code>
   -h, --help
 </code>
 <p>
@@ -41,5 +36,5 @@
 
 ### Examples
 ```
-$ sgutil run vitis -p hello_world -t hw
+$ sgutil run vitis -p hello_world
 ```
