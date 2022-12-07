@@ -26,13 +26,12 @@
 <p>
   &nbsp; &nbsp; FPGA's serial number. See sgutil get serial.
 </p>
-<!-- <code>
-  -t, --target
+
+<code>
 </code>
 <p>
-  &nbsp; &nbsp; Binary compilation target (sw_emu, hw_emu, hw).
-</p> -->
-
+  &nbsp; &nbsp;
+</p>
 <code>
   -h, --help
 </code>

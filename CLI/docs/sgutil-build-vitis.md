@@ -41,13 +41,11 @@
   &nbsp; &nbsp; FPGA's serial number. See <a href="https://github.com/fpgasystems/hacc/blob/main/CLI/docs/sgutil-get-serial.md">sgutil get serial</a>.
 </p>
 
-<!-- <code>
-  -t, --target <string>
+<code>
 </code>
 <p>
-  &nbsp; &nbsp; Binary compilation target (sw_emu, hw_emu, hw).
-</p> -->
-
+  &nbsp; &nbsp; 
+</p>
 <code>
   -h, --help <string>
 </code>
@@ -57,5 +55,5 @@
 
 ### Examples
 ```
-$ sgutil build vitis -p hello_world -t hw_emu
+$ sgutil build vitis -p hello_world
 ```
