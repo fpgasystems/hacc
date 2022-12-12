@@ -12,4 +12,4 @@
 * None of the QSFP28 FPGA interfaces are directly connected to other FPGAs—in a point-to-point topology—but to the corresponding leaf switch.
 
 ## Features
-* The hot-plug boot process (which allows us to transition between the Vitis and Vivado workflows without the need of rebooting the system) is not available on the virtualized environment.
+* The PCIe hot-plug process (which allows us to transition between the Vitis and Vivado workflows without the need of rebooting the system) is not available on the virtualized environment.
