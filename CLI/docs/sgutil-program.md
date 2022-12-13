@@ -15,6 +15,7 @@
 
 ### Arguments
 
+* [coyote](./sgutil-program-coyote.md#sgutil-program-coyote)
 * [rescan](./sgutil-program-rescan.md#sgutil-program-rescan)
 * [revert](./sgutil-program-revert.md#sgutil-program-revert)
 * [vitis](./sgutil-program-vitis.md#sgutil-program-vitis)
