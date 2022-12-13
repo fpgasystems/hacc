@@ -1,7 +1,7 @@
 <div id="readme" class="Box-body readme blob js-code-block-container">
 <article class="markdown-body entry-content p-3 p-md-6" itemprop="text">
 <p align="right">
-<a href="https://github.com/fpgasystems/hacc/blob/main/CLI/docs/sgutil-run.md#sgutil-run">Back to sgutil run</a>
+<a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-run.md#sgutil-run">Back to sgutil run</a>
 </p>
 
 ## sgutil run vitis
@@ -36,5 +36,5 @@
 
 ### Examples
 ```
-$ sgutil run vitis -p hello_world
+$ sgutil run vitis -p hello_world -t hw
 ```

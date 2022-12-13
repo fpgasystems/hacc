@@ -1,7 +1,7 @@
 <div id="readme" class="Box-body readme blob js-code-block-container">
 <article class="markdown-body entry-content p-3 p-md-6" itemprop="text">
 <p align="right">
-<a href="https://github.com/fpgasystems/hacc/blob/main/CLI/docs/sgutil-new.md#sgutil-new">Back to sgutil new</a>
+<a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-new.md#sgutil-new">Back to sgutil new</a>
 </p>
 
 ## sgutil new vitis
