@@ -11,7 +11,7 @@ The following are *out-of-the-box* examples that aim to be a good starting point
 ## Vitis workflow
 It is primarily recommended to start with the *[Hello, world!](../docs/vocabulary.md#hello-world)* example which makes the new users aware about the basic structure of a Vitis based application. 
 
-* [Hello, world!](./hello_world/README.md)
+* [Hello, world!](./examples-hello-world.md)
 
 ## Vivado workflow
 *Coming soon!*
