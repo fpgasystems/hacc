@@ -142,6 +142,12 @@ else
         echo ""
         eval "make all TARGET=$target PLATFORM=$platform"
         echo ""        
+
+        #compile src
+        cd $DIR/src
+        g++ create_config.cpp -o ../create_config
+        g++ create_data.cpp -o ../create_data
+
     else
         echo "${bold}PL kernel compilation and linking: generating .xo and .xclbin:${normal}"
         echo ""
