@@ -1,0 +1,356 @@
+---
+
+#directories ----------------------------------------------------------------------------------------
+
+- name: create top directory
+  file:
+    path: /opt/cli
+    state: directory
+
+- name: create common directory
+  file:
+    path: /opt/cli/common
+    state: directory
+
+- name: create validate directory
+  file:
+    path: /opt/cli/validate
+    state: directory
+
+- name: create get directory
+  file:
+    path: /opt/cli/get
+    state: directory
+
+- name: create program directory
+  file:
+    path: /opt/cli/program
+    state: directory
+
+- name: create new directory
+  file:
+    path: /opt/cli/new
+    state: directory
+
+- name: create run directory
+  file:
+    path: /opt/cli/run
+    state: directory
+
+- name: create build directory
+  file:
+    path: /opt/cli/build
+    state: directory
+
+#sg
+#- name: copy sg
+#  copy:
+#    src: "../../cli/sg.sh"
+#    dest: /opt/cli/sg
+#    mode: 0755
+- name: remove sg
+  ansible.builtin.file:
+    path: /opt/cli/sg
+    state: absent
+
+#sg
+- name: copy sgutil
+  copy:
+    src: "../../cli/sgutil.sh"
+    dest: /opt/cli/sgutil
+    mode: 0755
+
+- name: copy sgutil_completion to /usr/share/bash-completion/completions
+  copy:
+    src: "../../cli/sgutil_completion.sh"
+    dest: /usr/share/bash-completion/completions/sgutil
+    mode: 0755
+
+#version
+- name: copy version
+  copy:
+    src: "../../cli/VERSION"
+    dest: /opt/cli/VERSION
+    mode: 0644
+
+# templates
+- name: Check on templates folder
+  stat:
+    path: "/opt/cli/templates" #[path to the file or directory you want to check]
+  register: templates_folder
+
+- name: Copy templates
+  copy:
+    src: "../../cli/templates"
+    dest: /opt/cli/
+    mode: 0755
+  when: templates_folder.stat.exists == False
+
+#build ----------------------------------------------------------------------------------------
+
+- name: copy (build) coyote script
+  copy:
+    src: "../../cli/build/coyote.sh"
+    dest: /opt/cli/build/coyote
+    mode: 0755
+
+- name: copy (build) vitis script
+  copy:
+    src: "../../cli/build/vitis.sh"
+    dest: /opt/cli/build/vitis
+    mode: 0755
+
+#common --------------------------------------------------------------------------------------
+
+- name: copy ssh_key_add script
+  copy:
+    src: "../../cli/common/ssh_key_add.sh"
+    dest: /opt/cli/common/ssh_key_add
+    mode: 0755
+
+- name: copy get_booking_system_host script
+  copy:
+    src: "../../cli/common/get_booking_system_host.sh"
+    dest: /opt/cli/common/get_booking_system_host
+    mode: 0755
+
+- name: copy get_booking_system_db_user script
+  copy:
+    src: "../../cli/common/get_booking_system_db_user.sh"
+    dest: /opt/cli/common/get_booking_system_db_user
+    mode: 0755
+
+- name: copy get_booking_system_db_passwd script
+  copy:
+    src: "../../cli/common/get_booking_system_db_passwd.sh"
+    dest: /opt/cli/common/get_booking_system_db_passwd
+    mode: 0755
+
+- name: copy get_booking_system_servers_list script
+  copy:
+    src: "../../cli/common/get_booking_system_servers_list.sh"
+    dest: /opt/cli/common/get_booking_system_servers_list
+    mode: 0755
+
+#- name: copy cli_completion script
+#  copy:
+#    src: "../../cli/common/cli_completion.sh"
+#    dest: /opt/cli/common/cli_completion
+#    mode: 0755
+- name: remove cli_completion
+  ansible.builtin.file:
+    path: /opt/cli/common/cli_completion
+    state: absent
+
+#- name: copy hot_plug_boot script
+#  copy:
+#    src: "../../cli/common/hot_plug_boot.sh"
+#    dest: /opt/cli/common/hot_plug_boot
+#    mode: 0755
+- name: remove /opt/cli/common/hot_plug_boot # moved to program/pci_hot_plug
+  ansible.builtin.file:
+    path: /opt/cli/common/hot_plug_boot
+    state: absent    
+
+#- name: run cli_completion at login #this is not working but neither to run the command on welcome_msg...
+#  copy:
+#    dest: /etc/profile.d/cli_completion.sh
+#    content: eval "$(source /opt/cli/common/cli_completion)"
+
+#get  ----------------------------------------------------------------------------------------
+
+- name: copy get_from_vars
+  copy:
+    src: "../../cli/get/get_from_vars"
+    dest: /opt/cli/get/get_from_vars
+    mode: 0755
+
+- name: copy device script
+  copy:
+    src: "../../cli/get/device.sh"
+    dest: /opt/cli/get/device
+    mode: 0755
+
+- name: copy ip script
+  copy:
+    src: "../../cli/get/ip.sh"
+    dest: /opt/cli/get/ip
+    mode: 0755
+
+- name: copy mac script
+  copy:
+    src: "../../cli/get/mac.sh"
+    dest: /opt/cli/get/mac
+    mode: 0755
+
+- name: copy serial script
+  copy:
+    src: "../../cli/get/serial.sh"
+    dest: /opt/cli/get/serial
+    mode: 0755
+
+#new ------------------------------------------------------------------------------------    
+
+- name: copy (new) vitis script
+  copy:
+    src: "../../cli/new/vitis.sh"
+    dest: /opt/cli/new/vitis
+    mode: 0755
+
+- name: copy (new) vivado script
+  copy:
+    src: "../../cli/new/vivado.sh"
+    dest: /opt/cli/new/vivado
+    mode: 0755
+
+- name: copy (new) coyote script
+  copy:
+    src: "../../cli/new/coyote.sh"
+    dest: /opt/cli/new/coyote
+    mode: 0755    
+
+#program ------------------------------------------------------------------------------------
+
+#- name: copy bit script
+#  copy:
+#    src: "../../cli/program/bit.sh"
+#    dest: /opt/cli/program/bit
+#    mode: 0755
+- name: remove bit
+  ansible.builtin.file:
+    path: /opt/cli/program/bit
+    state: absent
+
+- name: copy revert script
+  copy:
+    src: "../../cli/program/revert.sh"
+    dest: /opt/cli/program/revert
+    mode: 0755
+
+- name: copy rescan script
+  copy:
+    src: "../../cli/program/rescan.sh"
+    dest: /opt/cli/program/rescan
+    mode: 0755
+
+- name: copy vivado script
+  copy:
+    src: "../../cli/program/vivado.sh"
+    dest: /opt/cli/program/vivado
+    mode: 0755
+
+- name: copy flash_bitstream.tcl script
+  copy:
+    src: "../../cli/program/flash_bitstream.tcl"
+    dest: /opt/cli/program/flash_bitstream.tcl
+    mode: 0755
+
+- name: copy flash_xrt_bitstream.tcl script
+  copy:
+    src: "../../cli/program/flash_xrt_bitstream.tcl"
+    dest: /opt/cli/program/flash_xrt_bitstream.tcl
+    mode: 0755
+
+#- name: copy get_fpga script
+#  copy:
+#    src: "../../cli/program/get_fpga.sh"
+#    dest: /opt/cli/program/get_fpga
+#    mode: 0755
+- name: remove /opt/cli/program/get_fpga
+  ansible.builtin.file:
+    path: /opt/cli/program/get_fpga
+    state: absent
+
+- name: copy pci_hot_plug script
+  copy:
+    src: "../../cli/program/pci_hot_plug.sh"
+    dest: /opt/cli/program/pci_hot_plug
+    mode: 0755
+
+- name: copy fpga_chmod script
+  copy:
+    src: "../../cli/program/fpga_chmod.sh"
+    dest: /opt/cli/program/fpga_chmod
+    mode: 0755
+
+- name: copy vitis script
+  copy:
+    src: "../../cli/program/vitis.sh"
+    dest: /opt/cli/program/vitis
+    mode: 0755
+
+- name: copy (program) coyote script
+  copy:
+    src: "../../cli/program/coyote.sh"
+    dest: /opt/cli/program/coyote
+    mode: 0755
+
+# run ---------------------------------------------------------------------------------------
+
+- name: copy (run) vitis script
+  copy:
+    src: "../../cli/run/vitis.sh"
+    dest: /opt/cli/run/vitis
+    mode: 0755
+
+- name: copy (run) coyote script
+  copy:
+    src: "../../cli/run/coyote.sh"
+    dest: /opt/cli/run/coyote
+    mode: 0755
+
+#validate -----------------------------------------------------------------------------------
+
+- name: copy iperf script
+  copy:
+    src: "../../cli/validate/iperf.sh"
+    dest: /opt/cli/validate/iperf
+    mode: 0755
+
+#- name: copy mpich script
+#  copy:
+#    src: "../../cli/validate/mpich.sh"
+#    dest: /opt/cli/validate/mpich
+#    mode: 0755
+- name: remove mpich
+  ansible.builtin.file:
+    path: /opt/cli/validate/mpich
+    state: absent
+
+- name: copy mpi script
+  copy:
+    src: "../../cli/validate/mpi.sh"
+    dest: /opt/cli/validate/mpi
+    mode: 0755
+
+#- name: copy openmpi script
+#  copy:
+#    src: "../../cli/validate/openmpi.sh"
+#    dest: /opt/cli/validate/openmpi
+#    mode: 0755
+- name: remove openmpi
+  ansible.builtin.file:
+    path: /opt/cli/validate/openmpi
+    state: absent
+
+#- name: copy hello_world_mpi script
+#  copy:
+#    src: "../../cli/validate/hello_world_mpi.c"
+#    dest: /opt/cli/validate/hello_world_mpi.c
+#    mode: 0755
+- name: remove hello_world_mpi.c
+  ansible.builtin.file:
+    path: /opt/cli/validate/hello_world_mpi.c
+    state: absent
+
+- name: copy mpi_hello script
+  copy:
+    src: "../../cli/validate/mpi_hello.c"
+    dest: /opt/cli/validate/mpi_hello.c
+    mode: 0755
+
+#cli system-wide
+- name: /opt/cli to system-wide $PATH.
+  copy:
+    dest: /etc/profile.d/cli.sh
+    content: 'PATH=$PATH:/opt/cli'

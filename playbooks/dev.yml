@@ -1,0 +1,68 @@
+---
+
+- hosts:
+    #- alveo-build
+    #- alveo-hypervisors
+    #- alveo-u250
+    #- alveo-u280
+    #- alveo-u50d
+    #- alveo-u55c
+    #- versal-vck5000
+    #   - alveo-u50d-01.inf.ethz.ch
+    - alveo-u55c-01.inf.ethz.ch
+    #   - alveo-u55c-02.inf.ethz.ch
+    #- alveo-u55c-03.inf.ethz.ch
+    #- alveo-u55c-04.inf.ethz.ch
+    #- alveo-u55c-05.inf.ethz.ch
+    #- alveo-u55c-06.inf.ethz.ch
+    #- alveo-u55c-07.inf.ethz.ch
+    #- alveo-u55c-08.inf.ethz.ch
+    #- alveo-u55c-09.inf.ethz.ch
+    #- alveo-u55c-10.inf.ethz.ch
+    #- alveo-u250-01.ethz.ch
+    #- alveo-u250-02.ethz.ch
+    #- alveo-u250-03.ethz.ch
+    #- alveo-u250-04.ethz.ch
+    #- alveo-u250-05.ethz.ch
+    #- alveo-hypervisor-03.ethz.ch
+    #- alveo-u50d-01.inf.ethz.ch
+  become: true
+  become_method: community.general.sudosu
+  become_user: root
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    hypervisor_host_fqdn: "alveo-hypervisor-XX.ethz.ch"
+    xilinx_release: 2021.2
+    xilinx_downloads_path: /mnt/scratch/hacc/Xilinx_downloads
+    xilinx_tools_base_path: /tools/Xilinx
+    #development
+    xilinx_downloads_path: /mnt/scratch/hacc/Xilinx_downloads
+    xilinx_development_package_name: 
+      #- xilinx-u250-gen3x16-xdma-4.1-202210-1-dev_1-3512975_all.deb
+      - xilinx-u280-gen3x16-xdma-1-202211-1-dev_1-3585755_all.deb
+      #- xilinx-u50-gen3x16-xdma-5-202210-1-dev_1-3499627_all.deb
+      #- xilinx-u55c-gen3x16-xdma-3-202210-1-dev_1-3514517_all.deb
+      #- xilinx-vck5000-gen4x8-xdma-2-202210-1-dev_1-20220513_all.deb
+  #vars_files: vars.yml
+  tasks:
+    #- include_tasks: ./tasks/all_users_sudoers_add.yml
+    #- include_tasks: ./tasks/deploy_build_scripts.yml
+    #- include_tasks: ./tasks/vivado_developers_groupadd.yml
+    #- include_tasks: ./tasks/jtag_enable.yml
+    #- include_tasks: ./tasks/deploy_build_scripts_hypervisor.yml
+    #- include_tasks: ./tasks/debian-packages-install.yml
+    #- include_tasks: ./tasks/booking_system_hypervisor_add.yml
+    #- include_tasks: ./tasks/performance_mode_enable.yml
+    #- include_tasks: ./tasks/docker_developers_groupadd.yml
+    #- include_tasks: ./tasks/xilinx-install-dev.yml
+    #- include_tasks: ./tasks/ip_ports_enable.yml
+    #- include_tasks: ./2021.2/tasks/xilinx-install-y2k22-patch.yml
+    #- include_tasks: ./tasks/deploy_hacc_examples_task.yml
+    #- include_tasks: ./tasks/cli_install.yml
+    #- include_tasks: ./tasks/lsyncd-install.yml
+
+    - name: copy sgutil
+      copy:
+        src: "../cli/sgutil.sh"
+        dest: /opt/cli/sgutil
+        mode: 0755
