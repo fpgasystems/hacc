@@ -3,23 +3,12 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-#echo ""
-#echo "${bold}iperf${normal}"
-#echo ""
-
 # constants
 BIT_NAME="cyt_top.bit"
 DRIVER_NAME="coyote_drv.ko"
 
-# get hostname
-#url="${HOSTNAME}"
-#hostname="${url%%.*}"
-
 #get username
 username=$USER
-
-#echo "This will program Coyote"
-#exit
 
 # inputs
 read -a flags <<< "$@"
@@ -72,35 +61,11 @@ if ! [ -d "$DIR" ]; then
 else
     BIT_PATH="/home/$username/my_projects/coyote/$project_name/hw/build/bitstreams/" #$BIT_NAME
     DRIVER_PATH="/home/$username/my_projects/coyote/$project_name/driver/" #$DRIVER_NAME
-
-    #echo $BIT_PATH
-    #echo $DRIVER_PATH
-
-    #sgutil program vivado -b /mnt/scratch/runshi/coyote_perf_fpga/cyt_top.bit -d /mnt/scratch/runshi/coyote_perf_fpga/coyote_drv.ko
     
     # bitstream
     sgutil program vivado -b $BIT_PATH$BIT_NAME #-d $DRIVER_PATH$DRIVER_NAME
 
     #driver (we first need to copy it as it is not working from the /home/ folder)
-    cp -f $DRIVER_PATH$DRIVER_NAME /local/home/$username/$DRIVER_NAME #cp -f /home/jmoyapaya/my_projects/coyote/U55C_01_02/driver/coyote_drv.ko /local/home/jmoyapaya/
+    cp -f $DRIVER_PATH$DRIVER_NAME /local/home/$username/$DRIVER_NAME
     sgutil program vivado -d /local/home/$username/$DRIVER_NAME
 fi
-
-# --fpga to device_name and serial_number
-
-#BIT_PATH="/home/$username/my_projects/coyote/$project_name/hw/build/bitstreams/cyt_top.bit"
-#DRIVER_PATH="/home/$username/my_projects/coyote/$project_name/driver/coyote_drv.ko"
-
-#echo $BIT_PATH
-#echo $DRIVER_PATH
-
-#echo "Arrived here"
-
-#sudo /opt/cli/program/vivado -b $BIT_PATH -d $DRIVER_PATH
-#sudo /opt/cli/sgutil program vivado -b $BIT_PATH -d $DRIVER_PATH
-
-#/opt/cli/sgutil program vivado -b $BIT_PATH -d $DRIVER_PATH
-
-#sudo bash -c "/opt/cli/sgutil program vivado -b $BIT_PATH -d $DRIVER_PATH"
-
-#sgutil program vivado -b /mnt/scratch/runshi/coyote_perf_fpga/cyt_top.bit -d /mnt/scratch/runshi/coyote_perf_fpga/coyote_drv.ko

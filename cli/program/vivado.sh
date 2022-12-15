@@ -70,14 +70,12 @@ fi
 
 #sgutil get device if there is only one FPGA and not name_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
-    device_name=$(sgutil get device | cut -d "=" -f2)
-    #echo "device_name=$device_name"
+    device_name=$(/opt/cli/get/device | cut -d "=" -f2)
 fi
 
 #sgutil get serial if there is only one FPGA and not serial_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
-    serial_number=$(sgutil get serial | cut -d "=" -f2)
-    #echo "serial_number=$serial_number"
+    serial_number=$(/opt/cli/get/serial | cut -d "=" -f2)
 fi
 
 #get release branch
@@ -101,19 +99,6 @@ if [[ $program_driver = "1" ]]; then
 	echo ""
     echo "${bold}Inserting driver:${normal}"
 	echo ""
-
-    #if [[ $(lsmod | grep $driver_file | wc -l) -gt 0 ]]; then #>= 1
-    #    echo "sudo rmmod $driver_file"
-    #    sudo bash -c "rmmod $driver_file"
-    #    sleep 1
-    #    echo "sudo insmod $driver_file"
-    #    sudo bash -c "insmod $driver_file"
-    #    sleep 1
-    #else
-    #    echo "sudo insmod $driver_file"
-    #    sudo bash -c "insmod $driver_file"
-    #    sleep 1
-    #fi
 
     # we always remove and insert the driver
     echo "sudo rmmod $driver_file"
