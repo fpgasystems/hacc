@@ -3,38 +3,25 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-#echo ""
-#echo "${bold}iperf${normal}"
-#echo ""
-
-#echo "user is: $USER"
-
 #get username
 username=$USER
-#echo "Usuari: $username"
 
 # create my_projects directory
 DIR="/home/$username/my_projects"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
-#else
-#    echo "already exists"
 fi
 
 # create vitis directory
 DIR="/home/$username/my_projects/vitis"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
-#else
-#    echo "already exists"
 fi
 
 # copy vitis common folder
 DIR="/home/$username/my_projects/vitis/common"
 if ! [ -d "$DIR" ]; then
     cp -rf /opt/cli/templates/vitis/common/ $DIR
-#else
-#    echo "already exists"
 fi
 
 # create project
