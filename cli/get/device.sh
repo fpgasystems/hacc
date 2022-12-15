@@ -3,17 +3,6 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-#echo ""
-#echo "${bold}iperf${normal}"
-#echo ""
-
-# constants
-CLI_WORKDIR="/opt/cli"
-
-# get hostname
-url="${HOSTNAME}"
-hostname="${url%%.*}"
-
 # inputs
 flags=$@
 
@@ -36,38 +25,3 @@ else
 fi
 
 /opt/cli/get/get_from_vars $flags | sed "s/fpga_device_names_//g" | sed "s/\"//g" | sed "s/_/-/"
-
-# output=$(/opt/cli/get/get_from_vars $flags)
-
-# echo $output
-
-# echo ""
-# echo "Columnes"
-# echo ""
-
-# echo ${output[0]}
-# echo ${output[1]}
-# echo ${output[2]}
-
-# echo ""
-# echo "Loop:"
-# echo ""
-
-# IFS=''
-# read -ra output <<< "$output"
-# for (( i=0; i<${#output[@]}; i++ ))
-# do
-#     echo ${output[$i]}
-
-# done
-
-# #echo ${output[0]}
-# #echo ${output[1]}
-# #echo ${output[2]}
-# #echo ${output[3]}
-
-# #remove and replace
-# #output=${output/network_settings_/""}
-# #output=${output/_/-}
-
-# #echo $output
