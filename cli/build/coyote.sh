@@ -3,8 +3,6 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-#echo "ES EL BUILD COYOTE!"
-
 #get username
 username=$USER
 
@@ -48,17 +46,6 @@ if ! [ -d "$DIR" ]; then
     echo ""
     exit
 fi
-
-# forbiden combinations (serial_found and target_found only make sense with project_found = 1)
-#if [[ $project_found = "0" ]] && [[ $serial_found = "1" ]]; then
-#    use_help="1"
-#fi
-
-#print help
-#if [[ $use_help = "1" ]]; then
-#    /opt/cli/sgutil build coyote -h
-#    exit
-#fi
 
 echo ""
 echo "${bold}sgutil build coyote${normal}"
@@ -114,13 +101,7 @@ cd /opt/xilinx/platforms
 n=$(ls -l | grep -c ^d)
 if [ $((n + 0)) -eq  1 ]; then
     platform=$(echo *)
-#else
-    # Multiple platforms are on the server but we need to pick 
-    # the one matching the serial_number
 fi
-
-#echo $serial_number
-#echo $platform
 
 #change directory
 DIR="/home/$username/my_projects/coyote/$project_name"
@@ -195,21 +176,3 @@ else
 fi
 
 echo ""
-
-#cd hw
-#mkdir build 
-#cd build
-#cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config
-
-#echo "make all TARGET=$target PLATFORM=$platform" 
-#echo ""
-#eval "make all TARGET=$target PLATFORM=$platform"
-#echo ""
-
-#execution
-#echo "${bold}Executing accelerated application:${normal}"
-#echo ""
-#echo "make run TARGET=$target PLATFORM=$platform" 
-#echo ""
-#eval "make run TARGET=$target PLATFORM=$platform"
-#echo ""

@@ -3,8 +3,6 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-#echo "ES EL BUILD!"
-
 #get username
 username=$USER
 
@@ -19,7 +17,6 @@ fi
 
 project_found="0"
 serial_found="0"
-#target_found="0"
 for (( i=0; i<${#flags[@]}; i++ ))
 do
     if [[ " ${flags[$i]} " =~ " -p " ]] || [[ " ${flags[$i]} " =~ " --project " ]]; then # flags[i] is -p or --project
@@ -32,11 +29,6 @@ do
         serial_idx=$(($i+1))
         serial_number=${flags[$serial_idx]}
     fi
-    #if [[ " ${flags[$i]} " =~ " -t " ]] || [[ " ${flags[$i]} " =~ " --target " ]]; then 
-    #    target_found="1"
-    #    target_idx=$(($i+1))
-    #    target=${flags[$target_idx]}
-    #fi
 done
 
 # mandatory flags (-p and -t must be used)
@@ -44,23 +36,11 @@ use_help="0"
 if [[ $project_found = "0" ]]; then
     use_help="1"
 fi
-#if [[ $project_found = "1" ]] && [[ $target_found = "0" ]]; then 
-#    use_help="1"
-#fi
 
 # forbiden combinations (serial_found and target_found only make sense with project_found = 1)
 if [[ $project_found = "0" ]] && [[ $serial_found = "1" ]]; then
     use_help="1"
 fi
-#if [[ $project_found = "0" ]] && [[ $target_found = "1" ]]; then
-#    use_help="1"
-#fi
-
-# check on target
-#echo $target
-#if [[ $target =~ "sw_emu" ]] || [[ $target =~ "hw_emu" ]] || [[ $target =~ "hw" ]]; then
-#    echo "unexpected target"
-#fi
 
 #print help
 if [[ $use_help = "1" ]]; then
@@ -101,21 +81,8 @@ cd /opt/xilinx/platforms
 n=$(ls -l | grep -c ^d)
 if [ $((n + 0)) -eq  1 ]; then
     platform=$(echo *)
-#else
-    # Multiple platforms are on the server but we need to pick 
-    # the one matching the serial_number
 fi
 
-#echo $serial_number
-#echo $platform
-
-#change directory
-#echo ""
-#echo "${bold}Changing directory:${normal}"
-#echo ""
-#echo "cd /home/$username/my_projects/vitis/$project_name"
-#echo ""
-#cd /home/$username/my_projects/vitis/$project_name
 DIR="/home/$username/my_projects/vitis/$project_name"
 if ! [ -d "$DIR" ]; then
     echo ""
@@ -157,21 +124,3 @@ else
         echo ""
     fi
 fi
-
-#compilation
-#export CPATH="/usr/include/x86_64-linux-gnu" #https://support.xilinx.com/s/article/Fatal-error-sys-cdefs-h-No-such-file-or-directory?language=en_US
-
-#echo "${bold}PL kernel compilation and linking: generating .xo and .xclbin:${normal}"
-#echo ""
-#echo "make all TARGET=$target PLATFORM=$platform" 
-#echo ""
-#eval "make all TARGET=$target PLATFORM=$platform"
-#echo ""
-
-#execution
-#echo "${bold}Executing accelerated application:${normal}"
-#echo ""
-#echo "make run TARGET=$target PLATFORM=$platform" 
-#echo ""
-#eval "make run TARGET=$target PLATFORM=$platform"
-#echo ""
