@@ -6,10 +6,6 @@ normal=$(tput sgr0)
 # constants
 SERVERADDR="localhost"
 
-# get hostname
-url="${HOSTNAME}"
-hostname="${url%%.*}"
-
 # inputs
 read -a flags <<< "$@"
 
@@ -20,26 +16,20 @@ for (( i=0; i<${#flags[@]}; i++ ))
 do
     if [[ " ${flags[$i]} " =~ " -n " ]] || [[ " ${flags[$i]} " =~ " --name " ]]; then # flags[i] is -n or --name
         name_found="1"
-        #echo "name_found"
-        #echo "i (name_found)= $i"
     fi
     if [[ " ${flags[$i]} " =~ " -s " ]] || [[ " ${flags[$i]} " =~ " --serial " ]]; then 
         serial_found="1"
-        #echo "serial_found"
-        #echo "i (serial_found)= $i"
     fi
 done
 
 #sgutil get device if there is only one FPGA and not name_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
     device_name=$(/opt/cli/get/device | cut -d "=" -f2)
-    #echo "device_name=$device_name"
 fi
 
 #sgutil get serial if there is only one FPGA and not serial_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
     serial_number=$(/opt/cli/get/serial | cut -d "=" -f2)
-    #echo "serial_number=$serial_number"
 fi
 
 #get release branch
