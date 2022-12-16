@@ -67,7 +67,8 @@ Input Vector 2 from Global Memory --->|             |      |__|
 #define SIZEOF_WORD 4
 #define NUM_WORDS ((MEMORY_DWIDTH) / (8 * SIZEOF_WORD))
 
-#define DATA_SIZE 4096
+// #define DATA_SIZE 4096
+#include "../configs/config_000.hpp"
 
 // TRIPCOUNT identifier
 const int c_size = DATA_SIZE;

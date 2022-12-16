@@ -17,7 +17,9 @@
 #include "xcl2.hpp"
 #include <algorithm>
 #include <vector>
-#define DATA_SIZE 4096
+// #define DATA_SIZE 4096
+
+#include "../configs/config_000.hpp"
 
 int main(int argc, char** argv) {
     if (argc != 2) {
