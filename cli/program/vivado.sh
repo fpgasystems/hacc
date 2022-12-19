@@ -89,7 +89,8 @@ if [[ $program_bitstream = "1" ]]; then
 
     #hotplug
     if [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
-        sudo bash -c "source /opt/cli/program/pci_hot_plug ${hostname}"
+        #sudo bash -c "source /opt/cli/program/pci_hot_plug ${hostname}"
+        sudo /opt/cli/program/pci_hot_plug ${hostname}
     fi
 fi
 
@@ -102,12 +103,15 @@ if [[ $program_driver = "1" ]]; then
 
     # we always remove and insert the driver
     echo "sudo rmmod $driver_file"
-    sudo bash -c "rmmod $driver_file"
+    #sudo bash -c "rmmod $driver_file"
+    sudo rmmod $driver_file
     sleep 1
     echo "sudo insmod $driver_file"
-    sudo bash -c "insmod $driver_file"
+    #sudo bash -c "insmod $driver_file"
+    sudo insmod $driver_file
     sleep 1
 
-    sudo bash -c "/opt/cli/program/fpga_chmod 0"
+    #sudo bash -c "/opt/cli/program/fpga_chmod 0"
+    sudo /opt/cli/program/fpga_chmod 0
 
 fi

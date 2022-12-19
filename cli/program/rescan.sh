@@ -22,4 +22,5 @@ if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
 fi
 
 #hotplug ----------------------------------------------------------> we will need to adapt it to use the serial number
-sudo bash -c "source /opt/cli/program/pci_hot_plug ${hostname}"
+#sudo bash -c "source /opt/cli/program/pci_hot_plug ${hostname}"
+sudo /opt/cli/program/pci_hot_plug ${hostname}
