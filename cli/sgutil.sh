@@ -538,6 +538,12 @@ case "$command" in
     esac
     ;;
   new)
+
+    if [ "$#" -ne 2 ]; then
+      new_help
+      exit 1
+    fi
+
     case "$arguments" in
       -h|--help)
         new_help
