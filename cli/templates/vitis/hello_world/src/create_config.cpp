@@ -1,19 +1,29 @@
 #include <iostream>
 #include <vector> // for vectors
 #include <algorithm> // for find
+//#include <math.h>
 
 using namespace std;
 
 void print_vector(std::string name, vector<int> v)
 {
-    cout << name + "[ ";
-    for (int x : v)
-        cout << x << " ";
+    cout << name + " [ ";
+    if (v.size() <= 10) {
+        for (int x : v)
+            cout << x << " ";
+    }
+    else {
+        int n = v.size() - 1;
+        std::string s0 = std::to_string(v[0]);
+        std::string s1 = std::to_string(v[n]);
+        cout << s0 + " .. " + s1;     
+    }
     cout << "]: "; 
 }
 
 int read_value(std::string name, vector<int> v)
 {
+    print_vector(name, v);
     int found = 0;
     int element;
     vector<int>::iterator it;
@@ -30,6 +40,17 @@ int read_value(std::string name, vector<int> v)
     return element;
 }
 
+vector<int> new_vector(int min_, int max_)
+{
+    vector<int> myVec;
+    //int i = 0;
+    //double j;
+    for( int i = min_; i <= max_; i++ )
+        //j = pow(2, i);
+        myVec.push_back(i);
+    return myVec;
+}
+
 int main()
 {
 
@@ -41,51 +62,34 @@ int main()
         string myString;
     } config;
 
-    // vector iterator for finding elements
-    vector<int>::iterator it;
-    
     cout << "Simulation parameters: \n";
     // Tclk
     vector<int> T_clk_i{ 1, 2, 3, 4, 5, 10, 20, 30, 40, 50 };
-    print_vector("T_clk", T_clk_i);
-    /* int found = 0;
-    int T_clk;
-    while (found != 1) {
-        cin >> T_clk;
-        it = find(T_clk_i.begin(), T_clk_i.end(), T_clk);
-        if (it != T_clk_i.end()) {
-            found = 1;
-        }
-        else {
-            print_vector("T_clk", T_clk_i);
-        }
-    } */
     int T_clk = read_value("T_clk", T_clk_i);
-
     cout << "\n";
-
-    //cout << "Test\n";
-
-    //int Taux = read_value("T_clk", T_clk_i);
-
-    //cout << TaT_clk;
 
     cout << "Host parameters:  \n";
     // W_MAX
     vector<int> W_MAX_i{ 1, 2, 4, 8, 16, 32, 64, 128, 256 };
-    print_vector("W_MAX", W_MAX_i);
-    int found = 0;
-    int W_MAX;
-    
+    int W_MAX = read_value("W_MAX", W_MAX_i);
+    cout << "\n";
 
     cout << "Device parameters: \n";
-    int FPGA_CLOCK_FREQUENCY;
-    int W;
-    int F;
+    // FPGA_CLOCK_FREQUENCY
+    vector<int> FPGA_CLOCK_FREQUENCY_i{ 100, 200, 300, 400 };
+    int FPGA_CLOCK_FREQUENCY = read_value("FPGA_CLOCK_FREQUENCY", FPGA_CLOCK_FREQUENCY_i);
+    // W
+    vector<int> W_i = new_vector(1, W_MAX);
+    int W = read_value("W", W_i);
+    // F
+    vector<int> F_i = new_vector(0, W);
+    int F = read_value("F", F_i);
+    cout << "\n";
 
     cout << "Test parameters: \n";
-
-
+    cout << "RMSE_MAX: 0.01 \n";
+    double RMSE_MAX = 0.01;
+    cout << "\n";
 
     return 0;
 }
