@@ -72,6 +72,9 @@ int main()
     // W_MAX
     vector<int> W_MAX_i{ 1, 2, 4, 8, 16, 32, 64, 128, 256 };
     int W_MAX = read_value("W_MAX", W_MAX_i);
+    // VECTOR_LENGTH
+    vector<int> VECTOR_LENGTH_i{ 1, 2, 3, 4, 5, 10, 20 };
+    int VECTOR_LENGTH = read_value("VECTOR_LENGTH", VECTOR_LENGTH_i);
     cout << "\n";
 
     cout << "Device parameters: \n";
