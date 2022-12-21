@@ -1,9 +1,14 @@
 #include <iostream>
 #include <vector> // for vectors
 #include <algorithm> // for find
+#include <filesystem> // for find
 //#include <math.h>
 
 using namespace std;
+//using namespace std::filesystem;
+//using std::filesystem::directory_iterator;
+//using std::filesystem::directory_iterator;
+using std::filesystem::directory_iterator;
 
 void print_vector(std::string name, vector<int> v)
 {
@@ -43,10 +48,7 @@ int read_value(std::string name, vector<int> v)
 vector<int> new_vector(int min_, int max_)
 {
     vector<int> myVec;
-    //int i = 0;
-    //double j;
     for( int i = min_; i <= max_; i++ )
-        //j = pow(2, i);
         myVec.push_back(i);
     return myVec;
 }
@@ -93,6 +95,17 @@ int main()
     cout << "RMSE_MAX: 0.01 \n";
     double RMSE_MAX = 0.01;
     cout << "\n";
+
+    // create configuration
+    //filesystem::iterator d_it;
+    string path = "/home/jmoyapaya/my_projects/vitis/test_0/configs/"; // ha de ser relatiu al executable!
+
+    int n = 0;
+    for (const auto & file : directory_iterator(path)){
+        //cout << file.path() << endl;
+        n = n + 1;
+    }
+    cout << n;
 
     return 0;
 }
