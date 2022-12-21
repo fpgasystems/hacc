@@ -4,11 +4,14 @@
 #include <filesystem> // for find
 //#include <math.h>
 
+namespace fs = std::filesystem;
 using namespace std;
+
 //using namespace std::filesystem;
 //using std::filesystem::directory_iterator;
 //using std::filesystem::directory_iterator;
 using std::filesystem::directory_iterator;
+
 
 void print_vector(std::string name, vector<int> v)
 {
@@ -97,12 +100,12 @@ int main()
     cout << "\n";
 
     // create configuration
-    //filesystem::iterator d_it;
-    string path = "/home/jmoyapaya/my_projects/vitis/test_0/configs/"; // ha de ser relatiu al executable!
-
+    // get number of existing configs
+    fs::path p = fs::current_path();
+    string project_path = p.relative_path();
+    project_path = "/" + project_path + "/configs/";
     int n = 0;
-    for (const auto & file : directory_iterator(path)){
-        //cout << file.path() << endl;
+    for (const auto & file : directory_iterator(project_path)){
         n = n + 1;
     }
     cout << n;
