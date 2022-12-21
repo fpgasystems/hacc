@@ -112,8 +112,8 @@ else
 
         #compile src
         cd $DIR/src
-        g++ -std=c++11 create_config.cpp -o ../create_config
-        g++ -std=c++11 create_data.cpp -o ../create_data
+        g++ -std=c++17 create_config.cpp -o ../create_config
+        g++ -std=c++17 create_data.cpp -o ../create_data
 
     else
         echo "${bold}PL kernel compilation and linking: generating .xo and .xclbin:${normal}"
