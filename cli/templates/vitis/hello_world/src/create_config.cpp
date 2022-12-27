@@ -58,7 +58,7 @@ vector<int> new_vector(int min_, int max_)
     return myVec;
 }
 
-std::string get_config_string()
+string get_config_string()
 {
     fs::path p = fs::current_path();
     string project_path = p.relative_path();
@@ -67,19 +67,11 @@ std::string get_config_string()
     for (const auto & file : directory_iterator(project_path)){
         n = n + 1;
     }
-    //cout << n;
-    //cout << "\n";
-
-    std::string s = std::to_string(n);
-    //cout << s;
-    //cout << "\n"; // crear get_config_string...
-
+    string s = std::to_string(n);
     unsigned int number_of_zeros = STR_LENGTH - s.length();
     s.insert(0, number_of_zeros, '0');
-    //cout << s;
-    //cout << "\n";
+    s = "config_" + s;
     return s;
-
 }
 
 int main()
