@@ -54,7 +54,7 @@ vector<int> new_vector(int min_, int max_)
     return myVec;
 }
 
-void create_config_file()
+ofstream create_config_file()
 {
     fs::path p = fs::current_path();
     string project_path = p.relative_path();
@@ -69,7 +69,7 @@ void create_config_file()
     s = "config_" + s;
     string aux = project_path + s + ".hpp";
     std::ofstream o(aux.c_str());
-    //return 0;
+    return o;
 }
 
 int main()
@@ -116,7 +116,13 @@ int main()
     cout << "\n";
 
     // create configuration
-    create_config_file();
+    ofstream c = create_config_file();
+    c << "#if !defined(MYLIB_CONSTANTS_H)\n";
+    c << "#define MYLIB_CONSTANTS_H 1\n" << std::endl;
+    // config parameters
+
+    // endif
+    c << "#endif\n" << std::endl;
 
     return 0;
 }
