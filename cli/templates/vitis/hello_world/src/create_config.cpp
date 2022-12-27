@@ -12,6 +12,8 @@ using namespace std;
 //using std::filesystem::directory_iterator;
 using std::filesystem::directory_iterator;
 
+#define STR_LENGTH 3
+
 
 void print_vector(std::string name, vector<int> v)
 {
@@ -54,6 +56,30 @@ vector<int> new_vector(int min_, int max_)
     for( int i = min_; i <= max_; i++ )
         myVec.push_back(i);
     return myVec;
+}
+
+std::string get_config_string()
+{
+    fs::path p = fs::current_path();
+    string project_path = p.relative_path();
+    project_path = "/" + project_path + "/configs/";
+    int n = 0;
+    for (const auto & file : directory_iterator(project_path)){
+        n = n + 1;
+    }
+    //cout << n;
+    //cout << "\n";
+
+    std::string s = std::to_string(n);
+    //cout << s;
+    //cout << "\n"; // crear get_config_string...
+
+    unsigned int number_of_zeros = STR_LENGTH - s.length();
+    s.insert(0, number_of_zeros, '0');
+    //cout << s;
+    //cout << "\n";
+    return s;
+
 }
 
 int main()
@@ -100,15 +126,9 @@ int main()
     cout << "\n";
 
     // create configuration
-    // get number of existing configs
-    fs::path p = fs::current_path();
-    string project_path = p.relative_path();
-    project_path = "/" + project_path + "/configs/";
-    int n = 0;
-    for (const auto & file : directory_iterator(project_path)){
-        n = n + 1;
-    }
-    cout << n;
+    std::string a = get_config_string();
+    cout << a;
+    cout << "\n";
 
     return 0;
 }
