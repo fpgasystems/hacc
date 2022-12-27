@@ -1,15 +1,11 @@
 #include <iostream>
-#include <vector> // for vectors
-#include <algorithm> // for find
-#include <filesystem> // for find
-//#include <math.h>
+#include <vector>
+#include <algorithm>
+#include <filesystem>
+#include <fstream> 
 
 namespace fs = std::filesystem;
 using namespace std;
-
-//using namespace std::filesystem;
-//using std::filesystem::directory_iterator;
-//using std::filesystem::directory_iterator;
 using std::filesystem::directory_iterator;
 
 #define STR_LENGTH 3
@@ -58,7 +54,7 @@ vector<int> new_vector(int min_, int max_)
     return myVec;
 }
 
-string get_config_string()
+void create_config_file()
 {
     fs::path p = fs::current_path();
     string project_path = p.relative_path();
@@ -71,7 +67,9 @@ string get_config_string()
     unsigned int number_of_zeros = STR_LENGTH - s.length();
     s.insert(0, number_of_zeros, '0');
     s = "config_" + s;
-    return s;
+    string aux = project_path + s + ".hpp";
+    std::ofstream o(aux.c_str());
+    //return 0;
 }
 
 int main()
@@ -118,9 +116,7 @@ int main()
     cout << "\n";
 
     // create configuration
-    std::string a = get_config_string();
-    cout << a;
-    cout << "\n";
+    create_config_file();
 
     return 0;
 }
