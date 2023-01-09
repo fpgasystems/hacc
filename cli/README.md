@@ -24,9 +24,7 @@ ETHZ-HACC CLI brings Systems Group’s designs to your terminal and allows you t
 
 
 <!-- ### Options -->
-<code>
-  -h, --help
-</code>
+<code>-h, --help</code>
 <p>
   &nbsp; &nbsp; Help to use this application.
 </p>
