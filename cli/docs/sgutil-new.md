@@ -6,9 +6,7 @@
 
 ## sgutil new
 
-<code>
-  sgutil new [arguments] [--help]
-</code>
+<code>sgutil new [arguments] [--help]</code>
 <p>
   &nbsp; &nbsp; Creates a new project of your choice.
 </p>
@@ -18,9 +16,7 @@
 * [vitis](./sgutil-new-vitis.md)
 * [vivado](./sgutil-new-vivado.md)
 
-<code>
-  -h, --help
-</code>
+<code>-h, --help</code>
 <p>
   &nbsp; &nbsp; Help to use this command.
 </p>

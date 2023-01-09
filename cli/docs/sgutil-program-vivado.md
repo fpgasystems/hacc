@@ -6,52 +6,38 @@
 
 ## sgutil program vivado
 
-<code>
-  sgutil program vivado [flags] [--help]
-</code>
+<code>sgutil program vivado [flags] [--help]</code>
 <p>
   &nbsp; &nbsp; Programs a Vivado FPGA-bitstream to a given device.
 </p>
 
 ### Flags
-<code>
-  -b, --bitstream <string>
-</code>
+<code>-b, --bitstream <string></code>
 <p>
   &nbsp; &nbsp; Programs a .bit bitstream to the specified device.
 </p>
 
-<code>
-  -d, --driver <string>
-</code>
+<code>-d, --driver <string></code>
 <p>
   &nbsp; &nbsp; Installs an FPGA driver on the server.
 </p>
 
-<code>
-  -l, --ltx <string>
-</code>
+<code>-l, --ltx <string></code>
 <p>
   &nbsp; &nbsp; Specifies a .ltx debug probes file.
 </p>
 
-<code>
-  -n, --name <string>
-</code>
+<code>-n, --name <string></code>
 <p>
   &nbsp; &nbsp; FPGA's device name. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-device.md">sgutil get device</a>.
 </p>
 
-<code>
-  -s, --serial <string>
-</code>
+<code>-s, --serial <string></code>
 <p>
   &nbsp; &nbsp; FPGA's serial number. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-serial.md">sgutil get serial</a>.
 </p>
 
-<code>
-  -h, --help <string>
-</code>
+<code>-h, --help <string></code>
 <p>
   &nbsp; &nbsp; Help to program a bitstream.
 </p>

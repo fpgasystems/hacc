@@ -6,30 +6,22 @@
 
 ## sgutil build vitis
 
-<code>
-  sgutil build vitis [flags] [--help]
-</code>
+<code>sgutil build vitis [flags] [--help]</code>
 <p>
   &nbsp; &nbsp; Generates .xo kernels and .xclbin binaries for Vitis workflow.
 </p>
 
 ### Flags
-<code>
-  -p, --project <string>
-</code>
+<code>-p, --project <string></code>
 <p>
   &nbsp; &nbsp; Specifies your Vitis project name.
 </p>
-<code>
-  -s, --serial <string>
-</code>
+<code>-s, --serial <string></code>
 <p>
   &nbsp; &nbsp; FPGA's serial number. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-serial.md">sgutil get serial</a>.
 </p>
 
-<code>
-  -h, --help <string>
-</code>
+<code>-h, --help <string></code>
 <p>
   &nbsp; &nbsp; Help to program a binary.
 </p>

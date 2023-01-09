@@ -6,9 +6,7 @@
 
 ## sgutil program
 
-<code>
-  sgutil program [arguments [flags]] [--help]
-</code>
+<code>sgutil program [arguments [flags]] [--help]</code>
 <p>
   &nbsp; &nbsp; Downloads the accelerated application or driver to a given device.
 </p>
@@ -21,9 +19,7 @@
 * [vitis](./sgutil-program-vitis.md#sgutil-program-vitis)
 * [vivado](./sgutil-program-vivado.md#sgutil-program-vivado)
 
-<code>
-  -h, --help
-</code>
+<code>-h, --help</code>
 <p>
   &nbsp; &nbsp; Help to use this command.
 </p>

@@ -6,9 +6,7 @@
 
 ## sgutil new vitis
 
-<code>
-  sgutil get vitis [--help]
-</code>
+<code>sgutil get vitis [--help]</code>
 <p>
   &nbsp; &nbsp; Creates a new project using Vitis Hello, world! template.
 </p>

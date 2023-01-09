@@ -6,43 +6,31 @@
 
 ## sgutil validate iperf
 
-<code>
-  sgutil validate iperf [flags] [--help]
-</code>
+<code>sgutil validate iperf [flags] [--help]</code>
 <p>
   &nbsp; &nbsp; Measures HACC network performance. 
 </p>
 <!-- The number of parallel client threads to run is four by default. -->
 
 ### Flags
-<code>
-  -b, --bandwidth <string>
-</code>
+<code>-b, --bandwidth <string></code>
 <p>
   &nbsp; &nbsp; Bandwidth to send at in bits/sec or packets per second.
 </p>
-<code>
-  -p, --parallel <string>
-</code>
+<code>-p, --parallel <string></code>
 <p>
   &nbsp; &nbsp; Number of parallel client threads to run.
 </p>
-<code>
-  -t, --time <string>
-</code>
+<code>-t, --time <string></code>
 <p>
   &nbsp; &nbsp; Time in seconds to transmit for.
 </p>
-<code>
-  -u, --udp <string>
-</code>
+<code>-u, --udp <string></code>
 <p>
   &nbsp; &nbsp; Use UDP rather than TCP.
 </p>
 
-<code>
-  -h, --help <string>
-</code>
+<code>-h, --help <string></code>
 <p>
   &nbsp; &nbsp; Help to use iperf validation.
 </p>

@@ -6,25 +6,19 @@
 
 ## sgutil get device
 
-<code>
-  sgutil get device [flags] [--help]
-</code>
+<code>sgutil get device [flags] [--help]</code>
 <p>
   &nbsp; &nbsp; Retreives FPGA device name from the server/s.
 </p>
 <!-- The number of parallel client threads to run is four by default. -->
 
 ### Flags
-<code>
-  -w, --word <string>
-</code>
+<code>-w, --word <string></code>
 <p>
   &nbsp; &nbsp; Filters FPGA device name according to regexp expression.
 </p>
 
-<code>
-  -h, --help <string>
-</code>
+<code>-h, --help <string></code>
 <p>
   &nbsp; &nbsp; Help to use this command.
 </p>

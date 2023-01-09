@@ -6,31 +6,23 @@
 
 ## sgutil program revert
 
-<code>
-  sgutil program revert [flags] [--help]
-</code>
+<code>sgutil program revert [flags] [--help]</code>
 <p>
   &nbsp; &nbsp; Returns the specified device to the Vitis workflow.
 </p>
 
 ### Flags
-<code>
-  -n, --name <string>
-</code>
+<code>-n, --name <string></code>
 <p>
   &nbsp; &nbsp; FPGA's device name. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-device.md">sgutil get device</a>.
 </p>
 
-<code>
-  -s, --serial <string>
-</code>
+<code>-s, --serial <string></code>
 <p>
   &nbsp; &nbsp; FPGA's serial number. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-serial.md">sgutil get serial</a>.
 </p>
 
-<code>
-  -h, --help <string>
-</code>
+<code>-h, --help <string></code>
 <p>
   &nbsp; &nbsp; Help to revert a device.
 </p>

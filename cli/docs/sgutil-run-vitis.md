@@ -6,30 +6,22 @@
 
 ## sgutil run vitis
 
-<code>
-  sgutil run vitis [flags] [--help]
-</code>
+<code>sgutil run vitis [flags] [--help]</code>
 <p>
   &nbsp; &nbsp; Runs a Vitis FPGA-binary on a given device.
 </p>
 
 ### Flags
-<code>
-  -p, --project
-</code>
+<code>-p, --project</code>
 <p>
   &nbsp; &nbsp; Specifies your Vitis project name.
 </p>
-<code>
-  -s, --serial
-</code>
+<code>-s, --serial</code>
 <p>
   &nbsp; &nbsp; FPGA's serial number. See sgutil get serial.
 </p>
 
-<code>
-  -h, --help
-</code>
+<code>-h, --help</code>
 <p>
   &nbsp; &nbsp; Help to use this command.
 </p>

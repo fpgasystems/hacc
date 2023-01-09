@@ -6,9 +6,7 @@
 
 ## sgutil build
 
-<code>
-  sgutil build [arguments [flags]] [--help]
-</code>
+<code>sgutil build [arguments [flags]] [--help]</code>
 <p>
   &nbsp; &nbsp; Creates binaries, bitstreams, and drivers for your FPGA designs.
 </p>
@@ -19,9 +17,7 @@
 * [vitis](./sgutil-build-vitis.md#sgutil-build-vitis)
 * vivado
 
-<code>
-  -h, --help
-</code>
+<code>-h, --help</code>
 <p>
   &nbsp; &nbsp; Help to use this command.
 </p>

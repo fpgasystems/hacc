@@ -6,24 +6,18 @@
 
 ## sgutil validate mpi
 
-<code>
-  sgutil validate mpi [flags] [--help]
-</code>
+<code>sgutil validate mpi [flags] [--help]</code>
 <p>
   &nbsp; &nbsp; Validates MPI.
 </p>
 
 ### Flags
-<code>
-  -p, --processes <string>
-</code>
+<code>-p, --processes <string></code>
 <p>
   &nbsp; &nbsp; Specify the number of processes to use.
 </p>
 
-<code>
-  -h, --help <string>
-</code>
+<code>-h, --help <string></code>
 <p>
   &nbsp; &nbsp; Help to use MPI validation.
 </p>

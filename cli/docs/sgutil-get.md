@@ -6,9 +6,7 @@
 
 ## sgutil get
 
-<code>
-  sgutil get [arguments [flags]] [--help]
-</code>
+<code>sgutil get [arguments [flags]] [--help]</code>
 <p>
   &nbsp; &nbsp; Retreives information from the server/s.
 </p>
@@ -20,9 +18,7 @@
 * [mac](./sgutil-get-mac.md)
 * [serial](./sgutil-get-serial.md)
 
-<code>
-  -h, --help
-</code>
+<code>-h, --help</code>
 <p>
   &nbsp; &nbsp; Help to use this command.
 </p>

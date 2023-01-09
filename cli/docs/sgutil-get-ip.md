@@ -6,25 +6,19 @@
 
 ## sgutil get ip
 
-<code>
-  sgutil get ip [flags] [--help]
-</code>
+<code>sgutil get ip [flags] [--help]</code>
 <p>
   &nbsp; &nbsp; Retreives IP information from the server/s.
 </p>
 <!-- The number of parallel client threads to run is four by default. -->
 
 ### Flags
-<code>
-  -w, --word <string>
-</code>
+<code>-w, --word <string></code>
 <p>
   &nbsp; &nbsp; Filters IP information according to regexp expression.
 </p>
 
-<code>
-  -h, --help <string>
-</code>
+<code>-h, --help <string></code>
 <p>
   &nbsp; &nbsp; Help to use this command.
 </p>

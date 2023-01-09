@@ -6,24 +6,18 @@
 
 ## sgutil program rescan
 
-<code>
-  sgutil program rescan [flags] [--help]
-</code>
+<code>sgutil program rescan [flags] [--help]</code>
 <p>
   &nbsp; &nbsp; Runs the PCI hot-plug process.
 </p>
 
 ### Flags
-<code>
-  -s, --serial <string>
-</code>
+<code>-s, --serial <string></code>
 <p>
   &nbsp; &nbsp; FPGA's serial number. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-serial.md">sgutil get serial</a>.
 </p>
 
-<code>
-  -h, --help <string>
-</code>
+<code>-h, --help <string></code>
 <p>
   &nbsp; &nbsp; Help to use this command.
 </p>

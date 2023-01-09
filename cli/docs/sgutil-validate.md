@@ -6,9 +6,7 @@
 
 ## sgutil validate
 
-<code>
-  sgutil validate [arguments [flags]] [--help]
-</code>
+<code>sgutil validate [arguments [flags]] [--help]</code>
 <p>
   &nbsp; &nbsp; Validates the basic HACC infrastructure functionality.
 </p>
@@ -18,9 +16,7 @@
 * [iperf](./sgutil-validate-iperf.md)
 * [mpi](./sgutil-validate-mpi.md)
 
-<code>
-  -h, --help
-</code>
+<code>-h, --help</code>
 <p>
   &nbsp; &nbsp; Help to use this command.
 </p>

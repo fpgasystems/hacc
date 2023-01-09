@@ -6,9 +6,7 @@
 
 ## sgutil program vitis
 
-<code>
-  sgutil program vitis [flags] [--help]
-</code>
+<code>sgutil program vitis [flags] [--help]</code>
 <p>
   &nbsp; &nbsp; Programs a Vitis FPGA-binary to a given device.
 </p>
@@ -28,16 +26,12 @@
   &nbsp; &nbsp; FPGA's device name. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-device.md">sgutil get device</a>.
 </p> -->
 
-<code>
-  -p, --project <string>
-</code>
+<code>-p, --project <string></code>
 <p>
   &nbsp; &nbsp; Specifies your Vitis project name.
 </p>
 
-<code>
-  -s, --serial <string>
-</code>
+<code>-s, --serial <string></code>
 <p>
   &nbsp; &nbsp; FPGA's serial number. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-serial.md">sgutil get serial</a>.
 </p>
@@ -49,9 +43,7 @@
   &nbsp; &nbsp; The name (and path) of the xclbin to be loaded.
 </p> -->
 
-<code>
-  -h, --help <string>
-</code>
+<code>-h, --help <string></code>
 <p>
   &nbsp; &nbsp; Help to program a binary.
 </p>

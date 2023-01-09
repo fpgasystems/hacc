@@ -6,9 +6,7 @@
 
 ## sgutil run
 
-<code>
-  sgutil run [arguments [flags]] [--help]
-</code>
+<code>sgutil run [arguments [flags]] [--help]</code>
 <p>
   &nbsp; &nbsp; Executes the accelerated application on a given device.
 </p>
@@ -18,9 +16,7 @@
 * [vitis](./sgutil-run-vitis.md)
 * vivado
 
-<code>
-  -h, --help
-</code>
+<code>-h, --help</code>
 <p>
   &nbsp; &nbsp; Help to use this command.
 </p>

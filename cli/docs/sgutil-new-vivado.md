@@ -6,9 +6,7 @@
 
 ## sgutil new vivado
 
-<code>
-  sgutil get vivado [--help]
-</code>
+<code>sgutil get vivado [--help]</code>
 <p>
   &nbsp; &nbsp; Creates a new project using Vivado Hello, world! template.
 </p>
