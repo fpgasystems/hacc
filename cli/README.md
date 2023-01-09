@@ -8,9 +8,7 @@
 ETHZ-HACC CLI brings Systems Group’s designs to your terminal and allows you to use [Vivado and Vitis workflows](../docs/vocabulary.md#vivado-and-vitis-workflows) seamlessly.
 
 ## sgutil
-```
-  sgutil [commands] [arguments [flags]] [--help] [--version] 
-```
+<code>sgutil [commands] [arguments [flags]] [--help] [--version]</code>
 
 ### Commands
 
@@ -26,12 +24,10 @@ ETHZ-HACC CLI brings Systems Group’s designs to your terminal and allows you t
 <!-- ### Options -->
 <code>-h, --help</code>
 <p>
-  &nbsp; &nbsp; Help to use this application.
+&nbsp; &nbsp; Help to use this application.
 </p>
 
-<code>
-  -v, --version
-</code>
+<code>-v, --version</code>
 <p>
   &nbsp; &nbsp; Reports CLI version.
 </p>
