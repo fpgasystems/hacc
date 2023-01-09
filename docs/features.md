@@ -7,15 +7,15 @@
 # Features
 
 ## CLI
-With ETHZ-HACC [CLI](../CLI/README.md#cli), you can easily:
+With ETHZ-HACC [CLI](../cli/README.md#cli), you can easily:
 
-* Validate the basic HACC infrastructure functionality (see [Infrastructure validation](../infrastructure-validation/README.md#infrastructure-validation)),
-* Make use of *out-of-the-box* [Examples](../examples/README.md#examples) and user functions that help you to build your accelerated applications,
+* Validate the basic HACC infrastructure functionality (see [Infrastructure validation](./infrastructure-validation.md)),
+* Make use of *out-of-the-box* [Examples](./examples.md#examples) and user functions that help you to build your accelerated applications,
 * Deploy, build and design using any of our shipped applications,
 * *Et cetera.*
 
 ## Vitis and Vivado workflows
-Thanks to our [hot-plug boot](./vocabulary.md#hot-plug-boot) process, we are able to transition between the [Vivado and Vitis workflows](./vocabulary.md#vivado-and-vitis-workflows) without the need of rebooting the system.
+Thanks to our [PCI hot-plug](./vocabulary.md#pci-hot-plug) process, we are able to transition between the [Vivado and Vitis workflows](./vocabulary.md#vivado-and-vitis-workflows) without the need of rebooting the system.
 
 ## Managed
 We use [Infrastructure as Code (IaC)](./vocabulary.md#infrastructure-as-code-iac) and [Ansible Automation Platform (AAP)](./vocabulary.md#ansible-automation-platform-aap) to [operate the cluster](../docs/operating-the-cluster.md#operating-the-cluster) efficiently. Under the scope of a [DevOps](./vocabulary.md#devops) methodology, we achieve the following: <!-- https://docs.microsoft.com/en-us/devops/deliver/what-is-infrastructure-as-code -->
