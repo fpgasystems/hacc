@@ -118,9 +118,17 @@ int main()
     // create configuration
     ofstream c = create_config_file();
     c << "#if !defined(MYLIB_CONSTANTS_H)\n";
-    c << "#define MYLIB_CONSTANTS_H 1\n" << std::endl;
+    c << "#define MYLIB_CONSTANTS_H 1\n";
     // config parameters
-
+    c << std::endl;
+    c << "const int T_clk = " <<  T_clk << ";" << std::endl;
+    c << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
+    c << "const int VECTOR_LENGTH_i = " <<  VECTOR_LENGTH << ";" << std::endl;
+    c << "const int FPGA_CLOCK_FREQUENCY = " <<  FPGA_CLOCK_FREQUENCY << ";" << std::endl;
+    c << "const int W = " <<  W << ";" << std::endl;
+    c << "const int F = " <<  F << ";" << std::endl;
+    c << "const double RMSE_MAX = " <<  RMSE_MAX << ";" << std::endl;
+    c << std::endl;
     // endif
     c << "#endif\n" << std::endl;
 
