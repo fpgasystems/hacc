@@ -7,7 +7,7 @@
 # Features
 
 ## CLI
-With SG [CLI](../CLI/README.md#cli), you can easily:
+With ETHZ-HACC [CLI](../CLI/README.md#cli), you can easily:
 
 * Validate the basic HACC infrastructure functionality (see [Infrastructure validation](../infrastructure-validation/README.md#infrastructure-validation)),
 * Make use of *out-of-the-box* [Examples](../examples/README.md#examples) and user functions that help you to build your accelerated applications,
