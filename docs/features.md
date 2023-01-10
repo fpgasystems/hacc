@@ -13,7 +13,7 @@ With ETHZ-HACC [CLI](../cli/README.md#cli), you can easily:
 * Transition between [Vivado and Vitis workflows](#vivado-and-vitis-workflows),
 * Learn about model-based design by making use of our *out-of-the-box* [Examples](./examples.md#examples),
 * Create your own Vivado or Vitis projects based on multiple-choice dialogs and templates—helping you to develop your accelerated applications more quickly, 
-* Design, build, and deploy modern FPGA-accelerated applications on top of our [Infrastructure for heterogeneous architectures and hardware acceleration](https://systems.ethz.ch/research/data-processing-on-modern-hardware/hardware-acceleration-infrastructure.html) (i.e., including ACCL, Coyote, or EasyNet),
+* Design, build, and deploy modern FPGA-accelerated applications on top of our [Infrastructure for heterogeneous architectures and hardware acceleration](https://systems.ethz.ch/research/data-processing-on-modern-hardware/hardware-acceleration-infrastructure.html) platform (including ACCL, Coyote, or EasyNet),
 * *Et cetera.*
 
 ## Vivado and Vitis workflows
