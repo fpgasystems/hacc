@@ -9,12 +9,14 @@
 ## CLI
 With ETHZ-HACC [CLI](../cli/README.md#cli), you can easily:
 
+* Transition between [Vivado and Vitis workflows](#vivado-and-vitis-workflows),
 * Validate the basic HACC infrastructure functionality (see [Infrastructure validation](./infrastructure-validation.md)),
 * Make use of *out-of-the-box* [Examples](./examples.md#examples) and user functions that help you to build your accelerated applications,
-* Deploy, build and design using any of our shipped applications,
+* Create your own Vivado or Vitis projects using CLI’s support, 
+* Deploy, build and design using any of our shipped applications (including EasyNet, ACCL, or Coyote),
 * *Et cetera.*
 
-## Vitis and Vivado workflows
+## Vivado and Vitis workflows
 Thanks to our [PCI hot-plug](./vocabulary.md#pci-hot-plug) process, we are able to transition between the [Vivado and Vitis workflows](./vocabulary.md#vivado-and-vitis-workflows) without the need of rebooting the system.
 
 ## Managed
