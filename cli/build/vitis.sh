@@ -31,7 +31,7 @@ do
     fi
 done
 
-# mandatory flags (-p and -t must be used)
+# mandatory flags (-p must be used)
 use_help="0"
 if [[ $project_found = "0" ]]; then
     use_help="1"
@@ -44,6 +44,17 @@ fi
 
 #print help
 if [[ $use_help = "1" ]]; then
+    /opt/cli/sgutil build vitis -h
+    exit
+fi
+
+# when used, project_name or serial_found cannot be empty
+if [ "$project_found" = "1" ] && [ "$project_name" = "" ]; then
+    /opt/cli/sgutil build vitis -h
+    exit
+fi
+
+if [ "$serial_found" = "1" ] && [ "$serial_number" = "" ]; then
     /opt/cli/sgutil build vitis -h
     exit
 fi

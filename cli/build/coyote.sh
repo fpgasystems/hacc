@@ -38,6 +38,17 @@ if [[ $project_found = "0" ]]; then
     exit
 fi
 
+# when used, device_name or project_name cannot be empty
+if [ "$name_found" = "1" ] && [ "$device_name" = "" ]; then
+    /opt/cli/sgutil build coyote -h
+    exit
+fi
+
+if [ "$project_found" = "1" ] && [ "$project_name" = "" ]; then
+    /opt/cli/sgutil build coyote -h
+    exit
+fi
+
 # check if project exists
 DIR="/home/$username/my_projects/coyote/$project_name"
 if ! [ -d "$DIR" ]; then

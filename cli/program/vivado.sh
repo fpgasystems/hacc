@@ -24,9 +24,13 @@ for (( i=0; i<${#flags[@]}; i++ ))
 do
     if [[ " ${flags[$i]} " =~ " -n " ]] || [[ " ${flags[$i]} " =~ " --name " ]]; then # flags[i] is -n or --name
         name_found="1"
+        name_idx=$(($i+1))
+        device_name=${flags[$name_idx]}
     fi
     if [[ " ${flags[$i]} " =~ " -s " ]] || [[ " ${flags[$i]} " =~ " --serial " ]]; then 
         serial_found="1"
+        serial_idx=$(($i+1))
+        serial_number=${flags[$serial_idx]}
     fi
     if [[ " ${flags[$i]} " =~ " -b " ]] || [[ " ${flags[$i]} " =~ " --bitstream " ]]; then 
         program_bitstream="1"
@@ -64,6 +68,22 @@ fi
 
 #print help
 if [[ $use_help = "1" ]]; then
+    /opt/cli/sgutil program vivado -h
+    exit
+fi
+
+# when used, bit_file, ltx_file or driver_file cannot be empty
+if [ "$program_bitstream" = "1" ] && [ "$bit_file" = "" ]; then
+    /opt/cli/sgutil program vivado -h
+    exit
+fi
+
+if [ "$ltx_found" = "1" ] && [ "$ltx_file" = "" ]; then
+    /opt/cli/sgutil program vivado -h
+    exit
+fi
+
+if [ "$program_driver" = "1" ] && [ "$driver_file" = "" ]; then
     /opt/cli/sgutil program vivado -h
     exit
 fi

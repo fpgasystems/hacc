@@ -53,26 +53,25 @@ use_help="0"
 if [[ $project_found = "0" ]]; then
     use_help="1"
 fi
-#if [[ $project_found = "1" ]] && [[ $target_found = "0" ]]; then 
-#    use_help="1"
-#fi
 
 # forbiden combinations (serial_found and target_found only make sense with project_found = 1)
 if [[ $project_found = "0" ]] && [[ $serial_found = "1" ]]; then
     use_help="1"
 fi
-#if [[ $project_found = "0" ]] && [[ $target_found = "1" ]]; then
-#    use_help="1"
-#fi
-
-# check on target
-#echo $target
-#if [[ $target =~ "sw_emu" ]] || [[ $target =~ "hw_emu" ]] || [[ $target =~ "hw" ]]; then
-#    echo "unexpected target"
-#fi
 
 #print help
 if [[ $use_help = "1" ]]; then
+    /opt/cli/sgutil run vitis -h
+    exit
+fi
+
+# when used, project_name or serial_found cannot be empty
+if [ "$project_found" = "1" ] && [ "$project_name" = "" ]; then
+    /opt/cli/sgutil run vitis -h
+    exit
+fi
+
+if [ "$serial_found" = "1" ] && [ "$serial_number" = "" ]; then
     /opt/cli/sgutil run vitis -h
     exit
 fi
