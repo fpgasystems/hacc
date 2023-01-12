@@ -71,7 +71,7 @@ Input Vector 2 from Global Memory --->|             |      |__|
 #include "../configs/config_000.hpp"
 
 // TRIPCOUNT identifier
-const int c_size = DATA_SIZE;
+const int c_size = VECTOR_LENGTH; //DATA_SIZE;
 
 static void load_input(hls::vector<uint32_t, NUM_WORDS>* in,
                        hls::stream<hls::vector<uint32_t, NUM_WORDS> >& inStream,

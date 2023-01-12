@@ -4,7 +4,7 @@
 const int DATA_SIZE = 4096;
 const int T_clk = 10;
 const int W_MAX = 8;
-const int VECTOR_LENGTH_i = 5;
+const int VECTOR_LENGTH = 4096;
 const int FPGA_CLOCK_FREQUENCY = 400;
 const int W = 7;
 const int F = 0;
