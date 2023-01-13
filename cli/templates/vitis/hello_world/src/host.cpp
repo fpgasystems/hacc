@@ -17,9 +17,7 @@
 #include "xcl2.hpp"
 #include <algorithm>
 #include <vector>
-
-//#include "../platform_params.hpp"
-
+#include "../platform_params.hpp"
 #include "../configs/config_000.hpp"
 
 //int load_config(int c)
