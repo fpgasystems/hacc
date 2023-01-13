@@ -3,13 +3,13 @@
 #include <algorithm>
 #include <filesystem>
 #include <fstream> 
+#include "../platform_params.hpp"
 
 namespace fs = std::filesystem;
 using namespace std;
 using std::filesystem::directory_iterator;
 
-#define STR_LENGTH 3
-
+//#define STRING_LENGTH 3 // ha d'anar al config
 
 void print_vector(std::string name, vector<int> v)
 {
@@ -64,7 +64,7 @@ ofstream create_config_file()
         n = n + 1;
     }
     string s = std::to_string(n);
-    unsigned int number_of_zeros = STR_LENGTH - s.length();
+    unsigned int number_of_zeros = STRING_LENGTH - s.length();
     s.insert(0, number_of_zeros, '0');
     s = "config_" + s;
     string aux = project_path + s + ".hpp";

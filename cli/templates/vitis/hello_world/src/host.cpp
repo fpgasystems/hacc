@@ -17,9 +17,24 @@
 #include "xcl2.hpp"
 #include <algorithm>
 #include <vector>
-// #define DATA_SIZE 4096
-
+#include "../platform_params.hpp"
 #include "../configs/config_000.hpp"
+
+void load_config(int c)
+{
+    cout << name + " [ ";
+    if (v.size() <= 10) {
+        for (int x : v)
+            cout << x << " ";
+    }
+    else {
+        int n = v.size() - 1;
+        std::string s0 = std::to_string(v[0]);
+        std::string s1 = std::to_string(v[n]);
+        cout << s0 + " .. " + s1;     
+    }
+    cout << "]: "; 
+}
 
 int main(int argc, char** argv) {
     if (argc != 2) {
