@@ -117,8 +117,8 @@ int main()
 
     // create configuration
     ofstream c = create_config_file();
-    c << "#if !defined(MYLIB_CONSTANTS_H)\n";
-    c << "#define MYLIB_CONSTANTS_H 1\n";
+    //c << "#if !defined(MYLIB_CONSTANTS_H)\n";
+    //c << "#define MYLIB_CONSTANTS_H 1\n";
     // config parameters
     c << std::endl;
     c << "const int T_clk = " <<  T_clk << ";" << std::endl;
@@ -130,7 +130,7 @@ int main()
     c << "const double RMSE_MAX = " <<  RMSE_MAX << ";" << std::endl;
     c << std::endl;
     // endif
-    c << "#endif\n" << std::endl;
+    //c << "#endif\n" << std::endl;
 
     return 0;
 }
