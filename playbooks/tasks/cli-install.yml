@@ -86,6 +86,11 @@
     mode: 0755
   when: templates_folder.stat.exists == False
 
+- name: remove template.hpp
+  ansible.builtin.file:
+    path: /opt/cli/templates/vitis/hello_world/configs/template.hpp
+    state: absent
+
 #build ----------------------------------------------------------------------------------------
 
 - name: copy (build) coyote script
