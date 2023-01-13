@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
     }
 
     std::string binaryFile = argv[1];
-    size_t vector_size_bytes = sizeof(int) * DATA_SIZE;
+    size_t vector_size_bytes = sizeof(int) * VECTOR_LENGTH; //DATA_SIZE;
     cl_int err;
     cl::Context context;
     cl::Kernel krnl_vector_add;
@@ -44,15 +44,15 @@ int main(int argc, char** argv) {
     // boundary. It will
     // ensure that user buffer is used when user create Buffer/Mem object with
     // CL_MEM_USE_HOST_PTR
-    std::vector<int, aligned_allocator<int> > source_in1(DATA_SIZE);
-    std::vector<int, aligned_allocator<int> > source_in2(DATA_SIZE);
-    std::vector<int, aligned_allocator<int> > source_hw_results(DATA_SIZE);
-    std::vector<int, aligned_allocator<int> > source_sw_results(DATA_SIZE);
+    std::vector<int, aligned_allocator<int> > source_in1(VECTOR_LENGTH); //DATA_SIZE
+    std::vector<int, aligned_allocator<int> > source_in2(VECTOR_LENGTH); //DATA_SIZE
+    std::vector<int, aligned_allocator<int> > source_hw_results(VECTOR_LENGTH); //DATA_SIZE
+    std::vector<int, aligned_allocator<int> > source_sw_results(VECTOR_LENGTH); //DATA_SIZE
 
     // Create the test data
     std::generate(source_in1.begin(), source_in1.end(), std::rand);
     std::generate(source_in2.begin(), source_in2.end(), std::rand);
-    for (int i = 0; i < DATA_SIZE; i++) {
+    for (int i = 0; i < VECTOR_LENGTH; i++) { //for (int i = 0; i < DATA_SIZE; i++) {
         source_sw_results[i] = source_in1[i] + source_in2[i];
         source_hw_results[i] = 0;
     }
@@ -97,7 +97,7 @@ int main(int argc, char** argv) {
     OCL_CHECK(err, cl::Buffer buffer_output(context, CL_MEM_USE_HOST_PTR | CL_MEM_WRITE_ONLY, vector_size_bytes,
                                             source_hw_results.data(), &err));
 
-    int size = DATA_SIZE;
+    int size = VECTOR_LENGTH; //DATA_SIZE; 
     OCL_CHECK(err, err = krnl_vector_add.setArg(0, buffer_in1));
     OCL_CHECK(err, err = krnl_vector_add.setArg(1, buffer_in2));
     OCL_CHECK(err, err = krnl_vector_add.setArg(2, buffer_output));
@@ -119,7 +119,7 @@ int main(int argc, char** argv) {
 
     // Compare the results of the Device to the simulation
     bool match = true;
-    for (int i = 0; i < DATA_SIZE; i++) {
+    for (int i = 0; i < VECTOR_LENGTH; i++) { //for (int i = 0; i < DATA_SIZE; i++) {
         if (source_hw_results[i] != source_sw_results[i]) {
             std::cout << "Error: Result mismatch" << std::endl;
             std::cout << "i = " << i << " CPU result = " << source_sw_results[i]
