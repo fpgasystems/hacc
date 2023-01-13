@@ -1,0 +1,14 @@
+---
+
+# templates
+#- name: Check on templates folder
+#  stat:
+#    path: "/opt/cli/templates" #[path to the file or directory you want to check]
+#  register: templates_folder
+
+- name: Copy templates
+  copy:
+    src: "../../cli/templates"
+    dest: /opt/cli/
+    mode: 0755
+#  when: templates_folder.stat.exists == False
