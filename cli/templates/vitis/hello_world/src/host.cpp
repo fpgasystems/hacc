@@ -18,7 +18,7 @@
 #include <algorithm>
 #include <vector>
 #include "../platform_params.hpp"
-#include "../configs/config_000.hpp"
+//#include "../configs/config_000.hpp"
 
 //int load_config(int c)
 //{
@@ -30,6 +30,8 @@ int main(int argc, char** argv) {
         std::cout << "Usage: " << argv[0] << " <XCLBIN File>" << std::endl;
         return EXIT_FAILURE;
     }
+
+    #include "../configs/config_000.hpp"
 
     std::string binaryFile = argv[1];
     size_t vector_size_bytes = sizeof(int) * VECTOR_LENGTH; //DATA_SIZE;
