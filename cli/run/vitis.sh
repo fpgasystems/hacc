@@ -99,6 +99,22 @@ do
     esac
 done
 
+cd $DIR/configs/
+files=( "config_"*.hpp )
+if [[ $(ls -l | wc -l) > 2 ]]; then
+    echo ""
+    echo "Please, choose your configuration:"
+    echo ""
+    PS3=""
+    select file in "${files[@]}"; do
+        if [[ -z $file ]]; then
+            echo "" >&/dev/null
+        else
+            break
+        fi
+    done
+fi
+
 #sgutil get serial only when we have one FPGA and not serial_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
     serial_number=$(sgutil get serial | cut -d "=" -f2)
