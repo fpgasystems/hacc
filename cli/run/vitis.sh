@@ -86,18 +86,6 @@ fi
 
 echo ""
 echo "${bold}sgutil run vitis${normal}"
-echo ""
-echo "Please, choose binary's execution target:"
-echo ""
-PS3=""
-select target in sw_emu hw_emu hw
-do
-    case $target in
-        sw_emu) break;;
-        hw_emu) break;;
-        hw) break;;
-    esac
-done
 
 cd $DIR/configs/
 files=( "config_"*.hpp )
@@ -114,6 +102,21 @@ if [[ $(ls -l | wc -l) > 2 ]]; then
         fi
     done
 fi
+
+#echo ""
+#echo "${bold}sgutil run vitis${normal}"
+echo ""
+echo "Please, choose binary's execution target:"
+echo ""
+PS3=""
+select target in sw_emu hw_emu hw
+do
+    case $target in
+        sw_emu) break;;
+        hw_emu) break;;
+        hw) break;;
+    esac
+done
 
 #sgutil get serial only when we have one FPGA and not serial_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
