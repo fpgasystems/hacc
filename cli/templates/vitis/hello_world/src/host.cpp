@@ -18,12 +18,7 @@
 #include <algorithm>
 #include <vector>
 #include "../platform_params.hpp"
-//#include "../configs/config_000.hpp"
-
-//int load_config(int c)
-//{
-//   return 0;
-//}
+#include "../configs/config_000.hpp" // config_000.hpp is overwritten with the configuration you select
 
 int main(int argc, char** argv) {
     if (argc != 2) {
@@ -31,7 +26,8 @@ int main(int argc, char** argv) {
         return EXIT_FAILURE;
     }
 
-    #include "../configs/config_000.hpp"
+    std::cout << "VECTOR_LENGTH:";
+    std::cout << std::to_string(VECTOR_LENGTH);
 
     std::string binaryFile = argv[1];
     size_t vector_size_bytes = sizeof(int) * VECTOR_LENGTH; //DATA_SIZE;

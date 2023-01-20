@@ -62,13 +62,15 @@ Input Vector 2 from Global Memory --->|             |      |__|
 #include <hls_vector.h>
 #include <hls_stream.h>
 #include "assert.h"
+#include "../platform_params.hpp"
+#include "../configs/config_000.hpp"
 
 #define MEMORY_DWIDTH 512
 #define SIZEOF_WORD 4
 #define NUM_WORDS ((MEMORY_DWIDTH) / (8 * SIZEOF_WORD))
 
 // #define DATA_SIZE 4096
-#include "../configs/config_000.hpp"
+//#include "../configs/config_000.hpp"
 
 // TRIPCOUNT identifier
 const int c_size = VECTOR_LENGTH; //DATA_SIZE;
