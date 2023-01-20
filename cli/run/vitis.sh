@@ -88,25 +88,28 @@ echo ""
 echo "${bold}sgutil run vitis${normal}"
 
 cd $DIR/configs/
-files=( "config_"*.hpp )
+configs=( "config_"*.hpp )
 if [[ $(ls -l | wc -l) > 2 ]]; then
     echo ""
-    echo "Please, choose your configuration:"
+    echo "${bold}Please, choose your configuration:${normal}"
     echo ""
     PS3=""
-    select file in "${files[@]}"; do
-        if [[ -z $file ]]; then
+    select config in "${configs[@]}"; do
+        if [[ -z $config ]]; then
             echo "" >&/dev/null
         else
             break
         fi
     done
+    # copy selected config as config_000.hpp
+    cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
 fi
+
 
 #echo ""
 #echo "${bold}sgutil run vitis${normal}"
 echo ""
-echo "Please, choose binary's execution target:"
+echo "${bold}Please, choose binary's execution target:${normal}"
 echo ""
 PS3=""
 select target in sw_emu hw_emu hw
