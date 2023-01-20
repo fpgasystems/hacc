@@ -88,8 +88,8 @@ echo ""
 echo "${bold}sgutil run vitis${normal}"
 
 cd $DIR/configs/
-configs=( "config_"*.hpp )
 if [[ $(ls -l | wc -l) > 2 ]]; then
+    configs=$(ls -I "config_000.hpp")
     echo ""
     echo "${bold}Please, choose your configuration:${normal}"
     echo ""
