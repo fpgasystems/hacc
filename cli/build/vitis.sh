@@ -69,6 +69,25 @@ fi
 
 echo ""
 echo "${bold}sgutil build vitis${normal}"
+
+cd $DIR/configs/
+if [[ $(ls -l | wc -l) > 2 ]]; then
+    configs=$(ls -I "config_000.hpp")
+    echo ""
+    echo "${bold}Please, choose your configuration:${normal}"
+    echo ""
+    PS3=""
+    select config in "${configs[@]}"; do
+        if [[ -z $config ]]; then
+            echo "" >&/dev/null
+        else
+            break
+        fi
+    done
+    # copy selected config as config_000.hpp
+    cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
+fi
+
 echo ""
 echo "Please, choose binary's compilation target:"
 echo ""
@@ -122,9 +141,9 @@ else
         echo ""        
 
         #compile src
-        cd $DIR/src
-        g++ -std=c++17 create_config.cpp -o ../create_config
-        g++ -std=c++17 create_data.cpp -o ../create_data
+        #cd $DIR/src
+        #g++ -std=c++17 create_config.cpp -o ../create_config
+        #g++ -std=c++17 create_data.cpp -o ../create_data
 
     else
         echo "${bold}PL kernel compilation and linking: generating .xo and .xclbin:${normal}"
