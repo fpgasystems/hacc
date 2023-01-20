@@ -105,9 +105,6 @@ if [[ $(ls -l | wc -l) > 2 ]]; then
     cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
 fi
 
-
-#echo ""
-#echo "${bold}sgutil run vitis${normal}"
 echo ""
 echo "${bold}Please, choose binary's execution target:${normal}"
 echo ""
