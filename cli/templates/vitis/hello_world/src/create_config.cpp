@@ -94,7 +94,7 @@ int main()
     vector<int> W_MAX_i{ 1, 2, 4, 8, 16, 32, 64, 128, 256 };
     int W_MAX = read_value("W_MAX", W_MAX_i);
     // VECTOR_LENGTH
-    vector<int> VECTOR_LENGTH_i{ 1, 2, 3, 4, 5, 10, 20 };
+    vector<int> VECTOR_LENGTH_i{ 16, 32, 48, 64, 80, 96, 112, 128 };
     int VECTOR_LENGTH = read_value("VECTOR_LENGTH", VECTOR_LENGTH_i);
     cout << "\n";
 
