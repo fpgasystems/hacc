@@ -138,7 +138,7 @@ else
         echo ""
         mkdir $BUILD_DIR
         cd $BUILD_DIR
-        cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config
+        /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config
 
         #generate bitstream
         echo ""
@@ -167,10 +167,9 @@ else
     cd $DRIVER_DIR && make
 
     #application compilation
-    #APP_DIR="/home/$username/my_projects/coyote/$project_name/sw"
-    APP_DIR="/home/$username/my_projects/coyote/$project_name/sw/build" #build_dir.sw_$config
+    APP_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build" #build_dir.sw_$config
     echo ""
-    echo "${bold}Application compilation:${normal}"
+    echo "${bold}Example application compilation:${normal}"
     echo ""
     echo "cmake ../ -DTARGET_DIR=../examples/$config && make"
     echo ""
@@ -178,11 +177,12 @@ else
         mkdir $APP_DIR
     fi
     cd $APP_DIR
-    cmake ../ -DTARGET_DIR=../examples/$config && make
+    #/usr/bin/cmake ../ -DTARGET_DIR=../examples/$config && make
+    /usr/bin/cmake ../../../ -DTARGET_DIR=examples/$config && make
 
-    echo ""
-    cd $APP_DIR
-    make
+    #echo ""
+    #cd $APP_DIR
+    #make
 
 fi
 
