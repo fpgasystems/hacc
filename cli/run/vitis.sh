@@ -88,13 +88,16 @@ echo ""
 echo "${bold}sgutil run vitis${normal}"
 
 cd $DIR/configs/
-if [[ $(ls -l | wc -l) > 2 ]]; then
-    configs=$(ls -I "config_000.hpp")
+if [[ $(ls -l | wc -l) = 3 ]]; then
+    #config_000 and config_001
+    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+elif [[ $(ls -l | wc -l) > 3 ]]; then
+    configs=( "config_"*.hpp )
     echo ""
     echo "${bold}Please, choose your configuration:${normal}"
     echo ""
     PS3=""
-    select config in "${configs[@]}"; do
+    select config in "${configs[@]:1}"; do # with :1 we avoid config_000.hpp
         if [[ -z $config ]]; then
             echo "" >&/dev/null
         else
