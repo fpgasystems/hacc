@@ -92,7 +92,7 @@ elif [[ $(ls -l | wc -l) > 3 ]]; then
 fi
 
 echo ""
-echo "Please, choose binary's compilation target:"
+echo "${bold}Please, choose binary's compilation target:${normal}"
 echo ""
 PS3=""
 select target in sw_emu hw_emu hw
