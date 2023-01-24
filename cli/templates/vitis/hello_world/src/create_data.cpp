@@ -10,40 +10,69 @@ using namespace std;
 
 using TYPE = string;                   // the type of your data; use string if unknown
 
+
+vector<TYPE> read_vector(string data_file_name, int idx)
+{
+   // initialize x
+   vector<TYPE> x;
+   for (int i = 0; i < VECTOR_LENGTH; i++)
+   {
+      x.push_back(to_string(i));
+   } 
+
+   // fill x
+   ifstream data_file(data_file_name);
+   string line;
+   if (data_file.is_open())
+   {
+      //int i = 0;
+      
+      while (getline(data_file, line))
+      {
+         if (idx == 0) // first vector
+         {
+            int j = 0;
+            stringstream ss(line);  
+            string word;
+            while (ss >> word) {
+               //cout << word << endl;
+               x[j] = word;
+               j++;
+            }
+            cout << endl;
+         } else if (idx == 1) { // second vector
+            int j = 0;
+            stringstream ss(line);  
+            string word;
+            while (ss >> word) {
+               //cout << word << endl;
+               x[j] = word;
+               j++;
+            }
+            cout << endl;
+         }
+         //i++;
+      }
+      data_file.close();
+   }
+   else cout << "Unable to open file";
+
+   return x;
+    
+}
+
+
+
 int main()
 {
-   string filename = "./input_data/data_000.txt";
-   vector< vector<TYPE> > data;
-   
-   ifstream in( filename );
-   for ( string line; getline( in, line ); )
-   {
-      stringstream ss( line );
-      vector<TYPE> row;
-      for ( TYPE d; ss >> d; ) row.push_back( d );
-      data.push_back( row );
-   }
 
-   cout << "Your data:\n";
-   for ( auto &row : data )
-   {
-      for ( auto &item : row ) cout << setw( 10 ) << item << ' ';
-      cout << '\n';
-   }
-
-   vector<string> x;
-   vector<string> y;
+   vector<TYPE> x;
+   vector<TYPE> y;
    
    for (int i = 0; i < VECTOR_LENGTH; i++)
    {
       x.push_back(to_string(i));
       y.push_back(to_string(i)); 
-   }
-
-   for(int i = 0; i < x.size(); i++)
-   {
-      cout<<x[i]<<" ";
-      cout<<y[i]<<" ";
    }
 
    ifstream data_file("./input_data/data_001.txt");
@@ -55,35 +84,27 @@ int main()
       {
          if (i == 0) // first vector
          {
-            
-            cout << "First line" << '\n';
-            //cout << line << '\n';
             int j = 0;
             stringstream ss(line);  
             string word;
-            while (ss >> word) { // Extract word from the stream.
-               cout << word << endl;
+            while (ss >> word) {
+               //cout << word << endl;
                x[j] = word;
                j++;
             }
-            cout << endl;
+            //cout << endl;
          } else if (i == 1) { // second vector
-            
-            cout << "Second line" << '\n';
-            //cout << line << '\n';
-
             int j = 0;
             stringstream ss(line);  
             string word;
-            while (ss >> word) { // Extract word from the stream.
-               cout << word << endl;
+            while (ss >> word) {
+               //cout << word << endl;
                y[j] = word;
                j++;
             }
-            cout << endl;
+            //cout << endl;
          }
          i++;
-         //cout << line << '\n';
       }
       data_file.close();
    }
@@ -92,9 +113,16 @@ int main()
    for(int i = 0; i < x.size(); i++)
    {
       cout<<x[i]<<" ";
+      //cout<<y[i]<<" ";
+   }
+   cout << endl;
+
+   for(int i = 0; i < x.size(); i++)
+   {
+      //cout<<x[i]<<" ";
       cout<<y[i]<<" ";
    }
-
+   cout << endl;
 
 }
 
