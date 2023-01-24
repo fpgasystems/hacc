@@ -75,7 +75,7 @@ int main()
       y.push_back(to_string(i)); 
    }
 
-   ifstream data_file("./input_data/data_001.txt");
+   ifstream data_file("./input_data/data_000.txt");
    string line;
    if (data_file.is_open())
    {
