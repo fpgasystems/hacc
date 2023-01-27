@@ -6,7 +6,7 @@
 
 # Support
 
-For support related to **accounts and accessibility,** please contact Kassiem Jacobs ([kassiem.jacobs@inf.ethz.ch](mailto:kassiem.jacobs@inf.ethz.ch)); for topics related to the Infrastructure or AMD Xilinx hardware and software technologies, please contact Javier Moya ([javier.moyapaya@inf.ethz.ch](mailto:javier.moyapaya@inf.ethz.ch))
+For support related to **accounts and accessibility,** please contact Kassiem Jacobs ([kassiem.jacobs@inf.ethz.ch](mailto:kassiem.jacobs@inf.ethz.ch)); for topics related to the Infrastructure or AMD Xilinx hardware and software technologies, please contact Javier Moya ([javier.moyapaya@inf.ethz.ch](mailto:javier.moyapaya@inf.ethz.ch)).
 
 ## Technical support
 As mentioned [here,](https://www.xilinx.com/member/xup_research_clusters.html) we do not provide technical support and you should not use any of ETH’s emails with that purpose. Instead, please write to [research_clusters@amd.com](mailto:research_clusters@amd.com) or join the [HACC Slack workspace](https://join.slack.com/t/xaccworkspace/shared_invite/zt-o2xkrmj6-51z5BlI5WCBjwgpFXbO6Kw) to interact with other researchers. 
