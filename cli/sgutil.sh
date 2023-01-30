@@ -230,10 +230,38 @@ new_help() {
     echo "ARGUMENTS:"
     echo "   coyote          - Creates a new project using Coyote Hello, world! template."
     echo "   vitis           - Creates a new project using Vitis Hello, world! template."
-    echo "   vivado          - Creates a new project using Vivado Hello, world! template."
+    #echo "   vivado          - Creates a new project using Vivado Hello, world! template."
     #echo "   bin             - Programs a Vitis FPGA-bitstream to a given device."
     #echo "   bit             - Programs a Vivado FPGA-bitstream to a given device."
     #echo "   drv             - Installs an FPGA driver on the server." 
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
+new_coyote_help() {
+    echo ""
+    echo "${bold}sgutil new coyote [--help]${normal}"
+    echo ""
+    echo "Creates a new project using Coyote Hello, world! template."
+    echo ""
+    echo "FLAGS"
+    echo "   This command has no flags."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
+new_vitis_help() {
+    echo ""
+    echo "${bold}sgutil new vitis [--help]${normal}"
+    echo ""
+    echo "Creates a new project using Vitis Hello, world! template."
+    echo ""
+    echo "FLAGS"
+    echo "   This command has no flags."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -406,6 +434,7 @@ validate_help() {
     echo "Validates the basic HACC infrastructure functionality."
     echo ""
     echo "ARGUMENTS:"
+    echo "   coyote          - Validates Coyote for a configuration of your choice."
     echo "   iperf           - Measures HACC network performance."
     echo "   mpi             - Validates MPI." 
     echo "" 
@@ -413,6 +442,20 @@ validate_help() {
     #echo "   openmpi         - Validates openmpi (to be removed)."
     echo ""
     exit 1
+}
+
+validate_coyote_help() {
+      echo ""
+      echo "${bold}sgutil validate coyote [--help]${normal}"
+      echo ""
+      echo "Validates Coyote for a configuration of your choice."
+      echo ""
+      echo "FLAGS:"
+      echo "   This command has no flags."
+      echo ""
+      echo "   -h, --help      - Help to use Coyote validation."
+      echo ""
+      exit 1
 }
 
 validate_iperf_help() {

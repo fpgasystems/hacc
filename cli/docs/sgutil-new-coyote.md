@@ -4,11 +4,11 @@
 <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-new.md#sgutil-new">Back to sgutil new</a>
 </p>
 
-## sgutil new vivado
+## sgutil new vitis
 
-<code>sgutil get vivado [--help]</code>
+<code>sgutil get coyote [--help]</code>
 <p>
-  &nbsp; &nbsp; Creates a new project using Vivado Hello, world! template.
+  &nbsp; &nbsp; Creates a new project using Coyote Hello, world! template.
 </p>
 <!-- The number of parallel client threads to run is four by default. -->
 
@@ -19,5 +19,5 @@
 
 ### Examples
 ```
-$ sgutil new vivado
+$ sgutil new coyote
 ```
