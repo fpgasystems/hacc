@@ -13,8 +13,8 @@
 
 ### Arguments
 
+* [coyote](./sgutil-new-coyote.md)
 * [vitis](./sgutil-new-vitis.md)
-* [vivado](./sgutil-new-vivado.md)
 
 <code>-h, --help</code>
 <p>
