@@ -108,11 +108,11 @@ case "$device_name" in
 esac
 
 # serial to platform
-cd /opt/xilinx/platforms
-n=$(ls -l | grep -c ^d)
-if [ $((n + 0)) -eq  1 ]; then
-    platform=$(echo *)
-fi
+#cd /opt/xilinx/platforms
+#n=$(ls -l | grep -c ^d)
+#if [ $((n + 0)) -eq  1 ]; then
+#    platform=$(echo *)
+#fi
 
 #change directory
 DIR="/home/$username/my_projects/coyote/$project_name"
