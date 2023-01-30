@@ -38,10 +38,10 @@ if ! [ -d "$DIR" ]; then
 fi
 
 # create coyote validate directory
-DIR="/home/$username/my_projects/coyote/validate"
-if ! [ -d "$DIR" ]; then
-    mkdir ${DIR}
-fi
+#DIR="/home/$username/my_projects/coyote/validate"
+#if ! [ -d "$DIR" ]; then
+#    mkdir ${DIR}
+#fi
 
 echo ""
 echo "${bold}sgutil build coyote${normal}"
@@ -105,38 +105,36 @@ if ! [ -d "$DIR" ]; then
     git clone https://github.com/fpgasystems/Coyote.git
     mv Coyote/* .
     rm -rf Coyote
-    build="1"
-    break
-fi
+    #build="1"
+    #break
 
-# create configuration file
-cd ${DIR}
-touch config.cpp
-case "$config" in
-    perf_host) 
-        echo "const int EN_HLS = 0;" > config.cpp
-        echo "const int EN_MEM = 0;" >> config.cpp
-        echo "const int EN_STRM = 1;" >> config.cpp
-        echo "const int EN_MEM = 0;" >> config.cpp
-        echo "const int N_REGIONS = 3;" >> config.cpp
-        declare -i N_REGIONS=3
-        ;;
-    perf_fpga)
-        #...
-        ;;
-    gbm_dtrees) 
-        #...
-        ;;
-    *)
-        echo ""
-        echo "Unknown configuration."
-        echo ""
-    ;;  
-esac
+    # create configuration file
+    touch config.cpp
+    case "$config" in
+        perf_host) 
+            echo "const int EN_HLS = 0;" > config.cpp
+            echo "const int EN_MEM = 0;" >> config.cpp
+            echo "const int EN_STRM = 1;" >> config.cpp
+            echo "const int EN_MEM = 0;" >> config.cpp
+            echo "const int N_REGIONS = 3;" >> config.cpp
+            declare -i N_REGIONS=3
+            ;;
+        perf_fpga)
+            #...
+            ;;
+        gbm_dtrees) 
+            #...
+            ;;
+        *)
+            echo ""
+            echo "Unknown configuration."
+            echo ""
+        ;;  
+    esac
 
-#bitstream compilation
-BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
-if ! [ -d "$BUILD_DIR" ]; then
+    #bitstream compilation
+    BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
+    echo ""
     echo "${bold}Bitstream compilation:${normal}"
     echo ""
     echo "cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config"
@@ -152,40 +150,54 @@ if ! [ -d "$BUILD_DIR" ]; then
     echo "make shell && make compile"
     echo ""
     make shell && make compile
+
+    #driver compilation
+    DRIVER_DIR="/home/$username/my_projects/coyote/$project_name/driver"
+    echo ""
+    echo "${bold}Driver compilation:${normal}"
+    echo ""
+    echo "cd $DRIVER_DIR && make"
+    echo ""
+    cd $DRIVER_DIR && make
+
+    #application compilation
+    APP_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build" #build_dir.sw_$config
+    echo ""
+    echo "${bold}Example application compilation:${normal}"
+    echo ""
+    echo "cmake ../ -DTARGET_DIR=../examples/$config && make"
+    echo ""
+    if ! [ -d "$APP_DIR" ]; then
+        mkdir $APP_DIR
+    fi
+    cd $APP_DIR
+    /usr/bin/cmake ../../../ -DTARGET_DIR=examples/$config && make
 else
-    echo "${bold}Bitstream compilation and generation:${normal}"
     echo ""
-    echo "cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config"
-    echo "make shell && make compile"
-    echo ""
-    echo "$BUILD_DIR already exists!"
-    #exit
+    echo "$project_name already exists!"
+    #echo ""
 fi
 
-#driver compilation
-DRIVER_DIR="/home/$username/my_projects/coyote/$project_name/driver"
-echo ""
-echo "${bold}Driver compilation:${normal}"
-echo ""
-echo "cd $DRIVER_DIR && make"
-echo ""
-cd $DRIVER_DIR && make
 
-#application compilation
-APP_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build" #build_dir.sw_$config
-echo ""
-echo "${bold}Example application compilation:${normal}"
-echo ""
-echo "cmake ../ -DTARGET_DIR=../examples/$config && make"
-echo ""
-if ! [ -d "$APP_DIR" ]; then
-    mkdir $APP_DIR
-fi
-cd $APP_DIR
-/usr/bin/cmake ../../../ -DTARGET_DIR=examples/$config && make
+
+#if ! [ -d "$BUILD_DIR" ]; then
+    
+#else
+#    echo "${bold}Bitstream compilation and generation:${normal}"
+#    echo ""
+#    echo "cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config"
+#    echo "make shell && make compile"
+#    echo ""
+#    echo "$BUILD_DIR already exists!"
+#    #exit
+#fi
 
 # program
 /opt/cli/sgutil program coyote -p $project_name
+
+# get N_REGIONS
+cd ${DIR}
+N_REGIONS=$(grep -n "N_REGIONS" config.cpp | sed 's/.*=//' | sed 's/;//')
 
 # get fpga_chmod for the total of regions (0 is already assigned)
 N_REGIONS=$(($N_REGIONS-1));
@@ -196,4 +208,5 @@ done
 
 # run 
 DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build"
+cd ${DIR}
 ./main
