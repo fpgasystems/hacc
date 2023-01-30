@@ -4,7 +4,7 @@
 <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-new.md#sgutil-new">Back to sgutil new</a>
 </p>
 
-## sgutil new vitis
+## sgutil new coyote
 
 <code>sgutil get coyote [--help]</code>
 <p>
