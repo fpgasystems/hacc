@@ -582,24 +582,32 @@ case "$command" in
     ;;
   new)
 
-    if [ "$#" -ne 2 ]; then
-      new_help
-      exit 1
-    fi
+    #if [ "$#" -ne 2 ]; then
+    #  new_help
+    #  exit 1
+    #fi
 
     case "$arguments" in
       -h|--help)
         new_help
         ;;
       coyote)
+        if [ "$#" -ne 2 ]; then
+          new_coyote_help
+          exit 1
+        fi
         /opt/cli/new/coyote
         ;;
       vitis)
+        if [ "$#" -ne 2 ]; then
+          new_vitis_help
+          exit 1
+        fi
         /opt/cli/new/vitis
         ;;
-      vivado)
-        /opt/cli/new/vivado
-        ;;
+      #vivado)
+      #  /opt/cli/new/vivado
+      #  ;;
       *)
         new_help
       ;;
