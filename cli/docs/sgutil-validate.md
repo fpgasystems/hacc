@@ -13,6 +13,7 @@
 
 ### Arguments
 
+* [coyote](./sgutil-validate-coyote.md)
 * [iperf](./sgutil-validate-iperf.md)
 * [mpi](./sgutil-validate-mpi.md)
 
