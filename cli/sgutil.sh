@@ -446,12 +446,12 @@ validate_help() {
 
 validate_coyote_help() {
       echo ""
-      echo "${bold}sgutil validate coyote [--help]${normal}"
+      echo "${bold}sgutil validate coyote [flags] [--help]${normal}"
       echo ""
       echo "Validates Coyote for a configuration of your choice."
       echo ""
       echo "FLAGS:"
-      echo "   This command has no flags."
+      echo "   -n, --name      - FPGA's device name. See sgutil get device."
       echo ""
       echo "   -h, --help      - Help to use Coyote validation."
       echo ""
@@ -671,8 +671,12 @@ case "$command" in
   validate)
     case "$arguments" in
       coyote)
-        valid_flags="-h --help"
-
+        valid_flags="-n --name -h --help"
+        #if [ "$#" -ne 2 ]; then
+        #  validate_coyote_help
+        #  exit 1
+        #fi
+        #/opt/cli/validate/coyote
         command_run $command_arguments_flags"@"$valid_flags
       ;;
       iperf)
