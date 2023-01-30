@@ -619,6 +619,11 @@ case "$command" in
     ;;
   validate)
     case "$arguments" in
+      coyote)
+        valid_flags="-h --help"
+
+        command_run $command_arguments_flags"@"$valid_flags
+      ;;
       iperf)
         
         #valid flags

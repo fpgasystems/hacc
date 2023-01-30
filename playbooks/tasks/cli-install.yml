@@ -354,6 +354,12 @@
     dest: /opt/cli/validate/mpi_hello.c
     mode: 0755
 
+- name: copy coyote script
+  copy:
+    src: "../../cli/validate/coyote.sh"
+    dest: /opt/cli/validate/coyote
+    mode: 0755
+
 #cli system-wide
 - name: /opt/cli to system-wide $PATH.
   copy:

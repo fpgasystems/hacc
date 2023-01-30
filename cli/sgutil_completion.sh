@@ -29,7 +29,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "coyote vitis --help" -- ${cur})) # -h
                     ;;
                 validate)
-                    COMPREPLY=($(compgen -W "iperf mpi --help" -- ${cur})) # -h
+                    COMPREPLY=($(compgen -W "coyote iperf mpi --help" -- ${cur})) # -h
                     ;;
             esac
             ;;
@@ -71,8 +71,11 @@ _sgutil_completions()
                 vitis)
                     COMPREPLY=($(compgen -W "--project --serial --help" -- ${cur})) # -b -n -s -t -h --binary --name --target 
                     ;;
-                iperf) # validate
-                    COMPREPLY=($(compgen -W " --bandwidth --parallel --time --udp --help" -- ${cur})) # -b -P -t -u -h
+                coyote) # validate
+                    COMPREPLY=($(compgen -W "--help" -- ${cur}))
+                    ;;
+                iperf)
+                    COMPREPLY=($(compgen -W "--bandwidth --parallel --time --udp --help" -- ${cur})) # -b -P -t -u -h
                     ;;
                 mpi) 
                     COMPREPLY=($(compgen -W "--processes --help" -- ${cur})) # -n -h
