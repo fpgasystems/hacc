@@ -90,8 +90,11 @@ case "$device_name" in
     ;;  
 esac
 
+# set project name
+project_name="validate_$config.$device_name"
+
 # create coyote validate config.device_name directory and checkout
-DIR="/home/$username/my_projects/coyote/validate_$config.$device_name"
+DIR="/home/$username/my_projects/coyote/$project_name"
 #build="0"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
@@ -131,13 +134,58 @@ case "$config" in
     ;;  
 esac
 
-# build project
-if [ "$build" = "1" ]; then
-    /opt/cli/sgutil build coyote -p validate_$config.$device_name
+#bitstream compilation
+BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
+if ! [ -d "$BUILD_DIR" ]; then
+    echo "${bold}Bitstream compilation:${normal}"
+    echo ""
+    echo "cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config"
+    echo ""
+    mkdir $BUILD_DIR
+    cd $BUILD_DIR
+    /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config
+
+    #generate bitstream
+    echo ""
+    echo "${bold}Bitstream generation:${normal}"
+    echo ""
+    echo "make shell && make compile"
+    echo ""
+    make shell && make compile
+else
+    echo "${bold}Bitstream compilation and generation:${normal}"
+    echo ""
+    echo "cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config"
+    echo "make shell && make compile"
+    echo ""
+    echo "$BUILD_DIR already exists!"
+    #exit
 fi
 
+#driver compilation
+DRIVER_DIR="/home/$username/my_projects/coyote/$project_name/driver"
+echo ""
+echo "${bold}Driver compilation:${normal}"
+echo ""
+echo "cd $DRIVER_DIR && make"
+echo ""
+cd $DRIVER_DIR && make
+
+#application compilation
+APP_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build" #build_dir.sw_$config
+echo ""
+echo "${bold}Example application compilation:${normal}"
+echo ""
+echo "cmake ../ -DTARGET_DIR=../examples/$config && make"
+echo ""
+if ! [ -d "$APP_DIR" ]; then
+    mkdir $APP_DIR
+fi
+cd $APP_DIR
+/usr/bin/cmake ../../../ -DTARGET_DIR=examples/$config && make
+
 # program
-/opt/cli/sgutil program coyote -p validate_$config.$device_name
+/opt/cli/sgutil program coyote -p $project_name
 
 # get fpga_chmod for the total of regions (0 is already assigned)
 N_REGIONS=$(($N_REGIONS-1));
@@ -147,5 +195,5 @@ do
 done
 
 # run 
-DIR="/home/$username/my_projects/coyote/validate_$config.$device_name/sw/examples/$config/build"
+DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build"
 ./main
