@@ -117,13 +117,30 @@ if ! [ -d "$DIR" ]; then
             echo "const int EN_STRM = 1;" >> config.cpp
             echo "const int EN_MEM = 0;" >> config.cpp
             echo "const int N_REGIONS = 3;" >> config.cpp
-            declare -i N_REGIONS=3
             ;;
         perf_fpga)
-            #...
+            echo "const int EN_HLS = 0;" > config.cpp
+            echo "const int EN_BPSS = 1;" >> config.cpp
+            echo "const int EN_STRM = 1;" >> config.cpp
+            echo "const int EN_MEM = 0;" >> config.cpp
+            echo "const int EN_WB = 1;" >> config.cpp
             ;;
         gbm_dtrees) 
-            #...
+            echo "const int EN_HLS = 0;" > config.cpp
+            echo "const int EN_STRM = 1;" >> config.cpp
+            echo "const int EN_MEM = 0;" >> config.cpp
+            ;;
+        hyperloglog) 
+            echo "const int EN_HLS = 1;" > config.cpp
+            echo "const int EN_STRM = 1;" >> config.cpp
+            echo "const int EN_MEM = 0;" >> config.cpp
+            ;;
+        perf_dram) 
+            echo "const int N_REGIONS = 4;" > config.cpp
+            echo "const int EN_HLS = 0;" >> config.cpp
+            echo "const int EN_STRM = 0;" >> config.cpp
+            echo "const int EN_MEM = 1;" >> config.cpp
+            echo "const int N_DDR_CHAN = 2;" >> config.cpp
             ;;
         *)
             echo ""
@@ -192,12 +209,21 @@ fi
 #    #exit
 #fi
 
+# revert to xrt first if FPGA is already in baremetal
+if [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then
+    /opt/cli/program/revert
+fi
+
+
 # program
 /opt/cli/sgutil program coyote -p $project_name
 
 # get N_REGIONS
 cd ${DIR}
 N_REGIONS=$(grep -n "N_REGIONS" config.cpp | sed 's/.*=//' | sed 's/;//')
+if [ "$N_REGIONS" = "" ]; then
+    N_REGIONS="1"
+fi
 
 # get fpga_chmod for the total of regions (0 is already assigned)
 N_REGIONS=$(($N_REGIONS-1));
