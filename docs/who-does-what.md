@@ -20,7 +20,7 @@ The following people are relevant for our ETHZ-Heterogeneous Compute Accelerated
 
 ### ETH Zürich Systems Group
 * [Dario Korolija](https://systems.ethz.ch/people/profile.MjUyNDEz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [Coyote](https://systems.ethz.ch/research/data-processing-on-modern-hardware/hardware-acceleration-infrastructure.html#coyote) project leader
-* [Kassiem Jacobs](https://biol.ethz.ch/en/the-department/people/person-detail.MTI1MDA2.TGlzdC80NjAsOTIzMDMxMjIy.html), IT, [DCIM](./vocabulary.md#dcim) 
+* [Kassiem Jacobs](https://biol.ethz.ch/en/the-department/people/person-detail.MTI1MDA2.TGlzdC80NjAsOTIzMDMxMjIy.html), IT coordinator, [DCIM](./vocabulary.md#dcim) 
 * [Fabio Maschi](https://systems.ethz.ch/people/profile.MjU0MTQy.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [Booking system](./booking-system.md#booking-system)
 * [Javier Moya](https://systems.ethz.ch/people/profile.Mjk5NjU5.TGlzdC8zODkxLDEyOTU2NDI2OTI=.html), Senior scientist, HACC coordinator, [CLI](../CLI/README.md#cli) project leader
 * [Runbin Shi](https://systems.ethz.ch/people/profile.Mjg2NjY4.TGlzdC8zODg5LDEyOTU2NDI2OTI=.html), Postdoctoral researcher, [Hardware-​centric Transaction Processing for Distributed Memory](https://systems.ethz.ch/research/data-processing-on-modern-hardware/database-acceleration.html#hardware-centric) project leader
