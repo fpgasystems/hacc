@@ -20,7 +20,6 @@ The following people are relevant for our ETHZ-Heterogeneous Compute Accelerated
 
 ### ETH Zürich Systems Group
 * [Dario Korolija](https://systems.ethz.ch/people/profile.MjUyNDEz.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [Coyote](https://systems.ethz.ch/research/data-processing-on-modern-hardware/hardware-acceleration-infrastructure.html#coyote) project leader
-<!-- * [Dimitrios Koutsoukos](https://systems.ethz.ch/people/profile.MjM5MDk0.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, IT coordinator -->
 * [Kassiem Jacobs](https://biol.ethz.ch/en/the-department/people/person-detail.MTI1MDA2.TGlzdC80NjAsOTIzMDMxMjIy.html), IT, [DCIM](./vocabulary.md#dcim) 
 * [Fabio Maschi](https://systems.ethz.ch/people/profile.MjU0MTQy.TGlzdC8zODg4LDEyOTU2NDI2OTI=.html), PhD student, [Booking system](./booking-system.md#booking-system)
 * [Javier Moya](https://systems.ethz.ch/people/profile.Mjk5NjU5.TGlzdC8zODkxLDEyOTU2NDI2OTI=.html), Senior scientist, HACC coordinator, [CLI](../CLI/README.md#cli) project leader
