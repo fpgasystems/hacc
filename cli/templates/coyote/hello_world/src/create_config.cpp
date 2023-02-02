@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <filesystem>
 #include <fstream> 
-#include "../platform_params.hpp"
+#include "../coyote_params.hpp"
 
 namespace fs = std::filesystem;
 using namespace std;
