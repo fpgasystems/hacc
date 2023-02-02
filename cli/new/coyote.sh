@@ -38,6 +38,11 @@ while true; do
         git clone https://github.com/fpgasystems/Coyote.git
         mv Coyote/* .
         rm -rf Coyote
+        #copy template
+        cp -rf /opt/cli/templates/coyote/hello_world/* $DIR
+        #compile src
+        cd $DIR/src
+        g++ -std=c++17 create_config.cpp -o ../create_config
         break
     fi
 done
