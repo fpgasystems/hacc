@@ -58,29 +58,31 @@ if ! [ -d "$DIR" ]; then
     exit
 fi
 
+#we compile create_config (in case there were changes)
+cd $DIR/src
+g++ -std=c++17 create_config.cpp -o ../create_config
+
 echo ""
 echo "${bold}sgutil build coyote${normal}"
-echo ""
-echo "Please, choose Coyote's configuration:"
-echo ""
-PS3=""
-select config in perf_host perf_fpga gbm_dtrees hyperloglog perf_dram perf_hbm perf_rdma_host perf_rdma_card perf_tcp rdma_regex service_aes service_reconfiguration
-do
-    case $config in
-        perf_host) break;;
-        perf_fpga) break;;
-        gbm_dtrees) break;;
-        hyperloglog) break;;
-        perf_dram) break;;
-        perf_hbm) break;;
-        perf_rdma_host) break;;
-        perf_rdma_card) break;;
-        perf_tcp) break;;
-        rdma_regex) break;;
-        service_aes) break;;
-        service_reconfiguration) break;;
-    esac
-done
+
+cd $DIR
+./create_config
+
+exit
+
+#PS3=""
+#select config in N_REGIONS N_DDR_CHAN EN_BPSS EN_HLS EN_MEM EN_STRM EN_WB
+#do
+#    case $config in
+#        N_REGIONS) break;;
+#        N_DDR_CHAN) break;;
+#        EN_BPSS) break;;
+#        EN_HLS) break;;
+#        EN_MEM) break;;
+#        EN_STRM) break;;
+#        EN_WB) break;;
+#    esac
+#done
 
 #sgutil get device if there is only one FPGA and not name_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
