@@ -49,23 +49,30 @@ echo ""
 echo "Please, choose Coyote's configuration:"
 echo ""
 PS3=""
-select config in perf_host perf_fpga gbm_dtrees hyperloglog perf_dram perf_hbm perf_rdma_host perf_rdma_card perf_tcp rdma_regex service_aes service_reconfiguration
+select config in perf_host perf_fpga perf_mem gbm_dtrees hyperloglog #perf_host perf_fpga gbm_dtrees hyperloglog perf_dram perf_hbm perf_mem perf_rdma perf_rdma_host perf_rdma_card perf_tcp rdma_regex service_aes service_reconfiguration
 do
     case $config in
-        perf_host) break;;
-        perf_fpga) break;;
-        gbm_dtrees) break;;
-        hyperloglog) break;;
-        perf_dram) break;;
-        perf_hbm) break;;
-        perf_rdma_host) break;;
-        perf_rdma_card) break;;
-        perf_tcp) break;;
-        rdma_regex) break;;
-        service_aes) break;;
-        service_reconfiguration) break;;
+        perf_host) break;;                  #1
+        perf_fpga) break;;                  #2
+        perf_mem) break;;                   #7
+        gbm_dtrees) break;;                 #3
+        hyperloglog) break;;                #4
     esac
 done
+# perf_host) break;;                  #1
+# perf_fpga) break;;                  #2
+# gbm_dtrees) break;;                 #3
+# hyperloglog) break;;                #4
+# perf_dram) break;;                  #5
+# perf_hbm) break;;                   #6
+# perf_mem) break;;                   #7
+# perf_rdma) break;;                  #7  #8
+# perf_rdma_host) break;;             #8  #9
+# perf_rdma_card) break;;             #9  #10
+# perf_tcp) break;;                   #10 #11
+# rdma_regex) break;;                 #11 #12
+# service_aes) break;;                #12 #13
+# service_reconfiguration) break;;    #13 #14
 
 #sgutil get device if there is only one FPGA and not name_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
