@@ -84,12 +84,14 @@ int main()
     } config;
 
     cout << "Simulation parameters: \n";
+    cout << "\n";
     // Tclk
     vector<int> T_clk_i{ 1, 2, 3, 4, 5, 10, 20, 30, 40, 50 };
     int T_clk = read_value("T_clk", T_clk_i);
     cout << "\n";
 
     cout << "Host parameters:  \n";
+    cout << "\n";
     // W_MAX
     vector<int> W_MAX_i{ 1, 2, 4, 8, 16, 32, 64, 128, 256 };
     int W_MAX = read_value("W_MAX", W_MAX_i);
@@ -99,6 +101,7 @@ int main()
     cout << "\n";
 
     cout << "Device parameters: \n";
+    cout << "\n";
     // FPGA_CLOCK_FREQUENCY
     vector<int> FPGA_CLOCK_FREQUENCY_i{ 100, 200, 300, 400 };
     int FPGA_CLOCK_FREQUENCY = read_value("FPGA_CLOCK_FREQUENCY", FPGA_CLOCK_FREQUENCY_i);
@@ -111,15 +114,13 @@ int main()
     cout << "\n";
 
     cout << "Test parameters: \n";
+    cout << "\n";
     cout << "RMSE_MAX: 0.01 \n";
     double RMSE_MAX = 0.01;
     cout << "\n";
 
     // create configuration
     ofstream c = create_config_file();
-    //c << "#if !defined(MYLIB_CONSTANTS_H)\n";
-    //c << "#define MYLIB_CONSTANTS_H 1\n";
-    // config parameters
     c << std::endl;
     c << "const int T_clk = " <<  T_clk << ";" << std::endl;
     c << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
@@ -129,8 +130,6 @@ int main()
     c << "const int F = " <<  F << ";" << std::endl;
     c << "const double RMSE_MAX = " <<  RMSE_MAX << ";" << std::endl;
     c << std::endl;
-    // endif
-    //c << "#endif\n" << std::endl;
 
     return 0;
 }
