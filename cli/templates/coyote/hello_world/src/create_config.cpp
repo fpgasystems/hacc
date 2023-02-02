@@ -54,7 +54,7 @@ vector<int> new_vector(int min_, int max_)
     return myVec;
 }
 
-ofstream create_config_file()
+ofstream create_config_file(int hw)
 {
     fs::path p = fs::current_path();
     string project_path = p.relative_path();
@@ -66,7 +66,12 @@ ofstream create_config_file()
     string s = std::to_string(n);
     unsigned int number_of_zeros = STRING_LENGTH - s.length();
     s.insert(0, number_of_zeros, '0');
-    s = "config_" + s;
+    if (hw == 1) {
+        s = "config_hw";
+    }
+    else {
+        s = "config_" + s;    
+    }
     string aux = project_path + s + ".hpp";
     std::ofstream o(aux.c_str());
     return o;
@@ -75,7 +80,9 @@ ofstream create_config_file()
 int main()
 {
 
-    cout << "\n\e[1mcreate_config\e[0m\n";
+    // Parameters according Coyote documentation (bitstream) -------------------------------------------------------------------------
+    
+    cout << "\n\e[1mBitstream (hardware) parameters:\e[0m\n";
     cout << "\n";
 
     struct {
@@ -83,13 +90,154 @@ int main()
         string myString;
     } config;
 
-    cout << "Simulation parameters: \n";
-    // Tclk
-    vector<int> T_clk_i{ 1, 2, 3, 4, 5, 10, 20, 30, 40, 50 };
-    int T_clk = read_value("T_clk", T_clk_i);
+    cout << "Global parameters: \n";
+    cout << "\n";
+
+    // N_REGIONS
+    vector<int> N_REGIONS_i{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+    int N_REGIONS = read_value("N_REGIONS", N_REGIONS_i);
+    // EN_PR
+    vector<int> EN_PR_i{ 0, 1 };
+    int EN_PR = read_value("EN_PR", EN_PR_i);
+    // N_CONFIG
+    vector<int> N_CONFIG_i{ 1, 2, 3, 4 };
+    int N_CONFIG = read_value("N_CONFIG", N_CONFIG_i);
+    // EN_HLS
+    vector<int> EN_HLS_i{ 0, 1 };
+    int EN_HLS = read_value("EN_HLS", EN_HLS_i);
+    cout << "\n";
+
+    cout << "Memory parameters: \n";
+    cout << "\n";
+
+    // EN_DDR
+    vector<int> EN_DDR_i{ 0, 1 };
+    int EN_DDR = read_value("EN_DDR", EN_DDR_i);
+    cout << "\n";
+    
+    // N_DDR_CHAN
+    vector<int> N_DDR_CHAN_i{ 0, 1, 2, 3, 4 };
+    int N_DDR_CHAN = read_value("N_DDR_CHAN", N_DDR_CHAN_i);
+    cout << "\n";
+
+    // EN_STRM
+    vector<int> EN_STRM_i{ 0, 1 };
+    int EN_STRM = read_value("EN_STRM", EN_STRM_i);
+    cout << "\n";
+    
+    // EN_HBM
+    vector<int> EN_HBM_i{ 0, 1 };
+    int EN_HBM = read_value("EN_HBM", EN_HBM_i);
+    cout << "\n";
+
+    cout << "Networking parameters: \n";
+    cout << "\n";
+
+    // EN_TCP_0
+    vector<int> EN_TCP_0_i{ 0, 1 };
+    int EN_TCP_0 = read_value("EN_TCP_0", EN_TCP_0_i);
+    cout << "\n";
+
+    // EN_TCP_1
+    vector<int> EN_TCP_1_i{ 0, 1 };
+    int EN_TCP_1 = read_value("EN_TCP_1", EN_TCP_1_i);
+    cout << "\n";
+
+    // EN_RDMA_0
+    vector<int> EN_RDMA_0_i{ 0, 1 };
+    int EN_RDMA_0 = read_value("EN_RDMA_0", EN_RDMA_0_i);
+    cout << "\n";
+
+    // EN_RDMA_1
+    vector<int> EN_RDMA_1_i{ 0, 1 };
+    int EN_RDMA_1 = read_value("EN_RDMA_1", EN_RDMA_1_i);
+    cout << "\n";
+
+    // EN_RPC
+    vector<int> EN_RPC_i{ 0, 1 };
+    int EN_RPC = read_value("EN_RPC", EN_RPC_i);
+    cout << "\n";
+
+    cout << "Clocking parameters: \n";
+    cout << "\n";
+
+    // EN_ACLK
+    vector<int> EN_ACLK_i{ 0, 1 };
+    int EN_ACLK = read_value("EN_ACLK", EN_ACLK_i);
+    cout << "\n";
+    int ACLK_F = 250;
+    if (EN_ACLK == 1) {
+        // ACLK_F
+        vector<int> ACLK_F_i{ 0, 1 };
+        ACLK_F = read_value("ACLK_F", ACLK_F_i);
+        cout << "\n";
+    }
+    
+    // EN_NCLK
+    vector<int> EN_NCLK_i{ 0, 1 };
+    int EN_NCLK = read_value("EN_NCLK", EN_NCLK_i);
+    cout << "\n";
+    int NCLK_F = 250;
+    if (EN_NCLK == 1) {
+        // NCLK_F
+        vector<int> NCLK_F_i{ 0, 1 };
+        NCLK_F = read_value("NCLK_F", NCLK_F_i);
+        cout << "\n";
+    }
+
+    // EN_UCLK
+    vector<int> EN_UCLK_i{ 0, 1 };
+    int EN_UCLK = read_value("EN_UCLK", EN_UCLK_i);
+    cout << "\n";
+    int UCLK_F = 300;
+    if (EN_UCLK == 1) {
+        // UCLK_F
+        vector<int> UCLK_F_i{ 0, 1 };
+        UCLK_F = read_value("UCLK_F", UCLK_F_i);
+        cout << "\n";
+    }
+
+    // create hardware configuration
+    ofstream c_hw = create_config_file(1);
+    c_hw << std::endl;
+    // Global parameters
+    c_hw << "const int N_REGIONS = " <<  N_REGIONS << ";" << std::endl;
+    c_hw << "const int EN_PR = " <<  EN_PR << ";" << std::endl;
+    c_hw << "const int N_CONFIG = " <<  N_CONFIG << ";" << std::endl;
+    c_hw << "const int EN_HLS = " <<  EN_HLS << ";" << std::endl;
+    // Memory parameters
+    c_hw << "const int EN_DDR = " <<  EN_DDR << ";" << std::endl;
+    c_hw << "const int N_DDR_CHAN = " <<  N_DDR_CHAN << ";" << std::endl;
+    c_hw << "const int EN_STRM = " <<  EN_STRM << ";" << std::endl;
+    c_hw << "const int EN_HBM = " <<  EN_HBM << ";" << std::endl;
+    // Networking parameters
+    c_hw << "const int EN_TCP_0 = " <<  EN_TCP_0 << ";" << std::endl;
+    c_hw << "const int EN_TCP_1 = " <<  EN_TCP_1 << ";" << std::endl;
+    c_hw << "const int EN_RDMA_0 = " <<  EN_RDMA_0 << ";" << std::endl;
+    c_hw << "const int EN_RDMA_1 = " <<  EN_RDMA_1 << ";" << std::endl;
+    c_hw << "const int EN_RPC = " <<  EN_RPC << ";" << std::endl;
+    // Cloking parameters
+    c_hw << "const int EN_ACLK = " <<  EN_ACLK << ";" << std::endl;
+    if (EN_ACLK == 1) {
+        c_hw << "const int ACLK_F = " <<  ACLK_F << ";" << std::endl;
+    }
+    c_hw << "const int EN_NCLK = " <<  EN_NCLK << ";" << std::endl;
+    if (EN_NCLK == 1) {
+        c_hw << "const int NCLK_F = " <<  NCLK_F << ";" << std::endl;
+    }
+    c_hw << "const int EN_UCLK = " <<  EN_UCLK << ";" << std::endl;
+    if (EN_UCLK == 1) {
+        c_hw << "const int UCLK_F = " <<  UCLK_F << ";" << std::endl;
+    }
+    c_hw << std::endl;
+
+    // Specific software parameters (your application) -------------------------------------------------------------------------
+
+    cout << "\n\e[1mApplication (software) parameters:\e[0m\n";
     cout << "\n";
 
     cout << "Host parameters:  \n";
+    cout << "\n";
     // W_MAX
     vector<int> W_MAX_i{ 1, 2, 4, 8, 16, 32, 64, 128, 256 };
     int W_MAX = read_value("W_MAX", W_MAX_i);
@@ -99,9 +247,7 @@ int main()
     cout << "\n";
 
     cout << "Device parameters: \n";
-    // FPGA_CLOCK_FREQUENCY
-    vector<int> FPGA_CLOCK_FREQUENCY_i{ 100, 200, 300, 400 };
-    int FPGA_CLOCK_FREQUENCY = read_value("FPGA_CLOCK_FREQUENCY", FPGA_CLOCK_FREQUENCY_i);
+    cout << "\n";
     // W
     vector<int> W_i = new_vector(1, W_MAX);
     int W = read_value("W", W_i);
@@ -111,26 +257,21 @@ int main()
     cout << "\n";
 
     cout << "Test parameters: \n";
+    cout << "\n";
     cout << "RMSE_MAX: 0.01 \n";
     double RMSE_MAX = 0.01;
     cout << "\n";
 
-    // create configuration
-    ofstream c = create_config_file();
-    //c << "#if !defined(MYLIB_CONSTANTS_H)\n";
-    //c << "#define MYLIB_CONSTANTS_H 1\n";
-    // config parameters
-    c << std::endl;
-    c << "const int T_clk = " <<  T_clk << ";" << std::endl;
-    c << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
-    c << "const int VECTOR_LENGTH = " <<  VECTOR_LENGTH << ";" << std::endl;
-    c << "const int FPGA_CLOCK_FREQUENCY = " <<  FPGA_CLOCK_FREQUENCY << ";" << std::endl;
-    c << "const int W = " <<  W << ";" << std::endl;
-    c << "const int F = " <<  F << ";" << std::endl;
-    c << "const double RMSE_MAX = " <<  RMSE_MAX << ";" << std::endl;
-    c << std::endl;
-    // endif
-    //c << "#endif\n" << std::endl;
+    // create software configuration
+    ofstream c_sw = create_config_file(0);
+    c_sw << std::endl;
+    c_sw << "const int N_REGIONS = " <<  N_REGIONS << ";" << std::endl;
+    c_sw << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
+    c_sw << "const int VECTOR_LENGTH = " <<  VECTOR_LENGTH << ";" << std::endl;
+    c_sw << "const int W = " <<  W << ";" << std::endl;
+    c_sw << "const int F = " <<  F << ";" << std::endl;
+    c_sw << "const double RMSE_MAX = " <<  RMSE_MAX << ";" << std::endl;
+    c_sw << std::endl;
 
     return 0;
 }
