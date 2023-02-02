@@ -15,16 +15,6 @@ read -a flags <<< "$@"
 #    exit
 #fi
 
-name_found="0"
-for (( i=0; i<${#flags[@]}; i++ ))
-do
-    if [[ " ${flags[$i]} " =~ " -n " ]] || [[ " ${flags[$i]} " =~ " --name " ]]; then 
-        name_found="1"
-        name_idx=$(($i+1))
-        device_name=${flags[$name_idx]}
-    fi
-done
-
 # create my_projects directory
 DIR="/home/$username/my_projects"
 if ! [ -d "$DIR" ]; then
@@ -37,11 +27,15 @@ if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
 
-# create coyote validate directory
-#DIR="/home/$username/my_projects/coyote/validate"
-#if ! [ -d "$DIR" ]; then
-#    mkdir ${DIR}
-#fi
+name_found="0"
+for (( i=0; i<${#flags[@]}; i++ ))
+do
+    if [[ " ${flags[$i]} " =~ " -n " ]] || [[ " ${flags[$i]} " =~ " --name " ]]; then 
+        name_found="1"
+        name_idx=$(($i+1))
+        device_name=${flags[$name_idx]}
+    fi
+done
 
 echo ""
 echo "${bold}sgutil build coyote${normal}"
@@ -132,6 +126,10 @@ if ! [ -d "$DIR" ]; then
             echo "const int EN_MEM = 0;" >> config.cpp
             echo "const int EN_WB = 1;" >> config.cpp
             ;;
+        perf_mem)
+            echo "const int XXX = Y;" > config.cpp
+            echo "const int XXX = Y;" >> config.cpp
+            ;;
         gbm_dtrees) 
             echo "const int EN_HLS = 0;" > config.cpp
             echo "const int EN_STRM = 1;" >> config.cpp
@@ -142,13 +140,13 @@ if ! [ -d "$DIR" ]; then
             echo "const int EN_STRM = 1;" >> config.cpp
             echo "const int EN_MEM = 0;" >> config.cpp
             ;;
-        perf_dram) 
-            echo "const int N_REGIONS = 4;" > config.cpp
-            echo "const int EN_HLS = 0;" >> config.cpp
-            echo "const int EN_STRM = 0;" >> config.cpp
-            echo "const int EN_MEM = 1;" >> config.cpp
-            echo "const int N_DDR_CHAN = 2;" >> config.cpp
-            ;;
+        #perf_dram) 
+        #    echo "const int N_REGIONS = 4;" > config.cpp
+        #    echo "const int EN_HLS = 0;" >> config.cpp
+        #    echo "const int EN_STRM = 0;" >> config.cpp
+        #    echo "const int EN_MEM = 1;" >> config.cpp
+        #    echo "const int N_DDR_CHAN = 2;" >> config.cpp
+        #    ;;
         *)
             echo ""
             echo "Unknown configuration."
