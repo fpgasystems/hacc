@@ -77,25 +77,31 @@ ofstream create_config_file(int hw)
     return o;
 }
 
-bool FileExists(string filename) {
-    struct stat fileInfo;
-    return stat(filename.c_str(), &fileInfo) == 0;
-}
-
-void demo_exists(const fs::path& p, fs::file_status s = fs::file_status{})
+bool file_exists(const fs::path& p, fs::file_status s = fs::file_status{})
 {
     std::cout << p;
-    if(fs::status_known(s) ? fs::exists(s) : fs::exists(p))
-        std::cout << " exists\n";
+    bool exist;
+    if (fs::status_known(s) ? fs::exists(s) : fs::exists(p))
+        //std::cout << " exists\n";
+        exist = 1;
     else
-        std::cout << " does not exist\n";
+        //std::cout << " does not exist\n";
+        exist = 0;
+        
+    return exist;
 }
 
 int main()
 {
 
     const fs::path config_hw{"./configs/config_hw.hpp"};
-    demo_exists(config_hw);
+    bool exist = file_exists(config_hw);
+    if (exist) {
+        std::cout << " exists\n";
+    }    
+    else {
+        std::cout << " does not exist\n";
+    }    
 
     // Parameters according Coyote documentation (bitstream) -------------------------------------------------------------------------
     
