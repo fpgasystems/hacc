@@ -63,7 +63,7 @@ ofstream create_config_file(int hw)
     for (const auto & file : directory_iterator(project_path)){
         n = n + 1;
     }
-    string s = std::to_string(n);
+    string s = std::to_string(n - 1); // we assume config_hw is always present too
     unsigned int number_of_zeros = STRING_LENGTH - s.length();
     s.insert(0, number_of_zeros, '0');
     if (hw == 1) {
@@ -77,8 +77,25 @@ ofstream create_config_file(int hw)
     return o;
 }
 
+bool FileExists(string filename) {
+    struct stat fileInfo;
+    return stat(filename.c_str(), &fileInfo) == 0;
+}
+
+void demo_exists(const fs::path& p, fs::file_status s = fs::file_status{})
+{
+    std::cout << p;
+    if(fs::status_known(s) ? fs::exists(s) : fs::exists(p))
+        std::cout << " exists\n";
+    else
+        std::cout << " does not exist\n";
+}
+
 int main()
 {
+
+    const fs::path config_hw{"./configs/config_hw.hpp"};
+    demo_exists(config_hw);
 
     // Parameters according Coyote documentation (bitstream) -------------------------------------------------------------------------
     
@@ -113,18 +130,12 @@ int main()
     // EN_DDR
     vector<int> EN_DDR_i{ 0, 1 };
     int EN_DDR = read_value("EN_DDR", EN_DDR_i);
-    cout << "\n";
-    
     // N_DDR_CHAN
     vector<int> N_DDR_CHAN_i{ 0, 1, 2, 3, 4 };
     int N_DDR_CHAN = read_value("N_DDR_CHAN", N_DDR_CHAN_i);
-    cout << "\n";
-
     // EN_STRM
     vector<int> EN_STRM_i{ 0, 1 };
-    int EN_STRM = read_value("EN_STRM", EN_STRM_i);
-    cout << "\n";
-    
+    int EN_STRM = read_value("EN_STRM", EN_STRM_i);    
     // EN_HBM
     vector<int> EN_HBM_i{ 0, 1 };
     int EN_HBM = read_value("EN_HBM", EN_HBM_i);
@@ -136,23 +147,15 @@ int main()
     // EN_TCP_0
     vector<int> EN_TCP_0_i{ 0, 1 };
     int EN_TCP_0 = read_value("EN_TCP_0", EN_TCP_0_i);
-    cout << "\n";
-
     // EN_TCP_1
     vector<int> EN_TCP_1_i{ 0, 1 };
     int EN_TCP_1 = read_value("EN_TCP_1", EN_TCP_1_i);
-    cout << "\n";
-
     // EN_RDMA_0
     vector<int> EN_RDMA_0_i{ 0, 1 };
     int EN_RDMA_0 = read_value("EN_RDMA_0", EN_RDMA_0_i);
-    cout << "\n";
-
     // EN_RDMA_1
     vector<int> EN_RDMA_1_i{ 0, 1 };
     int EN_RDMA_1 = read_value("EN_RDMA_1", EN_RDMA_1_i);
-    cout << "\n";
-
     // EN_RPC
     vector<int> EN_RPC_i{ 0, 1 };
     int EN_RPC = read_value("EN_RPC", EN_RPC_i);
@@ -164,37 +167,29 @@ int main()
     // EN_ACLK
     vector<int> EN_ACLK_i{ 0, 1 };
     int EN_ACLK = read_value("EN_ACLK", EN_ACLK_i);
-    cout << "\n";
     int ACLK_F = 250;
     if (EN_ACLK == 1) {
         // ACLK_F
-        vector<int> ACLK_F_i{ 0, 1 };
+        vector<int> ACLK_F_i{ 250, 300, 350, 400 };
         ACLK_F = read_value("ACLK_F", ACLK_F_i);
-        cout << "\n";
     }
-    
     // EN_NCLK
     vector<int> EN_NCLK_i{ 0, 1 };
     int EN_NCLK = read_value("EN_NCLK", EN_NCLK_i);
-    cout << "\n";
     int NCLK_F = 250;
     if (EN_NCLK == 1) {
         // NCLK_F
-        vector<int> NCLK_F_i{ 0, 1 };
+        vector<int> NCLK_F_i{ 250, 300, 350, 400 };
         NCLK_F = read_value("NCLK_F", NCLK_F_i);
-        cout << "\n";
     }
-
     // EN_UCLK
     vector<int> EN_UCLK_i{ 0, 1 };
     int EN_UCLK = read_value("EN_UCLK", EN_UCLK_i);
-    cout << "\n";
     int UCLK_F = 300;
     if (EN_UCLK == 1) {
         // UCLK_F
-        vector<int> UCLK_F_i{ 0, 1 };
+        vector<int> UCLK_F_i{ 300, 350, 400 };
         UCLK_F = read_value("UCLK_F", UCLK_F_i);
-        cout << "\n";
     }
 
     // create hardware configuration
@@ -218,22 +213,23 @@ int main()
     c_hw << "const int EN_RPC = " <<  EN_RPC << ";" << std::endl;
     // Cloking parameters
     c_hw << "const int EN_ACLK = " <<  EN_ACLK << ";" << std::endl;
-    if (EN_ACLK == 1) {
+    //if (EN_ACLK == 1) {
         c_hw << "const int ACLK_F = " <<  ACLK_F << ";" << std::endl;
-    }
+    //}
     c_hw << "const int EN_NCLK = " <<  EN_NCLK << ";" << std::endl;
-    if (EN_NCLK == 1) {
+    //if (EN_NCLK == 1) {
         c_hw << "const int NCLK_F = " <<  NCLK_F << ";" << std::endl;
-    }
+    //}
     c_hw << "const int EN_UCLK = " <<  EN_UCLK << ";" << std::endl;
-    if (EN_UCLK == 1) {
+    //if (EN_UCLK == 1) {
         c_hw << "const int UCLK_F = " <<  UCLK_F << ";" << std::endl;
-    }
+    //}
     c_hw << std::endl;
 
     // Specific software parameters (your application) -------------------------------------------------------------------------
 
-    cout << "\n\e[1mApplication (software) parameters:\e[0m\n";
+    cout << "\n";
+    cout << "\e[1mApplication (software) parameters:\e[0m\n";
     cout << "\n";
 
     cout << "Host parameters:  \n";
