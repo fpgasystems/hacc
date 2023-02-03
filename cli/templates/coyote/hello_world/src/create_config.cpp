@@ -79,158 +79,151 @@ ofstream create_config_file(int hw)
 
 bool file_exists(const fs::path& p, fs::file_status s = fs::file_status{})
 {
-    std::cout << p;
     bool exist;
     if (fs::status_known(s) ? fs::exists(s) : fs::exists(p))
-        //std::cout << " exists\n";
         exist = 1;
     else
-        //std::cout << " does not exist\n";
         exist = 0;
-        
+
     return exist;
 }
 
 int main()
 {
 
+    cout << "\n\e[1mcreate_config\e[0m\n";
+
     const fs::path config_hw{"./configs/config_hw.hpp"};
     bool exist = file_exists(config_hw);
-    if (exist) {
-        std::cout << " exists\n";
-    }    
-    else {
-        std::cout << " does not exist\n";
-    }    
-
-    // Parameters according Coyote documentation (bitstream) -------------------------------------------------------------------------
+    if (exist == 0) {
+        
+        // Parameters according Coyote documentation (bitstream) -------------------------------------------------------------------------
     
-    cout << "\n\e[1mBitstream (hardware) parameters:\e[0m\n";
-    cout << "\n";
+        cout << "\n\e[1mBitstream (hardware) parameters:\e[0m\n";
+        cout << "\n";
 
-    struct {
-        int myNum;
-        string myString;
-    } config;
+        //struct {
+        //    int myNum;
+        //    string myString;
+        //} config;
 
-    cout << "Global parameters: \n";
-    cout << "\n";
+        cout << "Global parameters: \n";
+        cout << "\n";
 
-    // N_REGIONS
-    vector<int> N_REGIONS_i{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
-    int N_REGIONS = read_value("N_REGIONS", N_REGIONS_i);
-    // EN_PR
-    vector<int> EN_PR_i{ 0, 1 };
-    int EN_PR = read_value("EN_PR", EN_PR_i);
-    // N_CONFIG
-    vector<int> N_CONFIG_i{ 1, 2, 3, 4 };
-    int N_CONFIG = read_value("N_CONFIG", N_CONFIG_i);
-    // EN_HLS
-    vector<int> EN_HLS_i{ 0, 1 };
-    int EN_HLS = read_value("EN_HLS", EN_HLS_i);
-    cout << "\n";
+        // N_REGIONS
+        vector<int> N_REGIONS_i{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+        int N_REGIONS = read_value("N_REGIONS", N_REGIONS_i);
+        // EN_PR
+        vector<int> EN_PR_i{ 0, 1 };
+        int EN_PR = read_value("EN_PR", EN_PR_i);
+        // N_CONFIG
+        vector<int> N_CONFIG_i{ 1, 2, 3, 4 };
+        int N_CONFIG = read_value("N_CONFIG", N_CONFIG_i);
+        // EN_HLS
+        vector<int> EN_HLS_i{ 0, 1 };
+        int EN_HLS = read_value("EN_HLS", EN_HLS_i);
+        cout << "\n";
 
-    cout << "Memory parameters: \n";
-    cout << "\n";
+        cout << "Memory parameters: \n";
+        cout << "\n";
 
-    // EN_DDR
-    vector<int> EN_DDR_i{ 0, 1 };
-    int EN_DDR = read_value("EN_DDR", EN_DDR_i);
-    // N_DDR_CHAN
-    vector<int> N_DDR_CHAN_i{ 0, 1, 2, 3, 4 };
-    int N_DDR_CHAN = read_value("N_DDR_CHAN", N_DDR_CHAN_i);
-    // EN_STRM
-    vector<int> EN_STRM_i{ 0, 1 };
-    int EN_STRM = read_value("EN_STRM", EN_STRM_i);    
-    // EN_HBM
-    vector<int> EN_HBM_i{ 0, 1 };
-    int EN_HBM = read_value("EN_HBM", EN_HBM_i);
-    cout << "\n";
+        // EN_DDR
+        vector<int> EN_DDR_i{ 0, 1 };
+        int EN_DDR = read_value("EN_DDR", EN_DDR_i);
+        // N_DDR_CHAN
+        vector<int> N_DDR_CHAN_i{ 0, 1, 2, 3, 4 };
+        int N_DDR_CHAN = read_value("N_DDR_CHAN", N_DDR_CHAN_i);
+        // EN_STRM
+        vector<int> EN_STRM_i{ 0, 1 };
+        int EN_STRM = read_value("EN_STRM", EN_STRM_i);    
+        // EN_HBM
+        vector<int> EN_HBM_i{ 0, 1 };
+        int EN_HBM = read_value("EN_HBM", EN_HBM_i);
+        cout << "\n";
 
-    cout << "Networking parameters: \n";
-    cout << "\n";
+        cout << "Networking parameters: \n";
+        cout << "\n";
 
-    // EN_TCP_0
-    vector<int> EN_TCP_0_i{ 0, 1 };
-    int EN_TCP_0 = read_value("EN_TCP_0", EN_TCP_0_i);
-    // EN_TCP_1
-    vector<int> EN_TCP_1_i{ 0, 1 };
-    int EN_TCP_1 = read_value("EN_TCP_1", EN_TCP_1_i);
-    // EN_RDMA_0
-    vector<int> EN_RDMA_0_i{ 0, 1 };
-    int EN_RDMA_0 = read_value("EN_RDMA_0", EN_RDMA_0_i);
-    // EN_RDMA_1
-    vector<int> EN_RDMA_1_i{ 0, 1 };
-    int EN_RDMA_1 = read_value("EN_RDMA_1", EN_RDMA_1_i);
-    // EN_RPC
-    vector<int> EN_RPC_i{ 0, 1 };
-    int EN_RPC = read_value("EN_RPC", EN_RPC_i);
-    cout << "\n";
+        // EN_TCP_0
+        vector<int> EN_TCP_0_i{ 0, 1 };
+        int EN_TCP_0 = read_value("EN_TCP_0", EN_TCP_0_i);
+        // EN_TCP_1
+        vector<int> EN_TCP_1_i{ 0, 1 };
+        int EN_TCP_1 = read_value("EN_TCP_1", EN_TCP_1_i);
+        // EN_RDMA_0
+        vector<int> EN_RDMA_0_i{ 0, 1 };
+        int EN_RDMA_0 = read_value("EN_RDMA_0", EN_RDMA_0_i);
+        // EN_RDMA_1
+        vector<int> EN_RDMA_1_i{ 0, 1 };
+        int EN_RDMA_1 = read_value("EN_RDMA_1", EN_RDMA_1_i);
+        // EN_RPC
+        vector<int> EN_RPC_i{ 0, 1 };
+        int EN_RPC = read_value("EN_RPC", EN_RPC_i);
+        cout << "\n";
 
-    cout << "Clocking parameters: \n";
-    cout << "\n";
+        cout << "Clocking parameters: \n";
+        cout << "\n";
 
-    // EN_ACLK
-    vector<int> EN_ACLK_i{ 0, 1 };
-    int EN_ACLK = read_value("EN_ACLK", EN_ACLK_i);
-    int ACLK_F = 250;
-    if (EN_ACLK == 1) {
-        // ACLK_F
-        vector<int> ACLK_F_i{ 250, 300, 350, 400 };
-        ACLK_F = read_value("ACLK_F", ACLK_F_i);
-    }
-    // EN_NCLK
-    vector<int> EN_NCLK_i{ 0, 1 };
-    int EN_NCLK = read_value("EN_NCLK", EN_NCLK_i);
-    int NCLK_F = 250;
-    if (EN_NCLK == 1) {
-        // NCLK_F
-        vector<int> NCLK_F_i{ 250, 300, 350, 400 };
-        NCLK_F = read_value("NCLK_F", NCLK_F_i);
-    }
-    // EN_UCLK
-    vector<int> EN_UCLK_i{ 0, 1 };
-    int EN_UCLK = read_value("EN_UCLK", EN_UCLK_i);
-    int UCLK_F = 300;
-    if (EN_UCLK == 1) {
-        // UCLK_F
-        vector<int> UCLK_F_i{ 300, 350, 400 };
-        UCLK_F = read_value("UCLK_F", UCLK_F_i);
-    }
+        // EN_ACLK
+        vector<int> EN_ACLK_i{ 0, 1 };
+        int EN_ACLK = read_value("EN_ACLK", EN_ACLK_i);
+        int ACLK_F = 250;
+        if (EN_ACLK == 1) {
+            // ACLK_F
+            vector<int> ACLK_F_i{ 250, 300, 350, 400 };
+            ACLK_F = read_value("ACLK_F", ACLK_F_i);
+        }
+        // EN_NCLK
+        vector<int> EN_NCLK_i{ 0, 1 };
+        int EN_NCLK = read_value("EN_NCLK", EN_NCLK_i);
+        int NCLK_F = 250;
+        if (EN_NCLK == 1) {
+            // NCLK_F
+            vector<int> NCLK_F_i{ 250, 300, 350, 400 };
+            NCLK_F = read_value("NCLK_F", NCLK_F_i);
+        }
+        // EN_UCLK
+        vector<int> EN_UCLK_i{ 0, 1 };
+        int EN_UCLK = read_value("EN_UCLK", EN_UCLK_i);
+        int UCLK_F = 300;
+        if (EN_UCLK == 1) {
+            // UCLK_F
+            vector<int> UCLK_F_i{ 300, 350, 400 };
+            UCLK_F = read_value("UCLK_F", UCLK_F_i);
+        }
 
-    // create hardware configuration
-    ofstream c_hw = create_config_file(1);
-    c_hw << std::endl;
-    // Global parameters
-    c_hw << "const int N_REGIONS = " <<  N_REGIONS << ";" << std::endl;
-    c_hw << "const int EN_PR = " <<  EN_PR << ";" << std::endl;
-    c_hw << "const int N_CONFIG = " <<  N_CONFIG << ";" << std::endl;
-    c_hw << "const int EN_HLS = " <<  EN_HLS << ";" << std::endl;
-    // Memory parameters
-    c_hw << "const int EN_DDR = " <<  EN_DDR << ";" << std::endl;
-    c_hw << "const int N_DDR_CHAN = " <<  N_DDR_CHAN << ";" << std::endl;
-    c_hw << "const int EN_STRM = " <<  EN_STRM << ";" << std::endl;
-    c_hw << "const int EN_HBM = " <<  EN_HBM << ";" << std::endl;
-    // Networking parameters
-    c_hw << "const int EN_TCP_0 = " <<  EN_TCP_0 << ";" << std::endl;
-    c_hw << "const int EN_TCP_1 = " <<  EN_TCP_1 << ";" << std::endl;
-    c_hw << "const int EN_RDMA_0 = " <<  EN_RDMA_0 << ";" << std::endl;
-    c_hw << "const int EN_RDMA_1 = " <<  EN_RDMA_1 << ";" << std::endl;
-    c_hw << "const int EN_RPC = " <<  EN_RPC << ";" << std::endl;
-    // Cloking parameters
-    c_hw << "const int EN_ACLK = " <<  EN_ACLK << ";" << std::endl;
-    //if (EN_ACLK == 1) {
+        // create hardware configuration
+        ofstream c_hw = create_config_file(1);
+        c_hw << std::endl;
+        // Global parameters
+        c_hw << "const int N_REGIONS = " <<  N_REGIONS << ";" << std::endl;
+        c_hw << "const int EN_PR = " <<  EN_PR << ";" << std::endl;
+        c_hw << "const int N_CONFIG = " <<  N_CONFIG << ";" << std::endl;
+        c_hw << "const int EN_HLS = " <<  EN_HLS << ";" << std::endl;
+        // Memory parameters
+        c_hw << "const int EN_DDR = " <<  EN_DDR << ";" << std::endl;
+        c_hw << "const int N_DDR_CHAN = " <<  N_DDR_CHAN << ";" << std::endl;
+        c_hw << "const int EN_STRM = " <<  EN_STRM << ";" << std::endl;
+        c_hw << "const int EN_HBM = " <<  EN_HBM << ";" << std::endl;
+        // Networking parameters
+        c_hw << "const int EN_TCP_0 = " <<  EN_TCP_0 << ";" << std::endl;
+        c_hw << "const int EN_TCP_1 = " <<  EN_TCP_1 << ";" << std::endl;
+        c_hw << "const int EN_RDMA_0 = " <<  EN_RDMA_0 << ";" << std::endl;
+        c_hw << "const int EN_RDMA_1 = " <<  EN_RDMA_1 << ";" << std::endl;
+        c_hw << "const int EN_RPC = " <<  EN_RPC << ";" << std::endl;
+        // Cloking parameters
+        c_hw << "const int EN_ACLK = " <<  EN_ACLK << ";" << std::endl;
         c_hw << "const int ACLK_F = " <<  ACLK_F << ";" << std::endl;
-    //}
-    c_hw << "const int EN_NCLK = " <<  EN_NCLK << ";" << std::endl;
-    //if (EN_NCLK == 1) {
+        c_hw << "const int EN_NCLK = " <<  EN_NCLK << ";" << std::endl;
         c_hw << "const int NCLK_F = " <<  NCLK_F << ";" << std::endl;
-    //}
-    c_hw << "const int EN_UCLK = " <<  EN_UCLK << ";" << std::endl;
-    //if (EN_UCLK == 1) {
+        c_hw << "const int EN_UCLK = " <<  EN_UCLK << ";" << std::endl;
         c_hw << "const int UCLK_F = " <<  UCLK_F << ";" << std::endl;
-    //}
-    c_hw << std::endl;
+        c_hw << std::endl;
+
+    }    
+    //else {
+    //    std::cout << " does not exist\n";
+    //}    
 
     // Specific software parameters (your application) -------------------------------------------------------------------------
 
@@ -267,7 +260,6 @@ int main()
     // create software configuration
     ofstream c_sw = create_config_file(0);
     c_sw << std::endl;
-    c_sw << "const int N_REGIONS = " <<  N_REGIONS << ";" << std::endl;
     c_sw << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
     c_sw << "const int VECTOR_LENGTH = " <<  VECTOR_LENGTH << ";" << std::endl;
     c_sw << "const int W = " <<  W << ";" << std::endl;
