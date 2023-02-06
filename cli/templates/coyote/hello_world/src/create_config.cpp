@@ -99,7 +99,7 @@ int main()
         
         // Parameters according Coyote documentation (bitstream) -------------------------------------------------------------------------
     
-        cout << "\n\e[1mBitstream (hardware) parameters:\e[0m\n";
+        cout << "\n\e[1mCoyote (shell) parameters:\e[0m\n";
         cout << "\n";
 
         //struct {
@@ -192,6 +192,18 @@ int main()
             UCLK_F = read_value("UCLK_F", UCLK_F_i);
         }
 
+        cout << "\n\e[1mApplication (hardware) parameters:\e[0m\n";
+        cout << "\n";
+
+        // W_MAX
+        vector<int> W_MAX_i{ 1, 2, 4, 8, 16, 32, 64, 128, 256 };
+        int W_MAX = read_value("W_MAX", W_MAX_i);
+
+        // VECTOR_LENGTH_MAX
+        vector<int> VECTOR_LENGTH_MAX_i{ 16, 32, 48, 64, 80, 96, 112, 128 };
+        int VECTOR_LENGTH_MAX = read_value("VECTOR_LENGTH_MAX", VECTOR_LENGTH_MAX_i);
+        cout << "\n";
+
         // create hardware configuration
         ofstream c_hw = create_config_file(1);
         c_hw << std::endl;
@@ -218,6 +230,9 @@ int main()
         c_hw << "const int NCLK_F = " <<  NCLK_F << ";" << std::endl;
         c_hw << "const int EN_UCLK = " <<  EN_UCLK << ";" << std::endl;
         c_hw << "const int UCLK_F = " <<  UCLK_F << ";" << std::endl;
+        // Application (hardware) parameters
+        c_hw << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
+        c_hw << "const int VECTOR_LENGTH_MAX = " <<  VECTOR_LENGTH_MAX << ";" << std::endl;
         c_hw << std::endl;
 
     }    
@@ -233,16 +248,6 @@ int main()
 
     cout << "Host parameters:  \n";
     cout << "\n";
-    // W_MAX
-    vector<int> W_MAX_i{ 1, 2, 4, 8, 16, 32, 64, 128, 256 };
-    int W_MAX = read_value("W_MAX", W_MAX_i);
-    // VECTOR_LENGTH
-    vector<int> VECTOR_LENGTH_i{ 16, 32, 48, 64, 80, 96, 112, 128 };
-    int VECTOR_LENGTH = read_value("VECTOR_LENGTH", VECTOR_LENGTH_i);
-    cout << "\n";
-
-    cout << "Device parameters: \n";
-    cout << "\n";
     // W
     vector<int> W_i = new_vector(1, W_MAX);
     int W = read_value("W", W_i);
@@ -250,6 +255,16 @@ int main()
     vector<int> F_i = new_vector(0, W);
     int F = read_value("F", F_i);
     cout << "\n";
+    // VECTOR_LENGTH
+    vector<int> VECTOR_LENGTH_i{ 16, 32, 48, 64, 80, 96, 112, 128 };
+    int VECTOR_LENGTH = read_value("VECTOR_LENGTH", VECTOR_LENGTH_i);
+    cout << "\n";
+
+    cout << "Device parameters: \n";
+    cout << "\n";
+    // FPGA_CLOCK_FREQUENCY
+    vector<int> FPGA_CLOCK_FREQUENCY_i{ 300, 350, 400 };
+    int FPGA_CLOCK_FREQUENCY = read_value("FPGA_CLOCK_FREQUENCY", FPGA_CLOCK_FREQUENCY_i);
 
     cout << "Test parameters: \n";
     cout << "\n";
@@ -260,10 +275,10 @@ int main()
     // create software configuration
     ofstream c_sw = create_config_file(0);
     c_sw << std::endl;
-    c_sw << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
-    c_sw << "const int VECTOR_LENGTH = " <<  VECTOR_LENGTH << ";" << std::endl;
     c_sw << "const int W = " <<  W << ";" << std::endl;
     c_sw << "const int F = " <<  F << ";" << std::endl;
+    c_sw << "const int VECTOR_LENGTH = " <<  VECTOR_LENGTH << ";" << std::endl;
+    c_sw << "const int FPGA_CLOCK_FREQUENCY = " <<  FPGA_CLOCK_FREQUENCY << ";" << std::endl;
     c_sw << "const double RMSE_MAX = " <<  RMSE_MAX << ";" << std::endl;
     c_sw << std::endl;
 
