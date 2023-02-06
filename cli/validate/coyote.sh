@@ -40,7 +40,7 @@ done
 echo ""
 echo "${bold}sgutil build coyote${normal}"
 echo ""
-echo "Please, choose Coyote's configuration:"
+echo "Please, choose Coyote's configuration:" # this refers to a software (sw/examples) configuration
 echo ""
 PS3=""
 select config in perf_host perf_fpga perf_mem gbm_dtrees hyperloglog #perf_host perf_fpga gbm_dtrees hyperloglog perf_dram perf_hbm perf_mem perf_rdma perf_rdma_host perf_rdma_card perf_tcp rdma_regex service_aes service_reconfiguration
@@ -74,28 +74,54 @@ if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
 fi
 
 # device_name to coyote string <===========================================================================
-case "$device_name" in
-    xcu250_0) 
-        FDEV_NAME="u250"
-        ;;
-    xcu50_u55n_0)
-        FDEV_NAME="u50"
-        ;;
-    xcu280_u55c_0) 
-        FDEV_NAME="u55c"
-        ;;
-    *)
-        echo ""
-        echo "Unknown device name."
-        echo ""
-    ;;  
-esac
+FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
+if [ "$FDEV_NAME" = "u50d" ]; then
+    FDEV_NAME="u50"
+fi
+#echo "-------------"
+#echo "$FDEV_NAME"
+#echo "-------------"
 
 # set project name
 project_name="validate_$config.$device_name"
 
-# create coyote validate config.device_name directory and checkout
+#define directories
 DIR="/home/$username/my_projects/coyote/$project_name"
+BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
+DRIVER_DIR="/home/$username/my_projects/coyote/$project_name/driver"
+APP_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build"
+
+# adjust perf_mem validation
+if [ "$config" = "perf_mem" ]; then
+    case "$FDEV_NAME" in
+        u250) 
+            config_hw="perf_dram"
+            ;;
+        u280) 
+            config_hw="perf_hbm"
+            ;;
+        u50)
+            config_hw="perf_hbm"
+            ;;
+        u55c)
+            config_hw="perf_hbm"
+            ;; 
+        *)
+            echo ""
+            echo "Unknown device name."
+            echo ""
+        ;;  
+    esac
+else
+    config_hw=$config
+fi
+#echo "-------------"
+#echo "$config"
+#echo "$config_hw"
+#echo "-------------"
+
+# create coyote validate config.device_name directory and checkout
+#DIR="/home/$username/my_projects/coyote/$project_name"
 #build="0"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
@@ -111,7 +137,7 @@ if ! [ -d "$DIR" ]; then
 
     # create configuration file
     touch config.cpp
-    case "$config" in
+    case "$config_hw" in #config
         perf_host) 
             echo "const int EN_HLS = 0;" > config.cpp
             echo "const int EN_MEM = 0;" >> config.cpp
@@ -126,9 +152,18 @@ if ! [ -d "$DIR" ]; then
             echo "const int EN_MEM = 0;" >> config.cpp
             echo "const int EN_WB = 1;" >> config.cpp
             ;;
-        perf_mem)
-            echo "const int XXX = Y;" > config.cpp
-            echo "const int XXX = Y;" >> config.cpp
+        perf_hbm)
+            echo "const int N_REGIONS = 4;" > config.cpp
+            echo "const int EN_HLS = 0;" >> config.cpp
+            echo "const int EN_STRM = 0;" >> config.cpp
+            echo "const int EN_MEM = 1;" >> config.cpp
+            ;;
+        perf_dram)
+            echo "const int N_REGIONS = 4;" > config.cpp
+            echo "const int EN_HLS = 0;" >> config.cpp
+            echo "const int EN_STRM = 0;" >> config.cpp
+            echo "const int EN_MEM = 1;" >> config.cpp
+            echo "const int N_DDR_CHAN = 2;" >> config.cpp
             ;;
         gbm_dtrees) 
             echo "const int EN_HLS = 0;" > config.cpp
@@ -155,15 +190,15 @@ if ! [ -d "$DIR" ]; then
     esac
 
     #bitstream compilation
-    BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
+    #BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
     echo ""
     echo "${bold}Bitstream compilation:${normal}"
     echo ""
-    echo "cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config"
+    echo "cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config_hw"
     echo ""
     mkdir $BUILD_DIR
     cd $BUILD_DIR
-    /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config
+    /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config_hw #$config
 
     #generate bitstream
     echo ""
@@ -174,7 +209,7 @@ if ! [ -d "$DIR" ]; then
     make shell && make compile
 
     #driver compilation
-    DRIVER_DIR="/home/$username/my_projects/coyote/$project_name/driver"
+    #DRIVER_DIR="/home/$username/my_projects/coyote/$project_name/driver"
     echo ""
     echo "${bold}Driver compilation:${normal}"
     echo ""
@@ -183,7 +218,7 @@ if ! [ -d "$DIR" ]; then
     cd $DRIVER_DIR && make
 
     #application compilation
-    APP_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build" #build_dir.sw_$config
+    #APP_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build" #build_dir.sw_$config
     echo ""
     echo "${bold}Example application compilation:${normal}"
     echo ""
@@ -219,7 +254,6 @@ if [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then
     /opt/cli/program/revert
 fi
 
-
 # program
 /opt/cli/sgutil program coyote -p $project_name
 
@@ -238,6 +272,6 @@ do
 done
 
 # run 
-DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build"
-cd ${DIR}
+#DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build"
+cd /home/$username/my_projects/coyote/$project_name/sw/examples/$config/build #${DIR}
 ./main
