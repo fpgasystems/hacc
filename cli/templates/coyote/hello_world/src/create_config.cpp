@@ -207,6 +207,7 @@ int main()
         // create hardware configuration
         ofstream c_hw = create_config_file(1);
         c_hw << std::endl;
+        // Coyote (shell) parameters
         // Global parameters
         c_hw << "const int N_REGIONS = " <<  N_REGIONS << ";" << std::endl;
         c_hw << "const int EN_PR = " <<  EN_PR << ";" << std::endl;
