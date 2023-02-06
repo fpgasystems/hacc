@@ -87,11 +87,23 @@ fi
 echo ""
 echo "${bold}sgutil run vitis${normal}"
 
+#create or select a configuration
 cd $DIR/configs/
-if [[ $(ls -l | wc -l) = 3 ]]; then
-    #config_000 and config_001
+if [[ $(ls -l | wc -l) = 2 ]]; then
+    #only config_000 exists and we create config_001
+    #cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+    #cd $DIR
+    #./create_config
+    #cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+
+    echo "Please run build first."
+
+
+elif [[ $(ls -l | wc -l) = 3 ]]; then
+    #config_000 and config_001 exist
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
 elif [[ $(ls -l | wc -l) > 3 ]]; then
+    cd $DIR/configs/
     configs=( "config_"*.hpp )
     echo ""
     echo "${bold}Please, choose your configuration:${normal}"
