@@ -122,21 +122,20 @@ int main()
         cout << "\n\e[1mApplication (hardware) parameters:\e[0m\n";
         cout << "\n";
 
+        // N_MAX (VECTOR_LENGTH_MAX)
+        vector<int> N_MAX_i{ 16, 32, 48, 64, 80, 96, 112, 128 };
+        int N_MAX = read_value("N_MAX", N_MAX_i);
+        
         // W_MAX
         vector<int> W_MAX_i{ 1, 2, 4, 8, 16, 32, 64, 128, 256 };
         int W_MAX = read_value("W_MAX", W_MAX_i);
-
-        // VECTOR_LENGTH_MAX
-        vector<int> VECTOR_LENGTH_MAX_i{ 16, 32, 48, 64, 80, 96, 112, 128 };
-        int VECTOR_LENGTH_MAX = read_value("VECTOR_LENGTH_MAX", VECTOR_LENGTH_MAX_i);
-        cout << "\n";
 
         // create hardware configuration
         ofstream c_hw = create_config_file(1);
         c_hw << std::endl;
         // Application (hardware) parameters
+        c_hw << "const int N_MAX = " <<  N_MAX << ";" << std::endl;
         c_hw << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
-        c_hw << "const int VECTOR_LENGTH_MAX = " <<  VECTOR_LENGTH_MAX << ";" << std::endl;
         c_hw << std::endl;
 
     }
@@ -147,15 +146,26 @@ int main()
     cout << "\e[1mApplication (software) parameters:\e[0m\n";
     cout << "\n";
 
-    cout << "Simulation parameters: \n";
-    cout << "\n";
+    //cout << "Simulation parameters: \n";
+    //cout << "\n";
     // Tclk
-    vector<int> T_clk_i{ 1, 2, 3, 4, 5, 10, 20, 30, 40, 50 };
-    int T_clk = read_value("T_clk", T_clk_i);
-    cout << "\n";
+    //vector<int> T_clk_i{ 1, 2, 3, 4, 5, 10, 20, 30, 40, 50 };
+    //int T_clk = read_value("T_clk", T_clk_i);
+    //cout << "\n";
 
     cout << "Host parameters:  \n";
     cout << "\n";
+    
+    // Tclk
+    vector<int> T_clk_i{ 1, 2, 3, 4, 5, 10, 20, 30, 40, 50 };
+    int T_clk = read_value("T_clk", T_clk_i);
+    // N (VECTOR_LENGTH)
+    int N_MAX = read_parameter("./configs/config_hw.hpp", "N_MAX");
+    vector<int> N_i;
+    for (int i = 16; i <= N_MAX; i = i + 16) {
+        N_i.push_back(i);
+    }
+    int N = read_value("N", N_i);
     // W
     int W_MAX = read_parameter("./configs/config_hw.hpp", "W_MAX");
     vector<int> W_i = new_vector(1, W_MAX);
@@ -163,13 +173,6 @@ int main()
     // F
     vector<int> F_i = new_vector(0, W);
     int F = read_value("F", F_i);
-    // VECTOR_LENGTH
-    int VECTOR_LENGTH_MAX = read_parameter("./configs/config_hw.hpp", "VECTOR_LENGTH_MAX");
-    vector<int> VECTOR_LENGTH_i;
-    for (int i = 16; i <= VECTOR_LENGTH_MAX; i = i + 16) {
-        VECTOR_LENGTH_i.push_back(i);
-    }
-    int VECTOR_LENGTH = read_value("VECTOR_LENGTH", VECTOR_LENGTH_i);
     cout << "\n";
 
     cout << "Device parameters: \n";
@@ -188,9 +191,9 @@ int main()
     ofstream c = create_config_file(0);
     c << std::endl;
     c << "const int T_clk = " <<  T_clk << ";" << std::endl;
+    c << "const int N = " <<  N << ";" << std::endl;
     c << "const int W = " <<  W << ";" << std::endl;
     c << "const int F = " <<  F << ";" << std::endl;
-    c << "const int VECTOR_LENGTH = " <<  VECTOR_LENGTH << ";" << std::endl;    
     c << "const int FPGA_CLOCK_FREQUENCY = " <<  FPGA_CLOCK_FREQUENCY << ";" << std::endl;
     c << "const double RMSE_MAX = " <<  RMSE_MAX << ";" << std::endl;
     c << std::endl;

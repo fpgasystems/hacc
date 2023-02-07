@@ -23,7 +23,7 @@ Struct read_data(string data_file_name)
    // initialize x
    vector<TYPE> x;
    vector<TYPE> y;
-   for (int i = 0; i < VECTOR_LENGTH; i++)
+   for (int i = 0; i < N; i++)
    {
       x.push_back(to_string(i));
       y.push_back(to_string(i));
@@ -82,7 +82,7 @@ int main()
    vector<TYPE> x;
    vector<TYPE> y;
    
-   for (int i = 0; i < VECTOR_LENGTH; i++)
+   for (int i = 0; i < N; i++)
    {
       x.push_back(to_string(i));
       y.push_back(to_string(i)); 
