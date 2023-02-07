@@ -3,13 +3,12 @@
 #include <algorithm>
 #include <filesystem>
 #include <fstream> 
+#include <regex>
 #include "../platform_params.hpp"
 
 namespace fs = std::filesystem;
 using namespace std;
 using std::filesystem::directory_iterator;
-
-//#define STRING_LENGTH 3 // ha d'anar al config
 
 void print_vector(std::string name, vector<int> v)
 {
@@ -54,7 +53,7 @@ vector<int> new_vector(int min_, int max_)
     return myVec;
 }
 
-ofstream create_config_file()
+ofstream create_config_file(int hw)
 {
     fs::path p = fs::current_path();
     string project_path = p.relative_path();
@@ -63,25 +62,90 @@ ofstream create_config_file()
     for (const auto & file : directory_iterator(project_path)){
         n = n + 1;
     }
-    string s = std::to_string(n);
+    string s = std::to_string(n - 1); // we assume config_hw is always present too
     unsigned int number_of_zeros = STRING_LENGTH - s.length();
     s.insert(0, number_of_zeros, '0');
-    s = "config_" + s;
+    if (hw == 1) {
+        s = "config_hw";
+    }
+    else {
+        s = "config_" + s;    
+    }
     string aux = project_path + s + ".hpp";
     std::ofstream o(aux.c_str());
     return o;
+}
+
+bool file_exists(const fs::path& p, fs::file_status s = fs::file_status{})
+{
+    bool exist;
+    if (fs::status_known(s) ? fs::exists(s) : fs::exists(p))
+        exist = 1;
+    else
+        exist = 0;
+
+    return exist;
+}
+
+int read_parameter(string conf_name, string parameter)
+{
+
+  ifstream ifs(conf_name);
+  string word = parameter;
+  std::regex e{"\\b" + word + "\\b"};
+
+  string line;
+  while( getline(ifs, line ))
+  {
+    if ( regex_search(line, e) ){
+      int firstDelPos = line.find("=");
+      // Find the position of second delimiter
+      int secondDelPos = line.find(";");
+      // Get the substring between two delimiters
+      line = line.substr(firstDelPos+1, secondDelPos-firstDelPos-1);
+      line.erase(std::remove_if(line.begin(), line.end(), ::isspace),
+        line.end());
+      return stoi(line);
+    }
+  }
 }
 
 int main()
 {
 
     cout << "\n\e[1mcreate_config\e[0m\n";
-    cout << "\n";
 
-    struct {
-        int myNum;
-        string myString;
-    } config;
+    const fs::path config_hw{"./configs/config_hw.hpp"};
+    bool exist = file_exists(config_hw);
+    if (exist == 0) {
+
+        cout << "\n\e[1mApplication (hardware) parameters:\e[0m\n";
+        cout << "\n";
+
+        // W_MAX
+        vector<int> W_MAX_i{ 1, 2, 4, 8, 16, 32, 64, 128, 256 };
+        int W_MAX = read_value("W_MAX", W_MAX_i);
+
+        // VECTOR_LENGTH_MAX
+        vector<int> VECTOR_LENGTH_MAX_i{ 16, 32, 48, 64, 80, 96, 112, 128 };
+        int VECTOR_LENGTH_MAX = read_value("VECTOR_LENGTH_MAX", VECTOR_LENGTH_MAX_i);
+        cout << "\n";
+
+        // create hardware configuration
+        ofstream c_hw = create_config_file(1);
+        c_hw << std::endl;
+        // Application (hardware) parameters
+        c_hw << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
+        c_hw << "const int VECTOR_LENGTH_MAX = " <<  VECTOR_LENGTH_MAX << ";" << std::endl;
+        c_hw << std::endl;
+
+    }
+    
+    // Specific software parameters (your application) -------------------------------------------------------------------------
+
+    cout << "\n";
+    cout << "\e[1mApplication (software) parameters:\e[0m\n";
+    cout << "\n";
 
     cout << "Simulation parameters: \n";
     cout << "\n";
@@ -92,11 +156,19 @@ int main()
 
     cout << "Host parameters:  \n";
     cout << "\n";
-    // W_MAX
-    vector<int> W_MAX_i{ 1, 2, 4, 8, 16, 32, 64, 128, 256 };
-    int W_MAX = read_value("W_MAX", W_MAX_i);
+    // W
+    int W_MAX = read_parameter("./configs/config_hw.hpp", "W_MAX");
+    vector<int> W_i = new_vector(1, W_MAX);
+    int W = read_value("W", W_i);
+    // F
+    vector<int> F_i = new_vector(0, W);
+    int F = read_value("F", F_i);
     // VECTOR_LENGTH
-    vector<int> VECTOR_LENGTH_i{ 16, 32, 48, 64, 80, 96, 112, 128 };
+    int VECTOR_LENGTH_MAX = read_parameter("./configs/config_hw.hpp", "VECTOR_LENGTH_MAX");
+    vector<int> VECTOR_LENGTH_i;
+    for (int i = 16; i <= VECTOR_LENGTH_MAX; i = i + 16) {
+        VECTOR_LENGTH_i.push_back(i);
+    }
     int VECTOR_LENGTH = read_value("VECTOR_LENGTH", VECTOR_LENGTH_i);
     cout << "\n";
 
@@ -105,13 +177,6 @@ int main()
     // FPGA_CLOCK_FREQUENCY
     vector<int> FPGA_CLOCK_FREQUENCY_i{ 100, 200, 300, 400 };
     int FPGA_CLOCK_FREQUENCY = read_value("FPGA_CLOCK_FREQUENCY", FPGA_CLOCK_FREQUENCY_i);
-    // W
-    vector<int> W_i = new_vector(1, W_MAX);
-    int W = read_value("W", W_i);
-    // F
-    vector<int> F_i = new_vector(0, W);
-    int F = read_value("F", F_i);
-    cout << "\n";
 
     cout << "Test parameters: \n";
     cout << "\n";
@@ -119,15 +184,14 @@ int main()
     double RMSE_MAX = 0.01;
     cout << "\n";
 
-    // create configuration
-    ofstream c = create_config_file();
+    // create software configuration
+    ofstream c = create_config_file(0);
     c << std::endl;
     c << "const int T_clk = " <<  T_clk << ";" << std::endl;
-    c << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
-    c << "const int VECTOR_LENGTH = " <<  VECTOR_LENGTH << ";" << std::endl;
-    c << "const int FPGA_CLOCK_FREQUENCY = " <<  FPGA_CLOCK_FREQUENCY << ";" << std::endl;
     c << "const int W = " <<  W << ";" << std::endl;
     c << "const int F = " <<  F << ";" << std::endl;
+    c << "const int VECTOR_LENGTH = " <<  VECTOR_LENGTH << ";" << std::endl;    
+    c << "const int FPGA_CLOCK_FREQUENCY = " <<  FPGA_CLOCK_FREQUENCY << ";" << std::endl;
     c << "const double RMSE_MAX = " <<  RMSE_MAX << ";" << std::endl;
     c << std::endl;
 
