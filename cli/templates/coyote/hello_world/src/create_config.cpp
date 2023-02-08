@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <filesystem>
 #include <fstream> 
+#include <regex>
 #include "../coyote_params.hpp"
 
 namespace fs = std::filesystem;
@@ -63,11 +64,11 @@ ofstream create_config_file(int hw)
     for (const auto & file : directory_iterator(project_path)){
         n = n + 1;
     }
-    string s = std::to_string(n - 1); // we assume config_hw is always present too
+    string s = std::to_string(n - 1); // we assume config_shell is always present too
     unsigned int number_of_zeros = STRING_LENGTH - s.length();
     s.insert(0, number_of_zeros, '0');
     if (hw == 1) {
-        s = "config_hw";
+        s = "config_shell";
     }
     else {
         s = "config_" + s;    
@@ -88,24 +89,41 @@ bool file_exists(const fs::path& p, fs::file_status s = fs::file_status{})
     return exist;
 }
 
+int read_parameter(string conf_name, string parameter)
+{
+
+  ifstream ifs(conf_name);
+  string word = parameter;
+  std::regex e{"\\b" + word + "\\b"};
+
+  string line;
+  while( getline(ifs, line ))
+  {
+    if ( regex_search(line, e) ){
+      int firstDelPos = line.find("=");
+      // Find the position of second delimiter
+      int secondDelPos = line.find(";");
+      // Get the substring between two delimiters
+      line = line.substr(firstDelPos+1, secondDelPos-firstDelPos-1);
+      line.erase(std::remove_if(line.begin(), line.end(), ::isspace),
+        line.end());
+      return stoi(line);
+    }
+  }
+}
+
 int main()
 {
 
     cout << "\n\e[1mcreate_config\e[0m\n";
 
-    const fs::path config_hw{"./configs/config_hw.hpp"};
-    bool exist = file_exists(config_hw);
+    const fs::path config_shell{"./configs/config_shell.hpp"};
+    bool exist = file_exists(config_shell);
     if (exist == 0) {
         
-        // Parameters according Coyote documentation (bitstream) -------------------------------------------------------------------------
-    
+        // Parameters according Coyote documentation (bitstream)
         cout << "\n\e[1mCoyote (shell) parameters:\e[0m\n";
         cout << "\n";
-
-        //struct {
-        //    int myNum;
-        //    string myString;
-        //} config;
 
         cout << "Global parameters: \n";
         cout << "\n";
@@ -192,7 +210,7 @@ int main()
             UCLK_F = read_value("UCLK_F", UCLK_F_i);
         }
 
-        cout << "\n\e[1mApplication (hardware) parameters:\e[0m\n";
+        /* cout << "\n\e[1mApplication (hardware) parameters:\e[0m\n";
         cout << "\n";
 
         // W_MAX
@@ -202,7 +220,7 @@ int main()
         // VECTOR_LENGTH_MAX
         vector<int> VECTOR_LENGTH_MAX_i{ 16, 32, 48, 64, 80, 96, 112, 128 };
         int VECTOR_LENGTH_MAX = read_value("VECTOR_LENGTH_MAX", VECTOR_LENGTH_MAX_i);
-        cout << "\n";
+        cout << "\n"; */
 
         // create hardware configuration
         ofstream c_hw = create_config_file(1);
@@ -232,56 +250,88 @@ int main()
         c_hw << "const int EN_UCLK = " <<  EN_UCLK << ";" << std::endl;
         c_hw << "const int UCLK_F = " <<  UCLK_F << ";" << std::endl;
         // Application (hardware) parameters
-        c_hw << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
-        c_hw << "const int VECTOR_LENGTH_MAX = " <<  VECTOR_LENGTH_MAX << ";" << std::endl;
+        //c_hw << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
+        //c_hw << "const int VECTOR_LENGTH_MAX = " <<  VECTOR_LENGTH_MAX << ";" << std::endl;
         c_hw << std::endl;
 
     }    
-    //else {
-    //    std::cout << " does not exist\n";
-    //}    
 
-    // Specific software parameters (your application) -------------------------------------------------------------------------
+    cout << "\n\e[1mApplication (hardware) parameters:\e[0m\n";
+    cout << "\n";
+
+    // N_MAX (VECTOR_LENGTH_MAX)
+    vector<int> N_MAX_i{ 16, 32, 48, 64, 80, 96, 112, 128 };
+    int N_MAX = read_value("N_MAX", N_MAX_i);
+        
+    // W_MAX
+    vector<int> W_MAX_i{ 1, 2, 4, 8, 16, 32, 64, 128, 256 };
+    int W_MAX = read_value("W_MAX", W_MAX_i);
+
+    // CLK_F_MAX (USER LOGIC CLOCK FREQUENCY)
+    //vector<int> CLK_F_MAX_i{ 250, 300, 350, 400 };
+    //int CLK_F_MAX = read_value("CLK_F_MAX", CLK_F_MAX_i);
 
     cout << "\n";
     cout << "\e[1mApplication (software) parameters:\e[0m\n";
     cout << "\n";
 
+    //cout << "Simulation parameters: \n";
+    //cout << "\n";
+    // Tclk
+    //vector<int> TLCK_i{ 1, 2, 3, 4, 5, 10, 20, 30, 40, 50 };
+    //int TCLK = read_value("TCLK", TLCK_i);
+    //cout << "\n";
+
     cout << "Host parameters:  \n";
     cout << "\n";
+    
+    // N (VECTOR_LENGTH)
+    vector<int> N_i;
+    for (int i = 16; i <= N_MAX; i = i + 16) {
+        N_i.push_back(i);
+    }
+    int N = read_value("N", N_i);
     // W
     vector<int> W_i = new_vector(1, W_MAX);
     int W = read_value("W", W_i);
     // F
     vector<int> F_i = new_vector(0, W);
     int F = read_value("F", F_i);
-    cout << "\n";
-    // VECTOR_LENGTH
-    vector<int> VECTOR_LENGTH_i{ 16, 32, 48, 64, 80, 96, 112, 128 };
-    int VECTOR_LENGTH = read_value("VECTOR_LENGTH", VECTOR_LENGTH_i);
+    // T_CLK
+    vector<int> TLCK_i{ 1, 2, 3, 4, 5, 10, 20, 30, 40, 50 };
+    int T_CLK = read_value("T_CLK", TLCK_i);
     cout << "\n";
 
     cout << "Device parameters: \n";
     cout << "\n";
-    // FPGA_CLOCK_FREQUENCY
-    vector<int> FPGA_CLOCK_FREQUENCY_i{ 300, 350, 400 };
-    int FPGA_CLOCK_FREQUENCY = read_value("FPGA_CLOCK_FREQUENCY", FPGA_CLOCK_FREQUENCY_i);
 
+    // CLK_F
+    int UCLK_F = read_parameter("./configs/config_shell.hpp", "UCLK_F");
+    vector<int> CLK_F_i;
+    for (int i = 250; i <= UCLK_F; i = i + 50) {
+        CLK_F_i.push_back(i);
+    }
+    int CLK_F = read_value("CLK_F", CLK_F_i);
+    cout << "\n";
+    
     cout << "Test parameters: \n";
     cout << "\n";
-    cout << "RMSE_MAX: 0.01 \n";
-    double RMSE_MAX = 0.01;
+    cout << "RMSE: 0.01 \n";
+    double RMSE = 0.01;
     cout << "\n";
 
-    // create software configuration
-    ofstream c_sw = create_config_file(0);
-    c_sw << std::endl;
-    c_sw << "const int W = " <<  W << ";" << std::endl;
-    c_sw << "const int F = " <<  F << ";" << std::endl;
-    c_sw << "const int VECTOR_LENGTH = " <<  VECTOR_LENGTH << ";" << std::endl;
-    c_sw << "const int FPGA_CLOCK_FREQUENCY = " <<  FPGA_CLOCK_FREQUENCY << ";" << std::endl;
-    c_sw << "const double RMSE_MAX = " <<  RMSE_MAX << ";" << std::endl;
-    c_sw << std::endl;
+    // create config file
+    ofstream c = create_config_file(0);
+    c << std::endl;
+    c << "const int N_MAX = " <<  N_MAX << ";" << std::endl;
+    c << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
+    c << "const int N = " <<  N << ";" << std::endl;
+    c << "const int W = " <<  W << ";" << std::endl;
+    c << "const int F = " <<  F << ";" << std::endl;
+    c << "const int T_CLK = " <<  T_CLK << ";" << std::endl;
+    c << "const int CLK_F = " <<  CLK_F << ";" << std::endl;
+    c << "const double RMSE = " <<  RMSE << ";" << std::endl;
+    c << std::endl;
 
     return 0;
 }
