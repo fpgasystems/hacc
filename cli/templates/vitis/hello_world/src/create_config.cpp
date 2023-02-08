@@ -114,33 +114,7 @@ int main()
 {
 
     cout << "\n\e[1mcreate_config\e[0m\n";
-
-    /* const fs::path config_hw{"./configs/config_hw.hpp"};
-    bool exist = file_exists(config_hw);
-    if (exist == 0) {
-
-        cout << "\n\e[1mApplication (hardware) parameters:\e[0m\n";
-        cout << "\n";
-
-        // N_MAX (VECTOR_LENGTH_MAX)
-        vector<int> N_MAX_i{ 16, 32, 48, 64, 80, 96, 112, 128 };
-        int N_MAX = read_value("N_MAX", N_MAX_i);
-        
-        // W_MAX
-        vector<int> W_MAX_i{ 1, 2, 4, 8, 16, 32, 64, 128, 256 };
-        int W_MAX = read_value("W_MAX", W_MAX_i);
-
-        // create hardware configuration
-        ofstream c_hw = create_config_file(1);
-        c_hw << std::endl;
-        // Application (hardware) parameters
-        c_hw << "const int N_MAX = " <<  N_MAX << ";" << std::endl;
-        c_hw << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
-        c_hw << std::endl;
-
-    } */
-
-    // 
+ 
     cout << "\n\e[1mApplication (hardware) parameters:\e[0m\n";
     cout << "\n";
 
@@ -155,32 +129,21 @@ int main()
     // CLK_F_MAX (USER LOGIC CLOCK FREQUENCY)
     vector<int> CLK_F_MAX_i{ 250, 300, 350, 400 };
     int CLK_F_MAX = read_value("CLK_F_MAX", CLK_F_MAX_i);
-    
-    // Specific software parameters (your application) -------------------------------------------------------------------------
 
     cout << "\n";
     cout << "\e[1mApplication (software) parameters:\e[0m\n";
     cout << "\n";
 
-    //cout << "Simulation parameters: \n";
-    //cout << "\n";
-    // Tclk
-    //vector<int> TLCK_i{ 1, 2, 3, 4, 5, 10, 20, 30, 40, 50 };
-    //int TCLK = read_value("TCLK", TLCK_i);
-    //cout << "\n";
-
     cout << "Host parameters:  \n";
     cout << "\n";
     
     // N (VECTOR_LENGTH)
-    //int N_MAX = read_parameter("./configs/config_hw.hpp", "N_MAX");
     vector<int> N_i;
     for (int i = 16; i <= N_MAX; i = i + 16) {
         N_i.push_back(i);
     }
     int N = read_value("N", N_i);
     // W
-    //int W_MAX = read_parameter("./configs/config_hw.hpp", "W_MAX");
     vector<int> W_i = new_vector(1, W_MAX);
     int W = read_value("W", W_i);
     // F
@@ -195,7 +158,6 @@ int main()
     cout << "\n";
 
     // CLK_F
-    //vector<int> CLK_F_i{ 100, 200, 300, 400 };
     vector<int> CLK_F_i;
     for (int i = 250; i <= CLK_F_MAX; i = i + 50) {
         CLK_F_i.push_back(i);
@@ -209,7 +171,7 @@ int main()
     double RMSE = 0.01;
     cout << "\n";
 
-    // create software configuration
+    // create config file
     ofstream c = create_config_file(0);
     c << std::endl;
     c << "const int N_MAX = " <<  N_MAX << ";" << std::endl;
