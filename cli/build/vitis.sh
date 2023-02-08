@@ -81,6 +81,7 @@ if [[ $(ls -l | wc -l) = 2 ]]; then
 elif [[ $(ls -l | wc -l) = 3 ]]; then
     #config_000 and config_001 exist
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+    echo ""
 elif [[ $(ls -l | wc -l) > 3 ]]; then
     cd $DIR/configs/
     configs=( "config_"*.hpp )
@@ -88,7 +89,7 @@ elif [[ $(ls -l | wc -l) > 3 ]]; then
     echo "${bold}Please, choose your configuration:${normal}"
     echo ""
     PS3=""
-    select config in "${configs[@]:1}"; do # with :1 we avoid config_000.hpp
+    select config in "${configs[@]:1}"; do # with :1 we avoid config_000.hpp :${#configs[@]}-2
         if [[ -z $config ]]; then
             echo "" >&/dev/null
         else
@@ -97,9 +98,9 @@ elif [[ $(ls -l | wc -l) > 3 ]]; then
     done
     # copy selected config as config_000.hpp
     cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
+    echo ""
 fi
 
-echo ""
 echo "${bold}Please, choose binary's compilation target:${normal}"
 echo ""
 PS3=""
