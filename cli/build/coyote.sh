@@ -58,22 +58,20 @@ if ! [ -d "$DIR" ]; then
     exit
 fi
 
-#we compile create_config (in case there were changes)
-cd $DIR/src
-g++ -std=c++17 create_config.cpp -o ../create_config
-
 echo ""
 echo "${bold}sgutil build coyote${normal}"
 
 #create or select a configuration
 cd $DIR/configs/
 if [[ $(ls -l | wc -l) = 2 ]]; then
-    #config_000 and config_001
-    #cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+    #only config_000 exists and we create config_001
+    #we compile create_config (in case there were changes)
+    cd $DIR/src
+    g++ -std=c++17 create_config.cpp -o ../create_config
     cd $DIR
     ./create_config
 elif [[ $(ls -l | wc -l) = 4 ]]; then
-    #config_000, config_hw and config_001 exist
+    #config_000, config_shell and config_001 exist
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
 elif [[ $(ls -l | wc -l) > 4 ]]; then
     cd $DIR/configs/
@@ -82,7 +80,7 @@ elif [[ $(ls -l | wc -l) > 4 ]]; then
     echo "${bold}Please, choose your configuration:${normal}"
     echo ""
     PS3=""
-    select config in "${configs[@]:1:${#configs[@]}-2}"; do # with :1 we avoid config_000.hpp and then config_hw.hpp
+    select config in "${configs[@]:1:${#configs[@]}-2}"; do # with :1 we avoid config_000.hpp and then config_shell.hpp
         if [[ -z $config ]]; then
             echo "" >&/dev/null
         else

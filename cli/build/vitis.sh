@@ -74,7 +74,9 @@ echo "${bold}sgutil build vitis${normal}"
 cd $DIR/configs/
 if [[ $(ls -l | wc -l) = 2 ]]; then
     #only config_000 exists and we create config_001
-    #cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+    #we compile create_config (in case there were changes)
+    cd $DIR/src
+    g++ -std=c++17 create_config.cpp -o ../create_config
     cd $DIR
     ./create_config
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
@@ -144,19 +146,12 @@ else
     if ! [ -d "$BUILD_DIR" ]; then
         # BUILD_DIR does not exist
         export CPATH="/usr/include/x86_64-linux-gnu" #https://support.xilinx.com/s/article/Fatal-error-sys-cdefs-h-No-such-file-or-directory?language=en_US
-
         echo "${bold}PL kernel compilation and linking: generating .xo and .xclbin:${normal}"
         echo ""
         echo "make all TARGET=$target PLATFORM=$platform" 
         echo ""
         eval "make all TARGET=$target PLATFORM=$platform"
         echo ""        
-
-        #compile src
-        #cd $DIR/src
-        #g++ -std=c++17 create_config.cpp -o ../create_config
-        #g++ -std=c++17 create_data.cpp -o ../create_data
-
     else
         echo "${bold}PL kernel compilation and linking: generating .xo and .xclbin:${normal}"
         echo ""
