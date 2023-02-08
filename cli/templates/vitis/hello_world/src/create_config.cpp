@@ -115,7 +115,7 @@ int main()
 
     cout << "\n\e[1mcreate_config\e[0m\n";
 
-    const fs::path config_hw{"./configs/config_hw.hpp"};
+    /* const fs::path config_hw{"./configs/config_hw.hpp"};
     bool exist = file_exists(config_hw);
     if (exist == 0) {
 
@@ -138,7 +138,23 @@ int main()
         c_hw << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
         c_hw << std::endl;
 
-    }
+    } */
+
+    // 
+    cout << "\n\e[1mApplication (hardware) parameters:\e[0m\n";
+    cout << "\n";
+
+    // N_MAX (VECTOR_LENGTH_MAX)
+    vector<int> N_MAX_i{ 16, 32, 48, 64, 80, 96, 112, 128 };
+    int N_MAX = read_value("N_MAX", N_MAX_i);
+        
+    // W_MAX
+    vector<int> W_MAX_i{ 1, 2, 4, 8, 16, 32, 64, 128, 256 };
+    int W_MAX = read_value("W_MAX", W_MAX_i);
+
+    // CLK_F_MAX (USER LOGIC CLOCK FREQUENCY)
+    vector<int> CLK_F_MAX_i{ 250, 300, 350, 400 };
+    int CLK_F_MAX = read_value("CLK_F_MAX", CLK_F_MAX_i);
     
     // Specific software parameters (your application) -------------------------------------------------------------------------
 
@@ -149,53 +165,62 @@ int main()
     //cout << "Simulation parameters: \n";
     //cout << "\n";
     // Tclk
-    //vector<int> T_clk_i{ 1, 2, 3, 4, 5, 10, 20, 30, 40, 50 };
-    //int T_clk = read_value("T_clk", T_clk_i);
+    //vector<int> TLCK_i{ 1, 2, 3, 4, 5, 10, 20, 30, 40, 50 };
+    //int TCLK = read_value("TCLK", TLCK_i);
     //cout << "\n";
 
     cout << "Host parameters:  \n";
     cout << "\n";
     
-    // Tclk
-    vector<int> T_clk_i{ 1, 2, 3, 4, 5, 10, 20, 30, 40, 50 };
-    int T_clk = read_value("T_clk", T_clk_i);
     // N (VECTOR_LENGTH)
-    int N_MAX = read_parameter("./configs/config_hw.hpp", "N_MAX");
+    //int N_MAX = read_parameter("./configs/config_hw.hpp", "N_MAX");
     vector<int> N_i;
     for (int i = 16; i <= N_MAX; i = i + 16) {
         N_i.push_back(i);
     }
     int N = read_value("N", N_i);
     // W
-    int W_MAX = read_parameter("./configs/config_hw.hpp", "W_MAX");
+    //int W_MAX = read_parameter("./configs/config_hw.hpp", "W_MAX");
     vector<int> W_i = new_vector(1, W_MAX);
     int W = read_value("W", W_i);
     // F
     vector<int> F_i = new_vector(0, W);
     int F = read_value("F", F_i);
+    // T_CLK
+    vector<int> TLCK_i{ 1, 2, 3, 4, 5, 10, 20, 30, 40, 50 };
+    int T_CLK = read_value("T_CLK", TLCK_i);
     cout << "\n";
 
     cout << "Device parameters: \n";
     cout << "\n";
-    // FPGA_CLOCK_FREQUENCY
-    vector<int> FPGA_CLOCK_FREQUENCY_i{ 100, 200, 300, 400 };
-    int FPGA_CLOCK_FREQUENCY = read_value("FPGA_CLOCK_FREQUENCY", FPGA_CLOCK_FREQUENCY_i);
 
+    // CLK_F
+    //vector<int> CLK_F_i{ 100, 200, 300, 400 };
+    vector<int> CLK_F_i;
+    for (int i = 250; i <= CLK_F_MAX; i = i + 50) {
+        CLK_F_i.push_back(i);
+    }
+    int CLK_F = read_value("CLK_F", CLK_F_i);
+    cout << "\n";
+    
     cout << "Test parameters: \n";
     cout << "\n";
-    cout << "RMSE_MAX: 0.01 \n";
-    double RMSE_MAX = 0.01;
+    cout << "RMSE: 0.01 \n";
+    double RMSE = 0.01;
     cout << "\n";
 
     // create software configuration
     ofstream c = create_config_file(0);
     c << std::endl;
-    c << "const int T_clk = " <<  T_clk << ";" << std::endl;
+    c << "const int N_MAX = " <<  N_MAX << ";" << std::endl;
+    c << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
+    c << "const int CLK_F_MAX = " <<  CLK_F_MAX << ";" << std::endl;
     c << "const int N = " <<  N << ";" << std::endl;
     c << "const int W = " <<  W << ";" << std::endl;
     c << "const int F = " <<  F << ";" << std::endl;
-    c << "const int FPGA_CLOCK_FREQUENCY = " <<  FPGA_CLOCK_FREQUENCY << ";" << std::endl;
-    c << "const double RMSE_MAX = " <<  RMSE_MAX << ";" << std::endl;
+    c << "const int T_CLK = " <<  T_CLK << ";" << std::endl;
+    c << "const int CLK_F = " <<  CLK_F << ";" << std::endl;
+    c << "const double RMSE = " <<  RMSE << ";" << std::endl;
     c << std::endl;
 
     return 0;
