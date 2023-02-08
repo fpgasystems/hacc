@@ -48,7 +48,7 @@ while true; do
         sed -i "s/hello_world/$project_name/" $DIR/makefile_versal_alveo.mk
         #compile src
         cd $DIR/src
-        g++ -std=c++17 create_config.cpp -o ../create_config
+        g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
         g++ -std=c++17 create_data.cpp -o ../create_data
         break
     fi

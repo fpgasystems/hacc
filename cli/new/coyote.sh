@@ -42,7 +42,7 @@ while true; do
         cp -rf /opt/cli/templates/coyote/hello_world/* $DIR
         #compile src
         cd $DIR/src
-        g++ -std=c++17 create_config.cpp -o ../create_config
+        g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
         break
     fi
 done
