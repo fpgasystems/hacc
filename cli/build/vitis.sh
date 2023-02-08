@@ -76,7 +76,7 @@ if [[ $(ls -l | wc -l) = 2 ]]; then
     #only config_000 exists and we create config_001
     #we compile create_config (in case there were changes)
     cd $DIR/src
-    g++ -std=c++17 create_config.cpp -o ../create_config
+    g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
     cd $DIR
     ./create_config
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
