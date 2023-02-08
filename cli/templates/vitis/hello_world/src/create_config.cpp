@@ -62,11 +62,11 @@ ofstream create_config_file(int hw)
     for (const auto & file : directory_iterator(project_path)){
         n = n + 1;
     }
-    string s = std::to_string(n - 1); // we assume config_hw is always present too
+    string s = std::to_string(n - 1); // we assume config_shell is always present too
     unsigned int number_of_zeros = STRING_LENGTH - s.length();
     s.insert(0, number_of_zeros, '0');
     if (hw == 1) {
-        s = "config_hw";
+        s = "config_shell";
     }
     else {
         s = "config_" + s;    
