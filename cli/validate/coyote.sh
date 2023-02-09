@@ -192,7 +192,7 @@ if ! [ -d "$DIR" ]; then
     #bitstream compilation
     #BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
     echo ""
-    echo "${bold}Bitstream compilation:${normal}"
+    echo "${bold}Coyote shell compilation:${normal}"
     echo ""
     echo "cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config_hw"
     echo ""
@@ -202,7 +202,7 @@ if ! [ -d "$DIR" ]; then
 
     #generate bitstream
     echo ""
-    echo "${bold}Bitstream generation:${normal}"
+    echo "${bold}Coyote shell bitstream generation:${normal}"
     echo ""
     echo "make shell && make compile"
     echo ""
