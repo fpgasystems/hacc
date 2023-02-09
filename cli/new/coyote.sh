@@ -40,7 +40,10 @@ while true; do
         rm -rf Coyote
         #copy template
         cp -rf /opt/cli/templates/coyote/hello_world/* $DIR
-        #compile src
+        #replace Makefile (main.cpp specific version)
+        rm $DIR/sw/CMakeLists.txt
+        mv $DIR/CMakeLists.txt $DIR/sw
+        #compile create config
         cd $DIR/src
         g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
         break

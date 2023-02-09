@@ -3,6 +3,9 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
+CONFIG="perf_fpga"
+
 #get username
 username=$USER
 
@@ -108,65 +111,33 @@ do
     coyote_params=$coyote_params"-D"$name"="$value" "
 done
 
-echo $coyote_params
+#echo $coyote_params
 
-exit
-
-#PS3=""
-#select config in N_REGIONS N_DDR_CHAN EN_BPSS EN_HLS EN_MEM EN_STRM EN_WB
-#do
-#    case $config in
-#        N_REGIONS) break;;
-#        N_DDR_CHAN) break;;
-#        EN_BPSS) break;;
-#        EN_HLS) break;;
-#        EN_MEM) break;;
-#        EN_STRM) break;;
-#        EN_WB) break;;
-#    esac
-#done
+#exit
 
 #sgutil get device if there is only one FPGA and not name_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
     device_name=$(sgutil get device | cut -d "=" -f2)
 fi
 
-#echo $device_name
-
 # device_name to coyote string <===========================================================================
 FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
 if [ "$FDEV_NAME" = "u50d" ]; then
     FDEV_NAME="u50"
 fi
-echo "-------------"
-echo "$FDEV_NAME"
-echo "-------------"
-#case "$device_name" in
-#    xcu250_0) 
-#        FDEV_NAME="u250"
-#        ;;
-#    xcu50_u55n_0)
-#        FDEV_NAME="u50"
-#        ;;
-#    xcu280_u55c_0) 
-#        FDEV_NAME="u55c"
-#        ;;
-#    *)
-#        echo ""
-#        echo "Unknown device name."
-#        echo ""
-#    ;;  
-#esac
 
-# serial to platform
-#cd /opt/xilinx/platforms
-#n=$(ls -l | grep -c ^d)
-#if [ $((n + 0)) -eq  1 ]; then
-#    platform=$(echo *)
-#fi
+
+#define directories
+DIR="/home/$username/my_projects/coyote/$project_name"
+SHELL_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
+DRIVER_DIR="/home/$username/my_projects/coyote/$project_name/driver"
+#MAIN_CPP_DIR_0="/home/$username/my_projects/coyote/$project_name/sw/examples/$CONFIG"
+#MAIN_CPP_DIR_1="/home/$username/my_projects/coyote/$project_name/src"
+#APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build"
+APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build"
 
 #change directory
-DIR="/home/$username/my_projects/coyote/$project_name"
+#DIR="/home/$username/my_projects/coyote/$project_name"
 if ! [ -d "$DIR" ]; then
     echo ""
     echo "$DIR not found!"
@@ -181,58 +152,75 @@ else
     cd $DIR
 
     #bitstream compilation
-    BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build" #build_dir.hw_$config.$device_name
-    if ! [ -d "$BUILD_DIR" ]; then
-        echo "${bold}Bitstream compilation:${normal}"
+    #SHELL_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build" #build_dir.hw_$config.$device_name
+    if ! [ -d "$SHELL_BUILD_DIR" ]; then
+        echo "${bold}Coyote shell compilation:${normal}"
         echo ""
-        echo "cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config"
+        echo "cmake .. -DFDEV_NAME=$FDEV_NAME $coyote_params" #-DEXAMPLE=$config
         echo ""
-        mkdir $BUILD_DIR
-        cd $BUILD_DIR
-        /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config
+        mkdir $SHELL_BUILD_DIR
+        cd $SHELL_BUILD_DIR
+        /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME $coyote_params
 
         #generate bitstream
         echo ""
-        echo "${bold}Bitstream generation:${normal}"
+        echo "${bold}Coyote shell bitstream generation:${normal}"
         echo ""
         echo "make shell && make compile"
         echo ""
         make shell && make compile
+
+        #driver compilation
+        #DRIVER_DIR="/home/$username/my_projects/coyote/$project_name/driver"
+        echo ""
+        echo "${bold}Driver compilation:${normal}"
+        echo ""
+        echo "cd $DRIVER_DIR && make"
+        echo ""
+        cd $DRIVER_DIR && make
+
+        #copy perf_host main.cpp
+        #if ! [ -d "$MAIN_CPP_DIR_1" ]; then
+        #    mkdir $MAIN_CPP_DIR_1
+        #    cp $MAIN_CPP_DIR_0/main.cpp $MAIN_CPP_DIR_1
+        #fi
     else
-        echo "${bold}Bitstream compilation and generation:${normal}"
+        #echo "${bold}Coyote shell and driver compilation:${normal}"
+        #echo ""
+        #echo "cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config"
+        #echo "make shell && make compile"
         echo ""
-        echo "cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config"
-        echo "make shell && make compile"
-        echo ""
-        echo "$BUILD_DIR already exists!"
+        echo "Coyote shell already exists!"
         #exit
     fi
 
-    #driver compilation
-    DRIVER_DIR="/home/$username/my_projects/coyote/$project_name/driver"
-    echo ""
-    echo "${bold}Driver compilation:${normal}"
-    echo ""
-    echo "cd $DRIVER_DIR && make"
-    echo ""
-    cd $DRIVER_DIR && make
+    #mkdir /home/jmoyapaya/my_projects/coyote/compile_0/build
+    #cp /home/jmoyapaya/my_projects/coyote/compile_0/sw/examples/perf_host/main.cpp /home/jmoyapaya/my_projects/coyote/compile_0/src
+    #cd /home/jmoyapaya/my_projects/coyote/compile_0/build
 
     #application compilation
-    APP_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build" #build_dir.sw_$config
+    #APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build" #build_dir.sw_$config
+    #APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build"
     echo ""
     echo "${bold}Example application compilation:${normal}"
     echo ""
-    echo "cmake ../ -DTARGET_DIR=../examples/$config && make"
+    echo "cmake ../sw -DTARGET_DIR=../src/ && make"
     echo ""
-    if ! [ -d "$APP_DIR" ]; then
-        mkdir $APP_DIR
+    if ! [ -d "$APP_BUILD_DIR" ]; then
+        mkdir $APP_BUILD_DIR
+        cd $APP_BUILD_DIR
+        #/usr/bin/cmake ../../../ -DTARGET_DIR=examples/$config && make
+        /usr/bin/cmake ../sw -DTARGET_DIR=../src/ && make # 1: path from APP_BUILD_DIR to /sw 2: path from APP_BUILD_DIR to main.cpp
+        #rename folder
+        mv $APP_BUILD_DIR $APP_BUILD_DIR"_dir.$device_name"
+    else
+        cd $APP_BUILD_DIR"_dir.$device_name"
+        /usr/bin/cmake ../sw -DTARGET_DIR=../src/ && make
     fi
-    cd $APP_DIR
-    #/usr/bin/cmake ../ -DTARGET_DIR=../examples/$config && make
-    /usr/bin/cmake ../../../ -DTARGET_DIR=examples/$config && make
+    
 
     #echo ""
-    #cd $APP_DIR
+    #cd $APP_BUILD_DIR
     #make
 
 fi
