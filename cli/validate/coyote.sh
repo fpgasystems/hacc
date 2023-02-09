@@ -87,9 +87,9 @@ project_name="validate_$config.$device_name"
 
 #define directories
 DIR="/home/$username/my_projects/coyote/$project_name"
-BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
+SHELL_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
 DRIVER_DIR="/home/$username/my_projects/coyote/$project_name/driver"
-APP_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build"
+APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build"
 
 # adjust perf_mem validation
 if [ "$config" = "perf_mem" ]; then
@@ -190,14 +190,14 @@ if ! [ -d "$DIR" ]; then
     esac
 
     #bitstream compilation
-    #BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
+    #SHELL_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
     echo ""
     echo "${bold}Coyote shell compilation:${normal}"
     echo ""
     echo "cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config_hw"
     echo ""
-    mkdir $BUILD_DIR
-    cd $BUILD_DIR
+    mkdir $SHELL_BUILD_DIR
+    cd $SHELL_BUILD_DIR
     /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config_hw #$config
 
     #generate bitstream
@@ -218,16 +218,16 @@ if ! [ -d "$DIR" ]; then
     cd $DRIVER_DIR && make
 
     #application compilation
-    #APP_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build" #build_dir.sw_$config
+    #APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build" #build_dir.sw_$config
     echo ""
     echo "${bold}Example application compilation:${normal}"
     echo ""
     echo "cmake ../ -DTARGET_DIR=../examples/$config && make"
     echo ""
-    if ! [ -d "$APP_DIR" ]; then
-        mkdir $APP_DIR
+    if ! [ -d "$APP_BUILD_DIR" ]; then
+        mkdir $APP_BUILD_DIR
     fi
-    cd $APP_DIR
+    cd $APP_BUILD_DIR
     /usr/bin/cmake ../../../ -DTARGET_DIR=examples/$config && make
 else
     echo ""
@@ -237,7 +237,7 @@ fi
 
 
 
-#if ! [ -d "$BUILD_DIR" ]; then
+#if ! [ -d "$SHELL_BUILD_DIR" ]; then
     
 #else
 #    echo "${bold}Bitstream compilation and generation:${normal}"
@@ -245,7 +245,7 @@ fi
 #    echo "cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config"
 #    echo "make shell && make compile"
 #    echo ""
-#    echo "$BUILD_DIR already exists!"
+#    echo "$SHELL_BUILD_DIR already exists!"
 #    #exit
 #fi
 
