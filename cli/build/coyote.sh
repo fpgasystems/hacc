@@ -91,6 +91,25 @@ elif [[ $(ls -l | wc -l) > 4 ]]; then
     cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
 fi
 
+#compile Coyote shell (get config_shell parameters)
+coyote_params=""
+shopt -s lastpipe
+cat $DIR/configs/config_shell.hpp | while read line 
+do
+    #find equal (=)
+    idx=$(sed 's/ /\n/g' <<< "$line" | sed -n "/=/=")
+    #get indexes
+    name_idx=$(($idx-1))
+    value_idx=$(($idx+1))  
+    #get data
+    name=$(echo $line | awk -v i=$name_idx '{ print $i }')
+    value=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
+    #add to string
+    coyote_params=$coyote_params"-D"$name"="$value" "
+done
+
+echo $coyote_params
+
 exit
 
 #PS3=""
