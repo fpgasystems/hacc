@@ -13,5 +13,6 @@ It is primarily recommended to start with the *[Hello, world!](../docs/vocabular
 
 * [Hello, world!](./examples-hello-world.md)
 
-## Vivado workflow
-*Coming soon!*
+## Coyote workflow
+
+* [Hello, Coyote!](./examples-hello-coyote.md)
