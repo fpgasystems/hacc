@@ -360,6 +360,16 @@
     dest: /opt/cli/validate/coyote
     mode: 0755
 
+- name: remove templates/coyote/hello_world/src/host.cpp
+  ansible.builtin.file:
+    path: /opt/cli/templates/coyote/hello_world/src/host.cpp
+    state: absent
+    
+- name: remove templates/coyote/hello_world/src/vadd.cpp
+  ansible.builtin.file:
+    path: /opt/cli/templates/coyote/hello_world/src/vadd.cpp
+    state: absent
+
 #cli system-wide
 - name: /opt/cli to system-wide $PATH.
   copy:
