@@ -224,7 +224,6 @@ int main()
 
         // create hardware configuration
         ofstream c_hw = create_config_file(1);
-        c_hw << std::endl;
         // Coyote (shell) parameters
         // Global parameters
         c_hw << "const int N_REGIONS = " <<  N_REGIONS << ";" << std::endl;
@@ -249,10 +248,6 @@ int main()
         c_hw << "const int NCLK_F = " <<  NCLK_F << ";" << std::endl;
         c_hw << "const int EN_UCLK = " <<  EN_UCLK << ";" << std::endl;
         c_hw << "const int UCLK_F = " <<  UCLK_F << ";" << std::endl;
-        // Application (hardware) parameters
-        //c_hw << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
-        //c_hw << "const int VECTOR_LENGTH_MAX = " <<  VECTOR_LENGTH_MAX << ";" << std::endl;
-        c_hw << std::endl;
 
     }    
 
@@ -322,7 +317,6 @@ int main()
 
     // create config file
     ofstream c = create_config_file(0);
-    c << std::endl;
     c << "const int N_MAX = " <<  N_MAX << ";" << std::endl;
     c << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
     c << "const int N = " <<  N << ";" << std::endl;
@@ -331,7 +325,6 @@ int main()
     c << "const int T_CLK = " <<  T_CLK << ";" << std::endl;
     c << "const int CLK_F = " <<  CLK_F << ";" << std::endl;
     c << "const double RMSE = " <<  RMSE << ";" << std::endl;
-    c << std::endl;
 
     return 0;
 }
