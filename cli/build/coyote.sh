@@ -4,7 +4,7 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
-CONFIG="perf_fpga"
+#CONFIG="perf_fpga"
 
 #get username
 username=$USER
@@ -126,14 +126,10 @@ if [ "$FDEV_NAME" = "u50d" ]; then
     FDEV_NAME="u50"
 fi
 
-
 #define directories
 DIR="/home/$username/my_projects/coyote/$project_name"
 SHELL_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
 DRIVER_DIR="/home/$username/my_projects/coyote/$project_name/driver"
-#MAIN_CPP_DIR_0="/home/$username/my_projects/coyote/$project_name/sw/examples/$CONFIG"
-#MAIN_CPP_DIR_1="/home/$username/my_projects/coyote/$project_name/src"
-#APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build"
 APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build"
 
 #change directory
@@ -160,6 +156,7 @@ else
         echo ""
         mkdir $SHELL_BUILD_DIR
         cd $SHELL_BUILD_DIR
+        #/usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=perf_host
         /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME $coyote_params
 
         #generate bitstream
@@ -211,6 +208,10 @@ else
         cd $APP_BUILD_DIR
         #/usr/bin/cmake ../../../ -DTARGET_DIR=examples/$config && make
         /usr/bin/cmake ../sw -DTARGET_DIR=../src/ && make # 1: path from APP_BUILD_DIR to /sw 2: path from APP_BUILD_DIR to main.cpp
+        #copy bitstream
+        cp $SHELL_BUILD_DIR/bitstreams/cyt_top.bit $APP_BUILD_DIR
+        #copy driver
+        cp $DRIVER_DIR/coyote_drv.ko $APP_BUILD_DIR
         #rename folder
         mv $APP_BUILD_DIR $APP_BUILD_DIR"_dir.$device_name"
     else
