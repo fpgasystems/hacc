@@ -77,18 +77,12 @@ if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
     device_name=$(sgutil get device | cut -d "=" -f2)
 fi
 
-# serial to platform -------------------------------------------------------------> this will change with the fpga_idx concept
-cd /opt/xilinx/platforms
-n=$(ls -l | grep -c ^d)
-if [ $((n + 0)) -eq  1 ]; then
-    platform=$(echo *)
-#else
-    # Multiple platforms are on the server but we need to pick 
-    # the one matching the serial_number
-fi
+#define directories
+DIR="/home/$username/my_projects/coyote/$project_name"
+APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build_dir.$device_name/"
 
 #change directory
-DIR="/home/$username/my_projects/coyote/$project_name"
+#DIR="/home/$username/my_projects/coyote/$project_name"
 if ! [ -d "$DIR" ]; then
     echo ""
     echo "$DIR not found!"
@@ -103,11 +97,14 @@ else
     cd $DIR
 
     # this will change... we need to use $APP_DIR where we should find a file we can properly execute
-    APP_DIR="/home/$username/my_projects/coyote/$project_name/sw/build"
+    #APP_DIR="/home/$username/my_projects/coyote/$project_name/sw/build"
 
     # workaround working if we do sgutil program coyote -p U55C_01_02 first
-    cd /mnt/scratch/runshi/coyote_perf_fpga
-    ./perf_fpga
+    #cd /mnt/scratch/runshi/coyote_perf_fpga
+    #./perf_fpga
+
+    cd $APP_BUILD_DIR
+    ./main
 
 fi
 
