@@ -249,10 +249,10 @@ fi
 #    #exit
 #fi
 
-# revert to xrt first if FPGA is already in baremetal
-if [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then
-    /opt/cli/program/revert
-fi
+# revert to xrt first if FPGA is already in baremetal ===> moved to sgutil program coyote
+#if [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then
+#    /opt/cli/program/revert
+#fi
 
 # program
 /opt/cli/sgutil program coyote -p $project_name
