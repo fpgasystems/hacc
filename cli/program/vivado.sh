@@ -6,6 +6,9 @@ normal=$(tput sgr0)
 # constants
 SERVERADDR="localhost"
 
+#get username
+username=$USER
+
 # get hostname
 url="${HOSTNAME}"
 hostname="${url%%.*}"
@@ -116,22 +119,35 @@ fi
 
 if [[ $program_driver = "1" ]]; then
 
+    #we need to copy the driver to /local to avoid permission problems
+	echo ""
+    echo "${bold}Copying driver to /local/home/$username:${normal}"
+	echo ""
+    echo "cp -f $driver_file /local/home/$username"
+    
+    cp -f $driver_file /local/home/$username
+
+    #get driver name
+    driver_name=$(echo $driver_file | awk -F"/" '{print $NF}')
+
     #insert coyote driver
 	echo ""
     echo "${bold}Inserting driver:${normal}"
 	echo ""
 
     # we always remove and insert the driver
-    echo "sudo rmmod $driver_file"
+    echo "sudo rmmod $driver_name" #$driver_file
     #sudo bash -c "rmmod $driver_file"
-    sudo rmmod $driver_file
+    sudo rmmod $driver_name #$driver_file
     sleep 1
-    echo "sudo insmod $driver_file"
+    echo "sudo insmod /local/home/$username/$driver_name" #$driver_file
     #sudo bash -c "insmod $driver_file"
-    sudo insmod $driver_file
+    sudo insmod /local/home/$username/$driver_name #$driver_file
     sleep 1
 
+    echo ""
+
     #sudo bash -c "/opt/cli/program/fpga_chmod 0"
-    sudo /opt/cli/program/fpga_chmod 0
+    #sudo /opt/cli/program/fpga_chmod 0 ===========> this belongs to coyote
 
 fi

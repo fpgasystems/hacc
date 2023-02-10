@@ -91,8 +91,9 @@ else
     sgutil program vivado -b $APP_BUILD_DIR$BIT_NAME #-d $DRIVER_PATH$DRIVER_NAME
 
     #driver (we first need to copy it as it is not working from the /home/ folder)
-    cp -f $APP_BUILD_DIR$DRIVER_NAME /local/home/$username/$DRIVER_NAME
-    sgutil program vivado -d /local/home/$username/$DRIVER_NAME
+    #cp -f $APP_BUILD_DIR$DRIVER_NAME /local/home/$username/$DRIVER_NAME
+    #sgutil program vivado -d /local/home/$username/$DRIVER_NAME
+    sgutil program vivado -d $APP_BUILD_DIR$DRIVER_NAME #/local/home/$username/$DRIVER_NAME
 
     # get fpga_chmod for the total of regions (0 is already assigned)
     #get N_REGIONS
@@ -104,8 +105,8 @@ else
     #get data
     N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
     #fpga_chmod
-    N_REGIONS=$(($N_REGIONS-1));
-    for (( i = 1; i <= $N_REGIONS; i++ ))
+    #N_REGIONS=$(($N_REGIONS-1));
+    for (( i = 0; i < $N_REGIONS; i++ )) # we remove it from program/vivado (driver)
     do 
         sudo /opt/cli/program/fpga_chmod $i
     done
