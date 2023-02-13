@@ -91,6 +91,9 @@ SHELL_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
 DRIVER_DIR="/home/$username/my_projects/coyote/$project_name/driver"
 APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build"
 
+#APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build"
+#APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build_dir.$device_name/"
+
 # adjust perf_mem validation
 if [ "$config" = "perf_mem" ]; then
     case "$FDEV_NAME" in
@@ -136,51 +139,51 @@ if ! [ -d "$DIR" ]; then
     #break
 
     # create configuration file
-    touch config.cpp
+    touch config_shell.hpp
     case "$config_hw" in #config
         perf_host) 
-            echo "const int EN_HLS = 0;" > config.cpp
-            echo "const int EN_MEM = 0;" >> config.cpp
-            echo "const int EN_STRM = 1;" >> config.cpp
-            echo "const int EN_MEM = 0;" >> config.cpp
-            echo "const int N_REGIONS = 3;" >> config.cpp
+            echo "const int EN_HLS = 0;" > config_shell.hpp
+            echo "const int EN_MEM = 0;" >> config_shell.hpp
+            echo "const int EN_STRM = 1;" >> config_shell.hpp
+            echo "const int EN_MEM = 0;" >> config_shell.hpp
+            echo "const int N_REGIONS = 3;" >> config_shell.hpp
             ;;
         perf_fpga)
-            echo "const int EN_HLS = 0;" > config.cpp
-            echo "const int EN_BPSS = 1;" >> config.cpp
-            echo "const int EN_STRM = 1;" >> config.cpp
-            echo "const int EN_MEM = 0;" >> config.cpp
-            echo "const int EN_WB = 1;" >> config.cpp
+            echo "const int EN_HLS = 0;" > config_shell.hpp
+            echo "const int EN_BPSS = 1;" >> config_shell.hpp
+            echo "const int EN_STRM = 1;" >> config_shell.hpp
+            echo "const int EN_MEM = 0;" >> config_shell.hpp
+            echo "const int EN_WB = 1;" >> config_shell.hpp
             ;;
         perf_hbm)
-            echo "const int N_REGIONS = 4;" > config.cpp
-            echo "const int EN_HLS = 0;" >> config.cpp
-            echo "const int EN_STRM = 0;" >> config.cpp
-            echo "const int EN_MEM = 1;" >> config.cpp
+            echo "const int N_REGIONS = 4;" > config_shell.hpp
+            echo "const int EN_HLS = 0;" >> config_shell.hpp
+            echo "const int EN_STRM = 0;" >> config_shell.hpp
+            echo "const int EN_MEM = 1;" >> config_shell.hpp
             ;;
         perf_dram)
-            echo "const int N_REGIONS = 4;" > config.cpp
-            echo "const int EN_HLS = 0;" >> config.cpp
-            echo "const int EN_STRM = 0;" >> config.cpp
-            echo "const int EN_MEM = 1;" >> config.cpp
-            echo "const int N_DDR_CHAN = 2;" >> config.cpp
+            echo "const int N_REGIONS = 4;" > config_shell.hpp
+            echo "const int EN_HLS = 0;" >> config_shell.hpp
+            echo "const int EN_STRM = 0;" >> config_shell.hpp
+            echo "const int EN_MEM = 1;" >> config_shell.hpp
+            echo "const int N_DDR_CHAN = 2;" >> config_shell.hpp
             ;;
         gbm_dtrees) 
-            echo "const int EN_HLS = 0;" > config.cpp
-            echo "const int EN_STRM = 1;" >> config.cpp
-            echo "const int EN_MEM = 0;" >> config.cpp
+            echo "const int EN_HLS = 0;" > config_shell.hpp
+            echo "const int EN_STRM = 1;" >> config_shell.hpp
+            echo "const int EN_MEM = 0;" >> config_shell.hpp
             ;;
         hyperloglog) 
-            echo "const int EN_HLS = 1;" > config.cpp
-            echo "const int EN_STRM = 1;" >> config.cpp
-            echo "const int EN_MEM = 0;" >> config.cpp
+            echo "const int EN_HLS = 1;" > config_shell.hpp
+            echo "const int EN_STRM = 1;" >> config_shell.hpp
+            echo "const int EN_MEM = 0;" >> config_shell.hpp
             ;;
         #perf_dram) 
-        #    echo "const int N_REGIONS = 4;" > config.cpp
-        #    echo "const int EN_HLS = 0;" >> config.cpp
-        #    echo "const int EN_STRM = 0;" >> config.cpp
-        #    echo "const int EN_MEM = 1;" >> config.cpp
-        #    echo "const int N_DDR_CHAN = 2;" >> config.cpp
+        #    echo "const int N_REGIONS = 4;" > config_shell.hpp
+        #    echo "const int EN_HLS = 0;" >> config_shell.hpp
+        #    echo "const int EN_STRM = 0;" >> config_shell.hpp
+        #    echo "const int EN_MEM = 1;" >> config_shell.hpp
+        #    echo "const int N_DDR_CHAN = 2;" >> config_shell.hpp
         #    ;;
         *)
             echo ""
@@ -188,6 +191,8 @@ if ! [ -d "$DIR" ]; then
             echo ""
         ;;  
     esac
+    mkdir $DIR/configs
+    mv $DIR/config_shell.hpp $DIR/configs/config_shell.hpp
 
     #bitstream compilation
     #SHELL_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
@@ -229,6 +234,13 @@ if ! [ -d "$DIR" ]; then
     fi
     cd $APP_BUILD_DIR
     /usr/bin/cmake ../../../ -DTARGET_DIR=examples/$config && make
+    #copy bitstream
+    cp $SHELL_BUILD_DIR/bitstreams/cyt_top.bit $APP_BUILD_DIR
+    #copy driver
+    cp $DRIVER_DIR/coyote_drv.ko $APP_BUILD_DIR
+    #rename folder
+    mv $APP_BUILD_DIR /home/$username/my_projects/coyote/$project_name/build_dir.$device_name/
+
 else
     echo ""
     echo "$project_name already exists!"
@@ -258,20 +270,21 @@ fi
 /opt/cli/sgutil program coyote -p $project_name
 
 # get N_REGIONS
-cd ${DIR}
-N_REGIONS=$(grep -n "N_REGIONS" config.cpp | sed 's/.*=//' | sed 's/;//')
-if [ "$N_REGIONS" = "" ]; then
-    N_REGIONS="1"
-fi
+#cd ${DIR}
+#N_REGIONS=$(grep -n "N_REGIONS" config_shell.hpp | sed 's/.*=//' | sed 's/;//')
+#if [ "$N_REGIONS" = "" ]; then
+#    N_REGIONS="1"
+#fi
 
 # get fpga_chmod for the total of regions (0 is already assigned)
-N_REGIONS=$(($N_REGIONS-1));
-for (( i = 1; i <= $N_REGIONS; i++ ))
-do 
-   sudo /opt/cli/program/fpga_chmod $i
-done
+#N_REGIONS=$(($N_REGIONS-1));
+#for (( i = 1; i <= $N_REGIONS; i++ ))
+#do 
+#   sudo /opt/cli/program/fpga_chmod $i
+#done
 
 # run 
 #DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build"
-cd /home/$username/my_projects/coyote/$project_name/sw/examples/$config/build #${DIR}
-./main
+#cd /home/$username/my_projects/coyote/$project_name/sw/examples/$config/build #${DIR}
+#./main
+/opt/cli/sgutil run coyote -p $project_name
