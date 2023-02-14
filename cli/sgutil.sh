@@ -21,6 +21,7 @@ COMMANDS:
    new             - Creates a new project of your choice.
    program         - Downloads the accelerated application or driver to a given device.
    run             - Executes the accelerated application on a given device.
+   set             - Changes the configuration on a given device.
    validate        - Validates the basic HACC infrastructure functionality.
 
    -h, --help      - Help to use this application.
@@ -426,6 +427,36 @@ run_vitis_help() {
     exit 1
 }
 
+# set ------------------------------------------------------------------------------------------------------------------------
+
+set_help() {
+    echo ""
+    echo "${bold}sgutil set [arguments [flags]] [--help]${normal}"
+    echo ""
+    echo "Changes the configuration on a given device."
+    echo ""
+    echo "ARGUMENTS:"
+    echo "   write           - Assigns writing permissions on a given device."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
+set_write_help() {
+      echo ""
+      echo "${bold}sgutil set write [flags] [--help]${normal}"
+      echo ""
+      echo "Assigns writing permissions to a given device."
+      echo ""
+      echo "FLAGS:"
+      echo "   -i, --index     - PCI device index. See sgutil get devices."
+      echo ""
+      echo "   -h, --help      - Help to use this command."
+      echo ""
+      exit 1
+}
+
 # validate -----------------------------------------------------------------------------------------------------------------------
 validate_help() {
     echo ""
@@ -665,6 +696,20 @@ case "$command" in
         ;;
       *)
         run_help
+      ;;  
+    esac
+    ;;
+  set)
+    case "$arguments" in
+      -h|--help)
+        set_help
+        ;;
+      write) 
+        valid_flags="-i --index -h --help"
+        command_run $command_arguments_flags"@"$valid_flags
+        ;;
+      *)
+        set_help
       ;;  
     esac
     ;;

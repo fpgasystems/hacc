@@ -9,7 +9,7 @@ _sgutil_completions()
 
     case ${COMP_CWORD} in
         1)
-            COMPREPLY=($(compgen -W "build get new program run validate --help --version" -- ${cur})) # -h -v
+            COMPREPLY=($(compgen -W "build get new program run set validate --help --version" -- ${cur})) # -h -v
             ;;
         2)
             case ${prev} in
@@ -27,6 +27,9 @@ _sgutil_completions()
                     ;;
                 run)
                     COMPREPLY=($(compgen -W "coyote vitis --help" -- ${cur})) # -h
+                    ;;
+                set)
+                    COMPREPLY=($(compgen -W "write --help" -- ${cur})) # -h
                     ;;
                 validate)
                     COMPREPLY=($(compgen -W "coyote iperf mpi --help" -- ${cur})) # -h
@@ -70,6 +73,9 @@ _sgutil_completions()
                     ;;
                 vitis)
                     COMPREPLY=($(compgen -W "--project --serial --help" -- ${cur})) # -b -n -s -t -h --binary --name --target 
+                    ;;
+                write) # set 
+                    COMPREPLY=($(compgen -W "--index --help" -- ${cur})) 
                     ;;
                 coyote) # validate
                     COMPREPLY=($(compgen -W "--help" -- ${cur}))

@@ -42,6 +42,11 @@
     path: /opt/cli/build
     state: directory
 
+- name: create set directory
+  file:
+    path: /opt/cli/set
+    state: directory
+
 #sg
 #- name: copy sg
 #  copy:
@@ -302,6 +307,14 @@
   copy:
     src: "../../cli/run/coyote.sh"
     dest: /opt/cli/run/coyote
+    mode: 0755
+
+# set ---------------------------------------------------------------------------------------
+
+- name: copy write script
+  copy:
+    src: "../../cli/set/write.sh"
+    dest: /opt/cli/set/write
     mode: 0755
 
 #validate -----------------------------------------------------------------------------------
