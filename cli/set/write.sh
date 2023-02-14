@@ -16,6 +16,7 @@ if [ "$flags" = "" ]; then
 fi
 
 index_found="0"
+index=""
 for (( i=0; i<${#flags[@]}; i++ ))
 do
     if [[ " ${flags[$i]} " =~ " -i " ]] || [[ " ${flags[$i]} " =~ " --index " ]]; then 
@@ -25,7 +26,8 @@ do
     fi
 done
 
-if [[ $index_found = "0" ]]; then
+#apply fpga_chmod
+if [[ $index = "" ]]; then
     eval "/opt/cli/sgutil set write -h"
     exit
 else
