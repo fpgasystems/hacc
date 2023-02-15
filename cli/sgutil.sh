@@ -255,6 +255,20 @@ new_coyote_help() {
     exit 1
 }
 
+new_mpi_help() {
+    echo ""
+    echo "${bold}sgutil new mpi [--help]${normal}"
+    echo ""
+    echo "Creates a new project using MPI Hello, world! template."
+    echo ""
+    echo "FLAGS"
+    echo "   This command has no flags."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
 new_vitis_help() {
     echo ""
     echo "${bold}sgutil new vitis [--help]${normal}"
@@ -628,6 +642,13 @@ case "$command" in
           exit 1
         fi
         /opt/cli/new/coyote
+        ;;
+      mpi)
+        if [ "$#" -ne 2 ]; then
+          new_mpi_help
+          exit 1
+        fi
+        /opt/cli/new/mpi
         ;;
       vitis)
         if [ "$#" -ne 2 ]; then
