@@ -8,12 +8,13 @@
 
 <code>sgutil build [arguments [flags]] [--help]</code>
 <p>
-  &nbsp; &nbsp; Creates binaries, bitstreams, and drivers for your FPGA designs.
+  &nbsp; &nbsp; Creates binaries, bitstreams, and drivers for your accelerated applications.
 </p>
 
 ### Arguments
 
 * [coyote](./sgutil-build-coyote.md#sgutil-build-coyote)
+* [mpi](./sgutil-build-mpi.md#sgutil-build-mpi)
 * [vitis](./sgutil-build-vitis.md#sgutil-build-vitis)
 * vivado
 

@@ -16,7 +16,7 @@ cli_help() {
 ${bold}$cli_name [commands] [arguments [flags]] [--help] [--version]${normal}
 
 COMMANDS:
-   build           - Creates binaries, bitstreams, and drivers for your FPGA designs.
+   build           - Creates binaries, bitstreams, and drivers for your accelerated applications.
    get             - Retreives information from the server/s.
    new             - Creates a new project of your choice.
    program         - Downloads the accelerated application or driver to a given device.
@@ -77,12 +77,13 @@ build_help() {
     echo ""
     echo "${bold}sgutil build [arguments [flags]] [--help]${normal}"
     echo ""
-    echo "Creates binaries, bitstreams, and drivers for your FPGA designs."
+    echo "Creates binaries, bitstreams, and drivers for your accelerated applications."
     echo ""
     echo "ARGUMENTS:"
     echo "   coyote          - Generates Coyote's bitstreams and drivers." #Vitis .xo kernels and .xclbin binaries generation.
+    echo "   mpi             - Generates MPI binaries for your projects."
     echo "   vitis           - Generates .xo kernels and .xclbin binaries for Vitis workflow." #Vitis .xo kernels and .xclbin binaries generation.
-    echo "   vivado (soon)   - Generates .bit bitstreams and .ko drivers for Vivado workflow." #Compiles a bitstream and a driver.
+    #echo "   vivado (soon)   - Generates .bit bitstreams and .ko drivers for Vivado workflow." #Compiles a bitstream and a driver.
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -113,7 +114,7 @@ build_mpi_help() {
     echo ""
     echo "${bold}sgutil build mpi [--help]${normal}"
     echo ""
-    echo "Generates MPI executables."
+    echo "Generates MPI binaries for your projects."
     echo ""
     echo "FLAGS:"
     echo "   This command has no flags."
