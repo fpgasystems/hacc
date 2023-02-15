@@ -6,7 +6,7 @@
 
 ## sgutil new mpi
 
-<code>sgutil get mpi [--help]</code>
+<code>sgutil new mpi [--help]</code>
 <p>
   &nbsp; &nbsp; Creates a new project using MPI Hello, world! template.
 </p>
