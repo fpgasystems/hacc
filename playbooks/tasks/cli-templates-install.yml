@@ -12,3 +12,8 @@
     dest: /opt/cli/
     mode: 0755
 #  when: templates_folder.stat.exists == False
+
+- name: remove mpi_hello.c
+  ansible.builtin.file:
+    path: /opt/cli/validate/mpi_hello.c
+    state: absent

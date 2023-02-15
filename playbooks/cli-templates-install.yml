@@ -6,7 +6,7 @@
     - alveo-u50d
     - alveo-u55c
     - versal-vck5000
-    #- alveo-u55c-02.inf.ethz.ch
+    #- alveo-u55c-03.inf.ethz.ch
     #- alveo-u55c-04.inf.ethz.ch
   become: true
   become_method: community.general.sudosu
@@ -16,4 +16,4 @@
     ansible_python_interpreter: /usr/bin/python3
   #vars_files: vars.yml  
   tasks:
-    - include_tasks: ./tasks/cli-install.yml
+    - include_tasks: ./tasks/cli-templates-install.yml

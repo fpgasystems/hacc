@@ -217,6 +217,12 @@
   copy:
     src: "../../cli/new/coyote.sh"
     dest: /opt/cli/new/coyote
+    mode: 0755
+
+- name: copy (new) mpi script
+  copy:
+    src: "../../cli/new/mpi.sh"
+    dest: /opt/cli/new/mpi
     mode: 0755    
 
 #program ------------------------------------------------------------------------------------
@@ -349,6 +355,11 @@
 - name: remove openmpi
   ansible.builtin.file:
     path: /opt/cli/validate/openmpi
+    state: absent
+
+- name: remove mpi_hello.c
+  ansible.builtin.file:
+    path: /opt/cli/validate/mpi_hello.c
     state: absent
 
 #- name: copy hello_world_mpi script
