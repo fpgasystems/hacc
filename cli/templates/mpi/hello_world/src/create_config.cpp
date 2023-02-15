@@ -4,7 +4,7 @@
 #include <filesystem>
 #include <fstream> 
 #include <regex>
-#include "../coyote_params.hpp"
+#include "../mpi_params.hpp"
 
 namespace fs = std::filesystem;
 using namespace std;
