@@ -357,11 +357,6 @@
     path: /opt/cli/validate/openmpi
     state: absent
 
-- name: remove mpi_hello.c
-  ansible.builtin.file:
-    path: /opt/cli/validate/mpi_hello.c
-    state: absent
-
 #- name: copy hello_world_mpi script
 #  copy:
 #    src: "../../cli/validate/hello_world_mpi.c"
@@ -372,11 +367,15 @@
     path: /opt/cli/validate/hello_world_mpi.c
     state: absent
 
-- name: copy mpi_hello script
-  copy:
-    src: "../../cli/validate/mpi_hello.c"
-    dest: /opt/cli/validate/mpi_hello.c
-    mode: 0755
+#- name: copy mpi_hello script
+#  copy:
+#    src: "../../cli/validate/mpi_hello.c"
+#    dest: /opt/cli/validate/mpi_hello.c
+#    mode: 0755
+- name: remove mpi_hello.c
+  ansible.builtin.file:
+    path: /opt/cli/validate/mpi_hello.c
+    state: absent
 
 - name: copy coyote script
   copy:
