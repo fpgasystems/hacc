@@ -57,7 +57,7 @@ echo ""
 sleep 1
 echo "mpicc $WORKDIR/mpi_hello.c -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -o $WORKDIR/mpi_hello"
 echo ""
-cp $CLI_WORKDIR/validate/mpi_hello.c $WORKDIR
+cp $CLI_WORKDIR/templates/mpi/hello_world/src/mpi_hello.c $WORKDIR
 mpicc $WORKDIR/mpi_hello.c -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -o $WORKDIR/mpi_hello
 
 # create hosts file
