@@ -16,7 +16,6 @@
 * [coyote](./sgutil-build-coyote.md#sgutil-build-coyote)
 * [mpi](./sgutil-build-mpi.md#sgutil-build-mpi)
 * [vitis](./sgutil-build-vitis.md#sgutil-build-vitis)
-* vivado
 
 <code>-h, --help</code>
 <p>
