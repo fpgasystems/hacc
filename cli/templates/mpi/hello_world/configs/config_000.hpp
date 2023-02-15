@@ -1,1 +1,2 @@
-const int PROCESSES_PER_HOST = 2;
+const int N_MAX = 50;
+const int N = 2;
