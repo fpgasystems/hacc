@@ -17,3 +17,8 @@
   ansible.builtin.file:
     path: /opt/cli/validate/mpi_hello.c
     state: absent
+
+- name: remove mpi_hello.c (in /opt/cli/templates/mpi/hello_world/src)
+  ansible.builtin.file:
+    path: /opt/cli/templates/mpi/hello_world/src/mpi_hello.c
+    state: absent
