@@ -110,6 +110,12 @@
     dest: /opt/cli/build/vitis
     mode: 0755
 
+- name: copy (build) mpi script
+  copy:
+    src: "../../cli/build/mpi.sh"
+    dest: /opt/cli/build/mpi
+    mode: 0755
+
 #common --------------------------------------------------------------------------------------
 
 - name: copy ssh_key_add script

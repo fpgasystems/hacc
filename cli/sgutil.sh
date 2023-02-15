@@ -109,6 +109,20 @@ build_coyote_help() {
     exit 1
 }
 
+build_mpi_help() {
+    echo ""
+    echo "${bold}sgutil build mpi [--help]${normal}"
+    echo ""
+    echo "Generates MPI executables."
+    echo ""
+    echo "FLAGS:"
+    echo "   This command has no flags."
+    echo ""
+    echo "   -h, --help      - Help to build Coyote."
+    echo ""
+    exit 1
+}
+
 build_vitis_help() {
     echo ""
     echo "${bold}sgutil build vitis [flags] [--help]${normal}"
@@ -589,6 +603,13 @@ case "$command" in
       coyote) 
         valid_flags="-n --name -p --project -h --help" #-c --config 
         command_run $command_arguments_flags"@"$valid_flags
+        ;;
+      mpi) 
+        if [ "$#" -ne 2 ]; then
+          build_mpi_help
+          exit 1
+        fi
+        /opt/cli/build/mpi
         ;;
       vitis) 
         valid_flags="-p --project -s --serial -h --help" #-t --target

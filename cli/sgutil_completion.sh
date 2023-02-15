@@ -14,7 +14,7 @@ _sgutil_completions()
         2)
             case ${prev} in
                 build)
-                    COMPREPLY=($(compgen -W "coyote vitis --help" -- ${cur})) # -h
+                    COMPREPLY=($(compgen -W "coyote mpi vitis --help" -- ${cur})) # -h
                     ;;
                 get)
                     COMPREPLY=($(compgen -W "device ip mac serial --help" -- ${cur})) # -h
@@ -40,6 +40,9 @@ _sgutil_completions()
             case ${prev} in
                 coyote) # build
                     COMPREPLY=($(compgen -W "--name --project --help" -- ${cur})) #--config 
+                    ;;
+                mpi)
+                    COMPREPLY=($(compgen -W "--help" -- ${cur}))
                     ;;
                 vitis) 
                     COMPREPLY=($(compgen -W "--project --serial --help" -- ${cur})) # -w -h --target 
