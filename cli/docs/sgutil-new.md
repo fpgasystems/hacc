@@ -25,6 +25,5 @@
 ### Examples
 ```
 $ sgutil new -h
-$ sgutil new vitis
-$ sgutil new vivado
+$ sgutil new coyote
 ```
