@@ -14,6 +14,7 @@
 ### Arguments
 
 * [coyote](./sgutil-new-coyote.md)
+* [mpi](./sgutil-new-mpi.md)
 * [vitis](./sgutil-new-vitis.md)
 
 <code>-h, --help</code>
