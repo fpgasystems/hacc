@@ -22,3 +22,8 @@
   ansible.builtin.file:
     path: /opt/cli/templates/mpi/hello_world/src/mpi_hello.c
     state: absent
+
+- name: remove main.c (in /opt/cli/templates/mpi/hello_world/src)
+  ansible.builtin.file:
+    path: /opt/cli/templates/mpi/hello_world/src/main.c
+    state: absent
