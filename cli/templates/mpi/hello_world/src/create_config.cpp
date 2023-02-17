@@ -173,7 +173,7 @@ int main()
 
     // create config file
     ofstream c = create_config_file(0);
-    c << std::endl;
+    //c << std::endl;
     c << "const int N_MAX = " <<  N_MAX << ";" << std::endl;
     c << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
     c << "const int CLK_F_MAX = " <<  CLK_F_MAX << ";" << std::endl;
@@ -183,7 +183,7 @@ int main()
     c << "const int T_CLK = " <<  T_CLK << ";" << std::endl;
     c << "const int CLK_F = " <<  CLK_F << ";" << std::endl;
     c << "const double RMSE = " <<  RMSE << ";" << std::endl;
-    c << std::endl;
+    //c << std::endl;
 
     return 0;
 }
