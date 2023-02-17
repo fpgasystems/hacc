@@ -44,7 +44,16 @@ EN_UCLK 0
 Application (hardware) parameters:
 
 Choose at your convenience...
-        
+
+Programming coyote
+
+sgutil program coyote -p compile_4
+
+sgutil run coyote <========================================== fer
+
+
+
+
 
 ## References
 * [[1] Coyote](https://github.com/fpgasystems/Coyote)
