@@ -53,7 +53,7 @@ vector<int> new_vector(int min_, int max_)
     return myVec;
 }
 
-ofstream create_config_file(int hw)
+ofstream create_config_file()
 {
     fs::path p = fs::current_path();
     string project_path = p.relative_path();
@@ -62,15 +62,10 @@ ofstream create_config_file(int hw)
     for (const auto & file : directory_iterator(project_path)){
         n = n + 1;
     }
-    string s = std::to_string(n - 1); // we assume config_shell is always present too
+    string s = std::to_string(n - 1);
     unsigned int number_of_zeros = STRING_LENGTH - s.length();
     s.insert(0, number_of_zeros, '0');
-    if (hw == 1) {
-        s = "config_shell";
-    }
-    else {
-        s = "config_" + s;    
-    }
+    s = "config_" + s;    
     string aux = project_path + s + ".hpp";
     std::ofstream o(aux.c_str());
     return o;
@@ -172,8 +167,7 @@ int main()
     cout << "\n";
 
     // create config file
-    ofstream c = create_config_file(0);
-    //c << std::endl;
+    ofstream c = create_config_file();
     c << "const int N_MAX = " <<  N_MAX << ";" << std::endl;
     c << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
     c << "const int CLK_F_MAX = " <<  CLK_F_MAX << ";" << std::endl;
@@ -183,7 +177,6 @@ int main()
     c << "const int T_CLK = " <<  T_CLK << ";" << std::endl;
     c << "const int CLK_F = " <<  CLK_F << ";" << std::endl;
     c << "const double RMSE = " <<  RMSE << ";" << std::endl;
-    //c << std::endl;
 
     return 0;
 }
