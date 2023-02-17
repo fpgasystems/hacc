@@ -251,24 +251,24 @@ int main()
 
     }    
 
-    cout << "\n\e[1mApplication (hardware) parameters:\e[0m\n";
+    cout << "\n\e[1mApplication parameters:\e[0m\n";
     cout << "\n";
 
     // N_MAX (VECTOR_LENGTH_MAX)
-    vector<int> N_MAX_i{ 16, 32, 48, 64, 80, 96, 112, 128 };
+    vector<int> N_MAX_i{ 10, 20, 30, 40, 50 };
     int N_MAX = read_value("N_MAX", N_MAX_i);
         
     // W_MAX
-    vector<int> W_MAX_i{ 1, 2, 4, 8, 16, 32, 64, 128, 256 };
-    int W_MAX = read_value("W_MAX", W_MAX_i);
+    //vector<int> W_MAX_i{ 1, 2, 4, 8, 16, 32, 64, 128, 256 };
+    //int W_MAX = read_value("W_MAX", W_MAX_i);
 
     // CLK_F_MAX (USER LOGIC CLOCK FREQUENCY)
     //vector<int> CLK_F_MAX_i{ 250, 300, 350, 400 };
     //int CLK_F_MAX = read_value("CLK_F_MAX", CLK_F_MAX_i);
 
-    cout << "\n";
-    cout << "\e[1mApplication (software) parameters:\e[0m\n";
-    cout << "\n";
+    //cout << "\n";
+    //cout << "\e[1mApplication (software) parameters:\e[0m\n";
+    //cout << "\n";
 
     //cout << "Simulation parameters: \n";
     //cout << "\n";
@@ -277,54 +277,54 @@ int main()
     //int TCLK = read_value("TCLK", TLCK_i);
     //cout << "\n";
 
-    cout << "Host parameters:  \n";
-    cout << "\n";
+    //cout << "Host parameters:  \n";
+    //cout << "\n";
     
     // N (VECTOR_LENGTH)
     vector<int> N_i;
-    for (int i = 16; i <= N_MAX; i = i + 16) {
+    for (int i = 1; i <= N_MAX; i++) {
         N_i.push_back(i);
     }
     int N = read_value("N", N_i);
     // W
-    vector<int> W_i = new_vector(1, W_MAX);
-    int W = read_value("W", W_i);
+    //vector<int> W_i = new_vector(1, W_MAX);
+    //int W = read_value("W", W_i);
     // F
-    vector<int> F_i = new_vector(0, W);
-    int F = read_value("F", F_i);
+    //vector<int> F_i = new_vector(0, W);
+    //int F = read_value("F", F_i);
     // T_CLK
-    vector<int> TLCK_i{ 1, 2, 3, 4, 5, 10, 20, 30, 40, 50 };
-    int T_CLK = read_value("T_CLK", TLCK_i);
-    cout << "\n";
+    //vector<int> TLCK_i{ 1, 2, 3, 4, 5, 10, 20, 30, 40, 50 };
+    //int T_CLK = read_value("T_CLK", TLCK_i);
+    //cout << "\n";
 
-    cout << "Device parameters: \n";
-    cout << "\n";
+    //cout << "Device parameters: \n";
+    //cout << "\n";
 
     // CLK_F
-    int UCLK_F = read_parameter("./configs/config_shell.hpp", "UCLK_F");
-    vector<int> CLK_F_i;
-    for (int i = 250; i <= UCLK_F; i = i + 50) {
-        CLK_F_i.push_back(i);
-    }
-    int CLK_F = read_value("CLK_F", CLK_F_i);
-    cout << "\n";
+    //int UCLK_F = read_parameter("./configs/config_shell.hpp", "UCLK_F");
+    //vector<int> CLK_F_i;
+    //for (int i = 250; i <= UCLK_F; i = i + 50) {
+    //    CLK_F_i.push_back(i);
+    //}
+    //int CLK_F = read_value("CLK_F", CLK_F_i);
+    //cout << "\n";
     
-    cout << "Test parameters: \n";
-    cout << "\n";
-    cout << "RMSE: 0.01 \n";
-    double RMSE = 0.01;
-    cout << "\n";
+    //cout << "Test parameters: \n";
+    //cout << "\n";
+    //cout << "RMSE: 0.01 \n";
+    //double RMSE = 0.01;
+    //cout << "\n";
 
     // create config file
     ofstream c = create_config_file(0);
-    c << "const int N_MAX = " <<  N_MAX << ";" << std::endl;
-    c << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
-    c << "const int N = " <<  N << ";" << std::endl;
-    c << "const int W = " <<  W << ";" << std::endl;
-    c << "const int F = " <<  F << ";" << std::endl;
-    c << "const int T_CLK = " <<  T_CLK << ";" << std::endl;
-    c << "const int CLK_F = " <<  CLK_F << ";" << std::endl;
-    c << "const double RMSE = " <<  RMSE << ";" << std::endl;
+    c << "const int N_MAX = " << N_MAX << ";" << std::endl;
+    //c << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
+    c << "const int N = " << N << ";" << std::endl;
+    //c << "const int W = " <<  W << ";" << std::endl;
+    //c << "const int F = " <<  F << ";" << std::endl;
+    //c << "const int T_CLK = " <<  T_CLK << ";" << std::endl;
+    //c << "const int CLK_F = " <<  CLK_F << ";" << std::endl;
+    //c << "const double RMSE = " <<  RMSE << ";" << std::endl;
 
     return 0;
 }
