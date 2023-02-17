@@ -55,7 +55,7 @@ vector<int> new_vector(int min_, int max_)
     return myVec;
 }
 
-ofstream create_config_file(int hw)
+ofstream create_config_file()
 {
     fs::path p = fs::current_path();
     string project_path = p.relative_path();
@@ -64,15 +64,15 @@ ofstream create_config_file(int hw)
     for (const auto & file : directory_iterator(project_path)){
         n = n + 1;
     }
-    string s = std::to_string(n - 1); // we assume config_shell is always present too
+    string s = std::to_string(n); // we assume config_shell is always present too
     unsigned int number_of_zeros = STRING_LENGTH - s.length();
     s.insert(0, number_of_zeros, '0');
-    if (hw == 1) {
-        s = "config_shell";
-    }
-    else {
+    //if (hw == 1) {
+    //    s = "config_shell";
+    //}
+    //else {
         s = "config_" + s;    
-    }
+    //}
     string aux = project_path + s + ".hpp";
     std::ofstream o(aux.c_str());
     return o;
@@ -223,31 +223,31 @@ int main()
         cout << "\n"; */
 
         // create hardware configuration
-        ofstream c_hw = create_config_file(1);
+        //ofstream c_hw = create_config_file(1);
         // Coyote (shell) parameters
         // Global parameters
-        c_hw << "const int N_REGIONS = " <<  N_REGIONS << ";" << std::endl;
-        c_hw << "const int EN_PR = " <<  EN_PR << ";" << std::endl;
-        c_hw << "const int N_CONFIG = " <<  N_CONFIG << ";" << std::endl;
-        c_hw << "const int EN_HLS = " <<  EN_HLS << ";" << std::endl;
+        //c_hw << "const int N_REGIONS = " <<  N_REGIONS << ";" << std::endl;
+        //c_hw << "const int EN_PR = " <<  EN_PR << ";" << std::endl;
+        //c_hw << "const int N_CONFIG = " <<  N_CONFIG << ";" << std::endl;
+        //c_hw << "const int EN_HLS = " <<  EN_HLS << ";" << std::endl;
         // Memory parameters
-        c_hw << "const int EN_DDR = " <<  EN_DDR << ";" << std::endl;
-        c_hw << "const int N_DDR_CHAN = " <<  N_DDR_CHAN << ";" << std::endl;
-        c_hw << "const int EN_STRM = " <<  EN_STRM << ";" << std::endl;
-        c_hw << "const int EN_HBM = " <<  EN_HBM << ";" << std::endl;
+        //c_hw << "const int EN_DDR = " <<  EN_DDR << ";" << std::endl;
+        //c_hw << "const int N_DDR_CHAN = " <<  N_DDR_CHAN << ";" << std::endl;
+        //c_hw << "const int EN_STRM = " <<  EN_STRM << ";" << std::endl;
+        //c_hw << "const int EN_HBM = " <<  EN_HBM << ";" << std::endl;
         // Networking parameters
-        c_hw << "const int EN_TCP_0 = " <<  EN_TCP_0 << ";" << std::endl;
-        c_hw << "const int EN_TCP_1 = " <<  EN_TCP_1 << ";" << std::endl;
-        c_hw << "const int EN_RDMA_0 = " <<  EN_RDMA_0 << ";" << std::endl;
-        c_hw << "const int EN_RDMA_1 = " <<  EN_RDMA_1 << ";" << std::endl;
-        c_hw << "const int EN_RPC = " <<  EN_RPC << ";" << std::endl;
+        //c_hw << "const int EN_TCP_0 = " <<  EN_TCP_0 << ";" << std::endl;
+        //c_hw << "const int EN_TCP_1 = " <<  EN_TCP_1 << ";" << std::endl;
+        //c_hw << "const int EN_RDMA_0 = " <<  EN_RDMA_0 << ";" << std::endl;
+        //c_hw << "const int EN_RDMA_1 = " <<  EN_RDMA_1 << ";" << std::endl;
+        //c_hw << "const int EN_RPC = " <<  EN_RPC << ";" << std::endl;
         // Cloking parameters
-        c_hw << "const int EN_ACLK = " <<  EN_ACLK << ";" << std::endl;
-        c_hw << "const int ACLK_F = " <<  ACLK_F << ";" << std::endl;
-        c_hw << "const int EN_NCLK = " <<  EN_NCLK << ";" << std::endl;
-        c_hw << "const int NCLK_F = " <<  NCLK_F << ";" << std::endl;
-        c_hw << "const int EN_UCLK = " <<  EN_UCLK << ";" << std::endl;
-        c_hw << "const int UCLK_F = " <<  UCLK_F << ";" << std::endl;
+        //c_hw << "const int EN_ACLK = " <<  EN_ACLK << ";" << std::endl;
+        //c_hw << "const int ACLK_F = " <<  ACLK_F << ";" << std::endl;
+        //c_hw << "const int EN_NCLK = " <<  EN_NCLK << ";" << std::endl;
+        //c_hw << "const int NCLK_F = " <<  NCLK_F << ";" << std::endl;
+        //c_hw << "const int EN_UCLK = " <<  EN_UCLK << ";" << std::endl;
+        //c_hw << "const int UCLK_F = " <<  UCLK_F << ";" << std::endl;
 
     }    
 
@@ -266,7 +266,7 @@ int main()
     int N = read_value("N", N_i);
 
     // create config file
-    ofstream c = create_config_file(0);
+    ofstream c = create_config_file();
     c << "const int N_MAX = " << N_MAX << ";" << std::endl;
     c << "const int N = " << N << ";" << std::endl;
 
