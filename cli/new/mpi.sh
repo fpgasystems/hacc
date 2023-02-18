@@ -12,7 +12,7 @@ if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
 
-# create coyote directory
+# create mpi directory
 DIR="/home/$username/my_projects/mpi"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
