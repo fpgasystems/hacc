@@ -3,11 +3,24 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-# constants
-WORKDIR="/home/$USER"
-CLI_WORKDIR="/opt/cli"
+#constants
 MPICH_VERSION="4.0.2"
 MPICH_WORKDIR="/opt/mpich/mpich-$MPICH_VERSION-install"
+
+#get username
+username=$USER
+
+# create my_projects directory
+DIR="/home/$username/my_projects"
+if ! [ -d "$DIR" ]; then
+    mkdir ${DIR}
+fi
+
+# create mpi directory
+DIR="/home/$username/my_projects/mpi"
+if ! [ -d "$DIR" ]; then
+    mkdir ${DIR}
+fi
 
 echo ""
 #echo "${bold}mpich-$MPICH_VERSION${normal}"
@@ -44,21 +57,32 @@ else
 
 fi
 
-# setup keys
+#define directories
+CLI_WORKDIR="/opt/cli"
+VALIDATION_DIR="/home/$USER/my_projects/mpi/validate_mpi"
+
+#create temporal validation dir
+if ! [ -d "$VALIDATION_DIR" ]; then
+    mkdir ${VALIDATION_DIR}
+    mkdir $VALIDATION_DIR/build_dir
+fi
+
+#setup keys
 eval "$CLI_WORKDIR/common/ssh_key_add"
 
-# set environment
+#set environment
 PATH=$MPICH_WORKDIR/bin:$PATH
 LD_LIBRARY_PATH=$MPICH_WORKDIR/lib:$LD_LIBRARY_PATH
 
 # copy and compile
-echo "${bold}Compiling mpi_hello.c:${normal}"
+echo "${bold}Compiling main.cpp:${normal}"
 echo ""
 sleep 1
-echo "mpicc $WORKDIR/mpi_hello.c -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -o $WORKDIR/mpi_hello"
+echo "mpicc $VALIDATION_DIR/main.cpp -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -o $VALIDATION_DIR/build_dir/main"
 echo ""
-cp $CLI_WORKDIR/templates/mpi/hello_world/src/mpi_hello.c $WORKDIR
-mpicc $WORKDIR/mpi_hello.c -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -o $WORKDIR/mpi_hello
+cp -rf /opt/cli/templates/mpi/hello_world/* $VALIDATION_DIR
+#cp $CLI_WORKDIR/templates/mpi/hello_world/src/main.cpp $VALIDATION_DIR
+mpicc $VALIDATION_DIR/src/main.cpp -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -o $VALIDATION_DIR/build_dir/main
 
 # create hosts file
 echo "${bold}Creating hosts file:${normal}"
@@ -69,7 +93,9 @@ servers=$(sudo /opt/cli/common/get_booking_system_servers_list | tail -n +2) #ge
 echo ""
 servers=($servers) #convert string to an array
 
-cd $WORKDIR
+rm $VALIDATION_DIR/hosts
+
+cd $VALIDATION_DIR
 touch hosts
 j=0
 for i in "${servers[@]}"
@@ -89,12 +115,13 @@ mellanox_name=$(nmcli dev | grep mellanox-0 | awk '{print $1}')
 n=$(($j*$PROCESSES_PER_HOST))
 echo "${bold}Running openMPI:${normal}"
 echo ""
-echo "mpirun -n $n -f $WORKDIR/hosts -iface $mellanox_name $WORKDIR/mpi_hello"
+echo "mpirun -n $n -f $VALIDATION_DIR/hosts -iface $mellanox_name $VALIDATION_DIR/build_dir/main"
 echo ""
-mpirun -n $n -f $WORKDIR/hosts -iface $mellanox_name $WORKDIR/mpi_hello
+mpirun -n $n -f $VALIDATION_DIR/hosts -iface $mellanox_name $VALIDATION_DIR/build_dir/main
 
-# remove files
-rm $WORKDIR/hosts
-rm $WORKDIR/mpi_hello*
+# remove temporal validation files
+#rm $WORKDIR/hosts
+#rm $WORKDIR/main*
+rm -rf $VALIDATION_DIR
 
 echo ""
