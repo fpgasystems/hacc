@@ -12,8 +12,9 @@
 </p>
 
 ### Flags
+<code>-p, --project</code>
 <p>
-  &nbsp; &nbsp; This command has no flags.
+  &nbsp; &nbsp; Specifies your MPI project name.
 </p>
 
 ### Examples
