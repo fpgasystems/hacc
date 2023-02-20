@@ -321,6 +321,12 @@
     dest: /opt/cli/run/coyote
     mode: 0755
 
+- name: copy (run) mpi script
+  copy:
+    src: "../../cli/run/mpi.sh"
+    dest: /opt/cli/run/mpi
+    mode: 0755
+
 # set ---------------------------------------------------------------------------------------
 
 - name: copy write script
