@@ -59,7 +59,7 @@ PATH=$MPICH_WORKDIR/bin:$PATH
 LD_LIBRARY_PATH=$MPICH_WORKDIR/lib:$LD_LIBRARY_PATH
 
 echo ""
-echo "${bold}sgutil build mpi${normal}"
+echo "${bold}sgutil run mpi${normal}"
 
 #create or select a configuration
 cd $DIR/configs/
