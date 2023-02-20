@@ -118,17 +118,17 @@ int main()
     int N_MAX = read_value("N_MAX", N_MAX_i);
     
     // N (number of processes)
-    vector<int> N_i;
-    for (int i = 1; i <= N_MAX; i++) {
-        N_i.push_back(i);
-    }
-    int N = read_value("N", N_i);
-    cout << "\n";
+    //vector<int> N_i;
+    //for (int i = 1; i <= N_MAX; i++) {
+    //    N_i.push_back(i);
+    //}
+    //int N = read_value("N", N_i);
+    //cout << "\n";
 
     // create config file
     ofstream c = create_config_file();
     c << "const int N_MAX = " << N_MAX << ";" << std::endl;
-    c << "const int N = " << N << ";" << std::endl;
+    //c << "const int N = " << N << ";" << std::endl;
 
     return 0;
 }
