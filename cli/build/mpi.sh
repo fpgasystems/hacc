@@ -15,6 +15,9 @@ username=$USER
 # inputs
 read -a flags <<< "$@"
 
+echo ""
+echo "${bold}sgutil build mpi${normal}"
+
 #check on flags (before: flags cannot be empty)
 project_found="0"
 if [ "$flags" = "" ]; then
@@ -61,9 +64,6 @@ APP_BUILD_DIR="$DIR/build_dir"
 # set environment
 PATH=$MPICH_WORKDIR/bin:$PATH
 LD_LIBRARY_PATH=$MPICH_WORKDIR/lib:$LD_LIBRARY_PATH
-
-echo ""
-echo "${bold}sgutil build mpi${normal}"
 
 #create or select a configuration
 cd $DIR/configs/
