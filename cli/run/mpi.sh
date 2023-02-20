@@ -15,6 +15,9 @@ username=$USER
 # inputs
 read -a flags <<< "$@"
 
+echo ""
+echo "${bold}sgutil run mpi${normal}"
+
 #check on flags (before: flags cannot be empty)
 project_found="0"
 if [ "$flags" = "" ]; then
@@ -51,19 +54,24 @@ else
     fi
 fi
 
-# setup keys
-eval "$CLI_WORKDIR/common/ssh_key_add"
-
 # set environment
 PATH=$MPICH_WORKDIR/bin:$PATH
 LD_LIBRARY_PATH=$MPICH_WORKDIR/lib:$LD_LIBRARY_PATH
 
-echo ""
-echo "${bold}sgutil run mpi${normal}"
-
 #define directories
 DIR="/home/$username/my_projects/mpi/$project_name"
 APP_BUILD_DIR="/home/$username/my_projects/mpi/$project_name/build_dir"
+
+if ! [ -d "$APP_BUILD_DIR" ]; then
+    echo ""
+    echo "Please, generate your MPI application with sgutil build mpi"
+    echo ""
+    exit
+fi
+
+# setup keys
+echo ""
+eval "$CLI_WORKDIR/common/ssh_key_add"
 
 #create or select a configuration
 cd $DIR/configs/
