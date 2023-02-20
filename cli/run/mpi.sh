@@ -52,7 +52,7 @@ else
 fi
 
 # setup keys
-#eval "$CLI_WORKDIR/common/ssh_key_add"
+eval "$CLI_WORKDIR/common/ssh_key_add"
 
 # set environment
 PATH=$MPICH_WORKDIR/bin:$PATH
@@ -60,6 +60,10 @@ LD_LIBRARY_PATH=$MPICH_WORKDIR/lib:$LD_LIBRARY_PATH
 
 echo ""
 echo "${bold}sgutil run mpi${normal}"
+
+#define directories
+DIR="/home/$username/my_projects/mpi/$project_name"
+APP_BUILD_DIR="/home/$username/my_projects/mpi/$project_name/build_dir"
 
 #create or select a configuration
 cd $DIR/configs/
@@ -90,10 +94,6 @@ elif [[ $(ls -l | wc -l) > 3 ]]; then
     # copy selected config as config_000.hpp
     cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
 fi
-
-#define directories
-DIR="/home/$username/my_projects/mpi/$project_name"
-APP_BUILD_DIR="/home/$username/my_projects/mpi/$project_name/build_dir"
 
 #change directory
 if ! [ -d "$DIR" ]; then
