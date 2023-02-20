@@ -44,6 +44,12 @@ servers=($servers)
 
 ## add SSH (mellanox-0) fingerprints to local known_hosts
 echo "${bold}Adding fingerprints to known_hosts:${normal}"
+
+#alveo-build-01
+ssh-keygen -R alveo-build-01-mellanox-0
+ssh-keyscan -H alveo-build-01-mellanox-0 >> ~/.ssh/known_hosts #> /dev/null
+
+#booked servers
 for i in "${servers[@]}"
 do
     echo ""
