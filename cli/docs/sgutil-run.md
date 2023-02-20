@@ -8,13 +8,14 @@
 
 <code>sgutil run [arguments [flags]] [--help]</code>
 <p>
-  &nbsp; &nbsp; Executes the accelerated application on a given device.
+  &nbsp; &nbsp; Executes your accelerated application.
 </p>
 
 ### Arguments
 
+* [coyote](./sgutil-run-coyote.md)
+* [mpi](./sgutil-run-mpi.md)
 * [vitis](./sgutil-run-vitis.md)
-* vivado
 
 <code>-h, --help</code>
 <p>
