@@ -65,6 +65,36 @@ LD_LIBRARY_PATH=$MPICH_WORKDIR/lib:$LD_LIBRARY_PATH
 echo ""
 echo "${bold}sgutil build mpi${normal}"
 
+#create or select a configuration
+cd $DIR/configs/
+if [[ $(ls -l | wc -l) = 2 ]]; then
+    #only config_000 exists and we create config_001
+    #we compile create_config (in case there were changes)
+    cd $DIR/src
+    g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
+    cd $DIR
+    ./create_config
+elif [[ $(ls -l | wc -l) = 3 ]]; then
+    #config_000 and config_001 exist
+    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+elif [[ $(ls -l | wc -l) > 3 ]]; then
+    cd $DIR/configs/
+    configs=( "config_"*.hpp )
+    echo ""
+    echo "${bold}Please, choose your configuration:${normal}"
+    echo ""
+    PS3=""
+    select config in "${configs[@]:1}"; do
+        if [[ -z $config ]]; then
+            echo "" >&/dev/null
+        else
+            break
+        fi
+    done
+    # copy selected config as config_000.hpp
+    cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
+fi
+
 #change directory
 if ! [ -d "$DIR" ]; then
     echo ""
