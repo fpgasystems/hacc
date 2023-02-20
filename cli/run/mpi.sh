@@ -18,12 +18,22 @@ read -a flags <<< "$@"
 #check on flags (before: flags cannot be empty)
 project_found="0"
 if [ "$flags" = "" ]; then
-    #/opt/cli/sgutil build mpi -h
-    #exit
     #no flags: start dialog
-
-
-    project_found="1"
+    cd /home/$username/my_projects/mpi/
+    projects=( *"/" )
+    echo ""
+    echo "${bold}Please, choose your project:${normal}"
+    echo ""
+    PS3=""
+    select project_name in "${projects[@]}"; do
+        if [[ -z $project_name ]]; then
+            echo "" >&/dev/null
+        else
+            project_found="1"
+            project_name=${project_name::-1} #we remove the last character, i.e. "/""
+            break
+        fi
+    done
 else
     #find flags and values
     for (( i=0; i<${#flags[@]}; i++ ))
@@ -39,18 +49,10 @@ else
         /opt/cli/sgutil build mpi -h
         exit
     fi
-    # check if project exists
-    DIR="/home/$username/my_projects/mpi/$project_name"
-    if ! [ -d "$DIR" ]; then
-        echo ""
-        echo "$DIR is not a valid --project name!"
-        echo ""
-        exit
-    fi
 fi
 
 # setup keys
-eval "$CLI_WORKDIR/common/ssh_key_add"
+#eval "$CLI_WORKDIR/common/ssh_key_add"
 
 # set environment
 PATH=$MPICH_WORKDIR/bin:$PATH
@@ -68,6 +70,9 @@ if [[ $(ls -l | wc -l) = 2 ]]; then
     g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
     cd $DIR
     ./create_config
+elif [[ $(ls -l | wc -l) = 3 ]]; then
+    #config_000 and config_001 exist
+    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
 elif [[ $(ls -l | wc -l) > 3 ]]; then
     cd $DIR/configs/
     configs=( "config_"*.hpp )
@@ -104,24 +109,6 @@ else
     echo ""
     cd $DIR
 
-    #get number of servers and processes
-    #num_servers=$(cat hosts | wc -l)
-    num_servers=0
-    num_proc=0
-    while read p; do
-        #echo "$p"
-        #eval "echo $p | sed 's/.*://'" 
-        aux=$(echo $p | sed 's/.*://')
-        #echo $aux
-        ((num_servers=num_servers+1))
-        ((num_proc=num_proc+aux))
-    done <hosts
-
-    echo $num_servers
-    echo $num_proc
-
-    exit
-
     #get N_MAX (MAX PROCESSES_PER_HOST)
     line=$(grep -n "N_MAX" $DIR/configs/config_000.hpp)
     #find equal (=)
@@ -131,19 +118,31 @@ else
     #get data
     N_MAX=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
 
+    #get number of servers and processes
+    num_servers=0
+    num_proc=0
+    shopt -s lastpipe
+    while read p; do 
+        aux=$(echo $p | sed 's/.*://')
+        if [[ $aux -gt $N_MAX ]]; then
+            echo ""
+            echo "The number of processes for (at least) one of the hosts exceeds N_MAX=$N_MAX!"
+            echo ""
+            exit
+        fi
+        ((num_servers=num_servers+1))
+        ((num_proc=num_proc+aux))
+    done <hosts
 
-    
-
-
-
-    n=$(($j*$PROCESSES_PER_HOST))
+    #get interface name
+    mellanox_name=$(nmcli dev | grep mellanox-0 | awk '{print $1}')
     
     #run
     echo "${bold}Running openMPI:${normal}"
     echo ""
-    echo "mpirun -n $n -f $VALIDATION_DIR/hosts -iface $mellanox_name $VALIDATION_DIR/build_dir/main"
+    echo "mpirun -n $num_proc -f $DIR/hosts -iface $mellanox_name $APP_BUILD_DIR/main"
     echo ""
-    mpirun -n $n -f $VALIDATION_DIR/hosts -iface $mellanox_name $VALIDATION_DIR/build_dir/main
+    mpirun -n $num_proc -f $DIR/hosts -iface $mellanox_name $APP_BUILD_DIR/main
 
 fi
 
