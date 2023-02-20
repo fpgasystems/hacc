@@ -112,12 +112,13 @@ build_coyote_help() {
 
 build_mpi_help() {
     echo ""
-    echo "${bold}sgutil build mpi [--help]${normal}"
+    echo "${bold}sgutil build mpi [flags] [--help]${normal}"
     echo ""
     echo "Generates MPI binaries for your projects."
     echo ""
     echo "FLAGS:"
-    echo "   This command has no flags."
+    #echo "   This command has no flags."
+    echo "   -p, --project   - Specifies your MPI project name."
     echo ""
     echo "   -h, --help      - Help to build Coyote."
     echo ""
@@ -409,12 +410,13 @@ run_help() {
     echo ""
     echo "${bold}sgutil run [arguments [flags]] [--help]${normal}"
     echo ""
-    echo "Executes the accelerated application on a given device."
+    echo "Executes your accelerated application."
     echo ""
     echo "ARGUMENTS:"
     echo "   coyote          - Runs Coyote on a given device."
     echo "   vitis           - Runs a Vitis FPGA-binary on a given device."
-    echo "   vivado (soon)   - Runs a Vivado FPGA-bitstream on a given device."
+    echo "   mpi             - Runs your MPI application according to your setup."
+    #echo "   vivado (soon)   - Runs a Vivado FPGA-bitstream on a given device."
     #echo "   bin             - Programs a Vitis FPGA-bitstream to a given device."
     #echo "   bit             - Programs a Vivado FPGA-bitstream to a given device."
     #echo "   drv             - Installs an FPGA driver on the server." 
@@ -431,9 +433,24 @@ run_coyote_help() {
     echo "Runs Coyote on a given device."
     echo ""
     echo "FLAGS:"
-    echo "   -p, --project   - Specifies your Vitis project name."
+    echo "   -p, --project   - Specifies your Coyote project name."
     echo "   -s, --serial    - FPGA's serial number. See sgutil get serial."
     #echo "   -t, --target    - Binary compilation target (sw_emu, hw_emu, hw)."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
+run_mpi_help() {
+    echo ""
+    echo "${bold}sgutil run mpi [flags] [--help]${normal}"
+    echo ""
+    echo "Runs your MPI application according to your setup."
+    echo ""
+    echo "FLAGS"
+    #echo "   This command has no flags."
+    echo "   -p, --project   - Specifies your MPI project name."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -606,11 +623,13 @@ case "$command" in
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       mpi) 
-        if [ "$#" -ne 2 ]; then
-          build_mpi_help
-          exit 1
-        fi
-        /opt/cli/build/mpi
+        #if [ "$#" -ne 2 ]; then
+        #  build_mpi_help
+        #  exit 1
+        #fi
+        #/opt/cli/build/mpi
+        valid_flags="-p --project -h --help" 
+        command_run $command_arguments_flags"@"$valid_flags
         ;;
       vitis) 
         valid_flags="-p --project -s --serial -h --help" #-t --target
@@ -731,6 +750,10 @@ case "$command" in
         ;;
       coyote) 
         valid_flags="-p --project -s --serial -h --help" # -b --binary -n --name -t --target 
+        command_run $command_arguments_flags"@"$valid_flags
+        ;;
+      mpi) 
+        valid_flags="-p --project -h --help" 
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       vitis) 

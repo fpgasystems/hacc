@@ -26,7 +26,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "coyote rescan revert vitis vivado --help" -- ${cur})) # -h
                     ;;
                 run)
-                    COMPREPLY=($(compgen -W "coyote vitis --help" -- ${cur})) # -h
+                    COMPREPLY=($(compgen -W "coyote mpi vitis --help" -- ${cur})) # -h
                     ;;
                 set)
                     COMPREPLY=($(compgen -W "write --help" -- ${cur})) # -h
@@ -73,6 +73,9 @@ _sgutil_completions()
                     ;;
                 coyote) # run 
                     COMPREPLY=($(compgen -W "--project --serial --help" -- ${cur})) 
+                    ;;
+                mpi)
+                    COMPREPLY=($(compgen -W "--project --help" -- ${cur}))
                     ;;
                 vitis)
                     COMPREPLY=($(compgen -W "--project --serial --help" -- ${cur})) # -b -n -s -t -h --binary --name --target 
