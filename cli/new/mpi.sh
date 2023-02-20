@@ -3,6 +3,9 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
+PROCESSES_PER_HOST=2
+
 #get username
 username=$USER
 
@@ -46,6 +49,23 @@ while true; do
         #compile create config
         cd $DIR/src
         g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
+        #create hosts file (it will create it with the current booked servers)
+        #echo "${bold}Creating hosts file:${normal}"
+        #echo ""
+        #sleep 1
+        servers=$(sudo /opt/cli/common/get_booking_system_servers_list | tail -n +2) #get booked machines
+        servers=($servers) #convert string to an array
+        cd $DIR
+        rm hosts
+        touch hosts
+        j=0
+        for i in "${servers[@]}"
+        do
+            if [ "$i" != "$hostname" ]; then
+                echo "$i-mellanox-0:$PROCESSES_PER_HOST" >> hosts
+                ((j=j+1))
+            fi
+        done
         break
     fi
 done
