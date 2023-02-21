@@ -80,9 +80,11 @@ if [[ $(ls -l | wc -l) = 2 ]]; then
     cd $DIR
     ./create_config
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+    config="config_001.hpp"
 elif [[ $(ls -l | wc -l) = 3 ]]; then
     #config_000 and config_001 exist
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+    config="config_001.hpp"
     echo ""
 elif [[ $(ls -l | wc -l) > 3 ]]; then
     cd $DIR/configs/

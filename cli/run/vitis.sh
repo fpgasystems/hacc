@@ -76,7 +76,13 @@ if [ "$serial_found" = "1" ] && [ "$serial_number" = "" ]; then
     exit
 fi
 
+echo ""
+echo "${bold}sgutil run vitis${normal}"
+
+#define directories (1)
 DIR="/home/$username/my_projects/vitis/$project_name"
+
+#check if project exists
 if ! [ -d "$DIR" ]; then
     echo ""
     echo "$DIR is not a valid --project name!"
@@ -84,22 +90,22 @@ if ! [ -d "$DIR" ]; then
     exit
 fi
 
-echo ""
-echo "${bold}sgutil run vitis${normal}"
-
 #create or select a configuration
 cd $DIR/configs/
 if [[ $(ls -l | wc -l) = 2 ]]; then
     #only config_000 exists and we create config_001
     #we compile create_config (in case there were changes)
-    cd $DIR/src
-    g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
-    cd $DIR
-    ./create_config
-    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+    #cd $DIR/src
+    #g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
+    #cd $DIR
+    #./create_config
+    #cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+    config=""
+    echo "" >&/dev/null
 elif [[ $(ls -l | wc -l) = 3 ]]; then
     #config_000 and config_001 exist
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+    config="config_001.hpp"
     echo ""
 elif [[ $(ls -l | wc -l) > 3 ]]; then
     cd $DIR/configs/
@@ -120,7 +126,7 @@ elif [[ $(ls -l | wc -l) > 3 ]]; then
     echo ""
 fi
 
-echo ""
+#echo ""
 echo "${bold}Please, choose binary's execution target:${normal}"
 echo ""
 PS3=""
@@ -151,6 +157,17 @@ fi
 #echo $serial_number
 #echo $platform
 
+#define directories (2)
+APP_BUILD_DIR="/home/$username/my_projects/vitis/$project_name/build_dir.$target.$platform"
+
+#check for build directory
+if ! [ -d "$APP_BUILD_DIR" ]; then
+    echo ""
+    echo "You must generate your application first! Please, use sgutil build vitis"
+    echo ""
+    exit
+fi
+
 #change directory
 #echo ""
 #echo "${bold}Changing directory:${normal}"
@@ -158,20 +175,20 @@ fi
 #echo "cd /home/$username/my_projects/vitis/$project_name"
 #echo ""
 #cd /home/$username/my_projects/vitis/$project_name
-DIR="/home/$username/my_projects/vitis/$project_name"
-if ! [ -d "$DIR" ]; then
-    echo ""
-    echo "$DIR not found!"
-    echo ""
-    exit
-else
+#DIR="/home/$username/my_projects/vitis/$project_name"
+#if ! [ -d "$DIR" ]; then
+#    echo ""
+#    echo "$DIR not found!"
+#    echo ""
+#    exit
+#else
     echo ""
     echo "${bold}Changing directory:${normal}"
     echo ""
     echo "cd $DIR"
     echo ""
     cd $DIR
-fi
+#fi
 
 #compilation
 #export CPATH="/usr/include/x86_64-linux-gnu" #https://support.xilinx.com/s/article/Fatal-error-sys-cdefs-h-No-such-file-or-directory?language=en_US
@@ -183,13 +200,13 @@ fi
 #eval "make all TARGET=$target PLATFORM=$platform"
 #echo ""
 
-DIR="/home/$username/my_projects/vitis/$project_name/build_dir.$target.$platform"
-if ! [ -d "$DIR" ]; then
-    # project_name does not exist
-    echo "Please, generate your binary first with sgutil build vitis."
-    echo ""
-    exit
-fi
+#DIR="/home/$username/my_projects/vitis/$project_name/build_dir.$target.$platform"
+#if ! [ -d "$DIR" ]; then
+#    # project_name does not exist
+#    echo "Please, generate your binary first with sgutil build vitis."
+#    echo ""
+#    exit
+#fi
 
 #execution
 echo "${bold}Running accelerated application:${normal}"

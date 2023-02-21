@@ -62,6 +62,7 @@ LD_LIBRARY_PATH=$MPICH_WORKDIR/lib:$LD_LIBRARY_PATH
 DIR="/home/$username/my_projects/mpi/$project_name"
 APP_BUILD_DIR="/home/$username/my_projects/mpi/$project_name/build_dir"
 
+#check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
     echo ""
     echo "You must generate your application first! Please, use sgutil build mpi"
@@ -78,14 +79,17 @@ cd $DIR/configs/
 if [[ $(ls -l | wc -l) = 2 ]]; then
     #only config_000 exists and we create config_001
     #we compile create_config (in case there were changes)
-    cd $DIR/src
-    g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
-    cd $DIR
-    ./create_config
-    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+    #cd $DIR/src
+    #g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
+    #cd $DIR
+    #./create_config
+    #cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+    config=""
+    echo "" >&/dev/null
 elif [[ $(ls -l | wc -l) = 3 ]]; then
     #config_000 and config_001 exist
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+    config="config_001.hpp"
     echo ""
 elif [[ $(ls -l | wc -l) > 3 ]]; then
     cd $DIR/configs/

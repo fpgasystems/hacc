@@ -63,11 +63,22 @@ if [ "$project_found" = "1" ] && [ "$project_name" = "" ]; then
     exit
 fi
 
-# check if project exists
+#define directories
 DIR="/home/$username/my_projects/coyote/$project_name"
+APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build_dir.$device_name/"
+
+#check if project exists
 if ! [ -d "$DIR" ]; then
     echo ""
     echo "$DIR is not a valid --project name!"
+    echo ""
+    exit
+fi
+
+#check for build directory
+if ! [ -d "$APP_BUILD_DIR" ]; then
+    echo ""
+    echo "You must generate your application first! Please, use sgutil build coyote"
     echo ""
     exit
 fi
@@ -77,14 +88,17 @@ cd $DIR/configs/
 if [[ $(ls -l | wc -l) = 2 ]]; then
     #only config_000 exists and we create config_001
     #we compile create_config (in case there were changes)
-    cd $DIR/src
-    g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
-    cd $DIR
-    ./create_config
-    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+    #cd $DIR/src
+    #g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
+    #cd $DIR
+    #./create_config
+    #cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+    config=""
+    echo "" >&/dev/null
 elif [[ $(ls -l | wc -l) = 4 ]]; then
     #config_000, config_shell and config_001 exist
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+    config="config_001.hpp"
     echo ""
 elif [[ $(ls -l | wc -l) > 4 ]]; then
     cd $DIR/configs/
@@ -108,10 +122,6 @@ fi
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
     device_name=$(sgutil get device | cut -d "=" -f2)
 fi
-
-#define directories
-DIR="/home/$username/my_projects/coyote/$project_name"
-APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build_dir.$device_name/"
 
 #change directory
 #DIR="/home/$username/my_projects/coyote/$project_name"
