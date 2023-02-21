@@ -287,4 +287,6 @@ fi
 #DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build"
 #cd /home/$username/my_projects/coyote/$project_name/sw/examples/$config/build #${DIR}
 #./main
-/opt/cli/sgutil run coyote -p $project_name
+#/opt/cli/sgutil run coyote -p $project_name
+cd /home/$username/my_projects/coyote/$project_name/build_dir.$device_name/
+./main
