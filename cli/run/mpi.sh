@@ -49,7 +49,7 @@ else
     done
     #project is not found or its name is empty
     if [[ $project_found = "0" ]] || ([ "$project_found" = "1" ] && [ "$project_name" = "" ]); then
-        /opt/cli/sgutil build mpi -h
+        /opt/cli/sgutil run mpi -h
         exit
     fi
 fi
@@ -64,7 +64,7 @@ APP_BUILD_DIR="/home/$username/my_projects/mpi/$project_name/build_dir"
 
 if ! [ -d "$APP_BUILD_DIR" ]; then
     echo ""
-    echo "Please, generate your MPI application with sgutil build mpi"
+    echo "You must generate your application first! Please, use sgutil build mpi"
     echo ""
     exit
 fi
@@ -82,9 +82,11 @@ if [[ $(ls -l | wc -l) = 2 ]]; then
     g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
     cd $DIR
     ./create_config
+    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
 elif [[ $(ls -l | wc -l) = 3 ]]; then
     #config_000 and config_001 exist
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+    echo ""
 elif [[ $(ls -l | wc -l) > 3 ]]; then
     cd $DIR/configs/
     configs=( "config_"*.hpp )
@@ -110,7 +112,7 @@ if ! [ -d "$DIR" ]; then
     echo ""
     exit
 else
-    echo ""
+    #echo ""
     echo "${bold}Changing directory:${normal}"
     echo ""
     echo "cd $DIR"
