@@ -65,7 +65,7 @@ APP_BUILD_DIR="$DIR/build_dir"
 #check for project directory
 if ! [ -d "$DIR" ]; then
     echo ""
-    echo "You must generate your project first! Please, use sgutil new mpi"
+    echo "You must create your project first! Please, use sgutil new mpi"
     echo ""
     exit
 fi
