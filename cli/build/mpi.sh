@@ -74,6 +74,7 @@ if [[ $(ls -l | wc -l) = 2 ]]; then
     g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
     cd $DIR
     ./create_config
+    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
 elif [[ $(ls -l | wc -l) = 3 ]]; then
     #config_000 and config_001 exist
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
