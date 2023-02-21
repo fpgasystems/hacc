@@ -60,7 +60,15 @@ LD_LIBRARY_PATH=$MPICH_WORKDIR/lib:$LD_LIBRARY_PATH
 
 #define directories
 DIR="/home/$username/my_projects/mpi/$project_name"
-APP_BUILD_DIR="/home/$username/my_projects/mpi/$project_name/build_dir"
+APP_BUILD_DIR="$DIR/build_dir"
+
+#check for project directory
+if ! [ -d "$DIR" ]; then
+    echo ""
+    echo "You must generate your project first! Please, use sgutil new mpi"
+    echo ""
+    exit
+fi
 
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
@@ -110,12 +118,12 @@ elif [[ $(ls -l | wc -l) > 3 ]]; then
 fi
 
 #change directory
-if ! [ -d "$DIR" ]; then
-    echo ""
-    echo "$DIR not found!"
-    echo ""
-    exit
-else
+#if ! [ -d "$DIR" ]; then
+#    echo ""
+#    echo "$DIR not found!"
+#    echo ""
+#    exit
+#else
     #echo ""
     echo "${bold}Changing directory:${normal}"
     echo ""
@@ -158,6 +166,6 @@ else
     echo ""
     mpirun -n $num_proc -f $DIR/hosts -iface $mellanox_name $APP_BUILD_DIR/main
 
-fi
+#fi
 
 echo ""

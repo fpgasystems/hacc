@@ -58,6 +58,14 @@ fi
 DIR="/home/$username/my_projects/mpi/$project_name"
 APP_BUILD_DIR="$DIR/build_dir"
 
+#check for project directory
+if ! [ -d "$DIR" ]; then
+    echo ""
+    echo "You must generate your project first! Please, use sgutil new mpi"
+    echo ""
+    exit
+fi
+
 # setup keys
 #eval "$CLI_WORKDIR/common/ssh_key_add"
 
@@ -99,12 +107,12 @@ elif [[ $(ls -l | wc -l) > 3 ]]; then
 fi
 
 #change directory
-if ! [ -d "$DIR" ]; then
-    echo ""
-    echo "$DIR is not a valid --project name!"
-    echo ""
-    exit
-else
+#if ! [ -d "$DIR" ]; then
+#    echo ""
+#    echo "$DIR is not a valid --project name!"
+#    echo ""
+#    exit
+#else
     echo ""
     echo "${bold}Changing directory:${normal}"
     echo ""
@@ -127,4 +135,4 @@ else
     #mpicc $DIR/src/main.c -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -o $APP_BUILD_DIR/main
     mpicc $DIR/src/main.cpp -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -o $APP_BUILD_DIR/main
   
-fi
+#fi
