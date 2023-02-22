@@ -246,6 +246,7 @@ new_help() {
     echo ""
     echo "ARGUMENTS:"
     echo "   coyote          - Creates a new project using Coyote Hello, world! template."
+    echo "   mpi             - Creates a new project using MPI Hello, world! template."
     echo "   vitis           - Creates a new project using Vitis Hello, world! template."
     #echo "   vivado          - Creates a new project using Vivado Hello, world! template."
     #echo "   bin             - Programs a Vitis FPGA-bitstream to a given device."
