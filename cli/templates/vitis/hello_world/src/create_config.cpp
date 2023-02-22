@@ -53,6 +53,22 @@ vector<int> new_vector(int min_, int max_)
     return myVec;
 }
 
+string get_config_string()
+{
+    fs::path p = fs::current_path();
+    string project_path = p.relative_path();
+    project_path = "/" + project_path + "/configs/";
+    int n = 0;
+    for (const auto & file : directory_iterator(project_path)){
+        n = n + 1;
+    }
+    string s = std::to_string(n - 1);
+    unsigned int number_of_zeros = STRING_LENGTH - s.length();
+    s.insert(0, number_of_zeros, '0');
+    s = "config_" + s;    
+    return s;
+}
+
 ofstream create_config_file()
 {
     fs::path p = fs::current_path();
@@ -166,6 +182,9 @@ int main()
     double RMSE = 0.01;
     cout << "\n";
 
+    // get config string
+    string s = get_config_string();
+
     // create config file
     ofstream c = create_config_file();
     c << "const int N_MAX = " <<  N_MAX << ";" << std::endl;
@@ -177,6 +196,9 @@ int main()
     c << "const int T_CLK = " <<  T_CLK << ";" << std::endl;
     c << "const int CLK_F = " <<  CLK_F << ";" << std::endl;
     c << "const double RMSE = " <<  RMSE << ";" << std::endl;
+
+    cout << "The configuration " << s << ".hpp has been created!\n";
+    cout << "\n";
 
     return 0;
 }
