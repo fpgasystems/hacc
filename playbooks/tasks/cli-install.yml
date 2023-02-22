@@ -213,11 +213,15 @@
     dest: /opt/cli/new/vitis
     mode: 0755
 
-- name: copy (new) vivado script
-  copy:
-    src: "../../cli/new/vivado.sh"
-    dest: /opt/cli/new/vivado
-    mode: 0755
+#- name: copy (new) vivado script
+#  copy:
+#    src: "../../cli/new/vivado.sh"
+#    dest: /opt/cli/new/vivado
+#    mode: 0755
+- name: remove new vivado (until we truly implement the workflow)
+  ansible.builtin.file:
+    path: /opt/cli/new/vivado
+    state: absent
 
 - name: copy (new) coyote script
   copy:
