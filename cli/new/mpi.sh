@@ -53,6 +53,7 @@ while true; do
         #echo "${bold}Creating hosts file:${normal}"
         #echo ""
         #sleep 1
+        echo ""
         servers=$(sudo /opt/cli/common/get_booking_system_servers_list | tail -n +2) #get booked machines
         servers=($servers) #convert string to an array
         cd $DIR
