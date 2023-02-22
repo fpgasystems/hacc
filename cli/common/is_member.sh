@@ -11,14 +11,17 @@ fi
 
 #check if group exists
 if [ $(getent group $groupname) ]; then
-  echo "group exists."
+  #the group exists
+  echo "" >&/dev/null
 else
-  echo "group does not exist."
+  echo ""
+  echo "The group $groupname does not exist."
+  echo ""
   exit
 fi
 
 if getent group $groupname | grep -q "\b${username}\b"; then
-    echo true
+    echo "true"
 else
-    echo false
+    echo "false"
 fi
