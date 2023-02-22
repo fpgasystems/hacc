@@ -9,6 +9,18 @@ username=$USER
 # inputs
 read -a flags <<< "$@"
 
+echo ""
+echo "${bold}sgutil set write${normal}"
+
+#check for vivado_developers
+member=$(/opt/cli/common/is_member $username vivado_developers)
+if [ "$member" = "false" ]; then
+    echo ""
+    echo "Sorry, ${bold}$username!${normal} You are not granted to use this command."
+    echo ""
+    exit
+fi
+
 # flags cannot be empty
 if [ "$flags" = "" ]; then
     eval "/opt/cli/sgutil set write -h"

@@ -12,6 +12,15 @@ read -a flags <<< "$@"
 echo ""
 echo "${bold}sgutil build coyote${normal}"
 
+#check for vivado_developers
+member=$(/opt/cli/common/is_member $username vivado_developers)
+if [ "$member" = "false" ]; then
+    echo ""
+    echo "Sorry, ${bold}$username!${normal} You are not granted to use this command."
+    echo ""
+    exit
+fi
+
 #check on flags (before: flags cannot be empty)
 name_found="0"
 project_found="0"
@@ -176,13 +185,13 @@ if ! [ -d "$SHELL_BUILD_DIR" ]; then
     echo ""
     cd $DRIVER_DIR && make
 else
-    echo ""
-    echo "Coyote shell already exists!"
+    #echo ""
+    echo "The Coyote shell already exists!"
 fi
 
 #application compilation
 echo ""
-echo "${bold}Example application compilation:${normal}"
+echo "${bold}Application compilation:${normal}"
 echo ""
 echo "cmake ../sw -DTARGET_DIR=../src/ && make"
 echo ""

@@ -6,6 +6,18 @@ normal=$(tput sgr0)
 #get username
 username=$USER
 
+echo ""
+echo "${bold}sgutil new coyote${normal}"
+
+#check for vivado_developers
+member=$(/opt/cli/common/is_member $username vivado_developers)
+if [ "$member" = "false" ]; then
+    echo ""
+    echo "Sorry, ${bold}$username!${normal} You are not granted to use this command."
+    echo ""
+    exit
+fi
+
 # create my_projects directory
 DIR="/home/$username/my_projects"
 if ! [ -d "$DIR" ]; then
@@ -19,8 +31,6 @@ if ! [ -d "$DIR" ]; then
 fi
 
 # create project
-echo ""
-echo "${bold}sgutil new coyote${normal}"
 echo ""
 echo "Please, insert a non-existing name for your Coyote project:"
 echo ""

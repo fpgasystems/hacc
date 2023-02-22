@@ -12,6 +12,15 @@ read -a flags <<< "$@"
 echo ""
 echo "${bold}sgutil run coyote${normal}"
 
+#check for vivado_developers
+member=$(/opt/cli/common/is_member $username vivado_developers)
+if [ "$member" = "false" ]; then
+    echo ""
+    echo "Sorry, ${bold}$username!${normal} You are not granted to use this command."
+    echo ""
+    exit
+fi
+
 #check on flags (before: flags cannot be empty)
 name_found="0"
 project_found="0"
