@@ -15,7 +15,6 @@ echo "${bold}sgutil run coyote${normal}"
 #check on flags (before: flags cannot be empty)
 name_found="0"
 project_found="0"
-#serial_found="0"
 if [ "$flags" = "" ]; then
     #no flags: start dialog
     cd /home/$username/my_projects/coyote/
@@ -35,7 +34,7 @@ if [ "$flags" = "" ]; then
     echo "${bold}Please, choose your project:${normal}"
     echo ""
     PS3=""
-    select project_name in "${aux[@]}"; do #projects
+    select project_name in "${aux[@]}"; do
         if [[ -z $project_name ]]; then
             echo "" >&/dev/null
         else
@@ -128,31 +127,14 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
 fi
 
 #change directory
-#DIR="/home/$username/my_projects/coyote/$project_name"
-#if ! [ -d "$DIR" ]; then
-#    echo ""
-#    echo "$DIR not found!"
-#    echo ""
-#    exit
-#else
-    echo ""
-    echo "${bold}Changing directory:${normal}"
-    echo ""
-    echo "cd $DIR"
-    echo ""
-    cd $DIR
-
-    # this will change... we need to use $APP_DIR where we should find a file we can properly execute
-    #APP_DIR="/home/$username/my_projects/coyote/$project_name/sw/build"
-
-    # workaround working if we do sgutil program coyote -p U55C_01_02 first
-    #cd /mnt/scratch/runshi/coyote_perf_fpga
-    #./perf_fpga
-    #echo "${bold}sgutil run coyote${normal}"
+echo ""
+echo "${bold}Changing directory:${normal}"
+echo ""
+echo "cd $DIR"
+echo ""
+cd $DIR
     
-    cd $APP_BUILD_DIR
-    ./main
-
-#fi
+cd $APP_BUILD_DIR
+./main
 
 echo ""

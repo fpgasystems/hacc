@@ -15,7 +15,6 @@ echo "${bold}sgutil build coyote${normal}"
 #check on flags (before: flags cannot be empty)
 name_found="0"
 project_found="0"
-#serial_found="0"
 if [ "$flags" = "" ]; then
     #no flags: start dialog
     cd /home/$username/my_projects/coyote/
@@ -66,55 +65,10 @@ else
     fi
 fi
 
-
-
-#------------------------------
-
-# flags cannot be empty
-#if [ "$flags" = "" ]; then
-#    /opt/cli/sgutil build coyote -h
-#    exit
-#fi
-
-#name_found="0"
-#project_found="0"
-#for (( i=0; i<${#flags[@]}; i++ ))
-#do
-#    if [[ " ${flags[$i]} " =~ " -n " ]] || [[ " ${flags[$i]} " =~ " --name " ]]; then 
-#        name_found="1"
-#        name_idx=$(($i+1))
-#        device_name=${flags[$name_idx]}
-#    fi
-#    if [[ " ${flags[$i]} " =~ " -p " ]] || [[ " ${flags[$i]} " =~ " --project " ]]; then
-#        project_found="1"
-#        project_idx=$(($i+1))
-#        project_name=${flags[$project_idx]}
-#    fi
-#done
-
-# mandatory flags (-p must be used)
-#use_help="0"
-#if [[ $project_found = "0" ]]; then
-#    /opt/cli/sgutil build coyote -h
-#    exit
-#fi
-
-# when used, device_name or project_name cannot be empty
-#if [ "$name_found" = "1" ] && [ "$device_name" = "" ]; then
-#    /opt/cli/sgutil build coyote -h
-#    exit
-#fi
-
-#if [ "$project_found" = "1" ] && [ "$project_name" = "" ]; then
-#    /opt/cli/sgutil build coyote -h
-#    exit
-#fi
-
 #define directories (1)
 DIR="/home/$username/my_projects/coyote/$project_name"
 
 # check if project exists
-#DIR="/home/$username/my_projects/coyote/$project_name"
 if ! [ -d "$DIR" ]; then
     echo ""
     echo "You must create your project first! Please, use sgutil new coyote"
@@ -173,119 +127,78 @@ do
     coyote_params=$coyote_params"-D"$name"="$value" "
 done
 
-#echo $coyote_params
-
-#exit
-
 #sgutil get device if there is only one FPGA and not name_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
     device_name=$(sgutil get device | cut -d "=" -f2)
 fi
 
-# device_name to coyote string <===========================================================================
+# device_name to coyote string 
 FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
 if [ "$FDEV_NAME" = "u50d" ]; then
     FDEV_NAME="u50"
 fi
 
 #define directories (2)
-#DIR="/home/$username/my_projects/coyote/$project_name"
 SHELL_BUILD_DIR="$DIR/hw/build"
 DRIVER_DIR="$DIR/driver"
 APP_BUILD_DIR="$DIR/build"
 
-#change directory
-#DIR="/home/$username/my_projects/coyote/$project_name"
-#if ! [ -d "$DIR" ]; then
-#    echo ""
-#    echo "$DIR not found!"
-#    echo ""
-#    exit
-#else
+echo ""
+echo "${bold}Changing directory:${normal}"
+echo ""
+echo "cd $DIR"
+echo ""
+cd $DIR
+
+#bitstream compilation    
+if ! [ -d "$SHELL_BUILD_DIR" ]; then
+    echo "${bold}Coyote shell compilation:${normal}"
     echo ""
-    echo "${bold}Changing directory:${normal}"
+    echo "cmake .. -DFDEV_NAME=$FDEV_NAME $coyote_params"
     echo ""
-    echo "cd $DIR"
+    mkdir $SHELL_BUILD_DIR
+    cd $SHELL_BUILD_DIR
+    /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME $coyote_params
+
+    #generate bitstream
     echo ""
-    cd $DIR
-
-    #bitstream compilation
-    #SHELL_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build" #build_dir.hw_$config.$device_name
-    if ! [ -d "$SHELL_BUILD_DIR" ]; then
-        echo "${bold}Coyote shell compilation:${normal}"
-        echo ""
-        echo "cmake .. -DFDEV_NAME=$FDEV_NAME $coyote_params" #-DEXAMPLE=$config
-        echo ""
-        mkdir $SHELL_BUILD_DIR
-        cd $SHELL_BUILD_DIR
-        #/usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=perf_host
-        /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME $coyote_params
-
-        #generate bitstream
-        echo ""
-        echo "${bold}Coyote shell bitstream generation:${normal}"
-        echo ""
-        echo "make shell && make compile"
-        echo ""
-        make shell && make compile
-
-        #driver compilation
-        #DRIVER_DIR="/home/$username/my_projects/coyote/$project_name/driver"
-        echo ""
-        echo "${bold}Driver compilation:${normal}"
-        echo ""
-        echo "cd $DRIVER_DIR && make"
-        echo ""
-        cd $DRIVER_DIR && make
-
-        #copy perf_host main.cpp
-        #if ! [ -d "$MAIN_CPP_DIR_1" ]; then
-        #    mkdir $MAIN_CPP_DIR_1
-        #    cp $MAIN_CPP_DIR_0/main.cpp $MAIN_CPP_DIR_1
-        #fi
-    else
-        #echo "${bold}Coyote shell and driver compilation:${normal}"
-        #echo ""
-        #echo "cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config"
-        #echo "make shell && make compile"
-        echo ""
-        echo "Coyote shell already exists!"
-        #exit
-    fi
-
-    #mkdir /home/jmoyapaya/my_projects/coyote/compile_0/build
-    #cp /home/jmoyapaya/my_projects/coyote/compile_0/sw/examples/perf_host/main.cpp /home/jmoyapaya/my_projects/coyote/compile_0/src
-    #cd /home/jmoyapaya/my_projects/coyote/compile_0/build
-
-    #application compilation
-    #APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build" #build_dir.sw_$config
-    #APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build"
+    echo "${bold}Coyote shell bitstream generation:${normal}"
     echo ""
-    echo "${bold}Example application compilation:${normal}"
+    echo "make shell && make compile"
     echo ""
-    echo "cmake ../sw -DTARGET_DIR=../src/ && make"
+    make shell && make compile
+
+    #driver compilation
     echo ""
-    if ! [ -d "$APP_BUILD_DIR" ]; then
-        mkdir $APP_BUILD_DIR
-        cd $APP_BUILD_DIR
-        #/usr/bin/cmake ../../../ -DTARGET_DIR=examples/$config && make
-        /usr/bin/cmake ../sw -DTARGET_DIR=../src/ && make # 1: path from APP_BUILD_DIR to /sw 2: path from APP_BUILD_DIR to main.cpp
-        #copy bitstream
-        cp $SHELL_BUILD_DIR/bitstreams/cyt_top.bit $APP_BUILD_DIR
-        #copy driver
-        cp $DRIVER_DIR/coyote_drv.ko $APP_BUILD_DIR
-        #rename folder
-        mv $APP_BUILD_DIR $APP_BUILD_DIR"_dir.$device_name"
-    else
-        cd $APP_BUILD_DIR"_dir.$device_name"
-        /usr/bin/cmake ../sw -DTARGET_DIR=../src/ && make
-    fi
-    
+    echo "${bold}Driver compilation:${normal}"
+    echo ""
+    echo "cd $DRIVER_DIR && make"
+    echo ""
+    cd $DRIVER_DIR && make
+else
+    echo ""
+    echo "Coyote shell already exists!"
+fi
 
-    #echo ""
-    #cd $APP_BUILD_DIR
-    #make
-
-#fi
+#application compilation
+echo ""
+echo "${bold}Example application compilation:${normal}"
+echo ""
+echo "cmake ../sw -DTARGET_DIR=../src/ && make"
+echo ""
+if ! [ -d "$APP_BUILD_DIR" ]; then
+    mkdir $APP_BUILD_DIR
+    cd $APP_BUILD_DIR
+    /usr/bin/cmake ../sw -DTARGET_DIR=../src/ && make # 1: path from APP_BUILD_DIR to /sw 2: path from APP_BUILD_DIR to main.cpp
+    #copy bitstream
+    cp $SHELL_BUILD_DIR/bitstreams/cyt_top.bit $APP_BUILD_DIR
+    #copy driver
+    cp $DRIVER_DIR/coyote_drv.ko $APP_BUILD_DIR
+    #rename folder
+    mv $APP_BUILD_DIR $APP_BUILD_DIR"_dir.$device_name"
+else
+    cd $APP_BUILD_DIR"_dir.$device_name"
+    /usr/bin/cmake ../sw -DTARGET_DIR=../src/ && make
+fi
 
 echo ""
