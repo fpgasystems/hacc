@@ -66,9 +66,6 @@ if ! [ -d "$DIR" ]; then
     exit
 fi
 
-# setup keys
-#eval "$CLI_WORKDIR/common/ssh_key_add"
-
 # set environment
 PATH=$MPICH_WORKDIR/bin:$PATH
 LD_LIBRARY_PATH=$MPICH_WORKDIR/lib:$LD_LIBRARY_PATH
@@ -107,32 +104,22 @@ elif [[ $(ls -l | wc -l) > 3 ]]; then
 fi
 
 #change directory
-#if ! [ -d "$DIR" ]; then
-#    echo ""
-#    echo "$DIR is not a valid --project name!"
-#    echo ""
-#    exit
-#else
-    echo ""
-    echo "${bold}Changing directory:${normal}"
-    echo ""
-    echo "cd $DIR"
-    echo ""
-    cd $DIR
+echo ""
+echo "${bold}Changing directory:${normal}"
+echo ""
+echo "cd $DIR"
+echo ""
+cd $DIR
 
-    #create build_dir
-    if ! [ -d "$APP_BUILD_DIR" ]; then
-        mkdir $APP_BUILD_DIR
-    fi
+#create build_dir
+if ! [ -d "$APP_BUILD_DIR" ]; then
+    mkdir $APP_BUILD_DIR
+fi
 
-    # copy and compile
-    echo "${bold}Compiling main.c:${normal}"
-    echo ""
-    sleep 1
-    echo "mpicc $DIR/src/main.cpp -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -o $APP_BUILD_DIR/main"
-    echo ""
-    #cp $CLI_WORKDIR/templates/mpi/hello_world/src/mpi_hello.c $WORKDIR
-    #mpicc $DIR/src/main.c -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -o $APP_BUILD_DIR/main
-    mpicc $DIR/src/main.cpp -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -o $APP_BUILD_DIR/main
-  
-#fi
+# copy and compile
+echo "${bold}Compiling main.c:${normal}"
+echo ""
+sleep 1
+echo "mpicc $DIR/src/main.cpp -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -o $APP_BUILD_DIR/main"
+echo ""
+mpicc $DIR/src/main.cpp -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -o $APP_BUILD_DIR/main

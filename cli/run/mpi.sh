@@ -118,54 +118,45 @@ elif [[ $(ls -l | wc -l) > 3 ]]; then
 fi
 
 #change directory
-#if ! [ -d "$DIR" ]; then
-#    echo ""
-#    echo "$DIR not found!"
-#    echo ""
-#    exit
-#else
-    #echo ""
-    echo "${bold}Changing directory:${normal}"
-    echo ""
-    echo "cd $DIR"
-    echo ""
-    cd $DIR
+echo "${bold}Changing directory:${normal}"
+echo ""
+echo "cd $DIR"
+echo ""
+cd $DIR
 
-    #get N_MAX (MAX PROCESSES_PER_HOST)
-    line=$(grep -n "N_MAX" $DIR/configs/config_000.hpp)
-    #find equal (=)
-    idx=$(sed 's/ /\n/g' <<< "$line" | sed -n "/=/=")
-    #get index
-    value_idx=$(($idx+1))
-    #get data
-    N_MAX=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
+#get N_MAX (MAX PROCESSES_PER_HOST)
+line=$(grep -n "N_MAX" $DIR/configs/config_000.hpp)
+#find equal (=)
+idx=$(sed 's/ /\n/g' <<< "$line" | sed -n "/=/=")
+#get index
+value_idx=$(($idx+1))
+#get data
+N_MAX=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
 
-    #get number of servers and processes
-    num_servers=0
-    num_proc=0
-    shopt -s lastpipe
-    while read p; do 
-        aux=$(echo $p | sed 's/.*://')
-        if [[ $aux -gt $N_MAX ]]; then
-            echo ""
-            echo "The number of processes for (at least) one of the hosts exceeds N_MAX=$N_MAX!"
-            echo ""
-            exit
-        fi
-        ((num_servers=num_servers+1))
-        ((num_proc=num_proc+aux))
-    done <hosts
+#get number of servers and processes
+num_servers=0
+num_proc=0
+shopt -s lastpipe
+while read p; do 
+    aux=$(echo $p | sed 's/.*://')
+    if [[ $aux -gt $N_MAX ]]; then
+        echo ""
+        echo "The number of processes for (at least) one of the hosts exceeds N_MAX=$N_MAX!"
+        echo ""
+        exit
+    fi
+    ((num_servers=num_servers+1))
+    ((num_proc=num_proc+aux))
+done <hosts
 
-    #get interface name
-    mellanox_name=$(nmcli dev | grep mellanox-0 | awk '{print $1}')
+#get interface name
+mellanox_name=$(nmcli dev | grep mellanox-0 | awk '{print $1}')
     
-    #run
-    echo "${bold}Running openMPI:${normal}"
-    echo ""
-    echo "mpirun -n $num_proc -f $DIR/hosts -iface $mellanox_name $APP_BUILD_DIR/main"
-    echo ""
-    mpirun -n $num_proc -f $DIR/hosts -iface $mellanox_name $APP_BUILD_DIR/main
-
-#fi
+#run
+echo "${bold}Running openMPI:${normal}"
+echo ""
+echo "mpirun -n $num_proc -f $DIR/hosts -iface $mellanox_name $APP_BUILD_DIR/main"
+echo ""
+mpirun -n $num_proc -f $DIR/hosts -iface $mellanox_name $APP_BUILD_DIR/main
 
 echo ""
