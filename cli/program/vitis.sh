@@ -154,14 +154,17 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     exit
 fi
 
-# revert to xrt first if FPGA is already in baremetal
+#revert to xrt first if FPGA is already in baremetal
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then
     /opt/cli/program/revert
 fi
 
-# get xclbin
+#get xclbin
 cd $APP_BUILD_DIR
 xclbin=$(echo *.xclbin | awk '{print $NF}')
+
+#reset device (we delete any xclbin)
+/opt/xilinx/xrt/bin/xbutil reset $serial_number --force
 
 # program xclbin
 /opt/xilinx/xrt/bin/xbutil program $serial_number -u $xclbin
