@@ -3,69 +3,71 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-#echo ""
-#echo "${bold}iperf${normal}"
-#echo ""
-
-# constants
-#CLI_WORKDIR="/opt/cli"
-
-# get hostname
-#url="${HOSTNAME}"
-#hostname="${url%%.*}"
-
 #get username
 username=$USER
-
-#echo "This will run Coyote"
-#exit
 
 # inputs
 read -a flags <<< "$@"
 
-# flags cannot be empty
-if [ "$flags" = "" ]; then
-    /opt/cli/sgutil run coyote -h
-    exit
-fi
+echo ""
+echo "${bold}sgutil run coyote${normal}"
 
+#check on flags (before: flags cannot be empty)
 name_found="0"
 project_found="0"
-for (( i=0; i<${#flags[@]}; i++ ))
-do
-    if [[ " ${flags[$i]} " =~ " -n " ]] || [[ " ${flags[$i]} " =~ " --name " ]]; then 
-        name_found="1"
-        name_idx=$(($i+1))
-        device_name=${flags[$name_idx]}
+#serial_found="0"
+if [ "$flags" = "" ]; then
+    #no flags: start dialog
+    cd /home/$username/my_projects/coyote/
+    projects=( *"/" )
+    #delete validate folders from projects
+    j=0
+    for i in "${projects[@]}"
+    do
+        if [[ $i =~ validate_* ]]; then
+            echo "" >&/dev/null
+        else
+            aux[j]=$i
+            j=$(($j + 1))
+        fi
+    done
+    echo ""
+    echo "${bold}Please, choose your project:${normal}"
+    echo ""
+    PS3=""
+    select project_name in "${aux[@]}"; do #projects
+        if [[ -z $project_name ]]; then
+            echo "" >&/dev/null
+        else
+            project_found="1"
+            project_name=${project_name::-1} #we remove the last character, i.e. "/""
+            break
+        fi
+    done
+else
+    #find flags and values
+    for (( i=0; i<${#flags[@]}; i++ ))
+    do
+        if [[ " ${flags[$i]} " =~ " -n " ]] || [[ " ${flags[$i]} " =~ " --name " ]]; then 
+            name_found="1"
+            name_idx=$(($i+1))
+            device_name=${flags[$name_idx]}
+        fi
+        if [[ " ${flags[$i]} " =~ " -p " ]] || [[ " ${flags[$i]} " =~ " --project " ]]; then
+            project_found="1"
+            project_idx=$(($i+1))
+            project_name=${flags[$project_idx]}
+        fi
+    done
+    #forbidden combinations
+    if [[ $project_found = "0" ]] || ([ "$project_found" = "1" ] && [ "$project_name" = "" ]) || ([ $project_found = "0" ] && [ $name_found = "1" ]) || ([ "$name_found" = "1" ] && [ "$device_name" = "" ]); then
+        /opt/cli/sgutil build coyote -h
+        exit
     fi
-    if [[ " ${flags[$i]} " =~ " -p " ]] || [[ " ${flags[$i]} " =~ " --project " ]]; then
-        project_found="1"
-        project_idx=$(($i+1))
-        project_name=${flags[$project_idx]}
-    fi
-done
-
-# mandatory flags (-p must be used)
-use_help="0"
-if [[ $project_found = "0" ]]; then
-    /opt/cli/sgutil build coyote -h
-    exit
 fi
 
-# when used, device_name or project_name cannot be empty
-if [ "$name_found" = "1" ] && [ "$device_name" = "" ]; then
-    /opt/cli/sgutil run coyote -h
-    exit
-fi
-
-if [ "$project_found" = "1" ] && [ "$project_name" = "" ]; then
-    /opt/cli/sgutil run coyote -h
-    exit
-fi
-
-#define directories
+#define directories (1)
 DIR="/home/$username/my_projects/coyote/$project_name"
-APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build_dir.$device_name/"
 
 #check if project exists
 if ! [ -d "$DIR" ]; then
@@ -75,26 +77,17 @@ if ! [ -d "$DIR" ]; then
     exit
 fi
 
-#check for build directory
-if ! [ -d "$APP_BUILD_DIR" ]; then
-    echo ""
-    echo "You must generate your application first! Please, use sgutil build coyote"
-    echo ""
-    exit
-fi
-
 #create or select a configuration
 cd $DIR/configs/
 if [[ $(ls -l | wc -l) = 2 ]]; then
     #only config_000 exists and we create config_001
     #we compile create_config (in case there were changes)
-    #cd $DIR/src
-    #g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
-    #cd $DIR
-    #./create_config
-    #cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
-    config=""
-    echo "" >&/dev/null
+    cd $DIR/src
+    g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
+    cd $DIR
+    ./create_config
+    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+    config="config_001.hpp"
 elif [[ $(ls -l | wc -l) = 4 ]]; then
     #config_000, config_shell and config_001 exist
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
@@ -123,14 +116,25 @@ if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
     device_name=$(sgutil get device | cut -d "=" -f2)
 fi
 
-#change directory
-#DIR="/home/$username/my_projects/coyote/$project_name"
-if ! [ -d "$DIR" ]; then
+#define directories (2)
+APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build_dir.$device_name/"
+
+#check for build directory
+if ! [ -d "$APP_BUILD_DIR" ]; then
     echo ""
-    echo "$DIR not found!"
+    echo "You must generate your application first! Please, use sgutil build coyote"
     echo ""
     exit
-else
+fi
+
+#change directory
+#DIR="/home/$username/my_projects/coyote/$project_name"
+#if ! [ -d "$DIR" ]; then
+#    echo ""
+#    echo "$DIR not found!"
+#    echo ""
+#    exit
+#else
     echo ""
     echo "${bold}Changing directory:${normal}"
     echo ""
@@ -144,11 +148,11 @@ else
     # workaround working if we do sgutil program coyote -p U55C_01_02 first
     #cd /mnt/scratch/runshi/coyote_perf_fpga
     #./perf_fpga
-    echo "${bold}sgutil run coyote${normal}"
+    #echo "${bold}sgutil run coyote${normal}"
     
     cd $APP_BUILD_DIR
     ./main
 
-fi
+#fi
 
 echo ""
