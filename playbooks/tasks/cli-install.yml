@@ -173,6 +173,18 @@
 #    dest: /etc/profile.d/cli_completion.sh
 #    content: eval "$(source /opt/cli/common/cli_completion)"
 
+- name: copy common/is_member script
+  copy:
+    src: "../../cli/common/is_member.sh"
+    dest: /opt/cli/common/is_member
+    mode: 0755
+
+- name: copy common/is_virtualized script
+  copy:
+    src: "../../cli/common/is_virtualized.sh"
+    dest: /opt/cli/common/is_virtualized
+    mode: 0755
+
 #get  ----------------------------------------------------------------------------------------
 
 - name: copy get_from_vars
