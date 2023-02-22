@@ -34,7 +34,7 @@ if [ "$flags" = "" ]; then
     echo "${bold}Please, choose your project:${normal}"
     echo ""
     PS3=""
-    select project_name in "${aux[@]}"; do #projects
+    select project_name in "${aux[@]}"; do
         if [[ -z $project_name ]]; then
             echo "" >&/dev/null
         else
@@ -130,21 +130,6 @@ fi
 
 #define directories (2)
 APP_BUILD_DIR="/home/$username/my_projects/vitis/$project_name/build_dir.$target.$platform"
-
-#change directory
-#if ! [ -d "$DIR" ]; then
-#    echo ""
-#    echo "$DIR not found!"
-#    echo ""
-#    exit
-#else
-    #echo ""
-    #echo "${bold}Changing directory:${normal}"
-    #echo ""
-    #echo "cd $DIR"
-    #echo ""
-    #cd $DIR
-#fi
 
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then

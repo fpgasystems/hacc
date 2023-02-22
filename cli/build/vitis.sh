@@ -34,7 +34,7 @@ if [ "$flags" = "" ]; then
     echo "${bold}Please, choose your project:${normal}"
     echo ""
     PS3=""
-    select project_name in "${aux[@]}"; do #projects
+    select project_name in "${aux[@]}"; do
         if [[ -z $project_name ]]; then
             echo "" >&/dev/null
         else
@@ -64,38 +64,6 @@ else
         exit
     fi
 fi
-
-
-#----------------------
-
-
-# mandatory flags (-p must be used)
-#use_help="0"
-#if [[ $project_found = "0" ]]; then
-#    use_help="1"
-#fi
-
-# forbiden combinations (serial_found and target_found only make sense with project_found = 1)
-#if [[ $project_found = "0" ]] && [[ $serial_found = "1" ]]; then
-#    use_help="1"
-#fi
-
-#print help
-#if [[ $use_help = "1" ]]; then
-#    /opt/cli/sgutil build vitis -h
-#    exit
-#fi
-
-# when used, project_name or serial_found cannot be empty
-#if [ "$project_found" = "1" ] && [ "$project_name" = "" ]; then
-#    /opt/cli/sgutil build vitis -h
-#    exit
-#fi
-
-#if [ "$serial_found" = "1" ] && [ "$serial_number" = "" ]; then
-#    /opt/cli/sgutil build vitis -h
-#    exit
-#fi
 
 #define directories (1)
 DIR="/home/$username/my_projects/vitis/$project_name"
@@ -170,37 +138,28 @@ fi
 #define directories (2)
 APP_BUILD_DIR="/home/$username/my_projects/vitis/$project_name/build_dir.$target.$platform"
 
-#DIR="/home/$username/my_projects/vitis/$project_name"
-#if ! [ -d "$DIR" ]; then
-#    echo ""
-#    echo "$DIR not found!"
-#    echo ""
-#    exit
-#else
-    echo ""
-    echo "${bold}Changing directory:${normal}"
-    echo ""
-    echo "cd $DIR"
-    echo ""
-    cd $DIR
+echo ""
+echo "${bold}Changing directory:${normal}"
+echo ""
+echo "cd $DIR"
+echo ""
+cd $DIR
 
-    #compilation
-    #APP_BUILD_DIR="/home/$username/my_projects/vitis/$project_name/build_dir.$target.$platform" # build_dir.hw.xilinx_u55c_gen3x16_xdma_3_202210_1
-    if ! [ -d "$APP_BUILD_DIR" ]; then
-        # APP_BUILD_DIR does not exist
-        export CPATH="/usr/include/x86_64-linux-gnu" #https://support.xilinx.com/s/article/Fatal-error-sys-cdefs-h-No-such-file-or-directory?language=en_US
-        echo "${bold}PL kernel compilation and linking: generating .xo and .xclbin:${normal}"
-        echo ""
-        echo "make all TARGET=$target PLATFORM=$platform" 
-        echo ""
-        eval "make all TARGET=$target PLATFORM=$platform"
-        echo ""        
-    else
-        echo "${bold}PL kernel compilation and linking: generating .xo and .xclbin:${normal}"
-        echo ""
-        echo "make all TARGET=$target PLATFORM=$platform" 
-        echo ""
-        echo "$APP_BUILD_DIR already exists!"
-        echo ""
-    fi
-#fi
+#compilation
+if ! [ -d "$APP_BUILD_DIR" ]; then
+    # APP_BUILD_DIR does not exist
+    export CPATH="/usr/include/x86_64-linux-gnu" #https://support.xilinx.com/s/article/Fatal-error-sys-cdefs-h-No-such-file-or-directory?language=en_US
+    echo "${bold}PL kernel compilation and linking: generating .xo and .xclbin:${normal}"
+    echo ""
+    echo "make all TARGET=$target PLATFORM=$platform" 
+    echo ""
+    eval "make all TARGET=$target PLATFORM=$platform"
+    echo ""        
+else
+    echo "${bold}PL kernel compilation and linking: generating .xo and .xclbin:${normal}"
+    echo ""
+    echo "make all TARGET=$target PLATFORM=$platform" 
+    echo ""
+    echo "$APP_BUILD_DIR already exists!"
+    echo ""
+fi
