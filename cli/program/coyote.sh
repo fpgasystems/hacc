@@ -39,7 +39,7 @@ if [ "$flags" = "" ]; then
     echo "${bold}Please, choose your project:${normal}"
     echo ""
     PS3=""
-    select project_name in "${aux[@]}"; do #projects
+    select project_name in "${aux[@]}"; do
         if [[ -z $project_name ]]; then
             echo "" >&/dev/null
         else
@@ -126,51 +126,33 @@ APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build_dir.$devic
 
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
-    #echo ""
     echo "You must generate your application first! Please, use sgutil build coyote"
     echo ""
     exit
 fi
 
-# check if bitstream exists
-#DIR="/home/$username/my_projects/coyote/$project_name/hw/build/bitstreams"
-#if ! [ -d "$APP_BUILD_DIR" ]; then
-#    echo ""
-#    echo "Please, generate your bitstream first with sgutil build coyote."
-#    echo ""
-#    exit
-#else
-    #BIT_PATH="/home/$username/my_projects/coyote/$project_name/hw/build/bitstreams/" #$BIT_NAME
-    #DRIVER_PATH="/home/$username/my_projects/coyote/$project_name/driver/" #$DRIVER_NAME
-    #APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build_dir.$device_name/"
-
-    # revert to xrt first if FPGA is already in baremetal
-    if [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then
-        /opt/cli/program/revert
-    fi
+# revert to xrt first if FPGA is already in baremetal
+if [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then
+    /opt/cli/program/revert
+fi
     
-    # bitstream
-    sgutil program vivado -b $APP_BUILD_DIR$BIT_NAME #-d $DRIVER_PATH$DRIVER_NAME
+# bitstream
+sgutil program vivado -b $APP_BUILD_DIR$BIT_NAME
 
-    #driver (we first need to copy it as it is not working from the /home/ folder)
-    #cp -f $APP_BUILD_DIR$DRIVER_NAME /local/home/$username/$DRIVER_NAME
-    #sgutil program vivado -d /local/home/$username/$DRIVER_NAME
-    sgutil program vivado -d $APP_BUILD_DIR$DRIVER_NAME #/local/home/$username/$DRIVER_NAME
+#driver 
+sgutil program vivado -d $APP_BUILD_DIR$DRIVER_NAME
 
-    # get fpga_chmod for the total of regions (0 is already assigned)
-    #get N_REGIONS
-    line=$(grep -n "N_REGIONS" $DIR/configs/config_shell.hpp)
-    #find equal (=)
-    idx=$(sed 's/ /\n/g' <<< "$line" | sed -n "/=/=")
-    #get index
-    value_idx=$(($idx+1))
-    #get data
-    N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
-    #fpga_chmod
-    #N_REGIONS=$(($N_REGIONS-1));
-    for (( i = 0; i < $N_REGIONS; i++ )) # we remove it from program/vivado (driver)
-    do 
-        sudo /opt/cli/program/fpga_chmod $i
-    done
+#get N_REGIONS
+line=$(grep -n "N_REGIONS" $DIR/configs/config_shell.hpp)
+#find equal (=)
+idx=$(sed 's/ /\n/g' <<< "$line" | sed -n "/=/=")
+#get index
+value_idx=$(($idx+1))
+#get data
+N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
 
-#fi
+#fpga_chmod for N_REGIONS times
+for (( i = 0; i < $N_REGIONS; i++ ))
+do 
+    sudo /opt/cli/program/fpga_chmod $i
+done
