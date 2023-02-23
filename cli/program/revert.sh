@@ -13,6 +13,9 @@ hostname="${url%%.*}"
 # inputs
 read -a flags <<< "$@"
 
+echo ""
+echo "${bold}sgutil program revert${normal}"
+
 #derive actions to perform
 name_found="0"
 serial_found="0"
