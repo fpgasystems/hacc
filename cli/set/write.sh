@@ -9,9 +9,6 @@ username=$USER
 # inputs
 read -a flags <<< "$@"
 
-echo ""
-echo "${bold}sgutil set write${normal}"
-
 #check for vivado_developers
 member=$(/opt/cli/common/is_member $username vivado_developers)
 if [ "$member" = "false" ]; then
@@ -43,5 +40,7 @@ if [[ $index = "" ]]; then
     eval "/opt/cli/sgutil set write -h"
     exit
 else
+    echo ""
+    echo "${bold}sgutil set write${normal}"
     sudo /opt/cli/program/fpga_chmod $index
 fi
