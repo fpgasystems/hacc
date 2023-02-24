@@ -5,6 +5,10 @@ normal=$(tput sgr0)
 
 # constants
 SERVERADDR="localhost"
+EMAIL="jmoyapaya@ethz.ch"
+
+#get username
+username=$USER
 
 # get hostname
 url="${HOSTNAME}"
@@ -15,6 +19,27 @@ read -a flags <<< "$@"
 
 echo ""
 echo "${bold}sgutil program revert${normal}"
+
+#check for number of pci functions
+if [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
+    #the server is already in Vitis workflow
+    echo ""
+    exit
+fi
+
+#check for virtualized
+virtualized=$(/opt/cli/common/is_virtualized)
+if [ "$virtualized" = "true" ]; then
+    echo ""
+    echo "${bold}The server needs to revert to operate with XRT normally. For this purpose:${normal}"
+	echo ""
+	echo "    Use the ${bold}revert to xrt${normal} button on the booking system, or"
+	echo "    Contact ${bold}$EMAIL${normal} for support."
+    echo ""
+    #send email
+    echo "Subject: $hostname requires to revert_to_xrt ($username)" | sendmail $EMAIL
+    exit
+fi
 
 #derive actions to perform
 name_found="0"
