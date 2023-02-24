@@ -252,8 +252,8 @@ APP_BUILD_DIR=/home/$username/my_projects/coyote/$project_name/build_dir.$device
 #show message for virtualized environment (after program/vivado shows go to baremetal/warm boot message)
 virtualized=$(/opt/cli/common/is_virtualized)
 if [[ $(lspci | grep Xilinx | wc -l) = 2 ]] && [ "$virtualized" = "true" ]; then
-    %echo ""
-    echo "Once you login again on the server, please type sgutil coyote again."
+    echo ""
+    echo "Once you login again on the server, please type ${bold}sgutil validate coyote${normal} again."
     echo ""
 fi
 
