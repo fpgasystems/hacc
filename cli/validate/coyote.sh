@@ -241,10 +241,10 @@ APP_BUILD_DIR=/home/$username/my_projects/coyote/$project_name/build_dir.$device
 #program (we need to disclose sgutil program coyote)
 
 #revert to xrt first if FPGA is already in baremetal (it is proven to be needed on non-virtualized environments)
-virtualized=$(/opt/cli/common/is_virtualized)
-if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] && [ "$virtualized" = "false" ]; then 
-    /opt/cli/program/revert
-fi
+#virtualized=$(/opt/cli/common/is_virtualized)
+#if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] && [ "$virtualized" = "false" ]; then 
+#    /opt/cli/program/revert
+#fi ========================================================> moved to program vivado
 
 #program coyote bitstream
 /opt/cli/program/vivado -b $APP_BUILD_DIR$BIT_NAME

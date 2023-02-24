@@ -101,12 +101,12 @@ if [[ $(ls -l | wc -l) = 2 ]]; then
     #./create_config
     #cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
     config=""
-    echo ""
+    #echo ""
 elif [[ $(ls -l | wc -l) = 4 ]]; then
     #config_000, config_shell and config_001 exist
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
     config="config_001.hpp"
-    echo ""
+    #echo ""
 elif [[ $(ls -l | wc -l) > 4 ]]; then
     cd $DIR/configs/
     configs=( "config_"*.hpp )
@@ -140,10 +140,10 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     exit
 fi
 
-# revert to xrt first if FPGA is already in baremetal
-if [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then
-    /opt/cli/program/revert
-fi
+# revert to xrt first if FPGA is already in baremetal 
+#if [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then
+#    /opt/cli/program/revert
+#fi ========================================================> moved to program vivado
     
 # bitstream
 sgutil program vivado -b $APP_BUILD_DIR$BIT_NAME

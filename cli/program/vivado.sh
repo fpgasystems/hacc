@@ -118,28 +118,52 @@ fi
 branch=$(/opt/xilinx/xrt/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
 
 if [[ $program_bitstream = "1" ]]; then
-    
+
+    #revert to xrt first if FPGA is already in baremetal (it is proven to be needed on non-virtualized environments)
+    virtualized=$(/opt/cli/common/is_virtualized)
+    if [ "$virtualized" = "false" ] && [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then 
+        /opt/cli/program/revert
+    fi
+
     echo ""
 	echo "${bold}Programming bitstream:${normal}"
     /tools/Xilinx/Vivado/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source /opt/cli/program/flash_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name $bit_file $ltx_file
 
     #check for virtualized and apply PCI hot plug
-    virtualized=$(/opt/cli/common/is_virtualized)
-    if [ "$virtualized" = "true" ]; then
-        echo "${bold}The server needs to warm boot to operate in Vivado workflow. For this purpose:${normal}"
-		echo ""
-		echo "    Use the ${bold}go to baremetal${normal} button on the booking system, or"
-		echo "    Contact ${bold}$EMAIL${normal} for support."
-        echo ""
-        #send email
-        echo "Subject: $username requires to warm boot/go to baremetal ($hostname)" | sendmail $EMAIL
-        exit
-    elif [ "$virtualized" = "false" ]; then
-        #run PCI hot plug
-        if [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
+    if [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
+        if [ "$virtualized" = "true" ]; then
+            echo ""
+            echo "${bold}The server needs to warm boot to operate in Vivado workflow. For this purpose:${normal}"
+		    echo ""
+		    echo "    Use the ${bold}go to baremetal${normal} button on the booking system, or"
+		    echo "    Contact ${bold}$EMAIL${normal} for support."
+            echo ""
+            #send email
+            echo "Subject: $username requires to go to baremetal/warm boot ($hostname)" | sendmail $EMAIL
+            exit
+        elif [ "$virtualized" = "false" ]; then
             sudo /opt/cli/program/pci_hot_plug ${hostname}
         fi
     fi
+
+    #check for virtualized and apply PCI hot plug
+    #virtualized=$(/opt/cli/common/is_virtualized)
+    #if [ "$virtualized" = "true" ]; then
+    #    echo ""
+    #    echo "${bold}The server needs to warm boot to operate in Vivado workflow. For this purpose:${normal}"
+	#	echo ""
+	#	echo "    Use the ${bold}go to baremetal${normal} button on the booking system, or"
+	#	echo "    Contact ${bold}$EMAIL${normal} for support."
+    #    echo ""
+    #    #send email
+    #    echo "Subject: $username requires to warm boot/go to baremetal ($hostname)" | sendmail $EMAIL
+    #    exit
+    #elif [ "$virtualized" = "false" ]; then
+    #    #run PCI hot plug
+    #    if [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
+    #        sudo /opt/cli/program/pci_hot_plug ${hostname}
+    #    fi
+    #fi
 fi
 
 if [[ $program_driver = "1" ]]; then
