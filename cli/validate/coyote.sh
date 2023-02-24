@@ -3,6 +3,10 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
+BIT_NAME="cyt_top.bit"
+DRIVER_NAME="coyote_drv.ko"
+
 #get username
 username=$USER
 
@@ -73,26 +77,20 @@ if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
     device_name=$(sgutil get device | cut -d "=" -f2)
 fi
 
-# device_name to coyote string <===========================================================================
+# device_name to coyote string
 FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
 if [ "$FDEV_NAME" = "u50d" ]; then
     FDEV_NAME="u50"
 fi
-#echo "-------------"
-#echo "$FDEV_NAME"
-#echo "-------------"
 
 # set project name
 project_name="validate_$config.$device_name"
 
-#define directories
+#define directories (1)
 DIR="/home/$username/my_projects/coyote/$project_name"
 SHELL_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
 DRIVER_DIR="/home/$username/my_projects/coyote/$project_name/driver"
 APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build"
-
-#APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build"
-#APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build_dir.$device_name/"
 
 # adjust perf_mem validation
 if [ "$config" = "perf_mem" ]; then
@@ -118,14 +116,8 @@ if [ "$config" = "perf_mem" ]; then
 else
     config_hw=$config
 fi
-#echo "-------------"
-#echo "$config"
-#echo "$config_hw"
-#echo "-------------"
 
 # create coyote validate config.device_name directory and checkout
-#DIR="/home/$username/my_projects/coyote/$project_name"
-#build="0"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
     echo ""
@@ -195,7 +187,6 @@ if ! [ -d "$DIR" ]; then
     mv $DIR/config_shell.hpp $DIR/configs/config_shell.hpp
 
     #bitstream compilation
-    #SHELL_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
     echo ""
     echo "${bold}Coyote shell compilation:${normal}"
     echo ""
@@ -214,7 +205,6 @@ if ! [ -d "$DIR" ]; then
     make shell && make compile
 
     #driver compilation
-    #DRIVER_DIR="/home/$username/my_projects/coyote/$project_name/driver"
     echo ""
     echo "${bold}Driver compilation:${normal}"
     echo ""
@@ -223,7 +213,6 @@ if ! [ -d "$DIR" ]; then
     cd $DRIVER_DIR && make
 
     #application compilation
-    #APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build" #build_dir.sw_$config
     echo ""
     echo "${bold}Example application compilation:${normal}"
     echo ""
@@ -240,53 +229,56 @@ if ! [ -d "$DIR" ]; then
     cp $DRIVER_DIR/coyote_drv.ko $APP_BUILD_DIR
     #rename folder
     mv $APP_BUILD_DIR /home/$username/my_projects/coyote/$project_name/build_dir.$device_name/
-
 else
     echo ""
     echo "$project_name already exists!"
     #echo ""
 fi
 
+#define directories (2)
+APP_BUILD_DIR=/home/$username/my_projects/coyote/$project_name/build_dir.$device_name/
 
+#program (we need to disclose sgutil program coyote)
 
-#if ! [ -d "$SHELL_BUILD_DIR" ]; then
-    
-#else
-#    echo "${bold}Bitstream compilation and generation:${normal}"
-#    echo ""
-#    echo "cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=$config"
-#    echo "make shell && make compile"
-#    echo ""
-#    echo "$SHELL_BUILD_DIR already exists!"
-#    #exit
-#fi
+#revert to xrt first if FPGA is already in baremetal (it is proven to be needed on non-virtualized environments)
+virtualized=$(/opt/cli/common/is_virtualized)
+if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] && [ "$virtualized" = "false" ]; then 
+    /opt/cli/program/revert
+fi
 
-# revert to xrt first if FPGA is already in baremetal ===> moved to sgutil program coyote
-#if [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then
-#    /opt/cli/program/revert
-#fi
+#program coyote bitstream
+/opt/cli/program/vivado -b $APP_BUILD_DIR$BIT_NAME
 
-# program
-/opt/cli/sgutil program coyote -p $project_name
+#show message for virtualized environment (after program/vivado shows go to baremetal/warm boot message)
+virtualized=$(/opt/cli/common/is_virtualized)
+if [[ $(lspci | grep Xilinx | wc -l) = 2 ]] && [ "$virtualized" = "true" ]; then
+    %echo ""
+    echo "Once you login again on the server, please type sgutil coyote again."
+    echo ""
+fi
 
-# get N_REGIONS
-#cd ${DIR}
-#N_REGIONS=$(grep -n "N_REGIONS" config_shell.hpp | sed 's/.*=//' | sed 's/;//')
-#if [ "$N_REGIONS" = "" ]; then
-#    N_REGIONS="1"
-#fi
+#this means that the user made a warm boot (virtualized) or the PCI hot plug script run (dedicated servers)
+if [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then 
 
-# get fpga_chmod for the total of regions (0 is already assigned)
-#N_REGIONS=$(($N_REGIONS-1));
-#for (( i = 1; i <= $N_REGIONS; i++ ))
-#do 
-#   sudo /opt/cli/program/fpga_chmod $i
-#done
+    #program coyote driver
+    /opt/cli/program/vivado -d $APP_BUILD_DIR$DRIVER_NAME
 
-# run 
-#DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build"
-#cd /home/$username/my_projects/coyote/$project_name/sw/examples/$config/build #${DIR}
-#./main
-#/opt/cli/sgutil run coyote -p $project_name
-cd /home/$username/my_projects/coyote/$project_name/build_dir.$device_name/
-./main
+    #get N_REGIONS
+    line=$(grep -n "N_REGIONS" $DIR/configs/config_shell.hpp)
+    #find equal (=)
+    idx=$(sed 's/ /\n/g' <<< "$line" | sed -n "/=/=")
+    #get index
+    value_idx=$(($idx+1))
+    #get data
+    N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
+
+    #fpga_chmod for N_REGIONS times
+    for (( i = 0; i < $N_REGIONS; i++ ))
+    do 
+        sudo /opt/cli/program/fpga_chmod $i
+    done
+
+    #run 
+    cd $APP_BUILD_DIR #/home/$username/my_projects/coyote/$project_name/build_dir.$device_name/
+    ./main
+fi
