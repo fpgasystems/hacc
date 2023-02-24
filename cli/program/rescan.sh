@@ -10,6 +10,15 @@ read -a flags <<< "$@"
 echo ""
 echo "${bold}sgutil program rescan${normal}"
 
+#check for virtualized
+virtualized=$(/opt/cli/common/is_virtualized)
+if [ "$virtualized" = "true" ]; then
+    echo ""
+    echo "Sorry, this command is only available for ${bold}non-virtualized servers.${normal}"
+    echo ""
+    exit
+fi
+
 #check for vivado_developers
 member=$(/opt/cli/common/is_member $username vivado_developers)
 if [ "$member" = "false" ]; then
