@@ -36,6 +36,10 @@ echo "Please, insert a non-existing name for your Coyote project:"
 echo ""
 while true; do
     read -p "" project_name
+    #project_name cannot start with validate_
+    if  [[ $project_name == validate_* ]]; then
+        project_name=""
+    fi
     DIR="/home/$username/my_projects/coyote/$project_name"
     if ! [ -d "$DIR" ]; then
         # project_name does not exist
