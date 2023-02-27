@@ -311,6 +311,7 @@ program_help() {
     echo "ARGUMENTS:"
     echo "   coyote          - Programs Coyote on a given device."
     echo "   rescan          - Runs the PCI hot-plug process."
+    echo "   reset           - Resets the given device."
     echo "   revert          - Returns the specified device to the Vitis workflow."
     echo "   vitis           - Programs a Vitis FPGA-binary to a given device."
     echo "   vivado          - Programs a Vivado FPGA-bitstream to a given device."
