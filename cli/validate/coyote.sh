@@ -228,7 +228,10 @@ if ! [ -d "$DIR" ]; then
     #copy driver
     cp $DRIVER_DIR/coyote_drv.ko $APP_BUILD_DIR
     #rename folder
-    mv $APP_BUILD_DIR /home/$username/my_projects/coyote/$project_name/build_dir.$device_name/
+    mv $APP_BUILD_DIR /home/$username/my_projects/coyote/$project_name/build_dir.$FDEV_NAME/
+    #remove all other build temporal folders
+    rm -rf $SHELL_BUILD_DIR
+    rm -rf $DRIVER_DIR
 else
     echo ""
     echo "$project_name already exists!"
@@ -236,7 +239,7 @@ else
 fi
 
 #define directories (2)
-APP_BUILD_DIR=/home/$username/my_projects/coyote/$project_name/build_dir.$device_name/
+APP_BUILD_DIR=/home/$username/my_projects/coyote/$project_name/build_dir.$FDEV_NAME/
 
 #program (we need to disclose sgutil program coyote)
 
@@ -252,7 +255,6 @@ APP_BUILD_DIR=/home/$username/my_projects/coyote/$project_name/build_dir.$device
 #show message for virtualized environment (after program/vivado shows go to baremetal/warm boot message)
 virtualized=$(/opt/cli/common/is_virtualized)
 if [[ $(lspci | grep Xilinx | wc -l) = 2 ]] && [ "$virtualized" = "true" ]; then
-    echo ""
     echo "Once you login again on the server, please type ${bold}sgutil validate coyote${normal} again."
     echo ""
 fi
@@ -279,6 +281,6 @@ if [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then
     done
 
     #run 
-    cd $APP_BUILD_DIR #/home/$username/my_projects/coyote/$project_name/build_dir.$device_name/
+    cd $APP_BUILD_DIR
     ./main
 fi
