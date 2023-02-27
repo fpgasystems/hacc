@@ -50,6 +50,7 @@ fi
 /opt/cli/program/revert 
 
 #reset device (we delete any xclbin)
-/opt/xilinx/xrt/bin/xbutil reset $serial_number --force
-
-echo ""
+if [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
+    /opt/xilinx/xrt/bin/xbutil reset $serial_number --force
+    echo ""
+fi
