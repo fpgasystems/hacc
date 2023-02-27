@@ -349,6 +349,20 @@ program_rescan_help() {
     exit 1
 }
 
+program_reset_help() {
+    echo ""
+    echo "${bold}sgutil program reset [flags] [--help]${normal}"
+    echo ""
+    echo "Resets the given device."
+    echo ""
+    echo "FLAGS:"
+    echo "   -s, --serial    - FPGA's serial number. See sgutil get serial."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
 program_revert_help() {
     echo ""
     echo "${bold}sgutil program revert [flags] [--help]${normal}"
@@ -717,6 +731,10 @@ case "$command" in
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       rescan) # flags can be empty if we have only one FPGA
+        valid_flags="-s --serial -h --help"
+        command_run $command_arguments_flags"@"$valid_flags
+        ;;
+      reset) 
         valid_flags="-s --serial -h --help"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
