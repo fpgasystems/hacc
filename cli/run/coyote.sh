@@ -124,8 +124,14 @@ if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
     device_name=$(sgutil get device | cut -d "=" -f2)
 fi
 
+#device_name to coyote string 
+FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
+if [ "$FDEV_NAME" = "u50d" ]; then
+    FDEV_NAME="u50"
+fi
+
 #define directories (2)
-APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build_dir.$device_name/"
+APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build_dir.$FDEV_NAME/" #$device_name
 
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
