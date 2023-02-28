@@ -167,7 +167,7 @@ if ! [ -d "$SHELL_BUILD_DIR" ]; then
     echo ""
     mkdir $SHELL_BUILD_DIR
     cd $SHELL_BUILD_DIR
-    /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME $coyote_params
+    /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME $coyote_params #-DEXAMPLE=perf_host
 
     #generate bitstream
     echo ""
@@ -204,9 +204,12 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     #copy driver
     cp $DRIVER_DIR/coyote_drv.ko $APP_BUILD_DIR
     #rename folder
-    mv $APP_BUILD_DIR $APP_BUILD_DIR"_dir.$device_name"
+    mv $APP_BUILD_DIR $APP_BUILD_DIR"_dir.$FDEV_NAME" #$device_name
+    #remove all other build temporal folders
+    rm -rf $SHELL_BUILD_DIR
+    rm -rf $DRIVER_DIR
 else
-    cd $APP_BUILD_DIR"_dir.$device_name"
+    cd $APP_BUILD_DIR"_dir.$FDEV_NAME" #$device_name
     /usr/bin/cmake ../sw -DTARGET_DIR=../src/ && make
 fi
 
