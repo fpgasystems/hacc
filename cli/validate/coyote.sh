@@ -13,12 +13,6 @@ username=$USER
 # inputs
 read -a flags <<< "$@"
 
-# flags cannot be empty ==> they can!
-#if [ "$flags" = "" ]; then
-#    /opt/cli/sgutil build coyote -h
-#    exit
-#fi
-
 # create my_projects directory
 DIR="/home/$username/my_projects"
 if ! [ -d "$DIR" ]; then
@@ -88,9 +82,9 @@ project_name="validate_$config.$device_name"
 
 #define directories (1)
 DIR="/home/$username/my_projects/coyote/$project_name"
-SHELL_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/hw/build"
-DRIVER_DIR="/home/$username/my_projects/coyote/$project_name/driver"
-APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/sw/examples/$config/build"
+SHELL_BUILD_DIR="$DIR/hw/build"
+DRIVER_DIR="$DIR/driver"
+APP_BUILD_DIR="$DIR/sw/examples/$config/build"
 
 # adjust perf_mem validation
 if [ "$config" = "perf_mem" ]; then
@@ -185,7 +179,13 @@ if ! [ -d "$DIR" ]; then
     esac
     mkdir $DIR/configs
     mv $DIR/config_shell.hpp $DIR/configs/config_shell.hpp
+else
+    echo ""
+    echo "$project_name already exists!"
+fi
 
+#check on build_dir.FDEV_NAME
+if ! [ -d "/home/$username/my_projects/coyote/$project_name/build_dir.$FDEV_NAME" ]; then
     #bitstream compilation
     echo ""
     echo "${bold}Coyote shell compilation:${normal}"
@@ -231,23 +231,22 @@ if ! [ -d "$DIR" ]; then
     mv $APP_BUILD_DIR /home/$username/my_projects/coyote/$project_name/build_dir.$FDEV_NAME/
     #remove all other build temporal folders
     rm -rf $SHELL_BUILD_DIR
-    rm -rf $DRIVER_DIR
+    rm $DRIVER_DIR/coyote_drv*
+    rm $DRIVER_DIR/fpga_dev.o
+    rm $DRIVER_DIR/fpga_drv.o
+    rm $DRIVER_DIR/fpga_fops.o
+    rm $DRIVER_DIR/fpga_isr.o
+    rm $DRIVER_DIR/fpga_mmu.o
+    rm $DRIVER_DIR/fpga_sysfs.o
+    rm $DRIVER_DIR/modules.order
 else
     echo ""
-    echo "$project_name already exists!"
+    echo "$project_name/build_dir.$FDEV_NAME shell already exists!"
     #echo ""
 fi
 
 #define directories (2)
 APP_BUILD_DIR=/home/$username/my_projects/coyote/$project_name/build_dir.$FDEV_NAME/
-
-#program (we need to disclose sgutil program coyote)
-
-#revert to xrt first if FPGA is already in baremetal (it is proven to be needed on non-virtualized environments)
-#virtualized=$(/opt/cli/common/is_virtualized)
-#if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] && [ "$virtualized" = "false" ]; then 
-#    /opt/cli/program/revert
-#fi ========================================================> moved to program vivado
 
 #program coyote bitstream
 /opt/cli/program/vivado -b $APP_BUILD_DIR$BIT_NAME

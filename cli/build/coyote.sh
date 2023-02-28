@@ -150,24 +150,24 @@ fi
 #define directories (2)
 SHELL_BUILD_DIR="$DIR/hw/build"
 DRIVER_DIR="$DIR/driver"
-APP_BUILD_DIR="$DIR/build"
+#APP_BUILD_DIR="$DIR/build"
+APP_BUILD_DIR="$DIR/build_dir.$FDEV_NAME"
 
-echo ""
 echo "${bold}Changing directory:${normal}"
 echo ""
 echo "cd $DIR"
 echo ""
 cd $DIR
 
-#bitstream compilation    
-if ! [ -d "$SHELL_BUILD_DIR" ]; then
+#shell compilation    
+if ! [ -d "$APP_BUILD_DIR" ]; then
     echo "${bold}Coyote shell compilation:${normal}"
     echo ""
     echo "cmake .. -DFDEV_NAME=$FDEV_NAME $coyote_params"
     echo ""
     mkdir $SHELL_BUILD_DIR
     cd $SHELL_BUILD_DIR
-    /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME $coyote_params #-DEXAMPLE=perf_host
+    /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=perf_host #$coyote_params <=========================== Change!!!!!!!!!
 
     #generate bitstream
     echo ""
@@ -184,33 +184,45 @@ if ! [ -d "$SHELL_BUILD_DIR" ]; then
     echo "cd $DRIVER_DIR && make"
     echo ""
     cd $DRIVER_DIR && make
-else
-    #echo ""
-    echo "The Coyote shell already exists!"
-fi
 
-#application compilation
-echo ""
-echo "${bold}Application compilation:${normal}"
-echo ""
-echo "cmake ../sw -DTARGET_DIR=../src/ && make"
-echo ""
-if ! [ -d "$APP_BUILD_DIR" ]; then
+    #application compilation
+    echo ""
+    echo "${bold}Application compilation:${normal}"
+    echo ""
+    echo "cmake ../sw -DTARGET_DIR=../src/ && make"
+    echo ""
     mkdir $APP_BUILD_DIR
     cd $APP_BUILD_DIR
     /usr/bin/cmake ../sw -DTARGET_DIR=../src/ && make # 1: path from APP_BUILD_DIR to /sw 2: path from APP_BUILD_DIR to main.cpp
+
     #copy bitstream
     cp $SHELL_BUILD_DIR/bitstreams/cyt_top.bit $APP_BUILD_DIR
     #copy driver
     cp $DRIVER_DIR/coyote_drv.ko $APP_BUILD_DIR
-    #rename folder
-    mv $APP_BUILD_DIR $APP_BUILD_DIR"_dir.$FDEV_NAME" #$device_name
     #remove all other build temporal folders
     rm -rf $SHELL_BUILD_DIR
-    rm -rf $DRIVER_DIR
+    rm $DRIVER_DIR/coyote_drv*
+    rm $DRIVER_DIR/fpga_dev.o
+    rm $DRIVER_DIR/fpga_drv.o
+    rm $DRIVER_DIR/fpga_fops.o
+    rm $DRIVER_DIR/fpga_isr.o
+    rm $DRIVER_DIR/fpga_mmu.o
+    rm $DRIVER_DIR/fpga_sysfs.o
+    rm $DRIVER_DIR/modules.order
 else
-    cd $APP_BUILD_DIR"_dir.$FDEV_NAME" #$device_name
-    /usr/bin/cmake ../sw -DTARGET_DIR=../src/ && make
+    echo "${bold}Coyote shell bitstream generation:${normal}"
+    echo ""
+    echo "$project_name/build_dir.$FDEV_NAME shell already exists!"
+
+    #software application is always compiled
+    echo ""
+    echo "${bold}Application compilation:${normal}"
+    echo ""
+    echo "cmake ../sw -DTARGET_DIR=../src/ && make"
+    echo ""
+    #mkdir $APP_BUILD_DIR
+    cd $APP_BUILD_DIR
+    /usr/bin/cmake ../sw -DTARGET_DIR=../src/ && make # 1: path from APP_BUILD_DIR to /sw 2: path from APP_BUILD_DIR to main.cpp
 fi
 
 echo ""
