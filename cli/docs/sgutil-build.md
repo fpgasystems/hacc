@@ -24,6 +24,6 @@
 
 ### Examples
 ```
-$ sgutil build vivado -h
-$ sgutil build vitis -h
+$ sgutil build coyote
+$ sgutil build vitis
 ```
