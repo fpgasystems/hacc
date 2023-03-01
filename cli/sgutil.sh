@@ -745,14 +745,15 @@ case "$command" in
         ;;
       vivado) # flags cannot be empty (i.e. at least -b is required)
         valid_flags="-d --driver -b --bitstream -l --ltx -n --name -s --serial -h --help" #-r --revert
+        command_run $command_arguments_flags"@"$valid_flags
 
         # check if flags are empty (first is at position 2)
-        read -a aux_flags <<< "$command_arguments_flags"
-        if [ "${aux_flags[2]}" = "" ]; then
-          program_vivado_help
-        else
-          command_run $command_arguments_flags"@"$valid_flags
-        fi
+        #read -a aux_flags <<< "$command_arguments_flags"
+        #if [ "${aux_flags[2]}" = "" ]; then
+        #  program_vivado_help
+        #else
+        #  command_run $command_arguments_flags"@"$valid_flags
+        #fi
         ;;
       vitis)
         valid_flags="-p --project -s --serial -h --help" # -b --binary -n --name -t --target -u --user
