@@ -140,9 +140,7 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
 fi
 
 #revert to xrt first if FPGA is already in baremetal
-#if [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then
-    /opt/cli/program/revert
-#fi
+sudo /opt/cli/program/revert
 
 #get xclbin
 cd $APP_BUILD_DIR

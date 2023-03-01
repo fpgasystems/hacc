@@ -122,7 +122,7 @@ if [[ $program_bitstream = "1" ]]; then
     #revert to xrt first if FPGA is already in baremetal (it is proven to be needed on non-virtualized environments)
     virtualized=$(/opt/cli/common/is_virtualized)
     if [ "$virtualized" = "false" ] && [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then 
-        /opt/cli/program/revert
+        sudo /opt/cli/program/revert
     fi
 
     echo ""
