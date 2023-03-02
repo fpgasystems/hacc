@@ -17,6 +17,11 @@
   &nbsp; &nbsp; Specifies your MPI project name.
 </p>
 
+<code>-h, --help <string></code>
+<p>
+  &nbsp; &nbsp; Help to use this command.
+</p>
+
 ### Examples
 ```
 $ sgutil run mpi
