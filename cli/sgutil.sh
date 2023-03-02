@@ -120,7 +120,7 @@ build_mpi_help() {
     #echo "   This command has no flags."
     echo "   -p, --project   - Specifies your MPI project name."
     echo ""
-    echo "   -h, --help      - Help to build Coyote."
+    echo "   -h, --help      - Help to use this command."
     echo ""
     exit 1
 }
