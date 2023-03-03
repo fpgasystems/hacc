@@ -687,6 +687,7 @@ case "$command" in
         get_help
         ;;
       device)
+        xilinx_build_check
         valid_flags="-h --help -w --word"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
@@ -699,6 +700,7 @@ case "$command" in
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       serial)
+        xilinx_build_check
         valid_flags="-h --help -w --word"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
@@ -791,6 +793,7 @@ case "$command" in
     esac
     ;;
   run)
+    xilinx_build_check
     case "$arguments" in
       -h|--help)
         run_help
@@ -813,6 +816,7 @@ case "$command" in
     esac
     ;;
   set)
+    xilinx_build_check
     case "$arguments" in
       -h|--help)
         set_help
