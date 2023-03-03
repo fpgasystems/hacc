@@ -70,6 +70,31 @@ command_run() {
     fi
 }
 
+xilinx_build_check() {
+
+    EMAIL=$(/opt/cli/common/get_email) #"jmoyapaya@ethz.ch"
+    username=$USER
+    url="${HOSTNAME}"
+    hostname="${url%%.*}"
+
+    #check for Xilinx device and build server
+    if [[ $(lspci | grep Xilinx | wc -l) = 0 ]]; then
+        if [ "$hostname" = "alveo-build-01" ]; then
+            echo ""
+            echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
+            echo ""
+        else
+            echo ""
+            echo "The server needs special care to operate with XRT normally."
+	          echo ""
+	          echo "${bold}An email has been sent to the person in charge;${normal} we will let you know when XRT is ready to use again."
+            echo ""
+            #send email
+            echo "Subject: $hostname requires special attention ($username)" | sendmail $EMAIL
+        fi
+        exit
+    fi
+}
 
 # build ------------------------------------------------------------------------------------------------------------------------
 
@@ -723,6 +748,7 @@ case "$command" in
     esac
     ;;
   program)
+    xilinx_build_check
     case "$arguments" in
       -h|--help)
         program_help
@@ -801,6 +827,7 @@ case "$command" in
     esac
     ;;
   validate)
+    xilinx_build_check
     case "$arguments" in
       coyote)
         valid_flags="-n --name -h --help"
@@ -812,7 +839,6 @@ case "$command" in
         command_run $command_arguments_flags"@"$valid_flags
       ;;
       iperf)
-        
         #valid flags
         valid_flags="-b --bandwidth -h --help -p --parallel -t --time -u --udp"
         
@@ -831,16 +857,11 @@ case "$command" in
           #add it at the end
           command_arguments_flags=$command_arguments_flags" -u" # this is done on purpose (see iperf.sh)
         fi
-
         command_run $command_arguments_flags"@"$valid_flags
-
       ;;
       mpi)
-
         valid_flags="-h --help -p --processes"
-
         command_run $command_arguments_flags"@"$valid_flags
-
       ;;
       #openmpi) 
       #  eval "/opt/cli/validate/openmpi"
