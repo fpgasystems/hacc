@@ -167,7 +167,7 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     echo ""
     mkdir $SHELL_BUILD_DIR
     cd $SHELL_BUILD_DIR
-    /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=perf_host #$coyote_params <=========================== Change!!!!!!!!!
+    /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME $coyote_params # -DEXAMPLE=perf_host
 
     #generate bitstream
     echo ""
