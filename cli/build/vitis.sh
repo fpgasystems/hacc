@@ -6,6 +6,10 @@ normal=$(tput sgr0)
 #get username
 username=$USER
 
+#get hostname
+url="${HOSTNAME}"
+hostname="${url%%.*}"
+
 # inputs
 read -a flags <<< "$@"
 
@@ -76,6 +80,23 @@ if ! [ -d "$DIR" ]; then
     exit
 fi
 
+#select vivado release
+if [ "$hostname" = "alveo-build-01" ]; then
+    echo ""
+    echo "${bold}Please, select your favourite Vivado release:${normal}" 
+    echo ""
+    PS3=""
+    select release in 2022.1 2022.2
+    do
+        case $release in
+            2022.1) break;;
+            2022.2) break;;
+        esac
+    done
+    #enable release
+    eval "source xrt_select $release"
+fi
+
 #create or select a configuration
 cd $DIR/configs/
 if [[ $(ls -l | wc -l) = 2 ]]; then
@@ -130,9 +151,24 @@ fi
 
 # serial to platform
 cd /opt/xilinx/platforms
-n=$(ls -l | grep -c ^d)
-if [ $((n + 0)) -eq  1 ]; then
-    platform=$(echo *)
+if [ "$hostname" = "alveo-build-01" ]; then
+    platforms=( "xilinx_"* )
+    echo ""
+    echo "${bold}Please, choose the device (or platform):${normal}" 
+    echo ""
+    PS3=""
+    select platform in "${platforms[@]}"; do 
+        if [[ -z $platform ]]; then
+            echo "" >&/dev/null
+        else
+            break
+        fi
+    done
+else
+    n=$(ls -l | grep -c ^d)
+    if [ $((n + 0)) -eq  1 ]; then
+        platform=$(echo *)
+    fi
 fi
 
 #define directories (2)
