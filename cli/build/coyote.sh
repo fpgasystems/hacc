@@ -6,7 +6,11 @@ normal=$(tput sgr0)
 #get username
 username=$USER
 
-# inputs
+#get hostname
+url="${HOSTNAME}"
+hostname="${url%%.*}"
+
+#inputs
 read -a flags <<< "$@"
 
 echo ""
@@ -85,6 +89,23 @@ if ! [ -d "$DIR" ]; then
     exit
 fi
 
+#select vivado release
+if [ "$hostname" = "alveo-build-01" ]; then
+    echo ""
+    echo "${bold}Please, select your favourite Vivado release:${normal}" 
+    echo ""
+    PS3=""
+    select release in 2022.1 2022.2
+    do
+        case $release in
+            2022.1) break;;
+            2022.2) break;;
+        esac
+    done
+    #enable release
+    eval "source xrt_select $release"
+fi
+
 #create or select a configuration
 cd $DIR/configs/
 if [[ $(ls -l | wc -l) = 2 ]]; then
@@ -142,7 +163,25 @@ if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
 fi
 
 # device_name to coyote string 
-FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
+if [ "$hostname" = "alveo-build-01" ]; then
+    echo "${bold}Please, choose the device (or platform):${normal}" 
+    echo ""
+    PS3=""
+    select FDEV_NAME in u250 u280 u50d u55c
+    do
+        case $FDEV_NAME in
+            u250) break;;
+            u280) break;;
+            u50d) break;;
+            u55c) break;;
+        esac
+    done
+    echo ""
+else
+    FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
+fi
+
+#check on u50d
 if [ "$FDEV_NAME" = "u50d" ]; then
     FDEV_NAME="u50"
 fi
@@ -150,7 +189,6 @@ fi
 #define directories (2)
 SHELL_BUILD_DIR="$DIR/hw/build"
 DRIVER_DIR="$DIR/driver"
-#APP_BUILD_DIR="$DIR/build"
 APP_BUILD_DIR="$DIR/build_dir.$FDEV_NAME"
 
 echo "${bold}Changing directory:${normal}"
@@ -167,7 +205,7 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     echo ""
     mkdir $SHELL_BUILD_DIR
     cd $SHELL_BUILD_DIR
-    /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME $coyote_params # -DEXAMPLE=perf_host
+    /usr/bin/cmake .. -DFDEV_NAME=$FDEV_NAME -DEXAMPLE=perf_host #$coyote_params
 
     #generate bitstream
     echo ""
