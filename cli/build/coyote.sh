@@ -252,7 +252,28 @@ else
     echo ""
     echo "$project_name/build_dir.$FDEV_NAME shell already exists!"
 
-    #software application is always compiled
+    #driver compilation
+    echo ""
+    echo "${bold}Driver compilation:${normal}"
+    echo ""
+    echo "cd $DRIVER_DIR && make"
+    echo ""
+    cd $DRIVER_DIR && make
+    
+    #copy driver
+    cp $DRIVER_DIR/coyote_drv.ko $APP_BUILD_DIR
+
+    #remove driver build temporal folders
+    rm $DRIVER_DIR/coyote_drv*
+    rm $DRIVER_DIR/fpga_dev.o
+    rm $DRIVER_DIR/fpga_drv.o
+    rm $DRIVER_DIR/fpga_fops.o
+    rm $DRIVER_DIR/fpga_isr.o
+    rm $DRIVER_DIR/fpga_mmu.o
+    rm $DRIVER_DIR/fpga_sysfs.o
+    rm $DRIVER_DIR/modules.order
+
+    #application compilation
     echo ""
     echo "${bold}Application compilation:${normal}"
     echo ""
@@ -260,6 +281,8 @@ else
     echo ""
     #mkdir $APP_BUILD_DIR
     cd $APP_BUILD_DIR
+    #remove CMakeLists.txt to avoid recompiling errors
+    rm CMakeCache.txt
     /usr/bin/cmake ../sw -DTARGET_DIR=../src/ && make # 1: path from APP_BUILD_DIR to /sw 2: path from APP_BUILD_DIR to main.cpp
 fi
 
