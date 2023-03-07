@@ -64,7 +64,7 @@ string get_config_string()
             n = n + 1;
         }
     }
-    string s = std::to_string(n - 1);
+    string s = std::to_string(n);
     unsigned int number_of_zeros = STRING_LENGTH - s.length();
     s.insert(0, number_of_zeros, '0');
     s = "config_" + s;    
@@ -82,7 +82,7 @@ ofstream create_config_file()
             n = n + 1;
         }
     }
-    string s = std::to_string(n - 1);
+    string s = std::to_string(n);
     unsigned int number_of_zeros = STRING_LENGTH - s.length();
     s.insert(0, number_of_zeros, '0');
     s = "config_" + s;    
