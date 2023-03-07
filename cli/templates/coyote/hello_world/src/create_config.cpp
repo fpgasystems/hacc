@@ -62,7 +62,9 @@ string get_config_string()
     project_path = "/" + project_path + "/configs/";
     int n = 0;
     for (const auto & file : directory_iterator(project_path)){
-        n = n + 1;
+        if (file.path().extension() == ".hpp") {
+            n = n + 1;
+        }
     }
     string s = std::to_string(n - 1); // we assume config_shell is always present too
     unsigned int number_of_zeros = STRING_LENGTH - s.length();
@@ -78,7 +80,9 @@ ofstream create_config_file(int hw)
     project_path = "/" + project_path + "/configs/";
     int n = 0;
     for (const auto & file : directory_iterator(project_path)){
-        n = n + 1;
+        if (file.path().extension() == ".hpp") {
+            n = n + 1;
+        }
     }
     string s = std::to_string(n - 1); // we assume config_shell is always present too
     unsigned int number_of_zeros = STRING_LENGTH - s.length();
