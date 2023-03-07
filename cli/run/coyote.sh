@@ -136,7 +136,7 @@ APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build_dir.$FDEV_
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
     echo ""
-    echo "You must generate your application first! Please, use sgutil build coyote"
+    echo "You must build your project first! Please, use sgutil build coyote" # before generate (build) / application (project)
     echo ""
     exit
 fi
@@ -157,6 +157,13 @@ echo ""
     
 #run referring to config
 config="${config%%.*}"
-./main_$config
+FILE="main_$config"
+if [ -f "$FILE" ]; then
+    ./main_$config
+else
+    echo "You must build your application first! Please, use sgutil build coyote"
+    echo ""
+    exit
+fi
 
 echo ""
