@@ -16,6 +16,9 @@
 #include "cBench.hpp"
 #include "cProcess.hpp"
 
+#include "../global_params.hpp"
+#include "../configs/config_000.hpp" // config_000.hpp is overwritten with the configuration you select
+
 using namespace std;
 using namespace fpga;
 
@@ -37,6 +40,12 @@ int main(int argc, char *argv[])
     // ---------------------------------------------------------------
     // Args 
     // ---------------------------------------------------------------
+
+    // print config values as a test
+    std::cout << "N_MAX: ";
+    std::cout << std::to_string(N_MAX); 
+    std::cout << "N: ";
+    std::cout << std::to_string(N);
 
     // Read arguments
     boost::program_options::options_description programDescription("Options:");
