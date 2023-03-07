@@ -26,6 +26,7 @@ int main(int argc, char** argv) {
         return EXIT_FAILURE;
     }
 
+    // print config values as a test
     std::cout << "N_MAX: ";
     std::cout << std::to_string(N_MAX); 
     std::cout << "N: ";
