@@ -145,11 +145,18 @@ fi
 echo ""
 echo "${bold}Changing directory:${normal}"
 echo ""
-echo "cd $DIR"
+echo "cd $APP_BUILD_DIR"
 echo ""
-cd $DIR
-    
 cd $APP_BUILD_DIR
-./main
+
+#display configuration
+echo "${bold}You are running $config:${normal}"
+echo ""
+cat $DIR/configs/$config
+echo ""
+    
+#run referring to config
+config="${config%%.*}"
+./main_$config
 
 echo ""
