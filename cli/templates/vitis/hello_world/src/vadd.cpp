@@ -63,17 +63,17 @@ Input Vector 2 from Global Memory --->|             |      |__|
 #include <hls_stream.h>
 #include "assert.h"
 #include "../global_params.hpp"
-#include "../configs/config_000.hpp"
+#include "../configs/config_hw.hpp" // canviar a config_hw
 
 #define MEMORY_DWIDTH 512
 #define SIZEOF_WORD 4
 #define NUM_WORDS ((MEMORY_DWIDTH) / (8 * SIZEOF_WORD))
 
 // #define DATA_SIZE 4096
-//#include "../configs/config_000.hpp"
+//#include "../configs/config_hw.hpp"
 
 // TRIPCOUNT identifier
-const int c_size = N; //DATA_SIZE;
+const int c_size = N_MAX; //DATA_SIZE;
 
 static void load_input(hls::vector<uint32_t, NUM_WORDS>* in,
                        hls::stream<hls::vector<uint32_t, NUM_WORDS> >& inStream,

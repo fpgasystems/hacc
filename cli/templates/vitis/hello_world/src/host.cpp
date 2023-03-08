@@ -27,8 +27,6 @@ int main(int argc, char** argv) {
     }
 
     // print config values as a test
-    std::cout << "N_MAX: ";
-    std::cout << std::to_string(N_MAX); 
     std::cout << "N: ";
     std::cout << std::to_string(N);
 
