@@ -109,7 +109,7 @@ fi
 #create or select a configuration
 cd $DIR/configs/
 if [[ $(ls -l | wc -l) = 2 ]]; then
-    #only config_000 exists and we create config_001
+    #only config_000 exists and we create config_shell and config_001
     #we compile create_config (in case there were changes)
     cd $DIR/src
     g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
