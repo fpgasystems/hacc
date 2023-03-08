@@ -17,6 +17,7 @@
 #include "cProcess.hpp"
 
 #include "../global_params.hpp"
+#include "../configs/config_shell.hpp"
 #include "../configs/config_000.hpp" // config_000.hpp is overwritten with the configuration you select
 
 using namespace std;
