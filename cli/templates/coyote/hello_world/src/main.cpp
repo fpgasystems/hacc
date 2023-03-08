@@ -18,7 +18,7 @@
 
 #include "../global_params.hpp"
 #include "../configs/config_shell.hpp"
-#include "../configs/config_000.hpp" // config_000.hpp is overwritten with the configuration you select
+#include "../configs/config_000.hpp" // config_000.hpp is overwritten with the configuration you select; config_000 includes hardware (N_MAX) and software (N) parameters
 
 using namespace std;
 using namespace fpga;
