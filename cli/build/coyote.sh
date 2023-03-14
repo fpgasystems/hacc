@@ -247,6 +247,11 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     rm $DRIVER_DIR/fpga_mmu.o
     rm $DRIVER_DIR/fpga_sysfs.o
     rm $DRIVER_DIR/modules.order
+
+    #send email at the end
+    user_email=$username@ethz.ch
+    echo "Subject: Good news! sgutil build coyote ($project_name / -DFDEV_NAME=$FDEV_NAME) on $hostname is done!" | sendmail $user_email
+
 else
     echo "${bold}Coyote shell bitstream generation:${normal}"
     echo ""
