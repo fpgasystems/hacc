@@ -232,6 +232,7 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     mkdir $APP_BUILD_DIR
     cd $APP_BUILD_DIR
     /usr/bin/cmake ../sw -DTARGET_DIR=../src/ && make # 1: path from APP_BUILD_DIR to /sw 2: path from APP_BUILD_DIR to main.cpp
+    
     #save referring to config
     config="${config%%.*}"
     mv main main_$config
