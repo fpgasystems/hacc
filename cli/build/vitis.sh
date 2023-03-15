@@ -100,7 +100,7 @@ fi
 #create or select a configuration
 cd $DIR/configs/
 if [[ $(ls -l | wc -l) = 2 ]]; then
-    #only config_000 exists and we create config_001
+    #only config_000 exists and we create config_kernel and config_001
     #we compile create_config (in case there were changes)
     cd $DIR/src
     g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
@@ -108,19 +108,19 @@ if [[ $(ls -l | wc -l) = 2 ]]; then
     ./create_config
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
     config="config_001.hpp"
-elif [[ $(ls -l | wc -l) = 3 ]]; then
-    #config_000 and config_001 exist
+elif [[ $(ls -l | wc -l) = 4 ]]; then
+    #config_000, config_kernel and config_001 exist
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
     config="config_001.hpp"
     echo ""
-elif [[ $(ls -l | wc -l) > 3 ]]; then
+elif [[ $(ls -l | wc -l) > 4 ]]; then
     cd $DIR/configs/
     configs=( "config_"*.hpp )
     echo ""
     echo "${bold}Please, choose your configuration:${normal}"
     echo ""
     PS3=""
-    select config in "${configs[@]:1}"; do # with :1 we avoid config_000.hpp :${#configs[@]}-2
+    select config in "${configs[@]:1:${#configs[@]}-2}"; do # with :1 we avoid config_000.hpp and then config_kernel.hpp
         if [[ -z $config ]]; then
             echo "" >&/dev/null
         else
@@ -191,6 +191,13 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     echo ""
     eval "make all TARGET=$target PLATFORM=$platform"
     echo ""        
+
+    #send email at the end
+    if [ "$target" = "hw" ]; then
+        user_email=$username@ethz.ch
+        echo "Subject: Good news! sgutil build vitis ($project_name / TARGET=$target / PLATFORM=$platform) is done!" | sendmail $user_email
+    fi
+    
 else
     echo "${bold}PL kernel compilation and linking: generating .xo and .xclbin:${normal}"
     echo ""
