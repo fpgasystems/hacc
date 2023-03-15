@@ -79,28 +79,24 @@ fi
 #create or select a configuration
 cd $DIR/configs/
 if [[ $(ls -l | wc -l) = 2 ]]; then
-    #only config_000 exists and we create config_001
-    #we compile create_config (in case there were changes)
-    #cd $DIR/src
-    #g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
-    #cd $DIR
-    #./create_config
-    #cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
-    config=""
+    #only config_000
     echo ""
-elif [[ $(ls -l | wc -l) = 3 ]]; then
-    #config_000 and config_001 exist
+    echo "You must build your project first! Please, use sgutil build vitis"
+    echo ""
+    exit
+elif [[ $(ls -l | wc -l) = 4 ]]; then
+    #config_000, config_shell and config_001 exist
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
     config="config_001.hpp"
     echo ""
-elif [[ $(ls -l | wc -l) > 3 ]]; then
+elif [[ $(ls -l | wc -l) > 4 ]]; then
     cd $DIR/configs/
     configs=( "config_"*.hpp )
     echo ""
     echo "${bold}Please, choose your configuration:${normal}"
     echo ""
     PS3=""
-    select config in "${configs[@]:1}"; do # with :1 we avoid config_000.hpp :${#configs[@]}-2
+    select config in "${configs[@]:1:${#configs[@]}-2}"; do # with :1 we avoid config_000.hpp and then config_kernel.hpp
         if [[ -z $config ]]; then
             echo "" >&/dev/null
         else
@@ -143,7 +139,7 @@ APP_BUILD_DIR="/home/$username/my_projects/vitis/$project_name/build_dir.$target
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
     echo ""
-    echo "You must generate your application first! Please, use sgutil build vitis"
+    echo "You must build your project first! Please, use sgutil build vitis"
     echo ""
     exit
 fi
