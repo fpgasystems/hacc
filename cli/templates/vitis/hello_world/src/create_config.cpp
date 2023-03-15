@@ -66,7 +66,7 @@ string get_config_string()
             n = n + 1;
         }
     }
-    string s = std::to_string(n - 1); // we assume config_hw is always present too
+    string s = std::to_string(n - 1); // we assume config_kernel is always present too
     unsigned int number_of_zeros = STRING_LENGTH - s.length();
     s.insert(0, number_of_zeros, '0');
     s = "config_" + s;    
@@ -84,11 +84,11 @@ ofstream create_config_file(int hw)
             n = n + 1;
         }
     }
-    string s = std::to_string(n - 1); // we assume config_hw is always present too
+    string s = std::to_string(n - 1); // we assume config_kernel is always present too
     unsigned int number_of_zeros = STRING_LENGTH - s.length();
     s.insert(0, number_of_zeros, '0');
     if (hw == 1) {
-        s = "config_hw";
+        s = "config_kernel";
     }
     else {
         s = "config_" + s;    
@@ -137,8 +137,8 @@ int main()
 
     cout << "\n\e[1mcreate_config\e[0m\n";
 
-    const fs::path config_hw{"./configs/config_hw.hpp"};
-    bool exist = file_exists(config_hw);
+    const fs::path config_kernel{"./configs/config_kernel.hpp"};
+    bool exist = file_exists(config_kernel);
     if (exist == 0) {
         
         cout << "\n\e[1mHardware (xclbin) parameters:\e[0m\n";
@@ -157,10 +157,10 @@ int main()
         int CLK_F_MAX = read_value("CLK_F_MAX", CLK_F_MAX_i);
 
         // create hardware configuration
-        ofstream c_hw = create_config_file(1);
-        c_hw << "const int N_MAX = " <<  N_MAX << ";" << std::endl;
-        c_hw << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
-        c_hw << "const int CLK_F_MAX = " <<  CLK_F_MAX << ";" << std::endl;
+        ofstream c_kernel = create_config_file(1);
+        c_kernel << "const int N_MAX = " <<  N_MAX << ";" << std::endl;
+        c_kernel << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
+        c_kernel << "const int CLK_F_MAX = " <<  CLK_F_MAX << ";" << std::endl;
     }    
 
     cout << "\n";
@@ -171,14 +171,14 @@ int main()
     cout << "\n";
     
     // N (VECTOR_LENGTH)
-    int N_MAX = read_parameter("./configs/config_hw.hpp", "N_MAX");
+    int N_MAX = read_parameter("./configs/config_kernel.hpp", "N_MAX");
     vector<int> N_i;
     for (int i = 16; i <= N_MAX; i = i + 16) {
         N_i.push_back(i);
     }
     int N = read_value("N", N_i);
     // W
-    int W_MAX = read_parameter("./configs/config_hw.hpp", "W_MAX");
+    int W_MAX = read_parameter("./configs/config_kernel.hpp", "W_MAX");
     vector<int> W_i = new_vector(1, W_MAX);
     int W = read_value("W", W_i);
     // F
@@ -193,7 +193,7 @@ int main()
     cout << "\n";
 
     // CLK_F
-    int CLK_F_MAX = read_parameter("./configs/config_hw.hpp", "CLK_F_MAX");
+    int CLK_F_MAX = read_parameter("./configs/config_kernel.hpp", "CLK_F_MAX");
     vector<int> CLK_F_i;
     for (int i = 250; i <= CLK_F_MAX; i = i + 50) {
         CLK_F_i.push_back(i);

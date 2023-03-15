@@ -63,7 +63,7 @@ Input Vector 2 from Global Memory --->|             |      |__|
 #include <hls_stream.h>
 #include "assert.h"
 #include "../global_params.hpp"
-#include "../configs/config_hw.hpp" // canviar a config_hw
+#include "../configs/config_kernel.hpp" // canviar a config_hw
 
 #define MEMORY_DWIDTH 512
 #define SIZEOF_WORD 4
