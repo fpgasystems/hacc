@@ -86,38 +86,38 @@ if ! [ -d "$DIR" ]; then
 fi
 
 #create or select a configuration
-cd $DIR/configs/
-if [[ $(ls -l | wc -l) = 2 ]]; then
-    #only config_000 exists and we create config_001
-    #we compile create_config (in case there were changes)
-    cd $DIR/src
-    g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
-    cd $DIR
-    ./create_config
-    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
-    config="config_001.hpp"
-elif [[ $(ls -l | wc -l) = 4 ]]; then
-    #config_000, config_shell and config_001 exist
-    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
-    config="config_001.hpp"
-    echo ""
-elif [[ $(ls -l | wc -l) > 4 ]]; then
-    cd $DIR/configs/
-    configs=( "config_"*.hpp )
-    echo ""
-    echo "${bold}Please, choose your configuration:${normal}"
-    echo ""
-    PS3=""
-    select config in "${configs[@]:1:${#configs[@]}-2}"; do # with :1 we avoid config_000.hpp and then config_shell.hpp
-        if [[ -z $config ]]; then
-            echo "" >&/dev/null
-        else
-            break
-        fi
-    done
-    # copy selected config as config_000.hpp
-    cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
-fi
+#cd $DIR/configs/
+#if [[ $(ls -l | wc -l) = 2 ]]; then
+#    #only config_000 exists and we create config_001
+#    #we compile create_config (in case there were changes)
+#    cd $DIR/src
+#    g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
+#    cd $DIR
+#    ./create_config
+#    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+#    config="config_001.hpp"
+#elif [[ $(ls -l | wc -l) = 4 ]]; then
+#    #config_000, config_shell and config_001 exist
+#    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+#    config="config_001.hpp"
+#    echo ""
+#elif [[ $(ls -l | wc -l) > 4 ]]; then
+#    cd $DIR/configs/
+#    configs=( "config_"*.hpp )
+#    echo ""
+#    echo "${bold}Please, choose your configuration:${normal}"
+#    echo ""
+#    PS3=""
+#    select config in "${configs[@]:1:${#configs[@]}-2}"; do # with :1 we avoid config_000.hpp and then config_shell.hpp
+#        if [[ -z $config ]]; then
+#            echo "" >&/dev/null
+#        else
+#            break
+#        fi
+#    done
+#    # copy selected config as config_000.hpp
+#    cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
+#fi
 
 #sgutil get device if there is only one FPGA and not name_found ------------------> this will change with the fpga_idx concept
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
@@ -150,20 +150,28 @@ echo ""
 cd $APP_BUILD_DIR
 
 #display configuration
-echo "${bold}You are running $config:${normal}"
+cd $DIR/configs/
+config_id=$(ls *.active)
+config_id="${config_id%%.*}"
+
+echo "${bold}You are running $config_id:${normal}"
 echo ""
-cat $DIR/configs/$config
+cat $DIR/configs/config_000.hpp
 echo ""
     
+#run application
+cd $APP_BUILD_DIR
+./main
+
 #run referring to config
-config="${config%%.*}"
-FILE="main_$config"
-if [ -f "$FILE" ]; then
-    ./main_$config
-else
-    echo "You must build your application first! Please, use sgutil build coyote"
-    echo ""
-    exit
-fi
+#config="${config%%.*}"
+#FILE="main_$config"
+#if [ -f "$FILE" ]; then
+#    ./main_$config
+#else
+#    echo "You must build your application first! Please, use sgutil build coyote"
+#    echo ""
+#    exit
+#fi
 
 echo ""
