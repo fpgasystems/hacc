@@ -152,6 +152,9 @@ echo "cd $DIR"
 echo ""
 cd $DIR
 
+#revert to xrt first if FPGA is already in baremetal (this is needed also for sw_emu and hw_emu, i.e. when we do not use sgutil program vitis)
+sudo /opt/cli/program/revert
+
 #execution
 echo "${bold}Running accelerated application:${normal}"
 echo ""
