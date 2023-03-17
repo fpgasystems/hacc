@@ -205,4 +205,17 @@ else
     echo ""
     echo "$APP_BUILD_DIR already exists!"
     echo ""
+
+    #get xrt version
+    branch=$(/opt/xilinx/xrt/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
+    branch=${branch:7:6}
+    
+    #application compilation
+    echo "${bold}Application compilation:${normal}"
+    echo ""
+    echo "g++ -o $project_name xcl2.cpp src/host.cpp"
+    echo ""
+
+    g++ -o $project_name /home/$username/my_projects/vitis/common/includes/xcl2/xcl2.cpp src/host.cpp -I/opt/xilinx/xrt/include -I/tools/Xilinx//Vivado/$branch/include -Wall -O0 -g -std=c++1y -I/home/$username/my_projects/vitis/common/includes/xcl2 -fmessage-length=0 -L/opt/xilinx/xrt/lib -pthread -lOpenCL -lrt -lstdc++
+
 fi
