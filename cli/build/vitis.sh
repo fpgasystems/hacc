@@ -132,6 +132,14 @@ elif [[ $(ls -l | wc -l) > 4 ]]; then
     echo ""
 fi
 
+#save config id
+cd $DIR/configs/
+if [ -e config_*.active ]; then
+    rm *.active
+fi
+config_id="${config%%.*}"
+touch $config_id.active
+
 echo "${bold}Please, choose binary's compilation target:${normal}"
 echo ""
 PS3=""

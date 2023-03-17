@@ -77,38 +77,38 @@ if ! [ -d "$DIR" ]; then
 fi
 
 #create or select a configuration
-cd $DIR/configs/
-if [[ $(ls -l | wc -l) = 2 ]]; then
-    #only config_000
-    echo ""
-    echo "You must build your project first! Please, use sgutil build vitis"
-    echo ""
-    exit
-elif [[ $(ls -l | wc -l) = 4 ]]; then
-    #config_000, config_shell and config_001 exist
-    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
-    config="config_001.hpp"
-    echo ""
-elif [[ $(ls -l | wc -l) > 4 ]]; then
-    cd $DIR/configs/
-    configs=( "config_"*.hpp )
-    echo ""
-    echo "${bold}Please, choose your configuration:${normal}"
-    echo ""
-    PS3=""
-    select config in "${configs[@]:1:${#configs[@]}-2}"; do # with :1 we avoid config_000.hpp and then config_kernel.hpp
-        if [[ -z $config ]]; then
-            echo "" >&/dev/null
-        else
-            break
-        fi
-    done
-    # copy selected config as config_000.hpp
-    cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
-    echo ""
-fi
+#cd $DIR/configs/
+#if [[ $(ls -l | wc -l) = 2 ]]; then
+#    #only config_000
+#    echo ""
+#    echo "You must build your project first! Please, use sgutil build vitis"
+#    echo ""
+#    exit
+#elif [[ $(ls -l | wc -l) = 4 ]]; then
+#    #config_000, config_shell and config_001 exist
+#    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+#    config="config_001.hpp"
+#    echo ""
+#elif [[ $(ls -l | wc -l) > 4 ]]; then
+#    cd $DIR/configs/
+#    configs=( "config_"*.hpp )
+#    echo ""
+#    echo "${bold}Please, choose your configuration:${normal}"
+#    echo ""
+#    PS3=""
+#    select config in "${configs[@]:1:${#configs[@]}-2}"; do # with :1 we avoid config_000.hpp and then config_kernel.hpp
+#        if [[ -z $config ]]; then
+#            echo "" >&/dev/null
+#        else
+#            break
+#        fi
+#    done
+#    # copy selected config as config_000.hpp
+#    cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
+#    echo ""
+#fi
 
-#echo ""
+echo ""
 echo "${bold}Please, choose binary's execution target:${normal}"
 echo ""
 PS3=""
@@ -144,18 +144,29 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     exit
 fi
 
+#revert to xrt first if FPGA is already in baremetal (this is needed also for sw_emu and hw_emu, i.e. when we do not use sgutil program vitis)
+sudo /opt/cli/program/revert
+
 #change directory
 echo ""
 echo "${bold}Changing directory:${normal}"
 echo ""
 echo "cd $DIR"
 echo ""
-cd $DIR
+#cd $DIR
 
-#revert to xrt first if FPGA is already in baremetal (this is needed also for sw_emu and hw_emu, i.e. when we do not use sgutil program vitis)
-sudo /opt/cli/program/revert
+#display configuration
+cd $DIR/configs/
+config_id=$(ls *.active)
+config_id="${config_id%%.*}"
+
+echo "${bold}You are running $config_id:${normal}"
+echo ""
+cat $DIR/configs/config_000.hpp
+echo ""
 
 #execution
+cd $DIR
 echo "${bold}Running accelerated application:${normal}"
 echo ""
 echo "make run TARGET=$target PLATFORM=$platform" 
