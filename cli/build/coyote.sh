@@ -140,6 +140,14 @@ elif [[ $(ls -l | wc -l) > 4 ]]; then
     cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
 fi
 
+#save config id
+cd $DIR/configs/
+if [ -e config_*.active ]; then
+    rm *.active
+fi
+config_id="${config%%.*}"
+touch $config_id.active
+
 #compile Coyote shell (get config_shell parameters)
 coyote_params=""
 shopt -s lastpipe
@@ -234,8 +242,8 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     /usr/bin/cmake ../sw -DTARGET_DIR=../src/ && make # 1: path from APP_BUILD_DIR to /sw 2: path from APP_BUILD_DIR to main.cpp
     
     #save referring to config
-    config="${config%%.*}"
-    mv main main_$config
+    #config="${config%%.*}"
+    #mv main main_$config
 
     #copy bitstream
     cp $SHELL_BUILD_DIR/bitstreams/cyt_top.bit $APP_BUILD_DIR
@@ -293,9 +301,10 @@ else
     #remove CMakeLists.txt to avoid recompiling errors
     rm CMakeCache.txt
     /usr/bin/cmake ../sw -DTARGET_DIR=../src/ && make # 1: path from APP_BUILD_DIR to /sw 2: path from APP_BUILD_DIR to main.cpp
+    
     #save referring to config
-    config="${config%%.*}"
-    mv main main_$config
+    #config="${config%%.*}"
+    #mv main main_$config
 fi
 
 echo ""
