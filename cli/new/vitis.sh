@@ -53,7 +53,7 @@ while true; do
         #compile src
         cd $DIR/src
         g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
-        g++ -std=c++17 create_data.cpp -o ../create_data
+        #g++ -std=c++17 create_data.cpp -o ../create_data
         break
     fi
 done

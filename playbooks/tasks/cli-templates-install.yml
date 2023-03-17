@@ -27,3 +27,13 @@
   ansible.builtin.file:
     path: /opt/cli/templates/mpi/hello_world/src/main.c
     state: absent
+
+- name: remove create_data (in /opt/cli/templates/vitis/hello_world/src)
+  ansible.builtin.file:
+    path: /opt/cli/templates/vitis/hello_world/src/create_data.cpp
+    state: absent
+
+- name: remove create_data (in /opt/cli/templates/coyote/hello_world/src)
+  ansible.builtin.file:
+    path: /opt/cli/templates/coyote/hello_world/src/create_data.cpp
+    state: absent
