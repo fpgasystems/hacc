@@ -17,15 +17,15 @@ hostname="${url%%.*}"
 # inputs
 read -a flags <<< "$@"
 
-echo ""
-echo "${bold}sgutil program revert${normal}"
-
 #check for number of pci functions
 if [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
     #the server is already in Vitis workflow
     echo ""
     exit
 fi
+
+echo ""
+echo "${bold}sgutil program revert${normal}"
 
 #check for virtualized
 virtualized=$(/opt/cli/common/is_virtualized)
