@@ -6,6 +6,9 @@ normal=$(tput sgr0)
 #get username
 username=$USER
 
+#constants
+TARGET="hw"
+
 # inputs
 read -a flags <<< "$@"
 
@@ -108,15 +111,6 @@ fi
 #    echo ""
 #fi
 
-#set execution target
-target="hw"
-
-#sgutil get serial only when we have one FPGA and not serial_found
-if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
-    #serial_number=$(sgutil get serial | cut -d "=" -f2)
-    serial_number="--device"
-fi
-
 # serial to platform
 cd /opt/xilinx/platforms
 n=$(ls -l | grep -c ^d)
@@ -125,7 +119,7 @@ if [ $((n + 0)) -eq  1 ]; then
 fi
 
 #define directories (2)
-APP_BUILD_DIR="/home/$username/my_projects/vitis/$project_name/build_dir.$target.$platform"
+APP_BUILD_DIR="/home/$username/my_projects/vitis/$project_name/build_dir.$TARGET.$platform"
 
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
@@ -133,6 +127,40 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     echo "You must build your project first! Please, use sgutil build vitis (target = hw)"
     echo ""
     exit
+fi
+
+#get booked machines
+echo ""
+servers=$(sudo /opt/cli/common/get_booking_system_servers_list | tail -n +2)
+echo ""
+
+#convert string to an array
+servers=($servers)
+
+#we only show likely servers (i.e., alveo-u55c)
+server_family=$(sgutil get device)
+server_family="${server_family%%=*}"
+
+#build servers_family_list
+servers_family_list=()
+for i in "${servers[@]}"
+do
+    if [[ $i == $server_family* ]]; then
+        #append the matching element to the array
+        servers_family_list+=("$i") 
+    fi
+done
+
+#loop through booked servers (same family)
+for i in "${servers_family_list[@]}"
+do
+    echo "$i"
+done
+
+#sgutil get serial only when we have one FPGA and not serial_found
+if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
+    #serial_number=$(sgutil get serial | cut -d "=" -f2)
+    serial_number="--device"
 fi
 
 #revert to xrt first if FPGA is already in baremetal
