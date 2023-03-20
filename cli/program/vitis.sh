@@ -198,8 +198,6 @@ sudo /opt/cli/program/revert
 #program xclbin
 /opt/xilinx/xrt/bin/xbutil program $serial_number -u $xclbin
 
-#echo "Local xclbin: $xclbin"
-
 #programming remote servers (if applies)
 for i in "${servers_family_list[@]}"
 do
@@ -211,31 +209,8 @@ do
     #we assume this for now
     serial_number="--device"
 
-    #remotely...
-    #revert to xrt first if FPGA is already in baremetal (-t forces a pseudo-tty allocation)
-    ssh -t $username@$i "sudo /opt/cli/program/revert"
-    #reset device (we delete any xclbin) and program
-    #ssh $username@$i "/opt/xilinx/xrt/bin/xbutil reset $serial_number --force"
-    #program xclbin
-    #ssh $username@$i "/opt/xilinx/xrt/bin/xbutil program $serial_number -u $APP_BUILD_DIR/$xclbin"
-
-    #reset device (we delete any xclbin) and program xclbin
-    ssh $username@$i "/opt/xilinx/xrt/bin/xbutil reset $serial_number --force ; /opt/xilinx/xrt/bin/xbutil program $serial_number -u $APP_BUILD_DIR/$xclbin"
+    #remotely revert to xrt, reset device (we delete any xclbin) and program xclbin
+    ssh -t $username@$i "sudo /opt/cli/program/revert ; /opt/xilinx/xrt/bin/xbutil reset $serial_number --force ; /opt/xilinx/xrt/bin/xbutil program $serial_number -u $APP_BUILD_DIR/$xclbin"
 done
-
-##sgutil get serial only when we have one FPGA and not serial_found
-#if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
-#    #serial_number=$(sgutil get serial | cut -d "=" -f2)
-#    serial_number="--device"
-#fi
-
-#revert to xrt first if FPGA is already in baremetal
-#sudo /opt/cli/program/revert
-
-#reset device (we delete any xclbin)
-#/opt/xilinx/xrt/bin/xbutil reset $serial_number --force
-
-# program xclbin
-#/opt/xilinx/xrt/bin/xbutil program $serial_number -u $xclbin
 
 echo ""
