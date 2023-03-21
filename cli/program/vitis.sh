@@ -168,31 +168,33 @@ servers_family_list_string=$(printf ", %s" "${servers_family_list[@]}")
 servers_family_list_string=${servers_family_list_string:2}
 
 #deployment dialog
-echo "${bold}Where do you want to deploy your binary?${normal}"
-echo ""
-echo "    1) Only this server ($hostname)"
-echo "    2) All servers I have booked ($hostname, $servers_family_list_string)"
-while true; do
-	read -p "" deploy_option
-    case $deploy_option in
-        "1") 
-            servers_family_list=()
-            all_servers="0";
-            break
-            ;;
-        "2") 
-            all_servers="1"
-            break
-            ;;
-    esac
-done
+if [ -n "$servers_family_list_string" ]; then
+    echo "${bold}Where do you want to deploy your binary?${normal}"
+    echo ""
+    echo "    1) Only this server ($hostname)"
+    echo "    2) All servers I have booked ($hostname, $servers_family_list_string)"
+    while true; do
+	    read -p "" deploy_option
+        case $deploy_option in
+            "1") 
+                servers_family_list=()
+                all_servers="0";
+                break
+                ;;
+            "2") 
+                all_servers="1"
+                break
+                ;;
+        esac
+    done
+    echo ""
+fi
 
 #get xclbin
 cd $APP_BUILD_DIR
 xclbin=$(echo *.xclbin | awk '{print $NF}')
 
 #programming local server
-echo ""
 echo "Programming local server ${bold}$hostname...${normal}"
 #sgutil get serial only when we have one FPGA and not serial_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
