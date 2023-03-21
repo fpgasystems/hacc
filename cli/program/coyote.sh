@@ -154,9 +154,6 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     exit
 fi
 
-
-#-------------------------
-
 #get booked machines
 echo ""
 servers=$(sudo /opt/cli/common/get_booking_system_servers_list | tail -n +2)
@@ -203,8 +200,6 @@ while true; do
     esac
 done
 
-#---------------------------------
-
 #prgramming local server
 echo ""
 echo "Programming local server ${bold}$hostname...${normal}"
@@ -216,13 +211,6 @@ fi
 sgutil program vivado -b $APP_BUILD_DIR$BIT_NAME
 #driver 
 sgutil program vivado -d $APP_BUILD_DIR$DRIVER_NAME
-
-#fpga_chmod for N_REGIONS times
-#N_REGIONS=$(get_N_REGIONS "$DIR")
-#for (( i = 0; i < $N_REGIONS; i++ ))
-#do 
-#    sudo /opt/cli/program/fpga_chmod $i
-#done
 
 #get permissions on N_REGIONS
 /opt/cli/program/get_N_REGIONS $DIR
