@@ -10,8 +10,25 @@ DRIVER_NAME="coyote_drv.ko"
 #get username
 username=$USER
 
-# inputs
+#get hostname
+url="${HOSTNAME}"
+hostname="${url%%.*}"
+
+#inputs
 read -a flags <<< "$@"
+
+get_N_REGIONS() {
+    local DIR=$1
+    #get N_REGIONS
+    line=$(grep -n "N_REGIONS" $DIR/configs/config_shell.hpp)
+    #find equal (=)
+    idx=$(sed 's/ /\n/g' <<< "$line" | sed -n "/=/=")
+    #get index
+    value_idx=$(($idx+1))
+    #get data
+    N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
+    echo $N_REGIONS
+}
 
 echo ""
 echo "${bold}sgutil program coyote${normal}"
@@ -121,11 +138,6 @@ fi
 #    cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
 #fi
 
-#sgutil get device if there is only one FPGA and not name_found
-if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
-    device_name=$(sgutil get device | cut -d "=" -f2)
-fi
-
 #device_name to coyote string 
 FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
 if [ "$FDEV_NAME" = "u50d" ]; then
@@ -142,28 +154,90 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     exit
 fi
 
-# revert to xrt first if FPGA is already in baremetal 
-#if [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then
-#    /opt/cli/program/revert
-#fi ========================================================> moved to program vivado
-    
-# bitstream
-sgutil program vivado -b $APP_BUILD_DIR$BIT_NAME
 
+#-------------------------
+
+#get booked machines
+echo ""
+servers=$(sudo /opt/cli/common/get_booking_system_servers_list | tail -n +2)
+echo ""
+
+#convert string to an array
+servers=($servers)
+
+#we only show likely servers (i.e., alveo-u55c)
+server_family=$(sgutil get device)
+server_family="${server_family%%=*}"
+
+#build servers_family_list
+servers_family_list=()
+for i in "${servers[@]}"
+do
+    if [[ $i == $server_family* ]] && [[ $i != $hostname ]]; then
+        #append the matching element to the array
+        servers_family_list+=("$i") 
+    fi
+done
+
+#convert to string and remove the leading delimiter (:2)
+servers_family_list_string=$(printf ", %s" "${servers_family_list[@]}")
+servers_family_list_string=${servers_family_list_string:2}
+
+#deployment dialog
+echo "${bold}Where do you want to deploy your binary?${normal}"
+echo ""
+echo "    1) Only this server ($hostname)"
+echo "    2) All servers I have booked ($hostname, $servers_family_list_string)"
+while true; do
+	read -p "" deploy_option
+    case $deploy_option in
+        "1") 
+            servers_family_list=()
+            all_servers="0";
+            break
+            ;;
+        "2") 
+            all_servers="1"
+            break
+            ;;
+    esac
+done
+
+#---------------------------------
+
+#prgramming local server
+echo ""
+echo "Programming local server ${bold}$hostname...${normal}"
+#sgutil get device if there is only one FPGA and not name_found
+if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
+    device_name=$(sgutil get device | cut -d "=" -f2)
+fi
+#bitstream
+sgutil program vivado -b $APP_BUILD_DIR$BIT_NAME
 #driver 
 sgutil program vivado -d $APP_BUILD_DIR$DRIVER_NAME
 
-#get N_REGIONS
-line=$(grep -n "N_REGIONS" $DIR/configs/config_shell.hpp)
-#find equal (=)
-idx=$(sed 's/ /\n/g' <<< "$line" | sed -n "/=/=")
-#get index
-value_idx=$(($idx+1))
-#get data
-N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
+##get N_REGIONS
+#line=$(grep -n "N_REGIONS" $DIR/configs/config_shell.hpp)
+##find equal (=)
+#idx=$(sed 's/ /\n/g' <<< "$line" | sed -n "/=/=")
+##get index
+#value_idx=$(($idx+1))
+##get data
+#N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
+
+N_REGIONS=$(get_N_REGIONS "$DIR")
+
+
 
 #fpga_chmod for N_REGIONS times
 for (( i = 0; i < $N_REGIONS; i++ ))
 do 
     sudo /opt/cli/program/fpga_chmod $i
+done
+
+#programming remote servers (if applies)
+for i in "${servers_family_list[@]}"
+do
+    echo $i
 done
