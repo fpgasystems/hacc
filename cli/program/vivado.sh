@@ -142,7 +142,8 @@ if [[ $program_bitstream = "1" ]]; then
             echo "Subject: $username requires to go to baremetal/warm boot ($hostname)" | sendmail $EMAIL
             exit
         elif [ "$virtualized" = "false" ]; then
-            sudo /opt/cli/program/pci_hot_plug ${hostname}
+            #sudo /opt/cli/program/pci_hot_plug ${hostname}
+            /opt/cli/program/rescan
         fi
     fi
 
