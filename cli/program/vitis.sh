@@ -183,7 +183,7 @@ done
 cd $APP_BUILD_DIR
 xclbin=$(echo *.xclbin | awk '{print $NF}')
 
-#prgramming local server
+#programming local server
 echo ""
 echo "Programming local server ${bold}$hostname...${normal}"
 #sgutil get serial only when we have one FPGA and not serial_found
