@@ -18,6 +18,14 @@ read -a flags <<< "$@"
 echo ""
 echo "${bold}sgutil run mpi${normal}"
 
+#check if workflow exists
+if ! [ -d "/home/$username/my_projects/mpi/" ]; then
+    echo ""
+    echo "You must build your project first! Please, use sgutil build mpi"
+    echo ""
+    exit
+fi
+
 #check on flags (before: flags cannot be empty)
 project_found="0"
 if [ "$flags" = "" ]; then

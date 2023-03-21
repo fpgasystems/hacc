@@ -16,6 +16,14 @@ read -a flags <<< "$@"
 echo ""
 echo "${bold}sgutil build vitis${normal}"
 
+#check if workflow exists
+if ! [ -d "/home/$username/my_projects/vitis/" ]; then
+    echo ""
+    echo "You must create your project first! Please, use sgutil new vitis"
+    echo ""
+    exit
+fi
+
 #check on flags (before: flags cannot be empty)
 project_found="0"
 serial_found="0"

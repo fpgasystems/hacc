@@ -42,6 +42,14 @@ if [ "$member" = "false" ]; then
     exit
 fi
 
+#check if workflow exists
+if ! [ -d "/home/$username/my_projects/coyote/" ]; then
+    echo ""
+    echo "You must build your project first! Please, use sgutil build coyote"
+    echo ""
+    exit
+fi
+
 #check on flags (before: flags cannot be empty)
 name_found="0"
 project_found="0"
