@@ -17,18 +17,18 @@ hostname="${url%%.*}"
 #inputs
 read -a flags <<< "$@"
 
-get_N_REGIONS() {
-    local DIR=$1
-    #get N_REGIONS
-    line=$(grep -n "N_REGIONS" $DIR/configs/config_shell.hpp)
-    #find equal (=)
-    idx=$(sed 's/ /\n/g' <<< "$line" | sed -n "/=/=")
-    #get index
-    value_idx=$(($idx+1))
-    #get data
-    N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
-    echo $N_REGIONS
-}
+#get_N_REGIONS() {
+#    local DIR=$1
+#    #get N_REGIONS
+#    line=$(grep -n "N_REGIONS" $DIR/configs/config_shell.hpp)
+#    #find equal (=)
+#    idx=$(sed 's/ /\n/g' <<< "$line" | sed -n "/=/=")
+#    #get index
+#    value_idx=$(($idx+1))
+#    #get data
+#    N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
+#    echo $N_REGIONS
+#}
 
 echo ""
 echo "${bold}sgutil program coyote${normal}"
@@ -217,27 +217,29 @@ sgutil program vivado -b $APP_BUILD_DIR$BIT_NAME
 #driver 
 sgutil program vivado -d $APP_BUILD_DIR$DRIVER_NAME
 
-##get N_REGIONS
-#line=$(grep -n "N_REGIONS" $DIR/configs/config_shell.hpp)
-##find equal (=)
-#idx=$(sed 's/ /\n/g' <<< "$line" | sed -n "/=/=")
-##get index
-#value_idx=$(($idx+1))
-##get data
-#N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
-
-N_REGIONS=$(get_N_REGIONS "$DIR")
-
-
-
 #fpga_chmod for N_REGIONS times
-for (( i = 0; i < $N_REGIONS; i++ ))
-do 
-    sudo /opt/cli/program/fpga_chmod $i
-done
+#N_REGIONS=$(get_N_REGIONS "$DIR")
+#for (( i = 0; i < $N_REGIONS; i++ ))
+#do 
+#    sudo /opt/cli/program/fpga_chmod $i
+#done
+
+#get permissions on N_REGIONS
+/opt/cli/program/get_N_REGIONS $DIR
 
 #programming remote servers (if applies)
 for i in "${servers_family_list[@]}"
 do
-    echo $i
+    #remote servers
+    echo ""
+    echo "Programming remote server ${bold}$i...${normal}"
+    echo ""
+
+    #sgutil get device if there is only one FPGA and not name_found (we assume this for now)
+    if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
+        device_name=$(sgutil get device | cut -d "=" -f2)
+    fi
+
+
+
 done
