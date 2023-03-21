@@ -240,6 +240,9 @@ do
         device_name=$(sgutil get device | cut -d "=" -f2)
     fi
 
-
+    #remotely program bitstream, driver, and run get_N_REGIONS
+    ssh -t $username@$i "/opt/cli/program/vivado -b $APP_BUILD_DIR$BIT_NAME ; /opt/cli/program/vivado -d $APP_BUILD_DIR$DRIVER_NAME ; /opt/cli/program/get_N_REGIONS $DIR"
 
 done
+
+echo ""
