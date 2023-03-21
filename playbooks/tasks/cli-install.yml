@@ -329,6 +329,12 @@
     dest: /opt/cli/program/coyote
     mode: 0755
 
+- name: copy program get_N_REGIONS
+  copy:
+    src: "../../cli/program/get_N_REGIONS.sh"
+    dest: /opt/cli/program/get_N_REGIONS
+    mode: 0755
+
 # run ---------------------------------------------------------------------------------------
 
 - name: copy (run) vitis script
