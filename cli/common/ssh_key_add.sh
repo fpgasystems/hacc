@@ -44,6 +44,7 @@ servers=($servers)
 
 ## add SSH (mellanox-0) fingerprints to local known_hosts
 echo "${bold}Adding fingerprints to known_hosts:${normal}"
+echo ""
 
 #alveo-build-01
 ssh-keygen -R alveo-build-01-mellanox-0

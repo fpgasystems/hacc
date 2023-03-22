@@ -8,6 +8,7 @@ read -a flags <<< "$@"
 
 echo ""
 echo "${bold}sgutil set keys${normal}"
+echo ""
 
 # setup keys
 /opt/cli/common/ssh_key_add
