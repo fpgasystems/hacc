@@ -335,6 +335,7 @@ program_help() {
     echo ""
     echo "ARGUMENTS:"
     echo "   coyote          - Programs Coyote on a given device."
+    echo "   reboot          - Reboots the server (warm boot)."
     echo "   rescan          - Runs the PCI hot-plug process."
     echo "   reset           - Resets the given device."
     echo "   revert          - Returns the specified device to the Vitis workflow."
@@ -355,6 +356,20 @@ program_coyote_help() {
     echo "FLAGS:"
     echo "   -p, --project   - Specifies your Coyote project name." 
     echo "   -s, --serial    - FPGA's serial number. See sgutil get serial."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
+program_reboot_help() {
+    echo ""
+    echo "${bold}sgutil program reboot [--help]${normal}"
+    echo ""
+    echo "Reboots the server (warm boot)."
+    echo ""
+    echo "FLAGS:"
+    echo "   This command has no flags."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -758,6 +773,13 @@ case "$command" in
       coyote)
         valid_flags="-p --project -s --serial -h --help"
         command_run $command_arguments_flags"@"$valid_flags
+        ;;
+      reboot)
+        if [ "$#" -ne 2 ]; then
+          program_reboot_help
+          exit 1
+        fi
+        /opt/cli/program/reboot
         ;;
       rescan) # flags can be empty if we have only one FPGA
         valid_flags="-s --serial -h --help"
