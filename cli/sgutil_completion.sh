@@ -29,7 +29,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "coyote mpi vitis --help" -- ${cur})) # -h
                     ;;
                 set)
-                    COMPREPLY=($(compgen -W "write --help" -- ${cur})) # -h
+                    COMPREPLY=($(compgen -W "keys write --help" -- ${cur})) # -h
                     ;;
                 validate)
                     COMPREPLY=($(compgen -W "coyote iperf mpi --help" -- ${cur})) # -h
@@ -86,7 +86,10 @@ _sgutil_completions()
                 vitis)
                     COMPREPLY=($(compgen -W "--project --serial --help" -- ${cur})) # -b -n -s -t -h --binary --name --target 
                     ;;
-                write) # set 
+                keys) # set 
+                    COMPREPLY=($(compgen -W "--help" -- ${cur})) 
+                    ;;
+                write)
                     COMPREPLY=($(compgen -W "--index --help" -- ${cur})) 
                     ;;
                 coyote) # validate

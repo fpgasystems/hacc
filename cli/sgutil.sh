@@ -538,7 +538,22 @@ set_help() {
     echo "Changes the configuration on a given device."
     echo ""
     echo "ARGUMENTS:"
+    echo "   keys            - Creates your RSA key pairs and adds to authorized_keys and known_hosts."
     echo "   write           - Assigns writing permissions on a given device."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
+set_keys_help() {
+    echo ""
+    echo "${bold}sgutil set keys [--help]${normal}"
+    echo ""
+    echo "Creates your RSA key pairs and adds to authorized_keys and known_hosts."
+    echo ""
+    echo "FLAGS:"
+    echo "   This command has no flags."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -842,6 +857,13 @@ case "$command" in
     case "$arguments" in
       -h|--help)
         set_help
+        ;;
+      keys)
+        if [ "$#" -ne 2 ]; then
+          set_keys_help
+          exit 1
+        fi
+        eval "/opt/cli/set/keys"
         ;;
       write) 
         valid_flags="-i --index -h --help"
