@@ -21,7 +21,7 @@ COMMANDS:
    new             - Creates a new project of your choice.
    program         - Downloads the accelerated application or driver to a given device.
    run             - Executes the accelerated application on a given device.
-   set             - Changes the configuration on a given device.
+   set             - Changes the configuration of your server or given device.
    validate        - Validates the basic HACC infrastructure functionality.
 
    -h, --help      - Help to use this application.
@@ -535,7 +535,7 @@ set_help() {
     echo ""
     echo "${bold}sgutil set [arguments [flags]] [--help]${normal}"
     echo ""
-    echo "Changes the configuration on a given device."
+    echo "Changes the configuration of your server or given device."
     echo ""
     echo "ARGUMENTS:"
     echo "   keys            - Creates your RSA key pairs and adds to authorized_keys and known_hosts."

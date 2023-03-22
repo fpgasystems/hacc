@@ -8,11 +8,12 @@
 
 <code>sgutil set [arguments [flags]] [--help]</code>
 <p>
-  &nbsp; &nbsp; Changes the configuration on a given device.
+  &nbsp; &nbsp; Changes the configuration of your server or given device.
 </p>
 
 ### Arguments
 
+* [keys](./sgutil-set-keys.md)
 * [write](./sgutil-set-write.md)
 
 <code>-h, --help</code>
