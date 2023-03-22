@@ -3,10 +3,6 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-# constants
-SERVERADDR="localhost"
-EMAIL="jmoyapaya@ethz.ch"
-
 #get username
 username=$USER
 
