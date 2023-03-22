@@ -37,11 +37,11 @@ if [ "$member" = "false" ]; then
 fi
 
 echo ""
-echo "The server will reboot (warm boot) in 3 seconds ."
+echo "The server will reboot (warm boot) in 3 seconds."
 sleep 1
-echo "The server will reboot (warm boot) in 2 seconds .."
+echo "The server will reboot (warm boot) in 2 seconds.."
 sleep 1
-echo "The server will reboot (warm boot) in 1 seconds ..."
+echo "The server will reboot (warm boot) in 1 seconds..."
 sleep 1
 echo ""
 echo "See you later, ${bold}$username!${normal}"
