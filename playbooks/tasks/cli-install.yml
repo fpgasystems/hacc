@@ -363,10 +363,16 @@
 
 # set ---------------------------------------------------------------------------------------
 
-- name: copy write script
+- name: copy set/write script
   copy:
     src: "../../cli/set/write.sh"
     dest: /opt/cli/set/write
+    mode: 0755
+
+- name: copy set/keys script
+  copy:
+    src: "../../cli/set/keys.sh"
+    dest: /opt/cli/set/keys
     mode: 0755
 
 #validate -----------------------------------------------------------------------------------
