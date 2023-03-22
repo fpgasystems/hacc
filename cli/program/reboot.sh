@@ -10,19 +10,8 @@ EMAIL="jmoyapaya@ethz.ch"
 #get username
 username=$USER
 
-# get hostname
-url="${HOSTNAME}"
-hostname="${url%%.*}"
-
 # inputs
 read -a flags <<< "$@"
-
-#check for number of pci functions
-if [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
-    #the server is already in Vitis workflow
-    echo ""
-    exit
-fi
 
 echo ""
 echo "${bold}sgutil program reboot${normal}"
