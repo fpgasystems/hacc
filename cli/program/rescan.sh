@@ -1,5 +1,8 @@
 #!/bin/bash
 
+bold=$(tput bold)
+normal=$(tput sgr0)
+
 # get hostname
 url="${HOSTNAME}"
 hostname="${url%%.*}"
