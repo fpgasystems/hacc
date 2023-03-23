@@ -99,9 +99,9 @@ We use [Ansible Automation Platform (AAP)](docs/vocabulary.md#ansible-automation
   </tr>
   <tr>
     <td class="tg-0pky"><div align="center">Versal</div></td>
+    <td class="tg-0pky" align="center">&#9675;</td>
     <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky" align="center"> </td>
-    <td class="tg-0pky">xilinx_vck5000_gen4x8_xdma_base_2</td>
+    <td class="tg-0pky">xilinx_vck5000_gen4x8_qdma_base_2</td>
   </tr>
 </tbody>
 <tfoot><tr><td colspan="5">&#9675; Existing release.</td></tr></tfoot>
