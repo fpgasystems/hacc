@@ -116,12 +116,12 @@ if [[ $(ls -l | wc -l) = 2 ]]; then
     ./create_config
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
     config="config_001.hpp"
-elif [[ $(ls -l | wc -l) = 4 ]]; then
+elif [[ $(ls -l | wc -l) = 5 ]]; then
     #config_000, config_kernel and config_001 exist
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
     config="config_001.hpp"
     echo ""
-elif [[ $(ls -l | wc -l) > 4 ]]; then
+elif [[ $(ls -l | wc -l) > 5 ]]; then
     cd $DIR/configs/
     configs=( "config_"*.hpp )
     echo ""
