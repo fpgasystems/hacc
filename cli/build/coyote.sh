@@ -114,6 +114,35 @@ if [ "$hostname" = "alveo-build-01" ]; then
     eval "source xrt_select $release"
 fi
 
+#sgutil get device if there is only one FPGA and not name_found
+if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
+    device_name=$(sgutil get device | cut -d "=" -f2)
+fi
+
+# device_name to coyote string 
+if [ "$hostname" = "alveo-build-01" ]; then
+    echo "${bold}Please, choose the device (or platform):${normal}" 
+    echo ""
+    PS3=""
+    select FDEV_NAME in u250 u280 u50d u55c
+    do
+        case $FDEV_NAME in
+            u250) break;;
+            u280) break;;
+            u50d) break;;
+            u55c) break;;
+        esac
+    done
+    echo ""
+else
+    FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
+fi
+
+#check on u50d
+if [ "$FDEV_NAME" = "u50d" ]; then
+    FDEV_NAME="u50"
+fi
+
 #create or select a configuration
 cd $DIR/configs/
 if [[ $(ls -l | wc -l) = 2 ]]; then
@@ -172,35 +201,6 @@ do
     #add to string
     coyote_params=$coyote_params"-D"$name"="$value" "
 done
-
-#sgutil get device if there is only one FPGA and not name_found
-if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
-    device_name=$(sgutil get device | cut -d "=" -f2)
-fi
-
-# device_name to coyote string 
-if [ "$hostname" = "alveo-build-01" ]; then
-    echo "${bold}Please, choose the device (or platform):${normal}" 
-    echo ""
-    PS3=""
-    select FDEV_NAME in u250 u280 u50d u55c
-    do
-        case $FDEV_NAME in
-            u250) break;;
-            u280) break;;
-            u50d) break;;
-            u55c) break;;
-        esac
-    done
-    echo ""
-else
-    FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
-fi
-
-#check on u50d
-if [ "$FDEV_NAME" = "u50d" ]; then
-    FDEV_NAME="u50"
-fi
 
 #define directories (2)
 SHELL_BUILD_DIR="$DIR/hw/build"
