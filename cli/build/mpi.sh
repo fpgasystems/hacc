@@ -89,11 +89,11 @@ if [[ $(ls -l | wc -l) = 2 ]]; then
     ./create_config
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
     config="config_001.hpp"
-elif [[ $(ls -l | wc -l) = 3 ]]; then
+elif [[ $(ls -l | wc -l) = 4 ]]; then
     #config_000 and config_001 exist
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
     config="config_001.hpp"
-elif [[ $(ls -l | wc -l) > 3 ]]; then
+elif [[ $(ls -l | wc -l) > 4 ]]; then
     cd $DIR/configs/
     configs=( "config_"*.hpp )
     echo ""
@@ -110,6 +110,14 @@ elif [[ $(ls -l | wc -l) > 3 ]]; then
     # copy selected config as config_000.hpp
     cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
 fi
+
+#save config id
+cd $DIR/configs/
+if [ -e config_*.active ]; then
+    rm *.active
+fi
+config_id="${config%%.*}"
+touch $config_id.active
 
 #change directory
 echo ""
