@@ -136,6 +136,8 @@ fi
 echo "${bold}Compiling main.c:${normal}"
 echo ""
 sleep 1
-echo "mpicc $DIR/src/main.cpp -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -o $APP_BUILD_DIR/main"
+echo "mpicc $DIR/src/main.cpp -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -lstdc++ -o $APP_BUILD_DIR/main"
 echo ""
-mpicc $DIR/src/main.cpp -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -o $APP_BUILD_DIR/main
+mpicc $DIR/src/main.cpp -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -lstdc++ -o $APP_BUILD_DIR/main
+
+#mpicc /home/jmoyapaya/my_projects/mpi/test4/src/main.cpp -I /opt/mpich/mpich-4.0.2-install/include -L /opt/mpich/mpich-4.0.2-install/lib -lstdc++ -o /home/jmoyapaya/my_projects/mpi/test4/build_dir/main

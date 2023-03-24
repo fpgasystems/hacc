@@ -1,9 +1,17 @@
+#include <iostream>
 #include <mpi.h>
 #include <stdio.h>
 #include "../global_params.hpp"
 #include "../configs/config_000.hpp" // config_000.hpp is overwritten with the configuration you select
 
+using namespace std;
+
 int main(int argc, char** argv) {
+
+	// print config values as a test
+    std::cout << "N_MAX: ";
+    std::cout << std::to_string(N_MAX); 
+
 	MPI_Init(NULL, NULL);      // initialize MPI environment
 	int world_size; // number of processes
 	MPI_Comm_size(MPI_COMM_WORLD, &world_size);

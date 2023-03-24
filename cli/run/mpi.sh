@@ -91,39 +91,39 @@ echo ""
 eval "$CLI_WORKDIR/common/ssh_key_add"
 
 #create or select a configuration
-cd $DIR/configs/
-if [[ $(ls -l | wc -l) = 2 ]]; then
-    #only config_000 exists and we create config_001
-    #we compile create_config (in case there were changes)
-    #cd $DIR/src
-    #g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
-    #cd $DIR
-    #./create_config
-    #cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
-    config=""
-    echo ""
-elif [[ $(ls -l | wc -l) = 3 ]]; then
-    #config_000 and config_001 exist
-    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
-    config="config_001.hpp"
-    echo ""
-elif [[ $(ls -l | wc -l) > 3 ]]; then
-    cd $DIR/configs/
-    configs=( "config_"*.hpp )
-    echo ""
-    echo "${bold}Please, choose your configuration:${normal}"
-    echo ""
-    PS3=""
-    select config in "${configs[@]:1}"; do # with :1 we avoid config_000.hpp and then config_shell.hpp
-        if [[ -z $config ]]; then
-            echo "" >&/dev/null
-        else
-            break
-        fi
-    done
-    # copy selected config as config_000.hpp
-    cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
-fi
+#cd $DIR/configs/
+#if [[ $(ls -l | wc -l) = 2 ]]; then
+#    #only config_000 exists and we create config_001
+#    #we compile create_config (in case there were changes)
+#    #cd $DIR/src
+#    #g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
+#    #cd $DIR
+#    #./create_config
+#    #cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+#    config=""
+#    echo ""
+#elif [[ $(ls -l | wc -l) = 3 ]]; then
+#    #config_000 and config_001 exist
+#    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
+#    config="config_001.hpp"
+#    echo ""
+#elif [[ $(ls -l | wc -l) > 3 ]]; then
+#    cd $DIR/configs/
+#    configs=( "config_"*.hpp )
+#    echo ""
+#    echo "${bold}Please, choose your configuration:${normal}"
+#    echo ""
+#    PS3=""
+#    select config in "${configs[@]:1}"; do # with :1 we avoid config_000.hpp and then config_shell.hpp
+#        if [[ -z $config ]]; then
+#            echo "" >&/dev/null
+#        else
+#            break
+#        fi
+#    done
+#    # copy selected config as config_000.hpp
+#    cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
+#fi
 
 #change directory
 echo "${bold}Changing directory:${normal}"
@@ -131,6 +131,16 @@ echo ""
 echo "cd $DIR"
 echo ""
 cd $DIR
+
+#display configuration
+cd $DIR/configs/
+config_id=$(ls *.active)
+config_id="${config_id%%.*}"
+
+echo "${bold}You are running $config_id:${normal}"
+echo ""
+cat $DIR/configs/config_000.hpp
+echo ""
 
 #get N_MAX (MAX PROCESSES_PER_HOST)
 line=$(grep -n "N_MAX" $DIR/configs/config_000.hpp)
