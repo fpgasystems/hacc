@@ -75,14 +75,13 @@ PATH=$MPICH_WORKDIR/bin:$PATH
 LD_LIBRARY_PATH=$MPICH_WORKDIR/lib:$LD_LIBRARY_PATH
 
 # copy and compile
-echo "${bold}Compiling main.cpp:${normal}"
-echo ""
-sleep 1
-echo "mpicc $VALIDATION_DIR/main.cpp -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -o $VALIDATION_DIR/build_dir/main"
-echo ""
 cp -rf /opt/cli/templates/mpi/hello_world/* $VALIDATION_DIR
-#cp $CLI_WORKDIR/templates/mpi/hello_world/src/main.cpp $VALIDATION_DIR
-mpicc $VALIDATION_DIR/src/main.cpp -I $MPICH_WORKDIR/include -L $MPICH_WORKDIR/lib -o $VALIDATION_DIR/build_dir/main
+
+#create config
+cp $VALIDATION_DIR/configs/config_000.hpp $VALIDATION_DIR/configs/config_001.hpp
+
+#build (compile)
+/opt/cli/build/mpi -p validate_mpi
 
 # create hosts file
 echo "${bold}Creating hosts file:${normal}"
@@ -120,8 +119,6 @@ echo ""
 mpirun -n $n -f $VALIDATION_DIR/hosts -iface $mellanox_name $VALIDATION_DIR/build_dir/main
 
 # remove temporal validation files
-#rm $WORKDIR/hosts
-#rm $WORKDIR/main*
 rm -rf $VALIDATION_DIR
 
 echo ""
