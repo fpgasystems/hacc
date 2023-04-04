@@ -19,6 +19,9 @@ alveo-u55c-[01:10].inf.ethz.ch
 [versal-vck5000]
 versal-vck5000-01.ethz.ch
 
+[hacc-boxes]
+hacc-box-[01:03].inf.ethz.ch
+
 [local]
 localhost ansible_connection=local
 
