@@ -10,9 +10,8 @@ read -s password
 
 echo -e "\n"
 
-/usr/bin/ansible-playbook \
+ANSIBLE_CONFIG="ansible_user.cfg" /usr/bin/ansible-playbook \
     --ask-vault-pass \
     --inventory hosts \
     --extra-vars "ansible_ssh_user=$username ansible_ssh_pass=$password" \
-    ${@:2} \
-    ${@:1:1}
+    "$@"
