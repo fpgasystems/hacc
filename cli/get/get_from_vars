@@ -86,18 +86,13 @@ def getNetworkSettings(vars):
         if isOnlyLocalHost(host):
             continue
         objectName = prefixes + [host]
-        if 'mellanox' in settings['interfaces'].keys():
-            for i, m in enumerate(settings['interfaces']['mellanox']):
-                settingName = objectName + ['mellanox', i]
-                sn = getSettingName(settingName)
-                if not sn == False:
-                    ns[sn] = ("%s (%s)" % (m['ip'], m['mac']))
-        if 'fpga' in settings['interfaces'].keys():
-            for i, m in enumerate(settings['interfaces']['fpga']):
-                settingName = objectName + ['fpga', i]
-                sn = getSettingName(settingName)
-                if not sn == False:
-                    ns[sn] = ("%s (%s)" % (m['ip'], m['mac']))
+        for s in ['mellanox', 'fpga', 'acap']:
+            if s in settings['interfaces'].keys():
+                for i, m in enumerate(settings['interfaces'][s]):
+                    settingName = objectName + [s, i]
+                    sn = getSettingName(settingName)
+                    if not sn == False:
+                        ns[sn] = ("%s (%s)" % (m['ip'], m['mac']))
     return ns
 
 def getFpgaDevices(vars):
