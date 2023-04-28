@@ -3,238 +3,63 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-#constants (id upstream_port root_port LinkCtl device_type device_name serial_number IP MAC)
-ID_COLUMN=1
-UPSTREAM_PORT_COLUMN=2
-ROOT_PORT_COLUMN=3
-LINKCTL_COLUMN=4
-DEVICE_TYPE_COLUMN=5
-DEVICE_NAME_COLUMN=6
-SERIAL_NUMBER_COLUMN=7
-IP_COLUMN=8
-MAC_COLUMN=9
-
 #inputs (./examine 0 root_port)
-id=$1
-parameter=$2
+#id=$1
+#parameter=$2
 
 #get hostname
-url="${HOSTNAME}"
-hostname="${url%%.*}"
+#url="${HOSTNAME}"
+#hostname="${url%%.*}"
 
-#helper functions
-get_column() {
-  parameter=$1
-  case "$parameter" in
-    # id upstream_port root_port LinkCtl device_type device_name serial_number IP MAC  
-    upstream_port)
-      column=$UPSTREAM_PORT_COLUMN
-      ;;
-    root_port)
-      column=$ROOT_PORT_COLUMN
-      ;;
-    LinkCtl)
-      column=$LINKCTL_COLUMN
-      ;;
-    device_type)
-      column=$DEVICE_TYPE_COLUMN
-      ;;
-    device_name)
-      column=$DEVICE_NAME_COLUMN
-      ;;
-    serial_number)
-      column=$SERIAL_NUMBER_COLUMN
-      ;;
-    IP)
-      column=$IP_COLUMN
-      ;;
-    MAC)
-      column=$MAC_COLUMN
-      ;;
-    *)
-      echo "Unknown parameter $parameter."
-      ;;
-  esac
-  echo $column
+split_addresses (){
+
+  str_ip=$1
+  str_mac=$2
+  aux=$3
+
+  # Save the current IFS
+  OLDIFS=$IFS
+
+  # Set the IFS to / to split the string at each /
+  IFS="/"
+
+  # Read the two parts of the string into variables
+  read ip0 ip1 <<< "$str_ip"
+  read mac0 mac1 <<< "$str_mac"
+
+  # Reset the IFS to its original value
+  IFS=$OLDIFS
+
+  # Print the two parts of the string
+  if [[ "$aux" == "0" ]]; then
+    echo "$ip0 ($mac0)"
+  else
+    echo "$ip1 ($mac1)"
+  fi
+
 }
 
-get_devices() {
-  hostname=$1
-  device_0=""
-  device_1=""
-  device_2=""
-  device_3=""
-  case "$hostname" in
-    # id upstream_port root_port LinkCtl device_type device_name serial_number IP MAC  
-    alveo-u55c-01)
-      #device_0
-      id="0"
-      upstream_port="c4:00.0"
-      root_port="c0:01.1"
-      LinkCtl="58"
-      device_type="fpga" 
-      device_name="xcu280_u55c_0" 
-      serial_number="XFL1QOQ1ATTYA"
-      IP="10.253.74.66/10.253.74.66" 
-      MAC="08:C0:EB:C6:3E:BA/08:C0:EB:C6:3E:BB"
-      device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
-      ;;
-    hacc-box-01)
-      #device_0
-      id="0"
-      upstream_port="a1:00.0"
-      root_port="xx:xx.x"
-      LinkCtl="xx"
-      device_type="fpga" 
-      device_name="xcu280_u55c_0" 
-      serial_number="XFL1BE3ESRZ4A"
-      IP="10.253.74.112/10.253.74.113" 
-      MAC="00:0A:35:0F:5D:60/00:0A:35:0F:5D:64"
-      device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
-      #device_1
-      id="1"
-      upstream_port="81:00.0"
-      root_port="xx:xx.x"
-      LinkCtl="xx"
-      device_type="fpga" 
-      device_name="xcu280_u55c_0" 
-      serial_number="XFL13BA4HVZYA"
-      IP="10.253.74.114/10.253.74.115" 
-      MAC="00:0A:35:0F:52:18/00:0A:35:0F:52:1C"
-      device_1="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
-      #device_2
-      id="2"
-      upstream_port=""
-      root_port="xx:xx.x"
-      LinkCtl="xx"
-      device_type="" 
-      device_name="" 
-      serial_number=""
-      IP="" 
-      MAC=""
-      device_2="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
-      #device_3
-      id="3"
-      upstream_port=""
-      root_port="xx:xx.x"
-      LinkCtl="xx"
-      device_type="" 
-      device_name="" 
-      serial_number=""
-      IP="" 
-      MAC=""
-      device_3="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
-      #output devices with newline character
-      #echo -e "$device_0\n$device_1\n$device_2\n$device_3"
-      ;;
-    hacc-box-02)
-      #device_0
-      id="0"
-      upstream_port=""
-      root_port="xx:xx.x"
-      LinkCtl="xx"
-      device_type="" 
-      device_name="" 
-      serial_number=""
-      IP="" 
-      MAC=""
-      device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
-      #device_1
-      id="1"
-      upstream_port=""
-      root_port="xx:xx.x"
-      LinkCtl="xx"
-      device_type="" 
-      device_name="" 
-      serial_number=""
-      IP="" 
-      MAC=""
-      device_1="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
-      #device_2
-      id="2"
-      upstream_port=""
-      root_port="xx:xx.x"
-      LinkCtl="xx"
-      device_type="" 
-      device_name="" 
-      serial_number=""
-      IP="" 
-      MAC=""
-      device_2="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
-      #device_3
-      id="3"
-      upstream_port=""
-      root_port="xx:xx.x"
-      LinkCtl="xx"
-      device_type="" 
-      device_name="" 
-      serial_number=""
-      IP="" 
-      MAC=""
-      device_3="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
-      #output devices with newline character
-      #echo -e "$device_0\n$device_1\n$device_2\n$device_3"
-      ;;
-    hacc-box-03)
-      #device_0
-      id="0"
-      upstream_port=""
-      root_port="xx:xx.x"
-      LinkCtl="xx"
-      device_type="" 
-      device_name="" 
-      serial_number=""
-      IP="" 
-      MAC=""
-      device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
-      #device_1
-      id="1"
-      upstream_port=""
-      root_port="xx:xx.x"
-      LinkCtl="xx"
-      device_type="" 
-      device_name="" 
-      serial_number=""
-      IP="" 
-      MAC=""
-      device_1="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
-      #device_2
-      id="2"
-      upstream_port=""
-      root_port="xx:xx.x"
-      LinkCtl="xx"
-      device_type="" 
-      device_name="" 
-      serial_number=""
-      IP="" 
-      MAC=""
-      device_2="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
-      #device_3
-      id="3"
-      upstream_port=""
-      root_port="xx:xx.x"
-      LinkCtl="xx"
-      device_type="" 
-      device_name="" 
-      serial_number=""
-      IP="" 
-      MAC=""
-      device_3="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
-      #output devices with newline character
-      #echo -e "$device_0\n$device_1\n$device_2\n$device_3"
-      ;;
-    *)
-      echo "Unknown server."
-      ;;
-  esac
-  #output devices with newline character
-  echo -ne "$device_0\n$device_1\n$device_2\n$device_3"
-}
 
-get_devices hacc-box-01
+/opt/xilinx/xrt/bin/xbutil examine
 
-d=$(get_devices hacc-box-01)
-echo -ne $d
+echo ""
+echo ""
 
-column=$(get_column $parameter)
-echo $column
+#device_0
+id_0=$(/opt/cli/get/get_device_param 0 id)
+upstream_port_0=$(/opt/cli/get/get_device_param 0 upstream_port)
+device_type_0=$(/opt/cli/get/get_device_param 0 device_type)
+device_name_0=$(/opt/cli/get/get_device_param 0 device_name)
+serial_number_0=$(/opt/cli/get/get_device_param 0 serial_number)
+ip_0=$(/opt/cli/get/get_device_param 0 IP)
+mac_0=$(/opt/cli/get/get_device_param 0 MAC)
+
+echo "Device Index : BFD (Upstream port) : Device Type (Name)   : Serial Number : Networking"
+echo "-------------------------------------------------------------------------------------------------------------"
+
+if [ -n "$id_0" ]; then
+  add_0=$(split_addresses $ip_0 $mac_0 0)
+  add_1=$(split_addresses $ip_0 $mac_0 1)
+  echo "$id_0            : $upstream_port_0             : $device_type_0 ($device_name_0) : $serial_number_0 : $add_0"
+  echo "                                                                            $add_1"
+fi

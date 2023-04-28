@@ -27,6 +27,9 @@ get_column() {
   parameter=$1
   case "$parameter" in
     # id upstream_port root_port LinkCtl device_type device_name serial_number IP MAC  
+    id)
+      column=$ID_COLUMN
+      ;;
     upstream_port)
       column=$UPSTREAM_PORT_COLUMN
       ;;
@@ -57,8 +60,6 @@ get_column() {
   esac
   echo $column
 }
-
-hostname="hacc-box-01"
 
 device_0=""
 device_1=""
