@@ -13,14 +13,13 @@ ETHZ-HACC CLI brings Systems Group’s designs to your terminal and allows you t
 ### Commands
 
 * [build](./docs/sgutil-build.md#sgutil-build)
+* [examine](./docs/sgutil-examine.md#sgutil-examine)
 * [get](./docs/sgutil-get.md#sgutil-get)
 * [new](./docs/sgutil-new.md#sgutil-new)
 * [program](./docs/sgutil-program.md#sgutil-program)
 * [run](./docs/sgutil-run.md#sgutil-run)
 * [set](./docs/sgutil-set.md#sgutil-set)
-* [validate](./docs/sgutil-validate.md#sg-validate)
-* examine <!-- this shows the sgutil_list we generate on welcome_msg -->
-
+* [validate](./docs/sgutil-validate.md#sgutil-validate)
 
 <!-- ### Options -->
 <code>-h, --help</code>
