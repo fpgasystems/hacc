@@ -191,6 +191,14 @@
     dest: /opt/cli/common/get_email
     mode: 0755
 
+#examine -------------------------------------------------------------------------------------
+
+- name: copy examine
+  copy:
+    src: "../../cli/examine"
+    dest: /opt/cli/examine
+    mode: 0755
+
 #get  ----------------------------------------------------------------------------------------
 
 - name: copy get_from_vars
@@ -221,6 +229,12 @@
   copy:
     src: "../../cli/get/serial.sh"
     dest: /opt/cli/get/serial
+    mode: 0755
+
+- name: copy get_device_param script
+  copy:
+    src: "../../cli/get/get_device_param.sh"
+    dest: /opt/cli/get/get_device_param
     mode: 0755
 
 #new ------------------------------------------------------------------------------------    
