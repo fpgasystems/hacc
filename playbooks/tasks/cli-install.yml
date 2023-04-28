@@ -195,7 +195,7 @@
 
 - name: copy examine
   copy:
-    src: "../../cli/examine"
+    src: "../../cli/examine.sh"
     dest: /opt/cli/examine
     mode: 0755
 
