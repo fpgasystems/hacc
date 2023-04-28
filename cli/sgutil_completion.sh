@@ -9,12 +9,15 @@ _sgutil_completions()
 
     case ${COMP_CWORD} in
         1)
-            COMPREPLY=($(compgen -W "build get new program run set validate --help --version" -- ${cur})) # -h -v
+            COMPREPLY=($(compgen -W "build examine get new program run set validate --help --version" -- ${cur})) # -h -v
             ;;
         2)
             case ${prev} in
                 build)
                     COMPREPLY=($(compgen -W "coyote mpi vitis --help" -- ${cur})) # -h
+                    ;;
+                examine)
+                    COMPREPLY=($(compgen -W "--help" -- ${cur}))
                     ;;
                 get)
                     COMPREPLY=($(compgen -W "device ip mac serial --help" -- ${cur})) # -h

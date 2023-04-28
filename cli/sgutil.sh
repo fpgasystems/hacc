@@ -17,6 +17,7 @@ ${bold}$cli_name [commands] [arguments [flags]] [--help] [--version]${normal}
 
 COMMANDS:
    build           - Creates binaries, bitstreams, and drivers for your accelerated applications.
+   examine         - Status of the system and devices.
    get             - Retreives information from the server/s.
    new             - Creates a new project of your choice.
    program         - Downloads the accelerated application or driver to a given device.
@@ -179,6 +180,23 @@ build_vivado_help() {
     echo ""
     exit 1
 }
+
+# examine ------------------------------------------------------------------------------------------------------------------------
+
+examine_help() {
+    echo ""
+    echo "${bold}sgutil examine [--help]${normal}"
+    echo ""
+    echo "Status of the system and devices."
+    echo ""
+    echo "FLAGS"
+    echo "   This command has no flags."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
 
 # get ----------------------------------------------------------------------------------------------------------------------------
 
@@ -709,6 +727,20 @@ case "$command" in
       *)
         build_help
       ;;  
+    esac
+    ;;
+  examine)
+    case "$arguments" in
+      -h|--help)
+        examine_help
+        ;;
+      *)
+        if [ "$#" -ne 1 ]; then
+          examine_help
+          exit 1
+        fi
+        /opt/cli/examine
+        ;;
     esac
     ;;
   get)
