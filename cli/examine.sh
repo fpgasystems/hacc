@@ -11,6 +11,9 @@ normal=$(tput sgr0)
 #url="${HOSTNAME}"
 #hostname="${url%%.*}"
 
+#constants
+STR_LENGTH=20
+
 split_addresses (){
 
   str_ip=$1
@@ -85,15 +88,26 @@ echo "${bold}Device Index : BFD (Upstream port) : Device Type (Name)   : Serial 
 echo "${bold}-------------------------------------------------------------------------------------------------------------${normal}"
 
 #device_0
-if [ -n "$id_0" ]; then
+if [ -n "$id_0" ]; then  
+  #adjust length
+  aux="$device_type_0 ($device_name_0)"
+  diff=$(( $STR_LENGTH - ${#aux} ))
+  aux="$aux$(printf '%*s' $diff)"
+  #split ip
   add_0=$(split_addresses $ip_0 $mac_0 0)
   add_1=$(split_addresses $ip_0 $mac_0 1)
-  echo "$id_0            : $upstream_port_0             : $device_type_0 ($device_name_0) : $serial_number_0 : $add_0"
+
+  echo "$id_0            : $upstream_port_0             : $aux : $serial_number_0 : $add_0"
   echo "                                                                            $add_1"
 fi
 
 #device_1
 if [ -n "$id_1" ]; then
+  #adjust length
+  aux="$device_type_0 ($device_name_0)"
+  diff=$(( $STR_LENGTH - ${#aux} ))
+  aux="$aux$(printf '%*s' $diff)"
+  #split ip
   add_0=$(split_addresses $ip_1 $mac_1 0)
   add_1=$(split_addresses $ip_1 $mac_1 1)
   echo "$id_1            : $upstream_port_1             : $device_type_1 ($device_name_1) : $serial_number_1 : $add_0"
@@ -102,6 +116,11 @@ fi
 
 #device_2 (acap)
 if [ -n "$id_2" ]; then
+  #adjust length
+  aux="$device_type_0 ($device_name_0)"
+  diff=$(( $STR_LENGTH - ${#aux} ))
+  aux="$aux$(printf '%*s' $diff)"
+  #split ip
   add_0=$(split_addresses $ip_2 $mac_2 0)
   add_1=$(split_addresses $ip_2 $mac_2 1)
   echo "$id_2            : $upstream_port_2             : $device_type_2 ($device_name_2)    : $serial_number_2 : $add_0"
@@ -110,6 +129,11 @@ fi
 
 #device_3 (acap)
 if [ -n "$id_3" ]; then
+  #adjust length
+  aux="$device_type_0 ($device_name_0)"
+  diff=$(( $STR_LENGTH - ${#aux} ))
+  aux="$aux$(printf '%*s' $diff)"
+  #split ip
   add_0=$(split_addresses $ip_3 $mac_3 0)
   add_1=$(split_addresses $ip_3 $mac_3 1)
   echo "$id_3            : $upstream_port_3             : $device_type_3 ($device_name_3)    : $serial_number_3 : $add_0"
