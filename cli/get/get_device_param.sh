@@ -66,6 +66,152 @@ device_1=""
 device_2=""
 device_3=""
 case "$hostname" in
+    template)
+        #device_0
+        id="0"
+        upstream_port="xx:xx.x"
+        root_port="xx:xx.x"
+        LinkCtl="xx"
+        device_type="fpga/acap" 
+        device_name="xxxx" 
+        serial_number="xxxxA"
+        IP="xx/xx" 
+        MAC="xx/xx"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    #U250
+    alveo-u250-01)
+        #device_0
+        id="0"
+        upstream_port="06:00.0"
+        root_port="--:--.-"
+        LinkCtl="--"
+        device_type="fpga" 
+        device_name="xcu250_0" 
+        serial_number="213304937016A"
+        IP="10.253.74.12/10.253.74.13" 
+        MAC="00:0A:35:05:FC:84/00:0A:35:05:FC:85"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u250-02)
+        #device_0
+        id="0"
+        upstream_port="06:00.0"
+        root_port="--:--.-"
+        LinkCtl="--"
+        device_type="fpga" 
+        device_name="xcu250_0" 
+        serial_number="21330493707HA"
+        IP="10.253.74.16/10.253.74.17" 
+        MAC="00:0A:35:05:FD:3A/00:0A:35:05:FD:3B"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u250-03)
+        #device_0
+        id="0"
+        upstream_port="06:00.0"
+        root_port="--:--.-"
+        LinkCtl="--"
+        device_type="fpga" 
+        device_name="xcu250_0" 
+        serial_number="21330493706TA"
+        IP="10.253.74.20/10.253.74.21" 
+        MAC="00:0A:35:05:FC:6E/00:0A:35:05:FC:6F"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u250-04)
+        #device_0
+        id="0"
+        upstream_port="06:00.0"
+        root_port="--:--.-"
+        LinkCtl="--"
+        device_type="fpga" 
+        device_name="xcu250_0" 
+        serial_number="21330493700FA"
+        IP="10.253.74.24/10.253.74.25" 
+        MAC="00:0A:35:05:FD:D4/00:0A:35:05:FD:D5"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u250-05)
+        #device_0
+        id="0"
+        upstream_port="06:00.0"
+        root_port="--:--.-"
+        LinkCtl="--"
+        device_type="fpga" 
+        device_name="xcu250_0" 
+        serial_number="213304937059A" #it is not connected with JTAG (alveo3a)
+        IP="10.253.74.28/10.253.74.29" 
+        MAC="00:0A:35:05:FD:BC/00:0A:35:05:FD:BD"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u250-06)
+        #device_0
+        id="0"
+        upstream_port="06:00.0"
+        root_port="--:--.-"
+        LinkCtl="--"
+        device_type="fpga" 
+        device_name="xcu250_0" 
+        serial_number="21330493706DA" #it is not connected with JTAG (alveo4a)
+        IP="10.253.74.32/10.253.74.33" 
+        MAC="00:0A:35:05:FD:B6/00:0A:35:05:FD:B7"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    #U280
+    alveo-u280-01)
+        #device_0
+        id="0"
+        upstream_port="06:00.0"
+        root_port="--:--.-"
+        LinkCtl="--"
+        device_type="fpga" 
+        device_name="xcu280_u55c_0" 
+        serial_number="21770213S01PA"
+        IP="10.253.74.36/10.253.74.37" 
+        MAC="00:0A:35:05:FC:84/00:0A:35:05:FC:85"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u280-02)
+        #device_0
+        id="0"
+        upstream_port="06:00.0"
+        root_port="--:--.-"
+        LinkCtl="--"
+        device_type="fpga" 
+        device_name="xcu280_u55c_0" 
+        serial_number="21770297400DA"
+        IP="10.253.74.40/10.253.74.41" 
+        MAC="00:0A:35:05:FD:3A/00:0A:35:05:FD:3B"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u280-03)
+        #device_0
+        id="0"
+        upstream_port="06:00.0"
+        root_port="--:--.-"
+        LinkCtl="--"
+        device_type="fpga" 
+        device_name="xcu280_u55c_0" 
+        serial_number="217702974013A"
+        IP="10.253.74.44/10.253.74.45" 
+        MAC="00:0A:35:05:FC:6E/00:0A:35:05:FC:6F"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u280-04)
+        #device_0
+        id="0"
+        upstream_port="06:00.0"
+        root_port="--:--.-"
+        LinkCtl="--"
+        device_type="fpga" 
+        device_name="xcu280_u55c_0" 
+        serial_number="21770297400LA"
+        IP="10.253.74.48/10.253.74.49" 
+        MAC="00:0A:35:05:FD:D4/00:0A:35:05:FD:D5"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    #U55C
     alveo-u55c-01)
         #device_0
         id="0"
