@@ -211,6 +211,59 @@ case "$hostname" in
         MAC="00:0A:35:05:FD:D4/00:0A:35:05:FD:D5"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
+    #U50D
+    alveo-u50d-01)
+        #device_0
+        id="0"
+        upstream_port="02:00.0"
+        root_port="00:01.1"
+        LinkCtl="xx"
+        device_type="fpga" 
+        device_name="xcu50_u55n_0" 
+        serial_number="500202A20DQAA"
+        IP="10.253.74.52/10.253.74.53" 
+        MAC="00:0A:35:06:20:C4/00:0A:35:06:20:C6"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u50d-02)
+        #device_0
+        id="0"
+        upstream_port="02:00.0"
+        root_port="00:01.1"
+        LinkCtl="58"
+        device_type="fpga" 
+        device_name="xcu50_u55n_0" 
+        serial_number="500202A20C3AA"
+        IP="10.253.74.56/10.253.74.57" 
+        MAC="00:0A:35:06:1B:C8/00:0A:35:06:1B:CA"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u50d-03)
+        #device_0
+        id="0"
+        upstream_port="02:00.0"
+        root_port="00:01.1"
+        LinkCtl="58"
+        device_type="fpga" 
+        device_name="xcu50_u55n_0" 
+        serial_number="500202A206FAA"
+        IP="10.253.74.60/10.253.74.61" 
+        MAC="00:0A:35:06:1E:04/00:0A:35:06:1E:06"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u50d-04)
+        #device_0
+        id="0"
+        upstream_port="02:00.0"
+        root_port="00:01.1"
+        LinkCtl="58"
+        device_type="fpga" 
+        device_name="xcu50_u55n_0" 
+        serial_number="500202A206GAA"
+        IP="10.253.74.64/10.253.74.65" 
+        MAC="00:0A:35:06:1E:C8/00:0A:35:06:1E:CA"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
     #U55C
     alveo-u55c-01)
         #device_0
@@ -225,6 +278,7 @@ case "$hostname" in
         MAC="08:C0:EB:C6:3E:BA/08:C0:EB:C6:3E:BB"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
+    #HACC BOXES
     hacc-box-01)
         #device_0
         id="0"
