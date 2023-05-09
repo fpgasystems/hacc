@@ -217,7 +217,7 @@ case "$hostname" in
         id="0"
         upstream_port="02:00.0"
         root_port="00:01.1"
-        LinkCtl="xx"
+        LinkCtl="58"
         device_type="fpga" 
         device_name="xcu50_u55n_0" 
         serial_number="500202A20DQAA"
@@ -393,6 +393,20 @@ case "$hostname" in
         serial_number="XFL1H2WA3T53A"
         IP="10.253.74.104/10.253.74.105" 
         MAC="00:0A:35:0B:25:28/00:0A:35:0B:25:2C"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    #VERSAL
+    versal-vck5000-01)
+        #device_0
+        id="0"
+        upstream_port="06:00.0"
+        root_port="--:--.-"
+        LinkCtl="--"
+        device_type="acap" 
+        device_name="xcvc1902_1" 
+        serial_number="XFL1A5YZXAY1A"
+        IP="10.253.74.108/10.253.74.109" 
+        MAC="00:0A:35:0D:55:90/00:0A:35:0D:55:91"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
     #HACC BOXES
