@@ -272,10 +272,127 @@ case "$hostname" in
         root_port="c0:01.1"
         LinkCtl="58"
         device_type="fpga" 
-        device_name="xcu280_u55c_0" 
+        device_name="xcu280_u55c_0"
         serial_number="XFL1QOQ1ATTYA"
-        IP="10.253.74.66/10.253.74.66" 
-        MAC="08:C0:EB:C6:3E:BA/08:C0:EB:C6:3E:BB"
+        IP="10.253.74.68/10.253.74.69" 
+        MAC="00:0A:35:0B:22:D8/00:0A:35:0B:22:DC"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u55c-02)
+        #device_0
+        id="0"
+        upstream_port="c4:00.0"
+        root_port="c0:01.1"
+        LinkCtl="58"
+        device_type="fpga" 
+        device_name="xcu280_u55c_0"
+        serial_number="XFL1O5FZSJEIA"
+        IP="10.253.74.72/10.253.74.73" 
+        MAC="00:0A:35:0B:22:E8/00:0A:35:0B:22:EC"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u55c-03)
+        #device_0
+        id="0"
+        upstream_port="c4:00.0"
+        root_port="c0:01.1"
+        LinkCtl="58"
+        device_type="fpga" 
+        device_name="xcu280_u55c_0" 
+        serial_number="XFL1QGKZZ0HVA"
+        IP="10.253.74.76/10.253.74.77" 
+        MAC="00:0A:35:0B:23:40/00:0A:35:0B:23:44"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u55c-04)
+        #device_0
+        id="0"
+        upstream_port="c4:00.0"
+        root_port="c0:01.1"
+        LinkCtl="58"
+        device_type="fpga" 
+        device_name="xcu280_u55c_0" 
+        serial_number="XFL11JYUKD4IA"
+        IP="10.253.74.80/10.253.74.81" 
+        MAC="00:0A:35:0B:24:D8/00:0A:35:0B:24:DC"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u55c-05)
+        #device_0
+        id="0"
+        upstream_port="c4:00.0"
+        root_port="c0:01.1"
+        LinkCtl="58"
+        device_type="fpga" 
+        device_name="xcu280_u55c_0" 
+        serial_number="XFL1EN2C02C0A"
+        IP="10.253.74.84/10.253.74.85" 
+        MAC="00:0A:35:0B:23:B8/00:0A:35:0B:23:BC"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u55c-06)
+        #device_0
+        id="0"
+        upstream_port="c4:00.0"
+        root_port="c0:01.1"
+        LinkCtl="58"
+        device_type="fpga" 
+        device_name="xcu280_u55c_0" 
+        serial_number="XFL1NMVTYXR4A"
+        IP="10.253.74.88/10.253.74.89" 
+        MAC="00:0A:35:0B:24:48/00:0A:35:0B:24:4C"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u55c-07)
+        #device_0
+        id="0"
+        upstream_port="c4:00.0"
+        root_port="c0:01.1"
+        LinkCtl="58"
+        device_type="fpga" 
+        device_name="xcu280_u55c_0" 
+        serial_number="XFL1WI3AMW4IA"
+        IP="10.253.74.92/10.253.74.93" 
+        MAC="00:0A:35:0B:25:20/00:0A:35:0B:25:24"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u55c-08)
+        #device_0
+        id="0"
+        upstream_port="c4:00.0"
+        root_port="c0:01.1"
+        LinkCtl="58"
+        device_type="fpga" 
+        device_name="xcu280_u55c_0" 
+        serial_number="XFL1ELZXN2EGA"
+        IP="10.253.74.96/10.253.74.97" 
+        MAC="00:0A:35:0B:26:08/00:0A:35:0B:26:0C"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u55c-09)
+        #device_0
+        id="0"
+        upstream_port="c4:00.0"
+        root_port="c0:01.1"
+        LinkCtl="58"
+        device_type="fpga" 
+        device_name="xcu280_u55c_0" 
+        serial_number="XFL1W5OWZCXXA"
+        IP="10.253.74.100/10.253.74.101" 
+        MAC="00:0A:35:0B:24:98/00:0A:35:0B:24:9C"
+        device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
+        ;;
+    alveo-u55c-10)
+        #device_0
+        id="0"
+        upstream_port="c4:00.0"
+        root_port="c0:01.1"
+        LinkCtl="58"
+        device_type="fpga" 
+        device_name="xcu280_u55c_0" 
+        serial_number="XFL1H2WA3T53A"
+        IP="10.253.74.104/10.253.74.105" 
+        MAC="00:0A:35:0B:25:28/00:0A:35:0B:25:2C"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
     #HACC BOXES
