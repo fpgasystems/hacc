@@ -84,7 +84,7 @@ serial_number_3=$(/opt/cli/get/get_device_param 3 serial_number)
 ip_3=$(/opt/cli/get/get_device_param 3 IP)
 mac_3=$(/opt/cli/get/get_device_param 3 MAC)
 
-echo "${bold}Device Index : BFD (Upstream port) : Device Type (Name)   : Serial Number : Networking${normal}"
+echo "${bold}Device Index : BDF (Upstream port) : Device Type (Name)   : Serial Number : Networking${normal}"
 echo "${bold}-------------------------------------------------------------------------------------------------------------${normal}"
 
 #device_0
