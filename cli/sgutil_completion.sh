@@ -23,7 +23,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "device ip mac serial --help" -- ${cur})) # -h
                     ;;
                 new)
-                    COMPREPLY=($(compgen -W "coyote mpi vitis --help" -- ${cur})) # vivado
+                    COMPREPLY=($(compgen -W "coyote hip mpi vitis --help" -- ${cur})) # vivado
                     ;;
                 program)
                     COMPREPLY=($(compgen -W "coyote reboot rescan reset revert vitis vivado --help" -- ${cur})) # -h

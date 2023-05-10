@@ -289,6 +289,7 @@ new_help() {
     echo ""
     echo "ARGUMENTS:"
     echo "   coyote          - Creates a new project using Coyote Hello, world! template."
+    echo "   hip             - Creates a new project using HIP Hello, world! template."
     echo "   mpi             - Creates a new project using MPI Hello, world! template."
     echo "   vitis           - Creates a new project using Vitis Hello, world! template."
     #echo "   vivado          - Creates a new project using Vivado Hello, world! template."
@@ -306,6 +307,20 @@ new_coyote_help() {
     echo "${bold}sgutil new coyote [--help]${normal}"
     echo ""
     echo "Creates a new project using Coyote Hello, world! template."
+    echo ""
+    echo "FLAGS"
+    echo "   This command has no flags."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
+new_hpi_help() {
+    echo ""
+    echo "${bold}sgutil new hip [--help]${normal}"
+    echo ""
+    echo "Creates a new project using HIP Hello, world! template."
     echo ""
     echo "FLAGS"
     echo "   This command has no flags."
@@ -788,6 +803,13 @@ case "$command" in
           exit 1
         fi
         /opt/cli/new/coyote
+        ;;
+      hip)
+        if [ "$#" -ne 2 ]; then
+          new_hpi_help
+          exit 1
+        fi
+        /opt/cli/new/hip
         ;;
       mpi)
         if [ "$#" -ne 2 ]; then
