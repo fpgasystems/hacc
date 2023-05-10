@@ -96,13 +96,11 @@ int main( int argc, char* argv[] )
     }
 
     //print error message
-    printf("\n");
     if (err == 0) {    
         printf("TEST PASSED!\n");
     } else {
         printf("TEST FAILED!\n");
     }
-    printf("\n");
 
     // Release device memory
     HIP_ASSERT(hipFree(GPUArrayA));
