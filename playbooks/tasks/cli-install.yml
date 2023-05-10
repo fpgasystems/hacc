@@ -387,6 +387,12 @@
     dest: /opt/cli/run/mpi
     mode: 0755
 
+- name: copy run/hip script
+  copy:
+    src: "../../cli/run/hip.sh"
+    dest: /opt/cli/run/hip
+    mode: 0755
+
 # set ---------------------------------------------------------------------------------------
 
 - name: copy set/write script

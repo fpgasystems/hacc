@@ -29,7 +29,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "coyote reboot rescan reset revert vitis vivado --help" -- ${cur})) # -h
                     ;;
                 run)
-                    COMPREPLY=($(compgen -W "coyote mpi vitis --help" -- ${cur})) # -h
+                    COMPREPLY=($(compgen -W "coyote hip mpi vitis --help" -- ${cur})) # -h
                     ;;
                 set)
                     COMPREPLY=($(compgen -W "keys write --help" -- ${cur})) # -h
