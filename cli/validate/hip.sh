@@ -18,10 +18,6 @@ if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
 
-echo ""
-#echo "${bold}mpich-$MPICH_VERSION${normal}"
-#echo ""
-
 # get hostname
 url="${HOSTNAME}"
 hostname="${url%%.*}"
@@ -44,6 +40,7 @@ cp -rf $CLI_WORKDIR/templates/hip/hello_world/* $VALIDATION_DIR
 
 #create config
 cp $VALIDATION_DIR/configs/config_000.hpp $VALIDATION_DIR/configs/config_001.hpp
+touch $VALIDATION_DIR/configs/config_001.active
 
 #build (compile)
 $CLI_WORKDIR/build/hip -p validate_hip
