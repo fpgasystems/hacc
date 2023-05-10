@@ -114,7 +114,6 @@ config_id="${config%%.*}"
 touch $config_id.active
 
 #change directory
-echo ""
 echo "${bold}Changing directory:${normal}"
 echo ""
 echo "cd $DIR"
