@@ -35,7 +35,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "keys write --help" -- ${cur})) # -h
                     ;;
                 validate)
-                    COMPREPLY=($(compgen -W "coyote iperf mpi --help" -- ${cur})) # -h
+                    COMPREPLY=($(compgen -W "coyote hip iperf mpi --help" -- ${cur})) # -h
                     ;;
             esac
             ;;
