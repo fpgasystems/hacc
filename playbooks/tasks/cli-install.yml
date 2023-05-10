@@ -116,6 +116,12 @@
     dest: /opt/cli/build/mpi
     mode: 0755
 
+- name: copy build/hip script
+  copy:
+    src: "../../cli/build/hip.sh"
+    dest: /opt/cli/build/hip
+    mode: 0755
+
 #common --------------------------------------------------------------------------------------
 
 - name: copy ssh_key_add script

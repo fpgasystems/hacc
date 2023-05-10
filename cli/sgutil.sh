@@ -107,6 +107,7 @@ build_help() {
     echo ""
     echo "ARGUMENTS:"
     echo "   coyote          - Generates Coyote's bitstreams and drivers." #Vitis .xo kernels and .xclbin binaries generation.
+    echo "   hip             - Generates HIP binaries for your projects."
     echo "   mpi             - Generates MPI binaries for your projects."
     echo "   vitis           - Generates .xo kernels and .xclbin binaries for Vitis workflow." #Vitis .xo kernels and .xclbin binaries generation.
     #echo "   vivado (soon)   - Generates .bit bitstreams and .ko drivers for Vivado workflow." #Compiles a bitstream and a driver.
@@ -132,6 +133,20 @@ build_coyote_help() {
     echo "   -p, --project   - Specifies your Coyote project name."
     echo ""
     echo "   -h, --help      - Help to build Coyote."
+    echo ""
+    exit 1
+}
+
+build_hip_help() {
+    echo ""
+    echo "${bold}sgutil build hip [flags] [--help]${normal}"
+    echo ""
+    echo "Generates HIP binaries for your projects."
+    echo ""
+    echo "FLAGS:"
+    echo "   -p, --project   - Specifies your HIP project name."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
     echo ""
     exit 1
 }
@@ -724,6 +739,10 @@ case "$command" in
         ;;
       coyote) 
         valid_flags="-n --name -p --project -h --help" #-c --config 
+        command_run $command_arguments_flags"@"$valid_flags
+        ;;
+      hip) 
+        valid_flags="-p --project -h --help"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       mpi) 

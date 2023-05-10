@@ -14,7 +14,7 @@ _sgutil_completions()
         2)
             case ${prev} in
                 build)
-                    COMPREPLY=($(compgen -W "coyote mpi vitis --help" -- ${cur})) # -h
+                    COMPREPLY=($(compgen -W "coyote hip mpi vitis --help" -- ${cur})) # -h
                     ;;
                 examine)
                     COMPREPLY=($(compgen -W "--help" -- ${cur}))
