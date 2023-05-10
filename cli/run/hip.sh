@@ -77,6 +77,7 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
 fi
 
 #change directory
+echo ""
 echo "${bold}Changing directory:${normal}"
 echo ""
 echo "cd $DIR"
