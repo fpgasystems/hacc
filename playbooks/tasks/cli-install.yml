@@ -265,6 +265,12 @@
   copy:
     src: "../../cli/new/mpi.sh"
     dest: /opt/cli/new/mpi
+    mode: 0755
+
+- name: copy new/hip script
+  copy:
+    src: "../../cli/new/hip.sh"
+    dest: /opt/cli/new/hip
     mode: 0755    
 
 #program ------------------------------------------------------------------------------------
