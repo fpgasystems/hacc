@@ -10,8 +10,6 @@ namespace fs = std::filesystem;
 using namespace std;
 using std::filesystem::directory_iterator;
 
-//#define STRING_LENGTH 3 // ha d'anar al config
-
 void print_vector(std::string name, vector<int> v)
 {
     cout << name + " [ ";
@@ -66,14 +64,14 @@ string get_config_string()
             n = n + 1;
         }
     }
-    string s = std::to_string(n - 1); // we assume config_kernel is always present too
+    string s = std::to_string(n);
     unsigned int number_of_zeros = STRING_LENGTH - s.length();
     s.insert(0, number_of_zeros, '0');
-    s = "config_" + s;    
+    s = "config_" + s;
     return s;
 }
 
-ofstream create_config_file(int hw)
+ofstream create_config_file()
 {
     fs::path p = fs::current_path();
     string project_path = p.relative_path();
@@ -84,15 +82,10 @@ ofstream create_config_file(int hw)
             n = n + 1;
         }
     }
-    string s = std::to_string(n - 1); // we assume config_kernel is always present too
+    string s = std::to_string(n);
     unsigned int number_of_zeros = STRING_LENGTH - s.length();
     s.insert(0, number_of_zeros, '0');
-    if (hw == 1) {
-        s = "config_kernel";
-    }
-    else {
-        s = "config_" + s;    
-    }
+    s = "config_" + s;    
     string aux = project_path + s + ".hpp";
     std::ofstream o(aux.c_str());
     return o;
@@ -137,88 +130,34 @@ int main()
 
     cout << "\n\e[1mcreate_config\e[0m\n";
 
-    const fs::path config_kernel{"./configs/config_kernel.hpp"};
-    bool exist = file_exists(config_kernel);
-    if (exist == 0) {
-        
-        cout << "\n\e[1mHardware (xclbin) parameters:\e[0m\n";
-        cout << "\n";
-
-        // N_MAX (VECTOR_LENGTH_MAX)
-        vector<int> N_MAX_i{ 16, 32, 48, 64, 80, 96, 112, 128 };
-        int N_MAX = read_value("N_MAX", N_MAX_i);
-        
-        // W_MAX
-        vector<int> W_MAX_i{ 1, 2, 4, 8, 16, 32, 64, 128, 256 };
-        int W_MAX = read_value("W_MAX", W_MAX_i);
-
-        // CLK_F_MAX (USER LOGIC CLOCK FREQUENCY)
-        vector<int> CLK_F_MAX_i{ 250, 300, 350, 400 };
-        int CLK_F_MAX = read_value("CLK_F_MAX", CLK_F_MAX_i);
-
-        // create hardware configuration
-        ofstream c_kernel = create_config_file(1);
-        c_kernel << "const int N_MAX = " <<  N_MAX << ";" << std::endl;
-        c_kernel << "const int W_MAX = " <<  W_MAX << ";" << std::endl;
-        c_kernel << "const int CLK_F_MAX = " <<  CLK_F_MAX << ";" << std::endl;
-    }    
-
-    cout << "\n";
-    cout << "\e[1mSoftware (host) parameters:\e[0m\n";
+    cout << "\n\e[1mApplication parameters:\e[0m\n";
     cout << "\n";
 
-    cout << "Host parameters:  \n";
-    cout << "\n";
-    
-    // N (VECTOR_LENGTH)
-    int N_MAX = read_parameter("./configs/config_kernel.hpp", "N_MAX");
-    vector<int> N_i;
-    for (int i = 16; i <= N_MAX; i = i + 16) {
-        N_i.push_back(i);
-    }
+    // N (size of vectors, n)
+    vector<int> N_i{ 2560, 5120, 10240 };
     int N = read_value("N", N_i);
-    // W
-    int W_MAX = read_parameter("./configs/config_kernel.hpp", "W_MAX");
-    vector<int> W_i = new_vector(1, W_MAX);
-    int W = read_value("W", W_i);
-    // F
-    vector<int> F_i = new_vector(0, W);
-    int F = read_value("F", F_i);
-    // T_CLK
-    vector<int> TLCK_i{ 1, 2, 3, 4, 5, 10, 20, 30, 40, 50 };
-    int T_CLK = read_value("T_CLK", TLCK_i);
-    cout << "\n";
 
-    cout << "Device parameters: \n";
-    cout << "\n";
-
-    // CLK_F
-    int CLK_F_MAX = read_parameter("./configs/config_kernel.hpp", "CLK_F_MAX");
-    vector<int> CLK_F_i;
-    for (int i = 250; i <= CLK_F_MAX; i = i + 50) {
-        CLK_F_i.push_back(i);
-    }
-    int CLK_F = read_value("CLK_F", CLK_F_i);
-    cout << "\n";
+    // Number of threads in each thread block (blockSize)
+    vector<int> N_THREADS_i{ 128, 256 };
+    int N_THREADS = read_value("N_THREADS", N_THREADS_i);
     
-    cout << "Test parameters: \n";
-    cout << "\n";
-    cout << "RMSE: 0.01 \n";
-    double RMSE = 0.01;
-    cout << "\n";
+    // N (number of processes)
+    //vector<int> N_i;
+    //for (int i = 1; i <= N_MAX; i++) {
+    //    N_i.push_back(i);
+    //}
+    //int N = read_value("N", N_i);
+    //cout << "\n";
 
     // get config string
     string s = get_config_string();
 
     // create config file
-    ofstream c = create_config_file(0);
-    c << "const int N = " <<  N << ";" << std::endl;
-    c << "const int W = " <<  W << ";" << std::endl;
-    c << "const int F = " <<  F << ";" << std::endl;
-    c << "const int T_CLK = " <<  T_CLK << ";" << std::endl;
-    c << "const int CLK_F = " <<  CLK_F << ";" << std::endl;
-    c << "const double RMSE = " <<  RMSE << ";" << std::endl;
+    ofstream c = create_config_file();
+    c << "const int N = " << N << ";" << std::endl;
+    c << "const int N_THREADS = " << N_THREADS << ";" << std::endl;
 
+    cout << "\n";
     cout << "The configuration " << s << ".hpp has been created!\n";
     cout << "\n";
 
