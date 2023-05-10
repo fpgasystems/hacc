@@ -46,7 +46,10 @@ touch $VALIDATION_DIR/configs/config_001.active
 $CLI_WORKDIR/build/hip -p validate_hip
 
 #run
-$CLI_WORKDIR/run/hip -p validate_hip
+#$CLI_WORKDIR/run/hip -p validate_hip
+echo "${bold}Running HIP:${normal}"
+echo ""
+$VALIDATION_DIR/build_dir/main
 
 # remove temporal validation files
 rm -rf $VALIDATION_DIR

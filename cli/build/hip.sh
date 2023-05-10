@@ -87,6 +87,7 @@ elif [[ $(ls -l | wc -l) = 4 ]]; then
     #config_000 and config_001 exist
     cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
     config="config_001.hpp"
+    echo ""
 elif [[ $(ls -l | wc -l) > 4 ]]; then
     cd $DIR/configs/
     configs=( "config_"*.hpp )
