@@ -477,6 +477,12 @@
     path: /opt/cli/templates/coyote/hello_world/src/vadd.cpp
     state: absent
 
+- name: copy validate/hip
+  copy:
+    src: "../../cli/validate/hip.sh"
+    dest: /opt/cli/validate/hip
+    mode: 0755
+
 #cli system-wide
 - name: /opt/cli to system-wide $PATH.
   copy:

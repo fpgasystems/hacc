@@ -646,6 +646,7 @@ validate_help() {
     echo ""
     echo "ARGUMENTS:"
     echo "   coyote          - Validates Coyote for a configuration of your choice."
+    echo "   hip             - Validates HIP." 
     echo "   iperf           - Measures HACC network performance."
     echo "   mpi             - Validates MPI." 
     echo "" 
@@ -665,6 +666,20 @@ validate_coyote_help() {
       echo "   -n, --name      - FPGA's device name. See sgutil get device."
       echo ""
       echo "   -h, --help      - Help to use Coyote validation."
+      echo ""
+      exit 1
+}
+
+validate_hip_help() {
+      echo ""
+      echo "${bold}sgutil validate hip [--help]${normal}"
+      echo ""
+      echo "Validates HIP."
+      echo ""
+      echo "FLAGS:"
+      echo "   This command has no flags."
+      echo ""
+      echo "   -h, --help      - Help to use HIP validation."
       echo ""
       exit 1
 }
@@ -976,6 +991,10 @@ case "$command" in
         #  exit 1
         #fi
         #/opt/cli/validate/coyote
+        command_run $command_arguments_flags"@"$valid_flags
+      ;;
+      hip)
+        valid_flags="-h --help"
         command_run $command_arguments_flags"@"$valid_flags
       ;;
       iperf)

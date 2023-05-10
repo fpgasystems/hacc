@@ -65,7 +65,8 @@ int main( int argc, char* argv[] )
     HIP_ASSERT(hipMemcpy(GPUArrayA, CPUArrayA, bytes, hipMemcpyHostToDevice));
     HIP_ASSERT(hipMemcpy(GPUArrayB, CPUArrayB, bytes, hipMemcpyHostToDevice));
  
-    int blockSize, gridSize;
+    //int blockSize, gridSize;
+    int gridSize;
  
     // Number of threads in each thread block (replaced by N_THREADS in config_000)
     //blockSize = 256;
