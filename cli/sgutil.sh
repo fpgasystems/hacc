@@ -729,7 +729,7 @@ validate_vitis_help() {
       echo "FLAGS:"
       echo "   -d, --device    - FPGA's device index."
       echo ""
-      echo "   -h, --help      - Help to use Coyote validation."
+      echo "   -h, --help      - Help to use Vitis validation."
       echo ""
       exit 1
 }
