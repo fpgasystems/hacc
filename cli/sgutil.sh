@@ -648,7 +648,8 @@ validate_help() {
     echo "   coyote          - Validates Coyote for a configuration of your choice."
     echo "   hip             - Validates HIP." 
     echo "   iperf           - Measures HACC network performance."
-    echo "   mpi             - Validates MPI." 
+    echo "   mpi             - Validates MPI."
+    echo "   vitis           - Validates Vitis workflow on the selected device." 
     echo "" 
     echo "   -h, --help      - Help to use this command."
     #echo "   openmpi         - Validates openmpi (to be removed)."
@@ -715,6 +716,20 @@ validate_mpi_help() {
       echo "   -p, --processes - Specify the number of processes to use."
       echo ""
       echo "   -h, --help      - Help to use MPI validation."
+      echo ""
+      exit 1
+}
+
+validate_vitis_help() {
+      echo ""
+      echo "${bold}sgutil validate vitis [flags] [--help]${normal}"
+      echo ""
+      echo "Validates Vitis workflow on the selected device."
+      echo ""
+      echo "FLAGS:"
+      echo "   -d, --device    - FPGA's device index."
+      echo ""
+      echo "   -h, --help      - Help to use Coyote validation."
       echo ""
       exit 1
 }
@@ -1020,6 +1035,10 @@ case "$command" in
       ;;
       mpi)
         valid_flags="-h --help -p --processes"
+        command_run $command_arguments_flags"@"$valid_flags
+      ;;
+      vitis)
+        valid_flags="-d --device -h --help"
         command_run $command_arguments_flags"@"$valid_flags
       ;;
       #openmpi) 

@@ -35,7 +35,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "keys write --help" -- ${cur})) # -h
                     ;;
                 validate)
-                    COMPREPLY=($(compgen -W "coyote hip iperf mpi --help" -- ${cur})) # -h
+                    COMPREPLY=($(compgen -W "coyote hip iperf mpi vitis --help" -- ${cur})) # -h
                     ;;
             esac
             ;;
@@ -43,6 +43,9 @@ _sgutil_completions()
             case ${prev} in
                 coyote) # build
                     COMPREPLY=($(compgen -W "--name --project --help" -- ${cur})) #--config 
+                    ;;
+                hip)
+                    COMPREPLY=($(compgen -W "--project --help" -- ${cur}))
                     ;;
                 mpi)
                     COMPREPLY=($(compgen -W "--help" -- ${cur}))
@@ -68,20 +71,23 @@ _sgutil_completions()
                 reboot)
                     COMPREPLY=($(compgen -W "--help" -- ${cur}))
                     ;;
-                revert)
-                    COMPREPLY=($(compgen -W "--name --serial --help" -- ${cur})) # -n  -s  -h
-                    ;;
                 reset)
                     COMPREPLY=($(compgen -W "--serial --help" -- ${cur}))
                     ;;
-                vivado) 
-                    COMPREPLY=($(compgen -W "--bitstream --driver --ltx --name --serial --help" -- ${cur})) # -b -d -l -n -s -h
+                revert)
+                    COMPREPLY=($(compgen -W "--name --serial --help" -- ${cur})) # -n  -s  -h
                     ;;
                 vitis) 
                     COMPREPLY=($(compgen -W "--project --serial  --help" -- ${cur})) # -b -n -s -t -h --binary --name --target --user
                     ;;
+                vivado) 
+                    COMPREPLY=($(compgen -W "--bitstream --driver --ltx --name --serial --help" -- ${cur})) # -b -d -l -n -s -h
+                    ;;
                 coyote) # run 
                     COMPREPLY=($(compgen -W "--project --serial --help" -- ${cur})) 
+                    ;;
+                hip)
+                    COMPREPLY=($(compgen -W "--project --help" -- ${cur}))
                     ;;
                 mpi)
                     COMPREPLY=($(compgen -W "--project --help" -- ${cur}))
@@ -98,11 +104,17 @@ _sgutil_completions()
                 coyote) # validate
                     COMPREPLY=($(compgen -W "--help" -- ${cur}))
                     ;;
+                hip)
+                    COMPREPLY=($(compgen -W "--help" -- ${cur}))
+                    ;;
                 iperf)
                     COMPREPLY=($(compgen -W "--bandwidth --parallel --time --udp --help" -- ${cur})) # -b -P -t -u -h
                     ;;
                 mpi) 
                     COMPREPLY=($(compgen -W "--processes --help" -- ${cur})) # -n -h
+                    ;;
+                vitis) 
+                    COMPREPLY=($(compgen -W "--device --help" -- ${cur})) # -n -h
                     ;;
             esac
             ;;

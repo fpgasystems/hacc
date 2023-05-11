@@ -483,6 +483,12 @@
     dest: /opt/cli/validate/hip
     mode: 0755
 
+- name: copy validate/vitis
+  copy:
+    src: "../../cli/validate/vitis.sh"
+    dest: /opt/cli/validate/vitis
+    mode: 0755
+
 #cli system-wide
 - name: /opt/cli to system-wide $PATH.
   copy:
