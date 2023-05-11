@@ -29,10 +29,6 @@ hostname="${url%%.*}"
 # inputs
 read -a flags <<< "$@"
 
-echo ""
-echo "${bold}sgutil validate vitis${normal}"
-echo ""
-
 #check on multiple Xilinx devices
 if [[ -z $(lspci | grep Xilinx) ]]; then
     multiple_devices=""
@@ -101,15 +97,23 @@ else
     fi
 fi
 
-exit
+#device_index should be between {0 .. MAX_DEVICES - 1}
+MAX_DEVICES=$(($MAX_DEVICES-1))
+if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 0 ]]; then
+    echo "Not in range"
+    /opt/cli/sgutil validate vitis -h
+    exit
+fi
 
-#quan busquem device_index i és major que MAX_DEVICES
+echo ""
+echo "${bold}sgutil validate vitis${normal}"
+echo ""
 
 #get BDF from device_idx
 bdf="xxx"
 
 #validate
-/opt/xilinx/xrt/bin/xbutil validate --device $bdf
+#/opt/xilinx/xrt/bin/xbutil validate --device $bdf
 
 
 
