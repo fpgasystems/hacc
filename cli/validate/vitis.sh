@@ -100,9 +100,6 @@ if [ "$flags" = "" ]; then
         done
     fi
 else
-
-    echo "flags"
-
     #find flags and values
     for (( i=0; i<${#flags[@]}; i++ ))
     do
@@ -112,10 +109,6 @@ else
             device_index=${flags[$device_idx]}
         fi  
     done
-
-    echo "device_found=$device_found"
-    echo "device_idx=$device_idx"
-    echo "device_index=$device_index"
 
     #forbidden combinations
     if [[ $device_found = "0" ]] || [[ $device_index = "" ]] || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 0 ))); then
