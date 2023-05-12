@@ -727,7 +727,7 @@ validate_vitis_help() {
       echo "Validates Vitis workflow on the selected device."
       echo ""
       echo "FLAGS:"
-      echo "   -d, --device    - FPGA's device index."
+      echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
       echo ""
       echo "   -h, --help      - Help to use Vitis validation."
       echo ""
