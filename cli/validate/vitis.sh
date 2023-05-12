@@ -62,22 +62,29 @@ if [ "$flags" = "" ]; then
         device_index="0"
     elif [[ "$multiple_devices" == "1" ]]; then #$(lspci | grep Xilinx | wc -l) = 8
         #servers with four FPGAs (i.e., hacc-box-01)
-        echo "hola!"
-
         #device_0
         id_0=$($CLI_WORKDIR/get/get_device_param 0 id)
         device_type_0=$($CLI_WORKDIR/get/get_device_param 0 device_type)
         device_name_0=$($CLI_WORKDIR/get/get_device_param 0 device_name)
         serial_number_0=$($CLI_WORKDIR/get/get_device_param 0 serial_number)
-
         #device_1
         id_1=$($CLI_WORKDIR/get/get_device_param 1 id)
         device_type_1=$($CLI_WORKDIR/get/get_device_param 1 device_type)
         device_name_1=$($CLI_WORKDIR/get/get_device_param 1 device_name)
         serial_number_1=$($CLI_WORKDIR/get/get_device_param 1 serial_number)
-
-        devices=( "$id_0 [$device_type_0 - $device_name_0 - $serial_number_0]" "$id_1 [$device_type_1 - $device_name_1 - $serial_number_1]")
-
+        #device_2
+        id_2=$($CLI_WORKDIR/get/get_device_param 2 id)
+        device_type_2=$($CLI_WORKDIR/get/get_device_param 2 device_type)
+        device_name_2=$($CLI_WORKDIR/get/get_device_param 2 device_name)
+        serial_number_2=$($CLI_WORKDIR/get/get_device_param 2 serial_number)
+        #device_3
+        id_3=$($CLI_WORKDIR/get/get_device_param 3 id)
+        device_type_3=$($CLI_WORKDIR/get/get_device_param 3 device_type)
+        device_name_3=$($CLI_WORKDIR/get/get_device_param 3 device_name)
+        serial_number_3=$($CLI_WORKDIR/get/get_device_param 3 serial_number)
+        #concatenate strings
+        devices=( "$id_0 [$device_type_0 - $device_name_0 - $serial_number_0]" "$id_1 [$device_type_1 - $device_name_1 - $serial_number_1]" "$id_2 [$device_type_2 - $device_name_2 - $serial_number_2]" "$id_3 [$device_type_3 - $device_name_3 - $serial_number_3]")
+        #multiple choice
         echo ""
         echo "${bold}Please, choose your device:${normal}"
         echo ""
@@ -91,17 +98,6 @@ if [ "$flags" = "" ]; then
                 break
             fi
         done
-
-        #echo $device_index
-
-        #exit
-
-        #we need to ask for the index
-        #0
-        #1
-        #2
-        #3
-
     fi
 else
 
