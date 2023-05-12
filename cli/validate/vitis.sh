@@ -63,6 +63,39 @@ if [ "$flags" = "" ]; then
     elif [[ "$multiple_devices" == "1" ]]; then #$(lspci | grep Xilinx | wc -l) = 8
         #servers with four FPGAs (i.e., hacc-box-01)
         echo "hola!"
+
+        #device_0
+        id_0=$($CLI_WORKDIR/get/get_device_param 0 id)
+        device_type_0=$($CLI_WORKDIR/get/get_device_param 0 device_type)
+        device_name_0=$($CLI_WORKDIR/get/get_device_param 0 device_name)
+        serial_number_0=$($CLI_WORKDIR/get/get_device_param 0 serial_number)
+
+        #device_1
+        id_1=$($CLI_WORKDIR/get/get_device_param 1 id)
+        device_type_1=$($CLI_WORKDIR/get/get_device_param 1 device_type)
+        device_name_1=$($CLI_WORKDIR/get/get_device_param 1 device_name)
+        serial_number_1=$($CLI_WORKDIR/get/get_device_param 1 serial_number)
+
+        devices=( "$id_0 [$device_type_0 - $device_name_0 - $serial_number_0]" "$id_1 [$device_type_1 - $device_name_1 - $serial_number_1]")
+
+        echo ""
+        echo "${bold}Please, choose your device:${normal}"
+        echo ""
+        PS3=""
+        select device_index in "${devices[@]}"; do
+            if [[ -z $device_index ]]; then
+                echo "" >&/dev/null
+            else
+                device_found="1"
+                device_index=${device_index:0:1}
+                break
+            fi
+        done
+
+        #echo $device_index
+
+        #exit
+
         #we need to ask for the index
         #0
         #1
@@ -92,7 +125,7 @@ else
     if [[ $device_found = "0" ]] || [[ $device_index = "" ]] || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 0 ))); then
         #$CLI_WORKDIR/sgutil validate vitis -h
         echo "Forbidden comb."
-        /opt/cli/sgutil validate vitis -h
+        $CLI_WORKDIR/sgutil validate vitis -h
         exit
     fi
 fi
@@ -101,7 +134,7 @@ fi
 MAX_DEVICES=$(($MAX_DEVICES-1))
 if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 0 ]]; then
     echo "Not in range"
-    /opt/cli/sgutil validate vitis -h
+    $CLI_WORKDIR/sgutil validate vitis -h
     exit
 fi
 
@@ -110,10 +143,8 @@ echo "${bold}sgutil validate vitis${normal}"
 echo ""
 
 #get BDF from device_idx
-upstream_port=$(/opt/cli/get/get_device_param $device_index upstream_port)
+upstream_port=$($CLI_WORKDIR/get/get_device_param $device_index upstream_port)
 bdf=$(echo "$upstream_port" | sed 's/0$/1/')
-
-echo $bdf
 
 #validate
 /opt/xilinx/xrt/bin/xbutil validate --device $bdf
