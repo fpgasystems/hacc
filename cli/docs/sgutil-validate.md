@@ -17,6 +17,7 @@
 * [hip](./sgutil-validate-hip.md#sgutil-validate-hip)
 * [iperf](./sgutil-validate-iperf.md#sgutil-validate-iperf)
 * [mpi](./sgutil-validate-mpi.md#sgutil-validate-mpi)
+* [vitis](./sgutil-validate-vitis.md#sgutil-validate-vitis)
 
 <code>-h, --help</code>
 <p>
