@@ -13,9 +13,10 @@
 
 ### Arguments
 
-* [coyote](./sgutil-run-coyote.md)
-* [mpi](./sgutil-run-mpi.md)
-* [vitis](./sgutil-run-vitis.md)
+* [coyote](./sgutil-run-coyote.md#sgutil-run-coyote)
+* [hpi](./sgutil-run-hpi.md#sgutil-run-hip)
+* [mpi](./sgutil-run-mpi.md#sgutil-run-mpi)
+* [vitis](./sgutil-run-vitis.md#sgutil-run-vitis)
 
 <code>-h, --help</code>
 <p>
