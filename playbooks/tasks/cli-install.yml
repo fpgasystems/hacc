@@ -197,6 +197,12 @@
     dest: /opt/cli/common/get_email
     mode: 0755
 
+- name: copy common/get_device_ip script
+  copy:
+    src: "../../cli/common/get_device_ip.sh"
+    dest: /opt/cli/common/get_device_ip
+    mode: 0755
+
 #examine -------------------------------------------------------------------------------------
 
 - name: copy examine
