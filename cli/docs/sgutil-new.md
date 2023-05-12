@@ -13,10 +13,10 @@
 
 ### Arguments
 
-* [coyote](./sgutil-new-coyote.md)
-* [hip](./sgutil-new-hip.md)
-* [mpi](./sgutil-new-mpi.md)
-* [vitis](./sgutil-new-vitis.md)
+* [coyote](./sgutil-new-coyote.md#sgutil-new-coyote)
+* [hip](./sgutil-new-hip.md#sgutil-new-hip)
+* [mpi](./sgutil-new-mpi.md#sgutil-new-mpi)
+* [vitis](./sgutil-new-vitis.md#sgutil-new-vitis)
 
 <code>-h, --help</code>
 <p>
