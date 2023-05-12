@@ -14,6 +14,7 @@
 ### Arguments
 
 * [coyote](./sgutil-build-coyote.md#sgutil-build-coyote)
+* [hip](./sgutil-build-hip.md#sgutil-build-hip)
 * [mpi](./sgutil-build-mpi.md#sgutil-build-mpi)
 * [vitis](./sgutil-build-vitis.md#sgutil-build-vitis)
 
