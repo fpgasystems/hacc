@@ -673,12 +673,12 @@ validate_coyote_help() {
 
 validate_hip_help() {
       echo ""
-      echo "${bold}sgutil validate hip [--help]${normal}"
+      echo "${bold}sgutil validate hip [flags] [--help]${normal}"
       echo ""
       echo "Validates HIP."
       echo ""
       echo "FLAGS:"
-      echo "   This command has no flags."
+      echo "   -d, --device    - GPU Device Index (see sgutil examine)."
       echo ""
       echo "   -h, --help      - Help to use HIP validation."
       echo ""
@@ -1009,7 +1009,7 @@ case "$command" in
         command_run $command_arguments_flags"@"$valid_flags
       ;;
       hip)
-        valid_flags="-h --help"
+        valid_flags="-d --device -h --help"
         command_run $command_arguments_flags"@"$valid_flags
       ;;
       iperf)

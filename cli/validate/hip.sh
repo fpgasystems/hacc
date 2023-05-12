@@ -25,6 +25,8 @@ hostname="${url%%.*}"
 # inputs
 read -a flags <<< "$@"
 
+#we will need to read the device index just like for vitis!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 #define directories
 CLI_WORKDIR="/opt/cli"
 VALIDATION_DIR="/home/$USER/my_projects/hip/validate_hip"
