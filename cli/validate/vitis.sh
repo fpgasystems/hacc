@@ -110,11 +110,12 @@ echo "${bold}sgutil validate vitis${normal}"
 echo ""
 
 #get BDF from device_idx
-bdf="xxx"
+upstream_port=$(/opt/cli/get/get_device_param $device_index upstream_port)
+bdf=$(echo "$upstream_port" | sed 's/0$/1/')
+
+echo $bdf
 
 #validate
-#/opt/xilinx/xrt/bin/xbutil validate --device $bdf
-
-
+/opt/xilinx/xrt/bin/xbutil validate --device $bdf
 
 echo ""
