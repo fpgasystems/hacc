@@ -13,9 +13,10 @@
 
 ### Arguments
 
-* [coyote](./sgutil-validate-coyote.md)
-* [iperf](./sgutil-validate-iperf.md)
-* [mpi](./sgutil-validate-mpi.md)
+* [coyote](./sgutil-validate-coyote.md#sgutil-validate-coyote)
+* [hip](./sgutil-validate-hip.md#sgutil-validate-hip)
+* [iperf](./sgutil-validate-iperf.md#sgutil-validate-iperf)
+* [mpi](./sgutil-validate-mpi.md#sgutil-validate-mpi)
 
 <code>-h, --help</code>
 <p>
