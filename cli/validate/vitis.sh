@@ -47,15 +47,10 @@ else
     exit
 fi
 
-echo "multiple_devices=$multiple_devices"
-
 #check on flags
 device_found=""
 device_index=""
 if [ "$flags" = "" ]; then
-
-    echo "no flags"
-
     #get device index
     if [[ "$multiple_devices" == "0" ]]; then
         #servers with only one FPGA (i.e., alveo-u55c-01)
