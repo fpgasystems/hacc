@@ -14,6 +14,9 @@ SERIAL_NUMBER_COLUMN=7
 IP_COLUMN=8
 MAC_COLUMN=9
 
+#define directories
+CLI_WORKDIR="/opt/cli"
+
 #inputs (./examine 0 root_port)
 device_index=$1
 parameter=$2
@@ -61,6 +64,10 @@ get_column() {
   echo $column
 }
 
+#get mellanox name
+mellanox_name=$(nmcli dev | grep mellanox-0 | awk '{print $1}')
+
+#get parameters
 device_0=""
 device_1=""
 device_2=""
@@ -89,7 +96,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu250_0" 
         serial_number="213304937016A"
-        IP="10.253.74.12/10.253.74.13" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.12/10.253.74.13" 
         MAC="00:0A:35:05:FC:84/00:0A:35:05:FC:85"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -102,7 +112,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu250_0" 
         serial_number="21330493707HA"
-        IP="10.253.74.16/10.253.74.17" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.16/10.253.74.17" 
         MAC="00:0A:35:05:FD:3A/00:0A:35:05:FD:3B"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -115,7 +128,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu250_0" 
         serial_number="21330493706TA"
-        IP="10.253.74.20/10.253.74.21" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.20/10.253.74.21" 
         MAC="00:0A:35:05:FC:6E/00:0A:35:05:FC:6F"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -128,7 +144,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu250_0" 
         serial_number="21330493700FA"
-        IP="10.253.74.24/10.253.74.25" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.24/10.253.74.25" 
         MAC="00:0A:35:05:FD:D4/00:0A:35:05:FD:D5"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -141,7 +160,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu250_0" 
         serial_number="213304937059A" #it is not connected with JTAG (alveo3a)
-        IP="10.253.74.28/10.253.74.29" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.28/10.253.74.29" 
         MAC="00:0A:35:05:FD:BC/00:0A:35:05:FD:BD"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -154,7 +176,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu250_0" 
         serial_number="21330493706DA" #it is not connected with JTAG (alveo4a)
-        IP="10.253.74.32/10.253.74.33" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.32/10.253.74.33" 
         MAC="00:0A:35:05:FD:B6/00:0A:35:05:FD:B7"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -168,7 +193,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="21770213S01PA"
-        IP="10.253.74.36/10.253.74.37" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.36/10.253.74.37" 
         MAC="00:0A:35:05:FC:84/00:0A:35:05:FC:85"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -181,7 +209,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="21770297400DA"
-        IP="10.253.74.40/10.253.74.41" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.40/10.253.74.41" 
         MAC="00:0A:35:05:FD:3A/00:0A:35:05:FD:3B"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -194,7 +225,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="217702974013A"
-        IP="10.253.74.44/10.253.74.45" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.44/10.253.74.45" 
         MAC="00:0A:35:05:FC:6E/00:0A:35:05:FC:6F"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -207,7 +241,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="21770297400LA"
-        IP="10.253.74.48/10.253.74.49" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.48/10.253.74.49" 
         MAC="00:0A:35:05:FD:D4/00:0A:35:05:FD:D5"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -221,7 +258,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu50_u55n_0" 
         serial_number="500202A20DQAA"
-        IP="10.253.74.52/10.253.74.53" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.52/10.253.74.53" 
         MAC="00:0A:35:06:20:C4/00:0A:35:06:20:C6"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -234,7 +274,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu50_u55n_0" 
         serial_number="500202A20C3AA"
-        IP="10.253.74.56/10.253.74.57" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.56/10.253.74.57" 
         MAC="00:0A:35:06:1B:C8/00:0A:35:06:1B:CA"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -247,7 +290,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu50_u55n_0" 
         serial_number="500202A206FAA"
-        IP="10.253.74.60/10.253.74.61" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.60/10.253.74.61" 
         MAC="00:0A:35:06:1E:04/00:0A:35:06:1E:06"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -260,7 +306,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu50_u55n_0" 
         serial_number="500202A206GAA"
-        IP="10.253.74.64/10.253.74.65" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.64/10.253.74.65" 
         MAC="00:0A:35:06:1E:C8/00:0A:35:06:1E:CA"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -274,7 +323,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0"
         serial_number="XFL1QOQ1ATTYA"
-        IP="10.253.74.68/10.253.74.69" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.68/10.253.74.69" 
         MAC="00:0A:35:0B:22:D8/00:0A:35:0B:22:DC"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -287,7 +339,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0"
         serial_number="XFL1O5FZSJEIA"
-        IP="10.253.74.72/10.253.74.73" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.72/10.253.74.73" 
         MAC="00:0A:35:0B:22:E8/00:0A:35:0B:22:EC"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -300,7 +355,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="XFL1QGKZZ0HVA"
-        IP="10.253.74.76/10.253.74.77" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.76/10.253.74.77" 
         MAC="00:0A:35:0B:23:40/00:0A:35:0B:23:44"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -313,7 +371,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="XFL11JYUKD4IA"
-        IP="10.253.74.80/10.253.74.81" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.80/10.253.74.81" 
         MAC="00:0A:35:0B:24:D8/00:0A:35:0B:24:DC"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -326,7 +387,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="XFL1EN2C02C0A"
-        IP="10.253.74.84/10.253.74.85" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.84/10.253.74.85" 
         MAC="00:0A:35:0B:23:B8/00:0A:35:0B:23:BC"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -339,7 +403,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="XFL1NMVTYXR4A"
-        IP="10.253.74.88/10.253.74.89" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.88/10.253.74.89" 
         MAC="00:0A:35:0B:24:48/00:0A:35:0B:24:4C"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -352,7 +419,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="XFL1WI3AMW4IA"
-        IP="10.253.74.92/10.253.74.93" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.92/10.253.74.93" 
         MAC="00:0A:35:0B:25:20/00:0A:35:0B:25:24"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -365,7 +435,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="XFL1ELZXN2EGA"
-        IP="10.253.74.96/10.253.74.97" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.96/10.253.74.97" 
         MAC="00:0A:35:0B:26:08/00:0A:35:0B:26:0C"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -378,7 +451,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="XFL1W5OWZCXXA"
-        IP="10.253.74.100/10.253.74.101" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.100/10.253.74.101" 
         MAC="00:0A:35:0B:24:98/00:0A:35:0B:24:9C"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -391,7 +467,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="XFL1H2WA3T53A"
-        IP="10.253.74.104/10.253.74.105" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.104/10.253.74.105" 
         MAC="00:0A:35:0B:25:28/00:0A:35:0B:25:2C"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -405,7 +484,10 @@ case "$hostname" in
         device_type="acap" 
         device_name="xcvc1902_1" 
         serial_number="XFL1A5YZXAY1A"
-        IP="10.253.74.108/10.253.74.109" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.108/10.253.74.109" 
         MAC="00:0A:35:0D:55:90/00:0A:35:0D:55:91"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -419,7 +501,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="XFL1BE3ESRZ4A"
-        IP="10.253.74.112/10.253.74.113" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.112/10.253.74.113" 
         MAC="00:0A:35:0F:5D:60/00:0A:35:0F:5D:64"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         #device_1
@@ -430,7 +515,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="XFL13BA4HVZYA"
-        IP="10.253.74.114/10.253.74.115" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 4)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 5)
+        IP="$IP0/$IP1" #"10.253.74.114/10.253.74.115" 
         MAC="00:0A:35:0F:52:18/00:0A:35:0F:52:1C"
         device_1="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         #device_2
@@ -441,7 +529,10 @@ case "$hostname" in
         device_type="acap" 
         device_name="xcvc1902_1" 
         serial_number="XFL1ME4MB5JWA"
-        IP="10.253.74.116/10.253.74.117" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 6)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 7)
+        IP="$IP0/$IP1" #"10.253.74.116/10.253.74.117" 
         MAC="00:0A:35:0D:DD:D6/00:0A:35:0D:DD:D7"
         device_2="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         #device_3
@@ -452,7 +543,10 @@ case "$hostname" in
         device_type="acap" 
         device_name="xcvc1902_1" 
         serial_number="XFL1GYWC3JZJA"
-        IP="10.253.74.118/10.253.74.119" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 8)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 9)
+        IP="$IP0/$IP1" #"10.253.74.118/10.253.74.119" 
         MAC="00:0A:35:0D:DD:E0/00:0A:35:0D:DD:E1"
         device_3="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -465,7 +559,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="XFL14VH3AUBQA"
-        IP="10.253.74.122/10.253.74.123" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.122/10.253.74.123" 
         MAC="00:0A:35:0F:5D:28/00:0A:35:0F:5D:2C"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         #device_1
@@ -476,7 +573,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="XFL1L51Y4KOMA"
-        IP="10.253.74.124/10.253.74.125" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 4)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 5)
+        IP="$IP0/$IP1" #"10.253.74.124/10.253.74.125" 
         MAC="00:0A:35:0F:58:F0/00:0A:35:0F:58:F4"
         device_1="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         #device_2
@@ -487,7 +587,10 @@ case "$hostname" in
         device_type="acap" 
         device_name="xcvc1902_1" 
         serial_number="XFL1XCANFD0YA"
-        IP="10.253.74.126/10.253.74.127" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 6)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 7)
+        IP="$IP0/$IP1" #"10.253.74.126/10.253.74.127" 
         MAC="00:0A:35:0D:DD:F0/00:0A:35:0D:DD:F1"
         device_2="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         #device_3
@@ -498,7 +601,10 @@ case "$hostname" in
         device_type="acap" 
         device_name="xcvc1902_1" 
         serial_number="XFL124YTESELA"
-        IP="10.253.74.128/10.253.74.129" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 8)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 9)
+        IP="$IP0/$IP1" #"10.253.74.128/10.253.74.129" 
         MAC="00:0A:35:0D:DD:DC/00:0A:35:0D:DD:DD"
         device_3="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
@@ -511,7 +617,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="XFL1PW05GTWTA"
-        IP="10.253.74.132/10.253.74.133" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 2)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 3)
+        IP="$IP0/$IP1" #"10.253.74.132/10.253.74.133" 
         MAC="00:0A:35:0F:57:F8/00:0A:35:0F:57:FC"
         device_0="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         #device_1
@@ -522,7 +631,10 @@ case "$hostname" in
         device_type="fpga" 
         device_name="xcu280_u55c_0" 
         serial_number="XFL1U11N35QNA"
-        IP="10.253.74.134/10.253.74.135" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 4)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 5)
+        IP="$IP0/$IP1" #"10.253.74.134/10.253.74.135" 
         MAC="00:0A:35:0F:5A:F0/00:0A:35:0F:5A:F4"
         device_1="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         #device_2
@@ -533,7 +645,10 @@ case "$hostname" in
         device_type="acap" 
         device_name="xcvc1902_1" 
         serial_number="XFL11MXHI4IGA"
-        IP="10.253.74.136/10.253.74.137" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 6)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 7)
+        IP="$IP0/$IP1" #"10.253.74.136/10.253.74.137" 
         MAC="00:0A:35:0D:DD:EC/00:0A:35:0D:DD:ED"
         device_2="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         #device_3
@@ -544,7 +659,10 @@ case "$hostname" in
         device_type="acap" 
         device_name="xcvc1902_1" 
         serial_number="XFL1TCUIMWR1A"
-        IP="10.253.74.138/10.253.74.139" 
+        #calculate IPs
+        IP0=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 8)
+        IP1=$($CLI_WORKDIR/get/get_device_ip $mellanox_name 9)
+        IP="$IP0/$IP1" #"10.253.74.138/10.253.74.139" 
         MAC="00:0A:35:0D:DD:BC/00:0A:35:0D:DD:BD"
         device_3="$id $upstream_port $root_port $LinkCtl $device_type $device_name $serial_number $IP $MAC"
         ;;
