@@ -809,6 +809,7 @@ case "$command" in
     esac
     ;;
   examine)
+    xilinx_build_check
     case "$arguments" in
       -h|--help)
         examine_help
