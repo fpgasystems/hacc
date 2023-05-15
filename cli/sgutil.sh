@@ -223,8 +223,9 @@ get_help() { #it makes sense to group the flags here as they are the same for al
     echo ""
     echo "ARGUMENTS:"
     echo "   device          - Retreives FPGA device name from the server/s."
-    echo "   ip              - Retreives IP information from the server/s."
-    echo "   mac             - Retreives L2 information from the server/s."
+    #echo "   ip              - Retreives IP information from the server/s."
+    #echo "   mac             - Retreives L2 information from the server/s."
+    echo "   network         - Retreives networking information from the server/s."
     echo "   serial          - Retreives FPGA serial number from the server/s."
     echo ""
     echo "   -h, --help      - Help to use this command."
@@ -252,28 +253,42 @@ get_device_help() {
     exit 1
 }
 
-get_ip_help() {
+#get_ip_help() {
+#    echo ""
+#    echo "${bold}sgutil get ip [flags] [--help]${normal}"
+#    echo ""
+#    echo "Retreives IP information from the server/s."
+#    echo ""
+#    echo "FLAGS:"
+#    echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
+#    echo ""
+#    echo "   -h, --help      - Help to use this command."
+#    echo ""
+#    exit 1
+#}
+
+#get_mac_help() {
+#    echo ""
+#    echo "${bold}sgutil get mac [flags] [--help]${normal}"
+#    echo ""
+#    echo "Retreives L2 information from the server/s."
+#    echo ""
+#    echo "FLAGS:"
+#    echo "   -w, --word      - Filters L2 information according to regexp expression."
+#    echo ""
+#    echo "   -h, --help      - Help to use this command."
+#    echo ""
+#    exit 1
+#}
+
+get_network_help() {
     echo ""
-    echo "${bold}sgutil get ip [flags] [--help]${normal}"
+    echo "${bold}sgutil get network [flags] [--help]${normal}"
     echo ""
-    echo "Retreives IP information from the server/s."
+    echo "Retreives networking information from the server/s."
     echo ""
     echo "FLAGS:"
     echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
-    echo ""
-    echo "   -h, --help      - Help to use this command."
-    echo ""
-    exit 1
-}
-
-get_mac_help() {
-    echo ""
-    echo "${bold}sgutil get mac [flags] [--help]${normal}"
-    echo ""
-    echo "Retreives L2 information from the server/s."
-    echo ""
-    echo "FLAGS:"
-    echo "   -w, --word      - Filters L2 information according to regexp expression."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -833,12 +848,16 @@ case "$command" in
         valid_flags="-h --help -w --word"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
-      ip)
+      #ip)
+      #  valid_flags="-h --help -d --device"
+      #  command_run $command_arguments_flags"@"$valid_flags
+      #  ;;
+      #mac)
+      #  valid_flags="-h --help -w --word"
+      #  command_run $command_arguments_flags"@"$valid_flags
+      #  ;;
+      network)
         valid_flags="-h --help -d --device"
-        command_run $command_arguments_flags"@"$valid_flags
-        ;;
-      mac)
-        valid_flags="-h --help -w --word"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       serial)
