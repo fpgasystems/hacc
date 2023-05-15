@@ -57,7 +57,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "--word --help" -- ${cur})) # -w -h
                     ;;
                 ip) 
-                    COMPREPLY=($(compgen -W "--word --help" -- ${cur})) # -w -h 
+                    COMPREPLY=($(compgen -W "--device --help" -- ${cur}))
                     ;;
                 mac) 
                     COMPREPLY=($(compgen -W "--word --help" -- ${cur})) # -w  -h
