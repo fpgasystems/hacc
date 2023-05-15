@@ -13,10 +13,9 @@
 
 ### Arguments
 
-* [device](./sgutil-get-device.md)
-* [ip](./sgutil-get-ip.md)
-* [mac](./sgutil-get-mac.md)
-* [serial](./sgutil-get-serial.md)
+* [device](./sgutil-get-device.md#sgutil-get-device)
+* [network](./sgutil-get-network.md#sgutil-get-network)
+* [serial](./sgutil-get-serial.md#sgutil-get-serial)
 
 <code>-h, --help</code>
 <p>
