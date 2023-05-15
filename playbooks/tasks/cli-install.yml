@@ -229,17 +229,25 @@
     dest: /opt/cli/get/device
     mode: 0755
 
-- name: copy ip script
-  copy:
-    src: "../../cli/get/ip.sh"
-    dest: /opt/cli/get/ip
-    mode: 0755
+#- name: copy ip script
+#  copy:
+#    src: "../../cli/get/ip.sh"
+#    dest: /opt/cli/get/ip
+#    mode: 0755
+- name: remove get/ip
+  ansible.builtin.file:
+    path: /opt/cli/get/ip
+    state: absent
 
-- name: copy mac script
-  copy:
-    src: "../../cli/get/mac.sh"
-    dest: /opt/cli/get/mac
-    mode: 0755
+#- name: copy mac script
+#  copy:
+#    src: "../../cli/get/mac.sh"
+#    dest: /opt/cli/get/mac
+#    mode: 0755
+- name: remove get/mac
+  ansible.builtin.file:
+    path: /opt/cli/get/mac
+    state: absent
 
 - name: copy serial script
   copy:
@@ -251,6 +259,12 @@
   copy:
     src: "../../cli/get/get_device_param.sh"
     dest: /opt/cli/get/get_device_param
+    mode: 0755
+
+- name: copy get/network script
+  copy:
+    src: "../../cli/get/network.sh"
+    dest: /opt/cli/get/network
     mode: 0755
 
 #new ------------------------------------------------------------------------------------    
