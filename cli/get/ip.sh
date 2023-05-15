@@ -3,6 +3,10 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
+CLI_WORKDIR="/opt/cli"
+MAX_DEVICES=4
+
 split_addresses (){
 
   str_ip=$1
@@ -64,9 +68,6 @@ if [ "$flags" = "" ]; then
     mellanox_name=$(nmcli dev | grep mellanox-0 | awk '{print $1}')
     #print mellanox information
     echo ""
-    #ip addr show $mellanox_name
-    #ip_mellanox=$(ip addr show $mellanox_name | awk '/inet / {print $2}' | tr '\n' ' ' | sed 's/ *$//' | awk '{print $0, "(" $NF ")"}')
-    #ip_mellanox=$(ip addr show $mellanox_name | awk '/inet / {print $2}' | tr '\n' ' ' | sed 's/ *$//' | awk '{getline mac < "/sys/class/net/$mellanox_name/address"; print $0, "(" mac ")"}')
     ip_mellanox=$(ip addr show $mellanox_name | awk '/inet / {print $2}' | awk -F/ '{print $1}')
     mac_mellanox=$(ip addr show $mellanox_name | grep -oE 'link/ether [^ ]+' | awk '{print toupper($2)}')
     echo "$hostname-mellanox-0 ($mellanox_name): $ip_mellanox ($mac_mellanox)"
@@ -86,26 +87,7 @@ if [ "$flags" = "" ]; then
         fi
     done
     echo ""
-
-
-    #device_0    
-    #device=0
-    #ip=$(/opt/cli/get/get_device_param $device IP)
-    #if [ -n "$ip" ]; then
-    #    mac=$(/opt/cli/get/get_device_param $device MAC)
-    #    device_type=$(/opt/cli/get/get_device_param $device device_type)
-    #    #split ip
-    #    add_0=$(split_addresses $ip $mac 0)
-    #    add_1=$(split_addresses $ip $mac 1)
-    #    name="$hostname-$device_type-$device"
-    #    name_length=$(( ${#name} + 1 ))
-    #    echo "$name: $add_0"
-    #    printf "%-${name_length}s %s\n" "" "$add_1"
-    #fi
-
-
 else
-
     #find flags and values
     for (( i=0; i<${#flags[@]}; i++ ))
     do
@@ -115,6 +97,27 @@ else
             device_index=${flags[$device_idx]}
         fi  
     done
-
+    #forbidden combinations
+    if [[ $device_found = "0" ]] || [[ $device_index = "" ]] || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 0 ))); then
+        $CLI_WORKDIR/sgutil get ip -h
+        exit
+    fi
+    #device_index should be between {0 .. MAX_DEVICES - 1}
+    MAX_DEVICES=$(($MAX_DEVICES-1))
+    if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 0 ]]; then
+        $CLI_WORKDIR/sgutil validate vitis -h
+        exit
+    fi
+    #print
+    ip=$(/opt/cli/get/get_device_param $device_index IP)
+    mac=$(/opt/cli/get/get_device_param $device_index MAC)
+    device_type=$(/opt/cli/get/get_device_param $device_index device_type)
+    add_0=$(split_addresses $ip $mac 0)
+    add_1=$(split_addresses $ip $mac 1)
+    name="$hostname-$device_type-$device_index"
+    name_length=$(( ${#name} + 1 ))
+    echo ""
+    echo "$name: $add_0"
+    printf "%-${name_length}s %s\n" "" "$add_1"
+    echo ""
 fi
-
