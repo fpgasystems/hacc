@@ -43,6 +43,7 @@ split_addresses (){
 }
 
 #run xbutil examine
+echo ""
 /opt/xilinx/xrt/bin/xbutil examine
 
 echo ""
