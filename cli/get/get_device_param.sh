@@ -672,8 +672,17 @@ case "$hostname" in
 esac
 devices="$device_0\n$device_1\n$device_2\n$device_3"
 
-#get column for the parameter
-parameter_column=$(get_column $parameter)
+if [ -e /opt/hacc/devices ]; then
+    #echo "File /opt/hacc/devices exists."
+    #get column for the parameter
+    parameter_column=$(get_column $parameter)
 
-#output device parameter
-echo -e "$devices" | awk -v device_index="$device_index" -v parameter_column="$parameter_column" '$1 == device_index {print $parameter_column}'
+    #output device parameter
+    #echo -e "$devices" | awk -v device_index="$device_index" -v parameter_column="$parameter_column" '$1 == device_index {print $parameter_column}'
+    awk -v device_index="$device_index" -v parameter_column="$parameter_column" '$1 == device_index {print $parameter_column}' /opt/hacc/devices
+else
+    echo "File /opt/hacc/devices does not exist."
+fi
+
+
+
