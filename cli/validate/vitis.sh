@@ -115,7 +115,6 @@ fi
 #device_index should be between {0 .. MAX_DEVICES - 1}
 MAX_DEVICES=$(($MAX_DEVICES-1))
 if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 0 ]]; then
-    echo "Not in range"
     $CLI_WORKDIR/sgutil validate vitis -h
     exit
 fi
