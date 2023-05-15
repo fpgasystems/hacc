@@ -107,8 +107,6 @@ else
 
     #forbidden combinations
     if [[ $device_found = "0" ]] || [[ $device_index = "" ]] || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 0 ))); then
-        #$CLI_WORKDIR/sgutil validate vitis -h
-        echo "Forbidden comb."
         $CLI_WORKDIR/sgutil validate vitis -h
         exit
     fi
