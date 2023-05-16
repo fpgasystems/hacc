@@ -197,11 +197,15 @@
     dest: /opt/cli/common/get_email
     mode: 0755
 
-- name: copy get/get_device_ip script
-  copy:
-    src: "../../cli/get/get_device_ip.sh"
-    dest: /opt/cli/get/get_device_ip
-    mode: 0755
+#- name: copy get/get_device_ip script
+#  copy:
+#    src: "../../cli/get/get_device_ip.sh"
+#    dest: /opt/cli/get/get_device_ip
+#    mode: 0755
+- name: remove get/get_device_ip
+  ansible.builtin.file:
+    path: /opt/cli/get/get_device_ip
+    state: absent
 #- name: remove common/get_device_ip
 #  ansible.builtin.file:
 #    path: /opt/cli/common/get_device_ip
