@@ -65,12 +65,12 @@ device_found=""
 device_index=""
 if [ "$flags" = "" ]; then
     #get mellanox name
-    mellanox_name=$(nmcli dev | grep mellanox-0 | awk '{print $1}')
+    #mellanox_name=$(nmcli dev | grep mellanox-0 | awk '{print $1}')
     #print mellanox information
-    echo ""
-    ip_mellanox=$(ip addr show $mellanox_name | awk '/inet / {print $2}' | awk -F/ '{print $1}')
-    mac_mellanox=$(ip addr show $mellanox_name | grep -oE 'link/ether [^ ]+' | awk '{print toupper($2)}')
-    echo "$hostname-mellanox-0 ($mellanox_name): $ip_mellanox ($mac_mellanox)"
+    #echo ""
+    #ip_mellanox=$(ip addr show $mellanox_name | awk '/inet / {print $2}' | awk -F/ '{print $1}')
+    #mac_mellanox=$(ip addr show $mellanox_name | grep -oE 'link/ether [^ ]+' | awk '{print toupper($2)}')
+    #echo "$hostname-mellanox-0 ($mellanox_name): $ip_mellanox ($mac_mellanox)"
     echo ""
     #print devices information
     for device in 0 1 2 3; do
@@ -80,7 +80,7 @@ if [ "$flags" = "" ]; then
             device_type=$(/opt/cli/get/get_device_param $device device_type)
             add_0=$(split_addresses $ip $mac 0)
             add_1=$(split_addresses $ip $mac 1)
-            name="$hostname-$device_type-$device"
+            name="$device" #"$hostname-$device_type-$device"
             name_length=$(( ${#name} + 1 ))
             echo "$name: $add_0"
             printf "%-${name_length}s %s\n" "" "$add_1"
@@ -114,7 +114,7 @@ else
     device_type=$(/opt/cli/get/get_device_param $device_index device_type)
     add_0=$(split_addresses $ip $mac 0)
     add_1=$(split_addresses $ip $mac 1)
-    name="$hostname-$device_type-$device_index"
+    name="$device" #"$hostname-$device_type-$device"
     name_length=$(( ${#name} + 1 ))
     echo ""
     echo "$name: $add_0"
