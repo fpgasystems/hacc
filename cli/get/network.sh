@@ -99,7 +99,7 @@ else
     done
     #forbidden combinations
     if [[ $device_found = "0" ]] || [[ $device_index = "" ]] || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 0 ))); then
-        $CLI_WORKDIR/sgutil get ip -h
+        $CLI_WORKDIR/sgutil get network -h
         exit
     fi
     #device_index should be between {0 .. MAX_DEVICES - 1}
