@@ -13,6 +13,7 @@ normal=$(tput sgr0)
 
 #constants
 STR_LENGTH=20
+DATABASE="/opt/hacc/devices"
 
 split_addresses (){
 
@@ -47,7 +48,32 @@ echo ""
 /opt/xilinx/xrt/bin/xbutil examine
 
 echo ""
-echo ""
+
+echo "${bold}Device Index : BDF (Upstream port) : Device Type (Name)   : Serial Number : Networking${normal}"
+echo "${bold}-------------------------------------------------------------------------------------------------------------${normal}"
+
+# Check if the DATABASE exists
+if [[ ! -f "$DATABASE" ]]; then
+  echo ""
+  echo "Please, update $DATABASE according to your infrastructure."
+  echo ""
+  exit 1
+fi
+
+#the file exists - check its contents by evaluating first row (device_0)
+device_0=$(head -n 1 "$DATABASE")
+
+#extract the second, third, and fourth columns (upstream_port, root_port, LinkCtl) using awk
+upstream_port_0=$(echo "$device_0" | awk '{print $2}')
+root_port_0=$(echo "$device_0" | awk '{print $3}')
+LinkCtl_0=$(echo "$device_0" | awk '{print $4}')
+
+if [[ $upstream_port_0 == "xx:xx.x" || $root_port_0 == "xx:xx.x" || $LinkCtl_0 == "xx" ]]; then
+  echo ""
+  echo "Please, update $DATABASE according to your infrastructure."
+  echo ""
+  exit
+fi
 
 #device_0
 id_0=$(/opt/cli/get/get_device_param 0 id)
@@ -85,8 +111,8 @@ serial_number_3=$(/opt/cli/get/get_device_param 3 serial_number)
 ip_3=$(/opt/cli/get/get_device_param 3 IP)
 mac_3=$(/opt/cli/get/get_device_param 3 MAC)
 
-echo "${bold}Device Index : BDF (Upstream port) : Device Type (Name)   : Serial Number : Networking${normal}"
-echo "${bold}-------------------------------------------------------------------------------------------------------------${normal}"
+#echo "${bold}Device Index : BDF (Upstream port) : Device Type (Name)   : Serial Number : Networking${normal}"
+#echo "${bold}-------------------------------------------------------------------------------------------------------------${normal}"
 
 #device_0
 if [ -n "$id_0" ]; then  

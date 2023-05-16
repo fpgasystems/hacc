@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DATABASE="/opt/hacc/devices"
+
 #constants (id upstream_port root_port LinkCtl device_type device_name serial_number IP MAC)
 ID_COLUMN=1
 UPSTREAM_PORT_COLUMN=2
@@ -54,14 +56,35 @@ get_column() {
   echo $column
 }
 
-if [ -e /opt/hacc/devices ]; then
-    #get column for the parameter
-    parameter_column=$(get_column $parameter)
+# Check if the DATABASE exists
+if [[ ! -f "$DATABASE" ]]; then
+  echo ""
+  echo "Please, update $DATABASE according to your infrastructure."
+  echo ""
+  exit 1
+fi
 
-    #output device parameter
-    awk -v device_index="$device_index" -v parameter_column="$parameter_column" '$1 == device_index {print $parameter_column}' /opt/hacc/devices
+#the file exists - check its contents by evaluating first row (device_0)
+device_0=$(head -n 1 "$DATABASE")
+
+#extract the second, third, and fourth columns (upstream_port, root_port, LinkCtl) using awk
+upstream_port_0=$(echo "$device_0" | awk '{print $2}')
+root_port_0=$(echo "$device_0" | awk '{print $3}')
+LinkCtl_0=$(echo "$device_0" | awk '{print $4}')
+
+continue=1
+if [[ $upstream_port_0 == "xx:xx.x" || $root_port_0 == "xx:xx.x" || $LinkCtl_0 == "xx" ]]; then
+  continue=0
+fi
+
+if [[ $continue -eq 1 ]]; then
+  #get column for the parameter
+  parameter_column=$(get_column $parameter)
+  #output device parameter
+  awk -v device_index="$device_index" -v parameter_column="$parameter_column" '$1 == device_index {print $parameter_column}' $DATABASE
 else
-    echo ""
-    echo "File /opt/hacc/devices does not exist."
-    echo ""
+  echo ""
+  echo "Please, update $DATABASE according to your infrastructure."
+  echo ""
+  exit
 fi
