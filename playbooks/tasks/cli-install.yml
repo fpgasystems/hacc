@@ -219,6 +219,17 @@
     dest: /opt/cli/examine
     mode: 0755
 
+- name: create /opt/hacc directory for devices
+  file:
+    path: /opt/hacc
+    state: directory
+
+- name: copy devices template to /opt/hacc
+  copy:
+    src: "../../cli/devices"
+    dest: /opt/hacc/devices
+    mode: 0755
+
 #get  ----------------------------------------------------------------------------------------
 
 - name: copy get_from_vars
