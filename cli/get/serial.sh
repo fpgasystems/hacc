@@ -3,25 +3,102 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-# inputs
-flags=$@
+#constants
+CLI_WORKDIR="/opt/cli"
+MAX_DEVICES=4
 
-# set default
-udp_server=""
-if [ "$flags" = "" ]; then
-    flags="--fpga-serial-numbers -l"
+split_addresses (){
+
+  str_ip=$1
+  str_mac=$2
+  aux=$3
+
+  # Save the current IFS
+  OLDIFS=$IFS
+
+  # Set the IFS to / to split the string at each /
+  IFS="/"
+
+  # Read the two parts of the string into variables
+  read ip0 ip1 <<< "$str_ip"
+  read mac0 mac1 <<< "$str_mac"
+
+  # Reset the IFS to its original value
+  IFS=$OLDIFS
+
+  # Print the two parts of the string
+  if [[ "$aux" == "0" ]]; then
+    echo "$ip0 ($mac0)"
+  else
+    echo "$ip1 ($mac1)"
+  fi
+
+}
+
+#inputs
+read -a flags <<< "$@"
+
+#get hostname
+url="${HOSTNAME}"
+hostname="${url%%.*}"
+
+#check on multiple Xilinx devices
+if [[ -z $(lspci | grep Xilinx) ]]; then
+    multiple_devices=""
+    echo "No Xilinx device found."
+    echo ""
+    exit
+elif [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
+    #servers with only one FPGA (i.e., alveo-u55c-01)
+    multiple_devices="0"
+elif [[ $(lspci | grep Xilinx | wc -l) -gt 2 ]]; then
+    #servers with eight FPGAs (i.e., alveo-u280)
+    multiple_devices="1"
 else
-    read -a flags <<< "$flags"
-    for (( i=0; i<${#flags[@]}; i++ ))
-    do
-        if [[ " ${flags[$i]} " =~ " -w " ]] || [[ " ${flags[$i]} " =~ " --word " ]]; then # flags[i] is -w or --word
-            flags[$i]="--filter"
-            j=$(($i+1))
-            flags[$j]=$(echo ${flags[$j]} | sed "s/-/_/g") # regexp we enter like u55c-10 need to be u55c_10 for get_from_vars
-	    fi
-    done
-    flags="${flags[*]}" # convert array of strings into a string
-    flags="--fpga-serial-numbers "$flags
+    echo "Unexpected number of Xilinx devices."
+    echo ""
+    exit
 fi
 
-/opt/cli/get/get_from_vars $flags | sed "s/_/-/g" | sed "s/fpga-serial-numbers-//g" | sed "s/\"//g"
+echo ""
+
+#check on flags
+device_found=""
+device_index=""
+if [ "$flags" = "" ]; then
+    #print devices information
+    for device_index in 0 1 2 3; do
+        name=$($CLI_WORKDIR/get/get_device_param $device_index serial_number)
+        if [ -n "$name" ]; then
+            #type=$($CLI_WORKDIR/get/get_device_param $device_index device_type)
+            echo "$device_index: $name" #"$device_index: $type - $name"
+        fi
+    done
+    echo ""
+else
+    #find flags and values
+    for (( i=0; i<${#flags[@]}; i++ ))
+    do
+        if [[ " ${flags[$i]} " =~ " -d " ]] || [[ " ${flags[$i]} " =~ " --device " ]]; then # flags[i] is -d or --device
+            device_found="1"
+            device_idx=$(($i+1))
+            device_index=${flags[$device_idx]}
+        fi  
+    done
+    #forbidden combinations
+    if [[ $device_found = "0" ]] || [[ $device_index = "" ]] || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 0 ))); then
+        $CLI_WORKDIR/sgutil get device -h
+        exit
+    fi
+    #device_index should be between {0 .. MAX_DEVICES - 1}
+    MAX_DEVICES=$(($MAX_DEVICES-1))
+    if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 0 ]]; then
+        $CLI_WORKDIR/sgutil get device -h
+        exit
+    fi
+    #print
+    name=$($CLI_WORKDIR/get/get_device_param $device_index serial_number)
+    #type=$($CLI_WORKDIR/get/get_device_param $device_index device_type)
+    echo "$device_index: $name" #"$device_index: $type - $name"
+    echo ""
+fi

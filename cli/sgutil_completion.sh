@@ -66,7 +66,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "--device --help" -- ${cur}))
                     ;;
                 serial) 
-                    COMPREPLY=($(compgen -W "--word --help" -- ${cur})) # -w  -h
+                    COMPREPLY=($(compgen -W "--device --help" -- ${cur})) # -w  -h
                     ;;
                 coyote) # program
                     COMPREPLY=($(compgen -W "--project --serial --help" -- ${cur})) # -n  -s  -h

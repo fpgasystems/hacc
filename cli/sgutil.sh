@@ -302,7 +302,7 @@ get_serial_help() {
     echo "Retreives FPGA serial number from the server/s."
     echo ""
     echo "FLAGS:"
-    echo "   -w, --word      - Filters FPGA serial number according to regexp expression."
+    echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -862,7 +862,7 @@ case "$command" in
         ;;
       serial)
         xilinx_build_check
-        valid_flags="-h --help -w --word"
+        valid_flags="-h --help -d --device"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       *)
