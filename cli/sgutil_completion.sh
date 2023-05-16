@@ -54,7 +54,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "--project --serial --help" -- ${cur})) # -w -h --target 
                     ;;
                 device) # get
-                    COMPREPLY=($(compgen -W "--word --help" -- ${cur})) # -w -h
+                    COMPREPLY=($(compgen -W "--device --help" -- ${cur})) # -w -h
                     ;;
                 #ip) 
                 #    COMPREPLY=($(compgen -W "--device --help" -- ${cur}))
