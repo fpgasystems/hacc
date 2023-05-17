@@ -242,6 +242,11 @@
     path: /opt/cli/get/get_from_vars
     state: absent
 
+- name: remove vars.yml (just in case)
+  ansible.builtin.file:
+    path: /opt/user_tools/vars.yml
+    state: absent
+
 - name: copy device script
   copy:
     src: "../../cli/get/device.sh"
