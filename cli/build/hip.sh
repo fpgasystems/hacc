@@ -6,6 +6,19 @@ normal=$(tput sgr0)
 #get username
 username=$USER
 
+#get hostname
+url="${HOSTNAME}"
+hostname="${url%%.*}"
+
+#verify hip workflow (based on installed software)
+test1=$(dkms status | grep amdgpu)
+if [ -z "$test1" ] || [ ! -d "/opt/rocm/bin/" ]; then
+    echo ""
+    echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
+    echo ""
+    exit
+fi
+
 # inputs
 read -a flags <<< "$@"
 
