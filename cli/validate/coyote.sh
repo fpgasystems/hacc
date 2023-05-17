@@ -68,7 +68,8 @@ done
 
 #sgutil get device if there is only one FPGA and not name_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
-    device_name=$(sgutil get device | cut -d "=" -f2)
+    #device_name=$(sgutil get device | cut -d "=" -f2)
+    device_name=$(/opt/cli/get/device | awk -F': ' '{print $2}' | grep -v '^$')
 fi
 
 # device_name to coyote string

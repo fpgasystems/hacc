@@ -131,7 +131,8 @@ done
 
 #sgutil get serial only when we have one FPGA and not serial_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
-    serial_number=$(sgutil get serial | cut -d "=" -f2)
+    #serial_number=$(sgutil get serial | cut -d "=" -f2)
+    serial_number=$(/opt/cli/get/serial | awk -F': ' '{print $2}' | grep -v '^$')
 fi
 
 # serial to platform

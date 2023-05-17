@@ -42,7 +42,8 @@ done
 
 #sgutil get serial if there is only one FPGA and not serial_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
-    serial_number=$(/opt/cli/get/serial | cut -d "=" -f2)
+    #serial_number=$(/opt/cli/get/serial | cut -d "=" -f2)
+    serial_number=$(/opt/cli/get/serial | awk -F': ' '{print $2}' | grep -v '^$')
 fi
 
 #hotplug ----------------------------------------------------------> we will need to adapt it to use the serial number

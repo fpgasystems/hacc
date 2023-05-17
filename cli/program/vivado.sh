@@ -106,12 +106,14 @@ fi
 
 #sgutil get device if there is only one FPGA and not name_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
-    device_name=$(/opt/cli/get/device | cut -d "=" -f2)
+    #device_name=$(/opt/cli/get/device | cut -d "=" -f2)
+    device_name=$(/opt/cli/get/device | awk -F': ' '{print $2}' | grep -v '^$')
 fi
 
 #sgutil get serial if there is only one FPGA and not serial_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
-    serial_number=$(/opt/cli/get/serial | cut -d "=" -f2)
+    #serial_number=$(/opt/cli/get/serial | cut -d "=" -f2)
+    serial_number=$(/opt/cli/get/serial | awk -F': ' '{print $2}' | grep -v '^$')
 fi
 
 #get release branch

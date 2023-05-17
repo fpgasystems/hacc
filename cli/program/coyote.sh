@@ -170,9 +170,10 @@ echo ""
 #convert string to an array
 servers=($servers)
 
-#we only show likely servers (i.e., alveo-u55c)
-server_family=$(sgutil get device)
-server_family="${server_family%%=*}"
+#we only show likely servers (hostname is alveo-u55c-01 and we remove the las three characters, i.e., alveo-u55c)
+#server_family=$(sgutil get device)
+#server_family="${server_family%%=*}"
+server_family="${hostname%???}"
 
 #build servers_family_list
 servers_family_list=()
@@ -215,7 +216,8 @@ fi
 echo "Programming local server ${bold}$hostname...${normal}"
 #sgutil get device if there is only one FPGA and not name_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
-    device_name=$(sgutil get device | cut -d "=" -f2)
+    #device_name=$(sgutil get device | cut -d "=" -f2)
+    device_name=$(/opt/cli/get/device | awk -F': ' '{print $2}' | grep -v '^$')
 fi
 #bitstream
 sgutil program vivado -b $APP_BUILD_DIR$BIT_NAME
@@ -235,7 +237,8 @@ do
 
     #sgutil get device if there is only one FPGA and not name_found (we assume this for now)
     if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
-        device_name=$(sgutil get device | cut -d "=" -f2)
+        #device_name=$(sgutil get device | cut -d "=" -f2)
+        device_name=$(sgutil get device | awk -F': ' '{print $2}' | grep -v '^$')
     fi
 
     #remotely program bitstream, driver, and run get_N_REGIONS

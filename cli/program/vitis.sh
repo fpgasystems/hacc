@@ -150,8 +150,9 @@ echo ""
 servers=($servers)
 
 #we only show likely servers (i.e., alveo-u55c)
-server_family=$(sgutil get device)
-server_family="${server_family%%=*}"
+#server_family=$(sgutil get device)
+#server_family="${server_family%%=*}"
+server_family="${hostname%???}"
 
 #build servers_family_list
 servers_family_list=()

@@ -1,11 +1,17 @@
 #!/bin/bash
 
+DATABASE="/opt/hacc/devices"
+
 bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
 CLI_WORKDIR="/opt/cli"
 MAX_DEVICES=4
+
+#get hostname
+#url="${HOSTNAME}"
+#hostname="${url%%.*}"
 
 split_addresses (){
 
@@ -38,27 +44,62 @@ split_addresses (){
 #inputs
 read -a flags <<< "$@"
 
-#get hostname
-url="${HOSTNAME}"
-hostname="${url%%.*}"
+# Check if the DATABASE exists
+if [[ ! -f "$DATABASE" ]]; then
+  echo ""
+  echo "Please, update $DATABASE according to your infrastructure."
+  echo ""
+  exit 1
+fi
+
+#the file exists - check its contents by evaluating first row (device_0)
+device_0=$(head -n 1 "$DATABASE")
+
+#extract the second, third, and fourth columns (upstream_port, root_port, LinkCtl) using awk
+upstream_port_0=$(echo "$device_0" | awk '{print $2}')
+root_port_0=$(echo "$device_0" | awk '{print $3}')
+LinkCtl_0=$(echo "$device_0" | awk '{print $4}')
+
+#check on non-edited contents
+if [[ $upstream_port_0 == "xx:xx.x" || $root_port_0 == "xx:xx.x" || $LinkCtl_0 == "xx" ]]; then
+  echo ""
+  echo "Please, update $DATABASE according to your infrastructure."
+  echo ""
+  exit
+fi
 
 #check on multiple Xilinx devices
-if [[ -z $(lspci | grep Xilinx) ]]; then
-    multiple_devices=""
-    echo "No Xilinx device found."
-    echo ""
-    exit
-elif [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
-    #servers with only one FPGA (i.e., alveo-u55c-01)
-    multiple_devices="0"
-elif [[ $(lspci | grep Xilinx | wc -l) -gt 2 ]]; then
-    #servers with eight FPGAs (i.e., alveo-u280)
-    multiple_devices="1"
+multiple_devices=""
+devices=$(wc -l < $DATABASE)
+if [ -s $DATABASE ]; then
+    if [ "$devices" -eq 1 ]; then
+        multiple_devices="0"
+    else
+        multiple_devices="1"
+    fi
 else
-    echo "Unexpected number of Xilinx devices."
+    echo ""
+    echo "Please, update $DATABASE according to your infrastructure."
     echo ""
     exit
 fi
+
+#if [[ -z $(lspci | grep Xilinx) ]]; then
+#    multiple_devices=""
+#    echo "No Xilinx device found."
+#    echo ""
+#    exit
+#elif [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
+#    #servers with only one FPGA (i.e., alveo-u55c-01)
+#    multiple_devices="0"
+#elif [[ $(lspci | grep Xilinx | wc -l) -gt 2 ]]; then
+#    #servers with eight FPGAs (i.e., alveo-u280)
+#    multiple_devices="1"
+#else
+#    echo "Unexpected number of Xilinx devices."
+#    echo ""
+#    exit
+#fi
 
 #check on flags
 device_found=""
