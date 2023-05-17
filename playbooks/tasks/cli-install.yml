@@ -232,11 +232,15 @@
 
 #get  ----------------------------------------------------------------------------------------
 
-- name: copy get_from_vars
-  copy:
-    src: "../../cli/get/get_from_vars"
-    dest: /opt/cli/get/get_from_vars
-    mode: 0755
+#- name: copy get_from_vars
+#  copy:
+#    src: "../../cli/get/get_from_vars"
+#    dest: /opt/cli/get/get_from_vars
+#    mode: 0755
+- name: remove /opt/cli/get/get_from_vars
+  ansible.builtin.file:
+    path: /opt/cli/get/get_from_vars
+    state: absent
 
 - name: copy device script
   copy:
