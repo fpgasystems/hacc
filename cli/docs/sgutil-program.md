@@ -25,9 +25,3 @@
 <p>
   &nbsp; &nbsp; Help to use this command.
 </p>
-
-### Examples
-```
-$ sgutil program vivado -h
-$ sgutil program vitis -h
-```
