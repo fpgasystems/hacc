@@ -32,43 +32,56 @@ username=$USER
 read -a flags <<< "$@"
 
 # Check if the DATABASE exists
-if [[ ! -f "$DATABASE" ]]; then
-  echo ""
-  echo "Please, update $DATABASE according to your infrastructure."
-  echo ""
-  exit 1
-fi
+#if [[ ! -f "$DATABASE" ]]; then
+#  echo ""
+#  echo "Please, update $DATABASE according to your infrastructure."
+#  echo ""
+#  exit 1
+#fi
 
 #the file exists - check its contents by evaluating first row (device_0)
-device_0=$(head -n 1 "$DATABASE")
+#device_0=$(head -n 1 "$DATABASE")
 
 #extract the second, third, and fourth columns (upstream_port, root_port, LinkCtl) using awk
-upstream_port_0=$(echo "$device_0" | awk '{print $2}')
-root_port_0=$(echo "$device_0" | awk '{print $3}')
-LinkCtl_0=$(echo "$device_0" | awk '{print $4}')
+#upstream_port_0=$(echo "$device_0" | awk '{print $2}')
+#root_port_0=$(echo "$device_0" | awk '{print $3}')
+#LinkCtl_0=$(echo "$device_0" | awk '{print $4}')
 
 #check on non-edited contents
-if [[ $upstream_port_0 == "xx:xx.x" || $root_port_0 == "xx:xx.x" || $LinkCtl_0 == "xx" ]]; then
-  echo ""
-  echo "Please, update $DATABASE according to your infrastructure."
-  echo ""
-  exit
-fi
+#if [[ $upstream_port_0 == "xx:xx.x" || $root_port_0 == "xx:xx.x" || $LinkCtl_0 == "xx" ]]; then
+#  echo ""
+#  echo "Please, update $DATABASE according to your infrastructure."
+#  echo ""
+#  exit
+#fi
 
 #check on multiple Xilinx devices
-multiple_devices=""
-devices=$(wc -l < $DATABASE)
-if [ -s $DATABASE ]; then
-    if [ "$devices" -eq 1 ]; then
-        multiple_devices="0"
-    else
-        multiple_devices="1"
-    fi
-else
+#multiple_devices=""
+#devices=$(wc -l < $DATABASE)
+#if [ -s $DATABASE ]; then
+#    if [ "$devices" -eq 1 ]; then
+#        multiple_devices="0"
+#    else
+#        multiple_devices="1"
+#    fi
+#else
+#    echo ""
+#    echo "Please, update $DATABASE according to your infrastructure."
+#    echo ""
+#    exit
+#fi
+
+#check on multiple Xilinx devices
+num_devices=$(/opt/cli/common/get_num_devices)
+if [[ -z "$num_devices" ]] || [[ "$num_devices" -eq 0 ]]; then
     echo ""
     echo "Please, update $DATABASE according to your infrastructure."
     echo ""
     exit
+elif [[ "$num_devices" -eq 1 ]]; then
+    multiple_devices="0"
+else
+    multiple_devices="1"
 fi
 
 #if [[ -z $(lspci | grep Xilinx) ]]; then
