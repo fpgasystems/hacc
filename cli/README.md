@@ -31,10 +31,3 @@ ETHZ-HACC CLI brings Systems Group’s designs to your terminal and allows you t
 <p>
   &nbsp; &nbsp; Reports CLI version.
 </p>
-
-### Examples
-```
-$ sgutil -h
-$ sgutil --version
-$ sgutil validate
-```
