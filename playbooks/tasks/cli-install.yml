@@ -224,11 +224,17 @@
     path: /opt/hacc
     state: directory
 
+- name: check on /opt/hacc/devices 
+  stat:
+    path: /opt/hacc/devices
+  register: get_devices_stat
+
 - name: copy devices template to /opt/hacc
   copy:
     src: "../../cli/devices"
     dest: /opt/hacc/devices
     mode: 0755
+  when: not get_devices_stat.stat.exists
 
 - name: copy common/get_num_devices script
   copy:
