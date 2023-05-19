@@ -128,14 +128,11 @@ else
             project_idx=$(($i+1))
             project_name=${flags[$project_idx]}
         fi
-        for (( i=0; i<${#flags[@]}; i++ ))
-        do
-            if [[ " ${flags[$i]} " =~ " -d " ]] || [[ " ${flags[$i]} " =~ " --device " ]]; then # flags[i] is -d or --device
-                device_found="1"
-                device_idx=$(($i+1))
-                device_index=${flags[$device_idx]}
-            fi  
-        done
+        if [[ " ${flags[$i]} " =~ " -d " ]] || [[ " ${flags[$i]} " =~ " --device " ]]; then # flags[i] is -d or --device
+            device_found="1"
+            device_idx=$(($i+1))
+            device_index=${flags[$device_idx]}
+        fi  
     done
     #forbidden combinations
     if [[ $project_found = "0" ]] || ([ "$project_found" = "1" ] && [ "$project_name" = "" ]) || ([ $project_found = "0" ] && [ $device_found = "1" ]) || ([ "$device_found" = "1" ] && [ "$device_index" = "" ]); then
@@ -276,7 +273,7 @@ bdf="${upstream_port%?}1"
 #programming local server
 echo "Programming local server ${bold}$hostname...${normal}"
 #revert to xrt first if FPGA is already in baremetal
-sudo /opt/cli/program/revert $bdf
+sudo /opt/cli/program/revert -d $device_index
 #reset device (we delete any xclbin)
 /opt/xilinx/xrt/bin/xbutil reset --device $bdf --force
 #program xclbin
