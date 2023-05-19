@@ -17,8 +17,17 @@ hostname="${url%%.*}"
 # inputs
 read -a flags <<< "$@"
 
+#check on BDF
+if [ "$#" -ne 1 ] ; then
+    echo ""
+    echo "$0: exactly 1 argument expected. Example: /opt/cli/program/revert 81:00.1"
+else
+    bdf=$1 
+    bdf="${bdf%??}" #i.e., we transform 81:00.1 into 81:00
+fi
+
 #check for number of pci functions
-if [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
+if [[ $(lspci | grep Xilinx | grep $bdf | wc -l) = 2 ]]; then
     #the server is already in Vitis workflow
     echo ""
     exit
