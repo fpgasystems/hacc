@@ -88,18 +88,18 @@ if [[ $use_help = "1" ]]; then
     exit
 fi
 
-# when used, bit_file, ltx_file or driver_file cannot be empty
-if [ "$program_bitstream" = "1" ] && [ "$bit_file" = "" ]; then
+# when used, bit_file, ltx_file or driver_file cannot be empty and has to exist
+if [ "$program_bitstream" = "1" ] && ([ "$bit_file" = "" ] || [ ! -f "$bit_file" ]); then
     /opt/cli/sgutil program vivado -h
     exit
 fi
 
-if [ "$ltx_found" = "1" ] && [ "$ltx_file" = "" ]; then
+if [ "$ltx_found" = "1" ] && ([ "$ltx_file" = "" ] || [ ! -f "$ltx_file" ]); then
     /opt/cli/sgutil program vivado -h
     exit
 fi
 
-if [ "$program_driver" = "1" ] && [ "$driver_file" = "" ]; then
+if [ "$program_driver" = "1" ] && ([ "$driver_file" = "" ] || [ ! -f "$driver_file" ]); then
     /opt/cli/sgutil program vivado -h
     exit
 fi
