@@ -12,14 +12,9 @@
 </p>
 
 ### Flags
-<code>-n, --name <string></code>
+<code>-d, --device <string></code>
 <p>
-  &nbsp; &nbsp; FPGA's device name. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-device.md">sgutil get device</a>.
-</p>
-
-<code>-s, --serial <string></code>
-<p>
-  &nbsp; &nbsp; FPGA's serial number. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-serial.md">sgutil get serial</a>.
+  &nbsp; &nbsp; FPGA Device Index (see sgutil examine).
 </p>
 
 <code>-h, --help <string></code>
@@ -29,6 +24,5 @@
 
 ### Examples
 ```
-$ sgutil program revert -h
-$ sgutil program revert
+$ sgutil program revert -d 0
 ```

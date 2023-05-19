@@ -26,14 +26,14 @@
   &nbsp; &nbsp; FPGA's device name. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-device.md">sgutil get device</a>.
 </p> -->
 
+<code>-d, --device <string></code>
+<p>
+  &nbsp; &nbsp; FPGA Device Index (see sgutil examine).
+</p>
+
 <code>-p, --project <string></code>
 <p>
   &nbsp; &nbsp; Specifies your Vitis project name.
-</p>
-
-<code>-s, --serial <string></code>
-<p>
-  &nbsp; &nbsp; FPGA's serial number. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-serial.md">sgutil get serial</a>.
 </p>
 
 <!-- <code>
@@ -50,5 +50,5 @@
 
 ### Examples
 ```
-$ sgutil program vitis -u ~/my_projects/vitis/hello_world/build_dir.hw.xilinx_u55c_gen3x16_xdma_3_202210_1/vadd.xclbin
+$ sgutil program vitis
 ```
