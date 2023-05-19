@@ -78,10 +78,10 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "--serial --help" -- ${cur}))
                     ;;
                 revert)
-                    COMPREPLY=($(compgen -W "--name --serial --help" -- ${cur})) # -n  -s  -h
+                    COMPREPLY=($(compgen -W "--device --help" -- ${cur})) # -n  -s  -h
                     ;;
                 vitis) 
-                    COMPREPLY=($(compgen -W "--project --serial  --help" -- ${cur})) # -b -n -s -t -h --binary --name --target --user
+                    COMPREPLY=($(compgen -W "--device --project --help" -- ${cur}))
                     ;;
                 vivado) 
                     COMPREPLY=($(compgen -W "--bitstream --driver --ltx --name --serial --help" -- ${cur})) # -b -d -l -n -s -h

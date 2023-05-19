@@ -474,11 +474,7 @@ program_revert_help() {
     echo "Returns the specified device to the Vitis workflow."
     echo ""
     echo "FLAGS:"
-    #echo "   -b, --bitstream - Programs a .bit bitstream to the specified device." 
-    #echo "   -d, --driver    - Installs an FPGA driver on the server."
-    echo "   -n, --name      - FPGA's device name. See sgutil get device."
-    #echo "   -r, --revert    - Return the specified device to the Vitis workflow."
-    echo "   -s, --serial    - FPGA's serial number. See sgutil get serial."
+    echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
     echo ""
     echo "   -h, --help      - Help to revert a device."
     echo ""
@@ -511,12 +507,8 @@ program_vitis_help() {
     echo "Programs a Vitis FPGA-binary to a given device."
     echo ""
     echo "FLAGS:"
-    #echo "   -b, --binary    - Programs an .xclbin binary to the specified device." 
-    #echo "   -n, --name      - FPGA's device name. See sgutil get device."
+    echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
     echo "   -p, --project   - Specifies your Vitis project name."
-    echo "   -s, --serial    - FPGA's serial number. See sgutil get serial."
-    #echo "   -t, --target    - Binary compilation target (sw_emu, hw_emu, hw). REMOVE!!!"
-    #echo "   -u, --user      - The name (and path) of the xclbin to be loaded."
     echo ""
     echo "   -h, --help      - Help to program a binary."
     echo ""
@@ -959,7 +951,7 @@ case "$command" in
         #fi
         ;;
       vitis)
-        valid_flags="-p --project -s --serial -h --help" # -b --binary -n --name -t --target -u --user
+        valid_flags="-d --device -p --project -h --help" # -b --binary -n --name -t --target -u --user
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       *)
