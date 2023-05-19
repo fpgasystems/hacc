@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DATABASE="/opt/hacc/devices"
+
 #the file exists - check its contents by evaluating first row (device_0)
 device_0=$(head -n 1 "$DATABASE")
 
