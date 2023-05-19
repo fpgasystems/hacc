@@ -120,15 +120,15 @@ fi
 
 #get BDF (i.e., Bus:Device.Function) 
 upstream_port=$(/opt/cli/get/get_device_param $device_index upstream_port)
-upstream_port="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
+bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
 
 #check for number of pci functions
-if [[ $(lspci | grep Xilinx | grep $upstream_port | wc -l) = 2 ]]; then
+if [[ $(lspci | grep Xilinx | grep $bdf | wc -l) = 2 ]]; then
     #the server is already in Vitis workflow
     #echo ""
     #echo "The device ${bold}$upstream_port.1${normal} is ready for Vitis workflow!"
     echo ""
-    lspci | grep Xilinx | grep $upstream_port
+    lspci | grep Xilinx | grep $bdf
     echo ""
     exit
 fi
@@ -161,7 +161,10 @@ echo "${bold}Programming XRT shell:${normal}"
 
 #hotplug
 #sudo bash -c "source /opt/cli/program/pci_hot_plug ${hostname}"
-sudo /opt/cli/program/pci_hot_plug ${hostname}
+#upstream_port=$(/opt/cli/get/get_device_param $device_index upstream_port)
+root_port=$(/opt/cli/get/get_device_param $device_index root_port)
+LinkCtl=$(/opt/cli/get/get_device_param $device_index LinkCtl)
+sudo /opt/cli/program/pci_hot_plug $upstream_port $root_port $LinkCtl #${hostname}
 
 #inserting XRT driver
 echo "${bold}Inserting XRT drivers:${normal}"
@@ -180,5 +183,5 @@ if [[ $(lsmod | grep xclmgmt | wc -l) -gt 0 ]]; then #>= 1
     sleep 1
 fi
 echo ""
-lspci | grep Xilinx | grep $upstream_port
+lspci | grep Xilinx | grep $bdf
 echo ""
