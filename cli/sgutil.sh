@@ -935,7 +935,7 @@ case "$command" in
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       revert) # flags can be empty if we have only one FPGA
-        valid_flags="-n --name -s --serial -h --help"
+        valid_flags="-d --device -h --help"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       vivado) # flags cannot be empty (i.e. at least -b is required)
