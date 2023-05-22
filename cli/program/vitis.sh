@@ -1,10 +1,11 @@
 #!/bin/bash
 
-CLI_WORKDIR="/opt/cli"
-DATABASE="/opt/hacc/devices"
-
 bold=$(tput bold)
 normal=$(tput sgr0)
+
+CLI_WORKDIR="/opt/cli"
+DATABASE="/opt/hacc/devices"
+MAX_DEVICES=4
 
 #get username
 username=$USER
@@ -143,6 +144,13 @@ else
         $CLI_WORKDIR/sgutil program vitis -h
         exit
     fi
+fi
+
+#device_index should be between {0 .. MAX_DEVICES - 1}
+MAX_DEVICES=$(($MAX_DEVICES-1))
+if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 0 ]]; then
+    $CLI_WORKDIR/sgutil program revert -h
+    exit
 fi
 
 #define directories (1)
