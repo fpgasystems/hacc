@@ -12,9 +12,9 @@
 </p>
 
 ### Flags
-<code>-s, --serial <string></code>
+<code>-d, --device <string></code>
 <p>
-  &nbsp; &nbsp; FPGA's serial number. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-serial.md">sgutil get serial</a>.
+  &nbsp; &nbsp; FPGA Device Index (see sgutil examine).
 </p>
 
 <code>-h, --help <string></code>

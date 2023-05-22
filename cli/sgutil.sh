@@ -446,7 +446,7 @@ program_rescan_help() {
     echo "Runs the PCI hot-plug process."
     echo ""
     echo "FLAGS:"
-    echo "   -s, --serial    - FPGA's serial number. See sgutil get serial."
+    echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
