@@ -3,15 +3,16 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+CLI_WORKDIR="/opt/cli"
+DATABASE="/opt/hacc/devices"
+MAX_DEVICES=4
+
 # get hostname
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
 # inputs
 read -a flags <<< "$@"
-
-echo ""
-echo "${bold}sgutil program rescan${normal}"
 
 #check for virtualized
 virtualized=$(/opt/cli/common/is_virtualized)
@@ -31,21 +32,63 @@ if [ "$member" = "false" ]; then
     exit
 fi
 
-#derive actions to perform
-serial_found="0"
-for (( i=0; i<${#flags[@]}; i++ ))
-do
-    if [[ " ${flags[$i]} " =~ " -s " ]] || [[ " ${flags[$i]} " =~ " --serial " ]]; then 
-        serial_found="1"
-    fi
-done
-
-#sgutil get serial if there is only one FPGA and not serial_found
-if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
-    #serial_number=$(/opt/cli/get/serial | cut -d "=" -f2)
-    serial_number=$(/opt/cli/get/serial | awk -F': ' '{print $2}' | grep -v '^$')
+#check on multiple Xilinx devices
+num_devices=$(/opt/cli/common/get_num_devices)
+if [[ -z "$num_devices" ]] || [[ "$num_devices" -eq 0 ]]; then
+    echo ""
+    echo "Please, update $DATABASE according to your infrastructure."
+    echo ""
+    exit
+elif [[ "$num_devices" -eq 1 ]]; then
+    multiple_devices="0"
+else
+    multiple_devices="1"
 fi
 
-#hotplug ----------------------------------------------------------> we will need to adapt it to use the serial number
-#sudo bash -c "source /opt/cli/program/pci_hot_plug ${hostname}"
-sudo /opt/cli/program/pci_hot_plug ${hostname}
+#check on flags
+device_found="0"
+if [ "$flags" = "" ]; then
+    #get device index
+    if [[ "$multiple_devices" == "0" ]]; then
+        #servers with only one FPGA (i.e., alveo-u55c-01)
+        device_index="0"
+    else
+        $CLI_WORKDIR/sgutil program rescan -h
+        exit
+    fi
+else
+    #find flags and values
+    for (( i=0; i<${#flags[@]}; i++ ))
+    do
+        if [[ " ${flags[$i]} " =~ " -d " ]] || [[ " ${flags[$i]} " =~ " --device " ]]; then # flags[i] is -d or --device
+            device_found="1"
+            device_idx=$(($i+1))
+            device_index=${flags[$device_idx]}
+        fi    
+    done
+    #forbidden combinations
+    if [[ $device_found = "0" ]] || [[ $device_index = "" ]] || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 0 ))); then
+        $CLI_WORKDIR/sgutil program rescan -h
+        exit
+    fi
+fi
+
+#device_index should be between {0 .. MAX_DEVICES - 1}
+MAX_DEVICES=$(($MAX_DEVICES-1))
+if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 0 ]]; then
+    $CLI_WORKDIR/sgutil program revert -h
+    exit
+fi
+
+echo ""
+echo "${bold}sgutil program rescan${normal}"
+
+#pci_hot_plug
+upstream_port=$(/opt/cli/get/get_device_param $device_index upstream_port)
+root_port=$(/opt/cli/get/get_device_param $device_index root_port)
+LinkCtl=$(/opt/cli/get/get_device_param $device_index LinkCtl)
+sudo /opt/cli/program/pci_hot_plug $upstream_port $root_port $LinkCtl #${hostname}
+
+bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
+lspci | grep Xilinx | grep $bdf
+echo ""
