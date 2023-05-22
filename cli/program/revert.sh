@@ -1,11 +1,11 @@
 #!/bin/bash
 
+bold=$(tput bold)
+normal=$(tput sgr0)
+
 CLI_WORKDIR="/opt/cli"
 DATABASE="/opt/hacc/devices"
 MAX_DEVICES=4
-
-bold=$(tput bold)
-normal=$(tput sgr0)
 
 # constants
 SERVERADDR="localhost"
