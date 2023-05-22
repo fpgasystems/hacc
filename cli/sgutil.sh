@@ -927,7 +927,7 @@ case "$command" in
         /opt/cli/program/reboot
         ;;
       rescan) # flags can be empty if we have only one FPGA
-        valid_flags="-s --serial -h --help"
+        valid_flags="-d --device -h --help"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       reset) 

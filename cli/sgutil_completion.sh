@@ -77,6 +77,9 @@ _sgutil_completions()
                 reset)
                     COMPREPLY=($(compgen -W "--serial --help" -- ${cur}))
                     ;;
+                rescan)
+                    COMPREPLY=($(compgen -W "--device --help" -- ${cur}))
+                    ;;
                 revert)
                     COMPREPLY=($(compgen -W "--device --help" -- ${cur})) # -n  -s  -h
                     ;;
