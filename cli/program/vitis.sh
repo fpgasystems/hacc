@@ -164,50 +164,8 @@ if ! [ -d "$DIR" ]; then
     exit
 fi
 
-#create or select a configuration ===> for programming, configs (config_000) are irrelevant
-#cd $DIR/configs/
-#if [[ $(ls -l | wc -l) = 2 ]]; then
-#    #only config_000 exists and we create config_001
-#    echo ""
-#    echo "You must build your project first! Please, use sgutil build vitis (target = hw)"
-#    echo ""
-#    exit
-#elif [[ $(ls -l | wc -l) = 4 ]]; then
-#    #config_000, config_kernel and config_001 exist
-#    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
-#    config="config_001.hpp"
-#    echo ""
-#elif [[ $(ls -l | wc -l) > 4 ]]; then
-#    cd $DIR/configs/
-#    configs=( "config_"*.hpp )
-#    echo ""
-#    echo "${bold}Please, choose your configuration:${normal}"
-#    echo ""
-#    PS3=""
-#    select config in "${configs[@]:1:${#configs[@]}-2}"; do # with :1 we avoid config_000.hpp and then config_kernel.hpp
-#        if [[ -z $config ]]; then
-#            echo "" >&/dev/null
-#        else
-#            break
-#        fi
-#    done
-#    # copy selected config as config_000.hpp
-#    cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
-#    echo ""
-#fi
-
-# serial to platform
-#cd /opt/xilinx/platforms
-#n=$(ls -l | grep -c ^d)
-#if [ $((n + 0)) -eq  1 ]; then
-#    platform=$(echo *)
-#fi
-
 #get platform
 platform=$(/opt/cli/get/get_device_param $device_index platform)
-
-#get device name
-#device_name=$(/opt/cli/get/get_device_param $device_index device_name)
 
 #define directories (2)
 APP_BUILD_DIR="/home/$username/my_projects/vitis/$project_name/build_dir.$TARGET.$platform"
@@ -229,8 +187,6 @@ echo ""
 servers=($servers)
 
 #we only show likely servers (i.e., alveo-u55c)
-#server_family=$(sgutil get device)
-#server_family="${server_family%%=*}"
 server_family="${hostname%???}"
 
 #build servers_family_list
