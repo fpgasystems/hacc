@@ -3,10 +3,12 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
 CLI_WORKDIR="/opt/cli"
 WORKFLOW="vitis"
 DATABASE="/opt/hacc/devices"
 MAX_DEVICES=4
+TARGET="hw"
 
 #get username
 username=$USER
@@ -14,9 +16,6 @@ username=$USER
 #get hostname
 url="${HOSTNAME}"
 hostname="${url%%.*}"
-
-#constants
-TARGET="hw"
 
 # inputs
 read -a flags <<< "$@"
@@ -36,39 +35,12 @@ fi
 multiple_devices=$($CLI_WORKDIR/common/get_multiple_devices $DATABASE)
 
 #check on flags (before: flags cannot be empty)
-project_found="0"
+project_found=""
+project_name=""
 device_found=""
 device_index=""
-#serial_found="0"
 if [ "$flags" = "" ]; then
-    ##no flags: start dialog
-    #cd /home/$username/my_projects/vitis/
-    #projects=( *"/" )
-    ##delete common from projects
-    #j=0
-    #for i in "${projects[@]}"
-    #do
-    #    if [[ $i =~ "common/" ]]; then
-    #        echo "" >&/dev/null
-    #    else
-    #        aux[j]=$i
-    #        j=$(($j + 1))
-    #    fi
-    #done
-    #echo ""
-    #echo "${bold}Please, choose your project:${normal}"
-    #echo ""
-    #PS3=""
-    #select project_name in "${aux[@]}"; do
-    #    if [[ -z $project_name ]]; then
-    #        echo "" >&/dev/null
-    #    else
-    #        project_found="1"
-    #        project_name=${project_name::-1} #we remove the last character, i.e. "/""
-    #        break
-    #    fi
-    #done
-
+    #no flags: start dialogs
     #project
     echo ""
     echo "${bold}Please, choose your $WORKFLOW project:${normal}"
@@ -76,10 +48,6 @@ if [ "$flags" = "" ]; then
     result=$($CLI_WORKDIR/common/project_dialog $username $WORKFLOW)
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
-
-    echo $result
-    echo $project_found
-    echo $project_name
 
     #get device index
     if [[ "$multiple_devices" == "0" ]]; then
