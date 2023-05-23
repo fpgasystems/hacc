@@ -5,10 +5,12 @@ normal=$(tput sgr0)
 
 #constants
 CLI_WORKDIR="/opt/cli"
-WORKFLOW="vitis"
 DATABASE="/opt/hacc/devices"
-MAX_DEVICES=4
+WORKFLOW="vitis"
 TARGET="hw"
+
+#configuration parameters
+MAX_DEVICES=$($CLI_WORKDIR/common/get_MAX_DEVICES)
 
 #get username
 username=$USER
@@ -81,7 +83,7 @@ else
 fi
 
 #device_index should be between {0 .. MAX_DEVICES - 1}
-MAX_DEVICES=$(($MAX_DEVICES-1))
+#MAX_DEVICES=$(($MAX_DEVICES-1))
 if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 0 ]]; then
     $CLI_WORKDIR/sgutil program revert -h
     exit

@@ -17,14 +17,13 @@ elif [[ "$multiple_devices" == "1" ]]; then
     #declare an empty array to store the device strings
     devices=()
     #iterate over the indices 0 to MAX_DEVICES-1 using a for loop
-    for ((i=0; i<MAX_DEVICES; i++)); do
+    for ((i=1; i<=MAX_DEVICES; i++)); do
         #retrieve the parameters for each device using the current index
-        id=$($CLI_WORKDIR/get/get_device_param $i id)
-        device_type=$($CLI_WORKDIR/get/get_device_param $i device_type)
+        upstream_port=$($CLI_WORKDIR/get/get_device_param $i upstream_port)
+        bdf="${upstream_port::-1}1"
         device_name=$($CLI_WORKDIR/get/get_device_param $i device_name)
-        serial_number=$($CLI_WORKDIR/get/get_device_param $i serial_number)
         #concatenate the parameter values into a single string and add it to the array
-        devices+=("$id [$device_type - $device_name - $serial_number]")
+        devices+=("$bdf ($device_name)")
     done
     #multiple choice
     #echo ""
@@ -36,7 +35,7 @@ elif [[ "$multiple_devices" == "1" ]]; then
             echo "" >&/dev/null
         else
             device_found="1"
-            device_index=${device_index:0:1}
+            device_index=$REPLY #${device_index:0:1}
             break
         fi
     done
