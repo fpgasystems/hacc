@@ -82,9 +82,9 @@ else
     fi
 fi
 
-#device_index should be between {0 .. MAX_DEVICES - 1}
+#device_index should be between {1 ... MAX_DEVICES}
 #MAX_DEVICES=$(($MAX_DEVICES-1))
-if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 0 ]]; then
+if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]]; then
     $CLI_WORKDIR/sgutil program vitis -h
     exit
 fi
