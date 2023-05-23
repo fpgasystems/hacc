@@ -73,7 +73,7 @@ else
     done
     #forbidden combinations
     if [[ $project_found = "0" ]] || ([ "$project_found" = "1" ] && [ "$project_name" = "" ]) || ([ $project_found = "0" ] && [ $device_found = "1" ]) || ([ "$device_found" = "1" ] && [ "$device_index" = "" ]); then
-        /opt/cli/sgutil program vitis -h
+        $CLI_WORKDIR/sgutil program vitis -h
         exit
     fi
     if [[ $device_found = "0" ]] || [[ $device_index = "" ]] || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 0 ))); then
@@ -85,7 +85,7 @@ fi
 #device_index should be between {0 .. MAX_DEVICES - 1}
 #MAX_DEVICES=$(($MAX_DEVICES-1))
 if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 0 ]]; then
-    $CLI_WORKDIR/sgutil program revert -h
+    $CLI_WORKDIR/sgutil program vitis -h
     exit
 fi
 
@@ -101,7 +101,7 @@ if ! [ -d "$DIR" ]; then
 fi
 
 #get platform
-platform=$(/opt/cli/get/get_device_param $device_index platform)
+platform=$($CLI_WORKDIR/get/get_device_param $device_index platform)
 
 #define directories (2)
 APP_BUILD_DIR="/home/$username/my_projects/vitis/$project_name/build_dir.$TARGET.$platform"
@@ -116,7 +116,7 @@ fi
 
 #get booked machines
 echo ""
-servers=$(sudo /opt/cli/common/get_booking_system_servers_list | tail -n +2)
+servers=$(sudo $CLI_WORKDIR/common/get_booking_system_servers_list | tail -n +2)
 echo ""
 
 #convert string to an array
@@ -167,13 +167,13 @@ cd $APP_BUILD_DIR
 xclbin=$(echo *.xclbin | awk '{print $NF}')
 
 #get BDF (i.e., Bus:Device.Function) 
-upstream_port=$(/opt/cli/get/get_device_param $device_index upstream_port)
+upstream_port=$($CLI_WORKDIR/get/get_device_param $device_index upstream_port)
 bdf="${upstream_port%?}1"
 
 #programming local server
 echo "Programming local server ${bold}$hostname...${normal}"
 #revert to xrt first if FPGA is already in baremetal
-sudo /opt/cli/program/revert -d $device_index
+sudo $CLI_WORKDIR/program/revert -d $device_index
 #reset device (we delete any xclbin)
 /opt/xilinx/xrt/bin/xbutil reset --device $bdf --force
 #program xclbin
@@ -188,7 +188,7 @@ do
     echo ""
 
     #remotely revert to xrt, reset device (we delete any xclbin) and program xclbin
-    ssh -t $username@$i "sudo /opt/cli/program/revert ; /opt/xilinx/xrt/bin/xbutil reset --device $bdf --force ; /opt/xilinx/xrt/bin/xbutil program --device $bdf -u $APP_BUILD_DIR/$xclbin"
+    ssh -t $username@$i "sudo $CLI_WORKDIR/program/revert ; /opt/xilinx/xrt/bin/xbutil reset --device $bdf --force ; /opt/xilinx/xrt/bin/xbutil program --device $bdf -u $APP_BUILD_DIR/$xclbin"
 done
 
 echo ""
