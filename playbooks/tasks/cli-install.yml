@@ -254,6 +254,12 @@
     dest: /opt/cli/common/project_dialog
     mode: 0755
 
+- name: copy common/device_dialog script
+  copy:
+    src: "../../cli/common/device_dialog.sh"
+    dest: /opt/cli/common/device_dialog
+    mode: 0755
+
 #get  ----------------------------------------------------------------------------------------
 
 #- name: copy get_from_vars
