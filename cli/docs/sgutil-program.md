@@ -15,7 +15,6 @@
 
 * [coyote](./sgutil-program-coyote.md#sgutil-program-coyote)
 * [reboot](./sgutil-program-reboot.md#sgutil-program-reboot)
-* [rescan](./sgutil-program-rescan.md#sgutil-program-rescan)
 * [reset](./sgutil-program-reset.md#sgutil-program-reset)
 * [revert](./sgutil-program-revert.md#sgutil-program-revert)
 * [vitis](./sgutil-program-vitis.md#sgutil-program-vitis)

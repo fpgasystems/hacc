@@ -399,7 +399,7 @@ program_help() {
     echo "ARGUMENTS:"
     echo "   coyote          - Programs Coyote on a given device."
     echo "   reboot          - Reboots the server (warm boot)."
-    echo "   rescan          - Runs the PCI hot-plug process."
+    #echo "   rescan          - Runs the PCI hot-plug process."
     echo "   reset           - Resets the given device."
     echo "   revert          - Returns the specified device to the Vitis workflow."
     echo "   vitis           - Programs a Vitis FPGA-binary to a given device."
@@ -439,19 +439,19 @@ program_reboot_help() {
     exit 1
 }
 
-program_rescan_help() {
-    echo ""
-    echo "${bold}sgutil program rescan [flags] [--help]${normal}"
-    echo ""
-    echo "Runs the PCI hot-plug process."
-    echo ""
-    echo "FLAGS:"
-    echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
-    echo ""
-    echo "   -h, --help      - Help to use this command."
-    echo ""
-    exit 1
-}
+#program_rescan_help() {
+#    echo ""
+#    echo "${bold}sgutil program rescan [flags] [--help]${normal}"
+#    echo ""
+#    echo "Runs the PCI hot-plug process."
+#    echo ""
+#    echo "FLAGS:"
+#    echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
+#    echo ""
+#    echo "   -h, --help      - Help to use this command."
+#    echo ""
+#    exit 1
+#}
 
 program_reset_help() {
     echo ""
@@ -926,10 +926,10 @@ case "$command" in
         fi
         /opt/cli/program/reboot
         ;;
-      rescan) # flags can be empty if we have only one FPGA
-        valid_flags="-d --device -h --help"
-        command_run $command_arguments_flags"@"$valid_flags
-        ;;
+      #rescan) # flags can be empty if we have only one FPGA
+      #  valid_flags="-d --device -h --help"
+      #  command_run $command_arguments_flags"@"$valid_flags
+      #  ;;
       reset) 
         valid_flags="-s --serial -h --help"
         command_run $command_arguments_flags"@"$valid_flags
