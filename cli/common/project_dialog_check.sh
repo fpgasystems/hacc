@@ -21,7 +21,7 @@ if [[ $project_found = "0" ]] || ([ "$project_found" = "1" ] && [ "$project_name
     exit
 fi
 
-#return the values of device_found and device_index
+#return the values
 echo "$project_found"
 echo "$project_idx"
 echo "$project_name"
