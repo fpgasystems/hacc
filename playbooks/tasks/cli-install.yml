@@ -393,11 +393,15 @@
     dest: /opt/cli/program/revert
     mode: 0755
 
-- name: copy rescan script
-  copy:
-    src: "../../cli/program/rescan.sh"
-    dest: /opt/cli/program/rescan
-    mode: 0755
+#- name: copy rescan script
+#  copy:
+#    src: "../../cli/program/rescan.sh"
+#    dest: /opt/cli/program/rescan
+#    mode: 0755
+- name: remove rescan
+  ansible.builtin.file:
+    path: /opt/cli/program/rescan
+    state: absent
 
 - name: copy vivado script
   copy:
