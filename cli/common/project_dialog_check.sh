@@ -4,7 +4,7 @@ flags=("$@")  # Assign command-line arguments to the 'flags' array
 
 # Declare global variables
 declare -g project_found="0"
-declare -g project_idx=""
+#declare -g project_idx=""
 declare -g project_name=""
 
 #read flags
@@ -19,5 +19,5 @@ done
 
 #return the values
 echo "$project_found"
-echo "$project_idx"
+#echo "$project_idx"
 echo "$project_name"

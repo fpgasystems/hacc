@@ -4,7 +4,7 @@ flags=("$@")  # Assign command-line arguments to the 'flags' array
 
 # Declare global variables
 declare -g device_found="0"
-declare -g device_idx=""
+#declare -g device_idx=""
 declare -g device_index=""
 
 #read flags
@@ -19,5 +19,5 @@ done
 
 #return the values
 echo "$device_found"
-echo "$device_idx"
+#echo "$device_idx"
 echo "$device_index"
