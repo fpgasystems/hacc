@@ -260,6 +260,12 @@
     dest: /opt/cli/common/project_dialog
     mode: 0755
 
+- name: copy common/project_dialog_check script
+  copy:
+    src: "../../cli/common/project_dialog_check.sh"
+    dest: /opt/cli/common/project_dialog_check
+    mode: 0755
+
 - name: copy common/device_dialog script
   copy:
     src: "../../cli/common/device_dialog.sh"
