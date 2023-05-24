@@ -108,7 +108,7 @@ device_found=""
 device_index=""
 if [ "$flags" = "" ]; then
     #print devices information
-    for device_index in 0 1 2 3; do
+    for device_index in 1 2 3 4; do #0 1 2 3
         name=$($CLI_WORKDIR/get/get_device_param $device_index device_name)
         if [ -n "$name" ]; then
             #type=$($CLI_WORKDIR/get/get_device_param $device_index device_type)
@@ -127,13 +127,13 @@ else
         fi  
     done
     #forbidden combinations
-    if [[ $device_found = "0" ]] || [[ $device_index = "" ]] || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 0 ))); then
+    if [[ $device_found = "0" ]] || [[ $device_index = "" ]] || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))); then
         $CLI_WORKDIR/sgutil get device -h
         exit
     fi
     #device_index should be between {0 .. MAX_DEVICES - 1}
-    MAX_DEVICES=$(($MAX_DEVICES-1))
-    if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 0 ]]; then
+    #MAX_DEVICES=$(($MAX_DEVICES-1))
+    if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]]; then
         $CLI_WORKDIR/sgutil get device -h
         exit
     fi
