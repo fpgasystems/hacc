@@ -4,7 +4,7 @@ username=$1
 workflow=$2
 
 # Declare global variables
-declare -g project_found=""
+declare -g project_found="0"
 declare -g project_name=""
 
 # no flags: start dialog
