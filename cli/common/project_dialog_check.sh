@@ -16,6 +16,11 @@ do
     fi
 done
 
+if [[ $project_found = "0" ]] || ([ "$project_found" = "1" ] && [ "$project_name" = "" ]) || ([ $project_found = "0" ] && [ $device_found = "1" ]) || ([ "$device_found" = "1" ] && [ "$device_index" = "" ]); then
+    $CLI_WORKDIR/sgutil program vitis -h
+    exit
+fi
+
 #return the values of device_found and device_index
 echo "$project_found"
 echo "$project_idx"

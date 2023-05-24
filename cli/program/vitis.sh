@@ -22,9 +22,6 @@ hostname="${url%%.*}"
 # inputs
 read -a flags <<< "$@"
 
-echo ""
-echo "${bold}sgutil program vitis${normal}"
-
 #check if workflow exists
 if ! [ -d "/home/$username/my_projects/vitis/" ]; then
     echo ""
@@ -75,10 +72,10 @@ else
         fi  
     done
     #forbidden combinations
-    if [[ $project_found = "0" ]] || ([ "$project_found" = "1" ] && [ "$project_name" = "" ]) || ([ $project_found = "0" ] && [ $device_found = "1" ]) || ([ "$device_found" = "1" ] && [ "$device_index" = "" ]); then
-        $CLI_WORKDIR/sgutil program vitis -h
-        exit
-    fi
+    #if [[ $project_found = "0" ]] || ([ "$project_found" = "1" ] && [ "$project_name" = "" ]) || ([ $project_found = "0" ] && [ $device_found = "1" ]) || ([ "$device_found" = "1" ] && [ "$device_index" = "" ]); then
+    #    $CLI_WORKDIR/sgutil program vitis -h
+    #    exit
+    #fi
     if [[ $device_found = "0" ]] || [[ $device_index = "" ]] || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 0 ))); then
         $CLI_WORKDIR/sgutil program vitis -h
         exit
@@ -91,6 +88,10 @@ if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]]; then
     $CLI_WORKDIR/sgutil program vitis -h
     exit
 fi
+
+#header (goes after flags check)
+echo ""
+echo "${bold}sgutil program vitis${normal}"
 
 #define directories (1)
 DIR="/home/$username/my_projects/vitis/$project_name"
