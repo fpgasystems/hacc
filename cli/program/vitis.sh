@@ -59,27 +59,38 @@ else
     project_found=$(echo "$result" | sed -n '1p')
     project_idx=$(echo "$result" | sed -n '2p')
     project_name=$(echo "$result" | sed -n '3p')
+    project_error=$(echo "$result" | sed -n '4p')
+    #device_dialog_check
+    result="$("$CLI_WORKDIR/common/device_dialog_check" "${flags[@]}")"
+    device_found=$(echo "$result" | sed -n '1p')
+    device_idx=$(echo "$result" | sed -n '2p')
+    device_index=$(echo "$result" | sed -n '3p')
+    device_error=$(echo "$result" | sed -n '4p')
+    #error
+    if [[ "$project_error" == "1" ]] || [[ "$device_error" == "1" ]]; then
+        $CLI_WORKDIR/sgutil program vitis -h
+    fi
 
     
 
 
-    for (( i=0; i<${#flags[@]}; i++ ))
-    do
-        if [[ " ${flags[$i]} " =~ " -d " ]] || [[ " ${flags[$i]} " =~ " --device " ]]; then # flags[i] is -d or --device
-            device_found="1"
-            device_idx=$(($i+1))
-            device_index=${flags[$device_idx]}
-        fi  
-    done
+    #for (( i=0; i<${#flags[@]}; i++ ))
+    #do
+    #    if [[ " ${flags[$i]} " =~ " -d " ]] || [[ " ${flags[$i]} " =~ " --device " ]]; then # flags[i] is -d or --device
+    #        device_found="1"
+    #        device_idx=$(($i+1))
+    #        device_index=${flags[$device_idx]}
+    #    fi  
+    #done
     #forbidden combinations
     #if [[ $project_found = "0" ]] || ([ "$project_found" = "1" ] && [ "$project_name" = "" ]) || ([ $project_found = "0" ] && [ $device_found = "1" ]) || ([ "$device_found" = "1" ] && [ "$device_index" = "" ]); then
     #    $CLI_WORKDIR/sgutil program vitis -h
     #    exit
     #fi
-    if [[ $device_found = "0" ]] || [[ $device_index = "" ]] || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 0 ))); then
-        $CLI_WORKDIR/sgutil program vitis -h
-        exit
-    fi
+    #if [[ $device_found = "0" ]] || [[ $device_index = "" ]] || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 0 ))); then
+    #    $CLI_WORKDIR/sgutil program vitis -h
+    #    exit
+    #fi
 fi
 
 #device_index should be between {1 ... MAX_DEVICES}
