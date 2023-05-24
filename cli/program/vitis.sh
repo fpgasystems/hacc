@@ -50,23 +50,28 @@ if [ "$flags" = "" ]; then
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     #device_dialog
-    echo ""
-    echo "${bold}Please, choose your device:${normal}"
-    echo ""
-    result=$($CLI_WORKDIR/common/device_dialog $CLI_WORKDIR $MAX_DEVICES $multiple_devices)
-    device_found=$(echo "$result" | sed -n '1p')
-    device_index=$(echo "$result" | sed -n '2p')
+    if [[ $multiple_devices = "0" ]]; then
+        device_found="1"
+        device_index="1"
+    else
+        echo ""
+        echo "${bold}Please, choose your device:${normal}"
+        echo ""
+        result=$($CLI_WORKDIR/common/device_dialog $CLI_WORKDIR $MAX_DEVICES $multiple_devices)
+        device_found=$(echo "$result" | sed -n '1p')
+        device_index=$(echo "$result" | sed -n '2p')
+    fi
 else
     #project_dialog_check
     result="$("$CLI_WORKDIR/common/project_dialog_check" "${flags[@]}")"
     project_found=$(echo "$result" | sed -n '1p')
-    project_idx=$(echo "$result" | sed -n '2p')
-    project_name=$(echo "$result" | sed -n '3p')
+    #project_idx=$(echo "$result" | sed -n '2p')
+    project_name=$(echo "$result" | sed -n '2p')
     #device_dialog_check
     result="$("$CLI_WORKDIR/common/device_dialog_check" "${flags[@]}")"
     device_found=$(echo "$result" | sed -n '1p')
-    device_idx=$(echo "$result" | sed -n '2p')
-    device_index=$(echo "$result" | sed -n '3p')
+    #device_idx=$(echo "$result" | sed -n '2p')
+    device_index=$(echo "$result" | sed -n '2p')
     #forbidden combinations
     if ([ "$project_found" = "1" ] && [ "$project_name" = "" ]); then #[[ $project_found = "0" ]] || ([ $project_found = "0" ] && [ $device_found = "1" ]) || 
         $CLI_WORKDIR/sgutil program vitis -h
