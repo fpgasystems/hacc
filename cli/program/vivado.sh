@@ -145,7 +145,16 @@ if [[ $program_bitstream = "1" ]]; then
             exit
         elif [ "$virtualized" = "false" ]; then
             #sudo /opt/cli/program/pci_hot_plug ${hostname}
-            /opt/cli/program/rescan
+            #/opt/cli/program/rescan
+            device_index=1
+            upstream_port=$(/opt/cli/get/get_device_param $device_index upstream_port)
+            root_port=$(/opt/cli/get/get_device_param $device_index root_port)
+            LinkCtl=$(/opt/cli/get/get_device_param $device_index LinkCtl)
+            sudo /opt/cli/program/pci_hot_plug $upstream_port $root_port $LinkCtl #${hostname}
+
+            bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
+            lspci | grep Xilinx | grep $bdf
+            echo ""
         fi
     fi
 
