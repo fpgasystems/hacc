@@ -5,13 +5,14 @@ MAX_DEVICES=$2
 multiple_devices=$3
 
 # Declare global variables
-declare -g device_found=""
+declare -g device_found="0"
 declare -g device_index=""
 
 #get device index
 if [[ "$multiple_devices" == "0" ]]; then
     #servers with only one FPGA (i.e., alveo-u55c-01)
-    device_index="0"
+    device_found="1"
+    device_index="1"
 elif [[ "$multiple_devices" == "1" ]]; then 
     #servers with four FPGAs (i.e., hacc-box-01)
     #declare an empty array to store the device strings
