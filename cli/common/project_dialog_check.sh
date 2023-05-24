@@ -1,6 +1,6 @@
 #!/bin/bash
 
-flags=$1 
+flags=("$@")  # Assign command-line arguments to the 'flags' array
 
 # Declare global variables
 declare -g project_found=""

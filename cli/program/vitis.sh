@@ -58,13 +58,30 @@ if [ "$flags" = "" ]; then
     device_index=$(echo "$result" | sed -n '2p')
 else
     #find flags and values
+    #for (( i=0; i<${#flags[@]}; i++ ))
+    #do
+    #    if [[ " ${flags[$i]} " =~ " -p " ]] || [[ " ${flags[$i]} " =~ " --project " ]]; then # flags[i] is -p or --project
+    #        project_found="1"
+    #        project_idx=$(($i+1))
+    #        project_name=${flags[$project_idx]}
+    #    fi
+    #done
+
+    echo $flags
+    echo "${flags[@]}"
+
+    result="$("$CLI_WORKDIR/common/project_dialog_check" "${flags[@]}")"
+    project_found=$(echo "$result" | sed -n '1p')
+    project_idx=$(echo "$result" | sed -n '2p')
+    project_name=$(echo "$result" | sed -n '3p')
+
+    echo $project_found
+    echo $project_idx
+    echo $project_name
+
+
     for (( i=0; i<${#flags[@]}; i++ ))
     do
-        if [[ " ${flags[$i]} " =~ " -p " ]] || [[ " ${flags[$i]} " =~ " --project " ]]; then # flags[i] is -p or --project
-            project_found="1"
-            project_idx=$(($i+1))
-            project_name=${flags[$project_idx]}
-        fi
         if [[ " ${flags[$i]} " =~ " -d " ]] || [[ " ${flags[$i]} " =~ " --device " ]]; then # flags[i] is -d or --device
             device_found="1"
             device_idx=$(($i+1))
