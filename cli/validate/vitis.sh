@@ -1,105 +1,25 @@
 #!/bin/bash
 
-DATABASE="/opt/hacc/devices"
-
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+
+
 #constants
 CLI_WORKDIR="/opt/cli"
-MAX_DEVICES=4
+DATABASE="/opt/hacc/devices"
+
+#configuration parameters
+MAX_DEVICES=$($CLI_WORKDIR/common/get_MAX_DEVICES)
 
 #get username
 username=$USER
 
-# get hostname
-#url="${HOSTNAME}"
-#hostname="${url%%.*}"
-
-# create my_projects directory
-#DIR="/home/$username/my_projects"
-#if ! [ -d "$DIR" ]; then
-#    mkdir ${DIR}
-#fi
-
-# create hip directory
-#DIR="/home/$username/my_projects/hip"
-#if ! [ -d "$DIR" ]; then
-#    mkdir ${DIR}
-#fi
-
-# inputs
+#inputs
 read -a flags <<< "$@"
 
-# Check if the DATABASE exists
-#if [[ ! -f "$DATABASE" ]]; then
-#  echo ""
-#  echo "Please, update $DATABASE according to your infrastructure."
-#  echo ""
-#  exit 1
-#fi
-
-#the file exists - check its contents by evaluating first row (device_0)
-#device_0=$(head -n 1 "$DATABASE")
-
-#extract the second, third, and fourth columns (upstream_port, root_port, LinkCtl) using awk
-#upstream_port_0=$(echo "$device_0" | awk '{print $2}')
-#root_port_0=$(echo "$device_0" | awk '{print $3}')
-#LinkCtl_0=$(echo "$device_0" | awk '{print $4}')
-
-#check on non-edited contents
-#if [[ $upstream_port_0 == "xx:xx.x" || $root_port_0 == "xx:xx.x" || $LinkCtl_0 == "xx" ]]; then
-#  echo ""
-#  echo "Please, update $DATABASE according to your infrastructure."
-#  echo ""
-#  exit
-#fi
-
 #check on multiple Xilinx devices
-#multiple_devices=""
-#devices=$(wc -l < $DATABASE)
-#if [ -s $DATABASE ]; then
-#    if [ "$devices" -eq 1 ]; then
-#        multiple_devices="0"
-#    else
-#        multiple_devices="1"
-#    fi
-#else
-#    echo ""
-#    echo "Please, update $DATABASE according to your infrastructure."
-#    echo ""
-#    exit
-#fi
-
-#check on multiple Xilinx devices
-num_devices=$(/opt/cli/common/get_num_devices)
-if [[ -z "$num_devices" ]] || [[ "$num_devices" -eq 0 ]]; then
-    echo ""
-    echo "Please, update $DATABASE according to your infrastructure."
-    echo ""
-    exit
-elif [[ "$num_devices" -eq 1 ]]; then
-    multiple_devices="0"
-else
-    multiple_devices="1"
-fi
-
-#if [[ -z $(lspci | grep Xilinx) ]]; then
-#    multiple_devices=""
-#    echo "No Xilinx device found."
-#    echo ""
-#    exit
-#elif [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
-#    #servers with only one FPGA (i.e., alveo-u55c-01)
-#    multiple_devices="0"
-#elif [[ $(lspci | grep Xilinx | wc -l) -gt 2 ]]; then
-#    #servers with eight FPGAs (i.e., alveo-u280)
-#    multiple_devices="1"
-#else
-#    echo "Unexpected number of Xilinx devices."
-#    echo ""
-#    exit
-#fi
+multiple_devices=$($CLI_WORKDIR/common/get_multiple_devices $DATABASE)
 
 #check on flags
 device_found=""
@@ -133,8 +53,7 @@ else
     #header (2/2)
     echo ""
     echo "${bold}sgutil validate vitis${normal}"
-    #forgotten mandatories
-    #device_dialog
+    #device_dialog (forgotten mandatory)
     if [[ $device_found = "0" ]]; then
         echo ""
         echo "${bold}Please, choose your device:${normal}"
