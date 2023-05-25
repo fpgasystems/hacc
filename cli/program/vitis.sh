@@ -83,8 +83,7 @@ else
     #header (2/2)
     echo ""
     echo "${bold}sgutil program vitis${normal}"
-    #forgotten mandatories
-    #project_dialog
+    #project_dialog (forgotten mandatory 1)
     if [[ $project_found = "0" ]]; then
         echo ""
         echo "${bold}Please, choose your $WORKFLOW project:${normal}"
@@ -93,7 +92,7 @@ else
         project_found=$(echo "$result" | sed -n '1p')
         project_name=$(echo "$result" | sed -n '2p')
     fi
-    #device_dialog
+    #device_dialog (forgotten mandatory 2)
     if [[ $device_found = "0" ]]; then
         echo ""
         echo "${bold}Please, choose your device:${normal}"
