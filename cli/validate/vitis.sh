@@ -126,7 +126,7 @@ else
     device_found=$(echo "$result" | sed -n '1p')
     device_index=$(echo "$result" | sed -n '2p')
     #forbidden combinations
-    if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then #[[ $device_found = "0" ]] || 
+    if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
         $CLI_WORKDIR/sgutil validate vitis -h
         exit
     fi
@@ -145,15 +145,6 @@ else
     fi
 fi
 
-#device_index should be between {0 .. MAX_DEVICES - 1}
-#MAX_DEVICES=$(($MAX_DEVICES-1))
-if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]]; then
-    $CLI_WORKDIR/sgutil validate vitis -h
-    exit
-fi
-
-echo ""
-echo "${bold}sgutil validate vitis${normal}"
 echo ""
 
 #get BDF from device_idx
