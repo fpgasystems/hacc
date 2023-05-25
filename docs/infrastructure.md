@@ -25,7 +25,7 @@ There are **two types of deployment servers.** The first type of servers are equ
 *ETHZ-HACC server names.*
 
 ![ETHZ-HACC resources.](../imgs/resources.png "ETHZ-HACC resources.")
-*ETHZ-HACC resources. On the FPGA/ACAP column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale).*
+*ETHZ-HACC resources. On the Type - Model column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale).*
 
 <!-- <table>
 <thead>
