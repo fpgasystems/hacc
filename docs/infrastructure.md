@@ -197,8 +197,4 @@ For our **high-speed networking** data network, we are using a [spine-leaf archi
 ![Spine-leaf data network architecture.](../imgs/spine-leaf.png "Spine-leaf data network architecture.")
 *Spine-leaf data network architecture.*
 
-On the server side, the CPU NICs are [ConnectX-5](https://www.nvidia.com/en-us/networking/ethernet/connectx-5/) adaptors. As shown in the first figure, only one of cards interface is connected to the corresponding leaf switch (please, see [Known limitations](#known-limitations)), whereas both QSFP28 FPGA connectors are directly attached. For a given SERVERNAME, the following are valid IP addresses (interfaces):
-
-* SERVERNAME-mallanox-0
-* SERVERNAME-fpga-0
-* SERVERNAME-fpga-1
+On the server side, the CPU NICs are [ConnectX-5](https://www.nvidia.com/en-us/networking/ethernet/connectx-5/) adaptors. For the servers **with only one accelerator card, only one 100 GbE port is connected to the respective leaf switch.** On the other hand, **the HACC boxes have two 100 GbE ports connected to the respective leaf switch,** offering a total of 200 GbE effective bandwidth.
