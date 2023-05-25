@@ -33,7 +33,7 @@ fi
 #check on multiple Xilinx devices
 multiple_devices=$($CLI_WORKDIR/common/get_multiple_devices $DATABASE)
 
-#check on flags (before: flags cannot be empty)
+#check on flags
 project_found=""
 project_name=""
 device_found=""
@@ -65,19 +65,17 @@ else
     #project_dialog_check
     result="$("$CLI_WORKDIR/common/project_dialog_check" "${flags[@]}")"
     project_found=$(echo "$result" | sed -n '1p')
-    #project_idx=$(echo "$result" | sed -n '2p')
     project_name=$(echo "$result" | sed -n '2p')
-    #device_dialog_check
-    result="$("$CLI_WORKDIR/common/device_dialog_check" "${flags[@]}")"
-    device_found=$(echo "$result" | sed -n '1p')
-    #device_idx=$(echo "$result" | sed -n '2p')
-    device_index=$(echo "$result" | sed -n '2p')
     #forbidden combinations
-    if ([ "$project_found" = "1" ] && [ "$project_name" = "" ]); then #[[ $project_found = "0" ]] || ([ $project_found = "0" ] && [ $device_found = "1" ]) || 
+    if ([ "$project_found" = "1" ] && [ "$project_name" = "" ]); then 
         $CLI_WORKDIR/sgutil program vitis -h
         exit
     fi
-    #if [[ $device_index = "" ]]
+    #device_dialog_check
+    result="$("$CLI_WORKDIR/common/device_dialog_check" "${flags[@]}")"
+    device_found=$(echo "$result" | sed -n '1p')
+    device_index=$(echo "$result" | sed -n '2p')
+    #forbidden combinations
     if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then #[[ $device_found = "0" ]] || 
         $CLI_WORKDIR/sgutil program vitis -h
         exit
@@ -86,8 +84,8 @@ else
     echo ""
     echo "${bold}sgutil program vitis${normal}"
     #forgotten mandatories
+    #project_dialog
     if [[ $project_found = "0" ]]; then
-        #project_dialog
         echo ""
         echo "${bold}Please, choose your $WORKFLOW project:${normal}"
         echo ""
@@ -95,8 +93,8 @@ else
         project_found=$(echo "$result" | sed -n '1p')
         project_name=$(echo "$result" | sed -n '2p')
     fi
+    #device_dialog
     if [[ $device_found = "0" ]]; then
-        #device_dialog
         echo ""
         echo "${bold}Please, choose your device:${normal}"
         echo ""
