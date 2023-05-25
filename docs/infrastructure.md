@@ -5,12 +5,12 @@
 </p>
 
 # Infrastructure
-ETHZ-HACC comprises high-end servers, Xilinx accelerator cards, and high-speed networking. Each accelerator card has all of its Ethernet interfaces connected to a 100 GbE leaf switch to allow exploration of arbitrary network topologies for distributed computing. Additionally, we are offering a build server with development and bitstream compilation purposes. <!-- Our HACC is provisioned and managed based on [Infrastructure as Code](../docs/vocabulary.md#infrastructure-as-code) using [Ansible](../docs/vocabulary.md#ansible). -->
+ETHZ-HACC comprises high-end servers, GPUs, reconfigurable accelerator cards, and high-speed networking. Each accelerator card has all of its Ethernet interfaces connected to a 100 GbE leaf switch to allow exploration of arbitrary network topologies for distributed computing. Additionally, we are offering a build server with development and bitstream compilation purposes. <!-- Our HACC is provisioned and managed based on [Infrastructure as Code](../docs/vocabulary.md#infrastructure-as-code) using [Ansible](../docs/vocabulary.md#ansible). -->
 
-![ETHZ-HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.](../imgs/infrastructure.png "ETHZ-HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.")
-*ETHZ-HACC is comprised of high-​end servers, Xilinx accelerator cards, and high-​speed networking.*
+![ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.](../imgs/infrastructure.png "ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.")
+*ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.*
 
-We are offering twenty-four Alveo data center accelerator cards and one Versal card. Remember that each high-end server exposes **only one Xilinx accelerator card to the user.** The following tables give an overview of ETHZ-HACC **server names** and their **resources:**
+We are offering twenty-four Alveo data center accelerator cards and one Versal card. Remember that each high-end server exposes **only one reconfigurable accelerator card to the user.** The following tables give an overview of ETHZ-HACC **server names** and their **resources:**
 
 <!-- | Cluster | # instances | Booking | Names              | Examples                            |
 |---------|-------------|---------|--------------------|-------------------------------------|
@@ -147,11 +147,10 @@ We are offering twenty-four Alveo data center accelerator cards and one Versal c
 ## *Build cluster*
 We are offering a *build cluster* for development and bitstream compilation purposes. Multiple users can access this machine simultaneously without booking it first. Please only use the HACC build servers if you do not have access to similar resources at your research institution: too many users running large jobs on this machine will likely cause builds to run slowly—or sometimes to fail. Also, avoid using the build servers for debugging or simulating your hardware.
 
-## High-end servers and Xilinx accelerator cards
+## High-end servers and reconfigurable accelerator cards
 ### AMD EPYC
 EPYC is the world’s highest-performing x86 server processor with faster performance for cloud, enterprise, and HPC workloads. To learn more about it, please refer to the [AMD EPYC processors website](https://www.amd.com/en/processors/epyc-server-cpu-family) and its [data sheet.](https://www.amd.com/system/files/documents/amd-epyc-7003-series-datasheet.pdf)
 
-<!-- ## Xilinx accelerator cards -->
 ### Virtex Ultrascale+
 Virtex UltraScale+ devices provide the highest performance and integration capabilities in a 14nm/16nm FinFET node. It also provides registered inter-die routing lines enabling >600 MHz operation, with abundant and flexible clocking to deliver a virtual monolithic design experience. As the industry’s most capable FPGA family, the devices are ideal for compute-intensive applications ranging from 1+Tb/s networking and machine learning to radar/early-warning systems.
 
