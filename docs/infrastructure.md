@@ -10,7 +10,7 @@ ETHZ-HACC comprises high-end servers, GPUs, reconfigurable accelerator cards, an
 ![ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.](../imgs/infrastructure.png "ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.")
 *ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.*
 
-We are offering twenty-four Alveo data center accelerator cards and one Versal card. Remember that each high-end server exposes **only one reconfigurable accelerator card to the user.** The following tables give an overview of ETHZ-HACC **server names** and their **resources:**
+We are offering two types of deployment servers: those with only one accelerator (i.e., U250, U280, U55C, U50D, and the Versal servers), and  the HACC boxes (i.e., servers with different types of accelerators including GPUs, FPGAs, and ACAPs). In total, we are offering twelve GPUs, thirty-one Alveo data center accelerator cards and seven Versal cards. The following tables give an overview of ETHZ-HACC **server names** and their **resources:**
 
 <!-- | Cluster | # instances | Booking | Names              | Examples                            |
 |---------|-------------|---------|--------------------|-------------------------------------|
