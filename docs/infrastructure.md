@@ -175,6 +175,17 @@ Each HACC users can store data on the following directories:
 ### USB - JTAG connectivity
 The USB - JTAG connection allows granted users to interact directly with the FPGA by downloading bitstreams or updating memory content. The correct setup and access of a USB - JTAG connection is essential developers using working with [Vivado workflow](./vocabulary.md#vivado-workflow).
 
+## HACC boxes architecture
+The following picture details the architecture of the three heterogeneous servers including (per unit):
+
+* 2x EPYC Milan CPUs
+* 4x MI200 GPUs
+* 2x U55C FPGAs
+* 2x Versal ACAPs
+
+![HACC boxes architecture.](../imgs/hacc-boxes.png "HACC boxes architecture.")
+*HACC boxes architecture.*
+
 ## Networking
 
 ![Management, access and data networks.](../imgs/networking.png "Management, access and data networks.")
