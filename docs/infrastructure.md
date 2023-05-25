@@ -10,7 +10,7 @@ ETHZ-HACC comprises high-end servers, GPUs, reconfigurable accelerator cards, an
 ![ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.](../imgs/infrastructure.png "ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.")
 *ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.*
 
-We are offering two types of deployment servers: those with only one accelerator (i.e., U250, U280, U55C, U50D, and the Versal servers), and  the HACC boxes (i.e., servers with different types of accelerators including GPUs, FPGAs, and ACAPs). In total, we are offering twelve GPUs, thirty-one Alveo data center accelerator cards and seven Versal cards. The following tables give an overview of ETHZ-HACC **server names** and their **resources:**
+There are two types of deployment servers. The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including GPUs, FPGAs, and ACAPs (please, see the section [HACC boxes architecture](#hacc-boxes-architecture)). In total, ETHZ-HACC counts twelve GPUs, thirty-one Alveo data center accelerator cards, and seven Versal cards. The following tables give an overview of the **server names** and their **resources:**
 
 <!-- | Cluster | # instances | Booking | Names              | Examples                            |
 |---------|-------------|---------|--------------------|-------------------------------------|
@@ -197,7 +197,7 @@ For our **high-speed networking** data network, we are using a [spine-leaf archi
 ![Spine-leaf data network architecture.](../imgs/spine-leaf.png "Spine-leaf data network architecture.")
 *Spine-leaf data network architecture.*
 
-On the server side, the CPU NICs are [ConnectX-5](https://www.nvidia.com/en-us/networking/ethernet/connectx-5/) adaptors. As shown in the first figure, only one of cards interface is connected to the corresponding leaf switch (see [Known limitations](#known-limitations)), whereas both QSFP28 FPGA connectors are directly attached. For a given SERVERNAME, the following are valid IP addresses (interfaces):
+On the server side, the CPU NICs are [ConnectX-5](https://www.nvidia.com/en-us/networking/ethernet/connectx-5/) adaptors. As shown in the first figure, only one of cards interface is connected to the corresponding leaf switch (please, see [Known limitations](#known-limitations)), whereas both QSFP28 FPGA connectors are directly attached. For a given SERVERNAME, the following are valid IP addresses (interfaces):
 
 * SERVERNAME-mallanox-0
 * SERVERNAME-fpga-0
