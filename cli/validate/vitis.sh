@@ -53,7 +53,10 @@ else
     echo ""
     echo "${bold}sgutil validate vitis${normal}"
     #device_dialog (forgotten mandatory)
-    if [[ $device_found = "0" ]]; then
+    if [[ $multiple_devices = "0" ]]; then
+        device_found="1"
+        device_index="1"
+    elif [[ $device_found = "0" ]]; then
         echo ""
         echo "${bold}Please, choose your device:${normal}"
         echo ""
