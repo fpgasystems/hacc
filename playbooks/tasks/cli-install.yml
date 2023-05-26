@@ -242,6 +242,20 @@
     mode: 0755
   when: not get_devices_stat.stat.exists
 
+- name: copy devices_reconfigurable template to /opt/hacc
+  copy:
+    src: "../../cli/devices_reconfigurable"
+    dest: /opt/hacc/devices_reconfigurable
+    mode: 0755
+  when: not get_devices_stat.stat.exists
+
+- name: copy devices_gpu template to /opt/hacc
+  copy:
+    src: "../../cli/devices_gpu"
+    dest: /opt/hacc/devices_gpu
+    mode: 0755
+  when: not get_devices_stat.stat.exists
+
 - name: copy common/get_num_devices script
   copy:
     src: "../../cli/common/get_num_devices.sh"
