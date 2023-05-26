@@ -1,6 +1,7 @@
 #!/bin/bash
 
-DATABASE="/opt/hacc/devices"
+HACC_PATH="/opt/hacc"
+DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 
 #constants (id upstream_port root_port LinkCtl device_type device_name serial_number IP MAC)
 ID_COLUMN=1
@@ -60,16 +61,16 @@ get_column() {
   echo $column
 }
 
-# Check if the DATABASE exists
-if [[ ! -f "$DATABASE" ]]; then
+# Check if the DEVICES_LIST exists
+if [[ ! -f "$DEVICES_LIST" ]]; then
   echo ""
-  echo "Please, update $DATABASE according to your infrastructure."
+  echo "Please, update $DEVICES_LIST according to your infrastructure."
   echo ""
   exit 1
 fi
 
 #the file exists - check its contents by evaluating first row (device_0)
-device_0=$(head -n 1 "$DATABASE")
+device_0=$(head -n 1 "$DEVICES_LIST")
 
 #extract the second, third, and fourth columns (upstream_port, root_port, LinkCtl) using awk
 upstream_port_0=$(echo "$device_0" | awk '{print $2}')
@@ -85,10 +86,10 @@ if [[ $continue -eq 1 ]]; then
   #get column for the parameter
   parameter_column=$(get_column $parameter)
   #output device parameter
-  awk -v device_index="$device_index" -v parameter_column="$parameter_column" '$1 == device_index {print $parameter_column}' $DATABASE
+  awk -v device_index="$device_index" -v parameter_column="$parameter_column" '$1 == device_index {print $parameter_column}' $DEVICES_LIST
 else
   echo ""
-  echo "Please, update $DATABASE according to your infrastructure."
+  echo "Please, update $DEVICES_LIST according to your infrastructure."
   echo ""
   exit
 fi

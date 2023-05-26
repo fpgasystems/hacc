@@ -3,17 +3,10 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-#inputs (./examine 0 root_port)
-#id=$1
-#parameter=$2
-
-#get hostname
-#url="${HOSTNAME}"
-#hostname="${url%%.*}"
-
 #constants
+HACC_PATH="/opt/hacc"
+DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 STR_LENGTH=20
-DATABASE="/opt/hacc/devices"
 
 split_addresses (){
 
@@ -52,16 +45,16 @@ echo ""
 echo "${bold}Device Index : Upstream port (BFD) : Device Type (Name)   : Serial Number : Networking${normal}"
 echo "${bold}-------------------------------------------------------------------------------------------------------------${normal}"
 
-# Check if the DATABASE exists
-if [[ ! -f "$DATABASE" ]]; then
+# Check if the $DEVICES_LIST exists
+if [[ ! -f "$DEVICES_LIST" ]]; then
   echo ""
-  echo "Please, update $DATABASE according to your infrastructure."
+  echo "Please, update $DEVICES_LIST according to your infrastructure."
   echo ""
   exit 1
 fi
 
 #the file exists - check its contents by evaluating first row (device_0)
-device_0=$(head -n 1 "$DATABASE")
+device_0=$(head -n 1 "$DEVICES_LIST")
 
 #extract the second, third, and fourth columns (upstream_port, root_port, LinkCtl) using awk
 upstream_port_1=$(echo "$device_0" | awk '{print $2}')
@@ -70,7 +63,7 @@ LinkCtl_0=$(echo "$device_0" | awk '{print $4}')
 
 if [[ $upstream_port_1 == "xx:xx.x" || $root_port_0 == "xx:xx.x" || $LinkCtl_0 == "xx" ]]; then
   echo ""
-  echo "Please, update $DATABASE according to your infrastructure."
+  echo "Please, update $DEVICES_LIST according to your infrastructure."
   echo ""
   exit
 fi
