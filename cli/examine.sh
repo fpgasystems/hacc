@@ -32,39 +32,38 @@ split_addresses (){
   fi
 }
 
-#run xbutil examine
-echo ""
-$XRT_PATH/bin/xbutil examine
+print_reconfigurable_devices_header (){
+  echo "${bold}Device Index : Upstream port (BFD) : Device Type (Name)   : Serial Number : Networking${normal}"
+  echo "${bold}-------------------------------------------------------------------------------------------------------------${normal}"
+}
 
-echo ""
+print_gpu_devices_header (){
+  echo "${bold}Device Index : PCI BUS : Device Type (GPU ID)   : Serial Number : Unique ID${normal}"
+  echo "${bold}-------------------------------------------------------------------------------------------------------------${normal}"
+}
 
 #reconfigurable devices
-echo "${bold}Device Index : Upstream port (BFD) : Device Type (Name)   : Serial Number : Networking${normal}"
-echo "${bold}-------------------------------------------------------------------------------------------------------------${normal}"
 if [[ -f "$RECONF_DEVICES_LIST" ]]; then
-  #the file exists - check its contents by evaluating first row (device_0)
-  device_0=$(head -n 1 "$RECONF_DEVICES_LIST")
-  #extract the second, third, and fourth columns (upstream_port, root_port, LinkCtl) using awk
-  upstream_port_1=$(echo "$device_0" | awk '{print $2}')
-  root_port_0=$(echo "$device_0" | awk '{print $3}')
-  LinkCtl_0=$(echo "$device_0" | awk '{print $4}')
-  #print if the information has been updated
-  if [[ $upstream_port_1 == "xx:xx.x" || $root_port_0 == "xx:xx.x" || $LinkCtl_0 == "xx" ]]; then
+  #print if the first fpga/acap is valid
+  device_1=$(head -n 1 "$RECONF_DEVICES_LIST")
+  upstream_port_1=$(echo "$device_1" | awk '{print $2}')
+  if [[ -n "$(lspci | grep $upstream_port_1)" ]]; then
+    #run xbutil examine
     echo ""
-    echo "Please, update $RECONF_DEVICES_LIST according to your infrastructure."
+    $XRT_PATH/bin/xbutil examine
     echo ""
-  else
+    print_reconfigurable_devices_header
     #get number of fpga and acap devices present
     MAX_RECONF_DEVICES=$(grep -E "fpga|acap" $RECONF_DEVICES_LIST | wc -l)
     #loop over reconfigurable devices
     for ((i=1; i<=$MAX_RECONF_DEVICES; i++)); do
-      id=$(/opt/cli/get/get_device_param $i id)
-      upstream_port=$(/opt/cli/get/get_device_param $i upstream_port)
-      device_type=$(/opt/cli/get/get_device_param $i device_type)
-      device_name=$(/opt/cli/get/get_device_param $i device_name)
-      serial_number=$(/opt/cli/get/get_device_param $i serial_number)
-      ip=$(/opt/cli/get/get_device_param $i IP)
-      mac=$(/opt/cli/get/get_device_param $i MAC)
+      id=$(/opt/cli/get/get_reconfigurable_device_param $i id)
+      upstream_port=$(/opt/cli/get/get_reconfigurable_device_param $i upstream_port)
+      device_type=$(/opt/cli/get/get_reconfigurable_device_param $i device_type)
+      device_name=$(/opt/cli/get/get_reconfigurable_device_param $i device_name)
+      serial_number=$(/opt/cli/get/get_reconfigurable_device_param $i serial_number)
+      ip=$(/opt/cli/get/get_reconfigurable_device_param $i IP)
+      mac=$(/opt/cli/get/get_reconfigurable_device_param $i MAC)
       #print table
       if [ -n "$id" ]; then  
         #get bdf
@@ -83,9 +82,24 @@ if [[ -f "$RECONF_DEVICES_LIST" ]]; then
     done
     echo ""
   fi
-else
-  #the file does not even exist
-  echo ""
-  echo "Please, update $RECONF_DEVICES_LIST according to your infrastructure."
-  echo ""
+fi
+
+exit #borrar!!!!!!!!
+
+#GPU devices
+if [[ -f "$GPU_DEVICES_LIST" ]]; then
+  #print if the first fpga/acap is valid
+  device_1=$(head -n 1 "$GPU_DEVICES_LIST")
+  bus_1=$(echo "$device_1" | awk '{print $2}')
+  if [[ -n "$(lspci | grep $bus_1)" ]]; then
+    print_gpu_devices_header
+    #get number of gpu devices present
+    MAX_GPU_DEVICES=$(grep -E "fpga|acap" $GPU_DEVICES_LIST | wc -l)
+    #loop over reconfigurable devices
+    for ((i=1; i<=$MAX_GPU_DEVICES; i++)); do
+      id=$(/opt/cli/get/get_gpu_device_param $i id) #========================================> I need to update the function
+
+    done
+    echo ""
+  fi
 fi
