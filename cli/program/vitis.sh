@@ -4,13 +4,14 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
-CLI_WORKDIR="/opt/cli"
-DATABASE="/opt/hacc/devices"
+CLI_PATH="/opt/cli"
+HACC_PATH="/opt/hacc"
+DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 WORKFLOW="vitis"
 TARGET="hw"
 
-#configuration parameters
-MAX_DEVICES=$($CLI_WORKDIR/common/get_MAX_DEVICES)
+#get number of fpga and acap devices present
+MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 
 #get username
 username=$USER
@@ -31,7 +32,7 @@ if ! [ -d "/home/$username/my_projects/vitis/" ]; then
 fi
 
 #check on multiple Xilinx devices
-multiple_devices=$($CLI_WORKDIR/common/get_multiple_devices $DATABASE)
+multiple_devices=$($CLI_PATH/common/get_multiple_devices $DEVICES_LIST)
 
 #check on flags
 project_found=""
@@ -46,7 +47,7 @@ if [ "$flags" = "" ]; then
     echo ""
     echo "${bold}Please, choose your $WORKFLOW project:${normal}"
     echo ""
-    result=$($CLI_WORKDIR/common/project_dialog $username $WORKFLOW)
+    result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     #device_dialog
@@ -57,27 +58,27 @@ if [ "$flags" = "" ]; then
         echo ""
         echo "${bold}Please, choose your device:${normal}"
         echo ""
-        result=$($CLI_WORKDIR/common/device_dialog $CLI_WORKDIR $MAX_DEVICES $multiple_devices)
+        result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
     fi
 else
     #project_dialog_check
-    result="$("$CLI_WORKDIR/common/project_dialog_check" "${flags[@]}")"
+    result="$("$CLI_PATH/common/project_dialog_check" "${flags[@]}")"
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     #forbidden combinations
     if ([ "$project_found" = "1" ] && [ "$project_name" = "" ]); then 
-        $CLI_WORKDIR/sgutil program vitis -h
+        $CLI_PATH/sgutil program vitis -h
         exit
     fi
     #device_dialog_check
-    result="$("$CLI_WORKDIR/common/device_dialog_check" "${flags[@]}")"
+    result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
     device_found=$(echo "$result" | sed -n '1p')
     device_index=$(echo "$result" | sed -n '2p')
     #forbidden combinations
     if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
-        $CLI_WORKDIR/sgutil program vitis -h
+        $CLI_PATH/sgutil program vitis -h
         exit
     fi
     #header (2/2)
@@ -88,7 +89,7 @@ else
         echo ""
         echo "${bold}Please, choose your $WORKFLOW project:${normal}"
         echo ""
-        result=$($CLI_WORKDIR/common/project_dialog $username $WORKFLOW)
+        result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
         project_found=$(echo "$result" | sed -n '1p')
         project_name=$(echo "$result" | sed -n '2p')
     fi
@@ -97,7 +98,7 @@ else
         echo ""
         echo "${bold}Please, choose your device:${normal}"
         echo ""
-        result=$($CLI_WORKDIR/common/device_dialog $CLI_WORKDIR $MAX_DEVICES $multiple_devices)
+        result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
     fi
@@ -115,7 +116,7 @@ if ! [ -d "$DIR" ]; then
 fi
 
 #get platform
-platform=$($CLI_WORKDIR/get/get_device_param $device_index platform)
+platform=$($CLI_PATH/get/get_device_param $device_index platform)
 
 #define directories (2)
 APP_BUILD_DIR="/home/$username/my_projects/vitis/$project_name/build_dir.$TARGET.$platform"
@@ -130,7 +131,7 @@ fi
 
 #get booked machines
 echo ""
-servers=$(sudo $CLI_WORKDIR/common/get_booking_system_servers_list | tail -n +2)
+servers=$(sudo $CLI_PATH/common/get_booking_system_servers_list | tail -n +2)
 echo ""
 
 #convert string to an array
@@ -181,13 +182,13 @@ cd $APP_BUILD_DIR
 xclbin=$(echo *.xclbin | awk '{print $NF}')
 
 #get BDF (i.e., Bus:Device.Function) 
-upstream_port=$($CLI_WORKDIR/get/get_device_param $device_index upstream_port)
+upstream_port=$($CLI_PATH/get/get_device_param $device_index upstream_port)
 bdf="${upstream_port%?}1"
 
 #programming local server
 echo "Programming local server ${bold}$hostname...${normal}"
 #revert to xrt first if FPGA is already in baremetal
-sudo $CLI_WORKDIR/program/revert -d $device_index
+sudo $CLI_PATH/program/revert -d $device_index
 #reset device (we delete any xclbin)
 /opt/xilinx/xrt/bin/xbutil reset --device $bdf --force
 #program xclbin
@@ -202,7 +203,7 @@ do
     echo ""
 
     #remotely revert to xrt, reset device (we delete any xclbin) and program xclbin
-    ssh -t $username@$i "sudo $CLI_WORKDIR/program/revert ; /opt/xilinx/xrt/bin/xbutil reset --device $bdf --force ; /opt/xilinx/xrt/bin/xbutil program --device $bdf -u $APP_BUILD_DIR/$xclbin"
+    ssh -t $username@$i "sudo $CLI_PATH/program/revert ; /opt/xilinx/xrt/bin/xbutil reset --device $bdf --force ; /opt/xilinx/xrt/bin/xbutil program --device $bdf -u $APP_BUILD_DIR/$xclbin"
 done
 
 echo ""
