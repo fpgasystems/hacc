@@ -4,57 +4,56 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
+XRT_PATH="/opt/xilinx/xrt"
 HACC_PATH="/opt/hacc"
-DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+RECONF_DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+GPU_DEVICES_LIST="$HACC_PATH/devices_gpu"
 STR_LENGTH=20
 
-split_addresses (){
+#get number of fpga and acap devices present
+MAX_RECONF_DEVICES=$(grep -E "fpga|acap" $RECONF_DEVICES_LIST | wc -l)
 
+split_addresses (){
+  #input parameters
   str_ip=$1
   str_mac=$2
   aux=$3
-
-  # Save the current IFS
+  #save the current IFS
   OLDIFS=$IFS
-
-  # Set the IFS to / to split the string at each /
+  #set the IFS to / to split the string at each /
   IFS="/"
-
-  # Read the two parts of the string into variables
+  #read the two parts of the string into variables
   read ip0 ip1 <<< "$str_ip"
   read mac0 mac1 <<< "$str_mac"
-
-  # Reset the IFS to its original value
+  #reset the IFS to its original value
   IFS=$OLDIFS
-
-  # Print the two parts of the string
+  #print the two parts of the string
   if [[ "$aux" == "0" ]]; then
     echo "$ip0 ($mac0)"
   else
     echo "$ip1 ($mac1)"
   fi
-
 }
 
 #run xbutil examine
 echo ""
-/opt/xilinx/xrt/bin/xbutil examine
+$XRT_PATH/bin/xbutil examine
 
 echo ""
 
 echo "${bold}Device Index : Upstream port (BFD) : Device Type (Name)   : Serial Number : Networking${normal}"
 echo "${bold}-------------------------------------------------------------------------------------------------------------${normal}"
 
-# Check if the $DEVICES_LIST exists
-if [[ ! -f "$DEVICES_LIST" ]]; then
+# Check if the $RECONF_DEVICES_LIST exists
+if [[ ! -f "$RECONF_DEVICES_LIST" ]]; then
   echo ""
-  echo "Please, update $DEVICES_LIST according to your infrastructure."
+  echo "Please, update $RECONF_DEVICES_LIST according to your infrastructure."
   echo ""
   exit 1
 fi
 
 #the file exists - check its contents by evaluating first row (device_0)
-device_0=$(head -n 1 "$DEVICES_LIST")
+device_0=$(head -n 1 "$RECONF_DEVICES_LIST")
 
 #extract the second, third, and fourth columns (upstream_port, root_port, LinkCtl) using awk
 upstream_port_1=$(echo "$device_0" | awk '{print $2}')
@@ -63,7 +62,7 @@ LinkCtl_0=$(echo "$device_0" | awk '{print $4}')
 
 if [[ $upstream_port_1 == "xx:xx.x" || $root_port_0 == "xx:xx.x" || $LinkCtl_0 == "xx" ]]; then
   echo ""
-  echo "Please, update $DEVICES_LIST according to your infrastructure."
+  echo "Please, update $RECONF_DEVICES_LIST according to your infrastructure."
   echo ""
   exit
 fi
@@ -104,9 +103,6 @@ serial_number_4=$(/opt/cli/get/get_device_param 4 serial_number)
 ip_4=$(/opt/cli/get/get_device_param 4 IP)
 mac_4=$(/opt/cli/get/get_device_param 4 MAC)
 
-#echo "${bold}Device Index : BDF (Upstream port) : Device Type (Name)   : Serial Number : Networking${normal}"
-#echo "${bold}-------------------------------------------------------------------------------------------------------------${normal}"
-
 #device_1
 if [ -n "$id_1" ]; then  
   #get bdf
@@ -118,8 +114,7 @@ if [ -n "$id_1" ]; then
   #split ip
   add_0=$(split_addresses $ip_1 $mac_1 0)
   add_1=$(split_addresses $ip_1 $mac_1 1)
-
-  #echo "$id_1            : $upstream_port_1             : $aux : $serial_number_1 : $add_0"
+  #print
   echo "$id_1            : $upstream_port_1 ($bdf_1)   : $aux : $serial_number_1 : $add_0"
   echo "                                                                            $add_1"
 fi
@@ -135,7 +130,7 @@ if [ -n "$id_2" ]; then
   #split ip
   add_0=$(split_addresses $ip_2 $mac_2 0)
   add_1=$(split_addresses $ip_2 $mac_2 1)
-  #echo "$id_2            : $upstream_port_2             : $device_type_2 ($device_name_2) : $serial_number_2 : $add_0"
+  #print
   echo "$id_2            : $upstream_port_2 ($bdf_2)   : $device_type_2 ($device_name_2) : $serial_number_2 : $add_0"
   echo "                                                                            $add_1"
 fi
@@ -151,7 +146,7 @@ if [ -n "$id_3" ]; then
   #split ip
   add_0=$(split_addresses $ip_3 $mac_3 0)
   add_1=$(split_addresses $ip_3 $mac_3 1)
-  #echo "$id_3            : $upstream_port_3             : $device_type_3 ($device_name_3)    : $serial_number_3 : $add_0"
+  #print
   echo "$id_3            : $upstream_port_3 ($bdf_3)   : $device_type_3 ($device_name_3)    : $serial_number_3 : $add_0"
   echo "                                                                            $add_1"
 fi
@@ -167,7 +162,7 @@ if [ -n "$id_4" ]; then
   #split ip
   add_0=$(split_addresses $ip_4 $mac_4 0)
   add_1=$(split_addresses $ip_4 $mac_4 1)
-  #echo "$id_4            : $upstream_port_4             : $device_type_4 ($device_name_4)    : $serial_number_4 : $add_0"
+  #print
   echo "$id_4            : $upstream_port_4 ($bdf_4)   : $device_type_4 ($device_name_4)    : $serial_number_4 : $add_0"
   echo "                                                                            $add_1"
 fi
