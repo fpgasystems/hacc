@@ -38,7 +38,7 @@ print_reconfigurable_devices_header (){
 }
 
 print_gpu_devices_header (){
-  echo "${bold}Device Index : PCI BUS : Device Type (GPU ID)   : Serial Number : Unique ID${normal}"
+  echo "${bold}Device Index : PCI BUS : Device Type (GPU ID) : Serial Number : Unique ID${normal}"
   echo "${bold}-------------------------------------------------------------------------------------------------------------${normal}"
 }
 
@@ -103,7 +103,7 @@ if [[ -f "$GPU_DEVICES_LIST" ]]; then
         serial_number=$(/opt/cli/get/get_gpu_device_param $i serial_number)
         unique_id=$(/opt/cli/get/get_gpu_device_param $i unique_id)
         #print row
-        echo "$id            : $bus   : $device_type ($gpu_id) : $serial_number : $unique_id" 
+        echo "$id            : $bus : $device_type ($gpu_id)         : $serial_number  : $unique_id" 
       fi
     done
     echo ""
