@@ -58,15 +58,14 @@ if [[ -f "$RECONF_DEVICES_LIST" ]]; then
     #loop over reconfigurable devices
     for ((i=1; i<=$MAX_RECONF_DEVICES; i++)); do
       id=$(/opt/cli/get/get_reconfigurable_device_param $i id)
-      upstream_port=$(/opt/cli/get/get_reconfigurable_device_param $i upstream_port)
-      device_type=$(/opt/cli/get/get_reconfigurable_device_param $i device_type)
-      device_name=$(/opt/cli/get/get_reconfigurable_device_param $i device_name)
-      serial_number=$(/opt/cli/get/get_reconfigurable_device_param $i serial_number)
-      ip=$(/opt/cli/get/get_reconfigurable_device_param $i IP)
-      mac=$(/opt/cli/get/get_reconfigurable_device_param $i MAC)
       #print table
       if [ -n "$id" ]; then  
-        #get bdf
+        upstream_port=$(/opt/cli/get/get_reconfigurable_device_param $i upstream_port)
+        device_type=$(/opt/cli/get/get_reconfigurable_device_param $i device_type)
+        device_name=$(/opt/cli/get/get_reconfigurable_device_param $i device_name)
+        serial_number=$(/opt/cli/get/get_reconfigurable_device_param $i serial_number)
+        ip=$(/opt/cli/get/get_reconfigurable_device_param $i IP)
+        mac=$(/opt/cli/get/get_reconfigurable_device_param $i MAC)
         bdf="${upstream_port::-1}1"
         #adjust length
         aux="$device_type ($device_name)"
@@ -84,8 +83,6 @@ if [[ -f "$RECONF_DEVICES_LIST" ]]; then
   fi
 fi
 
-exit #borrar!!!!!!!!
-
 #GPU devices
 if [[ -f "$GPU_DEVICES_LIST" ]]; then
   #print if the first fpga/acap is valid
@@ -94,11 +91,20 @@ if [[ -f "$GPU_DEVICES_LIST" ]]; then
   if [[ -n "$(lspci | grep $bus_1)" ]]; then
     print_gpu_devices_header
     #get number of gpu devices present
-    MAX_GPU_DEVICES=$(grep -E "fpga|acap" $GPU_DEVICES_LIST | wc -l)
-    #loop over reconfigurable devices
+    MAX_GPU_DEVICES=$(grep -E "gpu" $GPU_DEVICES_LIST | wc -l)
+    #loop over gpu devices
     for ((i=1; i<=$MAX_GPU_DEVICES; i++)); do
       id=$(/opt/cli/get/get_gpu_device_param $i id) #========================================> I need to update the function
-
+      #print table
+      if [ -n "$id" ]; then
+        bus=$(/opt/cli/get/get_gpu_device_param $i bus)
+        device_type=$(/opt/cli/get/get_gpu_device_param $i device_type)
+        gpu_id=$(/opt/cli/get/get_gpu_device_param $i gpu_id)
+        serial_number=$(/opt/cli/get/get_gpu_device_param $i serial_number)
+        unique_id=$(/opt/cli/get/get_gpu_device_param $i unique_id)
+        #print row
+        echo "$id            : $bus   : $device_type ($gpu_id) : $serial_number : $unique_id" 
+      fi
     done
     echo ""
   fi
