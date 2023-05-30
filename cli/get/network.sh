@@ -114,7 +114,7 @@ if [ "$flags" = "" ]; then
     #echo "$hostname-mellanox-0 ($mellanox_name): $ip_mellanox ($mac_mellanox)"
     echo ""
     #print devices information
-    for device in 0 1 2 3; do
+    for device in 1 2 3 4; do
         ip=$(/opt/cli/get/get_fpga_device_param $device IP)
         if [ -n "$ip" ]; then
             mac=$(/opt/cli/get/get_fpga_device_param $device MAC)
