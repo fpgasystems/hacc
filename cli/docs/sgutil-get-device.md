@@ -24,6 +24,5 @@
 
 ### Examples
 ```
-$ sgutil get device
-$ sgutil get device -w u250
+$ sgutil get device -d 1
 ```

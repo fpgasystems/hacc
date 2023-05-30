@@ -8,7 +8,7 @@
 
 <code>sgutil get serial [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Retreives FPGA/ACAP serial numbers..
+  &nbsp; &nbsp; Retreives FPGA/ACAP serial numbers.
 </p>
 
 ### Flags
@@ -24,6 +24,5 @@
 
 ### Examples
 ```
-$ sgutil get serial
-$ sgutil get serial -w u55c-06
+$ sgutil get serial -d 1
 ```
