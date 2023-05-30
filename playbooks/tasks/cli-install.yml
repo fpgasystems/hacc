@@ -355,10 +355,20 @@
     path: /opt/cli/get/get_device_param
     state: absent
 
-- name: copy get_reconfigurable_device_param script
+#- name: copy get_reconfigurable_device_param script
+#  copy:
+#    src: "../../cli/get/get_reconfigurable_device_param.sh"
+#    dest: /opt/cli/get/get_reconfigurable_device_param
+#    mode: 0755
+- name: remove get/get_reconfigurable_device_param
+  ansible.builtin.file:
+    path: /opt/cli/get/get_reconfigurable_device_param
+    state: absent
+
+- name: copy get_fpga_device_param script
   copy:
-    src: "../../cli/get/get_reconfigurable_device_param.sh"
-    dest: /opt/cli/get/get_reconfigurable_device_param
+    src: "../../cli/get/get_fpga_device_param.sh"
+    dest: /opt/cli/get/get_fpga_device_param
     mode: 0755
 
 - name: copy get_gpu_device_param script
