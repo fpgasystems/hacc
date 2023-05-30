@@ -20,7 +20,7 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-# inputs
+#inputs
 read -a flags <<< "$@"
 
 #check if workflow exists
