@@ -3,10 +3,10 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-# constants
+#constants
 CLI_WORKDIR="/opt/cli"
 
-# inputs
+#inputs
 command=$1
 arguments=$2
 
@@ -18,11 +18,11 @@ ${bold}$cli_name [commands] [arguments [flags]] [--help] [--version]${normal}
 COMMANDS:
    build           - Creates binaries, bitstreams, and drivers for your accelerated applications.
    examine         - Status of the system and devices.
-   get             - Retreives information from the server/s.
+   get             - Devices and host information.
    new             - Creates a new project of your choice.
    program         - Downloads the accelerated application or driver to a given device.
    run             - Executes the accelerated application on a given device.
-   set             - Changes the configuration of your server or given device.
+   set             - Devices and host configuration.
    validate        - Validates the basic HACC infrastructure functionality.
 
    -h, --help      - Help to use this application.
@@ -215,26 +215,18 @@ examine_help() {
 
 # get ----------------------------------------------------------------------------------------------------------------------------
 
-get_help() { #it makes sense to group the flags here as they are the same for all the arguments
+get_help() {
     echo ""
     echo "${bold}sgutil get [arguments [flags]] [--help]${normal}"
     echo ""
-    echo "Retreives information from the server/s."
+    echo "Devices and host information."
     echo ""
     echo "ARGUMENTS:"
-    echo "   device          - Retreives FPGA device name from the server/s."
-    #echo "   ip              - Retreives IP information from the server/s."
-    #echo "   mac             - Retreives L2 information from the server/s."
-    echo "   network         - Retreives networking information from the server/s."
-    echo "   serial          - Retreives FPGA serial number from the server/s."
+    echo "   device          - Retreives FPGA/ACAP device names."
+    echo "   network         - Retreives FPGA/ACAP and host networking information."
+    echo "   serial          - Retreives FPGA/ACAP serial numbers."
     echo ""
     echo "   -h, --help      - Help to use this command."
-    #echo ""
-    #echo "FLAGS:"
-    #echo "   -l, --local     - Retreives information from the local server."
-    #echo "   -w, --word      - Filters information according to regexp expression."
-    #echo ""
-    #echo "   -h, --help      - Help to use this command."
     echo ""
     exit 1
 }
@@ -243,52 +235,24 @@ get_device_help() {
     echo ""
     echo "${bold}sgutil get device [flags] [--help]${normal}"
     echo ""
-    echo "Retreives FPGA device name from the server/s."
+    echo "Retreives FPGA/ACAP device names."
     echo ""
     echo "FLAGS:"
-    echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
+    echo "   -d, --device    - FPGA/ACAP Device Index (according to sgutil examine)."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
     exit 1
 }
 
-#get_ip_help() {
-#    echo ""
-#    echo "${bold}sgutil get ip [flags] [--help]${normal}"
-#    echo ""
-#    echo "Retreives IP information from the server/s."
-#    echo ""
-#    echo "FLAGS:"
-#    echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
-#    echo ""
-#    echo "   -h, --help      - Help to use this command."
-#    echo ""
-#    exit 1
-#}
-
-#get_mac_help() {
-#    echo ""
-#    echo "${bold}sgutil get mac [flags] [--help]${normal}"
-#    echo ""
-#    echo "Retreives L2 information from the server/s."
-#    echo ""
-#    echo "FLAGS:"
-#    echo "   -w, --word      - Filters L2 information according to regexp expression."
-#    echo ""
-#    echo "   -h, --help      - Help to use this command."
-#    echo ""
-#    exit 1
-#}
-
 get_network_help() {
     echo ""
     echo "${bold}sgutil get network [flags] [--help]${normal}"
     echo ""
-    echo "Retreives networking information from the server/s."
+    echo "Retreives FPGA/ACAP and host networking information."
     echo ""
     echo "FLAGS:"
-    echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
+    echo "   -d, --device    - FPGA/ACAP Device Index (according to sgutil examine)."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -299,10 +263,10 @@ get_serial_help() {
     echo ""
     echo "${bold}sgutil get serial [flags] [--help]${normal}"
     echo ""
-    echo "Retreives FPGA serial number from the server/s."
+    echo "Retreives FPGA/ACAP serial numbers."
     echo ""
     echo "FLAGS:"
-    echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
+    echo "   -d, --device    - FPGA/ACAP Device Index (according to sgutil examine)."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""

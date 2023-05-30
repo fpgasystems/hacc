@@ -8,7 +8,7 @@
 
 <code>sgutil get [arguments [flags]] [--help]</code>
 <p>
-  &nbsp; &nbsp; Retreives information from the server/s.
+  &nbsp; &nbsp; Devices and host information.
 </p>
 
 ### Arguments

@@ -8,14 +8,13 @@
 
 <code>sgutil get network [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Retreives networking information from the server/s.
+  &nbsp; &nbsp; Retreives FPGA/ACAP and host networking information.
 </p>
-<!-- The number of parallel client threads to run is four by default. -->
 
 ### Flags
 <code>-d, --device <string></code>
 <p>
-  &nbsp; &nbsp; FPGA Device Index (see sgutil examine).
+  &nbsp; &nbsp; FPGA/ACAP Device Index (according to sgutil examine).
 </p>
 
 <code>-h, --help <string></code>

@@ -8,14 +8,13 @@
 
 <code>sgutil get serial [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Retreives FPGA serial number from the server/s.
+  &nbsp; &nbsp; Retreives FPGA/ACAP serial numbers..
 </p>
-<!-- The number of parallel client threads to run is four by default. -->
 
 ### Flags
-<code>-w, --word <string></code>
+<code>-d, --device <string></code>
 <p>
-  &nbsp; &nbsp; Filters FPGA serial number according to regexp expression.
+  &nbsp; &nbsp; FPGA/ACAP Device Index (according to sgutil examine).
 </p>
 
 <code>-h, --help <string></code>
