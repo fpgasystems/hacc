@@ -92,9 +92,9 @@ device_index=""
 if [ "$flags" = "" ]; then
     #print devices information
     for device_index in 1 2 3 4; do #0 1 2 3
-        name=$($CLI_WORKDIR/get/get_device_param $device_index serial_number)
+        name=$($CLI_WORKDIR/get/get_fpga_device_param $device_index serial_number)
         if [ -n "$name" ]; then
-            #type=$($CLI_WORKDIR/get/get_device_param $device_index device_type)
+            #type=$($CLI_WORKDIR/get/get_fpga_device_param $device_index device_type)
             echo "$device_index: $name" #"$device_index: $type - $name"
         fi
     done
@@ -121,8 +121,8 @@ else
         exit
     fi
     #print
-    name=$($CLI_WORKDIR/get/get_device_param $device_index serial_number)
-    #type=$($CLI_WORKDIR/get/get_device_param $device_index device_type)
+    name=$($CLI_WORKDIR/get/get_fpga_device_param $device_index serial_number)
+    #type=$($CLI_WORKDIR/get/get_fpga_device_param $device_index device_type)
     echo "$device_index: $name" #"$device_index: $type - $name"
     echo ""
 fi

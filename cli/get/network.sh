@@ -115,10 +115,10 @@ if [ "$flags" = "" ]; then
     echo ""
     #print devices information
     for device in 0 1 2 3; do
-        ip=$(/opt/cli/get/get_device_param $device IP)
+        ip=$(/opt/cli/get/get_fpga_device_param $device IP)
         if [ -n "$ip" ]; then
-            mac=$(/opt/cli/get/get_device_param $device MAC)
-            device_type=$(/opt/cli/get/get_device_param $device device_type)
+            mac=$(/opt/cli/get/get_fpga_device_param $device MAC)
+            device_type=$(/opt/cli/get/get_fpga_device_param $device device_type)
             add_0=$(split_addresses $ip $mac 0)
             add_1=$(split_addresses $ip $mac 1)
             name="$device" #"$hostname-$device_type-$device"
@@ -150,9 +150,9 @@ else
         exit
     fi
     #print
-    ip=$(/opt/cli/get/get_device_param $device_index IP)
-    mac=$(/opt/cli/get/get_device_param $device_index MAC)
-    device_type=$(/opt/cli/get/get_device_param $device_index device_type)
+    ip=$(/opt/cli/get/get_fpga_device_param $device_index IP)
+    mac=$(/opt/cli/get/get_fpga_device_param $device_index MAC)
+    device_type=$(/opt/cli/get/get_fpga_device_param $device_index device_type)
     add_0=$(split_addresses $ip $mac 0)
     add_1=$(split_addresses $ip $mac 1)
     name="$device" #"$hostname-$device_type-$device"
