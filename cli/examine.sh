@@ -57,15 +57,15 @@ if [[ -f "$RECONF_DEVICES_LIST" ]]; then
     MAX_RECONF_DEVICES=$(grep -E "fpga|acap" $RECONF_DEVICES_LIST | wc -l)
     #loop over reconfigurable devices
     for ((i=1; i<=$MAX_RECONF_DEVICES; i++)); do
-      id=$(/opt/cli/get/get_reconfigurable_device_param $i id)
+      id=$(/opt/cli/get/get_fpga_device_param $i id)
       #print table
       if [ -n "$id" ]; then  
-        upstream_port=$(/opt/cli/get/get_reconfigurable_device_param $i upstream_port)
-        device_type=$(/opt/cli/get/get_reconfigurable_device_param $i device_type)
-        device_name=$(/opt/cli/get/get_reconfigurable_device_param $i device_name)
-        serial_number=$(/opt/cli/get/get_reconfigurable_device_param $i serial_number)
-        ip=$(/opt/cli/get/get_reconfigurable_device_param $i IP)
-        mac=$(/opt/cli/get/get_reconfigurable_device_param $i MAC)
+        upstream_port=$(/opt/cli/get/get_fpga_device_param $i upstream_port)
+        device_type=$(/opt/cli/get/get_fpga_device_param $i device_type)
+        device_name=$(/opt/cli/get/get_fpga_device_param $i device_name)
+        serial_number=$(/opt/cli/get/get_fpga_device_param $i serial_number)
+        ip=$(/opt/cli/get/get_fpga_device_param $i IP)
+        mac=$(/opt/cli/get/get_fpga_device_param $i MAC)
         bdf="${upstream_port::-1}1"
         #adjust length
         aux="$device_type ($device_name)"
