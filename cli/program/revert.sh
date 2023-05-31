@@ -4,7 +4,7 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 CLI_WORKDIR="/opt/cli"
-DATABASE="/opt/hacc/devices"
+DATABASE="/opt/hacc/devices_reconfigurable"
 MAX_DEVICES=4
 
 # constants
@@ -84,7 +84,7 @@ if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]]; then
 fi
 
 #get BDF (i.e., Bus:Device.Function) 
-upstream_port=$(/opt/cli/get/get_device_param $device_index upstream_port)
+upstream_port=$(/opt/cli/get/get_fpga_device_param $device_index upstream_port)
 bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
 
 #check for number of pci functions
@@ -114,9 +114,9 @@ echo "${bold}Programming XRT shell:${normal}"
 
 #hotplug
 #sudo bash -c "source /opt/cli/program/pci_hot_plug ${hostname}"
-#upstream_port=$(/opt/cli/get/get_device_param $device_index upstream_port)
-root_port=$(/opt/cli/get/get_device_param $device_index root_port)
-LinkCtl=$(/opt/cli/get/get_device_param $device_index LinkCtl)
+#upstream_port=$(/opt/cli/get/get_fpga_device_param $device_index upstream_port)
+root_port=$(/opt/cli/get/get_fpga_device_param $device_index root_port)
+LinkCtl=$(/opt/cli/get/get_fpga_device_param $device_index LinkCtl)
 sudo /opt/cli/program/pci_hot_plug $upstream_port $root_port $LinkCtl #${hostname}
 
 #inserting XRT driver

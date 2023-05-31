@@ -119,7 +119,7 @@ if ! [ -d "$DIR" ]; then
 fi
 
 #get platform
-platform=$($CLI_PATH/get/get_device_param $device_index platform)
+platform=$($CLI_PATH/get/get_fpga_device_param $device_index platform)
 
 #define directories (2)
 APP_BUILD_DIR="/home/$username/my_projects/vitis/$project_name/build_dir.$TARGET.$platform"
@@ -180,12 +180,14 @@ if [ -n "$servers_family_list_string" ]; then
     echo ""
 fi
 
+#servers_family_list=$($CLI_PATH/common/server_dialog $CLI_PATH $hostname)
+
 #get xclbin
 cd $APP_BUILD_DIR
 xclbin=$(echo *.xclbin | awk '{print $NF}')
 
 #get BDF (i.e., Bus:Device.Function) 
-upstream_port=$($CLI_PATH/get/get_device_param $device_index upstream_port)
+upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
 bdf="${upstream_port%?}1"
 
 #programming local server
