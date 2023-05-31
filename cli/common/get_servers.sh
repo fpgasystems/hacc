@@ -8,9 +8,7 @@ declare -g servers_family_list=""
 declare -g servers_family_list_string=""
 
 #get booked machines
-#echo ""
 servers=$(sudo $CLI_PATH/common/get_booking_system_servers_list | tail -n +2)
-#echo ""
 
 # Convert string to an array
 servers=($servers)
