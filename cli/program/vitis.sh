@@ -141,10 +141,10 @@ echo ""
 
 #deployment dialog
 if [ -n "$servers_family_list_string" ]; then
-    echo "${bold}Where do you want to deploy your binary?${normal}"
+    echo "${bold}Please, choose your deployment servers:${normal}"
     echo ""
-    echo "    1) Only this server ($hostname)"
-    echo "    2) All servers I have booked ($hostname, $servers_family_list_string)"
+    echo "1) $hostname"
+    echo "2) $hostname, $servers_family_list_string"
     while true; do
 	    read -p "" deploy_option
         case $deploy_option in
