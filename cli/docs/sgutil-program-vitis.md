@@ -12,20 +12,6 @@
 </p>
 
 ### Flags
-<!-- <code>
-  -b, --binary <string>
-</code>
-<p>
-  &nbsp; &nbsp; Programs an .xclbin binary to the specified device.
-</p>
-
-<code>
-  -n, --name <string>
-</code>
-<p>
-  &nbsp; &nbsp; FPGA's device name. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-device.md">sgutil get device</a>.
-</p> -->
-
 <code>-d, --device <string></code>
 <p>
   &nbsp; &nbsp; FPGA Device Index (see sgutil examine).
@@ -34,6 +20,11 @@
 <code>-p, --project <string></code>
 <p>
   &nbsp; &nbsp; Specifies your Vitis project name.
+</p>
+
+<code>-r, --remote <string></code>
+<p>
+  &nbsp; &nbsp; Local or remote deployment.
 </p>
 
 <!-- <code>

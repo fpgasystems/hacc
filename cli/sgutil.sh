@@ -473,7 +473,7 @@ program_vitis_help() {
     echo "FLAGS:"
     echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
     echo "   -p, --project   - Specifies your Vitis project name."
-    echo "   -r, --remote    - When used, deploys on local and remote servers."
+    echo "   -r, --remote    - Local or remote deployment."
     echo ""
     echo "   -h, --help      - Help to program a binary."
     echo ""
