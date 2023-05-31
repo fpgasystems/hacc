@@ -20,9 +20,9 @@ elif [[ "$multiple_devices" == "1" ]]; then
     #iterate over the indices 0 to MAX_DEVICES-1 using a for loop
     for ((i=1; i<=MAX_DEVICES; i++)); do
         #retrieve the parameters for each device using the current index
-        upstream_port=$($CLI_WORKDIR/get/get_device_param $i upstream_port)
+        upstream_port=$($CLI_WORKDIR/get/get_fpga_device_param $i upstream_port)
         bdf="${upstream_port::-1}1"
-        device_name=$($CLI_WORKDIR/get/get_device_param $i device_name)
+        device_name=$($CLI_WORKDIR/get/get_fpga_device_param $i device_name)
         #concatenate the parameter values into a single string and add it to the array
         devices+=("$bdf ($device_name)")
     done
