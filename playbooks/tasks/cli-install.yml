@@ -302,6 +302,12 @@
     dest: /opt/cli/common/get_servers
     mode: 0755
 
+- name: copy common/deployment_dialog_check script
+  copy:
+    src: "../../cli/common/deployment_dialog_check.sh"
+    dest: /opt/cli/common/deployment_dialog_check
+    mode: 0755
+
 - name: copy common/server_dialog script
   copy:
     src: "../../cli/common/server_dialog.sh"
