@@ -77,27 +77,6 @@ if [ "$flags" = "" ]; then
         deploy_option=$($CLI_PATH/common/deployment_dialog $servers_family_list_string)
         echo ""
     fi
-    #project_found=$(echo "$result" | sed -n '1p')
-    #project_name=$(echo "$result" | sed -n '2p')
-    #if [ -n "$servers_family_list_string" ]; then
-    #    #echo "${bold}Please, choose your deployment servers:${normal}"
-    #    #echo ""
-    #    #echo "0) $hostname"
-    #    #echo "1) $hostname, $servers_family_list_string"
-    #    while true; do
-    #        read -p "" deploy_option
-    #        case $deploy_option in
-    #            "0") 
-    #                servers_family_list=()
-    #                break
-    #                ;;
-    #            "1") 
-    #                break
-    #                ;;
-    #        esac
-    #    done
-    #    echo ""
-    #fi
 else
     #project_dialog_check
     result="$("$CLI_PATH/common/project_dialog_check" "${flags[@]}")"
@@ -169,31 +148,6 @@ else
             deploy_option=$($CLI_PATH/common/deployment_dialog $servers_family_list_string)
             echo ""
         fi
-        ##servers_family_list=()
-        ##echo ""
-        #result=$($CLI_PATH/common/get_servers $CLI_PATH $hostname)
-        #servers_family_list=$(echo "$result" | sed -n '1p' | sed -n '1p')
-        #servers_family_list_string=$(echo "$result" | sed -n '2p' | sed -n '1p')
-        #echo ""
-        #if [ -n "$servers_family_list_string" ]; then
-        #    echo "${bold}Please, choose your deployment servers:${normal}"
-        #    echo ""
-        #    echo "0) $hostname"
-        #    echo "1) $hostname, $servers_family_list_string"
-        #    while true; do
-        #        read -p "" deploy_option
-        #        case $deploy_option in
-        #            "0") 
-        #                servers_family_list=()
-        #                break
-        #                ;;
-        #            "1") 
-        #                break
-        #                ;;
-        #        esac
-        #    done
-        #    echo ""
-        #fi
     fi
 fi
 
