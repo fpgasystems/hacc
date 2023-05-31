@@ -124,7 +124,6 @@ else
         device_found="1"
         device_index="1"
     elif [[ $device_found = "0" ]]; then
-        #echo ""
         echo "${bold}Please, choose your device:${normal}"
         echo ""
         result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
@@ -134,7 +133,6 @@ else
     fi
     #deployment_dialog (forgotten mandatory 3)
     if [ "$remote_option_found" = "0" ]; then
-        echo ""
         result=$($CLI_PATH/common/get_servers $CLI_PATH $hostname)
         servers_family_list=$(echo "$result" | sed -n '1p' | sed -n '1p')
         servers_family_list_string=$(echo "$result" | sed -n '2p' | sed -n '1p')
