@@ -50,5 +50,7 @@ else
     fi
     #print
     name=$($CLI_PATH/get/get_fpga_device_param $device_index device_name)
+    echo ""
     echo "$device_index: $name"
+    echo ""
 fi
