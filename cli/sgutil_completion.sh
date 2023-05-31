@@ -84,7 +84,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "--device --help" -- ${cur})) # -n  -s  -h
                     ;;
                 vitis) 
-                    COMPREPLY=($(compgen -W "--device --project --help" -- ${cur}))
+                    COMPREPLY=($(compgen -W "--device --project -r --remote --help" -- ${cur}))
                     ;;
                 vivado) 
                     COMPREPLY=($(compgen -W "--bitstream --driver --ltx --name --serial --help" -- ${cur})) # -b -d -l -n -s -h
