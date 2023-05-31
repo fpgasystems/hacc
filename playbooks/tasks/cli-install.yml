@@ -296,6 +296,12 @@
     dest: /opt/cli/common/device_dialog_check
     mode: 0755
 
+- name: copy common/get_servers script
+  copy:
+    src: "../../cli/common/get_servers.sh"
+    dest: /opt/cli/common/get_servers
+    mode: 0755
+
 - name: copy common/server_dialog script
   copy:
     src: "../../cli/common/server_dialog.sh"
