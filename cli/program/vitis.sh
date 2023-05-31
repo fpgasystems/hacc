@@ -62,7 +62,7 @@ if [ "$flags" = "" ]; then
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
     fi
-    #server dialog
+    #deployment_dialog
     echo ""
     result=$($CLI_PATH/common/get_servers $CLI_PATH $hostname)
     servers_family_list=$(echo "$result" | sed -n '1p' | sed -n '1p')
@@ -71,18 +71,16 @@ if [ "$flags" = "" ]; then
     if [ -n "$servers_family_list_string" ]; then
         echo "${bold}Please, choose your deployment servers:${normal}"
         echo ""
-        echo "1) $hostname"
-        echo "2) $hostname, $servers_family_list_string"
+        echo "0) $hostname"
+        echo "1) $hostname, $servers_family_list_string"
         while true; do
             read -p "" deploy_option
             case $deploy_option in
-                "1") 
+                "0") 
                     servers_family_list=()
-                    all_servers="0";
                     break
                     ;;
-                "2") 
-                    all_servers="1"
+                "1") 
                     break
                     ;;
             esac
@@ -108,12 +106,22 @@ else
         $CLI_PATH/sgutil program vitis -h
         exit
     fi
+    #deployment_dialog_check
+    result="$("$CLI_PATH/common/deployment_dialog_check" "${flags[@]}")"
+    remote_option_found=$(echo "$result" | sed -n '1p')
+    remote_option=$(echo "$result" | sed -n '2p')
+    #forbidden combinations
+    if [ "$remote_option_found" = "1" ] && { [ "$remote_option" -ne 0 ] && [ "$remote_option" -ne 1 ]; }; then #if [ "$remote_option_found" = "1" ] && [ -n "$remote_option" ]; then 
+        $CLI_PATH/sgutil program vitis -h
+        exit
+    fi
     #header (2/2)
     echo ""
     echo "${bold}sgutil program vitis${normal}"
+    echo ""
     #project_dialog (forgotten mandatory 1)
     if [[ $project_found = "0" ]]; then
-        echo ""
+        #echo ""
         echo "${bold}Please, choose your $WORKFLOW project:${normal}"
         echo ""
         result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
@@ -125,12 +133,40 @@ else
         device_found="1"
         device_index="1"
     elif [[ $device_found = "0" ]]; then
-        echo ""
+        #echo ""
         echo "${bold}Please, choose your device:${normal}"
         echo ""
         result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
+    fi
+    #deployment_dialog (forgotten mandatory 3)
+    if [ "$remote_option_found" = "0" ]; then
+        #servers_family_list=()
+        #echo ""
+        result=$($CLI_PATH/common/get_servers $CLI_PATH $hostname)
+        servers_family_list=$(echo "$result" | sed -n '1p' | sed -n '1p')
+        servers_family_list_string=$(echo "$result" | sed -n '2p' | sed -n '1p')
+        echo ""
+        if [ -n "$servers_family_list_string" ]; then
+            echo "${bold}Please, choose your deployment servers:${normal}"
+            echo ""
+            echo "0) $hostname"
+            echo "1) $hostname, $servers_family_list_string"
+            while true; do
+                read -p "" deploy_option
+                case $deploy_option in
+                    "0") 
+                        servers_family_list=()
+                        break
+                        ;;
+                    "1") 
+                        break
+                        ;;
+                esac
+            done
+            echo ""
+        fi
     fi
 fi
 
