@@ -67,9 +67,9 @@ if [ "$flags" = "" ]; then
     result=$($CLI_PATH/common/get_servers $CLI_PATH $hostname)
     servers_family_list=$(echo "$result" | sed -n '1p' | sed -n '1p')
     servers_family_list_string=$(echo "$result" | sed -n '2p' | sed -n '1p')
-    num_servers=$(echo "$servers_family_list" | wc -w)
+    num_remote_servers=$(echo "$servers_family_list" | wc -w)
     echo ""
-    if [ "$num_servers" -gt 1 ]; then
+    if [ "$num_remote_servers" -ge 1 ]; then
         echo "${bold}Please, choose your deployment servers:${normal}"
         echo ""
         echo "0) $hostname"
@@ -136,9 +136,9 @@ else
         result=$($CLI_PATH/common/get_servers $CLI_PATH $hostname)
         servers_family_list=$(echo "$result" | sed -n '1p' | sed -n '1p')
         servers_family_list_string=$(echo "$result" | sed -n '2p' | sed -n '1p')
-        num_servers=$(echo "$servers_family_list" | wc -w)
+        num_remote_servers=$(echo "$servers_family_list" | wc -w)
         echo ""
-        if [ "$num_servers" -gt 1 ]; then
+        if [ "$num_remote_servers" -ge 1 ]; then
             echo "${bold}Please, choose your deployment servers:${normal}"
             echo ""
             echo "0) $hostname"
@@ -192,7 +192,14 @@ sudo $CLI_PATH/program/revert -d $device_index
 /opt/xilinx/xrt/bin/xbutil program --device $bdf -u $xclbin
 
 #programming remote servers (if applies)
+echo "per ací!"
+echo $deploy_option
+echo "per açà!"
+
 if [ "$deploy_option" = "1" ]; then
+    
+    echo "dins!"
+    
     for i in "${servers_family_list[@]}"
     do
         #remote servers
