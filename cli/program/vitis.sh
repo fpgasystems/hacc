@@ -132,30 +132,42 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     exit
 fi
 
-#get booked machines
+##get booked machines
+#echo ""
+#servers=$(sudo $CLI_PATH/common/get_booking_system_servers_list | tail -n +2)
+#echo ""
+
+##convert string to an array
+#servers=($servers)
+
+##we only show likely servers (i.e., alveo-u55c)
+#server_family="${hostname%???}"
+
+##build servers_family_list
+#servers_family_list=()
+#for i in "${servers[@]}"
+#do
+#    if [[ $i == $server_family* ]] && [[ $i != $hostname ]]; then
+#        #append the matching element to the array
+#        servers_family_list+=("$i") 
+#    fi
+#done
+
+##convert to string and remove the leading delimiter (:2)
+#servers_family_list_string=$(printf ", %s" "${servers_family_list[@]}")
+#servers_family_list_string=${servers_family_list_string:2}
+
+#echo "${servers_family_list[@]}"
+#echo "${servers_family_list_string[@]}"
+
 echo ""
-servers=$(sudo $CLI_PATH/common/get_booking_system_servers_list | tail -n +2)
+result=$($CLI_PATH/common/get_servers $CLI_PATH $hostname)
+servers_family_list=$(echo "$result" | sed -n '1p' | sed -n '1p')
+servers_family_list_string=$(echo "$result" | sed -n '2p' | sed -n '1p')
 echo ""
 
-#convert string to an array
-servers=($servers)
-
-#we only show likely servers (i.e., alveo-u55c)
-server_family="${hostname%???}"
-
-#build servers_family_list
-servers_family_list=()
-for i in "${servers[@]}"
-do
-    if [[ $i == $server_family* ]] && [[ $i != $hostname ]]; then
-        #append the matching element to the array
-        servers_family_list+=("$i") 
-    fi
-done
-
-#convert to string and remove the leading delimiter (:2)
-servers_family_list_string=$(printf ", %s" "${servers_family_list[@]}")
-servers_family_list_string=${servers_family_list_string:2}
+#echo "${servers_family_list_2[@]}"
+#echo "${servers_family_list_string_2[@]}"
 
 #deployment dialog
 if [ -n "$servers_family_list_string" ]; then
@@ -179,8 +191,6 @@ if [ -n "$servers_family_list_string" ]; then
     done
     echo ""
 fi
-
-#servers_family_list=$($CLI_PATH/common/server_dialog $CLI_PATH $hostname)
 
 #get xclbin
 cd $APP_BUILD_DIR
