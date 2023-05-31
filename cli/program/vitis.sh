@@ -62,6 +62,33 @@ if [ "$flags" = "" ]; then
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
     fi
+    #server dialog
+    echo ""
+    result=$($CLI_PATH/common/get_servers $CLI_PATH $hostname)
+    servers_family_list=$(echo "$result" | sed -n '1p' | sed -n '1p')
+    servers_family_list_string=$(echo "$result" | sed -n '2p' | sed -n '1p')
+    echo ""
+    if [ -n "$servers_family_list_string" ]; then
+        echo "${bold}Please, choose your deployment servers:${normal}"
+        echo ""
+        echo "1) $hostname"
+        echo "2) $hostname, $servers_family_list_string"
+        while true; do
+            read -p "" deploy_option
+            case $deploy_option in
+                "1") 
+                    servers_family_list=()
+                    all_servers="0";
+                    break
+                    ;;
+                "2") 
+                    all_servers="1"
+                    break
+                    ;;
+            esac
+        done
+        echo ""
+    fi
 else
     #project_dialog_check
     result="$("$CLI_PATH/common/project_dialog_check" "${flags[@]}")"
@@ -132,35 +159,35 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     exit
 fi
 
-#get booked machines
-echo ""
-result=$($CLI_PATH/common/get_servers $CLI_PATH $hostname)
-servers_family_list=$(echo "$result" | sed -n '1p' | sed -n '1p')
-servers_family_list_string=$(echo "$result" | sed -n '2p' | sed -n '1p')
-echo ""
+##get booked machines
+#echo ""
+#result=$($CLI_PATH/common/get_servers $CLI_PATH $hostname)
+#servers_family_list=$(echo "$result" | sed -n '1p' | sed -n '1p')
+#servers_family_list_string=$(echo "$result" | sed -n '2p' | sed -n '1p')
+#echo ""
 
-#deployment dialog
-if [ -n "$servers_family_list_string" ]; then
-    echo "${bold}Please, choose your deployment servers:${normal}"
-    echo ""
-    echo "1) $hostname"
-    echo "2) $hostname, $servers_family_list_string"
-    while true; do
-	    read -p "" deploy_option
-        case $deploy_option in
-            "1") 
-                servers_family_list=()
-                all_servers="0";
-                break
-                ;;
-            "2") 
-                all_servers="1"
-                break
-                ;;
-        esac
-    done
-    echo ""
-fi
+##deployment dialog
+#if [ -n "$servers_family_list_string" ]; then
+#    echo "${bold}Please, choose your deployment servers:${normal}"
+#    echo ""
+#    echo "1) $hostname"
+#    echo "2) $hostname, $servers_family_list_string"
+#    while true; do
+#	    read -p "" deploy_option
+#        case $deploy_option in
+#            "1") 
+#                servers_family_list=()
+#                all_servers="0";
+#                break
+#                ;;
+#            "2") 
+#                all_servers="1"
+#                break
+#                ;;
+#        esac
+#    done
+#    echo ""
+#fi
 
 #get xclbin
 cd $APP_BUILD_DIR
