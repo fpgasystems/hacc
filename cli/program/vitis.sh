@@ -71,6 +71,7 @@ if [ "$flags" = "" ]; then
     num_remote_servers=$(echo "$servers_family_list" | wc -w)
     echo ""
     #deployment_dialog
+    deploy_option="0"
     if [ "$num_remote_servers" -ge 1 ]; then
         echo "${bold}Please, choose your deployment servers:${normal}"
         echo ""
@@ -78,8 +79,6 @@ if [ "$flags" = "" ]; then
         echo "1) $hostname, $servers_family_list_string"
         deploy_option=$($CLI_PATH/common/deployment_dialog $servers_family_list_string)
         echo ""
-    #else
-    #    deploy_option="0"
     fi
 else
     #project_dialog_check
@@ -144,6 +143,7 @@ else
     #deployment_dialog (forgotten mandatory 3)
     if [ "$deploy_option_found" = "0" ]; then
         #deployment_dialog
+        deploy_option="0"
         if [ "$num_remote_servers" -ge 1 ]; then
             echo "${bold}Please, choose your deployment servers:${normal}"
             echo ""
@@ -151,8 +151,6 @@ else
             echo "1) $hostname, $servers_family_list_string"
             deploy_option=$($CLI_PATH/common/deployment_dialog $servers_family_list_string)
             echo ""
-        #else
-        #    deploy_option="0"
         fi
     fi
 fi
@@ -199,26 +197,14 @@ $XRT_PATH/bin/xbutil reset --device $bdf --force
 #program xclbin
 $XRT_PATH/bin/xbutil program --device $bdf -u $xclbin
 
-#programming remote servers (if applies)
-
-echo "hola!"
-echo $deploy_option
-echo "adéu!"
-
-#if ((deploy_option == 1)); then    
-
-#deploy_option=$((deploy_option))
-if [ "$deploy_option" -eq 1 ]; then #if [[ "$deploy_option" == "1" || $deploy_option -eq 1 ]]; then #if ((deploy_option == 1)); then    #if [ "$deploy_option" -eq 1 ]; then
-    
-    echo "dins!"
-
+#programming remote servers
+if [ "$deploy_option" -eq 1 ]; then 
     for i in "${servers_family_list[@]}"
     do
         #remote servers
         echo ""
         echo "Programming remote server ${bold}$i...${normal}"
         echo ""
-
         #remotely revert to xrt, reset device (we delete any xclbin) and program xclbin
         ssh -t $username@$i "sudo $CLI_PATH/program/revert ; $XRT_PATH/bin/xbutil reset --device $bdf --force ; $XRT_PATH/bin/xbutil program --device $bdf -u $APP_BUILD_DIR/$xclbin"
     done
