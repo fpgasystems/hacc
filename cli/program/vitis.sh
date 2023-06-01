@@ -63,12 +63,13 @@ if [ "$flags" = "" ]; then
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
     fi
-    #deployment_dialog
+    #get_servers
     echo ""
     result=$($CLI_PATH/common/get_servers $CLI_PATH $hostname)
     servers_family_list=$(echo "$result" | sed -n '1p' | sed -n '1p')
     servers_family_list_string=$(echo "$result" | sed -n '2p' | sed -n '1p')
     num_remote_servers=$(echo "$servers_family_list" | wc -w)
+    #deployment_dialog
     echo ""
     if [ "$num_remote_servers" -ge 1 ]; then
         echo "${bold}Please, choose your deployment servers:${normal}"
@@ -99,10 +100,10 @@ else
     fi
     #deployment_dialog_check
     result="$("$CLI_PATH/common/deployment_dialog_check" "${flags[@]}")"
-    remote_option_found=$(echo "$result" | sed -n '1p')
-    remote_option=$(echo "$result" | sed -n '2p')
+    deploy_option_found=$(echo "$result" | sed -n '1p')
+    deploy_option=$(echo "$result" | sed -n '2p')
     #forbidden combinations
-    if [ "$remote_option_found" = "1" ] && { [ "$remote_option" -ne 0 ] && [ "$remote_option" -ne 1 ]; }; then #if [ "$remote_option_found" = "1" ] && [ -n "$remote_option" ]; then 
+    if [ "$deploy_option_found" = "1" ] && { [ "$deploy_option" -ne 0 ] && [ "$deploy_option" -ne 1 ]; }; then #if [ "$deploy_option_found" = "1" ] && [ -n "$deploy_option" ]; then 
         $CLI_PATH/sgutil program vitis -h
         exit
     fi
@@ -133,11 +134,13 @@ else
         echo ""
     fi
     #deployment_dialog (forgotten mandatory 3)
-    if [ "$remote_option_found" = "0" ]; then
+    if [ "$deploy_option_found" = "0" ]; then
+        #get_servers
         result=$($CLI_PATH/common/get_servers $CLI_PATH $hostname)
         servers_family_list=$(echo "$result" | sed -n '1p' | sed -n '1p')
         servers_family_list_string=$(echo "$result" | sed -n '2p' | sed -n '1p')
         num_remote_servers=$(echo "$servers_family_list" | wc -w)
+        #deployment_dialog
         echo ""
         if [ "$num_remote_servers" -ge 1 ]; then
             echo "${bold}Please, choose your deployment servers:${normal}"
