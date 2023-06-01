@@ -199,14 +199,24 @@ $XRT_PATH/bin/xbutil program --device $bdf -u $xclbin
 
 #programming remote servers
 if [ "$deploy_option" -eq 1 ]; then 
-    for i in "${servers_family_list[@]}"
-    do
+    #for i in "${servers_family_list[@]}"
+    #do
+    #    #remote servers
+    #    echo ""
+    #    echo "Programming remote server ${bold}$i...${normal}"
+    #    echo ""
+    #    #remotely revert to xrt, reset device (we delete any xclbin) and program xclbin
+    #    ssh -t $username@$i "sudo $CLI_PATH/program/revert ; $XRT_PATH/bin/xbutil reset --device $bdf --force ; $XRT_PATH/bin/xbutil program --device $bdf -u $APP_BUILD_DIR/$xclbin"
+    #done
+    #convert string to array
+    IFS=" " read -ra servers_family_list_array <<< "$servers_family_list"
+    for i in "${servers_family_list_array[@]}"; do
         #remote servers
         echo ""
         echo "Programming remote server ${bold}$i...${normal}"
         echo ""
-        #remotely revert to xrt, reset device (we delete any xclbin) and program xclbin
-        ssh -t $username@$i "sudo $CLI_PATH/program/revert ; $XRT_PATH/bin/xbutil reset --device $bdf --force ; $XRT_PATH/bin/xbutil program --device $bdf -u $APP_BUILD_DIR/$xclbin"
+        #remotely revert to xrt, reset device (delete any xclbin), and program xclbin
+        ssh -t "$username@$i" "sudo $CLI_PATH/program/revert; $XRT_PATH/bin/xbutil reset --device $bdf --force; $XRT_PATH/bin/xbutil program --device $bdf -u $APP_BUILD_DIR/$xclbin"
     done
 fi
 
