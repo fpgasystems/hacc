@@ -206,15 +206,4 @@ if ((deploy_option == 1)); then
     done
 fi
 
-#for i in "${servers_family_list[@]}"
-#do
-#    #remote servers
-#    echo ""
-#    echo "Programming remote server ${bold}$i...${normal}"
-#    echo ""
-
-#    #remotely revert to xrt, reset device (we delete any xclbin) and program xclbin
-#    ssh -t $username@$i "sudo $CLI_PATH/program/revert ; $XRT_PATH/bin/xbutil reset --device $bdf --force ; $XRT_PATH/bin/xbutil program --device $bdf -u $APP_BUILD_DIR/$xclbin"
-#done
-
 echo ""
