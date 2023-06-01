@@ -6,6 +6,7 @@ normal=$(tput sgr0)
 #constants
 CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
+XRT_PATH="/opt/xilinx/xrt"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 WORKFLOW="vitis"
 TARGET="hw"
@@ -187,19 +188,12 @@ echo "Programming local server ${bold}$hostname...${normal}"
 #revert to xrt first if FPGA is already in baremetal
 sudo $CLI_PATH/program/revert -d $device_index
 #reset device (we delete any xclbin)
-/opt/xilinx/xrt/bin/xbutil reset --device $bdf --force
+$XRT_PATH/bin/xbutil reset --device $bdf --force
 #program xclbin
-/opt/xilinx/xrt/bin/xbutil program --device $bdf -u $xclbin
+$XRT_PATH/bin/xbutil program --device $bdf -u $xclbin
 
 #programming remote servers (if applies)
-echo "per ací!"
-echo $deploy_option
-echo "per açà!"
-
-if [ "$deploy_option" = "1" ]; then
-    
-    echo "dins!"
-    
+if ((deploy_option == 1)); then    
     for i in "${servers_family_list[@]}"
     do
         #remote servers
@@ -208,7 +202,7 @@ if [ "$deploy_option" = "1" ]; then
         echo ""
 
         #remotely revert to xrt, reset device (we delete any xclbin) and program xclbin
-        ssh -t $username@$i "sudo $CLI_PATH/program/revert ; /opt/xilinx/xrt/bin/xbutil reset --device $bdf --force ; /opt/xilinx/xrt/bin/xbutil program --device $bdf -u $APP_BUILD_DIR/$xclbin"
+        ssh -t $username@$i "sudo $CLI_PATH/program/revert ; $XRT_PATH/bin/xbutil reset --device $bdf --force ; $XRT_PATH/bin/xbutil program --device $bdf -u $APP_BUILD_DIR/$xclbin"
     done
 fi
 
@@ -220,7 +214,7 @@ fi
 #    echo ""
 
 #    #remotely revert to xrt, reset device (we delete any xclbin) and program xclbin
-#    ssh -t $username@$i "sudo $CLI_PATH/program/revert ; /opt/xilinx/xrt/bin/xbutil reset --device $bdf --force ; /opt/xilinx/xrt/bin/xbutil program --device $bdf -u $APP_BUILD_DIR/$xclbin"
+#    ssh -t $username@$i "sudo $CLI_PATH/program/revert ; $XRT_PATH/bin/xbutil reset --device $bdf --force ; $XRT_PATH/bin/xbutil program --device $bdf -u $APP_BUILD_DIR/$xclbin"
 #done
 
 echo ""
