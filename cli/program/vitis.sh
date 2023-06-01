@@ -196,7 +196,18 @@ $XRT_PATH/bin/xbutil reset --device $bdf --force
 $XRT_PATH/bin/xbutil program --device $bdf -u $xclbin
 
 #programming remote servers (if applies)
-if ((deploy_option == 1)); then    
+
+echo "hola!"
+echo $deploy_option
+echo "adéu!"
+
+#if ((deploy_option == 1)); then    
+
+#deploy_option=$((deploy_option))
+if [ "$deploy_option" -eq 1 ]; then #if [[ "$deploy_option" == "1" || $deploy_option -eq 1 ]]; then #if ((deploy_option == 1)); then    #if [ "$deploy_option" -eq 1 ]; then
+    
+    echo "dins!"
+    
     for i in "${servers_family_list[@]}"
     do
         #remote servers
