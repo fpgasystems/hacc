@@ -78,6 +78,8 @@ if [ "$flags" = "" ]; then
         echo "1) $hostname, $servers_family_list_string"
         deploy_option=$($CLI_PATH/common/deployment_dialog $servers_family_list_string)
         echo ""
+    else
+        deploy_option="0"
     fi
 else
     #project_dialog_check
@@ -149,6 +151,8 @@ else
             echo "1) $hostname, $servers_family_list_string"
             deploy_option=$($CLI_PATH/common/deployment_dialog $servers_family_list_string)
             echo ""
+        else
+            deploy_option="0"
         fi
     fi
 fi
@@ -207,7 +211,7 @@ echo "adéu!"
 if [ "$deploy_option" -eq 1 ]; then #if [[ "$deploy_option" == "1" || $deploy_option -eq 1 ]]; then #if ((deploy_option == 1)); then    #if [ "$deploy_option" -eq 1 ]; then
     
     echo "dins!"
-    
+
     for i in "${servers_family_list[@]}"
     do
         #remote servers
