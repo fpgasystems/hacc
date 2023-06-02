@@ -12,31 +12,25 @@ DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 
 split_addresses (){
-
+  #input parameters
   str_ip=$1
   str_mac=$2
   aux=$3
-
-  # Save the current IFS
+  #save the current IFS
   OLDIFS=$IFS
-
-  # Set the IFS to / to split the string at each /
+  #set the IFS to / to split the string at each /
   IFS="/"
-
-  # Read the two parts of the string into variables
+  #read the two parts of the string into variables
   read ip0 ip1 <<< "$str_ip"
   read mac0 mac1 <<< "$str_mac"
-
-  # Reset the IFS to its original value
+  #reset the IFS to its original value
   IFS=$OLDIFS
-
-  # Print the two parts of the string
+  #print the two parts of the string
   if [[ "$aux" == "0" ]]; then
     echo "$ip0 ($mac0)"
   else
     echo "$ip1 ($mac1)"
   fi
-
 }
 
 #inputs
@@ -104,7 +98,7 @@ else
         device_found="1"
         device_index="1"
     elif [[ $device_found = "0" ]]; then
-        $CLI_PATH/sgutil get device -h
+        $CLI_PATH/sgutil get network -h
         exit
     fi
     #print
@@ -113,7 +107,7 @@ else
     device_type=$(/opt/cli/get/get_fpga_device_param $device_index device_type)
     add_0=$(split_addresses $ip $mac 0)
     add_1=$(split_addresses $ip $mac 1)
-    name="$device"
+    name="$device_index"
     name_length=$(( ${#name} + 1 ))
     echo ""
     echo "$name: $add_0"
