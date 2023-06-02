@@ -324,10 +324,10 @@
     path: /opt/cli/common/server_dialog
     state: absent
 
-- name: copy common/devices_list_check script
+- name: copy common/device_list_check script
   copy:
-    src: "../../cli/common/devices_list_check.sh"
-    dest: /opt/cli/common/devices_list_check
+    src: "../../cli/common/device_list_check.sh"
+    dest: /opt/cli/common/device_list_check
     mode: 0755
 
 #get  ----------------------------------------------------------------------------------------
