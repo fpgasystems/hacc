@@ -36,28 +36,16 @@ split_addresses (){
 #inputs
 read -a flags <<< "$@"
 
-# Check if the DEVICES_LIST exists
+#check on DEVICES_LIST
 if [[ ! -f "$DEVICES_LIST" ]]; then
-  echo ""
-  echo "Please, update $DEVICES_LIST according to your infrastructure."
-  echo ""
-  exit 1
-fi
-
-#the file exists - check its contents by evaluating first row (device_0)
-device_0=$(head -n 1 "$DEVICES_LIST")
-
-#extract the second, third, and fourth columns (upstream_port, root_port, LinkCtl) using awk
-upstream_port_0=$(echo "$device_0" | awk '{print $2}')
-root_port_0=$(echo "$device_0" | awk '{print $3}')
-LinkCtl_0=$(echo "$device_0" | awk '{print $4}')
-
-#check on non-edited contents
-if [[ $upstream_port_0 == "xx:xx.x" || $root_port_0 == "xx:xx.x" || $LinkCtl_0 == "xx" ]]; then
-  echo ""
-  echo "Please, update $DEVICES_LIST according to your infrastructure."
-  echo ""
   exit
+else
+  # Print if the first fpga/acap is valid
+  device_1=$(head -n 1 "$DEVICES_LIST")
+  upstream_port_1=$(echo "$device_1" | awk '{print $2}') 
+  if ! lspci | grep -qz $upstream_port_1; then
+    exit
+  fi
 fi
 
 #check on multiple Xilinx devices
