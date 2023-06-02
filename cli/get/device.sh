@@ -21,8 +21,8 @@ multiple_devices=$($CLI_PATH/common/get_multiple_devices $DEVICES_LIST)
 device_found=""
 device_index=""
 if [ "$flags" = "" ]; then
-    #print devices information
     echo ""
+    #print devices information
     for device_index in $(seq 1 $MAX_DEVICES); do 
         name=$($CLI_PATH/get/get_fpga_device_param $device_index device_name)
         if [ -n "$name" ]; then
@@ -40,7 +40,7 @@ else
         $CLI_PATH/sgutil get device -h
         exit
     fi
-    #device_dialog (forgotten mandatory 2)
+    #device_dialog (forgotten mandatory)
     if [[ $multiple_devices = "0" ]]; then
         device_found="1"
         device_index="1"
