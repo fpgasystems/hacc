@@ -796,7 +796,7 @@ case "$command" in
     esac
     ;;
   examine)
-    xilinx_build_check
+    #xilinx_build_check
     case "$arguments" in
       -h|--help)
         examine_help
@@ -815,8 +815,13 @@ case "$command" in
       -h|--help)
         get_help
         ;;
+      bdf)
+        #xilinx_build_check
+        valid_flags="-h --help -d --device"
+        command_run $command_arguments_flags"@"$valid_flags
+        ;;
       device)
-        xilinx_build_check
+        #xilinx_build_check
         valid_flags="-h --help -d --device"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
@@ -833,7 +838,7 @@ case "$command" in
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       serial)
-        xilinx_build_check
+        #xilinx_build_check
         valid_flags="-h --help -d --device"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
