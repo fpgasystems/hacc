@@ -6,19 +6,19 @@ normal=$(tput sgr0)
 #constants
 CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
-DEVICE_LIST_FPGA="$HACC_PATH/devices_reconfigurable"
+DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 
 #check on DEVICES_LIST
-source "$CLI_PATH/common/device_list_check" "$DEVICE_LIST_FPGA"
+source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
 
 #get number of fpga and acap devices present
-MAX_DEVICES=$(grep -E "fpga|acap" $DEVICE_LIST_FPGA | wc -l)
+MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 
 #inputs
 read -a flags <<< "$@"
 
 #check on multiple Xilinx devices
-multiple_devices=$($CLI_PATH/common/get_multiple_devices $DEVICE_LIST_FPGA)
+multiple_devices=$($CLI_PATH/common/get_multiple_devices $DEVICES_LIST)
 
 #check on flags
 device_found=""
