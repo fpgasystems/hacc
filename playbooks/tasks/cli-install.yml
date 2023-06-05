@@ -417,6 +417,12 @@
     dest: /opt/cli/get/network
     mode: 0755
 
+- name: copy get/bdf script
+  copy:
+    src: "../../cli/get/bdf.sh"
+    dest: /opt/cli/get/bdf
+    mode: 0755
+
 #new ------------------------------------------------------------------------------------    
 
 - name: copy (new) vitis script

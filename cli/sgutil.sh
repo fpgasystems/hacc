@@ -222,9 +222,24 @@ get_help() {
     echo "Devices and host information."
     echo ""
     echo "ARGUMENTS:"
+    echo "   bdf             - Retreives FPGA/ACAP Bus Device Function.."
     echo "   device          - Retreives FPGA/ACAP device names."
     echo "   network         - Retreives FPGA/ACAP and host networking information."
     echo "   serial          - Retreives FPGA/ACAP serial numbers."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
+get_bdf_help() {
+    echo ""
+    echo "${bold}sgutil get bdf [flags] [--help]${normal}"
+    echo ""
+    echo "Retreives FPGA/ACAP Bus Device Function."
+    echo ""
+    echo "FLAGS:"
+    echo "   -d, --device    - FPGA/ACAP Device Index (according to sgutil examine)."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
