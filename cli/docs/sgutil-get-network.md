@@ -8,7 +8,7 @@
 
 <code>sgutil get network [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Retreives FPGA/ACAP and host networking information.
+  &nbsp; &nbsp; Retreives FPGA/ACAP networking information. 
 </p>
 
 ### Flags
