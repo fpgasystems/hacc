@@ -27,9 +27,9 @@ if [ "$flags" = "" ]; then
     echo ""
     #print devices information
     for device_index in $(seq 1 $MAX_DEVICES); do 
-        name=$($CLI_PATH/get/get_fpga_device_param $device_index device_name)
-        if [ -n "$name" ]; then
-            echo "$device_index: $name"
+        serial=$($CLI_PATH/get/get_fpga_device_param $device_index serial_number)
+        if [ -n "$serial" ]; then
+            echo "$device_index: $serial"
         fi
     done
     echo ""
@@ -52,8 +52,8 @@ else
         exit
     fi
     #print
-    name=$($CLI_PATH/get/get_fpga_device_param $device_index serial_number)
+    serial=$($CLI_PATH/get/get_fpga_device_param $device_index serial_number)
     echo ""
-    echo "$device_index: $name"
+    echo "$device_index: $serial"
     echo ""
 fi
