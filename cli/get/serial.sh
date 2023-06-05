@@ -1,59 +1,55 @@
 #!/bin/bash
 
-DATABASE="/opt/hacc/devices"
-
 bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
-CLI_WORKDIR="/opt/cli"
-MAX_DEVICES=4
+CLI_PATH="/opt/cli"
+HACC_PATH="/opt/hacc"
+DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 
-#get hostname
-#url="${HOSTNAME}"
-#hostname="${url%%.*}"
+#check on DEVICES_LIST
+source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
 
+#get number of fpga and acap devices present
+MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
+
+#inputs
+read -a flags <<< "$@"
+
+#helper functions
 split_addresses (){
-
+  #input parameters
   str_ip=$1
   str_mac=$2
   aux=$3
-
-  # Save the current IFS
+  #save the current IFS
   OLDIFS=$IFS
-
-  # Set the IFS to / to split the string at each /
+  #set the IFS to / to split the string at each /
   IFS="/"
-
-  # Read the two parts of the string into variables
+  #read the two parts of the string into variables
   read ip0 ip1 <<< "$str_ip"
   read mac0 mac1 <<< "$str_mac"
-
-  # Reset the IFS to its original value
+  #reset the IFS to its original value
   IFS=$OLDIFS
-
-  # Print the two parts of the string
+  #print the two parts of the string
   if [[ "$aux" == "0" ]]; then
     echo "$ip0 ($mac0)"
   else
     echo "$ip1 ($mac1)"
   fi
-
 }
 
-#inputs
-read -a flags <<< "$@"
-
-# Check if the DATABASE exists
-if [[ ! -f "$DATABASE" ]]; then
+# Check if the DEVICES_LIST exists
+if [[ ! -f "$DEVICES_LIST" ]]; then
   echo ""
-  echo "Please, update $DATABASE according to your infrastructure."
+  echo "Please, update $DEVICES_LIST according to your infrastructure."
   echo ""
   exit 1
 fi
 
 #the file exists - check its contents by evaluating first row (device_0)
-device_0=$(head -n 1 "$DATABASE")
+device_0=$(head -n 1 "$DEVICES_LIST")
 
 #extract the second, third, and fourth columns (upstream_port, root_port, LinkCtl) using awk
 upstream_port_0=$(echo "$device_0" | awk '{print $2}')
@@ -63,15 +59,15 @@ LinkCtl_0=$(echo "$device_0" | awk '{print $4}')
 #check on non-edited contents
 if [[ $upstream_port_0 == "xx:xx.x" || $root_port_0 == "xx:xx.x" || $LinkCtl_0 == "xx" ]]; then
   echo ""
-  echo "Please, update $DATABASE according to your infrastructure."
+  echo "Please, update $DEVICES_LIST according to your infrastructure."
   echo ""
   exit
 fi
 
 #check on multiple Xilinx devices
 multiple_devices=""
-devices=$(wc -l < $DATABASE)
-if [ -s $DATABASE ]; then
+devices=$(wc -l < $DEVICES_LIST)
+if [ -s $DEVICES_LIST ]; then
     if [ "$devices" -eq 1 ]; then
         multiple_devices="0"
     else
@@ -79,7 +75,7 @@ if [ -s $DATABASE ]; then
     fi
 else
     echo ""
-    echo "Please, update $DATABASE according to your infrastructure."
+    echo "Please, update $DEVICES_LIST according to your infrastructure."
     echo ""
     exit
 fi
@@ -92,9 +88,9 @@ device_index=""
 if [ "$flags" = "" ]; then
     #print devices information
     for device_index in 1 2 3 4; do #0 1 2 3
-        name=$($CLI_WORKDIR/get/get_fpga_device_param $device_index serial_number)
+        name=$($CLI_PATH/get/get_fpga_device_param $device_index serial_number)
         if [ -n "$name" ]; then
-            #type=$($CLI_WORKDIR/get/get_fpga_device_param $device_index device_type)
+            #type=$($CLI_PATH/get/get_fpga_device_param $device_index device_type)
             echo "$device_index: $name" #"$device_index: $type - $name"
         fi
     done
@@ -111,18 +107,18 @@ else
     done
     #forbidden combinations
     if [[ $device_found = "0" ]] || [[ $device_index = "" ]] || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))); then
-        $CLI_WORKDIR/sgutil get device -h
+        $CLI_PATH/sgutil get device -h
         exit
     fi
     #device_index should be between {0 .. MAX_DEVICES - 1}
     #MAX_DEVICES=$(($MAX_DEVICES-1))
     if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]]; then
-        $CLI_WORKDIR/sgutil get device -h
+        $CLI_PATH/sgutil get device -h
         exit
     fi
     #print
-    name=$($CLI_WORKDIR/get/get_fpga_device_param $device_index serial_number)
-    #type=$($CLI_WORKDIR/get/get_fpga_device_param $device_index device_type)
+    name=$($CLI_PATH/get/get_fpga_device_param $device_index serial_number)
+    #type=$($CLI_PATH/get/get_fpga_device_param $device_index device_type)
     echo "$device_index: $name" #"$device_index: $type - $name"
     echo ""
 fi
