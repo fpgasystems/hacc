@@ -8,9 +8,16 @@ CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 
+#check on DEVICES_LIST
+source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
+
 #get number of fpga and acap devices present
 MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 
+#inputs
+read -a flags <<< "$@"
+
+#helper functions
 split_addresses (){
   #input parameters
   str_ip=$1
@@ -32,12 +39,6 @@ split_addresses (){
     echo "$ip1 ($mac1)"
   fi
 }
-
-#inputs
-read -a flags <<< "$@"
-
-#check on DEVICES_LIST
-source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
 
 #check on multiple Xilinx devices
 multiple_devices=$($CLI_PATH/common/get_multiple_devices $DEVICES_LIST)
