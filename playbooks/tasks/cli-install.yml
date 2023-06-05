@@ -260,11 +260,15 @@
     mode: 0755
   when: not get_devices_stat.stat.exists
 
-- name: copy common/get_num_devices script
-  copy:
-    src: "../../cli/common/get_num_devices.sh"
-    dest: /opt/cli/common/get_num_devices
-    mode: 0755
+#- name: copy common/get_num_devices script
+#  copy:
+#    src: "../../cli/common/get_num_devices.sh"
+#    dest: /opt/cli/common/get_num_devices
+#    mode: 0755
+- name: remove common/get_num_devices
+  ansible.builtin.file:
+    path: /opt/cli/common/get_num_devices
+    state: absent
 
 - name: copy common/get_multiple_devices script
   copy:
