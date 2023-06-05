@@ -14,18 +14,11 @@ source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
 #get number of gpu devices present
 MAX_DEVICES=$(grep -E "gpu" $DEVICES_LIST | wc -l)
 
+#check on multiple devices
+multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
+
 #inputs
 read -a flags <<< "$@"
-
-#check on multiple Xilinx devices
-#multiple_devices=$($CLI_PATH/common/get_multiple_devices $DEVICES_LIST)
-if (( $MAX_DEVICES > 1 )); then
-    multiple_devices=1
-else
-    multiple_devices=0
-fi
-
-echo $multiple_devices
 
 #check on flags
 device_found=""
@@ -34,10 +27,9 @@ if [ "$flags" = "" ]; then
     echo ""
     #print devices information
     for device_index in $(seq 1 $MAX_DEVICES); do 
-        upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
-        bdf="${upstream_port::-1}1"
-        if [ -n "$bdf" ]; then
-            echo "$device_index: $bdf"
+        bus=$($CLI_PATH/get/get_gpu_device_param $device_index bus)
+        if [ -n "$bus" ]; then
+            echo "$device_index: $bus"
         fi
     done
     echo ""
@@ -48,7 +40,7 @@ else
     device_index=$(echo "$result" | sed -n '2p')
     #forbidden combinations
     if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
-        $CLI_PATH/sgutil get device -h
+        $CLI_PATH/sgutil get bus -h
         exit
     fi
     #device_dialog (forgotten mandatory)
@@ -60,9 +52,8 @@ else
         exit
     fi
     #print
-    upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
-    bdf="${upstream_port::-1}1"
+    bus=$($CLI_PATH/get/get_gpu_device_param $device_index bus)
     echo ""
-    echo "$device_index: $bdf"
+    echo "$device_index: $bus"
     echo ""
 fi
