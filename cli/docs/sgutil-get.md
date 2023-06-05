@@ -17,7 +17,6 @@
 * [device](./sgutil-get-device.md#sgutil-get-device)
 * [network](./sgutil-get-network.md#sgutil-get-network)
 * [serial](./sgutil-get-serial.md#sgutil-get-serial)
-
 * [bus](./sgutil-get-bus.md#sgutil-get-bus)
 
 <code>-h, --help</code>
