@@ -20,45 +20,40 @@ read -a flags <<< "$@"
 #check on multiple Xilinx devices
 multiple_devices=$($CLI_PATH/common/get_multiple_devices $DEVICES_LIST)
 
-echo ""
-
 #check on flags
 device_found=""
 device_index=""
 if [ "$flags" = "" ]; then
+    echo ""
     #print devices information
-    for device_index in 1 2 3 4; do #0 1 2 3
-        name=$($CLI_PATH/get/get_fpga_device_param $device_index serial_number)
+    for device_index in $(seq 1 $MAX_DEVICES); do 
+        name=$($CLI_PATH/get/get_fpga_device_param $device_index device_name)
         if [ -n "$name" ]; then
-            #type=$($CLI_PATH/get/get_fpga_device_param $device_index device_type)
-            echo "$device_index: $name" #"$device_index: $type - $name"
+            echo "$device_index: $name"
         fi
     done
     echo ""
 else
-    #find flags and values
-    for (( i=0; i<${#flags[@]}; i++ ))
-    do
-        if [[ " ${flags[$i]} " =~ " -d " ]] || [[ " ${flags[$i]} " =~ " --device " ]]; then # flags[i] is -d or --device
-            device_found="1"
-            device_idx=$(($i+1))
-            device_index=${flags[$device_idx]}
-        fi  
-    done
+    #device_dialog_check
+    result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
+    device_found=$(echo "$result" | sed -n '1p')
+    device_index=$(echo "$result" | sed -n '2p')
     #forbidden combinations
-    if [[ $device_found = "0" ]] || [[ $device_index = "" ]] || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))); then
+    if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
         $CLI_PATH/sgutil get device -h
         exit
     fi
-    #device_index should be between {0 .. MAX_DEVICES - 1}
-    #MAX_DEVICES=$(($MAX_DEVICES-1))
-    if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]]; then
+    #device_dialog (forgotten mandatory)
+    if [[ $multiple_devices = "0" ]]; then
+        device_found="1"
+        device_index="1"
+    elif [[ $device_found = "0" ]]; then
         $CLI_PATH/sgutil get device -h
         exit
     fi
     #print
     name=$($CLI_PATH/get/get_fpga_device_param $device_index serial_number)
-    #type=$($CLI_PATH/get/get_fpga_device_param $device_index device_type)
-    echo "$device_index: $name" #"$device_index: $type - $name"
+    echo ""
+    echo "$device_index: $name"
     echo ""
 fi
