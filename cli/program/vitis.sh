@@ -24,6 +24,9 @@ source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
 #get number of fpga and acap devices present
 MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 
+#check on multiple devices
+multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
+
 #inputs
 read -a flags <<< "$@"
 
@@ -34,9 +37,6 @@ if ! [ -d "/home/$username/my_projects/vitis/" ]; then
     echo ""
     exit
 fi
-
-#check on multiple Xilinx devices
-multiple_devices=$($CLI_PATH/common/get_multiple_devices $DEVICES_LIST)
 
 #check on flags
 project_found=""
