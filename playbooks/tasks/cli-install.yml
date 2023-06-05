@@ -423,6 +423,12 @@
     dest: /opt/cli/get/bdf
     mode: 0755
 
+- name: copy get/bus script
+  copy:
+    src: "../../cli/get/bus.sh"
+    dest: /opt/cli/get/bus
+    mode: 0755
+
 #new ------------------------------------------------------------------------------------    
 
 - name: copy (new) vitis script

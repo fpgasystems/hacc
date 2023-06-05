@@ -223,6 +223,7 @@ get_help() {
     echo ""
     echo "ARGUMENTS:"
     echo "   bdf             - Retreives FPGA/ACAP Bus Device Function."
+    echo "   bus             - Retreives GPU PCI Bus ID."
     echo "   device          - Retreives FPGA/ACAP device names."
     echo "   network         - Retreives FPGA/ACAP and host networking information."
     echo "   serial          - Retreives FPGA/ACAP serial numbers."
@@ -240,6 +241,20 @@ get_bdf_help() {
     echo ""
     echo "FLAGS:"
     echo "   -d, --device    - FPGA/ACAP Device Index (according to sgutil examine)."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
+get_bus_help() {
+    echo ""
+    echo "${bold}sgutil get bus [flags] [--help]${normal}"
+    echo ""
+    echo "Retreives GPU PCI Bus ID."
+    echo ""
+    echo "FLAGS:"
+    echo "   -d, --device    - GPU Device Index (according to sgutil examine)."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -816,7 +831,10 @@ case "$command" in
         get_help
         ;;
       bdf)
-        #xilinx_build_check
+        valid_flags="-h --help -d --device"
+        command_run $command_arguments_flags"@"$valid_flags
+        ;;
+      bus)
         valid_flags="-h --help -d --device"
         command_run $command_arguments_flags"@"$valid_flags
         ;;

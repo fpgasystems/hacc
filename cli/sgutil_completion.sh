@@ -20,7 +20,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "--help" -- ${cur}))
                     ;;
                 get)
-                    COMPREPLY=($(compgen -W "bdf device network serial --help" -- ${cur})) # -h ip mac
+                    COMPREPLY=($(compgen -W "bdf bus device network serial --help" -- ${cur})) # -h ip mac
                     ;;
                 new)
                     COMPREPLY=($(compgen -W "coyote hip mpi vitis --help" -- ${cur})) # vivado
@@ -54,6 +54,9 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "--project --serial --help" -- ${cur})) # -w -h --target 
                     ;;
                 bdf) # get
+                    COMPREPLY=($(compgen -W "--device --help" -- ${cur})) # -w -h
+                    ;;
+                bus)
                     COMPREPLY=($(compgen -W "--device --help" -- ${cur})) # -w -h
                     ;;
                 device)
