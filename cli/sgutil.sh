@@ -222,7 +222,7 @@ get_help() {
     echo "Devices and host information."
     echo ""
     echo "ARGUMENTS:"
-    echo "   bdf             - Retreives FPGA/ACAP Bus Device Function.."
+    echo "   bdf             - Retreives FPGA/ACAP Bus Device Function."
     echo "   device          - Retreives FPGA/ACAP device names."
     echo "   network         - Retreives FPGA/ACAP and host networking information."
     echo "   serial          - Retreives FPGA/ACAP serial numbers."
