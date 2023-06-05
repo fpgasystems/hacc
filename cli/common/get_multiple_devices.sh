@@ -1,17 +1,11 @@
 #!/bin/bash
 
-DATABASE=$1
+MAX_DEVICES=$1
 
-num_devices=$(/opt/cli/common/get_num_devices)
-if [[ -z "$num_devices" ]] || [[ "$num_devices" -eq 0 ]]; then
-    echo ""
-    echo "Please, update $DATABASE according to your infrastructure."
-    echo ""
-    exit
-elif [[ "$num_devices" -eq 1 ]]; then
-    multiple_devices="0"
+if (( $MAX_DEVICES > 1 )); then
+    multiple_devices=1
 else
-    multiple_devices="1"
+    multiple_devices=0
 fi
 
 echo $multiple_devices
