@@ -26,10 +26,10 @@ source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
 #get number of fpga and acap devices present
 MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 
-# inputs
-read -a flags <<< "$@"
+#check on multiple devices
+multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 
-#check for virtualized
+#check on virtualized
 virtualized=$(/opt/cli/common/is_virtualized)
 if [ "$virtualized" = "true" ]; then
     echo ""
@@ -43,18 +43,8 @@ if [ "$virtualized" = "true" ]; then
     exit
 fi
 
-#check on multiple Xilinx devices
-num_devices=$(/opt/cli/common/get_num_devices)
-if [[ -z "$num_devices" ]] || [[ "$num_devices" -eq 0 ]]; then
-    echo ""
-    echo "Please, update $DEVICES_LIST according to your infrastructure."
-    echo ""
-    exit
-elif [[ "$num_devices" -eq 1 ]]; then
-    multiple_devices="0"
-else
-    multiple_devices="1"
-fi
+#inputs
+read -a flags <<< "$@"
 
 #check on flags
 device_found="0"
