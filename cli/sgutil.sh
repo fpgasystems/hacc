@@ -205,8 +205,8 @@ examine_help() {
     echo ""
     echo "Status of the system and devices."
     echo ""
-    echo "FLAGS"
-    echo "   This command has no flags."
+    echo "ARGUMENTS"
+    echo "   This command has no arguments."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -414,21 +414,6 @@ program_coyote_help() {
     echo ""
     exit 1
 }
-
-program_reboot_help() {
-    echo ""
-    echo "${bold}sgutil program reboot [--help]${normal}"
-    echo ""
-    echo "Reboots the server (warm boot)."
-    echo ""
-    echo "FLAGS:"
-    echo "   This command has no flags."
-    echo ""
-    echo "   -h, --help      - Help to use this command."
-    echo ""
-    exit 1
-}
-
 #program_rescan_help() {
 #    echo ""
 #    echo "${bold}sgutil program rescan [flags] [--help]${normal}"
@@ -502,6 +487,22 @@ program_vitis_help() {
     echo "   -r, --remote    - Local or remote deployment."
     echo ""
     echo "   -h, --help      - Help to program a binary."
+    echo ""
+    exit 1
+}
+
+# reboot -------------------------------------------------------------------------------------------------------
+
+reboot_help() {
+    echo ""
+    echo "${bold}sgutil reboot [--help]${normal}"
+    echo ""
+    echo "Reboots the server (warm boot)."
+    echo ""
+    echo "ARGUMENTS:"
+    echo "   This command has no arguments."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
     echo ""
     exit 1
 }
@@ -959,11 +960,18 @@ case "$command" in
     esac
     ;;
   reboot)
-    if [ "$#" -ne 2 ]; then
-      program_reboot_help
-      exit 1
-    fi
-    /opt/cli/reboot
+    case "$arguments" in
+      -h|--help)
+        reboot_help
+        ;;
+      *)
+        if [ "$#" -ne 1 ]; then
+          reboot_help
+          exit 1
+        fi
+        /opt/cli/reboot
+        ;;
+    esac
     ;;
   run)
     xilinx_build_check
