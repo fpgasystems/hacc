@@ -3,7 +3,8 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-# constants
+#constants
+CLI_PATH="/opt/cli"
 EMAIL="jmoyapaya@ethz.ch"
 SERVERADDR="localhost"
 
@@ -21,7 +22,7 @@ echo ""
 echo "${bold}sgutil program vivado${normal}"
 
 #check for vivado_developers
-member=$(/opt/cli/common/is_member $username vivado_developers)
+member=$($CLI_PATH/common/is_member $username vivado_developers)
 if [ "$member" = "false" ]; then
     echo ""
     echo "Sorry, ${bold}$username!${normal} You are not granted to use this command."
@@ -84,36 +85,36 @@ fi
 
 #print help
 if [[ $use_help = "1" ]]; then
-    /opt/cli/sgutil program vivado -h
+    $CLI_PATH/sgutil program vivado -h
     exit
 fi
 
 # when used, bit_file, ltx_file or driver_file cannot be empty and has to exist
 if [ "$program_bitstream" = "1" ] && ([ "$bit_file" = "" ] || [ ! -f "$bit_file" ]); then
-    /opt/cli/sgutil program vivado -h
+    $CLI_PATH/sgutil program vivado -h
     exit
 fi
 
 if [ "$ltx_found" = "1" ] && ([ "$ltx_file" = "" ] || [ ! -f "$ltx_file" ]); then
-    /opt/cli/sgutil program vivado -h
+    $CLI_PATH/sgutil program vivado -h
     exit
 fi
 
 if [ "$program_driver" = "1" ] && ([ "$driver_file" = "" ] || [ ! -f "$driver_file" ]); then
-    /opt/cli/sgutil program vivado -h
+    $CLI_PATH/sgutil program vivado -h
     exit
 fi
 
 #sgutil get device if there is only one FPGA and not name_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
-    #device_name=$(/opt/cli/get/device | cut -d "=" -f2)
-    device_name=$(/opt/cli/get/device | awk -F': ' '{print $2}' | grep -v '^$')
+    #device_name=$($CLI_PATH/get/device | cut -d "=" -f2)
+    device_name=$($CLI_PATH/get/device | awk -F': ' '{print $2}' | grep -v '^$')
 fi
 
 #sgutil get serial if there is only one FPGA and not serial_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
-    #serial_number=$(/opt/cli/get/serial | cut -d "=" -f2)
-    serial_number=$(/opt/cli/get/serial | awk -F': ' '{print $2}' | grep -v '^$')
+    #serial_number=$($CLI_PATH/get/serial | cut -d "=" -f2)
+    serial_number=$($CLI_PATH/get/serial | awk -F': ' '{print $2}' | grep -v '^$')
 fi
 
 #get release branch
@@ -122,14 +123,14 @@ branch=$(/opt/xilinx/xrt/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:s
 if [[ $program_bitstream = "1" ]]; then
 
     #revert to xrt first if FPGA is already in baremetal (it is proven to be needed on non-virtualized environments)
-    virtualized=$(/opt/cli/common/is_virtualized)
+    virtualized=$($CLI_PATH/common/is_virtualized)
     if [ "$virtualized" = "false" ] && [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then 
-        sudo /opt/cli/program/revert
+        sudo $CLI_PATH/program/revert
     fi
 
     echo ""
 	echo "${bold}Programming bitstream:${normal}"
-    /tools/Xilinx/Vivado/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source /opt/cli/program/flash_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name $bit_file $ltx_file
+    /tools/Xilinx/Vivado/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name $bit_file $ltx_file
 
     #check for virtualized and apply PCI hot plug
     if [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
@@ -144,38 +145,19 @@ if [[ $program_bitstream = "1" ]]; then
             echo "Subject: $username requires to go to baremetal/warm boot ($hostname)" | sendmail $EMAIL
             exit
         elif [ "$virtualized" = "false" ]; then
-            #sudo /opt/cli/program/pci_hot_plug ${hostname}
-            #/opt/cli/program/rescan
+            #sudo $CLI_PATH/program/pci_hot_plug ${hostname}
+            #$CLI_PATH/program/rescan
             device_index=1
-            upstream_port=$(/opt/cli/get/get_fpga_device_param $device_index upstream_port)
-            root_port=$(/opt/cli/get/get_fpga_device_param $device_index root_port)
-            LinkCtl=$(/opt/cli/get/get_fpga_device_param $device_index LinkCtl)
-            sudo /opt/cli/program/pci_hot_plug $upstream_port $root_port $LinkCtl #${hostname}
+            upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
+            root_port=$($CLI_PATH/get/get_fpga_device_param $device_index root_port)
+            LinkCtl=$($CLI_PATH/get/get_fpga_device_param $device_index LinkCtl)
+            sudo $CLI_PATH/program/pci_hot_plug $upstream_port $root_port $LinkCtl #${hostname}
 
             bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
             lspci | grep Xilinx | grep $bdf
             echo ""
         fi
     fi
-
-    #check for virtualized and apply PCI hot plug
-    #virtualized=$(/opt/cli/common/is_virtualized)
-    #if [ "$virtualized" = "true" ]; then
-    #    echo ""
-    #    echo "${bold}The server needs to warm boot to operate in Vivado workflow. For this purpose:${normal}"
-	#	echo ""
-	#	echo "    Use the ${bold}go to baremetal${normal} button on the booking system, or"
-	#	echo "    Contact ${bold}$EMAIL${normal} for support."
-    #    echo ""
-    #    #send email
-    #    echo "Subject: $username requires to warm boot/go to baremetal ($hostname)" | sendmail $EMAIL
-    #    exit
-    #elif [ "$virtualized" = "false" ]; then
-    #    #run PCI hot plug
-    #    if [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
-    #        sudo /opt/cli/program/pci_hot_plug ${hostname}
-    #    fi
-    #fi
 fi
 
 if [[ $program_driver = "1" ]]; then
@@ -207,8 +189,5 @@ if [[ $program_driver = "1" ]]; then
     sleep 1
 
     echo ""
-
-    #sudo bash -c "/opt/cli/program/fpga_chmod 0"
-    #sudo /opt/cli/program/fpga_chmod 0 ===========> this belongs to coyote
 
 fi
