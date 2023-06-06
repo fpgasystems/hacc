@@ -4,6 +4,7 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
+CLI_PATH="/opt/cli"
 BIT_NAME="cyt_top.bit"
 DRIVER_NAME="coyote_drv.ko"
 
@@ -17,24 +18,11 @@ hostname="${url%%.*}"
 #inputs
 read -a flags <<< "$@"
 
-#get_N_REGIONS() {
-#    local DIR=$1
-#    #get N_REGIONS
-#    line=$(grep -n "N_REGIONS" $DIR/configs/config_shell.hpp)
-#    #find equal (=)
-#    idx=$(sed 's/ /\n/g' <<< "$line" | sed -n "/=/=")
-#    #get index
-#    value_idx=$(($idx+1))
-#    #get data
-#    N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
-#    echo $N_REGIONS
-#}
-
 echo ""
 echo "${bold}sgutil program coyote${normal}"
 
 #check for vivado_developers
-member=$(/opt/cli/common/is_member $username vivado_developers)
+member=$($CLI_PATH/common/is_member $username vivado_developers)
 if [ "$member" = "false" ]; then
     echo ""
     echo "Sorry, ${bold}$username!${normal} You are not granted to use this command."
@@ -99,7 +87,7 @@ else
     done
     #forbidden combinations
     if [[ $project_found = "0" ]] || ([ "$project_found" = "1" ] && [ "$project_name" = "" ]) || ([ $project_found = "0" ] && [ $name_found = "1" ]) || ([ "$name_found" = "1" ] && [ "$device_name" = "" ]); then
-        /opt/cli/sgutil build coyote -h
+        $CLI_PATH/sgutil build coyote -h
         exit
     fi
 fi
@@ -114,37 +102,6 @@ if ! [ -d "$DIR" ]; then
     echo ""
     exit
 fi
-
-#create or select a configuration ===> for programming, configs (config_000) are irrelevant
-#cd $DIR/configs/
-#if [[ $(ls -l | wc -l) = 2 ]]; then
-#    #only config_000 exists and we create config_001
-#    echo ""
-#    echo "You must build your project first! Please, use sgutil build coyote"
-#    echo ""
-#    exit
-#elif [[ $(ls -l | wc -l) = 4 ]]; then
-#    #config_000, config_shell and config_001 exist
-#    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
-#    config="config_001.hpp"
-#    #echo ""
-#elif [[ $(ls -l | wc -l) > 4 ]]; then
-#    cd $DIR/configs/
-#    configs=( "config_"*.hpp )
-#    echo ""
-#    echo "${bold}Please, choose your configuration:${normal}"
-#    echo ""
-#    PS3=""
-#    select config in "${configs[@]:1:${#configs[@]}-2}"; do # with :1 we avoid config_000.hpp and then config_shell.hpp
-#        if [[ -z $config ]]; then
-#            echo "" >&/dev/null
-#        else
-#            break
-#        fi
-#    done
-#    # copy selected config as config_000.hpp
-#    cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
-#fi
 
 #device_name to coyote string 
 FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
@@ -164,15 +121,13 @@ fi
 
 #get booked machines
 echo ""
-servers=$(sudo /opt/cli/common/get_booking_system_servers_list | tail -n +2)
+servers=$(sudo $CLI_PATH/common/get_booking_system_servers_list | tail -n +2)
 echo ""
 
 #convert string to an array
 servers=($servers)
 
 #we only show likely servers (hostname is alveo-u55c-01 and we remove the las three characters, i.e., alveo-u55c)
-#server_family=$(sgutil get device)
-#server_family="${server_family%%=*}"
 server_family="${hostname%???}"
 
 #build servers_family_list
@@ -217,7 +172,7 @@ echo "Programming local server ${bold}$hostname...${normal}"
 #sgutil get device if there is only one FPGA and not name_found
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
     #device_name=$(sgutil get device | cut -d "=" -f2)
-    device_name=$(/opt/cli/get/device | awk -F': ' '{print $2}' | grep -v '^$')
+    device_name=$($CLI_PATH/get/device | awk -F': ' '{print $2}' | grep -v '^$')
 fi
 #bitstream
 sgutil program vivado -b $APP_BUILD_DIR$BIT_NAME
@@ -225,7 +180,7 @@ sgutil program vivado -b $APP_BUILD_DIR$BIT_NAME
 sgutil program vivado -d $APP_BUILD_DIR$DRIVER_NAME
 
 #get permissions on N_REGIONS
-/opt/cli/program/get_N_REGIONS $DIR
+$CLI_PATH/program/get_N_REGIONS $DIR
 
 #programming remote servers (if applies)
 for i in "${servers_family_list[@]}"
@@ -242,7 +197,7 @@ do
     fi
 
     #remotely program bitstream, driver, and run get_N_REGIONS
-    ssh -t $username@$i "/opt/cli/program/vivado -b $APP_BUILD_DIR$BIT_NAME ; /opt/cli/program/vivado -d $APP_BUILD_DIR$DRIVER_NAME ; /opt/cli/program/get_N_REGIONS $DIR"
+    ssh -t $username@$i "$CLI_PATH/program/vivado -b $APP_BUILD_DIR$BIT_NAME ; $CLI_PATH/program/vivado -d $APP_BUILD_DIR$DRIVER_NAME ; $CLI_PATH/program/get_N_REGIONS $DIR"
 
 done
 
