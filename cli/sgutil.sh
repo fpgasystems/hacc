@@ -20,7 +20,7 @@ COMMANDS:
    examine         - Status of the system and devices.
    get             - Devices and host information.
    new             - Creates a new project of your choice.
-   program         - Downloads the accelerated application or driver to a given device.
+   program         - Download the acceleration program to a given FPGA/ACAP.
    run             - Executes the accelerated application on a given device.
    set             - Devices and host configuration.
    validate        - Validates the basic HACC infrastructure functionality.
@@ -316,11 +316,7 @@ new_help() {
     echo "   coyote          - Creates a new project using Coyote Hello, world! template."
     echo "   hip             - Creates a new project using HIP Hello, world! template."
     echo "   mpi             - Creates a new project using MPI Hello, world! template."
-    echo "   vitis           - Creates a new project using Vitis Hello, world! template."
-    #echo "   vivado          - Creates a new project using Vivado Hello, world! template."
-    #echo "   bin             - Programs a Vitis FPGA-bitstream to a given device."
-    #echo "   bit             - Programs a Vivado FPGA-bitstream to a given device."
-    #echo "   drv             - Installs an FPGA driver on the server." 
+    echo "   vitis           - Creates a new project using Vitis Hello, world! template." 
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -389,16 +385,15 @@ program_help() {
     echo ""
     echo "${bold}sgutil program [arguments [flags]] [--help]${normal}"
     echo ""
-    echo "Downloads the accelerated application or driver to a given device."
+    echo "Download the acceleration program to a given FPGA/ACAP."
     echo ""
     echo "ARGUMENTS:"
     echo "   coyote          - Programs Coyote on a given device."
     echo "   reboot          - Reboots the server (warm boot)."
-    #echo "   rescan          - Runs the PCI hot-plug process."
     echo "   reset           - Resets the given device."
     echo "   revert          - Returns the specified device to the Vitis workflow."
-    echo "   vitis           - Programs a Vitis FPGA-binary to a given device."
-    echo "   vivado          - Programs a Vivado FPGA-bitstream to a given device."
+    echo "   vitis           - Programs a Vitis binary to a given device."
+    echo "   vivado          - Programs a Vivado bitstream to a given device."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -480,7 +475,7 @@ program_vivado_help() {
     echo ""
     echo "${bold}sgutil program vivado [flags] [--help]${normal}"
     echo ""
-    echo "Programs a Vivado FPGA-bitstream to a given device."
+    echo "Programs a Vivado bitstream to a given device."
     echo ""
     echo "FLAGS:"
     echo "   -b, --bitstream - Programs a .bit bitstream to the specified device." 
@@ -499,7 +494,7 @@ program_vitis_help() {
     echo ""
     echo "${bold}sgutil program vitis [flags] [--help]${normal}"
     echo ""
-    echo "Programs a Vitis FPGA-binary to a given device."
+    echo "Programs a Vitis binary to a given device."
     echo ""
     echo "FLAGS:"
     echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
@@ -524,10 +519,6 @@ run_help() {
     echo "   hip             - Runs your HIP application on a given device."
     echo "   mpi             - Runs your MPI application according to your setup."
     echo "   vitis           - Runs a Vitis FPGA-binary on a given device."
-    #echo "   vivado (soon)   - Runs a Vivado FPGA-bitstream on a given device."
-    #echo "   bin             - Programs a Vitis FPGA-bitstream to a given device."
-    #echo "   bit             - Programs a Vivado FPGA-bitstream to a given device."
-    #echo "   drv             - Installs an FPGA driver on the server." 
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
