@@ -8,7 +8,7 @@
 
 <code>sgutil run vitis [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Runs a Vitis FPGA-binary on a given device.
+  &nbsp; &nbsp; Runs a Vitis FPGA-binary on a given FPGA/ACAP.
 </p>
 
 ### Flags

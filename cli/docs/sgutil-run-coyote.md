@@ -8,7 +8,7 @@
 
 <code>sgutil run coyote [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Runs Coyote on a given device.
+  &nbsp; &nbsp; Runs Coyote on a given FPGA/ACAP.
 </p>
 
 ### Flags

@@ -8,7 +8,7 @@
 
 <code>sgutil run hip [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Runs your HIP application on a given device.
+  &nbsp; &nbsp; Runs your HIP application on a given GPU.
 </p>
 
 ### Flags
