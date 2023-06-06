@@ -26,7 +26,10 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "coyote hip mpi vitis --help" -- ${cur})) # vivado
                     ;;
                 program)
-                    COMPREPLY=($(compgen -W "coyote reboot reset revert vitis vivado --help" -- ${cur})) # -h rescan
+                    COMPREPLY=($(compgen -W "coyote reset revert vitis vivado --help" -- ${cur})) # -h rescan
+                    ;;
+                reboot)
+                    COMPREPLY=($(compgen -W "--help" -- ${cur}))
                     ;;
                 run)
                     COMPREPLY=($(compgen -W "coyote hip mpi vitis --help" -- ${cur})) # -h
@@ -77,9 +80,9 @@ _sgutil_completions()
                 coyote) # program
                     COMPREPLY=($(compgen -W "--project --serial --help" -- ${cur})) # -n  -s  -h
                     ;;
-                reboot)
-                    COMPREPLY=($(compgen -W "--help" -- ${cur}))
-                    ;;
+                #reboot)
+                #    COMPREPLY=($(compgen -W "--help" -- ${cur}))
+                #    ;;
                 reset)
                     COMPREPLY=($(compgen -W "--serial --help" -- ${cur}))
                     ;;
