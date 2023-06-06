@@ -12,8 +12,9 @@
 </p>
 
 ### Arguments
-
-This command has no arguments.
+<p>
+  &nbsp; &nbsp; This command has no arguments.
+</p>
 
 <code>-h, --help</code>
 <p>
@@ -22,6 +23,5 @@ This command has no arguments.
 
 ### Examples
 ```
-$ sgutil examine -h
 $ sgutil examine
 ```
