@@ -43,12 +43,6 @@ if [ "$flags" = "" ]; then
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
     fi
-    #validate
-    echo ""
-    upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
-    bdf=$(echo "$upstream_port" | sed 's/0$/1/')
-    $XRT_PATH/bin/xbutil validate --device $bdf
-    echo "" 
 else
     #device_dialog_check
     result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
@@ -69,11 +63,12 @@ else
     elif [[ $device_found = "0" ]]; then
         $CLI_PATH/sgutil validate vitis -h
         exit
-    fi
-    #validate
-    echo ""
-    upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
-    bdf=$(echo "$upstream_port" | sed 's/0$/1/')
-    $XRT_PATH/bin/xbutil validate --device $bdf
-    echo ""    
+    fi    
 fi
+
+#validate
+echo ""
+upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
+bdf=$(echo "$upstream_port" | sed 's/0$/1/')
+$XRT_PATH/bin/xbutil validate --device $bdf
+echo ""
