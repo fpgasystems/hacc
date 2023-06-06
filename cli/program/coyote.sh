@@ -175,9 +175,9 @@ if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
     device_name=$($CLI_PATH/get/device | awk -F': ' '{print $2}' | grep -v '^$')
 fi
 #bitstream
-sgutil program vivado -b $APP_BUILD_DIR$BIT_NAME
+$CLI_PATH/sgutil program vivado -b $APP_BUILD_DIR$BIT_NAME
 #driver 
-sgutil program vivado -d $APP_BUILD_DIR$DRIVER_NAME
+$CLI_PATH/sgutil program vivado -d $APP_BUILD_DIR$DRIVER_NAME
 
 #get permissions on N_REGIONS
 $CLI_PATH/program/get_N_REGIONS $DIR
@@ -192,8 +192,7 @@ do
 
     #sgutil get device if there is only one FPGA and not name_found (we assume this for now)
     if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
-        #device_name=$(sgutil get device | cut -d "=" -f2)
-        device_name=$(sgutil get device | awk -F': ' '{print $2}' | grep -v '^$')
+        device_name=$($CLI_PATH/sgutil get device | awk -F': ' '{print $2}' | grep -v '^$')
     fi
 
     #remotely program bitstream, driver, and run get_N_REGIONS
