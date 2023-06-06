@@ -8,7 +8,7 @@
 
 <code>sgutil validate coyote [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Validates Coyote for a configuration of your choice.
+  &nbsp; &nbsp; Validates Coyote on the selected FPGA/ACAP.
 </p>
 
 ### Flags

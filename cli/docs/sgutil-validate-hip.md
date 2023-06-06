@@ -8,7 +8,7 @@
 
 <code>sgutil validate hip [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Validates HIP.
+  &nbsp; &nbsp; Validates HIP on the selected GPU.
 </p>
 
 ### Flags
