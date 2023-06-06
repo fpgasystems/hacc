@@ -7,6 +7,7 @@ normal=$(tput sgr0)
 CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
 XRT_PATH="/opt/xilinx/xrt"
+VIVADO_PATH="/tools/Xilinx/Vivado"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 SERVERADDR="localhost"
 
@@ -18,7 +19,7 @@ url="${HOSTNAME}"
 hostname="${url%%.*}"
 
 #get email
-email=$(/opt/cli/common/get_email)
+email=$($CLI_PATH/common/get_email)
 
 #check on DEVICES_LIST
 source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
@@ -30,7 +31,7 @@ MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 
 #check on virtualized
-virtualized=$(/opt/cli/common/is_virtualized)
+virtualized=$($CLI_PATH/common/is_virtualized)
 if [ "$virtualized" = "true" ]; then
     echo ""
     echo "${bold}The server needs to revert to operate with XRT normally. For this purpose:${normal}"
@@ -82,7 +83,7 @@ if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]]; then
 fi
 
 #get BDF (i.e., Bus:Device.Function) 
-upstream_port=$(/opt/cli/get/get_fpga_device_param $device_index upstream_port)
+upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
 bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
 
 #check for number of pci functions
@@ -100,22 +101,22 @@ echo ""
 echo "${bold}sgutil program revert${normal}"
 
 #get device and serial name
-serial_number=$(/opt/cli/get/serial -d $device_index | awk -F': ' '{print $2}' | grep -v '^$')
-device_name=$(/opt/cli/get/device -d $device_index | awk -F': ' '{print $2}' | grep -v '^$')
+serial_number=$($CLI_PATH/get/serial -d $device_index | awk -F': ' '{print $2}' | grep -v '^$')
+device_name=$($CLI_PATH/get/device -d $device_index | awk -F': ' '{print $2}' | grep -v '^$')
 
 #get release branch
 branch=$($XRT_PATH/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
 
 echo ""
 echo "${bold}Programming XRT shell:${normal}"
-/tools/Xilinx/Vivado/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source /opt/cli/program/flash_xrt_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name
+$VIVADO_PATH/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_xrt_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name
 
 #hotplug
-#sudo bash -c "source /opt/cli/program/pci_hot_plug ${hostname}"
-#upstream_port=$(/opt/cli/get/get_fpga_device_param $device_index upstream_port)
-root_port=$(/opt/cli/get/get_fpga_device_param $device_index root_port)
-LinkCtl=$(/opt/cli/get/get_fpga_device_param $device_index LinkCtl)
-sudo /opt/cli/program/pci_hot_plug $upstream_port $root_port $LinkCtl #${hostname}
+#sudo bash -c "source $CLI_PATH/program/pci_hot_plug ${hostname}"
+#upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
+root_port=$($CLI_PATH/get/get_fpga_device_param $device_index root_port)
+LinkCtl=$($CLI_PATH/get/get_fpga_device_param $device_index LinkCtl)
+sudo $CLI_PATH/program/pci_hot_plug $upstream_port $root_port $LinkCtl #${hostname}
 
 #inserting XRT driver
 echo "${bold}Inserting XRT drivers:${normal}"
