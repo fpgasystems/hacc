@@ -9,7 +9,7 @@ _sgutil_completions()
 
     case ${COMP_CWORD} in
         1)
-            COMPREPLY=($(compgen -W "build examine get new program run set validate --help --version" -- ${cur})) # -h -v
+            COMPREPLY=($(compgen -W "build examine get new program reboot run set validate --help --version" -- ${cur})) # -h -v
             ;;
         2)
             case ${prev} in
