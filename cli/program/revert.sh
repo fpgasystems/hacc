@@ -3,20 +3,28 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-CLI_WORKDIR="/opt/cli"
-DATABASE="/opt/hacc/devices_reconfigurable"
-MAX_DEVICES=4
-
-# constants
+#constants
+CLI_PATH="/opt/cli"
+HACC_PATH="/opt/hacc"
+XRT_PATH="/opt/xilinx/xrt"
+DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 SERVERADDR="localhost"
-EMAIL="jmoyapaya@ethz.ch"
 
 #get username
 username=$USER
 
-# get hostname
+#get hostname
 url="${HOSTNAME}"
 hostname="${url%%.*}"
+
+#get email
+email=$(/opt/cli/common/get_email)
+
+#check on DEVICES_LIST
+source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
+
+#get number of fpga and acap devices present
+MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 
 # inputs
 read -a flags <<< "$@"
@@ -28,10 +36,10 @@ if [ "$virtualized" = "true" ]; then
     echo "${bold}The server needs to revert to operate with XRT normally. For this purpose:${normal}"
 	echo ""
 	echo "    Use the ${bold}revert to xrt${normal} button on the booking system, or"
-	echo "    Contact ${bold}$EMAIL${normal} for support."
+	echo "    Contact ${bold}$email${normal} for support."
     echo ""
     #send email
-    echo "Subject: $hostname requires to revert_to_xrt ($username)" | sendmail $EMAIL
+    echo "Subject: $hostname requires to revert_to_xrt ($username)" | sendmail $email
     exit
 fi
 
@@ -39,7 +47,7 @@ fi
 num_devices=$(/opt/cli/common/get_num_devices)
 if [[ -z "$num_devices" ]] || [[ "$num_devices" -eq 0 ]]; then
     echo ""
-    echo "Please, update $DATABASE according to your infrastructure."
+    echo "Please, update $DEVICES_LIST according to your infrastructure."
     echo ""
     exit
 elif [[ "$num_devices" -eq 1 ]]; then
@@ -56,7 +64,7 @@ if [ "$flags" = "" ]; then
         #servers with only one FPGA (i.e., alveo-u55c-01)
         device_index="1"
     else
-        $CLI_WORKDIR/sgutil program revert -h
+        $CLI_PATH/sgutil program revert -h
         exit
     fi
 else
@@ -71,7 +79,7 @@ else
     done
     #forbidden combinations
     if [[ $device_found = "0" ]] || [[ $device_index = "" ]] || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))); then
-        $CLI_WORKDIR/sgutil program revert -h
+        $CLI_PATH/sgutil program revert -h
         exit
     fi
 fi
@@ -79,7 +87,7 @@ fi
 #device_index should be between {0 .. MAX_DEVICES - 1}
 #MAX_DEVICES=$(($MAX_DEVICES-1))
 if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]]; then
-    $CLI_WORKDIR/sgutil program revert -h
+    $CLI_PATH/sgutil program revert -h
     exit
 fi
 
@@ -106,7 +114,7 @@ serial_number=$(/opt/cli/get/serial -d $device_index | awk -F': ' '{print $2}' |
 device_name=$(/opt/cli/get/device -d $device_index | awk -F': ' '{print $2}' | grep -v '^$')
 
 #get release branch
-branch=$(/opt/xilinx/xrt/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
+branch=$($XRT_PATH/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
 
 echo ""
 echo "${bold}Programming XRT shell:${normal}"
