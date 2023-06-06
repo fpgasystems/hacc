@@ -433,6 +433,12 @@
     dest: /opt/cli/get/bus
     mode: 0755
 
+- name: copy get/ifconfig script
+  copy:
+    src: "../../cli/get/ifconfig.sh"
+    dest: /opt/cli/get/ifconfig
+    mode: 0755
+
 #new ------------------------------------------------------------------------------------    
 
 - name: copy (new) vitis script

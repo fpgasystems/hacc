@@ -13,6 +13,10 @@
 
 ### Arguments
 
+* [ifconfig](./sgutil-get-ifconfig.md#sgutil-get-ifconfig)
+
+<!-- Extra line -->
+
 * [bdf](./sgutil-get-bdf.md#sgutil-get-bdf)
 * [device](./sgutil-get-device.md#sgutil-get-device)
 * [network](./sgutil-get-network.md#sgutil-get-network)

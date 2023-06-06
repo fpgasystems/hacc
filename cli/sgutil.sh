@@ -223,6 +223,8 @@ get_help() {
     echo "Devices and host information."
     echo ""
     echo "ARGUMENTS:"
+    echo "   ifconfig        - Retreives host networking information."
+    echo ""
     echo "   bdf             - Retreives FPGA/ACAP Bus Device Function."
     echo "   device          - Retreives FPGA/ACAP device names."
     echo "   network         - Retreives FPGA/ACAP networking information."
@@ -271,6 +273,20 @@ get_device_help() {
     echo ""
     echo "FLAGS:"
     echo "   -d, --device    - FPGA/ACAP Device Index (according to sgutil examine)."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
+get_ifconfig_help() {
+    echo ""
+    echo "${bold}sgutil get ifconfig [--help]${normal}"
+    echo ""
+    echo "Retreives host networking information."
+    echo ""
+    echo "FLAGS:"
+    echo "   This command has no flags."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -848,6 +864,10 @@ case "$command" in
       #  valid_flags="-h --help -w --word"
       #  command_run $command_arguments_flags"@"$valid_flags
       #  ;;
+      ifconfig)
+        valid_flags="-h --help"
+        command_run $command_arguments_flags"@"$valid_flags
+        ;;
       network)
         valid_flags="-h --help -d --device"
         command_run $command_arguments_flags"@"$valid_flags
