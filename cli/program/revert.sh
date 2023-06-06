@@ -87,11 +87,8 @@ fi
 upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
 bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
 
-#check for number of pci functions
+#check on number of pci functions
 if [[ $(lspci | grep Xilinx | grep $bdf | wc -l) = 2 ]]; then
-    #the server is already in Vitis workflow
-    #echo ""
-    #echo "The device ${bold}$upstream_port.1${normal} is ready for Vitis workflow!"
     echo ""
     lspci | grep Xilinx | grep $bdf
     echo ""
@@ -113,25 +110,21 @@ echo "${bold}Programming XRT shell:${normal}"
 $VIVADO_PATH/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_xrt_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name
 
 #hotplug
-#sudo bash -c "source $CLI_PATH/program/pci_hot_plug ${hostname}"
-#upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
 root_port=$($CLI_PATH/get/get_fpga_device_param $device_index root_port)
 LinkCtl=$($CLI_PATH/get/get_fpga_device_param $device_index LinkCtl)
-sudo $CLI_PATH/program/pci_hot_plug $upstream_port $root_port $LinkCtl #${hostname}
+sudo $CLI_PATH/program/pci_hot_plug $upstream_port $root_port $LinkCtl
 
 #inserting XRT driver
 echo "${bold}Inserting XRT drivers:${normal}"
 echo ""
 
-if [[ $(lsmod | grep xocl | wc -l) -gt 0 ]]; then #>= 1
+if [[ $(lsmod | grep xocl | wc -l) -gt 0 ]]; then
     echo "sudo modprobe xocl"
-    #sudo bash -c "modprobe xocl"
     sudo modprobe xocl
     sleep 1
 fi
-if [[ $(lsmod | grep xclmgmt | wc -l) -gt 0 ]]; then #>= 1
+if [[ $(lsmod | grep xclmgmt | wc -l) -gt 0 ]]; then
     echo "sudo modprobe xclmgmt"
-    #sudo bash -c "modprobe xclmgmt"
     sudo modprobe xclmgmt
     sleep 1
 fi
