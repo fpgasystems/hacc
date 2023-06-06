@@ -13,27 +13,19 @@
 
 ### Arguments
 
-* [coyote](./sgutil-validate-coyote.md#sgutil-validate-coyote)
-* [hip](./sgutil-validate-hip.md#sgutil-validate-hip)
 * [iperf](./sgutil-validate-iperf.md#sgutil-validate-iperf)
 * [mpi](./sgutil-validate-mpi.md#sgutil-validate-mpi)
+
+<!-- Extra line -->
+
+* [coyote](./sgutil-validate-coyote.md#sgutil-validate-coyote)
 * [vitis](./sgutil-validate-vitis.md#sgutil-validate-vitis)
+
+<!-- Extra line -->
+
+* [hip](./sgutil-validate-hip.md#sgutil-validate-hip)
 
 <code>-h, --help</code>
 <p>
   &nbsp; &nbsp; Help to use this command.
 </p>
-
-<!-- <code>
-  iperf
-</code>
-<p>
-  &nbsp; &nbsp; Measures HACC network performance.
-</p>
-
-<code>
-  mpi
-</code>
-<p>
-  &nbsp; &nbsp; Validates MPI.
-</p> -->
