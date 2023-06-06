@@ -21,6 +21,7 @@ COMMANDS:
    get             - Devices and host information.
    new             - Creates a new project of your choice.
    program         - Download the acceleration program to a given FPGA/ACAP.
+   reboot          - Reboots the server (warm boot).
    run             - Executes the accelerated application on a given device.
    set             - Devices and host configuration.
    validate        - Validates the basic HACC infrastructure functionality.
@@ -389,7 +390,6 @@ program_help() {
     echo ""
     echo "ARGUMENTS:"
     echo "   coyote          - Programs Coyote on a given device."
-    echo "   reboot          - Reboots the server (warm boot)."
     echo "   reset           - Resets the given device."
     echo "   revert          - Returns the specified device to the Vitis workflow."
     echo "   vitis           - Programs a Vitis binary to a given device."
@@ -918,13 +918,13 @@ case "$command" in
         valid_flags="-p --project -s --serial -h --help"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
-      reboot)
-        if [ "$#" -ne 2 ]; then
-          program_reboot_help
-          exit 1
-        fi
-        /opt/cli/program/reboot
-        ;;
+      #reboot)
+      #  if [ "$#" -ne 2 ]; then
+      #    program_reboot_help
+      #    exit 1
+      #  fi
+      #  /opt/cli/program/reboot
+      #  ;;
       #rescan) # flags can be empty if we have only one FPGA
       #  valid_flags="-d --device -h --help"
       #  command_run $command_arguments_flags"@"$valid_flags
@@ -957,6 +957,13 @@ case "$command" in
         program_help
       ;;
     esac
+    ;;
+  reboot)
+    if [ "$#" -ne 2 ]; then
+      program_reboot_help
+      exit 1
+    fi
+    /opt/cli/reboot
     ;;
   run)
     xilinx_build_check

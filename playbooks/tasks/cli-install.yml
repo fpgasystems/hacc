@@ -555,11 +555,23 @@
     dest: /opt/cli/program/get_N_REGIONS
     mode: 0755
 
-- name: copy program reboot
+#- name: copy program reboot
+#  copy:
+#    src: "../../cli/program/reboot.sh"
+#    dest: /opt/cli/program/reboot
+#    mode: 0755
+- name: remove program/reboot
+  ansible.builtin.file:
+    path: /opt/cli/program/reboot
+    state: absent
+
+# reboot -------------------------------------------------------------------------------------
+
+- name: copy reboot
   copy:
-    src: "../../cli/program/reboot.sh"
-    dest: /opt/cli/program/reboot
-    mode: 0755
+    src: "../../cli/reboot.sh"
+    dest: /opt/cli/reboot
+    mode: 0755    
 
 # run ---------------------------------------------------------------------------------------
 

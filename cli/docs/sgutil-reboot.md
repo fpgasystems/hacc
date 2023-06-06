@@ -4,16 +4,16 @@
 <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-program.md#sgutil-program">Back to sgutil program</a>
 </p>
 
-## sgutil program reebot
+## sgutil reebot
 
-<code>sgutil program reebot [flags] [--help]</code>
+<code>sgutil reebot [--help]</code>
 <p>
   &nbsp; &nbsp; Reboots the server (warm boot).
 </p>
 
-### Flags
+### Arguments
 <p>
-  &nbsp; &nbsp; This command has no flags.
+  &nbsp; &nbsp; This command has no arguments.
 </p>
 
 <code>-h, --help <string></code>
@@ -23,6 +23,5 @@
 
 ### Examples
 ```
-$ sgutil program reebot -h
-$ sgutil program reebot
+$ sgutil reebot 
 ```

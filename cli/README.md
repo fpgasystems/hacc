@@ -17,6 +17,7 @@ ETHZ-HACC CLI brings Systems Group’s designs to your terminal and allows you t
 * [get](./docs/sgutil-get.md#sgutil-get)
 * [new](./docs/sgutil-new.md#sgutil-new)
 * [program](./docs/sgutil-program.md#sgutil-program)
+* [reboot](./docs/sgutil-reboot.md#sgutil-reboot)
 * [run](./docs/sgutil-run.md#sgutil-run)
 * [set](./docs/sgutil-set.md#sgutil-set)
 * [validate](./docs/sgutil-validate.md#sgutil-validate)
