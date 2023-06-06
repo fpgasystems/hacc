@@ -48,38 +48,39 @@ fi
 read -a flags <<< "$@"
 
 #check on flags
-device_found="0"
+device_found=""
+device_index=""
 if [ "$flags" = "" ]; then
-    #get device index
-    if [[ "$multiple_devices" == "0" ]]; then
-        #servers with only one FPGA (i.e., alveo-u55c-01)
+    #device_dialog
+    if [[ $multiple_devices = "0" ]]; then
+        device_found="1"
         device_index="1"
     else
-        $CLI_PATH/sgutil program revert -h
-        exit
+        echo ""
+        echo "${bold}Please, choose your device:${normal}"
+        echo ""
+        result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
+        device_found=$(echo "$result" | sed -n '1p')
+        device_index=$(echo "$result" | sed -n '2p')
     fi
 else
-    #find flags and values
-    for (( i=0; i<${#flags[@]}; i++ ))
-    do
-        if [[ " ${flags[$i]} " =~ " -d " ]] || [[ " ${flags[$i]} " =~ " --device " ]]; then # flags[i] is -d or --device
-            device_found="1"
-            device_idx=$(($i+1))
-            device_index=${flags[$device_idx]}
-        fi    
-    done
+    #device_dialog_check
+    result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
+    device_found=$(echo "$result" | sed -n '1p')
+    device_index=$(echo "$result" | sed -n '2p')
     #forbidden combinations
-    if [[ $device_found = "0" ]] || [[ $device_index = "" ]] || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))); then
+    if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
         $CLI_PATH/sgutil program revert -h
         exit
     fi
-fi
-
-#device_index should be between {0 .. MAX_DEVICES - 1}
-#MAX_DEVICES=$(($MAX_DEVICES-1))
-if [[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]]; then
-    $CLI_PATH/sgutil program revert -h
-    exit
+    #device_dialog (forgotten mandatory)
+    if [[ $multiple_devices = "0" ]]; then
+        device_found="1"
+        device_index="1"
+    elif [[ $device_found = "0" ]]; then
+        $CLI_PATH/sgutil program revert -h
+        exit
+    fi
 fi
 
 #get BDF (i.e., Bus:Device.Function) 
