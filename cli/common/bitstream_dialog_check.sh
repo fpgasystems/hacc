@@ -3,21 +3,26 @@
 flags=("$@")  # Assign command-line arguments to the 'flags' array
 
 # Declare global variables
-declare -g device_found="0"
-#declare -g device_idx=""
-declare -g device_index=""
+declare -g bitstream_found="0"
+declare -g bitstream_name=""
 
 #read flags
 for (( i=0; i<${#flags[@]}; i++ ))
 do
-    if [[ " ${flags[$i]} " =~ " -d " ]] || [[ " ${flags[$i]} " =~ " --device " ]]; then # flags[i] is -d or --device
-        device_found="1"
-        device_idx=$(($i+1))
-        device_index=${flags[$device_idx]}
+    if [[ " ${flags[$i]} " =~ " -b " ]] || [[ " ${flags[$i]} " =~ " --bitstream " ]]; then # flags[i] is -d or --device
+        bitstream_found="1"
+        bitstream_idx=$(($i+1))
+        bitstream_name=${flags[$bitstream_idx]}
     fi  
 done
 
+#check on bitstream existence and extension
+if [ ! -f "$bitstream_name" ]; then
+    bitstream_found="0"
+elif [ "${bitstream_name##*.}" != "bit" ]; then
+    bitstream_found="0"
+fi
+
 #return the values
-echo "$device_found"
-#echo "$device_idx"
-echo "$device_index"
+echo "$bitstream_found"
+echo "$bitstream_name"
