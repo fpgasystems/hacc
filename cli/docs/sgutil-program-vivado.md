@@ -14,7 +14,7 @@
 ### Flags
 <code>-b, --bitstream <string></code>
 <p>
-  &nbsp; &nbsp; Bitstream (.bit) file name
+  &nbsp; &nbsp; Bitstream (.bit) file path.
 </p>
 
 <code>    --device <string></code>
@@ -24,7 +24,7 @@
 
 <code>    --driver <string></code>
 <p>
-  &nbsp; &nbsp; Driver (.ko) file name.
+  &nbsp; &nbsp; Driver (.ko) file path.
 </p>
 
 <!-- <code>-l, --ltx <string></code>
