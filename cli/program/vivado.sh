@@ -14,7 +14,7 @@ SERVERADDR="localhost"
 #get username
 username=$USER
 
-# get hostname
+#get hostname
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
