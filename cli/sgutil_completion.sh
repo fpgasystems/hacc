@@ -81,22 +81,16 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "--device --help" -- ${cur})) # -w  -h
                     ;;
                 coyote) # program
-                    COMPREPLY=($(compgen -W "--project --serial --help" -- ${cur})) # -n  -s  -h
+                    COMPREPLY=($(compgen -W "--device --project --remote --help" -- ${cur})) # -n  -s  -h
                     ;;
-                #reboot)
-                #    COMPREPLY=($(compgen -W "--help" -- ${cur}))
-                #    ;;
                 reset)
                     COMPREPLY=($(compgen -W "--serial --help" -- ${cur}))
                     ;;
-                #rescan)
-                #    COMPREPLY=($(compgen -W "--device --help" -- ${cur}))
-                #    ;;
                 revert)
                     COMPREPLY=($(compgen -W "--device --help" -- ${cur})) # -n  -s  -h
                     ;;
                 vitis) 
-                    COMPREPLY=($(compgen -W "--device --project -r --remote --help" -- ${cur}))
+                    COMPREPLY=($(compgen -W "--device --project --remote --help" -- ${cur}))
                     ;;
                 vivado) 
                     COMPREPLY=($(compgen -W "--bitstream --device --driver --ltx --name --serial --help" -- ${cur})) # -b -d -l -n -s -h

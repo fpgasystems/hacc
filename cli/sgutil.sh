@@ -423,8 +423,10 @@ program_coyote_help() {
     echo "Programs Coyote to a given FPGA."
     echo ""
     echo "FLAGS:"
+    echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
     echo "   -p, --project   - Specifies your Coyote project name." 
-    echo "   -s, --serial    - FPGA's serial number. See sgutil get serial."
+    echo "   -r, --remote    - Local or remote deployment."
+    #echo "   -s, --serial    - FPGA's serial number. See sgutil get serial."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -840,14 +842,6 @@ case "$command" in
         valid_flags="-h --help -d --device"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
-      #ip)
-      #  valid_flags="-h --help -d --device"
-      #  command_run $command_arguments_flags"@"$valid_flags
-      #  ;;
-      #mac)
-      #  valid_flags="-h --help -w --word"
-      #  command_run $command_arguments_flags"@"$valid_flags
-      #  ;;
       ifconfig)
         valid_flags="-h --help"
         command_run $command_arguments_flags"@"$valid_flags
@@ -867,12 +861,6 @@ case "$command" in
     esac
     ;;
   new)
-
-    #if [ "$#" -ne 2 ]; then
-    #  new_help
-    #  exit 1
-    #fi
-
     case "$arguments" in
       -h|--help)
         new_help
@@ -905,9 +893,6 @@ case "$command" in
         fi
         /opt/cli/new/vitis
         ;;
-      #vivado)
-      #  /opt/cli/new/vivado
-      #  ;;
       *)
         new_help
       ;;
@@ -920,7 +905,7 @@ case "$command" in
         program_help
         ;;
       coyote)
-        valid_flags="-p --project -s --serial -h --help"
+        valid_flags="-d --device -p --project -r --remote -h --help" #-s --serial
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       reset) 

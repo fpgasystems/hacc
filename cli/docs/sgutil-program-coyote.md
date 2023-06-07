@@ -12,36 +12,20 @@
 </p>
 
 ### Flags
-<!-- <code>
-  -b, --binary <string>
-</code>
+<code>-d, --device <string></code>
 <p>
-  &nbsp; &nbsp; Programs an .xclbin binary to the specified device.
+  &nbsp; &nbsp; FPGA Device Index (see sgutil examine).
 </p>
-
-<code>
-  -n, --name <string>
-</code>
-<p>
-  &nbsp; &nbsp; FPGA's device name. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-device.md">sgutil get device</a>.
-</p> -->
 
 <code>-p, --project <string></code>
 <p>
-  &nbsp; &nbsp; Specifies your Coyote project name.
+  &nbsp; &nbsp; Specifies your Vitis project name.
 </p>
 
-<code>-s, --serial <string></code>
+<code>-r, --remote <string></code>
 <p>
-  &nbsp; &nbsp; FPGA's serial number. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-serial.md">sgutil get serial</a>.
+  &nbsp; &nbsp; Local or remote deployment.
 </p>
-
-<!-- <code>
-  -u, --user <string>
-</code>
-<p>
-  &nbsp; &nbsp; The name (and path) of the xclbin to be loaded.
-</p> -->
 
 <code>-h, --help <string></code>
 <p>
@@ -50,5 +34,5 @@
 
 ### Examples
 ```
-$ sgutil program coyote -p my_coyote_project
+$ sgutil program coyote
 ```
