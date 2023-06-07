@@ -8,13 +8,13 @@
 
 <code>sgutil program vivado [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Programs a Vivado bitstream to a given FPGA/ACAP.
+  &nbsp; &nbsp; Programs a Vivado bitstream to a given FPGA.
 </p>
 
 ### Flags
 <code>-b, --bitstream <string></code>
 <p>
-  &nbsp; &nbsp; Bitstream file (.bit) path.
+  &nbsp; &nbsp; Bitstream (.bit) file name
 </p>
 
 <code>    --device <string></code>
@@ -24,7 +24,7 @@
 
 <code>    --driver <string></code>
 <p>
-  &nbsp; &nbsp; Driver file (.ko) path.
+  &nbsp; &nbsp; Driver (.ko) file name.
 </p>
 
 <!-- <code>-l, --ltx <string></code>

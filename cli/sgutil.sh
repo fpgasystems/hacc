@@ -407,9 +407,9 @@ program_help() {
     echo "ARGUMENTS:"
     echo "   coyote          - Programs Coyote to a given FPGA."
     echo "   reset           - Resets a given FPGA/ACAP."
-    echo "   revert          - Returns the specified FPGA/ACAP to the Vitis workflow."
+    echo "   revert          - Returns the specified FPGA to the Vitis workflow."
     echo "   vitis           - Programs a Vitis binary to a given FPGA/ACAP."
-    echo "   vivado          - Programs a Vivado bitstream to a given FPGA/ACAP."
+    echo "   vivado          - Programs a Vivado bitstream to a given FPGA."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -449,7 +449,7 @@ program_revert_help() {
     echo ""
     echo "${bold}sgutil program revert [flags] [--help]${normal}"
     echo ""
-    echo "Returns the specified FPGA/ACAP to the Vitis workflow."
+    echo "Returns the specified FPGA to the Vitis workflow."
     echo ""
     echo "FLAGS:"
     echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
@@ -463,15 +463,12 @@ program_vivado_help() {
     echo ""
     echo "${bold}sgutil program vivado [flags] [--help]${normal}"
     echo ""
-    echo "Programs a Vivado bitstream to a given FPGA/ACAP."
+    echo "Programs a Vivado bitstream to a given FPGA."
     echo ""
     echo "FLAGS:"
-    echo "   -b, --bitstream - Bitstream file (.bit) path." 
+    echo "   -b, --bitstream - Bitstream (.bit) file name." 
     echo "       --device    - FPGA Device Index (see sgutil examine)."
-    echo "       --driver    - Driver file (.ko) path."
-    #echo "   -l, --ltx       - Specifies a .ltx debug probes file."
-    #echo "   -n, --name      - FPGA's device name. See sgutil get device."
-    #echo "   -s, --serial    - FPGA's serial number. See sgutil get serial."
+    echo "       --driver    - Driver (.ko) file name."
     echo ""
     echo "   -h, --help      - Help to program a bitstream."
     echo ""
@@ -926,36 +923,17 @@ case "$command" in
         valid_flags="-p --project -s --serial -h --help"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
-      #reboot)
-      #  if [ "$#" -ne 2 ]; then
-      #    program_reboot_help
-      #    exit 1
-      #  fi
-      #  /opt/cli/program/reboot
-      #  ;;
-      #rescan) # flags can be empty if we have only one FPGA
-      #  valid_flags="-d --device -h --help"
-      #  command_run $command_arguments_flags"@"$valid_flags
-      #  ;;
       reset) 
         valid_flags="-s --serial -h --help"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
-      revert) # flags can be empty if we have only one FPGA
+      revert)
         valid_flags="-d --device -h --help"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
-      vivado) # flags cannot be empty (i.e. at least -b is required)
-        valid_flags="-b --bitstream --device --driver -l --ltx -n --name -s --serial -h --help" #-r --revert
+      vivado)
+        valid_flags="-b --bitstream --device --driver -h --help"
         command_run $command_arguments_flags"@"$valid_flags
-
-        # check if flags are empty (first is at position 2)
-        #read -a aux_flags <<< "$command_arguments_flags"
-        #if [ "${aux_flags[2]}" = "" ]; then
-        #  program_vivado_help
-        #else
-        #  command_run $command_arguments_flags"@"$valid_flags
-        #fi
         ;;
       vitis)
         valid_flags="-d --device -p --project -r --remote -h --help" # -b --binary -n --name -t --target -u --user
