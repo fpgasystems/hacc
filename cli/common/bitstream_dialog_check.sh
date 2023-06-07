@@ -16,13 +16,6 @@ do
     fi  
 done
 
-#check on bitstream existence and extension
-if [ ! -f "$bitstream_name" ]; then
-    bitstream_found="0"
-elif [ "${bitstream_name##*.}" != "bit" ]; then
-    bitstream_found="0"
-fi
-
 #return the values
 echo "$bitstream_found"
 echo "$bitstream_name"

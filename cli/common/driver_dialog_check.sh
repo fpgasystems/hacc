@@ -16,13 +16,6 @@ do
     fi  
 done
 
-#check on driver existence and extension
-if [ ! -f "$driver_name" ]; then
-    driver_found="0"
-elif [ "${driver_name##*.}" != "ko" ]; then
-    driver_found="0"
-fi
-
 #return the values
 echo "$driver_found"
 echo "$driver_name"
