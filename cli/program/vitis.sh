@@ -89,7 +89,7 @@ else
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     #forbidden combinations
-    if ([ "$project_found" = "1" ] && [ "$project_name" = "" ]); then 
+    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$username/my_projects/$WORKFLOW/$project_name" ]); then 
         $CLI_PATH/sgutil program vitis -h
         exit
     fi
