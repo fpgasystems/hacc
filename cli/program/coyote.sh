@@ -5,6 +5,9 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="/opt/cli"
+HACC_PATH="/opt/hacc"
+DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+WORKFLOW="coyote"
 BIT_NAME="cyt_top.bit"
 DRIVER_NAME="coyote_drv.ko"
 
@@ -15,11 +18,14 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#inputs
-read -a flags <<< "$@"
+#check on DEVICES_LIST
+source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
 
-echo ""
-echo "${bold}sgutil program coyote${normal}"
+#get number of fpga and acap devices present
+MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
+
+#check on multiple devices
+multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 
 #check for vivado_developers
 member=$($CLI_PATH/common/is_member $username vivado_developers)
@@ -31,12 +37,153 @@ if [ "$member" = "false" ]; then
 fi
 
 #check if workflow exists
-if ! [ -d "/home/$username/my_projects/coyote/" ]; then
+if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
     echo ""
     echo "You must build your project first! Please, use sgutil build coyote"
     echo ""
     exit
 fi
+
+#inputs
+read -a flags <<< "$@"
+
+#----------------------------------------------------------
+
+#check on flags
+project_found=""
+project_name=""
+device_found=""
+device_index=""
+if [ "$flags" = "" ]; then
+    #header (1/2)
+    echo ""
+    echo "${bold}sgutil program coyote${normal}"
+    #project_dialog
+    echo ""
+    echo "${bold}Please, choose your $WORKFLOW project:${normal}"
+    echo ""
+    result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+    project_found=$(echo "$result" | sed -n '1p')
+    project_name=$(echo "$result" | sed -n '2p')
+    #device_dialog
+    if [[ $multiple_devices = "0" ]]; then
+        device_found="1"
+        device_index="1"
+    else
+        echo ""
+        echo "${bold}Please, choose your device:${normal}"
+        echo ""
+        result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
+        device_found=$(echo "$result" | sed -n '1p')
+        device_index=$(echo "$result" | sed -n '2p')
+    fi
+    #get_servers
+    echo ""
+    result=$($CLI_PATH/common/get_servers $CLI_PATH $hostname)
+    servers_family_list=$(echo "$result" | sed -n '1p' | sed -n '1p')
+    servers_family_list_string=$(echo "$result" | sed -n '2p' | sed -n '1p')
+    num_remote_servers=$(echo "$servers_family_list" | wc -w)
+    echo ""
+    #deployment_dialog
+    deploy_option="0"
+    if [ "$num_remote_servers" -ge 1 ]; then
+        echo "${bold}Please, choose your deployment servers:${normal}"
+        echo ""
+        echo "0) $hostname"
+        echo "1) $hostname, $servers_family_list_string"
+        deploy_option=$($CLI_PATH/common/deployment_dialog $servers_family_list_string)
+        echo ""
+    fi
+else
+    #project_dialog_check
+    result="$("$CLI_PATH/common/project_dialog_check" "${flags[@]}")"
+    project_found=$(echo "$result" | sed -n '1p')
+    project_name=$(echo "$result" | sed -n '2p')
+    #forbidden combinations
+    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$username/my_projects/$WORKFLOW/$project_name" ]); then 
+        $CLI_PATH/sgutil program coyote -h
+        exit
+    fi
+    #device_dialog_check
+    result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
+    device_found=$(echo "$result" | sed -n '1p')
+    device_index=$(echo "$result" | sed -n '2p')
+    #forbidden combinations
+    if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
+        $CLI_PATH/sgutil program coyote -h
+        exit
+    fi
+    #deployment_dialog_check
+    result="$("$CLI_PATH/common/deployment_dialog_check" "${flags[@]}")"
+    deploy_option_found=$(echo "$result" | sed -n '1p')
+    deploy_option=$(echo "$result" | sed -n '2p')
+    #forbidden combinations
+    if [ "$deploy_option_found" = "1" ] && { [ "$deploy_option" -ne 0 ] && [ "$deploy_option" -ne 1 ]; }; then #if [ "$deploy_option_found" = "1" ] && [ -n "$deploy_option" ]; then 
+        $CLI_PATH/sgutil program coyote -h
+        exit
+    fi
+    #header (2/2)
+    echo ""
+    echo "${bold}sgutil program coyote${normal}"
+    echo ""
+    #project_dialog (forgotten mandatory 1)
+    if [[ $project_found = "0" ]]; then
+        #echo ""
+        echo "${bold}Please, choose your $WORKFLOW project:${normal}"
+        echo ""
+        result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+        project_found=$(echo "$result" | sed -n '1p')
+        project_name=$(echo "$result" | sed -n '2p')
+        echo ""
+    fi
+    #device_dialog (forgotten mandatory 2)
+    if [[ $multiple_devices = "0" ]]; then
+        device_found="1"
+        device_index="1"
+    elif [[ $device_found = "0" ]]; then
+        echo "${bold}Please, choose your device:${normal}"
+        echo ""
+        result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
+        device_found=$(echo "$result" | sed -n '1p')
+        device_index=$(echo "$result" | sed -n '2p')
+        echo ""
+    fi
+    #get_servers
+    result=$($CLI_PATH/common/get_servers $CLI_PATH $hostname)
+    servers_family_list=$(echo "$result" | sed -n '1p' | sed -n '1p')
+    servers_family_list_string=$(echo "$result" | sed -n '2p' | sed -n '1p')
+    num_remote_servers=$(echo "$servers_family_list" | wc -w)
+    echo ""
+    #deployment_dialog (forgotten mandatory 3)
+    if [ "$deploy_option_found" = "0" ]; then
+        #deployment_dialog
+        deploy_option="0"
+        if [ "$num_remote_servers" -ge 1 ]; then
+            echo "${bold}Please, choose your deployment servers:${normal}"
+            echo ""
+            echo "0) $hostname"
+            echo "1) $hostname, $servers_family_list_string"
+            deploy_option=$($CLI_PATH/common/deployment_dialog $servers_family_list_string)
+            echo ""
+        fi
+    fi
+fi
+
+echo $project_found
+echo $project_name
+echo $device_found
+echo $device_index
+echo $deploy_option
+
+exit
+
+#-------------
+
+
+
+
+echo ""
+echo "${bold}sgutil program coyote${normal}"
 
 #check on flags (before: flags cannot be empty)
 name_found="0"
@@ -93,7 +240,7 @@ else
 fi
 
 #define directories (1)
-DIR="/home/$username/my_projects/coyote/$project_name"
+DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
 
 #check if project exists
 if ! [ -d "$DIR" ]; then
@@ -110,7 +257,7 @@ if [ "$FDEV_NAME" = "u50d" ]; then
 fi
 
 #define directories (2)
-APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build_dir.$FDEV_NAME/" #$device_name
+APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/" #$device_name
 
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
