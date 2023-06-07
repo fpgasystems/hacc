@@ -27,13 +27,6 @@
   &nbsp; &nbsp; Local or remote deployment.
 </p>
 
-<!-- <code>
-  -u, --user <string>
-</code>
-<p>
-  &nbsp; &nbsp; The name (and path) of the xclbin to be loaded.
-</p> -->
-
 <code>-h, --help <string></code>
 <p>
   &nbsp; &nbsp; Help to program a binary.
