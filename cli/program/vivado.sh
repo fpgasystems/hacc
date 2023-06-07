@@ -5,7 +5,8 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="/opt/cli"
-EMAIL="jmoyapaya@ethz.ch"
+HACC_PATH="/opt/hacc"
+DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 SERVERADDR="localhost"
 
 #get username
@@ -15,13 +16,19 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-# inputs
-read -a flags <<< "$@"
+#get email
+email=$($CLI_PATH/common/get_email)
 
-echo ""
-echo "${bold}sgutil program vivado${normal}"
+#check on DEVICES_LIST
+source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
 
-#check for vivado_developers
+#get number of fpga and acap devices present
+MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
+
+#check on multiple devices
+multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
+
+#check on vivado_developers
 member=$($CLI_PATH/common/is_member $username vivado_developers)
 if [ "$member" = "false" ]; then
     echo ""
@@ -29,6 +36,51 @@ if [ "$member" = "false" ]; then
     echo ""
     exit
 fi
+
+#inputs
+read -a flags <<< "$@"
+
+echo ""
+echo "${bold}sgutil program vivado${normal}"
+
+#check on flags
+device_found=""
+device_index=""
+if [ "$flags" = "" ]; then
+    $CLI_PATH/sgutil program vivado -h
+    exit
+else
+    #bitstream_dialog_check
+    
+    #device_dialog_check
+    result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
+    device_found=$(echo "$result" | sed -n '1p')
+    device_index=$(echo "$result" | sed -n '2p')
+    #forbidden combinations
+    if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
+        $CLI_PATH/sgutil program vivado -h
+        exit
+    fi
+    #device_dialog (forgotten mandatory)
+    if [[ $multiple_devices = "0" ]]; then
+        device_found="1"
+        device_index="1"
+    elif [[ $device_found = "0" ]]; then
+        $CLI_PATH/sgutil program vivado -h
+        exit
+    fi
+
+    #driver_dialog_check
+
+fi
+
+echo "--device: $device_index"
+
+exit
+
+#-----------------------
+
+
 
 #derive actions to perform
 name_found="0"
@@ -139,10 +191,10 @@ if [[ $program_bitstream = "1" ]]; then
             echo "${bold}The server needs to warm boot to operate in Vivado workflow. For this purpose:${normal}"
 		    echo ""
 		    echo "    Use the ${bold}go to baremetal${normal} button on the booking system, or"
-		    echo "    Contact ${bold}$EMAIL${normal} for support."
+		    echo "    Contact ${bold}$email${normal} for support."
             echo ""
             #send email
-            echo "Subject: $username requires to go to baremetal/warm boot ($hostname)" | sendmail $EMAIL
+            echo "Subject: $username requires to go to baremetal/warm boot ($hostname)" | sendmail $email
             exit
         elif [ "$virtualized" = "false" ]; then
             #sudo $CLI_PATH/program/pci_hot_plug ${hostname}
