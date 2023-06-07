@@ -93,7 +93,6 @@ fi
 
 echo ""
 echo "${bold}sgutil program vivado${normal}"
-echo ""
 
 #get release branch
 branch=$($XRT_PATH/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
