@@ -84,8 +84,6 @@ else
         $CLI_PATH/sgutil program vivado -h
         exit
     fi
-    echo "$bitstream_found"
-    echo "$driver_found"
     #forbidden combinations (3)
     if ([ "$bitstream_found" = "0" ] && [ "$driver_found" = "0" ]); then
         $CLI_PATH/sgutil program vivado -h
@@ -96,103 +94,6 @@ fi
 echo ""
 echo "${bold}sgutil program vivado${normal}"
 echo ""
-
-#echo "-b: $bitstream_name"
-#echo "--device: $device_index"
-#echo "--driver: $driver_name"
-
-#exit
-
-#-----------------------
-
-
-
-#derive actions to perform
-name_found="0"
-serial_found="0"
-program_bitstream="0"
-ltx_found="0"
-ltx_file=""
-program_driver="0"
-for (( i=0; i<${#flags[@]}; i++ ))
-do
-    if [[ " ${flags[$i]} " =~ " -n " ]] || [[ " ${flags[$i]} " =~ " --name " ]]; then # flags[i] is -n or --name
-        name_found="1"
-        name_idx=$(($i+1))
-        device_name=${flags[$name_idx]}
-    fi
-    if [[ " ${flags[$i]} " =~ " -s " ]] || [[ " ${flags[$i]} " =~ " --serial " ]]; then 
-        serial_found="1"
-        serial_idx=$(($i+1))
-        serial_number=${flags[$serial_idx]}
-    fi
-    if [[ " ${flags[$i]} " =~ " -b " ]] || [[ " ${flags[$i]} " =~ " --bitstream " ]]; then 
-        program_bitstream="1"
-        bit_idx=$(($i+1))
-        bit_file=${flags[$bit_idx]}
-    fi
-    if [[ " ${flags[$i]} " =~ " -l " ]] || [[ " ${flags[$i]} " =~ " --ltx " ]]; then 
-        ltx_found="1"
-        ltx_idx=$(($i+1))
-        ltx_file=${flags[$ltx_idx]}
-    fi
-    if [[ " ${flags[$i]} " =~ " -d " ]] || [[ " ${flags[$i]} " =~ " --driver " ]]; then
-        program_driver="1"
-        driver_idx=$(($i+1))
-        driver_file=${flags[$driver_idx]}
-    fi
-done
-
-# mandatory flags (-b or -d should be used)
-use_help="0"
-if [[ $program_bitstream = "0" ]] && [[ $program_driver = "0" ]]; then # with && both conditions must be true
-    use_help="1"
-fi
-
-# forbiden combinations (name_found, serial_found and ltx_found only make sense with program_bitstream = 1)
-if [[ $program_bitstream = "0" ]] && [[ $name_found = "1" ]]; then
-    use_help="1"
-fi
-if [[ $program_bitstream = "0" ]] && [[ $serial_found = "1" ]]; then
-    use_help="1"
-fi
-if [[ $program_bitstream = "0" ]] && [[ $ltx_found = "1" ]]; then
-    use_help="1"
-fi
-
-#print help
-if [[ $use_help = "1" ]]; then
-    $CLI_PATH/sgutil program vivado -h
-    exit
-fi
-
-# when used, bit_file, ltx_file or driver_file cannot be empty and has to exist
-if [ "$program_bitstream" = "1" ] && ([ "$bit_file" = "" ] || [ ! -f "$bit_file" ]); then
-    $CLI_PATH/sgutil program vivado -h
-    exit
-fi
-
-if [ "$ltx_found" = "1" ] && ([ "$ltx_file" = "" ] || [ ! -f "$ltx_file" ]); then
-    $CLI_PATH/sgutil program vivado -h
-    exit
-fi
-
-if [ "$program_driver" = "1" ] && ([ "$driver_file" = "" ] || [ ! -f "$driver_file" ]); then
-    $CLI_PATH/sgutil program vivado -h
-    exit
-fi
-
-#sgutil get device if there is only one FPGA and not name_found
-if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
-    #device_name=$($CLI_PATH/get/device | cut -d "=" -f2)
-    device_name=$($CLI_PATH/get/device | awk -F': ' '{print $2}' | grep -v '^$')
-fi
-
-#sgutil get serial if there is only one FPGA and not serial_found
-if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
-    #serial_number=$($CLI_PATH/get/serial | cut -d "=" -f2)
-    serial_number=$($CLI_PATH/get/serial | awk -F': ' '{print $2}' | grep -v '^$')
-fi
 
 #get release branch
 branch=$($XRT_PATH/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
@@ -243,36 +144,25 @@ if [[ $bitstream_found = "1" ]]; then
 fi
 
 #program driver
-if [[ $driver_found = "1" ]]; then #program_driver
-
-    echo "heyyyyy!"
-
+if [[ $driver_found = "1" ]]; then
     #we need to copy the driver to /local to avoid permission problems
 	echo ""
     echo "${bold}Copying driver to /local/home/$username:${normal}"
 	echo ""
-    echo "cp -f $driver_file /local/home/$username"
-    
-    cp -f $driver_file /local/home/$username
-
-    #get driver name
-    driver_name=$(echo $driver_file | awk -F"/" '{print $NF}')
+    echo "cp -f $driver_name /local/home/$username"
+    cp -f $driver_name /local/home/$username
 
     #insert coyote driver
 	echo ""
     echo "${bold}Inserting driver:${normal}"
 	echo ""
 
-    # we always remove and insert the driver
-    echo "sudo rmmod $driver_name" #$driver_file
-    #sudo bash -c "rmmod $driver_file"
-    sudo rmmod $driver_name #$driver_file
+    #we always remove and insert the driver
+    echo "sudo rmmod $driver_name"
+    sudo rmmod $driver_name
     sleep 1
-    echo "sudo insmod /local/home/$username/$driver_name" #$driver_file
-    #sudo bash -c "insmod $driver_file"
-    sudo insmod /local/home/$username/$driver_name #$driver_file
+    echo "sudo insmod /local/home/$username/$driver_name"
+    sudo insmod /local/home/$username/$driver_name
     sleep 1
-
     echo ""
-
 fi
