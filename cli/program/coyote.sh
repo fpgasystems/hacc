@@ -167,9 +167,6 @@ else
     fi
 fi
 
-echo ""
-echo "${bold}sgutil program coyote${normal}"
-
 #define directories (1)
 DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
 
