@@ -8,21 +8,26 @@
 
 <code>sgutil program vivado [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Programs a Vivado bitstream to a given device.
+  &nbsp; &nbsp; Programs a Vivado bitstream to a given FPGA/ACAP.
 </p>
 
 ### Flags
 <code>-b, --bitstream <string></code>
 <p>
-  &nbsp; &nbsp; Programs a .bit bitstream to the specified device.
+  &nbsp; &nbsp; Bitstream file (.bit) path.
 </p>
 
-<code>-d, --driver <string></code>
+<code>    --device <string></code>
 <p>
-  &nbsp; &nbsp; Installs an FPGA driver on the server.
+  &nbsp; &nbsp; FPGA Device Index (see sgutil examine).
 </p>
 
-<code>-l, --ltx <string></code>
+<code>    --driver <string></code>
+<p>
+  &nbsp; &nbsp; Driver file (.ko) path.
+</p>
+
+<!-- <code>-l, --ltx <string></code>
 <p>
   &nbsp; &nbsp; Specifies a .ltx debug probes file.
 </p>
@@ -35,7 +40,7 @@
 <code>-s, --serial <string></code>
 <p>
   &nbsp; &nbsp; FPGA's serial number. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-serial.md">sgutil get serial</a>.
-</p>
+</p> -->
 
 <code>-h, --help <string></code>
 <p>
@@ -44,6 +49,5 @@
 
 ### Examples
 ```
-$ sgutil program vivado -b my_bitstream.bit -d my_driver.ko
-$ sgutil program vivado -d xcu50_u55n_0 -s 500202A20DQAA -b my_bitstream.bit -d my_driver.ko
+$ sgutil program vivado -b my_bitstream.bit --driver my_driver.ko --device 1
 ```

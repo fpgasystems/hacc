@@ -409,7 +409,7 @@ program_help() {
     echo "   reset           - Resets the given device."
     echo "   revert          - Returns the specified device to the Vitis workflow."
     echo "   vitis           - Programs a Vitis binary to a given device."
-    echo "   vivado          - Programs a Vivado bitstream to a given device."
+    echo "   vivado          - Programs a Vivado bitstream to a given FPGA/ACAP."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -430,19 +430,6 @@ program_coyote_help() {
     echo ""
     exit 1
 }
-#program_rescan_help() {
-#    echo ""
-#    echo "${bold}sgutil program rescan [flags] [--help]${normal}"
-#    echo ""
-#    echo "Runs the PCI hot-plug process."
-#    echo ""
-#    echo "FLAGS:"
-#    echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
-#    echo ""
-#    echo "   -h, --help      - Help to use this command."
-#    echo ""
-#    exit 1
-#}
 
 program_reset_help() {
     echo ""
@@ -476,15 +463,15 @@ program_vivado_help() {
     echo ""
     echo "${bold}sgutil program vivado [flags] [--help]${normal}"
     echo ""
-    echo "Programs a Vivado bitstream to a given device."
+    echo "Programs a Vivado bitstream to a given FPGA/ACAP."
     echo ""
     echo "FLAGS:"
-    echo "   -b, --bitstream - Programs a .bit bitstream to the specified device." 
-    echo "   -d, --driver    - Installs an FPGA driver on the server."
-    echo "   -l, --ltx       - Specifies a .ltx debug probes file."
-    echo "   -n, --name      - FPGA's device name. See sgutil get device."
-    #echo "   -r, --revert    - Return the specified device to the Vitis workflow."
-    echo "   -s, --serial    - FPGA's serial number. See sgutil get serial."
+    echo "   -b, --bitstream - Bitstream file (.bit) path." 
+    echo "       --device    - FPGA Device Index (see sgutil examine)."
+    echo "       --driver    - Driver file (.ko) path."
+    #echo "   -l, --ltx       - Specifies a .ltx debug probes file."
+    #echo "   -n, --name      - FPGA's device name. See sgutil get device."
+    #echo "   -s, --serial    - FPGA's serial number. See sgutil get serial."
     echo ""
     echo "   -h, --help      - Help to program a bitstream."
     echo ""
@@ -959,7 +946,7 @@ case "$command" in
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       vivado) # flags cannot be empty (i.e. at least -b is required)
-        valid_flags="-d --driver -b --bitstream -l --ltx -n --name -s --serial -h --help" #-r --revert
+        valid_flags="-b --bitstream --device --driver -l --ltx -n --name -s --serial -h --help" #-r --revert
         command_run $command_arguments_flags"@"$valid_flags
 
         # check if flags are empty (first is at position 2)

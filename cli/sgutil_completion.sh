@@ -99,7 +99,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "--device --project -r --remote --help" -- ${cur}))
                     ;;
                 vivado) 
-                    COMPREPLY=($(compgen -W "--bitstream --driver --ltx --name --serial --help" -- ${cur})) # -b -d -l -n -s -h
+                    COMPREPLY=($(compgen -W "--bitstream --device --driver --ltx --name --serial --help" -- ${cur})) # -b -d -l -n -s -h
                     ;;
                 coyote) # run 
                     COMPREPLY=($(compgen -W "--project --serial --help" -- ${cur})) 
