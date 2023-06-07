@@ -221,6 +221,12 @@
     path: /opt/cli/common/get_MAX_DEVICES
     state: absent
 
+- name: copy common/bitstream_dialog_check script
+  copy:
+    src: "../../cli/common/bitstream_dialog_check.sh"
+    dest: /opt/cli/common/bitstream_dialog_check
+    mode: 0755
+
 #examine -------------------------------------------------------------------------------------
 
 - name: copy examine
