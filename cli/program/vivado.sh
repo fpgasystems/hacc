@@ -114,7 +114,7 @@ if [[ $bitstream_found = "1" ]]; then
 
     echo ""
 	echo "${bold}Programming bitstream:${normal}"
-    $VIVADO_PATH/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name $bit_file $ltx_file
+    $VIVADO_PATH/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name $bitstream_name
 
     #check for virtualized and apply PCI hot plug
     if [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
