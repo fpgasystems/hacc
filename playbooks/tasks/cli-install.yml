@@ -227,6 +227,12 @@
     dest: /opt/cli/common/bitstream_dialog_check
     mode: 0755
 
+- name: copy common/driver_dialog_check script
+  copy:
+    src: "../../cli/common/driver_dialog_check.sh"
+    dest: /opt/cli/common/driver_dialog_check
+    mode: 0755
+
 #examine -------------------------------------------------------------------------------------
 
 - name: copy examine
