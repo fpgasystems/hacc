@@ -8,7 +8,7 @@
 
 <code>sgutil program reset [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Resets the given device.
+  &nbsp; &nbsp; Resets a given FPGA/ACAP.
 </p>
 
 ### Flags

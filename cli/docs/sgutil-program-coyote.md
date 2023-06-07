@@ -8,7 +8,7 @@
 
 <code>sgutil program coyote [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Programs Coyote on a given device.
+  &nbsp; &nbsp; Programs Coyote to a given FPGA.
 </p>
 
 ### Flags

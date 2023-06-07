@@ -8,7 +8,7 @@
 
 <code>sgutil program revert [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Returns the specified device to the Vitis workflow.
+  &nbsp; &nbsp; Returns the specified FPGA/ACAP to the Vitis workflow.
 </p>
 
 ### Flags
