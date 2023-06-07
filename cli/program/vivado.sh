@@ -197,10 +197,8 @@ fi
 #get release branch
 branch=$($XRT_PATH/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
 
-if [[ $bitstream_found = "1" ]]; then #program_bitstream
-
-    echo "hola!!!!!!"
-
+#program bitstream
+if [[ $bitstream_found = "1" ]]; then
     #revert to xrt first if FPGA is already in baremetal (it is proven to be needed on non-virtualized environments)
     virtualized=$($CLI_PATH/common/is_virtualized)
     if [ "$virtualized" = "false" ] && [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then 
@@ -230,14 +228,13 @@ if [[ $bitstream_found = "1" ]]; then #program_bitstream
             echo "Subject: $username requires to go to baremetal/warm boot ($hostname)" | sendmail $email
             exit
         elif [ "$virtualized" = "false" ]; then
-            #sudo $CLI_PATH/program/pci_hot_plug ${hostname}
-            #$CLI_PATH/program/rescan
-            #device_index=1
+            #get device params
             upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
             root_port=$($CLI_PATH/get/get_fpga_device_param $device_index root_port)
             LinkCtl=$($CLI_PATH/get/get_fpga_device_param $device_index LinkCtl)
-            sudo $CLI_PATH/program/pci_hot_plug $upstream_port $root_port $LinkCtl #${hostname}
-
+            #hot plug boot
+            sudo $CLI_PATH/program/pci_hot_plug $upstream_port $root_port $LinkCtl
+            #print
             bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
             lspci | grep Xilinx | grep $bdf
             echo ""
@@ -245,7 +242,10 @@ if [[ $bitstream_found = "1" ]]; then #program_bitstream
     fi
 fi
 
-if [[ $program_driver = "1" ]]; then
+#program driver
+if [[ $driver_found = "1" ]]; then #program_driver
+
+    echo "heyyyyy!"
 
     #we need to copy the driver to /local to avoid permission problems
 	echo ""
