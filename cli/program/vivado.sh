@@ -40,9 +40,6 @@ fi
 #inputs
 read -a flags <<< "$@"
 
-echo ""
-echo "${bold}sgutil program vivado${normal}"
-
 #check on flags
 device_found=""
 device_index=""
@@ -50,8 +47,6 @@ if [ "$flags" = "" ]; then
     $CLI_PATH/sgutil program vivado -h
     exit
 else
-    #bitstream_dialog_check
-    
     #device_dialog_check
     result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
     device_found=$(echo "$result" | sed -n '1p')
@@ -69,12 +64,39 @@ else
         $CLI_PATH/sgutil program vivado -h
         exit
     fi
-
+    #bitstream_dialog_check
+    result="$("$CLI_PATH/common/bitstream_dialog_check" "${flags[@]}")"
+    bitstream_found=$(echo "$result" | sed -n '1p')
+    bitstream_name=$(echo "$result" | sed -n '2p')
+    #forbidden combinations (1)
+    if [ "$bitstream_found" = "1" ] && ([ "$bitstream_name" = "" ] || [ ! -f "$bitstream_name" ] || [ "${bitstream_name##*.}" != "bit" ]); then
+        $CLI_PATH/sgutil program vivado -h
+        exit
+    fi
     #driver_dialog_check
-
+    result="$("$CLI_PATH/common/driver_dialog_check" "${flags[@]}")"
+    driver_found=$(echo "$result" | sed -n '1p')
+    driver_name=$(echo "$result" | sed -n '2p')
+    #forbidden combinations (2)
+    if [ "$driver_found" = "1" ] && ([ "$driver_name" = "" ] || [ ! -f "$driver_name" ] || [ "${driver_name##*.}" != "ko" ]); then
+        $CLI_PATH/sgutil program vivado -h
+        exit
+    fi
+    echo "$bitstream_found"
+    echo "$driver_found"
+    #forbidden combinations (3)
+    if ([ "$bitstream_found" = "0" ] && [ "$driver_found" = "0" ]); then
+        $CLI_PATH/sgutil program vivado -h
+        exit
+    fi
 fi
 
+echo ""
+echo "${bold}sgutil program vivado${normal}"
+
+echo "-b: $bitstream_name"
 echo "--device: $device_index"
+echo "--driver: $driver_name"
 
 exit
 
