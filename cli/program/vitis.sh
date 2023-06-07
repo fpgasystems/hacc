@@ -28,7 +28,7 @@ MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 
 #check if workflow exists
-if ! [ -d "/home/$username/my_projects/vitis/" ]; then
+if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
     echo ""
     echo "You must create build your project first! Please, use sgutil build vitis"
     echo ""
@@ -159,7 +159,7 @@ else
 fi
 
 #define directories (1)
-DIR="/home/$username/my_projects/vitis/$project_name"
+DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
 
 #check if project exists
 if ! [ -d "$DIR" ]; then
@@ -173,7 +173,7 @@ fi
 platform=$($CLI_PATH/get/get_fpga_device_param $device_index platform)
 
 #define directories (2)
-APP_BUILD_DIR="/home/$username/my_projects/vitis/$project_name/build_dir.$TARGET.$platform"
+APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$TARGET.$platform"
 
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
