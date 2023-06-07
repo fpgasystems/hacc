@@ -6,6 +6,8 @@ normal=$(tput sgr0)
 #constants
 CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
+XRT_PATH="/opt/xilinx/xrt"
+VIVADO_PATH="/tools/Xilinx/Vivado"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 SERVERADDR="localhost"
 
@@ -93,12 +95,13 @@ fi
 
 echo ""
 echo "${bold}sgutil program vivado${normal}"
+echo ""
 
-echo "-b: $bitstream_name"
-echo "--device: $device_index"
-echo "--driver: $driver_name"
+#echo "-b: $bitstream_name"
+#echo "--device: $device_index"
+#echo "--driver: $driver_name"
 
-exit
+#exit
 
 #-----------------------
 
@@ -192,9 +195,11 @@ if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
 fi
 
 #get release branch
-branch=$(/opt/xilinx/xrt/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
+branch=$($XRT_PATH/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
 
-if [[ $program_bitstream = "1" ]]; then
+if [[ $bitstream_found = "1" ]]; then #program_bitstream
+
+    echo "hola!!!!!!"
 
     #revert to xrt first if FPGA is already in baremetal (it is proven to be needed on non-virtualized environments)
     virtualized=$($CLI_PATH/common/is_virtualized)
@@ -202,9 +207,15 @@ if [[ $program_bitstream = "1" ]]; then
         sudo $CLI_PATH/program/revert
     fi
 
+    #get serial number
+    serial_number=$(/opt/cli/get/get_fpga_device_param $device_index serial_number)
+
+    #get device name
+    device_name=$(/opt/cli/get/get_fpga_device_param $device_index device_name)
+
     echo ""
 	echo "${bold}Programming bitstream:${normal}"
-    /tools/Xilinx/Vivado/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name $bit_file $ltx_file
+    $VIVADO_PATH/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name $bit_file $ltx_file
 
     #check for virtualized and apply PCI hot plug
     if [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
@@ -221,7 +232,7 @@ if [[ $program_bitstream = "1" ]]; then
         elif [ "$virtualized" = "false" ]; then
             #sudo $CLI_PATH/program/pci_hot_plug ${hostname}
             #$CLI_PATH/program/rescan
-            device_index=1
+            #device_index=1
             upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
             root_port=$($CLI_PATH/get/get_fpga_device_param $device_index root_port)
             LinkCtl=$($CLI_PATH/get/get_fpga_device_param $device_index LinkCtl)
