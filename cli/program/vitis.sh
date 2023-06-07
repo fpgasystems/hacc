@@ -27,9 +27,6 @@ MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 #check on multiple devices
 multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 
-#inputs
-read -a flags <<< "$@"
-
 #check if workflow exists
 if ! [ -d "/home/$username/my_projects/vitis/" ]; then
     echo ""
@@ -37,6 +34,9 @@ if ! [ -d "/home/$username/my_projects/vitis/" ]; then
     echo ""
     exit
 fi
+
+#inputs
+read -a flags <<< "$@"
 
 #check on flags
 project_found=""
