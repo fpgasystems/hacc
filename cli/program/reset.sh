@@ -86,8 +86,7 @@ $CLI_PATH/program/revert -d $device_index
 upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
 bdf="${upstream_port%?}1"
 
-#reset device (we delete any xclbin) if xx:xx.1 (bdf) function is present
-if lspci | grep -q "$bdf"; then
-    $XRT_PATH/bin/xbutil reset --device $bdf --force
-    echo ""
-fi
+#reset device (we delete any xclbin) assuming xx:xx.1 (bdf) function is present after revert
+$XRT_PATH/bin/xbutil reset --device $bdf --force
+
+echo ""
