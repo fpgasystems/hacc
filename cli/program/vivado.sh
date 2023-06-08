@@ -101,8 +101,8 @@ branch=$($XRT_PATH/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]
 if [[ $bitstream_found = "1" ]]; then
     #revert to xrt first if FPGA is already in baremetal (it is proven to be needed on non-virtualized environments)
     virtualized=$($CLI_PATH/common/is_virtualized)
-    if [ "$virtualized" = "false" ] && [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then 
-        sudo $CLI_PATH/program/revert
+    if [ "$virtualized" = "false" ]; then
+        sudo $CLI_PATH/program/revert -d $device_index
     fi
 
     #get serial number
@@ -115,31 +115,54 @@ if [[ $bitstream_found = "1" ]]; then
 	echo "${bold}Programming bitstream:${normal}"
     $VIVADO_PATH/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name $bitstream_name
 
-    #check for virtualized and apply PCI hot plug
-    if [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
-        if [ "$virtualized" = "true" ]; then
-            echo ""
-            echo "${bold}The server needs to warm boot to operate in Vivado workflow. For this purpose:${normal}"
-		    echo ""
-		    echo "    Use the ${bold}go to baremetal${normal} button on the booking system, or"
-		    echo "    Contact ${bold}$email${normal} for support."
-            echo ""
-            #send email
-            echo "Subject: $username requires to go to baremetal/warm boot ($hostname)" | sendmail $email
-            exit
-        elif [ "$virtualized" = "false" ]; then
-            #get device params
-            upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
-            root_port=$($CLI_PATH/get/get_fpga_device_param $device_index root_port)
-            LinkCtl=$($CLI_PATH/get/get_fpga_device_param $device_index LinkCtl)
-            #hot plug boot
-            sudo $CLI_PATH/program/pci_hot_plug $upstream_port $root_port $LinkCtl
-            #print
-            bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
-            lspci | grep Xilinx | grep $bdf
-            echo ""
-        fi
+    #check for virtualized and apply pci_hot_plug (is always needed as we reverted first)
+    if [ "$virtualized" = "true" ] && [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
+        echo ""
+        echo "${bold}The server needs to warm boot to operate in Vivado workflow. For this purpose:${normal}"
+        echo ""
+        echo "    Use the ${bold}go to baremetal${normal} button on the booking system, or"
+        echo "    Contact ${bold}$email${normal} for support."
+        echo ""
+        #send email
+        echo "Subject: $username requires to go to baremetal/warm boot ($hostname)" | sendmail $email
+        exit
+    elif [ "$virtualized" = "false" ]; then 
+        #get device params
+        upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
+        root_port=$($CLI_PATH/get/get_fpga_device_param $device_index root_port)
+        LinkCtl=$($CLI_PATH/get/get_fpga_device_param $device_index LinkCtl)
+        #hot plug boot
+        sudo $CLI_PATH/program/pci_hot_plug $upstream_port $root_port $LinkCtl
+        #print
+        bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
+        lspci | grep Xilinx | grep $bdf
+        echo ""
     fi
+
+    #if [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
+    #    if [ "$virtualized" = "true" ]; then
+    #        echo ""
+    #        echo "${bold}The server needs to warm boot to operate in Vivado workflow. For this purpose:${normal}"
+	#	    echo ""
+	#	    echo "    Use the ${bold}go to baremetal${normal} button on the booking system, or"
+	#	    echo "    Contact ${bold}$email${normal} for support."
+    #       echo ""
+    #        #send email
+    #        echo "Subject: $username requires to go to baremetal/warm boot ($hostname)" | sendmail $email
+    #        exit
+    #    elif [ "$virtualized" = "false" ]; then
+    #        #get device params
+    #        upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
+    #        root_port=$($CLI_PATH/get/get_fpga_device_param $device_index root_port)
+    #        LinkCtl=$($CLI_PATH/get/get_fpga_device_param $device_index LinkCtl)
+    #        #hot plug boot
+    #        sudo $CLI_PATH/program/pci_hot_plug $upstream_port $root_port $LinkCtl
+    #        #print
+    #        bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
+    #        lspci | grep Xilinx | grep $bdf
+    #        echo ""
+    #    fi
+    #fi
 fi
 
 #program driver
