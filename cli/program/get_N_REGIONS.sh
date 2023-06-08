@@ -1,5 +1,9 @@
 #!/bin/bash
 
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+#inputs
 DIR=$1
 
 #get N_REGIONS
@@ -12,7 +16,10 @@ value_idx=$(($idx+1))
 N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
 
 #applu fpga_chmod to N_REGIONS
+echo "${bold}Setting read and write permissions:${normal}"
+echo ""
 for (( i = 0; i < $N_REGIONS; i++ ))
 do 
+    echo $i
     sudo /opt/cli/program/fpga_chmod $i
 done
