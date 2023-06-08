@@ -138,31 +138,6 @@ if [[ $bitstream_found = "1" ]]; then
         lspci | grep Xilinx | grep $bdf
         echo ""
     fi
-
-    #if [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
-    #    if [ "$virtualized" = "true" ]; then
-    #        echo ""
-    #        echo "${bold}The server needs to warm boot to operate in Vivado workflow. For this purpose:${normal}"
-	#	    echo ""
-	#	    echo "    Use the ${bold}go to baremetal${normal} button on the booking system, or"
-	#	    echo "    Contact ${bold}$email${normal} for support."
-    #       echo ""
-    #        #send email
-    #        echo "Subject: $username requires to go to baremetal/warm boot ($hostname)" | sendmail $email
-    #        exit
-    #    elif [ "$virtualized" = "false" ]; then
-    #        #get device params
-    #        upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
-    #        root_port=$($CLI_PATH/get/get_fpga_device_param $device_index root_port)
-    #        LinkCtl=$($CLI_PATH/get/get_fpga_device_param $device_index LinkCtl)
-    #        #hot plug boot
-    #        sudo $CLI_PATH/program/pci_hot_plug $upstream_port $root_port $LinkCtl
-    #        #print
-    #        bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
-    #        lspci | grep Xilinx | grep $bdf
-    #        echo ""
-    #    fi
-    #fi
 fi
 
 #program driver
