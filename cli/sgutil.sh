@@ -440,7 +440,7 @@ program_reset_help() {
     echo "Resets a given FPGA/ACAP."
     echo ""
     echo "FLAGS:"
-    echo "   -s, --serial    - FPGA's serial number. See sgutil get serial."
+    echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -909,7 +909,7 @@ case "$command" in
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       reset) 
-        valid_flags="-s --serial -h --help"
+        valid_flags="-d --device -h --help"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       revert)

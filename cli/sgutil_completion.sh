@@ -84,7 +84,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "--device --project --remote --help" -- ${cur})) # -n  -s  -h
                     ;;
                 reset)
-                    COMPREPLY=($(compgen -W "--serial --help" -- ${cur}))
+                    COMPREPLY=($(compgen -W "--device --help" -- ${cur}))
                     ;;
                 revert)
                     COMPREPLY=($(compgen -W "--device --help" -- ${cur})) # -n  -s  -h
