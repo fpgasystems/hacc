@@ -214,7 +214,7 @@ if [ "$deploy_option" -eq 1 ]; then
         echo "Programming remote server ${bold}$i...${normal}"
         echo ""
         #remotely program bitstream, driver, and run get_N_REGIONS
-        ssh -t $username@$i "$CLI_PATH/program/vivado --device $device_index -b $APP_BUILD_DIR$BIT_NAME -d $APP_BUILD_DIR$DRIVER_NAME ; $CLI_PATH/program/get_N_REGIONS $DIR"
+        ssh -t $username@$i "cd $APP_BUILD_DIR ; $CLI_PATH/program/vivado --device $device_index -b $BIT_NAME -d $DRIVER_NAME ; $CLI_PATH/program/get_N_REGIONS $DIR"
     done
 fi
 
