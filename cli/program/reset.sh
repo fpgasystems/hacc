@@ -28,21 +28,6 @@ read -a flags <<< "$@"
 echo ""
 echo "${bold}sgutil program reset${normal}"
 
-##derive actions to perform
-#serial_found="0"
-#for (( i=0; i<${#flags[@]}; i++ ))
-#do
-#    if [[ " ${flags[$i]} " =~ " -s " ]] || [[ " ${flags[$i]} " =~ " --serial " ]]; then 
-#        serial_found="1"
-#    fi
-#done
-
-##sgutil get serial if there is only one FPGA and not serial_found
-#if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
-#    #serial_number=$(/opt/cli/get/serial | cut -d "=" -f2)
-#    serial_number="--device"
-#fi
-
 #check on flags
 device_found=""
 device_index=""
