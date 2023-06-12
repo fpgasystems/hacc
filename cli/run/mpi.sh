@@ -52,7 +52,6 @@ else
         exit
     fi
     #header (2/2)
-    echo ""
     echo "${bold}sgutil run $WORKFLOW${normal}"
     echo ""
     #project_dialog (forgotten mandatory 1)
