@@ -179,13 +179,14 @@ if ! [ -d "$DIR" ]; then
 fi
 
 #device_name to coyote string 
-FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
-if [ "$FDEV_NAME" = "u50d" ]; then
-    FDEV_NAME="u50"
-fi
+#FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
+#if [ "$FDEV_NAME" = "u50d" ]; then
+#    FDEV_NAME="u50"
+#fi
+device_name=$($CLI_PATH/get/get_fpga_device_param $device_index device_name)
 
 #define directories (2)
-APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/" #$device_name
+APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$device_name/" #$FDEV_NAME
 
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
