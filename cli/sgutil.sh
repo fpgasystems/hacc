@@ -581,8 +581,8 @@ run_vitis_help() {
     echo "Runs a Vitis FPGA-binary on a given FPGA/ACAP."
     echo ""
     echo "FLAGS:"
+    echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
     echo "   -p, --project   - Specifies your Vitis project name."
-    echo "   -s, --serial    - FPGA's serial number. See sgutil get serial."
     #echo "   -t, --target    - Binary compilation target (sw_emu, hw_emu, hw)."
     echo ""
     echo "   -h, --help      - Help to use this command."
@@ -961,7 +961,7 @@ case "$command" in
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       vitis) 
-        valid_flags="-p --project -s --serial -h --help" # -b --binary -n --name -t --target 
+        valid_flags="-d --device -p --project -h --help"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       *)

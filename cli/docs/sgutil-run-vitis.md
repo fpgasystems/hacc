@@ -12,13 +12,14 @@
 </p>
 
 ### Flags
+<code>-d, --device <string></code>
+<p>
+  &nbsp; &nbsp; FPGA Device Index (see sgutil examine).
+</p>
+
 <code>-p, --project</code>
 <p>
   &nbsp; &nbsp; Specifies your Vitis project name.
-</p>
-<code>-s, --serial</code>
-<p>
-  &nbsp; &nbsp; FPGA's serial number. See sgutil get serial.
 </p>
 
 <code>-h, --help</code>
@@ -28,5 +29,5 @@
 
 ### Examples
 ```
-$ sgutil run vitis -p hello_world -t hw
+$ sgutil run vitis -p hello_world -d 1 -t sw_emu
 ```
