@@ -119,9 +119,12 @@ else
         device_index=$(echo "$result" | sed -n '2p')
         echo ""
     fi
-
-    #target_name="hw"
-
+    #target_dialog (forgotten mandatory 3)
+    if [[ $target_found = "0" ]]; then
+        echo "${bold}Please, choose binary's execution target:${normal}"
+        echo ""
+        target_name=$($CLI_PATH/common/target_dialog)
+    fi
 fi
 
 #define directories (1)
