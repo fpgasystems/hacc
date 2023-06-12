@@ -60,6 +60,11 @@ if [ "$flags" = "" ]; then
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
     fi
+    #target_dialog
+    echo ""
+    echo "${bold}Please, choose binary's execution target:${normal}"
+    echo ""
+    target_name=$($CLI_PATH/common/target_dialog)
 else
     #project_dialog_check
     result="$("$CLI_PATH/common/project_dialog_check" "${flags[@]}")"
@@ -79,6 +84,10 @@ else
         $CLI_PATH/sgutil run vitis -h
         exit
     fi
+    #target_dialog_check
+    result="$("$CLI_PATH/common/target_dialog_check" "${flags[@]}")"
+    target_found=$(echo "$result" | sed -n '1p')
+    target_name=$(echo "$result" | sed -n '2p')
     #header (2/2)
     echo ""
     echo "${bold}sgutil run vitis${normal}"
@@ -118,24 +127,24 @@ if ! [ -d "$DIR" ]; then
     exit
 fi
 
-echo ""
-echo "${bold}Please, choose binary's execution target:${normal}"
-echo ""
-PS3=""
-select target in sw_emu hw_emu hw
-do
-    case $target in
-        sw_emu) break;;
-        hw_emu) break;;
-        hw) break;;
-    esac
-done
+#echo ""
+#echo "${bold}Please, choose binary's execution target:${normal}"
+#echo ""
+#PS3=""
+#select target in sw_emu hw_emu hw
+#do
+#    case $target in
+#        sw_emu) break;;
+#        hw_emu) break;;
+#        hw) break;;
+#    esac
+#done
 
 #get platform
 platform=$($CLI_PATH/get/get_fpga_device_param $device_index platform)
 
 #define directories (2)
-APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$target.$platform"
+APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$target_name.$platform"
 
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
@@ -173,9 +182,9 @@ echo ""
 cd $DIR
 echo "${bold}Running accelerated application:${normal}"
 echo ""
-echo "make run TARGET=$target PLATFORM=$platform" 
+echo "make run TARGET=$target_name PLATFORM=$platform" 
 echo ""
-eval "make run TARGET=$target PLATFORM=$platform"
+eval "make run TARGET=$target_name PLATFORM=$platform"
 echo ""
 
 # This is equivalent to do ./$project_name path_to_target_xclbin, i.e.:
