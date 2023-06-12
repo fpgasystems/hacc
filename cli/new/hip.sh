@@ -3,6 +3,10 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
+CLI_PATH="/opt/cli"
+WORKFLOW="hip"
+
 #get username
 username=$USER
 
@@ -26,7 +30,7 @@ if ! [ -d "$DIR" ]; then
 fi
 
 # create hip directory
-DIR="/home/$username/my_projects/hip"
+DIR="/home/$username/my_projects/$WORKFLOW"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
@@ -43,20 +47,12 @@ while true; do
     if  [[ $project_name == validate_* ]]; then
         project_name=""
     fi
-    DIR="/home/$username/my_projects/hip/$project_name"
+    DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
     if ! [ -d "$DIR" ]; then
         # project_name does not exist
         mkdir ${DIR}
         # copy
-        cp -rf /opt/cli/templates/hip/hello_world/* $DIR
-        # we only need makefile_us_alveo.mk (for alveos) and makefile_versal_alveo.mk (for versal)
-        #rm $DIR/makefile_versal_ps.mk
-        #rm $DIR/makefile_zynq7000.mk
-        #rm $DIR/makefile_zynqmp.mk
-        # adjust Makefile
-        #sed -i "s/hello_world/$project_name/" $DIR/Makefile
-        #sed -i "s/hello_world/$project_name/" $DIR/makefile_us_alveo.mk
-        #sed -i "s/hello_world/$project_name/" $DIR/makefile_versal_alveo.mk
+        cp -rf $CLI_PATH/templates/$WORKFLOW/hello_world/* $DIR
         #compile src
         cd $DIR/src
         g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
@@ -65,5 +61,5 @@ while true; do
     fi
 done
 echo ""
-echo "The project /home/$username/my_projects/hip/$project_name has been created!"
+echo "The project /home/$username/my_projects/$WORKFLOW/$project_name has been created!"
 echo ""

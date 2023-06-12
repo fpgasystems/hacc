@@ -4,6 +4,10 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
+CLI_PATH="/opt/cli"
+WORKFLOW="mpi"
+
+#constants
 PROCESSES_PER_HOST=2
 
 #get username
@@ -16,7 +20,7 @@ if ! [ -d "$DIR" ]; then
 fi
 
 # create mpi directory
-DIR="/home/$username/my_projects/mpi"
+DIR="/home/$username/my_projects/$WORKFLOW"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
@@ -33,18 +37,18 @@ while true; do
     if  [[ $project_name == validate_* ]]; then
         project_name=""
     fi
-    DIR="/home/$username/my_projects/mpi/$project_name"
+    DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
     if ! [ -d "$DIR" ]; then
         # project_name does not exist
         mkdir $DIR
         #copy template
-        cp -rf /opt/cli/templates/mpi/hello_world/* $DIR
+        cp -rf $CLI_PATH/templates/$WORKFLOW/hello_world/* $DIR
         #compile create config
         cd $DIR/src
         g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
         #create hosts file (it will create it with the current booked servers)
         echo ""
-        servers=$(sudo /opt/cli/common/get_booking_system_servers_list | tail -n +2) #get booked machines
+        servers=$(sudo $CLI_PATH/common/get_booking_system_servers_list | tail -n +2) #get booked machines
         servers=($servers) #convert string to an array
         cd $DIR
         rm hosts
@@ -61,5 +65,5 @@ while true; do
     fi
 done
 echo ""
-echo "The project /home/$username/my_projects/mpi/$project_name has been created!"
+echo "The project /home/$username/my_projects/$WORKFLOW/$project_name has been created!"
 echo ""

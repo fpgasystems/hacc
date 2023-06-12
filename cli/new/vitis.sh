@@ -3,6 +3,10 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
+CLI_PATH="/opt/cli"
+WORKFLOW="vitis"
+
 #get username
 username=$USER
 
@@ -13,15 +17,15 @@ if ! [ -d "$DIR" ]; then
 fi
 
 # create vitis directory
-DIR="/home/$username/my_projects/vitis"
+DIR="/home/$username/my_projects/$WORKFLOW"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
 
 # copy vitis common folder
-DIR="/home/$username/my_projects/vitis/common"
+DIR="/home/$username/my_projects/$WORKFLOW/common"
 if ! [ -d "$DIR" ]; then
-    cp -rf /opt/cli/templates/vitis/common/ $DIR
+    cp -rf $CLI_PATH/templates/$WORKFLOW/common/ $DIR
 fi
 
 # create project
@@ -36,12 +40,12 @@ while true; do
     if  [[ $project_name == validate_* ]]; then
         project_name=""
     fi
-    DIR="/home/$username/my_projects/vitis/$project_name"
+    DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
     if ! [ -d "$DIR" ]; then
         # project_name does not exist
         mkdir ${DIR}
         # copy
-        cp -rf /opt/cli/templates/vitis/hello_world/* $DIR
+        cp -rf $CLI_PATH/templates/$WORKFLOW/hello_world/* $DIR
         # we only need makefile_us_alveo.mk (for alveos) and makefile_versal_alveo.mk (for versal)
         rm $DIR/makefile_versal_ps.mk
         rm $DIR/makefile_zynq7000.mk
@@ -53,10 +57,9 @@ while true; do
         #compile src
         cd $DIR/src
         g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
-        #g++ -std=c++17 create_data.cpp -o ../create_data
         break
     fi
 done
 echo ""
-echo "The project /home/$username/my_projects/vitis/$project_name has been created!"
+echo "The project /home/$username/my_projects/$WORKFLOW/$project_name has been created!"
 echo ""
