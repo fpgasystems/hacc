@@ -3,78 +3,112 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
+CLI_PATH="/opt/cli"
+HACC_PATH="/opt/hacc"
+DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+WORKFLOW="vitis"
+
 #get username
 username=$USER
+
+#check on DEVICES_LIST
+source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
+
+#get number of fpga and acap devices present
+MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
+
+#check on multiple devices
+multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 
 # inputs
 read -a flags <<< "$@"
 
-echo ""
-echo "${bold}sgutil run vitis${normal}"
-
 #check if workflow exists
-if ! [ -d "/home/$username/my_projects/vitis/" ]; then
+if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
     echo ""
     echo "You must build and/or program (target = hw) your project/device first! Please, use sgutil build/program vitis"
     echo ""
     exit
 fi
 
-#check on flags (before: flags cannot be empty)
-project_found="0"
-serial_found="0"
+#check on flags
+project_found=""
+project_name=""
+device_found=""
+device_index=""
 if [ "$flags" = "" ]; then
-    #no flags: start dialog
-    cd /home/$username/my_projects/vitis/
-    projects=( *"/" )
-    #delete common from projects
-    j=0
-    for i in "${projects[@]}"
-    do
-        if [[ $i =~ "common/" ]]; then
-            echo "" >&/dev/null
-        else
-            aux[j]=$i
-            j=$(($j + 1))
-        fi
-    done
+    #header (1/2)
     echo ""
-    echo "${bold}Please, choose your project:${normal}"
+    echo "${bold}sgutil run vitis${normal}"
+    #project_dialog
     echo ""
-    PS3=""
-    select project_name in "${aux[@]}"; do
-        if [[ -z $project_name ]]; then
-            echo "" >&/dev/null
-        else
-            project_found="1"
-            project_name=${project_name::-1} #we remove the last character, i.e. "/""
-            break
-        fi
-    done
+    echo "${bold}Please, choose your $WORKFLOW project:${normal}"
+    echo ""
+    result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+    project_found=$(echo "$result" | sed -n '1p')
+    project_name=$(echo "$result" | sed -n '2p')
+    #device_dialog
+    if [[ $multiple_devices = "0" ]]; then
+        device_found="1"
+        device_index="1"
+    else
+        echo ""
+        echo "${bold}Please, choose your device:${normal}"
+        echo ""
+        result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
+        device_found=$(echo "$result" | sed -n '1p')
+        device_index=$(echo "$result" | sed -n '2p')
+    fi
 else
-    #find flags and values
-    for (( i=0; i<${#flags[@]}; i++ ))
-    do
-        if [[ " ${flags[$i]} " =~ " -p " ]] || [[ " ${flags[$i]} " =~ " --project " ]]; then # flags[i] is -p or --project
-            project_found="1"
-            project_idx=$(($i+1))
-            project_name=${flags[$project_idx]}
-        fi
-        if [[ " ${flags[$i]} " =~ " -s " ]] || [[ " ${flags[$i]} " =~ " --serial " ]]; then 
-            serial_found="1"
-            serial_idx=$(($i+1))
-            serial_number=${flags[$serial_idx]}
-        fi
-    done
+    #project_dialog_check
+    result="$("$CLI_PATH/common/project_dialog_check" "${flags[@]}")"
+    project_found=$(echo "$result" | sed -n '1p')
+    project_name=$(echo "$result" | sed -n '2p')
     #forbidden combinations
-    if [[ $project_found = "0" ]] || ([ "$project_found" = "1" ] && [ "$project_name" = "" ]) || ([ $project_found = "0" ] && [ $serial_found = "1" ]) || ([ "$serial_found" = "1" ] && [ "$serial_number" = "" ]); then
-        /opt/cli/sgutil build vitis -h
+    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$username/my_projects/$WORKFLOW/$project_name" ]); then 
+        $CLI_PATH/sgutil run vitis -h
         exit
+    fi
+    #device_dialog_check
+    result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
+    device_found=$(echo "$result" | sed -n '1p')
+    device_index=$(echo "$result" | sed -n '2p')
+    #forbidden combinations
+    if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
+        $CLI_PATH/sgutil run vitis -h
+        exit
+    fi
+    #header (2/2)
+    echo ""
+    echo "${bold}sgutil run vitis${normal}"
+    echo ""
+    #project_dialog (forgotten mandatory 1)
+    if [[ $project_found = "0" ]]; then
+        #echo ""
+        echo "${bold}Please, choose your $WORKFLOW project:${normal}"
+        echo ""
+        result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+        project_found=$(echo "$result" | sed -n '1p')
+        project_name=$(echo "$result" | sed -n '2p')
+        echo ""
+    fi
+    #device_dialog (forgotten mandatory 2)
+    if [[ $multiple_devices = "0" ]]; then
+        device_found="1"
+        device_index="1"
+    elif [[ $device_found = "0" ]]; then
+        echo "${bold}Please, choose your device:${normal}"
+        echo ""
+        result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
+        device_found=$(echo "$result" | sed -n '1p')
+        device_index=$(echo "$result" | sed -n '2p')
+        echo ""
     fi
 fi
 
 #define directories (1)
-DIR="/home/$username/my_projects/vitis/$project_name"
+DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
 
 #check if project exists
 if ! [ -d "$DIR" ]; then
@@ -129,21 +163,11 @@ do
     esac
 done
 
-#sgutil get serial only when we have one FPGA and not serial_found
-if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
-    #serial_number=$(sgutil get serial | cut -d "=" -f2)
-    serial_number=$(/opt/cli/get/serial | awk -F': ' '{print $2}' | grep -v '^$')
-fi
-
-# serial to platform
-cd /opt/xilinx/platforms
-n=$(ls -l | grep -c ^d)
-if [ $((n + 0)) -eq  1 ]; then
-    platform=$(echo *)
-fi
+#get platform
+platform=$($CLI_PATH/get/get_fpga_device_param $device_index platform)
 
 #define directories (2)
-APP_BUILD_DIR="/home/$username/my_projects/vitis/$project_name/build_dir.$target.$platform"
+APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$target.$platform"
 
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
@@ -154,7 +178,7 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
 fi
 
 #revert to xrt first if FPGA is already in baremetal (this is needed also for sw_emu and hw_emu, i.e. when we do not use sgutil program vitis)
-sudo /opt/cli/program/revert
+sudo $CLI_PATH/program/revert
 
 #change directory
 echo ""
@@ -172,6 +196,9 @@ config_id="${config_id%%.*}"
 echo "${bold}You are running $config_id:${normal}"
 echo ""
 cat $DIR/configs/config_000.hpp
+echo ""
+
+echo "We should be running Vitis on device=$device_index"
 echo ""
 
 #execution
