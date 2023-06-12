@@ -127,12 +127,6 @@ if ! [ -d "$DIR" ]; then
     exit
 fi
 
-#sgutil get device if there is only one FPGA and not name_found ------------------> this will change with the fpga_idx concept
-if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
-    #device_name=$(sgutil get device | cut -d "=" -f2)
-    device_name=$($CLI_PATH/get/device | awk -F': ' '{print $2}' | grep -v '^$')
-fi
-
 #device_name to coyote string 
 #FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
 #if [ "$FDEV_NAME" = "u50d" ]; then
@@ -169,7 +163,6 @@ echo ""
 cat $DIR/configs/config_000.hpp
 echo ""
 
-echo ""
 echo "We should be running Coyote on device=$device_index"
 echo ""
     
