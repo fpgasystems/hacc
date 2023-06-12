@@ -4,10 +4,10 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
-WORKDIR="/home/$USER"
-CLI_WORKDIR="/opt/cli"
+CLI_PATH="/opt/cli"
 MPICH_VERSION="4.0.2"
-MPICH_WORKDIR="/opt/mpich/mpich-$MPICH_VERSION-install"
+MPICH_PATH="/opt/mpich/mpich-$MPICH_VERSION-install"
+WORKFLOW="mpi"
 
 #get username
 username=$USER
@@ -19,7 +19,7 @@ echo ""
 echo "${bold}sgutil run mpi${normal}"
 
 #check if workflow exists
-if ! [ -d "/home/$username/my_projects/mpi/" ]; then
+if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
     echo ""
     echo "You must build your project first! Please, use sgutil build mpi"
     echo ""
@@ -30,7 +30,7 @@ fi
 project_found="0"
 if [ "$flags" = "" ]; then
     #no flags: start dialog
-    cd /home/$username/my_projects/mpi/
+    cd /home/$username/my_projects/$WORKFLOW/
     projects=( *"/" )
     echo ""
     echo "${bold}Please, choose your project:${normal}"
@@ -63,11 +63,11 @@ else
 fi
 
 # set environment
-PATH=$MPICH_WORKDIR/bin:$PATH
-LD_LIBRARY_PATH=$MPICH_WORKDIR/lib:$LD_LIBRARY_PATH
+PATH=$MPICH_PATH/bin:$PATH
+LD_LIBRARY_PATH=$MPICH_PATH/lib:$LD_LIBRARY_PATH
 
 #define directories
-DIR="/home/$username/my_projects/mpi/$project_name"
+DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
 APP_BUILD_DIR="$DIR/build_dir"
 
 #check for project directory
@@ -88,7 +88,7 @@ fi
 
 # setup keys
 echo ""
-eval "$CLI_WORKDIR/common/ssh_key_add"
+eval "$CLI_PATH/common/ssh_key_add"
 
 #create or select a configuration
 #cd $DIR/configs/
@@ -165,7 +165,7 @@ while read p; do
     fi
     ((num_servers=num_servers+1))
     ((num_proc=num_proc+aux))
-done <hosts
+done <$DIR/hosts
 
 #get interface name
 mellanox_name=$(nmcli dev | grep mellanox-0 | awk '{print $1}')
