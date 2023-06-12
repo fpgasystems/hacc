@@ -138,19 +138,6 @@ if ! [ -d "$DIR" ]; then
     exit
 fi
 
-#echo ""
-#echo "${bold}Please, choose binary's execution target:${normal}"
-#echo ""
-#PS3=""
-#select target in sw_emu hw_emu hw
-#do
-#    case $target in
-#        sw_emu) break;;
-#        hw_emu) break;;
-#        hw) break;;
-#    esac
-#done
-
 #get platform
 platform=$($CLI_PATH/get/get_fpga_device_param $device_index platform)
 
