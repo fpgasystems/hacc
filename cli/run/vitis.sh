@@ -84,6 +84,15 @@ else
         $CLI_PATH/sgutil run vitis -h
         exit
     fi
+    #target_dialog_check
+    result="$("$CLI_PATH/common/target_dialog_check" "${flags[@]}")"
+    target_found=$(echo "$result" | sed -n '1p')
+    target_name=$(echo "$result" | sed -n '2p')
+    #forbidden combinations
+    if [[ "$target_found" = "1" && ! ( "$target_name" = "sw_emu" || "$target_name" = "hw_emu" || "$target_name" = "hw" ) ]]; then
+        $CLI_PATH/sgutil run vitis -h
+        exit
+    fi
     #header (2/2)
     echo ""
     echo "${bold}sgutil run vitis${normal}"
@@ -111,7 +120,7 @@ else
         echo ""
     fi
 
-    target_name="hw"
+    #target_name="hw"
 
 fi
 
