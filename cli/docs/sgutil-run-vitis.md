@@ -22,6 +22,11 @@
   &nbsp; &nbsp; Specifies your Vitis project name.
 </p>
 
+<code>-t, --target</code>
+<p>
+  &nbsp; &nbsp; Binary compilation target (sw_emu, hw_emu, hw).
+</p>
+
 <code>-h, --help</code>
 <p>
   &nbsp; &nbsp; Help to use this command.

@@ -105,7 +105,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "--project --help" -- ${cur}))
                     ;;
                 vitis)
-                    COMPREPLY=($(compgen -W " --device --project --help" -- ${cur}))
+                    COMPREPLY=($(compgen -W " --device --project --target --help" -- ${cur}))
                     ;;
                 keys) # set 
                     COMPREPLY=($(compgen -W "--help" -- ${cur})) 

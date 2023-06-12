@@ -583,7 +583,7 @@ run_vitis_help() {
     echo "FLAGS:"
     echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
     echo "   -p, --project   - Specifies your Vitis project name."
-    #echo "   -t, --target    - Binary compilation target (sw_emu, hw_emu, hw)."
+    echo "   -t, --target    - Binary compilation target (sw_emu, hw_emu, hw)."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -961,7 +961,7 @@ case "$command" in
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       vitis) 
-        valid_flags="-d --device -p --project -h --help"
+        valid_flags="-d --device -p --project -t --target -h --help"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       *)
