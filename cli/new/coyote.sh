@@ -3,6 +3,10 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
+CLI_PATH="/opt/cli"
+WORKFLOW="coyote"
+
 #get username
 username=$USER
 
@@ -10,7 +14,7 @@ echo ""
 echo "${bold}sgutil new coyote${normal}"
 
 #check for vivado_developers
-member=$(/opt/cli/common/is_member $username vivado_developers)
+member=$($CLI_PATH/common/is_member $username vivado_developers)
 if [ "$member" = "false" ]; then
     echo ""
     echo "Sorry, ${bold}$username!${normal} You are not granted to use this command."
@@ -25,7 +29,7 @@ if ! [ -d "$DIR" ]; then
 fi
 
 # create coyote directory
-DIR="/home/$username/my_projects/coyote"
+DIR="/home/$username/my_projects/$WORKFLOW"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
@@ -40,7 +44,7 @@ while true; do
     if  [[ $project_name == validate_* ]]; then
         project_name=""
     fi
-    DIR="/home/$username/my_projects/coyote/$project_name"
+    DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
     if ! [ -d "$DIR" ]; then
         # project_name does not exist
         mkdir ${DIR}
@@ -53,7 +57,7 @@ while true; do
         mv Coyote/* .
         rm -rf Coyote
         #copy template
-        cp -rf /opt/cli/templates/coyote/hello_world/* $DIR
+        cp -rf $CLI_PATH/templates/$WORKFLOW/hello_world/* $DIR
         #replace Makefile (main.cpp specific version)
         rm $DIR/sw/CMakeLists.txt
         mv $DIR/CMakeLists.txt $DIR/sw
@@ -64,5 +68,5 @@ while true; do
     fi
 done
 echo ""
-echo "The project /home/$username/my_projects/coyote/$project_name has been created!"
+echo "The project /home/$username/my_projects/$WORKFLOW/$project_name has been created!"
 echo ""
