@@ -90,41 +90,6 @@ fi
 echo ""
 eval "$CLI_PATH/common/ssh_key_add"
 
-#create or select a configuration
-#cd $DIR/configs/
-#if [[ $(ls -l | wc -l) = 2 ]]; then
-#    #only config_000 exists and we create config_001
-#    #we compile create_config (in case there were changes)
-#    #cd $DIR/src
-#    #g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
-#    #cd $DIR
-#    #./create_config
-#    #cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
-#    config=""
-#    echo ""
-#elif [[ $(ls -l | wc -l) = 3 ]]; then
-#    #config_000 and config_001 exist
-#    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
-#    config="config_001.hpp"
-#    echo ""
-#elif [[ $(ls -l | wc -l) > 3 ]]; then
-#    cd $DIR/configs/
-#    configs=( "config_"*.hpp )
-#    echo ""
-#    echo "${bold}Please, choose your configuration:${normal}"
-#    echo ""
-#    PS3=""
-#    select config in "${configs[@]:1}"; do # with :1 we avoid config_000.hpp and then config_shell.hpp
-#        if [[ -z $config ]]; then
-#            echo "" >&/dev/null
-#        else
-#            break
-#        fi
-#    done
-#    # copy selected config as config_000.hpp
-#    cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
-#fi
-
 #change directory
 echo "${bold}Changing directory:${normal}"
 echo ""
