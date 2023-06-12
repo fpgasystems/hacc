@@ -520,7 +520,7 @@ run_help() {
     echo "ARGUMENTS:"
     echo "   mpi             - Runs your MPI application according to your setup."
     echo ""
-    echo "   coyote          - Runs Coyote on a given FPGA/ACAP."
+    echo "   coyote          - Runs Coyote on a given FPGA."
     echo "   vitis           - Runs a Vitis FPGA-binary on a given FPGA/ACAP."
     echo ""
     echo "   hip             - Runs your HIP application on a given GPU."
@@ -534,12 +534,11 @@ run_coyote_help() {
     echo ""
     echo "${bold}sgutil run coyote [flags] [--help]${normal}"
     echo ""
-    echo "Runs Coyote on a given FPGA/ACAP."
+    echo "Runs Coyote on a given FPGA."
     echo ""
     echo "FLAGS:"
+    echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
     echo "   -p, --project   - Specifies your Coyote project name."
-    echo "   -s, --serial    - FPGA's serial number. See sgutil get serial."
-    #echo "   -t, --target    - Binary compilation target (sw_emu, hw_emu, hw)."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -950,7 +949,7 @@ case "$command" in
         run_help
         ;;
       coyote) 
-        valid_flags="-p --project -s --serial -h --help" # -b --binary -n --name -t --target 
+        valid_flags="-d --device -p --project -h --help"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       hip) 

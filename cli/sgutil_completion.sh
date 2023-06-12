@@ -96,7 +96,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "--bitstream --device --driver --ltx --name --serial --help" -- ${cur})) # -b -d -l -n -s -h
                     ;;
                 coyote) # run 
-                    COMPREPLY=($(compgen -W "--project --serial --help" -- ${cur})) 
+                    COMPREPLY=($(compgen -W "--device --project --help" -- ${cur})) 
                     ;;
                 hip)
                     COMPREPLY=($(compgen -W "--project --help" -- ${cur}))
