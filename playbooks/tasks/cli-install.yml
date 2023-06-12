@@ -233,6 +233,18 @@
     dest: /opt/cli/common/driver_dialog_check
     mode: 0755
 
+- name: copy common/target_dialog script
+  copy:
+    src: "../../cli/common/target_dialog.sh"
+    dest: /opt/cli/common/target_dialog
+    mode: 0755
+
+- name: copy common/target_dialog_check script
+  copy:
+    src: "../../cli/common/target_dialog_check.sh"
+    dest: /opt/cli/common/target_dialog_check
+    mode: 0755
+
 #examine -------------------------------------------------------------------------------------
 
 - name: copy examine
