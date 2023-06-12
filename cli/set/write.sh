@@ -3,14 +3,17 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
+CLI_PATH="/opt/cli"
+
 #get username
 username=$USER
 
-# inputs
+#inputs
 read -a flags <<< "$@"
 
 #check for vivado_developers
-member=$(/opt/cli/common/is_member $username vivado_developers)
+member=$($CLI_PATH/common/is_member $username vivado_developers)
 if [ "$member" = "false" ]; then
     echo ""
     echo "Sorry, ${bold}$username!${normal} You are not granted to use this command."
@@ -20,7 +23,7 @@ fi
 
 # flags cannot be empty
 if [ "$flags" = "" ]; then
-    eval "/opt/cli/sgutil set write -h"
+    eval "$CLI_PATH/sgutil set write -h"
     exit
 fi
 
@@ -37,10 +40,10 @@ done
 
 #apply fpga_chmod
 if [[ $index = "" ]]; then
-    eval "/opt/cli/sgutil set write -h"
+    eval "$CLI_PATH/sgutil set write -h"
     exit
 else
     echo ""
     echo "${bold}sgutil set write${normal}"
-    sudo /opt/cli/program/fpga_chmod $index
+    sudo $CLI_PATH/program/fpga_chmod $index
 fi
