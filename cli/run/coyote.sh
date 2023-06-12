@@ -3,8 +3,23 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
+CLI_PATH="/opt/cli"
+HACC_PATH="/opt/hacc"
+DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+WORKFLOW="coyote"
+
 #get username
 username=$USER
+
+#check on DEVICES_LIST
+source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
+
+#get number of fpga and acap devices present
+MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
+
+#check on multiple devices
+multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 
 # inputs
 read -a flags <<< "$@"
@@ -13,7 +28,7 @@ echo ""
 echo "${bold}sgutil run coyote${normal}"
 
 #check for vivado_developers
-member=$(/opt/cli/common/is_member $username vivado_developers)
+member=$($CLI_PATH/common/is_member $username vivado_developers)
 if [ "$member" = "false" ]; then
     echo ""
     echo "Sorry, ${bold}$username!${normal} You are not granted to use this command."
@@ -22,7 +37,7 @@ if [ "$member" = "false" ]; then
 fi
 
 #check if workflow exists
-if ! [ -d "/home/$username/my_projects/coyote/" ]; then
+if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
     echo ""
     echo "You must build and program your project/device first! Please, use sgutil build/program coyote"
     echo ""
@@ -34,7 +49,7 @@ name_found="0"
 project_found="0"
 if [ "$flags" = "" ]; then
     #no flags: start dialog
-    cd /home/$username/my_projects/coyote/
+    cd /home/$username/my_projects/$WORKFLOW/
     projects=( *"/" )
     #delete validate folders from projects
     j=0
@@ -77,13 +92,13 @@ else
     done
     #forbidden combinations
     if [[ $project_found = "0" ]] || ([ "$project_found" = "1" ] && [ "$project_name" = "" ]) || ([ $project_found = "0" ] && [ $name_found = "1" ]) || ([ "$name_found" = "1" ] && [ "$device_name" = "" ]); then
-        /opt/cli/sgutil build coyote -h
+        $CLI_PATH/sgutil build coyote -h
         exit
     fi
 fi
 
 #define directories (1)
-DIR="/home/$username/my_projects/coyote/$project_name"
+DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
 
 #check if project exists
 if ! [ -d "$DIR" ]; then
@@ -93,44 +108,10 @@ if ! [ -d "$DIR" ]; then
     exit
 fi
 
-#create or select a configuration
-#cd $DIR/configs/
-#if [[ $(ls -l | wc -l) = 2 ]]; then
-#    #only config_000 exists and we create config_001
-#    #we compile create_config (in case there were changes)
-#    cd $DIR/src
-#    g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
-#    cd $DIR
-#    ./create_config
-#    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
-#    config="config_001.hpp"
-#elif [[ $(ls -l | wc -l) = 4 ]]; then
-#    #config_000, config_shell and config_001 exist
-#    cp -fr $DIR/configs/config_001.hpp $DIR/configs/config_000.hpp
-#    config="config_001.hpp"
-#    echo ""
-#elif [[ $(ls -l | wc -l) > 4 ]]; then
-#    cd $DIR/configs/
-#    configs=( "config_"*.hpp )
-#    echo ""
-#    echo "${bold}Please, choose your configuration:${normal}"
-#    echo ""
-#    PS3=""
-#    select config in "${configs[@]:1:${#configs[@]}-2}"; do # with :1 we avoid config_000.hpp and then config_shell.hpp
-#        if [[ -z $config ]]; then
-#            echo "" >&/dev/null
-#        else
-#            break
-#        fi
-#    done
-#    # copy selected config as config_000.hpp
-#    cp -fr $DIR/configs/$config $DIR/configs/config_000.hpp
-#fi
-
 #sgutil get device if there is only one FPGA and not name_found ------------------> this will change with the fpga_idx concept
 if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
     #device_name=$(sgutil get device | cut -d "=" -f2)
-    device_name=$(/opt/cli/get/device | awk -F': ' '{print $2}' | grep -v '^$')
+    device_name=$($CLI_PATH/get/device | awk -F': ' '{print $2}' | grep -v '^$')
 fi
 
 #device_name to coyote string 
@@ -140,7 +121,7 @@ if [ "$FDEV_NAME" = "u50d" ]; then
 fi
 
 #define directories (2)
-APP_BUILD_DIR="/home/$username/my_projects/coyote/$project_name/build_dir.$FDEV_NAME/" #$device_name
+APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/" #$device_name
 
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
@@ -171,16 +152,5 @@ echo ""
 #run application
 cd $APP_BUILD_DIR
 ./main
-
-#run referring to config
-#config="${config%%.*}"
-#FILE="main_$config"
-#if [ -f "$FILE" ]; then
-#    ./main_$config
-#else
-#    echo "You must build your application first! Please, use sgutil build coyote"
-#    echo ""
-#    exit
-#fi
 
 echo ""
