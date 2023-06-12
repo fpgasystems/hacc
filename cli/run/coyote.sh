@@ -24,9 +24,6 @@ multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 # inputs
 read -a flags <<< "$@"
 
-echo ""
-echo "${bold}sgutil run coyote${normal}"
-
 #check for vivado_developers
 member=$($CLI_PATH/common/is_member $username vivado_developers)
 if [ "$member" = "false" ]; then
@@ -52,7 +49,7 @@ device_index=""
 if [ "$flags" = "" ]; then
     #header (1/2)
     echo ""
-    echo "${bold}sgutil program coyote${normal}"
+    echo "${bold}sgutil run coyote${normal}"
     #project_dialog
     echo ""
     echo "${bold}Please, choose your $WORKFLOW project:${normal}"
@@ -72,23 +69,6 @@ if [ "$flags" = "" ]; then
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
     fi
-    #get_servers
-    #echo ""
-    #result=$($CLI_PATH/common/get_servers $CLI_PATH $hostname)
-    #servers_family_list=$(echo "$result" | sed -n '1p' | sed -n '1p')
-    #servers_family_list_string=$(echo "$result" | sed -n '2p' | sed -n '1p')
-    #num_remote_servers=$(echo "$servers_family_list" | wc -w)
-    #echo ""
-    #deployment_dialog
-    #deploy_option="0"
-    #if [ "$num_remote_servers" -ge 1 ]; then
-    #    echo "${bold}Please, choose your deployment servers:${normal}"
-    #    echo ""
-    #    echo "0) $hostname"
-    #    echo "1) $hostname, $servers_family_list_string"
-    #    deploy_option=$($CLI_PATH/common/deployment_dialog $servers_family_list_string)
-    #    echo ""
-    #fi
 else
     #project_dialog_check
     result="$("$CLI_PATH/common/project_dialog_check" "${flags[@]}")"
@@ -108,18 +88,9 @@ else
         $CLI_PATH/sgutil run coyote -h
         exit
     fi
-    ##deployment_dialog_check
-    #result="$("$CLI_PATH/common/deployment_dialog_check" "${flags[@]}")"
-    #deploy_option_found=$(echo "$result" | sed -n '1p')
-    #deploy_option=$(echo "$result" | sed -n '2p')
-    #forbidden combinations
-    #if [ "$deploy_option_found" = "1" ] && { [ "$deploy_option" -ne 0 ] && [ "$deploy_option" -ne 1 ]; }; then #if [ "$deploy_option_found" = "1" ] && [ -n "$deploy_option" ]; then 
-    #    $CLI_PATH/sgutil run coyote -h
-    #    exit
-    #fi
     #header (2/2)
     echo ""
-    echo "${bold}sgutil program coyote${normal}"
+    echo "${bold}sgutil run coyote${normal}"
     echo ""
     #project_dialog (forgotten mandatory 1)
     if [[ $project_found = "0" ]]; then
@@ -143,25 +114,6 @@ else
         device_index=$(echo "$result" | sed -n '2p')
         echo ""
     fi
-    ##get_servers
-    #result=$($CLI_PATH/common/get_servers $CLI_PATH $hostname)
-    #servers_family_list=$(echo "$result" | sed -n '1p' | sed -n '1p')
-    #servers_family_list_string=$(echo "$result" | sed -n '2p' | sed -n '1p')
-    #num_remote_servers=$(echo "$servers_family_list" | wc -w)
-    #echo ""
-    ##deployment_dialog (forgotten mandatory 3)
-    #if [ "$deploy_option_found" = "0" ]; then
-    #    #deployment_dialog
-    #    deploy_option="0"
-    #    if [ "$num_remote_servers" -ge 1 ]; then
-    #        echo "${bold}Please, choose your deployment servers:${normal}"
-    #        echo ""
-    #        echo "0) $hostname"
-    #        echo "1) $hostname, $servers_family_list_string"
-    #        deploy_option=$($CLI_PATH/common/deployment_dialog $servers_family_list_string)
-    #        echo ""
-    #    fi
-    #fi
 fi
 
 #define directories (1)
