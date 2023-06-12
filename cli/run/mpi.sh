@@ -83,7 +83,7 @@ APP_BUILD_DIR="$DIR/build_dir"
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
     echo ""
-    echo "You must build your project first! Please, use sgutil build mpi"
+    echo "You must build your project first! Please, use sgutil build $WORKFLOW"
     echo ""
     exit
 fi
