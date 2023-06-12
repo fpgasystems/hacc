@@ -3,6 +3,10 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
+CLI_PATH="/opt/cli"
+WORKFLOW="hip"
+
 #get username
 username=$USER
 
@@ -23,12 +27,12 @@ fi
 read -a flags <<< "$@"
 
 echo ""
-echo "${bold}sgutil run hip${normal}"
+echo "${bold}sgutil run $WORKFLOW${normal}"
 
 #check if workflow exists
-if ! [ -d "/home/$username/my_projects/hip/" ]; then
+if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
     echo ""
-    echo "You must build your project first! Please, use sgutil build hip"
+    echo "You must build your project first! Please, use sgutil build $WORKFLOW"
     echo ""
     exit
 fi
@@ -37,7 +41,7 @@ fi
 project_found="0"
 if [ "$flags" = "" ]; then
     #no flags: start dialog
-    cd /home/$username/my_projects/hip/
+    cd /home/$username/my_projects/$WORKFLOW/
     projects=( *"/" )
     echo ""
     echo "${bold}Please, choose your project:${normal}"
@@ -64,19 +68,19 @@ else
     done
     #project is not found or its name is empty
     if [[ $project_found = "0" ]] || ([ "$project_found" = "1" ] && [ "$project_name" = "" ]); then
-        /opt/cli/sgutil run hip -h
+        $CLI_PATH/sgutil run $WORKFLOW -h
         exit
     fi
 fi
 
 #define directories
-DIR="/home/$username/my_projects/hip/$project_name"
+DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
 APP_BUILD_DIR="$DIR/build_dir"
 
 #check for project directory
 if ! [ -d "$DIR" ]; then
     echo ""
-    echo "You must create your project first! Please, use sgutil new hip"
+    echo "You must create your project first! Please, use sgutil new $WORKFLOW"
     echo ""
     exit
 fi
@@ -84,7 +88,7 @@ fi
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
     echo ""
-    echo "You must generate your application first! Please, use sgutil build hip"
+    echo "You must generate your application first! Please, use sgutil build $WORKFLOW"
     echo ""
     exit
 fi
