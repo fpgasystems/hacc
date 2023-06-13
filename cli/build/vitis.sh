@@ -41,8 +41,10 @@ read -a flags <<< "$@"
 #check on flags
 project_found=""
 project_name=""
-device_found=""
-device_index=""
+#device_found=""
+#device_index=""
+platform_found=""
+platform_name=""
 target_found=""
 target_name=""
 if [ "$flags" = "" ]; then
@@ -56,18 +58,29 @@ if [ "$flags" = "" ]; then
     result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
-    #device_dialog
-    if [[ $multiple_devices = "0" ]]; then
-        device_found="1"
-        device_index="1"
-    else
-        echo ""
-        echo "${bold}Please, choose your device:${normal}"
-        echo ""
-        result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
-        device_found=$(echo "$result" | sed -n '1p')
-        device_index=$(echo "$result" | sed -n '2p')
+    #platform_dialog
+    echo ""
+    echo "${bold}Please, choose your platform:${normal}"
+    echo ""
+    result=$($CLI_PATH/common/platform_dialog $XILINX_PATH)
+    platform_found=$(echo "$result" | sed -n '1p')
+    platform_name=$(echo "$result" | sed -n '2p')
+    multiple_platforms=$(echo "$result" | sed -n '3p')
+    if [[ $multiple_platforms = "0" ]]; then
+        echo $platform_name
     fi
+    #device_dialog
+    #if [[ $multiple_devices = "0" ]]; then
+    #    device_found="1"
+    #    device_index="1"
+    #else
+    #    echo ""
+    #    echo "${bold}Please, choose your device:${normal}"
+    #    echo ""
+    #    result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
+    #    device_found=$(echo "$result" | sed -n '1p')
+    #    device_index=$(echo "$result" | sed -n '2p')
+    #fi
     #target_dialog
     echo ""
     echo "${bold}Please, choose binary's execution target:${normal}"
@@ -84,11 +97,26 @@ else
         exit
     fi
     #device_dialog_check
-    result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
-    device_found=$(echo "$result" | sed -n '1p')
-    device_index=$(echo "$result" | sed -n '2p')
+    #result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
+    #device_found=$(echo "$result" | sed -n '1p')
+    #device_index=$(echo "$result" | sed -n '2p')
+    ##forbidden combinations
+    #if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
+    #    $CLI_PATH/sgutil build vitis -h
+    #    exit
+    #fi
+    #platform_dialog_check
+    result="$("$CLI_PATH/common/platform_dialog_check" "${flags[@]}")"
+    platform_found=$(echo "$result" | sed -n '1p')
+    platform_name=$(echo "$result" | sed -n '2p')    
+
+    echo ""
+    echo "Hola, platform_name is: $platform_name"
+    echo ""
+
+
     #forbidden combinations
-    if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
+    if ([ "$platform_found" = "1" ] && [ "$platform_name" = "" ]) || ([ "$platform_found" = "1" ] && [ ! -d "$XILINX_PATH/platforms/$platform_name" ]); then
         $CLI_PATH/sgutil build vitis -h
         exit
     fi
@@ -116,16 +144,29 @@ else
         echo ""
     fi
     #device_dialog (forgotten mandatory 2)
-    if [[ $multiple_devices = "0" ]]; then
-        device_found="1"
-        device_index="1"
-    elif [[ $device_found = "0" ]]; then
-        echo "${bold}Please, choose your device:${normal}"
+    #if [[ $multiple_devices = "0" ]]; then
+    #    device_found="1"
+    #    device_index="1"
+    #elif [[ $device_found = "0" ]]; then
+    #    echo "${bold}Please, choose your device:${normal}"
+    #    echo ""
+    #    result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
+    #    device_found=$(echo "$result" | sed -n '1p')
+    #    device_index=$(echo "$result" | sed -n '2p')
+    #    echo ""
+    #fi
+
+    #platform_dialog (forgotten mandatory 2)
+    if [[ $platform_found = "0" ]]; then
+        echo "${bold}Please, choose your platform:${normal}"
         echo ""
-        result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
-        device_found=$(echo "$result" | sed -n '1p')
-        device_index=$(echo "$result" | sed -n '2p')
-        echo ""
+        result=$($CLI_PATH/common/platform_dialog $XILINX_PATH)
+        platform_found=$(echo "$result" | sed -n '1p')
+        platform_name=$(echo "$result" | sed -n '2p')
+        multiple_platforms=$(echo "$result" | sed -n '3p')
+        if [[ $multiple_platforms = "0" ]]; then
+            echo $platform_name
+        fi
     fi
     #target_dialog (forgotten mandatory 3)
     if [[ $target_found = "0" ]]; then
@@ -207,27 +248,27 @@ config_id="${config%%.*}"
 touch $config_id.active
 
 #serial to platform
-cd $XILINX_PATH/platforms
-if [ "$hostname" = "alveo-build-01" ]; then
-    platforms=( "xilinx_"* )
-    echo ""
-    echo "${bold}Please, choose the device (or platform):${normal}" 
-    echo ""
-    PS3=""
-    select platform in "${platforms[@]}"; do 
-        if [[ -z $platform ]]; then
-            echo "" >&/dev/null
-        else
-            break
-        fi
-    done
-else
-    #get platform
-    platform=$($CLI_PATH/get/get_fpga_device_param $device_index platform)
-fi
+#cd $XILINX_PATH/platforms
+#if [ "$hostname" = "alveo-build-01" ]; then
+#    platforms=( "xilinx_"* )
+#    echo ""
+#    echo "${bold}Please, choose the device (or platform):${normal}" 
+#    echo ""
+#    PS3=""
+#    select platform in "${platforms[@]}"; do 
+#        if [[ -z $platform ]]; then
+#            echo "" >&/dev/null
+#        else
+#            break
+#        fi
+#    done
+#else
+#    #get platform
+#    platform=$($CLI_PATH/get/get_fpga_device_param $device_index platform)
+#fi
 
 #define directories (2)
-APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$target_name.$platform"
+APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$target_name.$platform_name"
 
 echo ""
 echo "${bold}Changing directory:${normal}"
@@ -242,21 +283,21 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     export CPATH="/usr/include/x86_64-linux-gnu" #https://support.xilinx.com/s/article/Fatal-error-sys-cdefs-h-No-such-file-or-directory?language=en_US
     echo "${bold}PL kernel compilation and linking: generating .xo and .xclbin:${normal}"
     echo ""
-    echo "make all TARGET=$target_name PLATFORM=$platform" 
+    echo "make all TARGET=$target_name PLATFORM=$platform_name" 
     echo ""
-    eval "make all TARGET=$target_name PLATFORM=$platform"
+    eval "make all TARGET=$target_name PLATFORM=$platform_name"
     echo ""        
 
     #send email at the end
     if [ "$target_name" = "hw" ]; then
         user_email=$username@ethz.ch
-        echo "Subject: Good news! sgutil build vitis ($project_name / TARGET=$target_name / PLATFORM=$platform) is done!" | sendmail $user_email
+        echo "Subject: Good news! sgutil build vitis ($project_name / TARGET=$target_name / PLATFORM=$platform_name) is done!" | sendmail $user_email
     fi
     
 else
     echo "${bold}PL kernel compilation and linking: generating .xo and .xclbin:${normal}"
     echo ""
-    echo "make all TARGET=$target_name PLATFORM=$platform" 
+    echo "make all TARGET=$target_name PLATFORM=$platform_name" 
     echo ""
     echo "$APP_BUILD_DIR already exists!"
     echo ""
