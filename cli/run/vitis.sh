@@ -37,6 +37,8 @@ project_found=""
 project_name=""
 device_found=""
 device_index=""
+target_found=""
+target_name=""
 if [ "$flags" = "" ]; then
     #header (1/2)
     echo ""
