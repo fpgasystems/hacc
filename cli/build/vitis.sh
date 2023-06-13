@@ -56,6 +56,10 @@ if [ "$flags" = "" ]; then
     result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
+    multiple_projects=$(echo "$result" | sed -n '3p')
+    if [[ $multiple_projects = "0" ]]; then
+        echo $project_name
+    fi
     #platform_dialog
     echo ""
     echo "${bold}Please, choose your platform:${normal}"
@@ -112,7 +116,11 @@ else
         result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
         project_found=$(echo "$result" | sed -n '1p')
         project_name=$(echo "$result" | sed -n '2p')
-        echo ""
+        multiple_projects=$(echo "$result" | sed -n '3p')
+        if [[ $multiple_projects = "0" ]]; then
+            echo $project_name
+        fi
+        #echo ""
     fi
     #platform_dialog (forgotten mandatory 2)
     if [[ $platform_found = "0" ]]; then
