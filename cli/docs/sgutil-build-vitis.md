@@ -12,13 +12,19 @@
 </p>
 
 ### Flags
-<code>-p, --project <string></code>
+<code>-d, --device <string></code>
+<p>
+  &nbsp; &nbsp; FPGA Device Index (see sgutil examine).
+</p>
+
+<code>-p, --project</code>
 <p>
   &nbsp; &nbsp; Specifies your Vitis project name.
 </p>
-<code>-s, --serial <string></code>
+
+<code>-t, --target</code>
 <p>
-  &nbsp; &nbsp; FPGA's serial number. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-serial.md">sgutil get serial</a>.
+  &nbsp; &nbsp; Binary compilation target (sw_emu, hw_emu, hw).
 </p>
 
 <code>-h, --help <string></code>
@@ -28,5 +34,5 @@
 
 ### Examples
 ```
-$ sgutil build vitis -p hello_world
+$ sgutil build vitis -d 1 -p hello_world -t sw_emu
 ```
