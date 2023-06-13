@@ -364,6 +364,12 @@
     dest: /opt/cli/common/platform_dialog
     mode: 0755
 
+- name: copy common/platform_dialog_check script
+  copy:
+    src: "../../cli/common/platform_dialog_check.sh"
+    dest: /opt/cli/common/platform_dialog_check
+    mode: 0755
+
 #get  ----------------------------------------------------------------------------------------
 
 #- name: copy get_from_vars
