@@ -358,6 +358,12 @@
     dest: /opt/cli/common/device_list_check
     mode: 0755
 
+- name: copy common/platform_dialog script
+  copy:
+    src: "../../cli/common/platform_dialog.sh"
+    dest: /opt/cli/common/platform_dialog
+    mode: 0755
+
 #get  ----------------------------------------------------------------------------------------
 
 #- name: copy get_from_vars
