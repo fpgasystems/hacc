@@ -12,9 +12,9 @@
 </p>
 
 ### Flags
-<code>-d, --device <string></code>
+<code>    --platform <string></code>
 <p>
-  &nbsp; &nbsp; FPGA Device Index (see sgutil examine).
+  &nbsp; &nbsp; Xilinx platform (according to sgutil get platform).
 </p>
 
 <code>-p, --project</code>
@@ -34,5 +34,6 @@
 
 ### Examples
 ```
-$ sgutil build vitis -d 1 -p hello_world -t sw_emu
+$ sgutil build vitis
+$ sgutil build vitis --platform xilinx_u55c_gen3x16_xdma_3_202210_1 -p hello_world -t sw_emu
 ```

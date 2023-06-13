@@ -54,7 +54,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "--help" -- ${cur}))
                     ;;
                 vitis) 
-                    COMPREPLY=($(compgen -W "--device --project --target --help" -- ${cur}))
+                    COMPREPLY=($(compgen -W "--platform --project --target --help" -- ${cur}))
                     ;;
                 bdf) # get
                     COMPREPLY=($(compgen -W "--device --help" -- ${cur})) # -w -h

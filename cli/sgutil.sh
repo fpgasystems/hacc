@@ -174,7 +174,7 @@ build_vitis_help() {
     echo "Generates .xo kernels and .xclbin binaries for Vitis workflow."
     echo ""
     echo "FLAGS:"
-    echo "   -d, --device    - FPGA/ACAP Device Index (according to sgutil examine)."
+    echo "       --platform  - Xilinx platform (according to sgutil get platform)."
     echo "   -p, --project   - Specifies your Vitis project name."
     echo "   -t, --target    - Binary compilation target (sw_emu, hw_emu, hw)."
     echo ""
@@ -800,7 +800,7 @@ case "$command" in
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       vitis) 
-        valid_flags="-d --device -p --project -t --target -h --help"
+        valid_flags="--platform -p --project -t --target -h --help"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       *)
