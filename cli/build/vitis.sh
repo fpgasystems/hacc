@@ -41,8 +41,6 @@ read -a flags <<< "$@"
 #check on flags
 project_found=""
 project_name=""
-#device_found=""
-#device_index=""
 platform_found=""
 platform_name=""
 target_found=""
@@ -69,18 +67,6 @@ if [ "$flags" = "" ]; then
     if [[ $multiple_platforms = "0" ]]; then
         echo $platform_name
     fi
-    #device_dialog
-    #if [[ $multiple_devices = "0" ]]; then
-    #    device_found="1"
-    #    device_index="1"
-    #else
-    #    echo ""
-    #    echo "${bold}Please, choose your device:${normal}"
-    #    echo ""
-    #    result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
-    #    device_found=$(echo "$result" | sed -n '1p')
-    #    device_index=$(echo "$result" | sed -n '2p')
-    #fi
     #target_dialog
     echo ""
     echo "${bold}Please, choose binary's execution target:${normal}"
@@ -96,25 +82,10 @@ else
         $CLI_PATH/sgutil build vitis -h
         exit
     fi
-    #device_dialog_check
-    #result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
-    #device_found=$(echo "$result" | sed -n '1p')
-    #device_index=$(echo "$result" | sed -n '2p')
-    ##forbidden combinations
-    #if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
-    #    $CLI_PATH/sgutil build vitis -h
-    #    exit
-    #fi
     #platform_dialog_check
     result="$("$CLI_PATH/common/platform_dialog_check" "${flags[@]}")"
     platform_found=$(echo "$result" | sed -n '1p')
     platform_name=$(echo "$result" | sed -n '2p')    
-
-    echo ""
-    echo "Hola, platform_name is: $platform_name"
-    echo ""
-
-
     #forbidden combinations
     if ([ "$platform_found" = "1" ] && [ "$platform_name" = "" ]) || ([ "$platform_found" = "1" ] && [ ! -d "$XILINX_PATH/platforms/$platform_name" ]); then
         $CLI_PATH/sgutil build vitis -h
@@ -143,19 +114,6 @@ else
         project_name=$(echo "$result" | sed -n '2p')
         echo ""
     fi
-    #device_dialog (forgotten mandatory 2)
-    #if [[ $multiple_devices = "0" ]]; then
-    #    device_found="1"
-    #    device_index="1"
-    #elif [[ $device_found = "0" ]]; then
-    #    echo "${bold}Please, choose your device:${normal}"
-    #    echo ""
-    #    result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
-    #    device_found=$(echo "$result" | sed -n '1p')
-    #    device_index=$(echo "$result" | sed -n '2p')
-    #    echo ""
-    #fi
-
     #platform_dialog (forgotten mandatory 2)
     if [[ $platform_found = "0" ]]; then
         echo "${bold}Please, choose your platform:${normal}"
