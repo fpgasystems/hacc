@@ -3,6 +3,14 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
+CLI_PATH="/opt/cli"
+HACC_PATH="/opt/hacc"
+XILINX_PATH="/opt/xilinx"
+XRT_PATH="$XILINX_PATH/xrt"
+DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+WORKFLOW="vitis"
+
 #get username
 username=$USER
 
@@ -10,80 +18,130 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-# inputs
-read -a flags <<< "$@"
+#check on DEVICES_LIST
+source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
 
-echo ""
-echo "${bold}sgutil build vitis${normal}"
+#get number of fpga and acap devices present
+MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
+
+#check on multiple devices
+multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 
 #check if workflow exists
-if ! [ -d "/home/$username/my_projects/vitis/" ]; then
+if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
     echo ""
     echo "You must create your project first! Please, use sgutil new vitis"
     echo ""
     exit
 fi
 
-#check on flags (before: flags cannot be empty)
-project_found="0"
-serial_found="0"
+#inputs
+read -a flags <<< "$@"
+
+#check on flags
+project_found=""
+project_name=""
+device_found=""
+device_index=""
+target_found=""
+target_name=""
 if [ "$flags" = "" ]; then
-    #no flags: start dialog
-    cd /home/$username/my_projects/vitis/
-    projects=( *"/" )
-    #delete common from projects
-    j=0
-    for i in "${projects[@]}"
-    do
-        if [[ $i =~ "common/" ]]; then
-            echo "" >&/dev/null
-        else
-            aux[j]=$i
-            j=$(($j + 1))
-        fi
-    done
+    #header (1/2)
     echo ""
-    echo "${bold}Please, choose your project:${normal}"
+    echo "${bold}sgutil build vitis${normal}"
+    #project_dialog
     echo ""
-    PS3=""
-    select project_name in "${aux[@]}"; do
-        if [[ -z $project_name ]]; then
-            echo "" >&/dev/null
-        else
-            project_found="1"
-            project_name=${project_name::-1} #we remove the last character, i.e. "/""
-            break
-        fi
-    done
+    echo "${bold}Please, choose your $WORKFLOW project:${normal}"
+    echo ""
+    result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+    project_found=$(echo "$result" | sed -n '1p')
+    project_name=$(echo "$result" | sed -n '2p')
+    #device_dialog
+    if [[ $multiple_devices = "0" ]]; then
+        device_found="1"
+        device_index="1"
+    else
+        echo ""
+        echo "${bold}Please, choose your device:${normal}"
+        echo ""
+        result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
+        device_found=$(echo "$result" | sed -n '1p')
+        device_index=$(echo "$result" | sed -n '2p')
+    fi
+    #target_dialog
+    echo ""
+    echo "${bold}Please, choose binary's execution target:${normal}"
+    echo ""
+    target_name=$($CLI_PATH/common/target_dialog)
 else
-    #find flags and values
-    for (( i=0; i<${#flags[@]}; i++ ))
-    do
-        if [[ " ${flags[$i]} " =~ " -p " ]] || [[ " ${flags[$i]} " =~ " --project " ]]; then # flags[i] is -p or --project
-            project_found="1"
-            project_idx=$(($i+1))
-            project_name=${flags[$project_idx]}
-        fi
-        if [[ " ${flags[$i]} " =~ " -s " ]] || [[ " ${flags[$i]} " =~ " --serial " ]]; then 
-            serial_found="1"
-            serial_idx=$(($i+1))
-            serial_number=${flags[$serial_idx]}
-        fi
-    done
+    #project_dialog_check
+    result="$("$CLI_PATH/common/project_dialog_check" "${flags[@]}")"
+    project_found=$(echo "$result" | sed -n '1p')
+    project_name=$(echo "$result" | sed -n '2p')
     #forbidden combinations
-    if [[ $project_found = "0" ]] || ([ "$project_found" = "1" ] && [ "$project_name" = "" ]) || ([ $project_found = "0" ] && [ $serial_found = "1" ]) || ([ "$serial_found" = "1" ] && [ "$serial_number" = "" ]); then
-        /opt/cli/sgutil build vitis -h
+    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$username/my_projects/$WORKFLOW/$project_name" ]); then 
+        $CLI_PATH/sgutil build vitis -h
         exit
+    fi
+    #device_dialog_check
+    result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
+    device_found=$(echo "$result" | sed -n '1p')
+    device_index=$(echo "$result" | sed -n '2p')
+    #forbidden combinations
+    if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
+        $CLI_PATH/sgutil build vitis -h
+        exit
+    fi
+    #target_dialog_check
+    result="$("$CLI_PATH/common/target_dialog_check" "${flags[@]}")"
+    target_found=$(echo "$result" | sed -n '1p')
+    target_name=$(echo "$result" | sed -n '2p')
+    #forbidden combinations
+    if [[ "$target_found" = "1" && ! ( "$target_name" = "sw_emu" || "$target_name" = "hw_emu" || "$target_name" = "hw" ) ]]; then
+        $CLI_PATH/sgutil build vitis -h
+        exit
+    fi
+    #header (2/2)
+    echo ""
+    echo "${bold}sgutil build vitis${normal}"
+    echo ""
+    #project_dialog (forgotten mandatory 1)
+    if [[ $project_found = "0" ]]; then
+        #echo ""
+        echo "${bold}Please, choose your $WORKFLOW project:${normal}"
+        echo ""
+        result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+        project_found=$(echo "$result" | sed -n '1p')
+        project_name=$(echo "$result" | sed -n '2p')
+        echo ""
+    fi
+    #device_dialog (forgotten mandatory 2)
+    if [[ $multiple_devices = "0" ]]; then
+        device_found="1"
+        device_index="1"
+    elif [[ $device_found = "0" ]]; then
+        echo "${bold}Please, choose your device:${normal}"
+        echo ""
+        result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
+        device_found=$(echo "$result" | sed -n '1p')
+        device_index=$(echo "$result" | sed -n '2p')
+        echo ""
+    fi
+    #target_dialog (forgotten mandatory 3)
+    if [[ $target_found = "0" ]]; then
+        echo "${bold}Please, choose binary's execution target:${normal}"
+        echo ""
+        target_name=$($CLI_PATH/common/target_dialog)
     fi
 fi
 
 #define directories (1)
-DIR="/home/$username/my_projects/vitis/$project_name"
+DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
 
 #check for project directory
 if ! [ -d "$DIR" ]; then
     echo ""
-    echo "You must create your project first! Please, use sgutil new vitis"
+    echo "$DIR is not a valid --project name!"
     echo ""
     exit
 fi
@@ -148,26 +206,8 @@ fi
 config_id="${config%%.*}"
 touch $config_id.active
 
-echo "${bold}Please, choose binary's compilation target:${normal}"
-echo ""
-PS3=""
-select target in sw_emu hw_emu hw
-do
-    case $target in
-        sw_emu) break;;
-        hw_emu) break;;
-        hw) break;;
-    esac
-done
-
-#sgutil get serial only when we have one FPGA and not serial_found
-if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $serial_found = "0" ]]; then
-    #serial_number=$(sgutil get serial | cut -d "=" -f2)
-    serial_number=$(/opt/cli/get/serial | awk -F': ' '{print $2}' | grep -v '^$')
-fi
-
-# serial to platform
-cd /opt/xilinx/platforms
+#serial to platform
+cd $XILINX_PATH/platforms
 if [ "$hostname" = "alveo-build-01" ]; then
     platforms=( "xilinx_"* )
     echo ""
@@ -182,14 +222,12 @@ if [ "$hostname" = "alveo-build-01" ]; then
         fi
     done
 else
-    n=$(ls -l | grep -c ^d)
-    if [ $((n + 0)) -eq  1 ]; then
-        platform=$(echo *)
-    fi
+    #get platform
+    platform=$($CLI_PATH/get/get_fpga_device_param $device_index platform)
 fi
 
 #define directories (2)
-APP_BUILD_DIR="/home/$username/my_projects/vitis/$project_name/build_dir.$target.$platform"
+APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$target_name.$platform"
 
 echo ""
 echo "${bold}Changing directory:${normal}"
@@ -204,35 +242,35 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     export CPATH="/usr/include/x86_64-linux-gnu" #https://support.xilinx.com/s/article/Fatal-error-sys-cdefs-h-No-such-file-or-directory?language=en_US
     echo "${bold}PL kernel compilation and linking: generating .xo and .xclbin:${normal}"
     echo ""
-    echo "make all TARGET=$target PLATFORM=$platform" 
+    echo "make all TARGET=$target_name PLATFORM=$platform" 
     echo ""
-    eval "make all TARGET=$target PLATFORM=$platform"
+    eval "make all TARGET=$target_name PLATFORM=$platform"
     echo ""        
 
     #send email at the end
-    if [ "$target" = "hw" ]; then
+    if [ "$target_name" = "hw" ]; then
         user_email=$username@ethz.ch
-        echo "Subject: Good news! sgutil build vitis ($project_name / TARGET=$target / PLATFORM=$platform) is done!" | sendmail $user_email
+        echo "Subject: Good news! sgutil build vitis ($project_name / TARGET=$target_name / PLATFORM=$platform) is done!" | sendmail $user_email
     fi
     
 else
     echo "${bold}PL kernel compilation and linking: generating .xo and .xclbin:${normal}"
     echo ""
-    echo "make all TARGET=$target PLATFORM=$platform" 
+    echo "make all TARGET=$target_name PLATFORM=$platform" 
     echo ""
     echo "$APP_BUILD_DIR already exists!"
     echo ""
 
     #get xrt version
-    branch=$(/opt/xilinx/xrt/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
+    branch=$($XRT_PATH/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
     branch=${branch:7:6}
     
     #application compilation
     echo "${bold}Application compilation:${normal}"
     echo ""
-    echo "g++ -o $project_name /home/$username/my_projects/vitis/common/includes/xcl2/xcl2.cpp src/host.cpp -I/opt/xilinx/xrt/include -I/tools/Xilinx//Vivado/$branch/include -Wall -O0 -g -std=c++1y -I/home/$username/my_projects/vitis/common/includes/xcl2 -fmessage-length=0 -L/opt/xilinx/xrt/lib -pthread -lOpenCL -lrt -lstdc++"
+    echo "g++ -o $project_name /home/$username/my_projects/$WORKFLOW/common/includes/xcl2/xcl2.cpp src/host.cpp -I$XRT_PATH/include -I/tools/Xilinx//Vivado/$branch/include -Wall -O0 -g -std=c++1y -I/home/$username/my_projects/$WORKFLOW/common/includes/xcl2 -fmessage-length=0 -L$XRT_PATH/lib -pthread -lOpenCL -lrt -lstdc++"
     echo ""
 
-    g++ -o $project_name /home/$username/my_projects/vitis/common/includes/xcl2/xcl2.cpp src/host.cpp -I/opt/xilinx/xrt/include -I/tools/Xilinx//Vivado/$branch/include -Wall -O0 -g -std=c++1y -I/home/$username/my_projects/vitis/common/includes/xcl2 -fmessage-length=0 -L/opt/xilinx/xrt/lib -pthread -lOpenCL -lrt -lstdc++
+    g++ -o $project_name /home/$username/my_projects/$WORKFLOW/common/includes/xcl2/xcl2.cpp src/host.cpp -I$XRT_PATH/include -I/tools/Xilinx//Vivado/$branch/include -Wall -O0 -g -std=c++1y -I/home/$username/my_projects/$WORKFLOW/common/includes/xcl2 -fmessage-length=0 -L$XRT_PATH/lib -pthread -lOpenCL -lrt -lstdc++
 
 fi
