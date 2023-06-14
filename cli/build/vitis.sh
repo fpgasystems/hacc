@@ -81,10 +81,6 @@ else
     result="$("$CLI_PATH/common/project_dialog_check" "${flags[@]}")"
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
-    multiple_projects=$(echo "$result" | sed -n '3p')
-    if [[ $multiple_projects = "0" ]]; then
-        echo $project_name
-    fi
     #forbidden combinations
     if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$username/my_projects/$WORKFLOW/$project_name" ]); then 
         $CLI_PATH/sgutil build vitis -h
