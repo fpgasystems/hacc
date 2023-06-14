@@ -9,7 +9,7 @@ declare -g device_name=""
 #read flags
 for (( i=0; i<${#flags[@]}; i++ ))
 do
-    if [[ " ${flags[$i]} " =~ " -d " ]] || [[ " ${flags[$i]} " =~ " --device " ]]; then # flags[i] is -d or --device
+    if [[ " ${flags[$i]} " =~ " -n " ]] || [[ " ${flags[$i]} " =~ " --name " ]]; then # flags[i] is -d or --device
         device_found="1"
         device_idx=$(($i+1))
         device_name=${flags[$device_idx]}
