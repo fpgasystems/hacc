@@ -107,10 +107,9 @@ else
     #header (2/2)
     echo ""
     echo "${bold}sgutil build vitis${normal}"
-    echo ""
     #project_dialog (forgotten mandatory 1)
     if [[ $project_found = "0" ]]; then
-        #echo ""
+        echo ""
         echo "${bold}Please, choose your $WORKFLOW project:${normal}"
         echo ""
         result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
@@ -120,10 +119,10 @@ else
         if [[ $multiple_projects = "0" ]]; then
             echo $project_name
         fi
-        #echo ""
     fi
     #platform_dialog (forgotten mandatory 2)
     if [[ $platform_found = "0" ]]; then
+        echo ""
         echo "${bold}Please, choose your platform:${normal}"
         echo ""
         result=$($CLI_PATH/common/platform_dialog $XILINX_PATH)
@@ -136,6 +135,7 @@ else
     fi
     #target_dialog (forgotten mandatory 3)
     if [[ $target_found = "0" ]]; then
+        echo ""
         echo "${bold}Please, choose binary's execution target:${normal}"
         echo ""
         target_name=$($CLI_PATH/common/target_dialog)
