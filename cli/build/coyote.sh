@@ -100,10 +100,10 @@ else
     #header (2/2)
     echo ""
     echo "${bold}sgutil build $WORKFLOW${normal}"
-    echo ""
+    #echo ""
     #project_dialog (forgotten mandatory 1)
     if [[ $project_found = "0" ]]; then
-        #echo ""
+        echo ""
         echo "${bold}Please, choose your $WORKFLOW project:${normal}"
         echo ""
         result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
@@ -243,7 +243,7 @@ done
 #define directories (2)
 SHELL_BUILD_DIR="$DIR/hw/build"
 DRIVER_DIR="$DIR/driver"
-APP_BUILD_DIR="$DIR/build_dir.$FDEV_NAME"
+APP_BUILD_DIR="$DIR/build_dir.$device_name" #FDEV_NAME
 
 echo "${bold}Changing directory:${normal}"
 echo ""
@@ -313,7 +313,7 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
 else
     echo "${bold}Coyote shell bitstream generation:${normal}"
     echo ""
-    echo "$project_name/build_dir.$FDEV_NAME shell already exists!"
+    echo "$project_name/build_dir.$device_name shell already exists!"
 
     #driver compilation
     echo ""
