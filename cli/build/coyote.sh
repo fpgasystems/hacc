@@ -100,7 +100,6 @@ else
     #header (2/2)
     echo ""
     echo "${bold}sgutil build $WORKFLOW${normal}"
-    #echo ""
     #project_dialog (forgotten mandatory 1)
     if [[ $project_found = "0" ]]; then
         echo ""
@@ -113,19 +112,18 @@ else
         if [[ $multiple_projects = "0" ]]; then
             echo $project_name
         fi
-        #echo ""
     fi
     #device_name_dialog (forgotten mandatory 2)
-    if [[ $device_found = "0" ]]; then
+    if [[ $multiple_devices = "0" ]]; then
+        device_found="1"
+        device_name=$($CLI_PATH/get/get_fpga_device_param 1 device_name)
+    elif [[ $device_found = "0" ]]; then
         echo ""
         echo "${bold}Please, choose your device:${normal}"
         echo ""
         result=$($CLI_PATH/common/device_name_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
         device_found=$(echo "$result" | sed -n '1p')
         device_name=$(echo "$result" | sed -n '2p')
-        if [[ $multiple_devices = "0" ]]; then
-            echo $device_name
-        fi
     fi
 fi
 
