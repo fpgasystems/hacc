@@ -18,7 +18,7 @@
 <!-- Extra line -->
 
 * [bdf](./sgutil-get-bdf.md#sgutil-get-bdf)
-* [device](./sgutil-get-device.md#sgutil-get-device)
+* [name](./sgutil-get-name.md#sgutil-get-name)
 * [network](./sgutil-get-network.md#sgutil-get-network)
 * [serial](./sgutil-get-serial.md#sgutil-get-serial)
 
