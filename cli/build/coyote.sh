@@ -3,6 +3,13 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
+CLI_PATH="/opt/cli"
+HACC_PATH="/opt/hacc"
+DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+DEVICE_NAME_COLUMN=6
+WORKFLOW="coyote"
+
 #get username
 username=$USER
 
@@ -10,14 +17,20 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
+#check on DEVICES_LIST
+source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
+
+#get number of fpga and acap devices present
+MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
+
+#check on multiple devices
+multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
+
 #inputs
 read -a flags <<< "$@"
 
-echo ""
-echo "${bold}sgutil build coyote${normal}"
-
 #check for vivado_developers
-member=$(/opt/cli/common/is_member $username vivado_developers)
+member=$($CLI_PATH/common/is_member $username vivado_developers)
 if [ "$member" = "false" ]; then
     echo ""
     echo "Sorry, ${bold}$username!${normal} You are not granted to use this command."
@@ -26,73 +39,103 @@ if [ "$member" = "false" ]; then
 fi
 
 #check if workflow exists
-if ! [ -d "/home/$username/my_projects/coyote/" ]; then
+if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
     echo ""
-    echo "You must create your project first! Please, use sgutil new coyote"
+    echo "You must create your project first! Please, use sgutil new $WORKFLOW"
     echo ""
     exit
 fi
 
-#check on flags (before: flags cannot be empty)
-name_found="0"
-project_found="0"
+#check on flags
+project_found=""
+project_name=""
+device_found=""
+device_name=""
 if [ "$flags" = "" ]; then
-    #no flags: start dialog
-    cd /home/$username/my_projects/coyote/
-    projects=( *"/" )
-    #delete validate folders from projects
-    j=0
-    for i in "${projects[@]}"
-    do
-        if [[ $i =~ validate_* ]]; then
-            echo "" >&/dev/null
-        else
-            aux[j]=$i
-            j=$(($j + 1))
-        fi
-    done
+    #header (1/2)
     echo ""
-    echo "${bold}Please, choose your project:${normal}"
+    echo "${bold}sgutil build $WORKFLOW${normal}"
+    #project_dialog
     echo ""
-    PS3=""
-    select project_name in "${aux[@]}"; do #projects
-        if [[ -z $project_name ]]; then
-            echo "" >&/dev/null
-        else
-            project_found="1"
-            project_name=${project_name::-1} #we remove the last character, i.e. "/""
-            break
-        fi
-    done
+    echo "${bold}Please, choose your $WORKFLOW project:${normal}"
+    echo ""
+    result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+    project_found=$(echo "$result" | sed -n '1p')
+    project_name=$(echo "$result" | sed -n '2p')
+    multiple_projects=$(echo "$result" | sed -n '3p')
+    if [[ $multiple_projects = "0" ]]; then
+        echo $project_name
+    fi
+    #device_name_dialog
+    echo ""
+    echo "${bold}Please, choose your device:${normal}"
+    echo ""
+    result=$($CLI_PATH/common/device_name_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
+    device_found=$(echo "$result" | sed -n '1p')
+    device_name=$(echo "$result" | sed -n '2p')
+    if [[ $multiple_devices = "0" ]]; then
+        echo $device_name
+    fi
 else
-    #find flags and values
-    for (( i=0; i<${#flags[@]}; i++ ))
-    do
-        if [[ " ${flags[$i]} " =~ " -n " ]] || [[ " ${flags[$i]} " =~ " --name " ]]; then 
-            name_found="1"
-            name_idx=$(($i+1))
-            device_name=${flags[$name_idx]}
-        fi
-        if [[ " ${flags[$i]} " =~ " -p " ]] || [[ " ${flags[$i]} " =~ " --project " ]]; then
-            project_found="1"
-            project_idx=$(($i+1))
-            project_name=${flags[$project_idx]}
-        fi
-    done
+    #project_dialog_check
+    result="$("$CLI_PATH/common/project_dialog_check" "${flags[@]}")"
+    project_found=$(echo "$result" | sed -n '1p')
+    project_name=$(echo "$result" | sed -n '2p')
     #forbidden combinations
-    if [[ $project_found = "0" ]] || ([ "$project_found" = "1" ] && [ "$project_name" = "" ]) || ([ $project_found = "0" ] && [ $name_found = "1" ]) || ([ "$name_found" = "1" ] && [ "$device_name" = "" ]); then
-        /opt/cli/sgutil build coyote -h
+    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$username/my_projects/$WORKFLOW/$project_name" ]); then 
+        $CLI_PATH/sgutil build $WORKFLOW -h
         exit
+    fi
+    #device_name_dialog_check
+    result="$("$CLI_PATH/common/device_name_dialog_check" "${flags[@]}")"
+    device_found=$(echo "$result" | sed -n '1p')
+    device_name=$(echo "$result" | sed -n '2p')
+    #get device_match
+    device_match=$(awk -v col="$DEVICE_NAME_COLUMN" -v device="$device_name" '$col == device { found=1; exit } END { if (found) print 1; else print 0 }' "$DEVICES_LIST")
+    #forbidden combinations
+    if [ "$device_found" = "1" ] && ([ "$device_name" = "" ] || [ "$device_match" = "0" ]); then 
+        $CLI_PATH/sgutil build $WORKFLOW -h
+        exit
+    fi
+    #header (2/2)
+    echo ""
+    echo "${bold}sgutil build $WORKFLOW${normal}"
+    echo ""
+    #project_dialog (forgotten mandatory 1)
+    if [[ $project_found = "0" ]]; then
+        #echo ""
+        echo "${bold}Please, choose your $WORKFLOW project:${normal}"
+        echo ""
+        result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+        project_found=$(echo "$result" | sed -n '1p')
+        project_name=$(echo "$result" | sed -n '2p')
+        multiple_projects=$(echo "$result" | sed -n '3p')
+        if [[ $multiple_projects = "0" ]]; then
+            echo $project_name
+        fi
+        #echo ""
+    fi
+    #device_name_dialog (forgotten mandatory 2)
+    if [[ $device_found = "0" ]]; then
+        echo ""
+        echo "${bold}Please, choose your device:${normal}"
+        echo ""
+        result=$($CLI_PATH/common/device_name_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
+        device_found=$(echo "$result" | sed -n '1p')
+        device_name=$(echo "$result" | sed -n '2p')
+        if [[ $multiple_devices = "0" ]]; then
+            echo $device_name
+        fi
     fi
 fi
 
 #define directories (1)
-DIR="/home/$username/my_projects/coyote/$project_name"
+DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
 
 # check if project exists
 if ! [ -d "$DIR" ]; then
     echo ""
-    echo "You must create your project first! Please, use sgutil new coyote"
+    echo "You must create your project first! Please, use sgutil new $WORKFLOW"
     echo ""
     exit
 fi
@@ -112,12 +155,6 @@ if [ "$hostname" = "alveo-build-01" ]; then
     done
     #enable release
     eval "source xrt_select $release"
-fi
-
-#sgutil get device if there is only one FPGA and not name_found
-if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
-    #device_name=$(sgutil get device | cut -d "=" -f2)
-    device_name=$(/opt/cli/get/device | awk -F': ' '{print $2}' | grep -v '^$')
 fi
 
 # device_name to coyote string 
