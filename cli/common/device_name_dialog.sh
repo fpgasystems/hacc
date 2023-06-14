@@ -17,17 +17,16 @@ elif [[ "$multiple_devices" == "1" ]]; then
     #servers with four FPGAs (i.e., hacc-box-01)
     #declare an empty array to store the device strings
     devices=()
-    #iterate over the indices 0 to MAX_DEVICES-1 using a for loop
+    # Iterate over the indices 0 to MAX_DEVICES-1 using a for loop
     for ((i=1; i<=MAX_DEVICES; i++)); do
-        #retrieve the parameters for each device using the current index
         device_name=$($CLI_PATH/get/get_fpga_device_param $i device_name)
-        #concatenate the parameter values into a single string and add it to the array
         devices+=("$device_name")
     done
+
+    # Remove duplicates
+    devices=($(echo "${devices[@]}" | tr ' ' '\n' | sort -u))
+
     #multiple choice
-    #echo ""
-    #echo "${bold}Please, choose your device:${normal}"
-    #echo ""
     PS3=""
     select device_name in "${devices[@]}"; do
         if [[ -z $device_name ]]; then
