@@ -21,7 +21,7 @@
 
 <code>-n, --name <string></code>
 <p>
-  &nbsp; &nbsp; FPGA's device name. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-device.md">sgutil get device</a>.
+  &nbsp; &nbsp; FPGA's device name. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-name.md">sgutil get name</a>.
 </p>
 
 <code>-p, --project <string></code>

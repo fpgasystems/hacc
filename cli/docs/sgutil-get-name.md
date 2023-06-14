@@ -4,9 +4,9 @@
 <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get.md#sgutil-get">Back to sgutil get</a>
 </p>
 
-## sgutil get device
+## sgutil get name
 
-<code>sgutil get device [flags] [--help]</code>
+<code>sgutil get name [flags] [--help]</code>
 <p>
   &nbsp; &nbsp; Retreives FPGA/ACAP device names.
 </p>
@@ -24,5 +24,5 @@
 
 ### Examples
 ```
-$ sgutil get device -d 1
+$ sgutil get name -d 1
 ```

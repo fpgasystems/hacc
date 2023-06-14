@@ -130,7 +130,7 @@ build_coyote_help() {
     #echo "                         hyperloglog, perf_dram, perf_hbm,"
     #echo "                         perf_rdma_host, perf_rdma_card, perf_tcp,"
     #echo "                         rdma_regex, service_aes, service_reconfiguration."
-    echo "   -n, --name      - FPGA's device name. See sgutil get device."
+    echo "   -n, --name      - FPGA's device name. See sgutil get name."
     echo "   -p, --project   - Specifies your Coyote project name."
     echo ""
     echo "   -h, --help      - Help to build Coyote."
