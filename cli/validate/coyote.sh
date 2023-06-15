@@ -4,41 +4,103 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
+CLI_PATH="/opt/cli"
+HACC_PATH="/opt/hacc"
+DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+WORKFLOW="coyote"
 BIT_NAME="cyt_top.bit"
 DRIVER_NAME="coyote_drv.ko"
 
 #get username
 username=$USER
 
-# inputs
+#check on DEVICES_LIST
+source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
+
+#get number of fpga and acap devices present
+MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
+
+#check on multiple devices
+multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
+
+#inputs
 read -a flags <<< "$@"
 
-# create my_projects directory
-DIR="/home/$username/my_projects"
+##create my_projects directory
+#DIR="/home/$username/my_projects"
+#if ! [ -d "$DIR" ]; then
+#    mkdir ${DIR}
+#fi
+
+#create coyote directory (we do not know if sgutil new coyote has been run)
+DIR="/home/$username/my_projects/$WORKFLOW"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
 
-# create coyote directory
-DIR="/home/$username/my_projects/coyote"
-if ! [ -d "$DIR" ]; then
-    mkdir ${DIR}
-fi
+#header (1/1)
+echo ""
+echo "${bold}sgutil validate $WORKFLOW${normal}"
 
-name_found="0"
-for (( i=0; i<${#flags[@]}; i++ ))
-do
-    if [[ " ${flags[$i]} " =~ " -n " ]] || [[ " ${flags[$i]} " =~ " --name " ]]; then 
-        name_found="1"
-        name_idx=$(($i+1))
-        device_name=${flags[$name_idx]}
+#check on flags
+device_found=""
+device_index=""
+if [ "$flags" = "" ]; then
+    #header (1/2)
+    #echo ""
+    #echo "${bold}sgutil program coyote${normal}"
+    #device_dialog
+    if [[ $multiple_devices = "0" ]]; then
+        device_found="1"
+        device_index="1"
+    else
+        echo ""
+        echo "${bold}Please, choose your device:${normal}"
+        echo ""
+        result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
+        device_found=$(echo "$result" | sed -n '1p')
+        device_index=$(echo "$result" | sed -n '2p')
     fi
-done
+else
+    #device_dialog_check
+    result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
+    device_found=$(echo "$result" | sed -n '1p')
+    device_index=$(echo "$result" | sed -n '2p')
+    #forbidden combinations
+    if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
+        $CLI_PATH/sgutil program coyote -h
+        exit
+    fi
+    #header (2/2)
+    #echo ""
+    #echo "${bold}sgutil program coyote${normal}"
+    #echo ""
+    #device_dialog (forgotten mandatory 2)
+    if [[ $multiple_devices = "0" ]]; then
+        device_found="1"
+        device_index="1"
+    elif [[ $device_found = "0" ]]; then
+        echo "${bold}Please, choose your device:${normal}"
+        echo ""
+        result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
+        device_found=$(echo "$result" | sed -n '1p')
+        device_index=$(echo "$result" | sed -n '2p')
+        echo ""
+    fi
+fi
+
+#name_found="0"
+#for (( i=0; i<${#flags[@]}; i++ ))
+#do
+#    if [[ " ${flags[$i]} " =~ " -n " ]] || [[ " ${flags[$i]} " =~ " --name " ]]; then 
+#        name_found="1"
+#        name_idx=$(($i+1))
+#        device_name=${flags[$name_idx]}
+#    fi
+#done
 
 echo ""
-echo "${bold}sgutil build coyote${normal}"
-echo ""
-echo "Please, choose Coyote's configuration:" # this refers to a software (sw/examples) configuration
+echo "${bold}Please, choose your configuration:${normal}" # this refers to a software (sw/examples) configuration
 echo ""
 PS3=""
 select config in perf_host perf_fpga perf_mem gbm_dtrees hyperloglog #perf_host perf_fpga gbm_dtrees hyperloglog perf_dram perf_hbm perf_mem perf_rdma perf_rdma_host perf_rdma_card perf_tcp rdma_regex service_aes service_reconfiguration
@@ -67,22 +129,36 @@ done
 # service_reconfiguration) break;;    #13 #14
 
 #sgutil get device if there is only one FPGA and not name_found
-if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
-    #device_name=$(sgutil get device | cut -d "=" -f2)
-    device_name=$(/opt/cli/get/device | awk -F': ' '{print $2}' | grep -v '^$')
+#if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
+#    #device_name=$(sgutil get device | cut -d "=" -f2)
+#    device_name=$($CLI_PATH/get/device | awk -F': ' '{print $2}' | grep -v '^$')
+#fi
+device_name=$($CLI_PATH/get/get_fpga_device_param $device_index device_name)
+
+#device_name to coyote string
+#FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
+#if [ "$FDEV_NAME" = "u50d" ]; then
+#    FDEV_NAME="u50"
+#fi
+
+#device_name to FDEV_NAME
+if [ "$device_name" = "xcu250_0" ]; then
+    FDEV_NAME=u250
+elif [ "$device_name" = "xcu280_u55c_0" ]; then
+    if [[ $multiple_devices = "0" ]]; then
+        FDEV_NAME=u280
+    else
+        FDEV_NAME=u55c
+    fi
+elif [ "$device_name" = "xcu50_u55n_0" ]; then
+    FDEV_NAME=u50    
 fi
 
-# device_name to coyote string
-FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
-if [ "$FDEV_NAME" = "u50d" ]; then
-    FDEV_NAME="u50"
-fi
-
-# set project name
+#set project name
 project_name="validate_$config.$device_name"
 
 #define directories (1)
-DIR="/home/$username/my_projects/coyote/$project_name"
+DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
 SHELL_BUILD_DIR="$DIR/hw/build"
 DRIVER_DIR="$DIR/driver"
 APP_BUILD_DIR="$DIR/sw/examples/$config/build"
@@ -180,13 +256,15 @@ if ! [ -d "$DIR" ]; then
     esac
     mkdir $DIR/configs
     mv $DIR/config_shell.hpp $DIR/configs/config_shell.hpp
-else
-    echo ""
-    echo "$project_name already exists!"
+#else
+#    echo ""
+#    echo "$project_name already exists!"
+#    echo ""
+#    exit
 fi
 
 #check on build_dir.FDEV_NAME
-if ! [ -d "/home/$username/my_projects/coyote/$project_name/build_dir.$FDEV_NAME" ]; then
+if ! [ -d "/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME" ]; then
     #bitstream compilation
     echo ""
     echo "${bold}Coyote shell compilation:${normal}"
@@ -229,7 +307,7 @@ if ! [ -d "/home/$username/my_projects/coyote/$project_name/build_dir.$FDEV_NAME
     #copy driver
     cp $DRIVER_DIR/coyote_drv.ko $APP_BUILD_DIR
     #rename folder
-    mv $APP_BUILD_DIR /home/$username/my_projects/coyote/$project_name/build_dir.$FDEV_NAME/
+    mv $APP_BUILD_DIR /home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/
     #remove all other build temporal folders
     rm -rf $SHELL_BUILD_DIR
     rm $DRIVER_DIR/coyote_drv*
@@ -247,38 +325,48 @@ else
 fi
 
 #define directories (2)
-APP_BUILD_DIR=/home/$username/my_projects/coyote/$project_name/build_dir.$FDEV_NAME/
+APP_BUILD_DIR=/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/
+
+#change directory
+cd $APP_BUILD_DIR
 
 #program coyote bitstream
-/opt/cli/program/vivado -b $APP_BUILD_DIR$BIT_NAME
+$CLI_PATH/program/vivado --device $device_index -b $BIT_NAME
 
 #show message for virtualized environment (after program/vivado shows go to baremetal/warm boot message)
-virtualized=$(/opt/cli/common/is_virtualized)
+virtualized=$($CLI_PATH/common/is_virtualized)
 if [[ $(lspci | grep Xilinx | wc -l) = 2 ]] && [ "$virtualized" = "true" ]; then
-    echo "Once you login again on the server, please type ${bold}sgutil validate coyote${normal} again."
+    echo "Once you login again on the server, please type ${bold}sgutil validate $WORKFLOW${normal} again."
     echo ""
 fi
 
+#get BDF (i.e., Bus:Device.Function) 
+upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
+bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
+
 #this means that the user made a warm boot (virtualized) or the PCI hot plug script run (dedicated servers)
-if [[ $(lspci | grep Xilinx | wc -l) = 1 ]]; then 
+if [[ $(lspci | grep Xilinx | grep $bdf | wc -l) = 1 ]]; then 
 
     #program coyote driver
-    /opt/cli/program/vivado -d $APP_BUILD_DIR$DRIVER_NAME
+    $CLI_PATH/sgutil program vivado --device $device_index --driver $DRIVER_NAME
 
-    #get N_REGIONS
-    line=$(grep -n "N_REGIONS" $DIR/configs/config_shell.hpp)
-    #find equal (=)
-    idx=$(sed 's/ /\n/g' <<< "$line" | sed -n "/=/=")
-    #get index
-    value_idx=$(($idx+1))
-    #get data
-    N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
+    ##get N_REGIONS
+    #line=$(grep -n "N_REGIONS" $DIR/configs/config_shell.hpp)
+    ##find equal (=)
+    #idx=$(sed 's/ /\n/g' <<< "$line" | sed -n "/=/=")
+    ##get index
+    #value_idx=$(($idx+1))
+    ##get data
+    #N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
 
-    #fpga_chmod for N_REGIONS times
-    for (( i = 0; i < $N_REGIONS; i++ ))
-    do 
-        sudo /opt/cli/program/fpga_chmod $i
-    done
+    ##fpga_chmod for N_REGIONS times
+    #for (( i = 0; i < $N_REGIONS; i++ ))
+    #do 
+    #    sudo $CLI_PATH/program/fpga_chmod $i
+    #done
+
+    #get permissions on N_REGIONS
+    $CLI_PATH/program/get_N_REGIONS $DIR
 
     #run 
     cd $APP_BUILD_DIR
