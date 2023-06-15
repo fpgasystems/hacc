@@ -26,12 +26,6 @@ multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 #inputs
 read -a flags <<< "$@"
 
-##create my_projects directory
-#DIR="/home/$username/my_projects"
-#if ! [ -d "$DIR" ]; then
-#    mkdir ${DIR}
-#fi
-
 #create coyote directory (we do not know if sgutil new coyote has been run)
 DIR="/home/$username/my_projects/$WORKFLOW"
 if ! [ -d "$DIR" ]; then
@@ -89,16 +83,6 @@ else
     fi
 fi
 
-#name_found="0"
-#for (( i=0; i<${#flags[@]}; i++ ))
-#do
-#    if [[ " ${flags[$i]} " =~ " -n " ]] || [[ " ${flags[$i]} " =~ " --name " ]]; then 
-#        name_found="1"
-#        name_idx=$(($i+1))
-#        device_name=${flags[$name_idx]}
-#    fi
-#done
-
 echo ""
 echo "${bold}Please, choose your configuration:${normal}" # this refers to a software (sw/examples) configuration
 echo ""
@@ -128,18 +112,8 @@ done
 # service_aes) break;;                #12 #13
 # service_reconfiguration) break;;    #13 #14
 
-#sgutil get device if there is only one FPGA and not name_found
-#if [[ $(lspci | grep Xilinx | wc -l) = 1 ]] & [[ $name_found = "0" ]]; then
-#    #device_name=$(sgutil get device | cut -d "=" -f2)
-#    device_name=$($CLI_PATH/get/device | awk -F': ' '{print $2}' | grep -v '^$')
-#fi
+#get device_name
 device_name=$($CLI_PATH/get/get_fpga_device_param $device_index device_name)
-
-#device_name to coyote string
-#FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
-#if [ "$FDEV_NAME" = "u50d" ]; then
-#    FDEV_NAME="u50"
-#fi
 
 #device_name to FDEV_NAME
 if [ "$device_name" = "xcu250_0" ]; then
@@ -198,8 +172,6 @@ if ! [ -d "$DIR" ]; then
     git clone https://github.com/fpgasystems/Coyote.git
     mv Coyote/* .
     rm -rf Coyote
-    #build="1"
-    #break
 
     # create configuration file
     touch config_shell.hpp
@@ -256,11 +228,6 @@ if ! [ -d "$DIR" ]; then
     esac
     mkdir $DIR/configs
     mv $DIR/config_shell.hpp $DIR/configs/config_shell.hpp
-#else
-#    echo ""
-#    echo "$project_name already exists!"
-#    echo ""
-#    exit
 fi
 
 #check on build_dir.FDEV_NAME
@@ -349,21 +316,6 @@ if [[ $(lspci | grep Xilinx | grep $bdf | wc -l) = 1 ]]; then
 
     #program coyote driver
     $CLI_PATH/sgutil program vivado --device $device_index --driver $DRIVER_NAME
-
-    ##get N_REGIONS
-    #line=$(grep -n "N_REGIONS" $DIR/configs/config_shell.hpp)
-    ##find equal (=)
-    #idx=$(sed 's/ /\n/g' <<< "$line" | sed -n "/=/=")
-    ##get index
-    #value_idx=$(($idx+1))
-    ##get data
-    #N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
-
-    ##fpga_chmod for N_REGIONS times
-    #for (( i = 0; i < $N_REGIONS; i++ ))
-    #do 
-    #    sudo $CLI_PATH/program/fpga_chmod $i
-    #done
 
     #get permissions on N_REGIONS
     $CLI_PATH/program/get_N_REGIONS $DIR
