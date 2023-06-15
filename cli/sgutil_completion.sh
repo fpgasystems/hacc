@@ -62,7 +62,7 @@ _sgutil_completions()
                 bus)
                     COMPREPLY=($(compgen -W "--device --help" -- ${cur})) # -w -h
                     ;;
-                device)
+                name)
                     COMPREPLY=($(compgen -W "--device --help" -- ${cur})) # -w -h
                     ;;
                 #ip) 

@@ -226,7 +226,7 @@ get_help() {
     echo "   ifconfig        - Retreives host networking information."
     echo ""
     echo "   bdf             - Retreives FPGA/ACAP Bus Device Function."
-    echo "   device          - Retreives FPGA/ACAP device names."
+    echo "   name            - Retreives FPGA/ACAP device names."
     echo "   network         - Retreives FPGA/ACAP networking information."
     echo "   serial          - Retreives FPGA/ACAP serial numbers."
     echo ""
@@ -265,9 +265,9 @@ get_bus_help() {
     exit 1
 }
 
-get_device_help() {
+get_name_help() {
     echo ""
-    echo "${bold}sgutil get device [flags] [--help]${normal}"
+    echo "${bold}sgutil get name [flags] [--help]${normal}"
     echo ""
     echo "Retreives FPGA/ACAP device names."
     echo ""
@@ -836,7 +836,7 @@ case "$command" in
         valid_flags="-h --help -d --device"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
-      device)
+      name)
         #xilinx_build_check
         valid_flags="-h --help -d --device"
         command_run $command_arguments_flags"@"$valid_flags
