@@ -228,6 +228,7 @@ get_help() {
     echo "   bdf             - Retreives FPGA/ACAP Bus Device Function."
     echo "   name            - Retreives FPGA/ACAP device names."
     echo "   network         - Retreives FPGA/ACAP networking information."
+    echo "   platform        - Retreives FPGA/ACAP platform name."
     echo "   serial          - Retreives FPGA/ACAP serial numbers."
     echo ""
     echo "   bus             - Retreives GPU PCI Bus ID."
@@ -298,6 +299,20 @@ get_network_help() {
     echo "${bold}sgutil get network [flags] [--help]${normal}"
     echo ""
     echo "Retreives FPGA/ACAP networking information."
+    echo ""
+    echo "FLAGS:"
+    echo "   -d, --device    - FPGA/ACAP Device Index (according to sgutil examine)."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
+get_platform_help() {
+    echo ""
+    echo "${bold}sgutil get platform [flags] [--help]${normal}"
+    echo ""
+    echo "Retreives FPGA/ACAP platform names."
     echo ""
     echo "FLAGS:"
     echo "   -d, --device    - FPGA/ACAP Device Index (according to sgutil examine)."
@@ -846,6 +861,10 @@ case "$command" in
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       network)
+        valid_flags="-h --help -d --device"
+        command_run $command_arguments_flags"@"$valid_flags
+        ;;
+      platform)
         valid_flags="-h --help -d --device"
         command_run $command_arguments_flags"@"$valid_flags
         ;;

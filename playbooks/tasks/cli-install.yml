@@ -497,6 +497,12 @@
     dest: /opt/cli/get/ifconfig
     mode: 0755
 
+- name: copy get/platform script
+  copy:
+    src: "../../cli/get/platform.sh"
+    dest: /opt/cli/get/platform
+    mode: 0755
+
 #new ------------------------------------------------------------------------------------    
 
 - name: copy (new) vitis script

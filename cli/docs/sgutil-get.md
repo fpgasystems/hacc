@@ -20,6 +20,7 @@
 * [bdf](./sgutil-get-bdf.md#sgutil-get-bdf)
 * [name](./sgutil-get-name.md#sgutil-get-name)
 * [network](./sgutil-get-network.md#sgutil-get-network)
+* [platform](./sgutil-get-platform.md#sgutil-get-platform)
 * [serial](./sgutil-get-serial.md#sgutil-get-serial)
 
 <!-- Extra line -->
