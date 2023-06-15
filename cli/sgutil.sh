@@ -673,10 +673,10 @@ validate_coyote_help() {
       echo ""
       echo "${bold}sgutil validate coyote [flags] [--help]${normal}"
       echo ""
-      echo "Validates Coyote on the selected FPGA/ACAP."
+      echo "Validates Coyote on the selected FPGA."
       echo ""
       echo "FLAGS:"
-      echo "   -n, --name      - FPGA's device name. See sgutil get device."
+      echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
       echo ""
       echo "   -h, --help      - Help to use Coyote validation."
       echo ""
@@ -1002,7 +1002,7 @@ case "$command" in
     xilinx_build_check
     case "$arguments" in
       coyote)
-        valid_flags="-n --name -h --help"
+        valid_flags="-d --device -h --help"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       hip)

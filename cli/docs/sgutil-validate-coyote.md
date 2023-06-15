@@ -8,13 +8,13 @@
 
 <code>sgutil validate coyote [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Validates Coyote on the selected FPGA/ACAP.
+  &nbsp; &nbsp; Validates Coyote on the selected FPGA.
 </p>
 
 ### Flags
-<code>-n, --name <string></code>
+<code>-d, --device <string></code>
 <p>
-  &nbsp; &nbsp; FPGA's device name. See sgutil get device.
+  &nbsp; &nbsp; FPGA Device Index (see sgutil examine).
 </p>
 
 <code>-h, --help <string></code>
@@ -25,5 +25,5 @@
 ### Examples
 ```
 $ sgutil validate coyote
-$ sgutil validate coyote -n xcu280_u55c_0
+$ sgutil validate coyote -d 1
 ```

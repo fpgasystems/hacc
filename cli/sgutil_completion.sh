@@ -111,7 +111,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "--index --help" -- ${cur})) 
                     ;;
                 coyote) # validate
-                    COMPREPLY=($(compgen -W "--help" -- ${cur}))
+                    COMPREPLY=($(compgen -W "--device --help" -- ${cur}))
                     ;;
                 hip)
                     COMPREPLY=($(compgen -W "--help" -- ${cur}))
