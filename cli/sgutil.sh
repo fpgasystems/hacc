@@ -441,7 +441,6 @@ program_coyote_help() {
     echo "   -d, --device    - FPGA Device Index (see sgutil examine)."
     echo "   -p, --project   - Specifies your Coyote project name." 
     echo "   -r, --remote    - Local or remote deployment."
-    #echo "   -s, --serial    - FPGA's serial number. See sgutil get serial."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -581,7 +580,6 @@ run_mpi_help() {
     echo "Runs your MPI application according to your setup."
     echo ""
     echo "FLAGS"
-    #echo "   This command has no flags."
     echo "   -p, --project   - Specifies your MPI project name."
     echo ""
     echo "   -h, --help      - Help to use this command."
@@ -667,7 +665,6 @@ validate_help() {
     echo "   hip             - Validates HIP on the selected GPU." 
     echo "" 
     echo "   -h, --help      - Help to use this command."
-    #echo "   openmpi         - Validates openmpi (to be removed)."
     echo ""
     exit 1
 }
@@ -708,8 +705,6 @@ validate_iperf_help() {
       echo ""
       echo "FLAGS:"
       echo "   -b, --bandwidth - Bandwidth to send at in bits/sec or packets per second."
-      #echo "   -d, --default   - Runs an iperf test using -P 4 and"
-      #echo "                     equals to run sgutil validate iperf without flags."
       echo "   -p, --parallel  - Number of parallel client threads to run."
       echo "   -t, --time      - Time in seconds to transmit for."
       echo "   -u, --udp       - Use UDP rather than TCP."
@@ -726,8 +721,6 @@ validate_mpi_help() {
       echo "Validates MPI."
       echo ""
       echo "FLAGS:"
-      #echo "   -d, --default   - Runs an mpi test using two --processes per host and"
-      #echo "                     equals to run sgutil validate mpi without flags."
       echo "   -p, --processes - Specify the number of processes to use."
       echo ""
       echo "   -h, --help      - Help to use MPI validation."
@@ -798,7 +791,7 @@ case "$command" in
         build_help
         ;;
       coyote) 
-        valid_flags="-n --name -p --project -h --help" #-c --config 
+        valid_flags="-n --name -p --project -h --help" 
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       hip) 
@@ -806,11 +799,6 @@ case "$command" in
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       mpi) 
-        #if [ "$#" -ne 2 ]; then
-        #  build_mpi_help
-        #  exit 1
-        #fi
-        #/opt/cli/build/mpi
         valid_flags="-p --project -h --help" 
         command_run $command_arguments_flags"@"$valid_flags
         ;;
@@ -923,7 +911,7 @@ case "$command" in
         program_help
         ;;
       coyote)
-        valid_flags="-d --device -p --project -r --remote -h --help" #-s --serial
+        valid_flags="-d --device -p --project -r --remote -h --help"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       reset) 
@@ -939,7 +927,7 @@ case "$command" in
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       vitis)
-        valid_flags="-d --device -p --project -r --remote -h --help" # -b --binary -n --name -t --target -u --user
+        valid_flags="-d --device -p --project -r --remote -h --help"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       *)
@@ -1015,30 +1003,23 @@ case "$command" in
     case "$arguments" in
       coyote)
         valid_flags="-n --name -h --help"
-        #if [ "$#" -ne 2 ]; then
-        #  validate_coyote_help
-        #  exit 1
-        #fi
-        #/opt/cli/validate/coyote
         command_run $command_arguments_flags"@"$valid_flags
-      ;;
+        ;;
       hip)
         valid_flags="-d --device -h --help"
         command_run $command_arguments_flags"@"$valid_flags
-      ;;
+        ;;
       iperf)
         #valid flags
         valid_flags="-b --bandwidth -h --help -p --parallel -t --time -u --udp"
         
         # ensure -u or --udp are going at the end
-        #-u
         if [[ $(echo "$command_arguments_flags" | grep "\-u\b" | wc -l) = 1 ]]; then
           #remove -u
           command_arguments_flags=${command_arguments_flags/-u/""}
           #add it at the end
           command_arguments_flags=$command_arguments_flags" -u"
         fi
-        #--udp
         if [[ $(echo "$command_arguments_flags" | grep "\-\-udp\b" | wc -l) = 1 ]]; then
           #remove --udp
           command_arguments_flags=${command_arguments_flags/--udp/""}
@@ -1046,21 +1027,18 @@ case "$command" in
           command_arguments_flags=$command_arguments_flags" -u" # this is done on purpose (see iperf.sh)
         fi
         command_run $command_arguments_flags"@"$valid_flags
-      ;;
+        ;;
       mpi)
         valid_flags="-h --help -p --processes"
         command_run $command_arguments_flags"@"$valid_flags
-      ;;
+        ;;
       vitis)
         valid_flags="-d --device -h --help"
         command_run $command_arguments_flags"@"$valid_flags
-      ;;
-      #openmpi) 
-      #  eval "/opt/cli/validate/openmpi"
-      #;;
+        ;;
       *)
         validate_help
-      ;;
+        ;;
     esac
     ;;
   *)
