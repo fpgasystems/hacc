@@ -100,7 +100,7 @@ echo "${bold}sgutil program revert${normal}"
 
 #get device and serial name
 serial_number=$($CLI_PATH/get/serial -d $device_index | awk -F': ' '{print $2}' | grep -v '^$')
-device_name=$($CLI_PATH/get/device -d $device_index | awk -F': ' '{print $2}' | grep -v '^$')
+device_name=$($CLI_PATH/get/name -d $device_index | awk -F': ' '{print $2}' | grep -v '^$')
 
 #get release branch
 branch=$($XRT_PATH/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
