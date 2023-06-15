@@ -3,6 +3,11 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
+CLI_PATH="/opt/cli"
+ROCM_PATH="/opt/rocm"
+WORKFLOW="hip"
+
 #get username
 username=$USER
 
@@ -12,78 +17,80 @@ hostname="${url%%.*}"
 
 #verify hip workflow (based on installed software)
 test1=$(dkms status | grep amdgpu)
-if [ -z "$test1" ] || [ ! -d "/opt/rocm/bin/" ]; then
+if [ -z "$test1" ] || [ ! -d "$ROCM_PATH/bin/" ]; then
     echo ""
     echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
     echo ""
     exit
 fi
 
-# inputs
-read -a flags <<< "$@"
-
-echo ""
-echo "${bold}sgutil build hip${normal}"
-
 #check if workflow exists
-if ! [ -d "/home/$username/my_projects/hip/" ]; then
+if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
     echo ""
-    echo "You must create your project first! Please, use sgutil new hip"
+    echo "You must create your project first! Please, use sgutil new $WORKFLOW"
     echo ""
     exit
 fi
 
-#check on flags (before: flags cannot be empty)
-project_found="0"
+#inputs
+read -a flags <<< "$@"
+
+#check on flags
+project_found=""
+project_name=""
 if [ "$flags" = "" ]; then
-    #no flags: start dialog
-    cd /home/$username/my_projects/hip/
-    projects=( *"/" )
+    #header (1/2)
     echo ""
-    echo "${bold}Please, choose your project:${normal}"
+    echo "${bold}sgutil build $WORKFLOW${normal}"
+    #project_dialog
     echo ""
-    PS3=""
-    select project_name in "${projects[@]}"; do
-        if [[ -z $project_name ]]; then
-            echo "" >&/dev/null
-        else
-            project_found="1"
-            project_name=${project_name::-1} #we remove the last character, i.e. "/""
-            break
-        fi
-    done
+    echo "${bold}Please, choose your $WORKFLOW project:${normal}"
+    echo ""
+    result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+    project_found=$(echo "$result" | sed -n '1p')
+    project_name=$(echo "$result" | sed -n '2p')
+    multiple_projects=$(echo "$result" | sed -n '3p')
+    if [[ $multiple_projects = "0" ]]; then
+        echo $project_name
+    fi
 else
-    #find flags and values
-    for (( i=0; i<${#flags[@]}; i++ ))
-    do
-        if [[ " ${flags[$i]} " =~ " -p " ]] || [[ " ${flags[$i]} " =~ " --project " ]]; then
-            project_found="1"
-            project_idx=$(($i+1))
-            project_name=${flags[$project_idx]}
-        fi
-    done
-    #project is not found or its name is empty
-    if [[ $project_found = "0" ]] || ([ "$project_found" = "1" ] && [ "$project_name" = "" ]); then
-        /opt/cli/sgutil build hip -h
+    #project_dialog_check
+    result="$("$CLI_PATH/common/project_dialog_check" "${flags[@]}")"
+    project_found=$(echo "$result" | sed -n '1p')
+    project_name=$(echo "$result" | sed -n '2p')
+    #forbidden combinations
+    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$username/my_projects/$WORKFLOW/$project_name" ]); then 
+        $CLI_PATH/sgutil build $WORKFLOW -h
         exit
+    fi
+    #header (2/2)
+    echo ""
+    echo "${bold}sgutil build $WORKFLOW${normal}"
+    #project_dialog (forgotten mandatory 1)
+    if [[ $project_found = "0" ]]; then
+        echo ""
+        echo "${bold}Please, choose your $WORKFLOW project:${normal}"
+        echo ""
+        result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+        project_found=$(echo "$result" | sed -n '1p')
+        project_name=$(echo "$result" | sed -n '2p')
+        multiple_projects=$(echo "$result" | sed -n '3p')
+        if [[ $multiple_projects = "0" ]]; then
+            echo $project_name
+        fi
     fi
 fi
 
-#define directories
-DIR="/home/$username/my_projects/hip/$project_name"
-APP_BUILD_DIR="$DIR/build_dir"
+#define directories (1)
+DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
 
 #check for project directory
 if ! [ -d "$DIR" ]; then
     echo ""
-    echo "You must create your project first! Please, use sgutil new hip"
+    echo "$DIR is not a valid --project name!"
     echo ""
     exit
 fi
-
-# set environment
-#PATH=$MPICH_WORKDIR/bin:$PATH
-#LD_LIBRARY_PATH=$MPICH_WORKDIR/lib:$LD_LIBRARY_PATH
 
 #create or select a configuration
 cd $DIR/configs/
@@ -127,6 +134,14 @@ fi
 config_id="${config%%.*}"
 touch $config_id.active
 
+#define directories (2)
+APP_BUILD_DIR="$DIR/build_dir"
+
+#create build_dir
+if ! [ -d "$APP_BUILD_DIR" ]; then
+    mkdir $APP_BUILD_DIR
+fi
+
 #change directory
 echo "${bold}Changing directory:${normal}"
 echo ""
@@ -134,12 +149,7 @@ echo "cd $DIR"
 echo ""
 cd $DIR
 
-#create build_dir
-if ! [ -d "$APP_BUILD_DIR" ]; then
-    mkdir $APP_BUILD_DIR
-fi
-
-# copy and compile
+#copy and compile
 echo "${bold}Compiling vadd.c:${normal}"
 echo ""
 sleep 1
