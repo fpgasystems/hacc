@@ -173,13 +173,24 @@ if [ "$hostname" = "alveo-build-01" ]; then
     done
     echo ""
 else
-    FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
+    #device_name to FDEV_NAME
+    if [ "$device_name" = "xcu250_0" ]; then
+        FDEV_NAME=u250
+    elif [ "$device_name" = "xcu280_u55c_0" ]; then
+        if [[ $multiple_devices = "0" ]]; then
+            FDEV_NAME=u280
+        else
+            FDEV_NAME=u55c
+        fi
+    elif [ "$device_name" = "xcu50_u55n_0" ]; then
+        FDEV_NAME=u50    
+    fi
 fi
 
 #check on u50d
-if [ "$FDEV_NAME" = "u50d" ]; then
-    FDEV_NAME="u50"
-fi
+#if [ "$FDEV_NAME" = "u50d" ]; then
+#    FDEV_NAME="u50"
+#fi
 
 #create or select a configuration
 cd $DIR/configs/
