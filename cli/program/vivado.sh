@@ -106,10 +106,10 @@ if [[ $bitstream_found = "1" ]]; then
     fi
 
     #get serial number
-    serial_number=$(/opt/cli/get/get_fpga_device_param $device_index serial_number)
+    serial_number=$($CLI_PATH/get/get_fpga_device_param $device_index serial_number)
 
     #get device name
-    device_name=$(/opt/cli/get/get_fpga_device_param $device_index device_name)
+    device_name=$($CLI_PATH/get/get_fpga_device_param $device_index device_name)
 
     echo ""
 	echo "${bold}Programming bitstream:${normal}"
