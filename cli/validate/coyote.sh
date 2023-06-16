@@ -116,20 +116,25 @@ done
 device_name=$($CLI_PATH/get/get_fpga_device_param $device_index device_name)
 
 #device_name to FDEV_NAME
-if [ "$device_name" = "xcu250_0" ]; then
-    FDEV_NAME=u250
-elif [ "$device_name" = "xcu280_u55c_0" ]; then
-    if [[ $multiple_devices = "0" ]]; then
-        FDEV_NAME=u280
-    else
-        FDEV_NAME=u55c
-    fi
-elif [ "$device_name" = "xcu50_u55n_0" ]; then
-    FDEV_NAME=u50    
-fi
+#if [ "$device_name" = "xcu250_0" ]; then
+#    FDEV_NAME=u250
+#elif [ "$device_name" = "xcu280_u55c_0" ]; then
+#    if [[ $multiple_devices = "0" ]]; then
+#        FDEV_NAME=u280
+#    else
+#        FDEV_NAME=u55c
+#    fi
+#elif [ "$device_name" = "xcu50_u55n_0" ]; then
+#    FDEV_NAME=u50    
+#fi
+
+#get FDEV_NAME
+platform=$(/opt/cli/get/get_fpga_device_param $device_index platform)
+FDEV_NAME=$(echo "$platform" | cut -d'_' -f2)
+
 
 #set project name
-project_name="validate_$config.$device_name"
+project_name="validate_$config.$FDEV_NAME"
 
 #define directories (1)
 DIR="/home/$username/my_projects/$WORKFLOW/$project_name"

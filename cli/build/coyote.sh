@@ -173,18 +173,21 @@ if [ "$hostname" = "alveo-build-01" ]; then
     done
     echo ""
 else
-    #device_name to FDEV_NAME
-    if [ "$device_name" = "xcu250_0" ]; then
-        FDEV_NAME=u250
-    elif [ "$device_name" = "xcu280_u55c_0" ]; then
-        if [[ $multiple_devices = "0" ]]; then
-            FDEV_NAME=u280
-        else
-            FDEV_NAME=u55c
-        fi
-    elif [ "$device_name" = "xcu50_u55n_0" ]; then
-        FDEV_NAME=u50    
-    fi
+    #get FDEV_NAME
+    platform=$(/opt/cli/get/get_fpga_device_param $device_index platform)
+    FDEV_NAME=$(echo "$platform" | cut -d'_' -f2)
+
+    #if [ "$device_name" = "xcu250_0" ]; then
+    #    FDEV_NAME=u250
+    #elif [ "$device_name" = "xcu280_u55c_0" ]; then
+    #    if [[ $multiple_devices = "0" ]]; then
+    #        FDEV_NAME=u280
+    #    else
+    #        FDEV_NAME=u55c
+    #    fi
+    #elif [ "$device_name" = "xcu50_u55n_0" ]; then
+    #    FDEV_NAME=u50    
+    #fi
 fi
 
 #check on u50d
@@ -254,7 +257,7 @@ done
 #define directories (2)
 SHELL_BUILD_DIR="$DIR/hw/build"
 DRIVER_DIR="$DIR/driver"
-APP_BUILD_DIR="$DIR/build_dir.$device_name" #FDEV_NAME
+APP_BUILD_DIR="$DIR/build_dir.$FDEV_NAME" #FDEV_NAME
 
 echo "${bold}Changing directory:${normal}"
 echo ""
@@ -324,7 +327,7 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
 else
     echo "${bold}Coyote shell bitstream generation:${normal}"
     echo ""
-    echo "$project_name/build_dir.$device_name shell already exists!"
+    echo "$project_name/build_dir.$FDEV_NAME shell already exists!"
 
     #driver compilation
     echo ""

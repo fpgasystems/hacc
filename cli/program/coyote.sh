@@ -191,10 +191,14 @@ fi
 #if [ "$FDEV_NAME" = "u50d" ]; then
 #    FDEV_NAME="u50"
 #fi
-device_name=$($CLI_PATH/get/get_fpga_device_param $device_index device_name)
+#device_name=$($CLI_PATH/get/get_fpga_device_param $device_index device_name)
+
+#get FDEV_NAME
+platform=$(/opt/cli/get/get_fpga_device_param $device_index platform)
+FDEV_NAME=$(echo "$platform" | cut -d'_' -f2)
 
 #define directories (2)
-APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$device_name/" #$FDEV_NAME
+APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/"
 
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
