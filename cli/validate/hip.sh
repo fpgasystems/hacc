@@ -3,6 +3,11 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
+CLI_PATH="/opt/cli"
+ROCM_PATH="/opt/rocm"
+WORKFLOW="hip"
+
 #get username
 username=$USER
 
@@ -12,37 +17,30 @@ hostname="${url%%.*}"
 
 #verify hip workflow (based on installed software)
 test1=$(dkms status | grep amdgpu)
-if [ -z "$test1" ] || [ ! -d "/opt/rocm/bin/" ]; then
+if [ -z "$test1" ] || [ ! -d "$ROCM_PATH/bin/" ]; then
     echo ""
     echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
     echo ""
     exit
 fi
 
-# create my_projects directory
-DIR="/home/$username/my_projects"
-if ! [ -d "$DIR" ]; then
-    mkdir ${DIR}
-fi
-
-# create hip directory
-DIR="/home/$username/my_projects/hip"
-if ! [ -d "$DIR" ]; then
-    mkdir ${DIR}
-fi
-
-# get hostname
-url="${HOSTNAME}"
-hostname="${url%%.*}"
-
-# inputs
+#inputs
 read -a flags <<< "$@"
 
-#we will need to read the device index just like for vitis!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+echo ""
+echo "${bold}sgutil validate $WORKFLOW${normal}"
 
-#define directories
-CLI_WORKDIR="/opt/cli"
-VALIDATION_DIR="/home/$USER/my_projects/hip/validate_hip"
+#create hip directory (we do not know if sgutil new hip has been run)
+DIR="/home/$username/my_projects/$WORKFLOW"
+if ! [ -d "$DIR" ]; then
+    mkdir ${DIR}
+fi
+
+#we will need to read the device index just like for vitis!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#check on flags [...]
+
+#define directories (1)
+VALIDATION_DIR="/home/$USER/my_projects/$WORKFLOW/validate_hip"
 
 #create temporal validation dir
 if ! [ -d "$VALIDATION_DIR" ]; then
@@ -50,23 +48,22 @@ if ! [ -d "$VALIDATION_DIR" ]; then
     mkdir $VALIDATION_DIR/build_dir
 fi
 
-# copy and compile
-cp -rf $CLI_WORKDIR/templates/hip/hello_world/* $VALIDATION_DIR
+#copy and compile
+cp -rf $CLI_PATH/templates/$WORKFLOW/hello_world/* $VALIDATION_DIR
 
 #create config
 cp $VALIDATION_DIR/configs/config_000.hpp $VALIDATION_DIR/configs/config_001.hpp
 touch $VALIDATION_DIR/configs/config_001.active
 
 #build (compile)
-$CLI_WORKDIR/build/hip -p validate_hip
+$CLI_PATH/build/hip -p validate_hip
 
 #run
-#$CLI_WORKDIR/run/hip -p validate_hip
 echo "${bold}Running HIP:${normal}"
 echo ""
 $VALIDATION_DIR/build_dir/main
 
-# remove temporal validation files
+#remove temporal validation files
 rm -rf $VALIDATION_DIR
 
 echo ""
