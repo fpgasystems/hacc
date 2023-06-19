@@ -4,39 +4,39 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
+CLI_PATH="/opt/cli"
 MPICH_VERSION="4.0.2"
 MPICH_WORKDIR="/opt/mpich/mpich-$MPICH_VERSION-install"
+WORKFLOW="mpi"
 
 #get username
 username=$USER
 
-# create my_projects directory
-DIR="/home/$username/my_projects"
-if ! [ -d "$DIR" ]; then
-    mkdir ${DIR}
-fi
-
-# create mpi directory
-DIR="/home/$username/my_projects/mpi"
-if ! [ -d "$DIR" ]; then
-    mkdir ${DIR}
-fi
-
-echo ""
-#echo "${bold}mpich-$MPICH_VERSION${normal}"
-#echo ""
-
-# get hostname
+#get hostname
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-# inputs
+#set environment
+PATH=$MPICH_WORKDIR/bin:$PATH
+LD_LIBRARY_PATH=$MPICH_WORKDIR/lib:$LD_LIBRARY_PATH
+
+#inputs
 flags=$@
 
-# replace p by n
+#replace p by n
 flags=${flags/p/n}
 
-# set default
+echo ""
+echo "${bold}sgutil validate $WORKFLOW${normal}"
+echo ""
+
+#create mpi directory (we do not know if sgutil new mpi has been run)
+DIR="/home/$username/my_projects/$WORKFLOW"
+if ! [ -d "$DIR" ]; then
+    mkdir ${DIR}
+fi
+
+#set default
 if [ "$flags" = "" ]; then
     flags="-n 2"
     PROCESSES_PER_HOST=2
@@ -54,12 +54,10 @@ else
             break
 	    fi
     done
-
 fi
 
-#define directories
-CLI_WORKDIR="/opt/cli"
-VALIDATION_DIR="/home/$USER/my_projects/mpi/validate_mpi"
+#define directories (1)
+VALIDATION_DIR="/home/$USER/my_projects/$WORKFLOW/validate_mpi"
 
 #create temporal validation dir
 if ! [ -d "$VALIDATION_DIR" ]; then
@@ -68,20 +66,16 @@ if ! [ -d "$VALIDATION_DIR" ]; then
 fi
 
 #setup keys
-eval "$CLI_WORKDIR/common/ssh_key_add"
+eval "$CLI_PATH/common/ssh_key_add"
 
-#set environment
-PATH=$MPICH_WORKDIR/bin:$PATH
-LD_LIBRARY_PATH=$MPICH_WORKDIR/lib:$LD_LIBRARY_PATH
-
-# copy and compile
-cp -rf /opt/cli/templates/mpi/hello_world/* $VALIDATION_DIR
+#copy and compile
+cp -rf /opt/cli/templates/$WORKFLOW/hello_world/* $VALIDATION_DIR
 
 #create config
 cp $VALIDATION_DIR/configs/config_000.hpp $VALIDATION_DIR/configs/config_001.hpp
 
 #build (compile)
-/opt/cli/build/mpi -p validate_mpi
+/opt/cli/build/$WORKFLOW -p validate_mpi
 
 # create hosts file
 echo "${bold}Creating hosts file:${normal}"
@@ -110,15 +104,15 @@ echo ""
 #get interface name
 mellanox_name=$(nmcli dev | grep mellanox-0 | awk '{print $1}')
 
-# run
+#run
 n=$(($j*$PROCESSES_PER_HOST))
-echo "${bold}Running openMPI:${normal}"
+echo "${bold}Running MPI:${normal}"
 echo ""
 echo "mpirun -n $n -f $VALIDATION_DIR/hosts -iface $mellanox_name $VALIDATION_DIR/build_dir/main"
 echo ""
 mpirun -n $n -f $VALIDATION_DIR/hosts -iface $mellanox_name $VALIDATION_DIR/build_dir/main
 
-# remove temporal validation files
+#remove temporal validation files
 rm -rf $VALIDATION_DIR
 
 echo ""
