@@ -146,7 +146,7 @@ done <$DIR/hosts
 mellanox_name=$(nmcli dev | grep mellanox-0 | awk '{print $1}')
     
 #run
-echo "${bold}Running openMPI:${normal}"
+echo "${bold}Running MPI:${normal}"
 echo ""
 echo "mpirun -n $num_proc -f $DIR/hosts -iface $mellanox_name $APP_BUILD_DIR/main"
 echo ""
