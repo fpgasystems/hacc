@@ -27,7 +27,9 @@ case $revert_devices in
         LinkCtls=${inputs[@]:3:1}
         ;;
     2)
-        xxx
+        upstream_ports=${inputs[@]:1:2}
+        root_ports=${inputs[@]:3:2}
+        LinkCtls=${inputs[@]:5:2}
         ;;
     3)
         aa
@@ -61,7 +63,7 @@ done
 sleep 1
 echo ""
 
-echo "${bold}Getting LnkCtl capacities:${normal}"
+echo "${bold}Getting LnkCtl capabilities:${normal}"
 sleep 1
 for ((i=0; i<${#LinkCtls[@]}; i++)); do
     echo "LinkCtl ($i) = ${LinkCtls[i]}"
