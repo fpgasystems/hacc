@@ -132,7 +132,7 @@ if [[ $bitstream_found = "1" ]]; then
         root_port=$($CLI_PATH/get/get_fpga_device_param $device_index root_port)
         LinkCtl=$($CLI_PATH/get/get_fpga_device_param $device_index LinkCtl)
         #hot plug boot
-        sudo $CLI_PATH/program/pci_hot_plug $upstream_port $root_port $LinkCtl
+        sudo $CLI_PATH/program/pci_hot_plug 1 $upstream_port $root_port $LinkCtl
         #print
         bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
         lspci | grep Xilinx | grep $bdf
