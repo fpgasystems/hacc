@@ -16,32 +16,31 @@ fi
 #inputs
 read -a inputs <<< "$@"
 
-#get revert_devices
+#get revert_devices (number of devices to be reverted, i.e. with only one BDF)
 revert_devices=${inputs[@]:0:1}
 
 #get upstream_ports, root_ports, LinkCtls
-case $revert_devices in
-    1)
-        upstream_ports=${inputs[@]:1:1}
-        root_ports=${inputs[@]:2:1}
-        LinkCtls=${inputs[@]:3:1}
-        ;;
-    2)
-        upstream_ports=${inputs[@]:1:2}
-        root_ports=${inputs[@]:3:2}
-        LinkCtls=${inputs[@]:5:2}
-        ;;
-    3)
-        aa
-        ;;
-    4)    
-        xxx
-        ;;
-    *)
-        echo "Invalid revert_devices value. Please provide a value between 1 and 4."
-        exit 1
-        ;;
-esac
+aux=2
+#upstream_ports
+vector=0
+a=$((aux + vector * revert_devices))
+b=$((a + revert_devices - 1))
+upstream_ports=$(echo "${inputs[@]}" | cut -d' ' -f$a-$b)
+#root_ports
+vector=1
+a=$((aux + vector * revert_devices))
+b=$((a + revert_devices - 1))
+root_ports=$(echo "${inputs[@]}" | cut -d' ' -f$a-$b)
+#LinkCtls
+vector=2
+a=$((aux + vector * revert_devices))
+b=$((a + revert_devices - 1))
+LinkCtls=$(echo "${inputs[@]}" | cut -d' ' -f$a-$b)
+
+#populate separate arrays using the read command
+read -ra upstream_ports <<< "$upstream_ports"
+read -ra root_ports <<< "$root_ports"
+read -ra LinkCtls <<< "$LinkCtls"
 
 echo ""
 echo "${bold}pci_hot_plug${normal}"
@@ -75,8 +74,8 @@ echo "${bold}Getting control addresses:${normal}"
 sleep 1
 link_control_access=()
 for ((i=0; i<${#LinkCtls[@]}; i++)); do
-    LinkCtl=${LinkCtls[i]}
-    link_control_access+=$(printf "%X" $((0x$LinkCtl+0x$LINK_CONTROL_OFFSET)))
+    LinkCtl="${LinkCtls[i]}"
+    link_control_access+=($(printf "%X" $((0x$LinkCtl + 0x$LINK_CONTROL_OFFSET))))
     echo "link_control_access ($i) = ${link_control_access[i]}"
 done
 sleep 1
