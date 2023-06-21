@@ -138,11 +138,10 @@ echo ""
 echo "${bold}Programming XRT shell:${normal}"
 
 #loop over reconfigurable devices
-for ((i=0; i<${#serial_numbers[@]}; i++)); do #for ((i=1; i<=$MAX_DEVICES; i++)); do
+for ((i=0; i<${#serial_numbers[@]}; i++)); do
     if [[ -n ${serial_numbers[i]} ]]; then
         serial_number=${serial_numbers[i]}
         device_name=${device_names[i]}
-        #echo "$VIVADO_PATH/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_xrt_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name"
         $VIVADO_PATH/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_xrt_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name
     fi
 done
@@ -152,15 +151,6 @@ revert_devices=$i
 
 #hotplug
 sudo $CLI_PATH/program/pci_hot_plug $revert_devices "${upstream_ports[@]}" "${root_ports[@]}" "${LinkCtls[@]}"
-
-#exit
-
-#$VIVADO_PATH/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_xrt_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name
-
-#hotplug
-#root_port=$($CLI_PATH/get/get_fpga_device_param $device_index root_port)
-#LinkCtl=$($CLI_PATH/get/get_fpga_device_param $device_index LinkCtl)
-#sudo $CLI_PATH/program/pci_hot_plug $upstream_port $root_port $LinkCtl
 
 #inserting XRT driver
 echo "${bold}Inserting XRT drivers:${normal}"
