@@ -98,35 +98,6 @@ fi
 echo ""
 echo "${bold}sgutil program revert${normal}"
 
-#loop over reconfigurable devices
-#serial_numbers=()
-#device_names=()
-#upstream_ports=()
-#root_ports=()
-#LinkCtls=()
-#for ((i=1; i<=$MAX_DEVICES; i++)); do
-#    upstream_port=$($CLI_PATH/get/get_fpga_device_param $i upstream_port)
-#    bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
-#    #add if the device is already on Vivado mode (only one BDF)
-#    if [[ $(lspci | grep Xilinx | grep $bdf | wc -l) = 1 ]]; then
-#        #serial_numbers
-#        serial_number=$($CLI_PATH/get/serial -d $i | awk -F': ' '{print $2}' | grep -v '^$')
-#        serial_numbers+=("$serial_number")
-#        #device_names
-#        device_name=$($CLI_PATH/get/name -d $i | awk -F': ' '{print $2}' | grep -v '^$')
-#        device_names+=("$device_name")
-#        #upstream_ports
-#        upstream_port=$($CLI_PATH/get/get_fpga_device_param $i upstream_port)
-#        upstream_ports+=("$upstream_port")
-#        #root_ports
-#        root_port=$($CLI_PATH/get/get_fpga_device_param $i root_port)
-#        root_ports+=("$root_port")
-#        #LinkCtl
-#        LinkCtl=$($CLI_PATH/get/get_fpga_device_param $i LinkCtl)
-#        LinkCtls+=("$LinkCtl")
-#    fi
-#done
-
 #get device and serial name
 serial_number=$($CLI_PATH/get/serial -d $device_index | awk -F': ' '{print $2}' | grep -v '^$')
 device_name=$($CLI_PATH/get/name -d $device_index | awk -F': ' '{print $2}' | grep -v '^$')
@@ -137,18 +108,9 @@ branch=$($XRT_PATH/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]
 echo ""
 echo "${bold}Programming XRT shell:${normal}"
 
-#loop over reconfigurable devices
-#for ((i=0; i<${#serial_numbers[@]}; i++)); do
-#    if [[ -n ${serial_numbers[i]} ]]; then
-#        serial_number=${serial_numbers[i]}
-#        device_name=${device_names[i]}
-#        $VIVADO_PATH/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_xrt_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name
-#    fi
-#done
 $VIVADO_PATH/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_xrt_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name
 
 #hotplug
-#sudo $CLI_PATH/program/pci_hot_plug $i "${upstream_ports[@]}" "${root_ports[@]}" "${LinkCtls[@]}"
 root_port=$($CLI_PATH/get/get_fpga_device_param $device_index root_port)
 LinkCtl=$($CLI_PATH/get/get_fpga_device_param $device_index LinkCtl)
 sudo $CLI_PATH/program/pci_hot_plug 1 $upstream_port $root_port $LinkCtl
