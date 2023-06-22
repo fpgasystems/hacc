@@ -27,6 +27,7 @@ if [ "$flags" = "" ]; then
     echo ""
     #print devices information
     for device_index in $(seq 1 $MAX_DEVICES); do 
+        #get Bus Device Function
         upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
 	    bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00    
         if [[ $(lspci | grep Xilinx | grep $bdf | wc -l) = 1 ]]; then
@@ -56,9 +57,11 @@ else
         $CLI_PATH/sgutil get platform -h
         exit
     fi
-    #print
+    #get Bus Device Function
     upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
     bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00    
+    #print
+    echo ""
     if [[ $(lspci | grep Xilinx | grep $bdf | wc -l) = 1 ]]; then
         echo "$device_index: vivado"
     elif [[ $(lspci | grep Xilinx | grep $bdf | wc -l) = 2 ]]; then
