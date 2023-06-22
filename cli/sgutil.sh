@@ -230,6 +230,7 @@ get_help() {
     echo "   network         - Retreives FPGA/ACAP networking information."
     echo "   platform        - Retreives FPGA/ACAP platform name."
     echo "   serial          - Retreives FPGA/ACAP serial numbers."
+    echo "   workflow        - Retreives FPGA/ACAP current workflow."
     echo ""
     echo "   bus             - Retreives GPU PCI Bus ID."
     echo ""
