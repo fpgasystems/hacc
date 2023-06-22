@@ -322,6 +322,20 @@ get_platform_help() {
     exit 1
 }
 
+get_workflow_help() {
+    echo ""
+    echo "${bold}sgutil get workflow [flags] [--help]${normal}"
+    echo ""
+    echo "Retreives FPGA/ACAP current workflow."
+    echo ""
+    echo "FLAGS:"
+    echo "   -d, --device    - FPGA/ACAP Device Index (according to sgutil examine)."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
 get_serial_help() {
     echo ""
     echo "${bold}sgutil get serial [flags] [--help]${normal}"
@@ -858,6 +872,10 @@ case "$command" in
         ;;
       serial)
         #xilinx_build_check
+        valid_flags="-h --help -d --device"
+        command_run $command_arguments_flags"@"$valid_flags
+        ;;
+      workflow)
         valid_flags="-h --help -d --device"
         command_run $command_arguments_flags"@"$valid_flags
         ;;

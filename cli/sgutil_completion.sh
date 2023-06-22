@@ -77,6 +77,9 @@ _sgutil_completions()
                 serial) 
                     COMPREPLY=($(compgen -W "--device --help" -- ${cur})) # -w  -h
                     ;;
+                workflow) 
+                    COMPREPLY=($(compgen -W "--device --help" -- ${cur})) # -w  -h
+                    ;;
                 coyote) # program
                     COMPREPLY=($(compgen -W "--device --project --remote --help" -- ${cur})) # -n  -s  -h
                     ;;

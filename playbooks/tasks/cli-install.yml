@@ -503,6 +503,12 @@
     dest: /opt/cli/get/platform
     mode: 0755
 
+- name: copy get/workflow script
+  copy:
+    src: "../../cli/get/workflow.sh"
+    dest: /opt/cli/get/workflow
+    mode: 0755
+
 #new ------------------------------------------------------------------------------------    
 
 - name: copy (new) vitis script
