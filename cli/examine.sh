@@ -4,6 +4,7 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
+CLI_PATH="/opt/cli"
 XRT_PATH="/opt/xilinx/xrt"
 HACC_PATH="/opt/hacc"
 DEVICE_LIST_FPGA="$HACC_PATH/devices_reconfigurable"
@@ -33,13 +34,13 @@ split_addresses (){
 }
 
 print_reconfigurable_devices_header (){
-  echo "${bold}Device Index : Upstream port (BFD) : Device Type (Name)   : Serial Number : Networking${normal}"
-  echo "${bold}-------------------------------------------------------------------------------------------------------------${normal}"
+  echo "${bold}Device Index : Upstream port (BFD) : Device Type (Name)   : Serial Number : Networking                        : Workflow${normal}"
+  echo "${bold}------------------------------------------------------------------------------------------------------------------------${normal}"
 }
 
 print_gpu_devices_header (){
   echo "${bold}Device Index : PCI BUS : Device Type (GPU ID) : Serial Number : Unique ID${normal}"
-  echo "${bold}-------------------------------------------------------------------------------------------------------------${normal}"
+  echo "${bold}------------------------------------------------------------------------------------------------------------------------${normal}"
 }
 
 #reconfigurable devices
@@ -57,15 +58,17 @@ if [[ -f "$DEVICE_LIST_FPGA" ]]; then
     MAX_RECONF_DEVICES=$(grep -E "fpga|acap" $DEVICE_LIST_FPGA | wc -l)
     #loop over reconfigurable devices
     for ((i=1; i<=$MAX_RECONF_DEVICES; i++)); do
-      id=$(/opt/cli/get/get_fpga_device_param $i id)
+      id=$($CLI_PATH/get/get_fpga_device_param $i id)
       #print table
       if [ -n "$id" ]; then  
-        upstream_port=$(/opt/cli/get/get_fpga_device_param $i upstream_port)
-        device_type=$(/opt/cli/get/get_fpga_device_param $i device_type)
-        device_name=$(/opt/cli/get/get_fpga_device_param $i device_name)
-        serial_number=$(/opt/cli/get/get_fpga_device_param $i serial_number)
-        ip=$(/opt/cli/get/get_fpga_device_param $i IP)
-        mac=$(/opt/cli/get/get_fpga_device_param $i MAC)
+        upstream_port=$($CLI_PATH/get/get_fpga_device_param $i upstream_port)
+        device_type=$($CLI_PATH/get/get_fpga_device_param $i device_type)
+        device_name=$($CLI_PATH/get/get_fpga_device_param $i device_name)
+        serial_number=$($CLI_PATH/get/get_fpga_device_param $i serial_number)
+        ip=$($CLI_PATH/get/get_fpga_device_param $i IP)
+        mac=$($CLI_PATH/get/get_fpga_device_param $i MAC)
+        workflow=$($CLI_PATH/get/workflow -d $i)
+        workflow=$(echo "$workflow" $i | cut -d' ' -f2 | sed '/^\s*$/d')
         bdf="${upstream_port::-1}1"
         #adjust length
         aux="$device_type ($device_name)"
@@ -75,7 +78,7 @@ if [[ -f "$DEVICE_LIST_FPGA" ]]; then
         add_0=$(split_addresses $ip $mac 0)
         add_1=$(split_addresses $ip $mac 1)
         #print row
-        echo "$id            : $upstream_port ($bdf)   : $aux : $serial_number : $add_0"
+        echo "$id            : $upstream_port ($bdf)   : $aux : $serial_number : $add_0 : $workflow"
         echo "                                                                            $add_1"
       fi
     done
@@ -94,14 +97,14 @@ if [[ -f "$DEVICE_LIST_GPU" ]]; then
     MAX_GPU_DEVICES=$(grep -E "gpu" $DEVICE_LIST_GPU | wc -l)
     #loop over gpu devices
     for ((i=1; i<=$MAX_GPU_DEVICES; i++)); do
-      id=$(/opt/cli/get/get_gpu_device_param $i id) #========================================> I need to update the function
+      id=$($CLI_PATH/get/get_gpu_device_param $i id) #========================================> I need to update the function
       #print table
       if [ -n "$id" ]; then
-        bus=$(/opt/cli/get/get_gpu_device_param $i bus)
-        device_type=$(/opt/cli/get/get_gpu_device_param $i device_type)
-        gpu_id=$(/opt/cli/get/get_gpu_device_param $i gpu_id)
-        serial_number=$(/opt/cli/get/get_gpu_device_param $i serial_number)
-        unique_id=$(/opt/cli/get/get_gpu_device_param $i unique_id)
+        bus=$($CLI_PATH/get/get_gpu_device_param $i bus)
+        device_type=$($CLI_PATH/get/get_gpu_device_param $i device_type)
+        gpu_id=$($CLI_PATH/get/get_gpu_device_param $i gpu_id)
+        serial_number=$($CLI_PATH/get/get_gpu_device_param $i serial_number)
+        unique_id=$($CLI_PATH/get/get_gpu_device_param $i unique_id)
         #print row
         echo "$id            : $bus : $device_type ($gpu_id)         : $serial_number  : $unique_id" 
       fi
