@@ -5,7 +5,7 @@
 </p>
 
 # Who does what
-The following people are relevant for our ETHZ-Heterogeneous Compute Accelerated Cluster (ETHZ-HACC) project.
+The following people are relevant for our ETHZ-Heterogeneous Compute Accelerated Cluster (ETHZ-HACC) project. **For specific technical issues or requests,** please follow our dedicated [Technical support](https://github.com/fpgasystems/hacc/blob/main/docs/technical-support.md#technical-support) page and avoid using the references below.
 
 ## AMD Xilinx University Program (XUP) coordinators
 * [Cathal McCabe](https://www.linkedin.com/in/cathalmccabe/), [Xilinx University Program](https://www.xilinx.com/support/university/XUP-HACC.html) Manager EMEA, AMD
@@ -31,6 +31,3 @@ The following people are relevant for our ETHZ-Heterogeneous Compute Accelerated
 * [Matthias Gabathuler](https://www.isg.inf.ethz.ch/Main/MatthiasGabathuler), Cloud technologies, [DevOps](./vocabulary.md#devops)
 * [Martin Sedler](https://www.isg.inf.ethz.ch/Main/MartinSedler), [DCIM](./vocabulary.md#dcim) leader
 * [Stefan Walter](https://www.isg.inf.ethz.ch/Main/StefanWalter), Operations coordinator
-
-## Disclaimer
-For specific technical issues or support requests, please follow our dedicated [Technical support](https://github.com/fpgasystems/hacc/blob/main/docs/technical-support.md#technical-support) page.
