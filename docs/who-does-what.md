@@ -16,7 +16,7 @@ The following people are relevant for our ETHZ-Heterogeneous Compute Accelerated
 
 ## [Hardware acceleration platform](./hardware-acceleration-platform.md)
 ### AMD
-* [Ken O’brien](https://www.linkedin.com/in/ken-o-brien-338807185/?originalSubdomain=ie), Senior member of technical staff software engineering
+* [Ken O’brien](https://www.linkedin.com/in/ken-o-brien-338807185/?originalSubdomain=ie), Senior member of technical staff software engineering, AMD
 * [Lucian Petrica](https://www.linkedin.com/in/lucian-petrica-586b2829/), Senior Research Scientist, AMD
 
 ### ETH Zürich Systems Group
