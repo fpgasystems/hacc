@@ -41,7 +41,6 @@ else
             break
         fi
     done
-
 fi
 
 # Return the values of project_found and project_name
