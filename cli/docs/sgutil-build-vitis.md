@@ -17,7 +17,7 @@
   &nbsp; &nbsp; Xilinx platform (according to sgutil get platform).
 </p>
 
-<code>-p, --project</code>
+<code>    --project</code>
 <p>
   &nbsp; &nbsp; Specifies your Vitis project name.
 </p>
