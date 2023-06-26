@@ -47,6 +47,11 @@
     path: /opt/cli/set
     state: directory
 
+- name: create constants directory
+  file:
+    path: /opt/cli/constants
+    state: directory
+
 #sg
 #- name: copy sg
 #  copy:
@@ -244,6 +249,14 @@
     src: "../../cli/common/target_dialog_check.sh"
     dest: /opt/cli/common/target_dialog_check
     mode: 0755
+
+#constants -----------------------------------------------------------------------------------
+
+- name: copy BUILD_SERVERS_LIST
+  copy:
+    src: "../../cli/constants/BUILD_SERVERS_LIST"
+    dest: /opt/cli/constants/BUILD_SERVERS_LIST
+    mode: 0644
 
 #examine -------------------------------------------------------------------------------------
 
