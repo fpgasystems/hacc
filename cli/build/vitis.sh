@@ -19,13 +19,13 @@ url="${HOSTNAME}"
 hostname="${url%%.*}"
 
 #check on DEVICES_LIST
-source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
+#source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
 
 #get number of fpga and acap devices present
-MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
+#MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 
 #check on multiple devices
-multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
+#multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 
 #check if workflow exists
 if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
@@ -33,6 +33,14 @@ if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
     echo "You must create your project first! Please, use sgutil new vitis"
     echo ""
     exit
+fi
+
+#check on valid XRT version
+if [ -z "$XILINX_XRT" ]; then
+    echo ""
+    echo "Please, source a valid XRT and Vitis version."
+    echo ""
+    exit 1
 fi
 
 #inputs
@@ -154,21 +162,21 @@ if ! [ -d "$DIR" ]; then
 fi
 
 #select vivado release
-if [ "$hostname" = "alveo-build-01" ]; then
-    echo ""
-    echo "${bold}Please, select your favourite Vivado release:${normal}" 
-    echo ""
-    PS3=""
-    select release in 2022.1 2022.2
-    do
-        case $release in
-            2022.1) break;;
-            2022.2) break;;
-        esac
-    done
-    #enable release
-    eval "source xrt_select $release"
-fi
+#if [ "$hostname" = "alveo-build-01" ]; then
+#    echo ""
+#    echo "${bold}Please, select your favourite Vivado release:${normal}" 
+#    echo ""
+#    PS3=""
+#    select release in 2022.1 2022.2
+#    do
+#        case $release in
+#            2022.1) break;;
+#            2022.2) break;;
+#        esac
+#    done
+#    #enable release
+#    eval "source xrt_select $release"
+#fi
 
 #create or select a configuration
 cd $DIR/configs/
