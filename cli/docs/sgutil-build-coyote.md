@@ -12,19 +12,12 @@
 </p>
 
 ### Flags
-<!-- <code>
-  -b, --binary <string>
-</code>
+<code>    --platform <string></code>
 <p>
-  &nbsp; &nbsp; Programs an .xclbin binary to the specified device.
-</p> -->
-
-<code>-n, --name <string></code>
-<p>
-  &nbsp; &nbsp; FPGA's device name. See <a href="https://github.com/fpgasystems/hacc/blob/main/cli/docs/sgutil-get-name.md">sgutil get name</a>.
+  &nbsp; &nbsp; Xilinx platform (according to sgutil get platform).
 </p>
 
-<code>-p, --project <string></code>
+<code>    --project <string></code>
 <p>
   &nbsp; &nbsp; Specifies your Coyote project name.
 </p>
@@ -36,5 +29,5 @@
 
 ### Examples
 ```
-$ sgutil build coyote -p hello_world
+$ sgutil build coyote
 ```
