@@ -130,8 +130,9 @@ build_coyote_help() {
     #echo "                         hyperloglog, perf_dram, perf_hbm,"
     #echo "                         perf_rdma_host, perf_rdma_card, perf_tcp,"
     #echo "                         rdma_regex, service_aes, service_reconfiguration."
-    echo "   -n, --name      - FPGA's device name. See sgutil get name."
-    echo "   -p, --project   - Specifies your Coyote project name."
+    #echo "   -n, --name      - FPGA's device name. See sgutil get name."
+    echo "       --platform  - Xilinx platform (according to sgutil get platform)."
+    echo "       --project   - Specifies your Coyote project name."
     echo ""
     echo "   -h, --help      - Help to build Coyote."
     echo ""
@@ -175,7 +176,7 @@ build_vitis_help() {
     echo ""
     echo "FLAGS:"
     echo "       --platform  - Xilinx platform (according to sgutil get platform)."
-    echo "   -p, --project   - Specifies your Vitis project name."
+    echo "       --project   - Specifies your Vitis project name."
     echo "   -t, --target    - Binary compilation target (sw_emu, hw_emu, hw)."
     echo ""
     echo "   -h, --help      - Help to build a binary."
@@ -806,7 +807,7 @@ case "$command" in
         build_help
         ;;
       coyote) 
-        valid_flags="-n --name -p --project -h --help" 
+        valid_flags="--platform --project -h --help" 
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       hip) 
@@ -818,7 +819,7 @@ case "$command" in
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       vitis) 
-        valid_flags="--platform -p --project -t --target -h --help"
+        valid_flags="--platform --project -t --target -h --help"
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       *)
@@ -924,7 +925,7 @@ case "$command" in
     esac
     ;;
   program)
-    xilinx_build_check
+    #xilinx_build_check
     case "$arguments" in
       -h|--help)
         program_help
@@ -969,7 +970,7 @@ case "$command" in
     esac
     ;;
   run)
-    xilinx_build_check
+    #xilinx_build_check
     case "$arguments" in
       -h|--help)
         run_help
@@ -996,7 +997,7 @@ case "$command" in
     esac
     ;;
   set)
-    xilinx_build_check
+    #xilinx_build_check
     case "$arguments" in
       -h|--help)
         set_help
@@ -1018,7 +1019,7 @@ case "$command" in
     esac
     ;;
   validate)
-    xilinx_build_check
+    #xilinx_build_check
     case "$arguments" in
       coyote)
         valid_flags="-d --device -h --help"
