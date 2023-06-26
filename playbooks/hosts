@@ -1,5 +1,5 @@
-[alveo-build]
-alveo-build-01.ethz.ch
+[hacc-build]
+hacc-build-01.ethz.ch
 
 [alveo-hypervisors]
 alveo-hypervisor-[01:04].ethz.ch
