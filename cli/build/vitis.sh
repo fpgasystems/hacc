@@ -18,15 +18,6 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#check on DEVICES_LIST
-#source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
-
-#get number of fpga and acap devices present
-#MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
-
-#check on multiple devices
-#multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
-
 #check if workflow exists
 if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
     echo ""
@@ -38,7 +29,7 @@ fi
 #check on valid XRT version
 if [ -z "$XILINX_XRT" ]; then
     echo ""
-    echo "Please, source a valid XRT and Vitis version."
+    echo "Please, source a valid XRT and Vitis version for ${bold}$hostname!${normal}"
     echo ""
     exit 1
 fi
@@ -161,23 +152,6 @@ if ! [ -d "$DIR" ]; then
     exit
 fi
 
-#select vivado release
-#if [ "$hostname" = "alveo-build-01" ]; then
-#    echo ""
-#    echo "${bold}Please, select your favourite Vivado release:${normal}" 
-#    echo ""
-#    PS3=""
-#    select release in 2022.1 2022.2
-#    do
-#        case $release in
-#            2022.1) break;;
-#            2022.2) break;;
-#        esac
-#    done
-#    #enable release
-#    eval "source xrt_select $release"
-#fi
-
 #create or select a configuration
 cd $DIR/configs/
 if [[ $(ls -l | wc -l) = 2 ]]; then
@@ -220,26 +194,6 @@ if [ -e config_*.active ]; then
 fi
 config_id="${config%%.*}"
 touch $config_id.active
-
-#serial to platform
-#cd $XILINX_PATH/platforms
-#if [ "$hostname" = "alveo-build-01" ]; then
-#    platforms=( "xilinx_"* )
-#    echo ""
-#    echo "${bold}Please, choose the device (or platform):${normal}" 
-#    echo ""
-#    PS3=""
-#    select platform in "${platforms[@]}"; do 
-#        if [[ -z $platform ]]; then
-#            echo "" >&/dev/null
-#        else
-#            break
-#        fi
-#    done
-#else
-#    #get platform
-#    platform=$($CLI_PATH/get/get_fpga_device_param $device_index platform)
-#fi
 
 #define directories (2)
 APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$target_name.$platform_name"
