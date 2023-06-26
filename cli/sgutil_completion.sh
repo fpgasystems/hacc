@@ -45,7 +45,7 @@ _sgutil_completions()
         3)
             case ${prev} in
                 coyote) # build
-                    COMPREPLY=($(compgen -W "--name --project --help" -- ${cur})) #--config 
+                    COMPREPLY=($(compgen -W "--platform --project --help" -- ${cur})) #--config 
                     ;;
                 hip)
                     COMPREPLY=($(compgen -W "--project --help" -- ${cur}))
