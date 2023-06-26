@@ -16,7 +16,6 @@ hostname="${url%%.*}"
 
 #check on build server
 if grep -q "^$hostname$" $BUILD_SERVERS_LIST; then
-    #echo "Hostname is on the list"
     echo ""
     ls -l $XILINX_PATH/platforms/ | grep '^d' | awk '{print $NF}'
     echo ""
