@@ -135,7 +135,6 @@ if ! [ -d "$DIR" ]; then
     exit
 fi
 
-
 #platform_name to FDEV_NAME
 FDEV_NAME=$(echo "$platform_name" | cut -d'_' -f2)
 
@@ -244,10 +243,6 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     mkdir $APP_BUILD_DIR
     cd $APP_BUILD_DIR
     /usr/bin/cmake ../sw -DTARGET_DIR=../src/ && make # 1: path from APP_BUILD_DIR to /sw 2: path from APP_BUILD_DIR to main.cpp
-    
-    #save referring to config
-    #config="${config%%.*}"
-    #mv main main_$config
 
     #copy bitstream
     cp $SHELL_BUILD_DIR/bitstreams/cyt_top.bit $APP_BUILD_DIR
