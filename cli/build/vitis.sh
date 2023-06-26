@@ -18,20 +18,20 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#check if workflow exists
-if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
-    echo ""
-    echo "You must create your project first! Please, use sgutil new vitis"
-    echo ""
-    exit
-fi
-
 #check on valid XRT version
 if [ -z "$XILINX_XRT" ]; then
     echo ""
     echo "Please, source a valid XRT and Vitis version for ${bold}$hostname!${normal}"
     echo ""
     exit 1
+fi
+
+#check if workflow exists
+if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
+    echo ""
+    echo "You must create your project first! Please, use sgutil new vitis"
+    echo ""
+    exit
 fi
 
 #inputs
