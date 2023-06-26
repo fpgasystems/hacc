@@ -5,10 +5,8 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="/opt/cli"
-HACC_PATH="/opt/hacc"
 XILINX_PATH="/opt/xilinx"
 XRT_PATH="$XILINX_PATH/xrt"
-DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 WORKFLOW="vitis"
 
 #get username
