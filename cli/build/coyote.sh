@@ -6,6 +6,7 @@ normal=$(tput sgr0)
 #constants
 CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
+XILINX_PATH="/opt/xilinx"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 DEVICE_NAME_COLUMN=6
 WORKFLOW="coyote"
@@ -17,17 +18,13 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#check on DEVICES_LIST
-source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
-
-#get number of fpga and acap devices present
-MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
-
-#check on multiple devices
-multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
-
-#inputs
-read -a flags <<< "$@"
+#check on valid XRT version
+if [ -z "$XILINX_XRT" ]; then
+    echo ""
+    echo "Please, source a valid XRT and Vitis version for ${bold}$hostname!${normal}"
+    echo ""
+    exit 1
+fi
 
 #check for vivado_developers
 member=$($CLI_PATH/common/is_member $username vivado_developers)
@@ -46,11 +43,25 @@ if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
     exit
 fi
 
+#check on DEVICES_LIST
+source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
+
+#get number of fpga and acap devices present
+MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
+
+#check on multiple devices
+multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
+
+#inputs
+read -a flags <<< "$@"
+
 #check on flags
 project_found=""
 project_name=""
-device_found=""
-device_name=""
+platform_found=""
+platform_name=""
+#device_found=""
+#device_name=""
 if [ "$flags" = "" ]; then
     #header (1/2)
     echo ""
@@ -67,16 +78,28 @@ if [ "$flags" = "" ]; then
         echo $project_name
     fi
     #device_name_dialog
-    if [[ $multiple_devices = "0" ]]; then
-        device_found="1"
-        device_name=$($CLI_PATH/get/get_fpga_device_param 1 device_name)
-    else
-        echo ""
-        echo "${bold}Please, choose your device:${normal}"
-        echo ""
-        result=$($CLI_PATH/common/device_name_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
-        device_found=$(echo "$result" | sed -n '1p')
-        device_name=$(echo "$result" | sed -n '2p')
+    #if [[ $multiple_devices = "0" ]]; then
+    #    device_found="1"
+    #    device_name=$($CLI_PATH/get/get_fpga_device_param 1 device_name)
+    #else
+    #    echo ""
+    #    echo "${bold}Please, choose your device:${normal}"
+    #    echo ""
+    #    result=$($CLI_PATH/common/device_name_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
+    #    device_found=$(echo "$result" | sed -n '1p')
+    #    device_name=$(echo "$result" | sed -n '2p')
+    #fi
+    
+    #platform_dialog
+    echo ""
+    echo "${bold}Please, choose your platform:${normal}"
+    echo ""
+    result=$($CLI_PATH/common/platform_dialog $XILINX_PATH)
+    platform_found=$(echo "$result" | sed -n '1p')
+    platform_name=$(echo "$result" | sed -n '2p')
+    multiple_platforms=$(echo "$result" | sed -n '3p')
+    if [[ $multiple_platforms = "0" ]]; then
+        echo $platform_name
     fi
 else
     #project_dialog_check
@@ -89,16 +112,27 @@ else
         exit
     fi
     #device_name_dialog_check
-    result="$("$CLI_PATH/common/device_name_dialog_check" "${flags[@]}")"
-    device_found=$(echo "$result" | sed -n '1p')
-    device_name=$(echo "$result" | sed -n '2p')
-    #get device_match
-    device_match=$(awk -v col="$DEVICE_NAME_COLUMN" -v device="$device_name" '$col == device { found=1; exit } END { if (found) print 1; else print 0 }' "$DEVICES_LIST")
+    #result="$("$CLI_PATH/common/device_name_dialog_check" "${flags[@]}")"
+    #device_found=$(echo "$result" | sed -n '1p')
+    #device_name=$(echo "$result" | sed -n '2p')
+    ##get device_match
+    #device_match=$(awk -v col="$DEVICE_NAME_COLUMN" -v device="$device_name" '$col == device { found=1; exit } END { if (found) print 1; else print 0 }' "$DEVICES_LIST")
+    ##forbidden combinations
+    #if [ "$device_found" = "1" ] && ([ "$device_name" = "" ] || [ "$device_match" = "0" ]); then 
+    #    $CLI_PATH/sgutil build $WORKFLOW -h
+    #    exit
+    #fi
+
+    #platform_dialog_check
+    result="$("$CLI_PATH/common/platform_dialog_check" "${flags[@]}")"
+    platform_found=$(echo "$result" | sed -n '1p')
+    platform_name=$(echo "$result" | sed -n '2p')    
     #forbidden combinations
-    if [ "$device_found" = "1" ] && ([ "$device_name" = "" ] || [ "$device_match" = "0" ]); then 
+    if ([ "$platform_found" = "1" ] && [ "$platform_name" = "" ]) || ([ "$platform_found" = "1" ] && [ ! -d "$XILINX_PATH/platforms/$platform_name" ]); then
         $CLI_PATH/sgutil build $WORKFLOW -h
         exit
     fi
+
     #header (2/2)
     echo ""
     echo "${bold}sgutil build $WORKFLOW${normal}"
@@ -116,16 +150,29 @@ else
         fi
     fi
     #device_name_dialog (forgotten mandatory 2)
-    if [[ $multiple_devices = "0" ]]; then
-        device_found="1"
-        device_name=$($CLI_PATH/get/get_fpga_device_param 1 device_name)
-    elif [[ $device_found = "0" ]]; then
+    #if [[ $multiple_devices = "0" ]]; then
+    #    device_found="1"
+    #    device_name=$($CLI_PATH/get/get_fpga_device_param 1 device_name)
+    #elif [[ $device_found = "0" ]]; then
+    #    echo ""
+    #    echo "${bold}Please, choose your device:${normal}"
+    #    echo ""
+    #    result=$($CLI_PATH/common/device_name_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
+    #    device_found=$(echo "$result" | sed -n '1p')
+    #    device_name=$(echo "$result" | sed -n '2p')
+    #fi
+    #platform_dialog (forgotten mandatory 2)
+    if [[ $platform_found = "0" ]]; then
         echo ""
-        echo "${bold}Please, choose your device:${normal}"
+        echo "${bold}Please, choose your platform:${normal}"
         echo ""
-        result=$($CLI_PATH/common/device_name_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
-        device_found=$(echo "$result" | sed -n '1p')
-        device_name=$(echo "$result" | sed -n '2p')
+        result=$($CLI_PATH/common/platform_dialog $XILINX_PATH)
+        platform_found=$(echo "$result" | sed -n '1p')
+        platform_name=$(echo "$result" | sed -n '2p')
+        multiple_platforms=$(echo "$result" | sed -n '3p')
+        if [[ $multiple_platforms = "0" ]]; then
+            echo $platform_name
+        fi
     fi
 fi
 
@@ -141,41 +188,41 @@ if ! [ -d "$DIR" ]; then
 fi
 
 #select vivado release
-if [ "$hostname" = "alveo-build-01" ]; then
-    echo ""
-    echo "${bold}Please, select your favourite Vivado release:${normal}" 
-    echo ""
-    PS3=""
-    select release in 2022.1 2022.2
-    do
-        case $release in
-            2022.1) break;;
-            2022.2) break;;
-        esac
-    done
-    #enable release
-    eval "source xrt_select $release"
-fi
+#if [ "$hostname" = "alveo-build-01" ]; then
+#    echo ""
+#    echo "${bold}Please, select your favourite Vivado release:${normal}" 
+#    echo ""
+#    PS3=""
+#    select release in 2022.1 2022.2
+#    do
+#        case $release in
+#            2022.1) break;;
+#            2022.2) break;;
+#        esac
+#    done
+#    #enable release
+#    eval "source xrt_select $release"
+#fi
 
 # device_name to coyote string 
-if [ "$hostname" = "alveo-build-01" ]; then
-    echo "${bold}Please, choose the device (or platform):${normal}" 
-    echo ""
-    PS3=""
-    select FDEV_NAME in u250 u280 u50d u55c
-    do
-        case $FDEV_NAME in
-            u250) break;;
-            u280) break;;
-            u50d) break;;
-            u55c) break;;
-        esac
-    done
-    echo ""
-else
-    #get FDEV_NAME
-    platform=$(/opt/cli/get/get_fpga_device_param $device_index platform)
-    FDEV_NAME=$(echo "$platform" | cut -d'_' -f2)
+#if [ "$hostname" = "alveo-build-01" ]; then
+#    echo "${bold}Please, choose the device (or platform):${normal}" 
+#    echo ""
+#    PS3=""
+#    select FDEV_NAME in u250 u280 u50d u55c
+#    do
+#        case $FDEV_NAME in
+#            u250) break;;
+#            u280) break;;
+#            u50d) break;;
+#            u55c) break;;
+#        esac
+#    done
+#    echo ""
+#else
+    ##get FDEV_NAME
+    #platform=$(/opt/cli/get/get_fpga_device_param $device_index platform)
+    #FDEV_NAME=$(echo "$platform" | cut -d'_' -f2)
 
     #if [ "$device_name" = "xcu250_0" ]; then
     #    FDEV_NAME=u250
@@ -188,7 +235,9 @@ else
     #elif [ "$device_name" = "xcu50_u55n_0" ]; then
     #    FDEV_NAME=u50    
     #fi
-fi
+#fi
+
+FDEV_NAME=$(echo "$platform_name" | cut -d'_' -f2)
 
 #check on u50d
 #if [ "$FDEV_NAME" = "u50d" ]; then
