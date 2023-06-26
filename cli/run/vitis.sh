@@ -6,11 +6,23 @@ normal=$(tput sgr0)
 #constants
 CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
+BUILD_SERVERS_LIST="$CLI_PATH/constants/BUILD_SERVERS_LIST"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 WORKFLOW="vitis"
 
 #get username
 username=$USER
+
+#get hostname
+url="${HOSTNAME}"
+hostname="${url%%.*}"
+
+#check on build server
+if grep -q "^$hostname$" $BUILD_SERVERS_LIST; then
+    echo ""
+    echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
+    exit
+fi
 
 #check on DEVICES_LIST
 source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
