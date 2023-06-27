@@ -6,7 +6,7 @@ normal=$(tput sgr0)
 #constants
 CLI_PATH="/opt/cli"
 MPICH_VERSION="4.0.2"
-MPICH_WORKDIR="/opt/mpich/mpich-$MPICH_VERSION-install"
+MPICH_PATH="/opt/mpich/mpich-$MPICH_VERSION-install"
 WORKFLOW="mpi"
 
 #get username
@@ -16,9 +16,17 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
+#check on valid MPICH version
+if [ ! -d "$MPICH_PATH" ]; then
+    echo ""
+    echo "Please, install a valid MPICH version for ${bold}$hostname!${normal}"
+    echo ""
+    exit 1
+fi
+
 #set environment
-PATH=$MPICH_WORKDIR/bin:$PATH
-LD_LIBRARY_PATH=$MPICH_WORKDIR/lib:$LD_LIBRARY_PATH
+PATH=$MPICH_PATH/bin:$PATH
+LD_LIBRARY_PATH=$MPICH_PATH/lib:$LD_LIBRARY_PATH
 
 #inputs
 flags=$@
