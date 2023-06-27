@@ -18,7 +18,7 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#check on ACAP or FPGA servers (build servers not allowed)
+#check on ACAP or FPGA servers (GPU or build servers not allowed)
 if ! (grep -q "^$hostname$" $FPGA_SERVERS_LIST || grep -q "^$hostname$" $ACAP_SERVERS_LIST); then
     echo ""
     echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
