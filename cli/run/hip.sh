@@ -5,6 +5,7 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="/opt/cli"
+ROCM_PATH="/opt/rocm"
 WORKFLOW="hip"
 
 #get username
@@ -16,7 +17,7 @@ hostname="${url%%.*}"
 
 #verify hip workflow (based on installed software)
 test1=$(dkms status | grep amdgpu)
-if [ -z "$test1" ] || [ ! -d "/opt/rocm/bin/" ]; then
+if [ -z "$test1" ] || [ ! -d "$ROCM_PATH/bin/" ]; then
     echo ""
     echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
     echo ""
