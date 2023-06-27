@@ -203,14 +203,7 @@ if ! [ -d "$DIR" ]; then
     exit
 fi
 
-#device_name to coyote string 
-#FDEV_NAME=$(echo $HOSTNAME | grep -oP '(?<=-).*?(?=-)')
-#if [ "$FDEV_NAME" = "u50d" ]; then
-#    FDEV_NAME="u50"
-#fi
-#device_name=$($CLI_PATH/get/get_fpga_device_param $device_index device_name)
-
-#get FDEV_NAME
+#platform to FDEV_NAME
 platform=$(/opt/cli/get/get_fpga_device_param $device_index platform)
 FDEV_NAME=$(echo "$platform" | cut -d'_' -f2)
 
