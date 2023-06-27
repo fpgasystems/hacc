@@ -252,10 +252,28 @@
 
 #constants -----------------------------------------------------------------------------------
 
+- name: copy ACAP_SERVERS_LIST
+  copy:
+    src: "../../cli/constants/ACAP_SERVERS_LIST"
+    dest: /opt/cli/constants/ACAP_SERVERS_LIST
+    mode: 0644
+
 - name: copy BUILD_SERVERS_LIST
   copy:
     src: "../../cli/constants/BUILD_SERVERS_LIST"
     dest: /opt/cli/constants/BUILD_SERVERS_LIST
+    mode: 0644
+
+- name: copy FPGA_SERVERS_LIST
+  copy:
+    src: "../../cli/constants/FPGA_SERVERS_LIST"
+    dest: /opt/cli/constants/FPGA_SERVERS_LIST
+    mode: 0644
+
+- name: copy GPU_SERVERS_LIST
+  copy:
+    src: "../../cli/constants/GPU_SERVERS_LIST"
+    dest: /opt/cli/constants/GPU_SERVERS_LIST
     mode: 0644
 
 #examine -------------------------------------------------------------------------------------
