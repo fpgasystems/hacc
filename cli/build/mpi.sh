@@ -12,9 +12,13 @@ WORKFLOW="mpi"
 #get username
 username=$USER
 
-#set environment
-PATH=$MPICH_PATH/bin:$PATH
-LD_LIBRARY_PATH=$MPICH_PATH/lib:$LD_LIBRARY_PATH
+#check on valid MPICH version
+if [ ! -d "$MPICH_PATH" ]; then
+    echo ""
+    echo "Please, install a valid MPICH version for ${bold}$hostname!${normal}"
+    echo ""
+    exit 1
+fi
 
 #check if workflow exists
 if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
@@ -23,6 +27,10 @@ if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
     echo ""
     exit
 fi
+
+#set environment
+PATH=$MPICH_PATH/bin:$PATH
+LD_LIBRARY_PATH=$MPICH_PATH/lib:$LD_LIBRARY_PATH
 
 #inputs
 read -a flags <<< "$@"
