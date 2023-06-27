@@ -12,6 +12,10 @@ WORKFLOW="mpi"
 #get username
 username=$USER
 
+#get hostname
+url="${HOSTNAME}"
+hostname="${url%%.*}"
+
 #check on valid MPICH version
 if [ ! -d "$MPICH_PATH" ]; then
     echo ""
