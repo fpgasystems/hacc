@@ -14,15 +14,6 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#verify hip workflow (based on installed software)
-test1=$(dkms status | grep amdgpu)
-if [ -z "$test1" ] || [ ! -d "/opt/rocm/bin/" ]; then
-    echo ""
-    echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
-    echo ""
-    exit
-fi
-
 # create my_projects directory
 DIR="/home/$username/my_projects"
 if ! [ -d "$DIR" ]; then
