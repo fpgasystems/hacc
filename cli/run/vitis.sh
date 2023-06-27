@@ -26,6 +26,14 @@ if ! (grep -q "^$hostname$" $FPGA_SERVERS_LIST || grep -q "^$hostname$" $ACAP_SE
     exit
 fi
 
+#check on valid XRT version
+if [ -z "$XILINX_XRT" ]; then
+    echo ""
+    echo "Please, source a valid XRT and Vitis version for ${bold}$hostname!${normal}"
+    echo ""
+    exit 1
+fi
+
 #check on DEVICES_LIST
 source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
 
