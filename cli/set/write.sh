@@ -5,14 +5,24 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="/opt/cli"
+FPGA_SERVERS_LIST="$CLI_PATH/constants/FPGA_SERVERS_LIST"
 
 #get username
 username=$USER
 
-#inputs
-read -a flags <<< "$@"
+#get hostname
+url="${HOSTNAME}"
+hostname="${url%%.*}"
 
-#check for vivado_developers
+#check on FPGA servers (ACAP, GPU or build servers not allowed)
+if ! (grep -q "^$hostname$" $FPGA_SERVERS_LIST); then
+    echo ""
+    echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
+    echo ""
+    exit
+fi
+
+#check on vivado_developers
 member=$($CLI_PATH/common/is_member $username vivado_developers)
 if [ "$member" = "false" ]; then
     echo ""
@@ -20,6 +30,9 @@ if [ "$member" = "false" ]; then
     echo ""
     exit
 fi
+
+#inputs
+read -a flags <<< "$@"
 
 # flags cannot be empty
 if [ "$flags" = "" ]; then
