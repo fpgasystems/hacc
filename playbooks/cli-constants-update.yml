@@ -7,12 +7,12 @@
     #- alveo-u50d
     #- alveo-u55c
     #- versal-vck5000
-    - hacc-boxes
+    #- hacc-boxes
     - alveo-u55c-01.inf.ethz.ch
     #- alveo-u55c-02.inf.ethz.ch
     #- alveo-u55c-04.inf.ethz.ch
-    #- hacc-box-01.inf.ethz.ch
-    #- hacc-box-02.inf.ethz.ch
+    - hacc-box-01.inf.ethz.ch
+    - hacc-box-02.inf.ethz.ch
     #- hacc-box-03.inf.ethz.ch
   become: true
   become_method: community.general.sudosu
@@ -25,6 +25,6 @@
     
     - name: copy constants folder and contents
       copy:
-        src: "../../cli/constants"
-        dest: /opt/cli/constants
+        src: "../cli/constants"
+        dest: /opt/cli/
         mode: 0644
