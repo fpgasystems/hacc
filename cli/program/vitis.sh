@@ -7,7 +7,8 @@ normal=$(tput sgr0)
 CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
 XRT_PATH="/opt/xilinx/xrt"
-BUILD_SERVERS_LIST="$CLI_PATH/constants/BUILD_SERVERS_LIST"
+ACAP_SERVERS_LIST="$CLI_PATH/constants/ACAP_SERVERS_LIST"
+FPGA_SERVERS_LIST="$CLI_PATH/constants/FPGA_SERVERS_LIST"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 WORKFLOW="vitis"
 TARGET="hw"
@@ -19,10 +20,11 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#check on build server
-if grep -q "^$hostname$" $BUILD_SERVERS_LIST; then
+#check on ACAP or FPGA servers (GPU or build servers not allowed)
+if ! (grep -q "^$hostname$" $FPGA_SERVERS_LIST || grep -q "^$hostname$" $ACAP_SERVERS_LIST); then
     echo ""
     echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
+    echo ""
     exit
 fi
 
