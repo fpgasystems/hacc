@@ -7,6 +7,7 @@ normal=$(tput sgr0)
 CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
 FPGA_SERVERS_LIST="$CLI_PATH/constants/FPGA_SERVERS_LIST"
+VIVADO_DEVICES_MAX=$(cat $CLI_PATH/constants/VIVADO_DEVICES_MAX)
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 WORKFLOW="coyote"
 BIT_NAME="cyt_top.bit"
@@ -104,6 +105,24 @@ else
         device_index=$(echo "$result" | sed -n '2p')
         echo ""
     fi
+fi
+
+#get vivado_devices
+vivado_devices=0
+for ((i=1; i<=$MAX_DEVICES; i++)); do
+    workflow=$($CLI_PATH/get/workflow -d $i)
+    workflow=$(echo "$workflow" $i | cut -d' ' -f2 | sed '/^\s*$/d')
+    if [ "$workflow" = "vivado" ] && [ "$i" -ne $device_index ]; then
+        ((vivado_devices++))
+    fi 
+done
+
+#check on VIVADO_DEVICES_MAX
+if [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
+    echo ""
+    echo "Sorry, you have reached VIVADO_DEVICES_MAX on ${bold}$hostname!${normal}"
+    echo ""
+    exit
 fi
 
 echo ""

@@ -9,6 +9,7 @@ HACC_PATH="/opt/hacc"
 XRT_PATH="/opt/xilinx/xrt"
 VIVADO_PATH="/tools/Xilinx/Vivado"
 FPGA_SERVERS_LIST="$CLI_PATH/constants/FPGA_SERVERS_LIST"
+VIVADO_DEVICES_MAX=$(cat $CLI_PATH/constants/VIVADO_DEVICES_MAX)
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 SERVERADDR="localhost"
 
@@ -70,7 +71,7 @@ else
     result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
     device_found=$(echo "$result" | sed -n '1p')
     device_index=$(echo "$result" | sed -n '2p')
-    #forbidden combinations
+    #forbidden combinations (1)
     if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
         $CLI_PATH/sgutil program vivado -h
         exit
@@ -110,6 +111,24 @@ fi
 
 echo ""
 echo "${bold}sgutil program vivado${normal}"
+
+#get vivado_devices
+vivado_devices=0
+for ((i=1; i<=$MAX_DEVICES; i++)); do
+    workflow=$($CLI_PATH/get/workflow -d $i)
+    workflow=$(echo "$workflow" $i | cut -d' ' -f2 | sed '/^\s*$/d')
+    if [ "$workflow" = "vivado" ] && [ "$i" -ne $device_index ]; then
+        ((vivado_devices++))
+    fi 
+done
+
+#check on VIVADO_DEVICES_MAX
+if [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
+    echo ""
+    echo "Sorry, you have reached VIVADO_DEVICES_MAX on ${bold}$hostname!${normal}"
+    echo ""
+    exit
+fi
 
 #get release branch
 branch=$($XRT_PATH/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
