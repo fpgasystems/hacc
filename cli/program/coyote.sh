@@ -96,6 +96,15 @@ if [ "$flags" = "" ]; then
         result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
+        #get vivado_devices
+        vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
+        #check on VIVADO_DEVICES_MAX
+        if [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
+            echo ""
+            echo "Sorry, you have reached the maximum number of devices in ${bold}Vivado workflow!${normal}"
+            echo ""
+            exit
+        fi
     fi
     #get_servers
     echo ""
@@ -128,9 +137,16 @@ else
     result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
     device_found=$(echo "$result" | sed -n '1p')
     device_index=$(echo "$result" | sed -n '2p')
+    #get vivado_devices
+    vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
     #forbidden combinations
     if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
         $CLI_PATH/sgutil program coyote -h
+        exit
+    elif [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
+        echo ""
+        echo "Sorry, you have reached the maximum number of devices in ${bold}Vivado workflow!${normal}"
+        echo ""
         exit
     fi
     #deployment_dialog_check
@@ -158,7 +174,7 @@ else
         if [[ $multiple_projects = "0" ]]; then
             echo $project_name
         fi
-        #echo ""
+        echo ""
     fi
     #device_dialog (forgotten mandatory 2)
     if [[ $multiple_devices = "0" ]]; then
@@ -191,17 +207,6 @@ else
             echo ""
         fi
     fi
-fi
-
-#get vivado_devices
-vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
-
-#check on VIVADO_DEVICES_MAX
-if [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
-    echo ""
-    echo "Sorry, you have reached VIVADO_DEVICES_MAX on ${bold}$hostname!${normal}"
-    echo ""
-    exit
 fi
 
 #define directories (1)

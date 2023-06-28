@@ -63,10 +63,6 @@ if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
 
-#header (1/1)
-echo ""
-echo "${bold}sgutil validate $WORKFLOW${normal}"
-
 #check on flags
 device_found=""
 device_index=""
@@ -82,15 +78,31 @@ if [ "$flags" = "" ]; then
         result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
+        #get vivado_devices
+        vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
+        #check on VIVADO_DEVICES_MAX
+        if [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
+            echo ""
+            echo "Sorry, you have reached the maximum number of devices in ${bold}Vivado workflow!${normal}"
+            echo ""
+            exit
+        fi
     fi
 else
     #device_dialog_check
     result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
     device_found=$(echo "$result" | sed -n '1p')
     device_index=$(echo "$result" | sed -n '2p')
+    #get vivado_devices
+    vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
     #forbidden combinations
     if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
-        $CLI_PATH/sgutil program coyote -h
+        $CLI_PATH/sgutil validate coyote -h
+        exit
+    elif [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
+        echo ""
+        echo "Sorry, you have reached the maximum number of devices in ${bold}Vivado workflow!${normal}"
+        echo ""
         exit
     fi
     #device_dialog (forgotten mandatory 1)
@@ -103,20 +115,20 @@ else
         result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
+        #check on VIVADO_DEVICES_MAX
+        if [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
+            echo ""
+            echo "Sorry, you have reached the maximum number of devices in ${bold}Vivado workflow!${normal}"
+            echo ""
+            exit
+        fi
         echo ""
     fi
 fi
 
-#get vivado_devices
-vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
-
-#check on VIVADO_DEVICES_MAX
-if [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
-    echo ""
-    echo "Sorry, you have reached VIVADO_DEVICES_MAX on ${bold}$hostname!${normal}"
-    echo ""
-    exit
-fi
+#header (1/1)
+echo ""
+echo "${bold}sgutil validate $WORKFLOW${normal}"
 
 echo ""
 echo "${bold}Please, choose your configuration:${normal}" # this refers to a software (sw/examples) configuration

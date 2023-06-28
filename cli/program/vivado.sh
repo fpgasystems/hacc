@@ -71,9 +71,16 @@ else
     result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
     device_found=$(echo "$result" | sed -n '1p')
     device_index=$(echo "$result" | sed -n '2p')
+    #get vivado_devices
+    vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
     #forbidden combinations (1)
     if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
         $CLI_PATH/sgutil program vivado -h
+        exit
+    elif [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
+        echo ""
+        echo "Sorry, you have reached the maximum number of devices in ${bold}Vivado workflow!${normal}"
+        echo ""
         exit
     fi
     #device_dialog (forgotten mandatory)
@@ -88,7 +95,7 @@ else
     result="$("$CLI_PATH/common/bitstream_dialog_check" "${flags[@]}")"
     bitstream_found=$(echo "$result" | sed -n '1p')
     bitstream_name=$(echo "$result" | sed -n '2p')
-    #forbidden combinations (1)
+    #forbidden combinations (2)
     if [ "$bitstream_found" = "1" ] && ([ "$bitstream_name" = "" ] || [ ! -f "$bitstream_name" ] || [ "${bitstream_name##*.}" != "bit" ]); then
         $CLI_PATH/sgutil program vivado -h
         exit
@@ -97,12 +104,12 @@ else
     result="$("$CLI_PATH/common/driver_dialog_check" "${flags[@]}")"
     driver_found=$(echo "$result" | sed -n '1p')
     driver_name=$(echo "$result" | sed -n '2p')
-    #forbidden combinations (2)
+    #forbidden combinations (3)
     if [ "$driver_found" = "1" ] && ([ "$driver_name" = "" ] || [ ! -f "$driver_name" ] || [ "${driver_name##*.}" != "ko" ]); then
         $CLI_PATH/sgutil program vivado -h
         exit
     fi
-    #forbidden combinations (3)
+    #forbidden combinations (4)
     if ([ "$bitstream_found" = "0" ] && [ "$driver_found" = "0" ]); then
         $CLI_PATH/sgutil program vivado -h
         exit
@@ -111,17 +118,6 @@ fi
 
 echo ""
 echo "${bold}sgutil program vivado${normal}"
-
-#get vivado_devices
-vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
-
-#check on VIVADO_DEVICES_MAX
-if [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
-    echo ""
-    echo "Sorry, you have reached VIVADO_DEVICES_MAX on ${bold}$hostname!${normal}"
-    echo ""
-    exit
-fi
 
 #get release branch
 branch=$($XRT_PATH/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
