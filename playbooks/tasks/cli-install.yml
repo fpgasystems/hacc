@@ -276,6 +276,18 @@
     dest: /opt/cli/constants/GPU_SERVERS_LIST
     mode: 0644
 
+- name: copy VIRTUALIZED_SERVERS_LIST
+  copy:
+    src: "../../cli/constants/VIRTUALIZED_SERVERS_LIST"
+    dest: /opt/cli/constants/VIRTUALIZED_SERVERS_LIST
+    mode: 0644
+
+- name: copy VIVADO_DEVICES_MAX
+  copy:
+    src: "../../cli/constants/VIVADO_DEVICES_MAX"
+    dest: /opt/cli/constants/VIVADO_DEVICES_MAX
+    mode: 0644
+
 #examine -------------------------------------------------------------------------------------
 
 - name: copy examine
