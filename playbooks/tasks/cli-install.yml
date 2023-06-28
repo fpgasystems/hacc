@@ -433,6 +433,12 @@
     path: /opt/cli/common/device_name_dialog_check
     state: absent
 
+- name: copy common/get_vivado_devices script
+  copy:
+    src: "../../cli/common/get_vivado_devices.sh"
+    dest: /opt/cli/common/get_vivado_devices
+    mode: 0755
+
 #get  ----------------------------------------------------------------------------------------
 
 #- name: copy get_from_vars
