@@ -1,11 +1,16 @@
 #!/bin/bash
 
-MAX_DEVICES=$1
+CLI_PATH=$1
+MAX_DEVICES=$2
+device_index=$3
 
-if (( $MAX_DEVICES > 1 )); then
-    multiple_devices=1
-else
-    multiple_devices=0
-fi
+vivado_devices=0
+for ((i=1; i<=$MAX_DEVICES; i++)); do
+    workflow=$($CLI_PATH/get/workflow -d $i)
+    workflow=$(echo "$workflow" $i | cut -d' ' -f2 | sed '/^\s*$/d')
+    if [ "$workflow" = "vivado" ] && [ "$i" -ne $device_index ]; then
+        ((vivado_devices++))
+    fi 
+done
 
-echo $multiple_devices
+echo $vivado_devices
