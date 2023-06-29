@@ -5,6 +5,7 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="/opt/cli"
+XRT_PATH="/opt/xilinx/xrt"
 HACC_PATH="/opt/hacc"
 FPGA_SERVERS_LIST="$CLI_PATH/constants/FPGA_SERVERS_LIST"
 VIVADO_DEVICES_MAX=$(cat $CLI_PATH/constants/VIVADO_DEVICES_MAX)
@@ -29,7 +30,7 @@ if ! (grep -q "^$hostname$" $FPGA_SERVERS_LIST); then
 fi
 
 #check on valid XRT version
-if [ -z "$XILINX_XRT" ]; then
+if [ ! -d $XRT_PATH ]; then #if [ -z "$(echo $XILINX_XRT)" ]; then
     echo ""
     echo "Please, source a valid XRT and Vivado version for ${bold}$hostname!${normal}"
     echo ""
