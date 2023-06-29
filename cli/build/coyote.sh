@@ -6,7 +6,6 @@ normal=$(tput sgr0)
 #constants
 CLI_PATH="/opt/cli"
 XILINX_PATH="/opt/xilinx"
-XRT_PATH="$XILINX_PATH/xrt"
 WORKFLOW="coyote"
 
 #get username
@@ -17,7 +16,7 @@ url="${HOSTNAME}"
 hostname="${url%%.*}"
 
 #check on valid XRT version
-if [ ! -d $XRT_PATH ]; then #if [ -z "$(echo $XILINX_XRT)" ]; then
+if [ -z "$(echo $XILINX_XRT)" ]; then
     echo ""
     echo "Please, source a valid XRT and Vitis version for ${bold}$hostname!${normal}"
     echo ""
