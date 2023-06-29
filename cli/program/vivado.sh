@@ -126,10 +126,6 @@ branch=$($XRT_PATH/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]
 if [[ $bitstream_found = "1" ]]; then
     #revert to xrt first if FPGA is already in baremetal (it is proven to be needed on non-virtualized environments)
     virtualized=$($CLI_PATH/common/is_virtualized $CLI_PATH $hostname)
-
-    echo "heyyyyy"
-    echo $virtualized
-
     if [ "$virtualized" = "0" ]; then
         sudo $CLI_PATH/program/revert -d $device_index
     fi
