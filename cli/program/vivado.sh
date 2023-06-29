@@ -32,7 +32,7 @@ if ! (grep -q "^$hostname$" $FPGA_SERVERS_LIST); then
 fi
 
 #check on valid XRT version
-if [ -z "$echo XILINX_XRT" ]; then
+if [ ! -d $XRT_PATH ]; then #if [ -z "$(echo $XILINX_XRT)" ]; then
     echo ""
     echo "Please, source a valid XRT and Vivado version for ${bold}$hostname!${normal}"
     echo ""
