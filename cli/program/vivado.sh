@@ -32,7 +32,7 @@ if ! (grep -q "^$hostname$" $FPGA_SERVERS_LIST); then
 fi
 
 #check on valid XRT version
-if [ -z "$XILINX_XRT" ]; then
+if [ -z "$echo XILINX_XRT" ]; then
     echo ""
     echo "Please, source a valid XRT and Vivado version for ${bold}$hostname!${normal}"
     echo ""
@@ -125,8 +125,12 @@ branch=$($XRT_PATH/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]
 #program bitstream
 if [[ $bitstream_found = "1" ]]; then
     #revert to xrt first if FPGA is already in baremetal (it is proven to be needed on non-virtualized environments)
-    virtualized=$($CLI_PATH/common/is_virtualized)
-    if [ "$virtualized" = "false" ]; then
+    virtualized=$($CLI_PATH/common/is_virtualized $CLI_PATH $hostname)
+
+    echo "heyyyyy"
+    echo $virtualized
+
+    if [ "$virtualized" = "0" ]; then
         sudo $CLI_PATH/program/revert -d $device_index
     fi
 
@@ -141,7 +145,7 @@ if [[ $bitstream_found = "1" ]]; then
     $VIVADO_PATH/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name $bitstream_name
 
     #check for virtualized and apply pci_hot_plug (is always needed as we reverted first)
-    if [ "$virtualized" = "true" ] && [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
+    if [ "$virtualized" = "1" ] && [[ $(lspci | grep Xilinx | wc -l) = 2 ]]; then
         echo ""
         echo "${bold}The server needs to warm boot to operate in Vivado workflow. For this purpose:${normal}"
         echo ""
@@ -151,7 +155,7 @@ if [[ $bitstream_found = "1" ]]; then
         #send email
         echo "Subject: $username requires to go to baremetal/warm boot ($hostname)" | sendmail $email
         exit
-    elif [ "$virtualized" = "false" ]; then 
+    elif [ "$virtualized" = "0" ]; then 
         #get device params
         upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
         root_port=$($CLI_PATH/get/get_fpga_device_param $device_index root_port)

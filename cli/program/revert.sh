@@ -48,8 +48,8 @@ MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 
 #check on virtualized
-virtualized=$($CLI_PATH/common/is_virtualized)
-if [ "$virtualized" = "true" ]; then
+virtualized=$($CLI_PATH/common/is_virtualized $CLI_PATH $hostname)
+if [ "$virtualized" = "1" ]; then
     echo ""
     echo "${bold}The server needs to revert to operate with XRT normally. For this purpose:${normal}"
 	echo ""
