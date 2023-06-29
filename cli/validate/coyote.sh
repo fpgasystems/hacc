@@ -7,6 +7,7 @@ normal=$(tput sgr0)
 CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
 FPGA_SERVERS_LIST="$CLI_PATH/constants/FPGA_SERVERS_LIST"
+VIRTUALIZED_SERVERS_LIST="$CLI_PATH/constants/VIRTUALIZED_SERVERS_LIST"
 VIVADO_DEVICES_MAX=$(cat $CLI_PATH/constants/VIVADO_DEVICES_MAX)
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 WORKFLOW="coyote"
@@ -22,6 +23,14 @@ hostname="${url%%.*}"
 
 #check on FPGA servers (ACAP, GPU or build servers not allowed)
 if ! (grep -q "^$hostname$" $FPGA_SERVERS_LIST); then
+    echo ""
+    echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
+    echo ""
+    exit
+fi
+
+#check on virtualized servers (hostname is in VIRTUALIZED_SERVERS_LIST)
+if (grep -q "^$hostname$" $VIRTUALIZED_SERVERS_LIST); then
     echo ""
     echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
     echo ""
@@ -335,30 +344,30 @@ APP_BUILD_DIR=/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$FDE
 #change directory
 cd $APP_BUILD_DIR
 
-#program coyote bitstream
-$CLI_PATH/program/vivado --device $device_index -b $BIT_NAME
+#program coyote bitstream and driver
+$CLI_PATH/program/vivado --device $device_index -b $BIT_NAME --driver $DRIVER_NAME
 
-#show message for virtualized environment (after program/vivado shows go to baremetal/warm boot message)
-virtualized=$($CLI_PATH/common/is_virtualized)
-if [[ $(lspci | grep Xilinx | wc -l) = 2 ]] && [ "$virtualized" = "true" ]; then
-    echo "Once you login again on the server, please type ${bold}sgutil validate $WORKFLOW${normal} again."
-    echo ""
-fi
+#get permissions on N_REGIONS
+$CLI_PATH/program/get_N_REGIONS $DIR
 
-#get BDF (i.e., Bus:Device.Function) 
-upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
-bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
+#run 
+cd $APP_BUILD_DIR
+./main
 
-#this means that the user made a warm boot (virtualized) or the PCI hot plug script run (dedicated servers)
-if [[ $(lspci | grep Xilinx | grep $bdf | wc -l) = 1 ]]; then 
+##get BDF (i.e., Bus:Device.Function) 
+#upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
+#bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
 
-    #program coyote driver
-    $CLI_PATH/sgutil program vivado --device $device_index --driver $DRIVER_NAME
-
-    #get permissions on N_REGIONS
-    $CLI_PATH/program/get_N_REGIONS $DIR
-
-    #run 
-    cd $APP_BUILD_DIR
-    ./main
-fi
+#program driver
+#if [[ $(lspci | grep Xilinx | grep $bdf | wc -l) = 1 ]]; then 
+#
+#    #program coyote driver
+#    $CLI_PATH/sgutil program vivado --device $device_index --driver $DRIVER_NAME
+#
+#    #get permissions on N_REGIONS
+#    $CLI_PATH/program/get_N_REGIONS $DIR
+#
+#    #run 
+#    cd $APP_BUILD_DIR
+#    ./main
+#fi
