@@ -7,7 +7,7 @@ normal=$(tput sgr0)
 CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
 XILINX_PATH="/opt/xilinx"
-BUILD_SERVERS_LIST="$CLI_PATH/constants/BUILD_SERVERS_LIST"
+CPU_SERVERS_LIST="$CLI_PATH/constants/CPU_SERVERS_LIST"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 
 #get hostname
@@ -15,7 +15,7 @@ url="${HOSTNAME}"
 hostname="${url%%.*}"
 
 #check on build server
-if grep -q "^$hostname$" $BUILD_SERVERS_LIST; then
+if grep -q "^$hostname$" $CPU_SERVERS_LIST; then
     echo ""
     ls -l $XILINX_PATH/platforms/ | grep '^d' | awk '{print $NF}'
     echo ""
