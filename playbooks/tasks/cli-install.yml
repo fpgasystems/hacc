@@ -274,6 +274,12 @@
     dest: /opt/cli/common/is_gpu
     mode: 0755
 
+- name: copy common/get_server_type script
+  copy:
+    src: "../../cli/common/get_server_type.sh"
+    dest: /opt/cli/common/get_server_type
+    mode: 0755
+
 #constants -----------------------------------------------------------------------------------
 
 - name: copy ACAP_SERVERS_LIST
