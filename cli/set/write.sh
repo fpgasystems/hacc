@@ -5,7 +5,6 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="/opt/cli"
-FPGA_SERVERS_LIST="$CLI_PATH/constants/FPGA_SERVERS_LIST"
 
 #get username
 username=$USER
@@ -14,8 +13,9 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#check on FPGA servers (ACAP, GPU or build servers not allowed)
-if ! (grep -q "^$hostname$" $FPGA_SERVERS_LIST); then
+#check on FPGA servers (server must have at least one FPGA)
+fpga=$($CLI_PATH/common/is_fpga $CLI_PATH $hostname)
+if [ "$fpga" = "0" ]; then
     echo ""
     echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
     echo ""

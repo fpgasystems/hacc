@@ -7,8 +7,6 @@ normal=$(tput sgr0)
 CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
 XRT_PATH="/opt/xilinx/xrt"
-FPGA_SERVERS_LIST="$CLI_PATH/constants/FPGA_SERVERS_LIST"
-VIRTUALIZED_SERVERS_LIST="$CLI_PATH/constants/VIRTUALIZED_SERVERS_LIST"
 VIVADO_DEVICES_MAX=$(cat $CLI_PATH/constants/VIVADO_DEVICES_MAX)
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 WORKFLOW="coyote"
@@ -22,16 +20,18 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#check on FPGA servers (ACAP, GPU or build servers not allowed)
-if ! (grep -q "^$hostname$" $FPGA_SERVERS_LIST); then
+#check on FPGA servers (server must have at least one FPGA)
+fpga=$($CLI_PATH/common/is_fpga $CLI_PATH $hostname)
+if [ "$fpga" = "0" ]; then
     echo ""
     echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
     echo ""
     exit
 fi
 
-#check on virtualized servers (hostname is in VIRTUALIZED_SERVERS_LIST)
-if (grep -q "^$hostname$" $VIRTUALIZED_SERVERS_LIST); then
+#check on virtualized servers
+virtualized=$($CLI_PATH/common/is_virtualized $CLI_PATH $hostname)
+if [ "$virtualized" = "1" ]; then
     echo ""
     echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
     echo ""
@@ -39,7 +39,7 @@ if (grep -q "^$hostname$" $VIRTUALIZED_SERVERS_LIST); then
 fi
 
 #check on valid XRT version
-if [ ! -d $XRT_PATH ]; then #if [ -z "$(echo $XILINX_XRT)" ]; then
+if [ ! -d $XRT_PATH ]; then
     echo ""
     echo "Please, source a valid XRT and Vivado version for ${bold}$hostname!${normal}"
     echo ""

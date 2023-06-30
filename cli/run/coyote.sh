@@ -6,7 +6,6 @@ normal=$(tput sgr0)
 #constants
 CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
-FPGA_SERVERS_LIST="$CLI_PATH/constants/FPGA_SERVERS_LIST"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 WORKFLOW="coyote"
 
@@ -17,8 +16,9 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#check on FPGA servers (ACAP, GPU or build servers not allowed)
-if ! (grep -q "^$hostname$" $FPGA_SERVERS_LIST); then
+#check on FPGA servers (server must have at least one FPGA)
+fpga=$($CLI_PATH/common/is_fpga $CLI_PATH $hostname)
+if [ "$fpga" = "0" ]; then
     echo ""
     echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
     echo ""
@@ -33,9 +33,6 @@ MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 
 #check on multiple devices
 multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
-
-# inputs
-read -a flags <<< "$@"
 
 #check for vivado_developers
 member=$($CLI_PATH/common/is_member $username vivado_developers)
@@ -53,6 +50,9 @@ if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
     echo ""
     exit
 fi
+
+#inputs
+read -a flags <<< "$@"
 
 #check on flags
 project_found=""

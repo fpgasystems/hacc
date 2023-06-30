@@ -7,8 +7,6 @@ normal=$(tput sgr0)
 CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
 XRT_PATH="/opt/xilinx/xrt"
-ACAP_SERVERS_LIST="$CLI_PATH/constants/ACAP_SERVERS_LIST"
-FPGA_SERVERS_LIST="$CLI_PATH/constants/FPGA_SERVERS_LIST"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 
 #get username
@@ -18,8 +16,10 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#check on ACAP or FPGA servers (GPU or build servers not allowed)
-if ! (grep -q "^$hostname$" $FPGA_SERVERS_LIST || grep -q "^$hostname$" $ACAP_SERVERS_LIST); then
+#check on ACAP or FPGA servers (server must have at least one ACAP or one FPGA)
+acap=$($CLI_PATH/common/is_acap $CLI_PATH $hostname)
+fpga=$($CLI_PATH/common/is_fpga $CLI_PATH $hostname)
+if [ "$acap" = "0" ] && [ "$fpga" = "0" ]; then
     echo ""
     echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
     echo ""
@@ -27,7 +27,7 @@ if ! (grep -q "^$hostname$" $FPGA_SERVERS_LIST || grep -q "^$hostname$" $ACAP_SE
 fi
 
 #check on valid XRT version
-if [ ! -d $XRT_PATH ]; then #if [ -z "$(echo $XILINX_XRT)" ]; then
+if [ ! -d $XRT_PATH ]; then
     echo ""
     echo "Please, source a valid XRT and Vitis version for ${bold}$hostname!${normal}"
     echo ""
