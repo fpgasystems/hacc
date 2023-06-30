@@ -18,12 +18,19 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#get email
-email=$($CLI_PATH/common/get_email)
+#check on virtualized
+virtualized=$($CLI_PATH/common/is_virtualized $CLI_PATH $hostname)
+if [ "$virtualized" = "1" ]; then
+    echo ""
+    echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
+    echo ""
+    exit
+fi
 
-#check on FPGA servers (server must have at least one FPGA)
+#check on ACAP or FPGA servers (server must have at least one ACAP or one FPGA)
+acap=$($CLI_PATH/common/is_acap $CLI_PATH $hostname)
 fpga=$($CLI_PATH/common/is_fpga $CLI_PATH $hostname)
-if [ "$fpga" = "0" ]; then
+if [ "$acap" = "0" ] && [ "$fpga" = "0" ]; then
     echo ""
     echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
     echo ""
@@ -46,20 +53,6 @@ MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 
 #check on multiple devices
 multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
-
-#check on virtualized
-virtualized=$($CLI_PATH/common/is_virtualized $CLI_PATH $hostname)
-if [ "$virtualized" = "1" ]; then
-    echo ""
-    echo "${bold}The server needs to revert to operate with XRT normally. For this purpose:${normal}"
-	echo ""
-	echo "    Use the ${bold}revert to xrt${normal} button on the booking system, or"
-	echo "    Contact ${bold}$email${normal} for support."
-    echo ""
-    #send email
-    echo "Subject: $hostname requires to revert_to_xrt ($username)" | sendmail $email
-    exit
-fi
 
 #inputs
 read -a flags <<< "$@"
