@@ -13,9 +13,10 @@ username=$USER
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#check on FPGA servers (server must have at least one FPGA)
+#check on ACAP or FPGA servers (server must have at least one ACAP or one FPGA)
+acap=$($CLI_PATH/common/is_acap $CLI_PATH $hostname)
 fpga=$($CLI_PATH/common/is_fpga $CLI_PATH $hostname)
-if [ "$fpga" = "0" ]; then
+if [ "$acap" = "0" ] && [ "$fpga" = "0" ]; then
     echo ""
     echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
     echo ""
