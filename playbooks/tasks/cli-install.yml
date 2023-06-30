@@ -250,6 +250,30 @@
     dest: /opt/cli/common/target_dialog_check
     mode: 0755
 
+- name: copy common/is_acap script
+  copy:
+    src: "../../cli/common/is_acap.sh"
+    dest: /opt/cli/common/is_acap
+    mode: 0755
+
+- name: copy common/is_cpu script
+  copy:
+    src: "../../cli/common/is_cpu.sh"
+    dest: /opt/cli/common/is_cpu
+    mode: 0755
+
+- name: copy common/is_fpga script
+  copy:
+    src: "../../cli/common/is_fpga.sh"
+    dest: /opt/cli/common/is_fpga
+    mode: 0755
+
+- name: copy common/is_gpu script
+  copy:
+    src: "../../cli/common/is_gpu.sh"
+    dest: /opt/cli/common/is_gpu
+    mode: 0755
+
 #constants -----------------------------------------------------------------------------------
 
 - name: copy ACAP_SERVERS_LIST
