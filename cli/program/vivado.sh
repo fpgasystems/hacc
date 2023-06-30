@@ -26,7 +26,6 @@ email=$($CLI_PATH/common/get_email)
 acap=$($CLI_PATH/common/is_acap $CLI_PATH $hostname)
 fpga=$($CLI_PATH/common/is_fpga $CLI_PATH $hostname)
 if [ "$acap" = "0" ] && [ "$fpga" = "0" ]; then
-if [ "$fpga" = "0" ]; then
     echo ""
     echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
     echo ""
