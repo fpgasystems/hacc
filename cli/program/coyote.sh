@@ -98,12 +98,19 @@ if [ "$flags" = "" ]; then
         result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
-        #get vivado_devices
-        vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
         #check on VIVADO_DEVICES_MAX
+        vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
         if [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
             echo ""
             echo "Sorry, you have reached the maximum number of devices in ${bold}Vivado workflow!${normal}"
+            echo ""
+            exit
+        fi
+        #check on acap (temporal until Coyote works on Versal)
+        device_type=$($CLI_PATH/get/get_fpga_device_param $device_index device_type)
+        if [[ $device_type = "acap" ]]; then
+            echo ""
+            echo "Sorry, this command is not available on ${bold}$device_type!${normal}"
             echo ""
             exit
         fi
@@ -140,14 +147,39 @@ else
     device_found=$(echo "$result" | sed -n '1p')
     device_index=$(echo "$result" | sed -n '2p')
     #get vivado_devices
-    vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
+    #echo "holaaaa"
+    #vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
+    #echo "adeuuuu"
+    #get device_type
+    #device_type=$($CLI_PATH/get/get_fpga_device_param $device_index device_type)
     #forbidden combinations
     if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
         $CLI_PATH/sgutil program coyote -h
         exit
-    elif [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
+    #elif [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
+    #    echo ""
+    #    echo "Sorry, you have reached the maximum number of devices in ${bold}Vivado workflow!${normal}"
+    #    echo ""
+    #    exit
+    #elif [[ $device_type = "acap" ]]; then
+    #    echo ""
+    #    echo "Sorry, this command is not available on ${bold}$device_type!${normal}"
+    #    echo ""
+    #    exit
+    fi
+    #check on VIVADO_DEVICES_MAX
+    vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
+    if ([ "$device_found" = "1" ] && [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]); then
         echo ""
         echo "Sorry, you have reached the maximum number of devices in ${bold}Vivado workflow!${normal}"
+        echo ""
+        exit
+    fi
+    #check on acap (temporal until Coyote works on Versal)
+    device_type=$($CLI_PATH/get/get_fpga_device_param $device_index device_type)
+    if ([ "$device_found" = "1" ] && [[ $device_type = "acap" ]]); then
+        echo ""
+        echo "Sorry, this command is not available on ${bold}$device_type!${normal}"
         echo ""
         exit
     fi
@@ -188,6 +220,22 @@ else
         result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
+        #check on VIVADO_DEVICES_MAX
+        vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
+        if [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
+            echo ""
+            echo "Sorry, you have reached the maximum number of devices in ${bold}Vivado workflow!${normal}"
+            echo ""
+            exit
+        fi
+        #check on acap (temporal until Coyote works on Versal)
+        device_type=$($CLI_PATH/get/get_fpga_device_param $device_index device_type)
+        if [[ $device_type = "acap" ]]; then
+            echo ""
+            echo "Sorry, this command is not available on ${bold}$device_type!${normal}"
+            echo ""
+            exit
+        fi
         echo ""
     fi
     #get_servers
