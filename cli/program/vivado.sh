@@ -72,25 +72,15 @@ else
     result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
     device_found=$(echo "$result" | sed -n '1p')
     device_index=$(echo "$result" | sed -n '2p')
-    #get vivado_devices
-    vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
     #forbidden combinations (1)
     if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
         $CLI_PATH/sgutil program vivado -h
-        exit
-    elif [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
-        echo ""
-        echo "Sorry, you have reached the maximum number of devices in ${bold}Vivado workflow!${normal}"
-        echo ""
         exit
     fi
     #device_dialog (forgotten mandatory)
     if [[ $multiple_devices = "0" ]]; then
         device_found="1"
         device_index="1"
-    elif [[ $device_found = "0" ]]; then
-        $CLI_PATH/sgutil program vivado -h
-        exit
     fi
     #bitstream_dialog_check
     result="$("$CLI_PATH/common/bitstream_dialog_check" "${flags[@]}")"
@@ -111,9 +101,29 @@ else
         exit
     fi
     #forbidden combinations (4)
+    if [ "$bitstream_found" = "1" ] && [[ $device_found = "0" ]]; then # this means bitstream always needs --device 
+        $CLI_PATH/sgutil program vivado -h
+        exit
+    fi
+    #forbidden combinations (5)
     if ([ "$bitstream_found" = "0" ] && [ "$driver_found" = "0" ]); then
         $CLI_PATH/sgutil program vivado -h
         exit
+    fi
+    #forbidden combinations (6)
+    if ([ "$driver_found" = "1" ] && [ "$bitstream_found" = "0" ] && [ "$device_found" = "1" ]); then
+        $CLI_PATH/sgutil program vivado -h
+        exit
+    fi
+    #check on VIVADO_DEVICES_MAX
+    if [ "$device_found" = "1" ]; then
+        vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
+        if [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
+            echo ""
+            echo "Sorry, you have reached the maximum number of devices in ${bold}Vivado workflow!${normal}"
+            echo ""
+            exit
+        fi
     fi
 fi
 
