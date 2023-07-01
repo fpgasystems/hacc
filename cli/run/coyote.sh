@@ -86,6 +86,14 @@ if [ "$flags" = "" ]; then
         result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
+        #check on acap (temporal until Coyote works on Versal)
+        device_type=$($CLI_PATH/get/get_fpga_device_param $device_index device_type)
+        if [[ $device_type = "acap" ]]; then
+            echo ""
+            echo "Sorry, this command is not available on ${bold}$device_type!${normal}"
+            echo ""
+            exit
+        fi
     fi
 else
     #project_dialog_check
@@ -104,6 +112,14 @@ else
     #forbidden combinations
     if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
         $CLI_PATH/sgutil run coyote -h
+        exit
+    fi
+    #check on acap (temporal until Coyote works on Versal)
+    device_type=$($CLI_PATH/get/get_fpga_device_param $device_index device_type)
+    if ([ "$device_found" = "1" ] && [[ $device_type = "acap" ]]); then
+        echo ""
+        echo "Sorry, this command is not available on ${bold}$device_type!${normal}"
+        echo ""
         exit
     fi
     #header (2/2)
@@ -134,6 +150,14 @@ else
         result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
+        #check on acap (temporal until Coyote works on Versal)
+        device_type=$($CLI_PATH/get/get_fpga_device_param $device_index device_type)
+        if [[ $device_type = "acap" ]]; then
+            echo ""
+            echo "Sorry, this command is not available on ${bold}$device_type!${normal}"
+            echo ""
+            exit
+        fi
         echo ""
     fi
 fi
