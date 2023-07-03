@@ -6,7 +6,7 @@ normal=$(tput sgr0)
 #constants
 CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
-XILINX_PATH="/opt/xilinx"
+XILINX_PLATFORMS_PATH="/opt/xilinx/platforms"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 
 #get hostname
@@ -17,7 +17,7 @@ hostname="${url%%.*}"
 cpu=$($CLI_PATH/common/is_cpu $CLI_PATH $hostname)
 if [ "$cpu" = "1" ]; then
     echo ""
-    ls -l $XILINX_PATH/platforms/ | grep '^d' | awk '{print $NF}'
+    ls -l $XILINX_PLATFORMS_PATH/ | grep '^d' | awk '{print $NF}'
     echo ""
     exit
 fi

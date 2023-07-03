@@ -5,7 +5,7 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="/opt/cli"
-XILINX_PATH="/opt/xilinx"
+XILINX_PLATFORMS_PATH="/opt/xilinx/platforms"
 WORKFLOW="coyote"
 
 #get username
@@ -67,7 +67,7 @@ if [ "$flags" = "" ]; then
     echo ""
     echo "${bold}Please, choose your platform:${normal}"
     echo ""
-    result=$($CLI_PATH/common/platform_dialog $XILINX_PATH)
+    result=$($CLI_PATH/common/platform_dialog $XILINX_PLATFORMS_PATH)
     platform_found=$(echo "$result" | sed -n '1p')
     platform_name=$(echo "$result" | sed -n '2p')
     multiple_platforms=$(echo "$result" | sed -n '3p')
@@ -89,7 +89,7 @@ else
     platform_found=$(echo "$result" | sed -n '1p')
     platform_name=$(echo "$result" | sed -n '2p')    
     #forbidden combinations
-    if ([ "$platform_found" = "1" ] && [ "$platform_name" = "" ]) || ([ "$platform_found" = "1" ] && [ ! -d "$XILINX_PATH/platforms/$platform_name" ]); then
+    if ([ "$platform_found" = "1" ] && [ "$platform_name" = "" ]) || ([ "$platform_found" = "1" ] && [ ! -d "$XILINX_PLATFORMS_PATH/$platform_name" ]); then
         $CLI_PATH/sgutil build $WORKFLOW -h
         exit
     fi
@@ -114,7 +114,7 @@ else
         echo ""
         echo "${bold}Please, choose your platform:${normal}"
         echo ""
-        result=$($CLI_PATH/common/platform_dialog $XILINX_PATH)
+        result=$($CLI_PATH/common/platform_dialog $XILINX_PLATFORMS_PATH)
         platform_found=$(echo "$result" | sed -n '1p')
         platform_name=$(echo "$result" | sed -n '2p')
         multiple_platforms=$(echo "$result" | sed -n '3p')

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-XILINX_PATH=$1
+XILINX_PLATFORMS_PATH=$1
 
 # Declare global variables
 declare -g platform_found="0"
@@ -8,7 +8,7 @@ declare -g platform_name=""
 declare -g multiple_platforms="0"
 
 #get platforms
-cd "$XILINX_PATH/platforms"
+cd "$XILINX_PLATFORMS_PATH"
 platforms=( "xilinx_"* )
 
 # Check if there is only one directory
