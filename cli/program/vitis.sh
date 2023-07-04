@@ -8,11 +8,9 @@ CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
 XRT_PATH="/opt/xilinx/xrt"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+MY_PROJECTS_PATH="/home/$USER/my_projects"
 WORKFLOW="vitis"
 TARGET="hw"
-
-#get username
-username=$USER
 
 #get hostname
 url="${HOSTNAME}"
@@ -46,7 +44,7 @@ MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 
 #check if workflow exists
-if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
+if ! [ -d "/home/$USER/my_projects/$WORKFLOW/" ]; then
     echo ""
     echo "You must create build your project first! Please, use sgutil build vitis"
     echo ""
@@ -69,7 +67,7 @@ if [ "$flags" = "" ]; then
     echo ""
     echo "${bold}Please, choose your $WORKFLOW project:${normal}"
     echo ""
-    result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+    result=$($CLI_PATH/common/project_dialog $USER $WORKFLOW)
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     multiple_projects=$(echo "$result" | sed -n '3p')
@@ -111,7 +109,7 @@ else
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     #forbidden combinations
-    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$username/my_projects/$WORKFLOW/$project_name" ]); then 
+    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$USER/my_projects/$WORKFLOW/$project_name" ]); then 
         $CLI_PATH/sgutil program vitis -h
         exit
     fi
@@ -142,7 +140,7 @@ else
         #echo ""
         echo "${bold}Please, choose your $WORKFLOW project:${normal}"
         echo ""
-        result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+        result=$($CLI_PATH/common/project_dialog $USER $WORKFLOW)
         project_found=$(echo "$result" | sed -n '1p')
         project_name=$(echo "$result" | sed -n '2p')
         multiple_projects=$(echo "$result" | sed -n '3p')
@@ -185,7 +183,7 @@ else
 fi
 
 #define directories (1)
-DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
+DIR="/home/$USER/my_projects/$WORKFLOW/$project_name"
 
 #check if project exists
 if ! [ -d "$DIR" ]; then
@@ -199,7 +197,7 @@ fi
 platform=$($CLI_PATH/get/get_fpga_device_param $device_index platform)
 
 #define directories (2)
-APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$TARGET.$platform"
+APP_BUILD_DIR="/home/$USER/my_projects/$WORKFLOW/$project_name/build_dir.$TARGET.$platform"
 
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
@@ -236,7 +234,7 @@ if [ "$deploy_option" -eq 1 ]; then
         echo "Programming remote server ${bold}$i...${normal}"
         echo ""
         #remotely revert to xrt, reset device (delete any xclbin), and program xclbin
-        ssh -t "$username@$i" "sudo $CLI_PATH/program/revert -d $device_index; $XRT_PATH/bin/xbutil reset --device $bdf --force; $XRT_PATH/bin/xbutil program --device $bdf -u $APP_BUILD_DIR/$xclbin"
+        ssh -t "$USER@$i" "sudo $CLI_PATH/program/revert -d $device_index; $XRT_PATH/bin/xbutil reset --device $bdf --force; $XRT_PATH/bin/xbutil program --device $bdf -u $APP_BUILD_DIR/$xclbin"
     done
 fi
 

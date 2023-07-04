@@ -10,10 +10,8 @@ XRT_PATH="/opt/xilinx/xrt"
 VIVADO_PATH="/tools/Xilinx/Vivado"
 VIVADO_DEVICES_MAX=$(cat $CLI_PATH/constants/VIVADO_DEVICES_MAX)
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+MY_PROJECTS_PATH="/home/$USER/my_projects"
 SERVERADDR="localhost"
-
-#get username
-username=$USER
 
 #get hostname
 url="${HOSTNAME}"
@@ -50,10 +48,10 @@ MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 
 #check on vivado_developers
-member=$($CLI_PATH/common/is_member $username vivado_developers)
+member=$($CLI_PATH/common/is_member $USER vivado_developers)
 if [ "$member" = "false" ]; then
     echo ""
-    echo "Sorry, ${bold}$username!${normal} You are not granted to use this command."
+    echo "Sorry, ${bold}$USER!${normal} You are not granted to use this command."
     echo ""
     exit
 fi
@@ -160,7 +158,7 @@ if [[ $bitstream_found = "1" ]]; then
         echo "    Contact ${bold}$email${normal} for support."
         echo ""
         #send email
-        echo "Subject: $username requires to go to baremetal/warm boot ($hostname)" | sendmail $email
+        echo "Subject: $USER requires to go to baremetal/warm boot ($hostname)" | sendmail $email
         exit
     elif [ "$virtualized" = "0" ]; then 
         #get device params
@@ -180,10 +178,10 @@ fi
 if [[ $driver_found = "1" ]]; then
     #we need to copy the driver to /local to avoid permission problems
 	echo ""
-    echo "${bold}Copying driver to /local/home/$username:${normal}"
+    echo "${bold}Copying driver to /local/home/$USER:${normal}"
 	echo ""
-    echo "cp -f $driver_name /local/home/$username"
-    cp -f $driver_name /local/home/$username
+    echo "cp -f $driver_name /local/home/$USER"
+    cp -f $driver_name /local/home/$USER
 
     #insert coyote driver
 	echo ""
@@ -194,8 +192,8 @@ if [[ $driver_found = "1" ]]; then
     echo "sudo rmmod $driver_name"
     sudo rmmod $driver_name
     sleep 1
-    echo "sudo insmod /local/home/$username/$driver_name"
-    sudo insmod /local/home/$username/$driver_name
+    echo "sudo insmod /local/home/$USER/$driver_name"
+    sudo insmod /local/home/$USER/$driver_name
     sleep 1
     echo ""
 fi

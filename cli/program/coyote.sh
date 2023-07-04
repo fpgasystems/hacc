@@ -9,12 +9,10 @@ XRT_PATH="/opt/xilinx/xrt"
 HACC_PATH="/opt/hacc"
 VIVADO_DEVICES_MAX=$(cat $CLI_PATH/constants/VIVADO_DEVICES_MAX)
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+MY_PROJECTS_PATH="/home/$USER/my_projects"
 WORKFLOW="coyote"
 BIT_NAME="cyt_top.bit"
 DRIVER_NAME="coyote_drv.ko"
-
-#get username
-username=$USER
 
 #get hostname
 url="${HOSTNAME}"
@@ -48,16 +46,16 @@ MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 
 #check for vivado_developers
-member=$($CLI_PATH/common/is_member $username vivado_developers)
+member=$($CLI_PATH/common/is_member $USER vivado_developers)
 if [ "$member" = "false" ]; then
     echo ""
-    echo "Sorry, ${bold}$username!${normal} You are not granted to use this command."
+    echo "Sorry, ${bold}$USER!${normal} You are not granted to use this command."
     echo ""
     exit
 fi
 
 #check if workflow exists
-if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
+if ! [ -d "/home/$USER/my_projects/$WORKFLOW/" ]; then
     echo ""
     echo "You must build your project first! Please, use sgutil build coyote"
     echo ""
@@ -80,7 +78,7 @@ if [ "$flags" = "" ]; then
     echo ""
     echo "${bold}Please, choose your $WORKFLOW project:${normal}"
     echo ""
-    result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+    result=$($CLI_PATH/common/project_dialog $USER $WORKFLOW)
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     multiple_projects=$(echo "$result" | sed -n '3p')
@@ -138,7 +136,7 @@ else
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     #forbidden combinations
-    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$username/my_projects/$WORKFLOW/$project_name" ]); then 
+    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$USER/my_projects/$WORKFLOW/$project_name" ]); then 
         $CLI_PATH/sgutil program coyote -h
         exit
     fi
@@ -185,7 +183,7 @@ else
         #echo ""
         echo "${bold}Please, choose your $WORKFLOW project:${normal}"
         echo ""
-        result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+        result=$($CLI_PATH/common/project_dialog $USER $WORKFLOW)
         project_found=$(echo "$result" | sed -n '1p')
         project_name=$(echo "$result" | sed -n '2p')
         multiple_projects=$(echo "$result" | sed -n '3p')
@@ -244,7 +242,7 @@ else
 fi
 
 #define directories (1)
-DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
+DIR="/home/$USER/my_projects/$WORKFLOW/$project_name"
 
 #check if project exists
 if ! [ -d "$DIR" ]; then
@@ -259,7 +257,7 @@ platform=$(/opt/cli/get/get_fpga_device_param $device_index platform)
 FDEV_NAME=$(echo "$platform" | cut -d'_' -f2)
 
 #define directories (2)
-APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/"
+APP_BUILD_DIR="/home/$USER/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/"
 
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
@@ -288,7 +286,7 @@ if [ "$deploy_option" -eq 1 ]; then
         echo "Programming remote server ${bold}$i...${normal}"
         echo ""
         #remotely program bitstream, driver, and run get_N_REGIONS
-        ssh -t $username@$i "cd $APP_BUILD_DIR ; $CLI_PATH/program/vivado --device $device_index -b $BIT_NAME --driver $DRIVER_NAME ; $CLI_PATH/program/get_N_REGIONS $DIR"
+        ssh -t $USER@$i "cd $APP_BUILD_DIR ; $CLI_PATH/program/vivado --device $device_index -b $BIT_NAME --driver $DRIVER_NAME ; $CLI_PATH/program/get_N_REGIONS $DIR"
     done
 fi
 
