@@ -4,7 +4,7 @@ username=$(getent passwd ${SUDO_UID})
 username=${username%%:*}
 
 #constants
-CLI_PATH=$(../common/get_path ../ CLI_PATH)
+CLI_PATH="$(dirname "$(dirname "$0")")"
 
 DB_IP=$($CLI_PATH/common/get_booking_system_host) 
 DB_USER=$($CLI_PATH/common/get_booking_system_db_user) 
