@@ -5,31 +5,29 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="/opt/cli"
+MY_PROJECTS_PATH="/home/$USER/my_projects"
 WORKFLOW="coyote"
-
-#get username
-username=$USER
 
 echo ""
 echo "${bold}sgutil new coyote${normal}"
 
 #check for vivado_developers
-member=$($CLI_PATH/common/is_member $username vivado_developers)
+member=$($CLI_PATH/common/is_member $USER vivado_developers)
 if [ "$member" = "false" ]; then
     echo ""
-    echo "Sorry, ${bold}$username!${normal} You are not granted to use this command."
+    echo "Sorry, ${bold}$USER!${normal} You are not granted to use this command."
     echo ""
     exit
 fi
 
 # create my_projects directory
-DIR="/home/$username/my_projects"
+DIR="$MY_PROJECTS_PATH"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
 
 # create coyote directory
-DIR="/home/$username/my_projects/$WORKFLOW"
+DIR="$MY_PROJECTS_PATH/$WORKFLOW"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
@@ -44,7 +42,7 @@ while true; do
     if  [[ $project_name == validate_* ]]; then
         project_name=""
     fi
-    DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
+    DIR="$MY_PROJECTS_PATH/$WORKFLOW/$project_name"
     if ! [ -d "$DIR" ]; then
         # project_name does not exist
         mkdir ${DIR}
@@ -68,5 +66,5 @@ while true; do
     fi
 done
 echo ""
-echo "The project /home/$username/my_projects/$WORKFLOW/$project_name has been created!"
+echo "The project $MY_PROJECTS_PATH/$WORKFLOW/$project_name has been created!"
 echo ""

@@ -5,23 +5,21 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="/opt/cli"
+MY_PROJECTS_PATH="/home/$USER/my_projects"
 WORKFLOW="hip"
-
-#get username
-username=$USER
 
 #get hostname
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
 # create my_projects directory
-DIR="/home/$username/my_projects"
+DIR="/home/$USER/my_projects"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
 
 # create hip directory
-DIR="/home/$username/my_projects/$WORKFLOW"
+DIR="/home/$USER/my_projects/$WORKFLOW"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
@@ -38,7 +36,7 @@ while true; do
     if  [[ $project_name == validate_* ]]; then
         project_name=""
     fi
-    DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
+    DIR="/home/$USER/my_projects/$WORKFLOW/$project_name"
     if ! [ -d "$DIR" ]; then
         # project_name does not exist
         mkdir ${DIR}
@@ -52,5 +50,5 @@ while true; do
     fi
 done
 echo ""
-echo "The project /home/$username/my_projects/$WORKFLOW/$project_name has been created!"
+echo "The project /home/$USER/my_projects/$WORKFLOW/$project_name has been created!"
 echo ""
