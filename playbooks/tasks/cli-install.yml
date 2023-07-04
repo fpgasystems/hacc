@@ -330,6 +330,48 @@
     dest: /opt/cli/constants/MY_PROJECTS_PATH
     mode: 0644
 
+- name: copy CLI_PATH
+  copy:
+    src: "../../cli/constants/CLI_PATH"
+    dest: /opt/cli/constants/CLI_PATH
+    mode: 0644
+
+- name: copy HACC_PATH
+  copy:
+    src: "../../cli/constants/HACC_PATH"
+    dest: /opt/cli/constants/HACC_PATH
+    mode: 0644
+
+- name: copy ROCM_PATH
+  copy:
+    src: "../../cli/constants/ROCM_PATH"
+    dest: /opt/cli/constants/ROCM_PATH
+    mode: 0644
+
+- name: copy VITIS_PATH
+  copy:
+    src: "../../cli/constants/VITIS_PATH"
+    dest: /opt/cli/constants/VITIS_PATH
+    mode: 0644
+
+- name: copy VIVADO_PATH
+  copy:
+    src: "../../cli/constants/VIVADO_PATH"
+    dest: /opt/cli/constants/VIVADO_PATH
+    mode: 0644
+
+- name: copy XILINX_PLATFORMS_PATH
+  copy:
+    src: "../../cli/constants/XILINX_PLATFORMS_PATH"
+    dest: /opt/cli/constants/XILINX_PLATFORMS_PATH
+    mode: 0644
+
+- name: copy XRT_PATH
+  copy:
+    src: "../../cli/constants/XRT_PATH"
+    dest: /opt/cli/constants/XRT_PATH
+    mode: 0644
+
 #examine -------------------------------------------------------------------------------------
 
 - name: copy examine
