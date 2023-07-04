@@ -4,9 +4,9 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
-CLI_PATH="/opt/cli"
-XRT_PATH="/opt/xilinx/xrt"
-HACC_PATH="/opt/hacc"
+CLI_PATH="$(dirname "$0")"
+XRT_PATH=$($CLI_PATH/common/get_path $CLI_PATH XRT_PATH)
+HACC_PATH=$($CLI_PATH/common/get_path $CLI_PATH HACC_PATH)
 DEVICE_LIST_FPGA="$HACC_PATH/devices_reconfigurable"
 DEVICE_LIST_GPU="$HACC_PATH/devices_gpu"
 STR_LENGTH=20
