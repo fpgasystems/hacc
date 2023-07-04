@@ -7,7 +7,7 @@ normal=$(tput sgr0)
 CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
-MY_PROJECTS_PATH="/home/$USER/my_projects"
+MY_PROJECTS_PATH=$($CLI_PATH/common/get_path $CLI_PATH MY_PROJECTS_PATH)
 WORKFLOW="coyote"
 
 #get hostname

@@ -6,7 +6,7 @@ normal=$(tput sgr0)
 #constants
 CLI_PATH="/opt/cli"
 ROCM_PATH="/opt/rocm"
-MY_PROJECTS_PATH="/home/$USER/my_projects"
+MY_PROJECTS_PATH=$($CLI_PATH/common/get_path $CLI_PATH MY_PROJECTS_PATH)
 WORKFLOW="hip"
 
 #get hostname

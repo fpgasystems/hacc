@@ -7,7 +7,7 @@ normal=$(tput sgr0)
 CLI_PATH="/opt/cli"
 MPICH_VERSION="4.0.2"
 MPICH_PATH="/opt/mpich/mpich-$MPICH_VERSION-install"
-MY_PROJECTS_PATH="/home/$USER/my_projects"
+MY_PROJECTS_PATH=$($CLI_PATH/common/get_path $CLI_PATH MY_PROJECTS_PATH)
 WORKFLOW="mpi"
 
 #get hostname

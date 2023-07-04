@@ -7,7 +7,7 @@ normal=$(tput sgr0)
 CLI_PATH="/opt/cli"
 XILINX_PLATFORMS_PATH="/opt/xilinx/platforms"
 XRT_PATH="/opt/xilinx/xrt"
-MY_PROJECTS_PATH="/home/$USER/my_projects"
+MY_PROJECTS_PATH=$($CLI_PATH/common/get_path $CLI_PATH MY_PROJECTS_PATH)
 WORKFLOW="vitis"
 
 #get hostname
