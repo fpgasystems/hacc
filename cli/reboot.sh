@@ -3,6 +3,9 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
+CLI_PATH="$(dirname "$0")"
+
 #get username
 username=$USER
 
@@ -13,7 +16,7 @@ echo ""
 echo "${bold}sgutil program reboot${normal}"
 
 #check for vivado_developers
-member=$(/opt/cli/common/is_member $username vivado_developers)
+member=$($CLI_PATH/common/is_member $username vivado_developers)
 if [ "$member" = "false" ]; then
     echo ""
     echo "Sorry, ${bold}$username!${normal} You are not granted to use this command."
