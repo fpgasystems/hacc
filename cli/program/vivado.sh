@@ -10,7 +10,6 @@ XRT_PATH="/opt/xilinx/xrt"
 VIVADO_PATH="/tools/Xilinx/Vivado"
 VIVADO_DEVICES_MAX=$(cat $CLI_PATH/constants/VIVADO_DEVICES_MAX)
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
-MY_PROJECTS_PATH="/home/$USER/my_projects"
 SERVERADDR="localhost"
 
 #get hostname

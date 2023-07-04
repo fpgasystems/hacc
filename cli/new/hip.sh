@@ -13,13 +13,13 @@ url="${HOSTNAME}"
 hostname="${url%%.*}"
 
 # create my_projects directory
-DIR="/home/$USER/my_projects"
+DIR="$MY_PROJECTS_PATH"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
 
 # create hip directory
-DIR="/home/$USER/my_projects/$WORKFLOW"
+DIR="$MY_PROJECTS_PATH/$WORKFLOW"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
@@ -36,7 +36,7 @@ while true; do
     if  [[ $project_name == validate_* ]]; then
         project_name=""
     fi
-    DIR="/home/$USER/my_projects/$WORKFLOW/$project_name"
+    DIR="$MY_PROJECTS_PATH/$WORKFLOW/$project_name"
     if ! [ -d "$DIR" ]; then
         # project_name does not exist
         mkdir ${DIR}
@@ -50,5 +50,5 @@ while true; do
     fi
 done
 echo ""
-echo "The project /home/$USER/my_projects/$WORKFLOW/$project_name has been created!"
+echo "The project $MY_PROJECTS_PATH/$WORKFLOW/$project_name has been created!"
 echo ""

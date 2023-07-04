@@ -55,7 +55,7 @@ if [ "$member" = "false" ]; then
 fi
 
 #check if workflow exists
-if ! [ -d "/home/$USER/my_projects/$WORKFLOW/" ]; then
+if ! [ -d "$MY_PROJECTS_PATH/$WORKFLOW/" ]; then
     echo ""
     echo "You must build your project first! Please, use sgutil build coyote"
     echo ""
@@ -136,7 +136,7 @@ else
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     #forbidden combinations
-    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$USER/my_projects/$WORKFLOW/$project_name" ]); then 
+    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "$MY_PROJECTS_PATH/$WORKFLOW/$project_name" ]); then 
         $CLI_PATH/sgutil program coyote -h
         exit
     fi
@@ -242,7 +242,7 @@ else
 fi
 
 #define directories (1)
-DIR="/home/$USER/my_projects/$WORKFLOW/$project_name"
+DIR="$MY_PROJECTS_PATH/$WORKFLOW/$project_name"
 
 #check if project exists
 if ! [ -d "$DIR" ]; then
@@ -257,7 +257,7 @@ platform=$(/opt/cli/get/get_fpga_device_param $device_index platform)
 FDEV_NAME=$(echo "$platform" | cut -d'_' -f2)
 
 #define directories (2)
-APP_BUILD_DIR="/home/$USER/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/"
+APP_BUILD_DIR="$MY_PROJECTS_PATH/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/"
 
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then

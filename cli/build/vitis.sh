@@ -23,7 +23,7 @@ if [ -z "$(echo $XILINX_XRT)" ]; then
 fi
 
 #check if workflow exists
-if ! [ -d "/home/$USER/my_projects/$WORKFLOW/" ]; then
+if ! [ -d "$MY_PROJECTS_PATH/$WORKFLOW/" ]; then
     echo ""
     echo "You must create your project first! Please, use sgutil new vitis"
     echo ""
@@ -77,7 +77,7 @@ else
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     #forbidden combinations
-    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$USER/my_projects/$WORKFLOW/$project_name" ]); then 
+    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "$MY_PROJECTS_PATH/$WORKFLOW/$project_name" ]); then 
         $CLI_PATH/sgutil build vitis -h
         exit
     fi
@@ -138,7 +138,7 @@ else
 fi
 
 #define directories (1)
-DIR="/home/$USER/my_projects/$WORKFLOW/$project_name"
+DIR="$MY_PROJECTS_PATH/$WORKFLOW/$project_name"
 
 #check for project directory
 if ! [ -d "$DIR" ]; then
@@ -192,7 +192,7 @@ config_id="${config%%.*}"
 touch $config_id.active
 
 #define directories (2)
-APP_BUILD_DIR="/home/$USER/my_projects/$WORKFLOW/$project_name/build_dir.$target_name.$platform_name"
+APP_BUILD_DIR="$MY_PROJECTS_PATH/$WORKFLOW/$project_name/build_dir.$target_name.$platform_name"
 
 echo ""
 echo "${bold}Changing directory:${normal}"
@@ -233,9 +233,9 @@ else
     #application compilation
     echo "${bold}Application compilation:${normal}"
     echo ""
-    echo "g++ -o $project_name /home/$USER/my_projects/$WORKFLOW/common/includes/xcl2/xcl2.cpp src/host.cpp -I$XRT_PATH/include -I/tools/Xilinx//Vivado/$branch/include -Wall -O0 -g -std=c++1y -I/home/$USER/my_projects/$WORKFLOW/common/includes/xcl2 -fmessage-length=0 -L$XRT_PATH/lib -pthread -lOpenCL -lrt -lstdc++"
+    echo "g++ -o $project_name $MY_PROJECTS_PATH/$WORKFLOW/common/includes/xcl2/xcl2.cpp src/host.cpp -I$XRT_PATH/include -I/tools/Xilinx//Vivado/$branch/include -Wall -O0 -g -std=c++1y -I$MY_PROJECTS_PATH/$WORKFLOW/common/includes/xcl2 -fmessage-length=0 -L$XRT_PATH/lib -pthread -lOpenCL -lrt -lstdc++"
     echo ""
 
-    g++ -o $project_name /home/$USER/my_projects/$WORKFLOW/common/includes/xcl2/xcl2.cpp src/host.cpp -I$XRT_PATH/include -I/tools/Xilinx//Vivado/$branch/include -Wall -O0 -g -std=c++1y -I/home/$USER/my_projects/$WORKFLOW/common/includes/xcl2 -fmessage-length=0 -L$XRT_PATH/lib -pthread -lOpenCL -lrt -lstdc++
+    g++ -o $project_name $MY_PROJECTS_PATH/$WORKFLOW/common/includes/xcl2/xcl2.cpp src/host.cpp -I$XRT_PATH/include -I/tools/Xilinx//Vivado/$branch/include -Wall -O0 -g -std=c++1y -I$MY_PROJECTS_PATH/$WORKFLOW/common/includes/xcl2 -fmessage-length=0 -L$XRT_PATH/lib -pthread -lOpenCL -lrt -lstdc++
 
 fi

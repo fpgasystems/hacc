@@ -67,7 +67,7 @@ fi
 read -a flags <<< "$@"
 
 #create coyote directory (we do not know if sgutil new coyote has been run)
-DIR="/home/$USER/my_projects/$WORKFLOW"
+DIR="$MY_PROJECTS_PATH/$WORKFLOW"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
@@ -204,7 +204,7 @@ FDEV_NAME=$(echo "$platform" | cut -d'_' -f2)
 project_name="validate_$config.$FDEV_NAME"
 
 #define directories (1)
-DIR="/home/$USER/my_projects/$WORKFLOW/$project_name"
+DIR="$MY_PROJECTS_PATH/$WORKFLOW/$project_name"
 SHELL_BUILD_DIR="$DIR/hw/build"
 DRIVER_DIR="$DIR/driver"
 APP_BUILD_DIR="$DIR/sw/examples/$config/build"
@@ -303,7 +303,7 @@ if ! [ -d "$DIR" ]; then
 fi
 
 #check on build_dir.FDEV_NAME
-if ! [ -d "/home/$USER/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME" ]; then
+if ! [ -d "$MY_PROJECTS_PATH/$WORKFLOW/$project_name/build_dir.$FDEV_NAME" ]; then
     #bitstream compilation
     echo ""
     echo "${bold}Coyote shell compilation:${normal}"
@@ -346,7 +346,7 @@ if ! [ -d "/home/$USER/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME"
     #copy driver
     cp $DRIVER_DIR/coyote_drv.ko $APP_BUILD_DIR
     #rename folder
-    mv $APP_BUILD_DIR /home/$USER/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/
+    mv $APP_BUILD_DIR $MY_PROJECTS_PATH/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/
     #remove all other build temporal folders
     rm -rf $SHELL_BUILD_DIR
     rm $DRIVER_DIR/coyote_drv*
@@ -364,7 +364,7 @@ else
 fi
 
 #define directories (2)
-APP_BUILD_DIR=/home/$USER/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/
+APP_BUILD_DIR=$MY_PROJECTS_PATH/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/
 
 #change directory
 cd $APP_BUILD_DIR

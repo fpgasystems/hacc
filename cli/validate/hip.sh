@@ -29,7 +29,7 @@ echo ""
 echo "${bold}sgutil validate $WORKFLOW${normal}"
 
 #create hip directory (we do not know if sgutil new hip has been run)
-DIR="/home/$USER/my_projects/$WORKFLOW"
+DIR="$MY_PROJECTS_PATH/$WORKFLOW"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
@@ -38,7 +38,7 @@ fi
 #check on flags [...]
 
 #define directories (1)
-VALIDATION_DIR="/home/$USER/my_projects/$WORKFLOW/validate_hip"
+VALIDATION_DIR="$MY_PROJECTS_PATH/$WORKFLOW/validate_hip"
 
 #create temporal validation dir
 if ! [ -d "$VALIDATION_DIR" ]; then
