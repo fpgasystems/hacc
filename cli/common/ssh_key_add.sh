@@ -3,15 +3,8 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-#echo ""
-#echo "${bold}ssh_key_add${normal}"
-#echo ""
-
-# get hostname
-#url="${HOSTNAME}"
-#hostname="${url%%.*}"
-
-#echo $hostname
+#constants
+CLI_PATH=$(../common/get_path ../ CLI_PATH)
 
 # create key
 echo "${bold}Creating id_rsa private and public keys:${normal}"
@@ -36,7 +29,7 @@ else
 fi
 
 # get booked machines
-servers=$(sudo /opt/cli/common/get_booking_system_servers_list | tail -n +2)
+servers=$(sudo $CLI_PATH/common/get_booking_system_servers_list | tail -n +2)
 echo ""
 
 # convert string to an array
