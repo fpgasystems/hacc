@@ -7,10 +7,8 @@ normal=$(tput sgr0)
 CLI_PATH="/opt/cli"
 HACC_PATH="/opt/hacc"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+MY_PROJECTS_PATH="/home/$USER/my_projects"
 WORKFLOW="coyote"
-
-#get username
-username=$USER
 
 #get hostname
 url="${HOSTNAME}"
@@ -36,16 +34,16 @@ MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 
 #check for vivado_developers
-member=$($CLI_PATH/common/is_member $username vivado_developers)
+member=$($CLI_PATH/common/is_member $USER vivado_developers)
 if [ "$member" = "false" ]; then
     echo ""
-    echo "Sorry, ${bold}$username!${normal} You are not granted to use this command."
+    echo "Sorry, ${bold}$USER!${normal} You are not granted to use this command."
     echo ""
     exit
 fi
 
 #check if workflow exists
-if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
+if ! [ -d "/home/$USER/my_projects/$WORKFLOW/" ]; then
     echo ""
     echo "You must build and program your project/device first! Please, use sgutil build/program coyote"
     echo ""
@@ -68,7 +66,7 @@ if [ "$flags" = "" ]; then
     echo ""
     echo "${bold}Please, choose your $WORKFLOW project:${normal}"
     echo ""
-    result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+    result=$($CLI_PATH/common/project_dialog $USER $WORKFLOW)
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     multiple_projects=$(echo "$result" | sed -n '3p')
@@ -101,7 +99,7 @@ else
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     #forbidden combinations
-    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$username/my_projects/$WORKFLOW/$project_name" ]); then 
+    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$USER/my_projects/$WORKFLOW/$project_name" ]); then 
         $CLI_PATH/sgutil run coyote -h
         exit
     fi
@@ -131,7 +129,7 @@ else
         #echo ""
         echo "${bold}Please, choose your $WORKFLOW project:${normal}"
         echo ""
-        result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+        result=$($CLI_PATH/common/project_dialog $USER $WORKFLOW)
         project_found=$(echo "$result" | sed -n '1p')
         project_name=$(echo "$result" | sed -n '2p')
         multiple_projects=$(echo "$result" | sed -n '3p')
@@ -163,7 +161,7 @@ else
 fi
 
 #define directories (1)
-DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
+DIR="/home/$USER/my_projects/$WORKFLOW/$project_name"
 
 #check if project exists
 if ! [ -d "$DIR" ]; then
@@ -185,7 +183,7 @@ platform=$(/opt/cli/get/get_fpga_device_param $device_index platform)
 FDEV_NAME=$(echo "$platform" | cut -d'_' -f2)
 
 #define directories (2)
-APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/" #$FDEV_NAME
+APP_BUILD_DIR="/home/$USER/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/" #$FDEV_NAME
 
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then

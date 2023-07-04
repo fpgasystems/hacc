@@ -7,10 +7,8 @@ normal=$(tput sgr0)
 CLI_PATH="/opt/cli"
 MPICH_VERSION="4.0.2"
 MPICH_PATH="/opt/mpich/mpich-$MPICH_VERSION-install"
+MY_PROJECTS_PATH="/home/$USER/my_projects"
 WORKFLOW="mpi"
-
-#get username
-username=$USER
 
 #get hostname
 url="${HOSTNAME}"
@@ -25,7 +23,7 @@ if [ ! -d "$MPICH_PATH" ]; then
 fi
 
 #check if workflow exists
-if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
+if ! [ -d "/home/$USER/my_projects/$WORKFLOW/" ]; then
     echo ""
     echo "You must build your project first! Please, use sgutil build mpi"
     echo ""
@@ -50,7 +48,7 @@ if [ "$flags" = "" ]; then
     echo ""
     echo "${bold}Please, choose your $WORKFLOW project:${normal}"
     echo ""
-    result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+    result=$($CLI_PATH/common/project_dialog $USER $WORKFLOW)
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     multiple_projects=$(echo "$result" | sed -n '3p')
@@ -63,7 +61,7 @@ else
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     #forbidden combinations
-    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$username/my_projects/$WORKFLOW/$project_name" ]); then 
+    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$USER/my_projects/$WORKFLOW/$project_name" ]); then 
         $CLI_PATH/sgutil run $WORKFLOW -h
         exit
     fi
@@ -75,7 +73,7 @@ else
         #echo ""
         echo "${bold}Please, choose your $WORKFLOW project:${normal}"
         echo ""
-        result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+        result=$($CLI_PATH/common/project_dialog $USER $WORKFLOW)
         project_found=$(echo "$result" | sed -n '1p')
         project_name=$(echo "$result" | sed -n '2p')
         multiple_projects=$(echo "$result" | sed -n '3p')
@@ -87,7 +85,7 @@ else
 fi
 
 #define directories (1)
-DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
+DIR="/home/$USER/my_projects/$WORKFLOW/$project_name"
 
 #check if project exists
 if ! [ -d "$DIR" ]; then
