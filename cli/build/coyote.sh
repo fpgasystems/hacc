@@ -6,10 +6,8 @@ normal=$(tput sgr0)
 #constants
 CLI_PATH="/opt/cli"
 XILINX_PLATFORMS_PATH="/opt/xilinx/platforms"
+MY_PROJECTS_PATH="/home/$USER/my_projects"
 WORKFLOW="coyote"
-
-#get username
-username=$USER
 
 #get hostname
 url="${HOSTNAME}"
@@ -24,16 +22,16 @@ if [ -z "$(echo $XILINX_XRT)" ]; then
 fi
 
 #check for vivado_developers
-member=$($CLI_PATH/common/is_member $username vivado_developers)
+member=$($CLI_PATH/common/is_member $USER vivado_developers)
 if [ "$member" = "false" ]; then
     echo ""
-    echo "Sorry, ${bold}$username!${normal} You are not granted to use this command."
+    echo "Sorry, ${bold}$USER!${normal} You are not granted to use this command."
     echo ""
     exit
 fi
 
 #check if workflow exists
-if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
+if ! [ -d "$MY_PROJECTS_PATH/$WORKFLOW/" ]; then
     echo ""
     echo "You must create your project first! Please, use sgutil new $WORKFLOW"
     echo ""
@@ -56,7 +54,7 @@ if [ "$flags" = "" ]; then
     echo ""
     echo "${bold}Please, choose your $WORKFLOW project:${normal}"
     echo ""
-    result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+    result=$($CLI_PATH/common/project_dialog $USER $WORKFLOW)
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     multiple_projects=$(echo "$result" | sed -n '3p')
@@ -80,7 +78,7 @@ else
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     #forbidden combinations
-    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$username/my_projects/$WORKFLOW/$project_name" ]); then 
+    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "$MY_PROJECTS_PATH/$WORKFLOW/$project_name" ]); then 
         $CLI_PATH/sgutil build $WORKFLOW -h
         exit
     fi
@@ -101,7 +99,7 @@ else
         echo ""
         echo "${bold}Please, choose your $WORKFLOW project:${normal}"
         echo ""
-        result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+        result=$($CLI_PATH/common/project_dialog $USER $WORKFLOW)
         project_found=$(echo "$result" | sed -n '1p')
         project_name=$(echo "$result" | sed -n '2p')
         multiple_projects=$(echo "$result" | sed -n '3p')
@@ -125,7 +123,7 @@ else
 fi
 
 #define directories (1)
-DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
+DIR="$MY_PROJECTS_PATH/$WORKFLOW/$project_name"
 
 # check if project exists
 if ! [ -d "$DIR" ]; then
@@ -260,7 +258,7 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
     rm $DRIVER_DIR/modules.order
 
     #send email at the end
-    user_email=$username@ethz.ch
+    user_email=$USER@ethz.ch
     echo "Subject: Good news! sgutil build coyote ($project_name / -DFDEV_NAME=$FDEV_NAME) is done!" | sendmail $user_email
 
 else

@@ -7,10 +7,8 @@ normal=$(tput sgr0)
 CLI_PATH="/opt/cli"
 XILINX_PLATFORMS_PATH="/opt/xilinx/platforms"
 XRT_PATH="/opt/xilinx/xrt"
+MY_PROJECTS_PATH="/home/$USER/my_projects"
 WORKFLOW="vitis"
-
-#get username
-username=$USER
 
 #get hostname
 url="${HOSTNAME}"
@@ -25,7 +23,7 @@ if [ -z "$(echo $XILINX_XRT)" ]; then
 fi
 
 #check if workflow exists
-if ! [ -d "/home/$username/my_projects/$WORKFLOW/" ]; then
+if ! [ -d "/home/$USER/my_projects/$WORKFLOW/" ]; then
     echo ""
     echo "You must create your project first! Please, use sgutil new vitis"
     echo ""
@@ -50,7 +48,7 @@ if [ "$flags" = "" ]; then
     echo ""
     echo "${bold}Please, choose your $WORKFLOW project:${normal}"
     echo ""
-    result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+    result=$($CLI_PATH/common/project_dialog $USER $WORKFLOW)
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     multiple_projects=$(echo "$result" | sed -n '3p')
@@ -79,7 +77,7 @@ else
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     #forbidden combinations
-    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$username/my_projects/$WORKFLOW/$project_name" ]); then 
+    if [ "$project_found" = "1" ] && ([ "$project_name" = "" ] || [ ! -d "/home/$USER/my_projects/$WORKFLOW/$project_name" ]); then 
         $CLI_PATH/sgutil build vitis -h
         exit
     fi
@@ -109,7 +107,7 @@ else
         echo ""
         echo "${bold}Please, choose your $WORKFLOW project:${normal}"
         echo ""
-        result=$($CLI_PATH/common/project_dialog $username $WORKFLOW)
+        result=$($CLI_PATH/common/project_dialog $USER $WORKFLOW)
         project_found=$(echo "$result" | sed -n '1p')
         project_name=$(echo "$result" | sed -n '2p')
         multiple_projects=$(echo "$result" | sed -n '3p')
@@ -140,7 +138,7 @@ else
 fi
 
 #define directories (1)
-DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
+DIR="/home/$USER/my_projects/$WORKFLOW/$project_name"
 
 #check for project directory
 if ! [ -d "$DIR" ]; then
@@ -194,7 +192,7 @@ config_id="${config%%.*}"
 touch $config_id.active
 
 #define directories (2)
-APP_BUILD_DIR="/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$target_name.$platform_name"
+APP_BUILD_DIR="/home/$USER/my_projects/$WORKFLOW/$project_name/build_dir.$target_name.$platform_name"
 
 echo ""
 echo "${bold}Changing directory:${normal}"
@@ -216,7 +214,7 @@ if ! [ -d "$APP_BUILD_DIR" ]; then
 
     #send email at the end
     if [ "$target_name" = "hw" ]; then
-        user_email=$username@ethz.ch
+        user_email=$USER@ethz.ch
         echo "Subject: Good news! sgutil build vitis ($project_name / TARGET=$target_name / PLATFORM=$platform_name) is done!" | sendmail $user_email
     fi
     
@@ -235,9 +233,9 @@ else
     #application compilation
     echo "${bold}Application compilation:${normal}"
     echo ""
-    echo "g++ -o $project_name /home/$username/my_projects/$WORKFLOW/common/includes/xcl2/xcl2.cpp src/host.cpp -I$XRT_PATH/include -I/tools/Xilinx//Vivado/$branch/include -Wall -O0 -g -std=c++1y -I/home/$username/my_projects/$WORKFLOW/common/includes/xcl2 -fmessage-length=0 -L$XRT_PATH/lib -pthread -lOpenCL -lrt -lstdc++"
+    echo "g++ -o $project_name /home/$USER/my_projects/$WORKFLOW/common/includes/xcl2/xcl2.cpp src/host.cpp -I$XRT_PATH/include -I/tools/Xilinx//Vivado/$branch/include -Wall -O0 -g -std=c++1y -I/home/$USER/my_projects/$WORKFLOW/common/includes/xcl2 -fmessage-length=0 -L$XRT_PATH/lib -pthread -lOpenCL -lrt -lstdc++"
     echo ""
 
-    g++ -o $project_name /home/$username/my_projects/$WORKFLOW/common/includes/xcl2/xcl2.cpp src/host.cpp -I$XRT_PATH/include -I/tools/Xilinx//Vivado/$branch/include -Wall -O0 -g -std=c++1y -I/home/$username/my_projects/$WORKFLOW/common/includes/xcl2 -fmessage-length=0 -L$XRT_PATH/lib -pthread -lOpenCL -lrt -lstdc++
+    g++ -o $project_name /home/$USER/my_projects/$WORKFLOW/common/includes/xcl2/xcl2.cpp src/host.cpp -I$XRT_PATH/include -I/tools/Xilinx//Vivado/$branch/include -Wall -O0 -g -std=c++1y -I/home/$USER/my_projects/$WORKFLOW/common/includes/xcl2 -fmessage-length=0 -L$XRT_PATH/lib -pthread -lOpenCL -lrt -lstdc++
 
 fi
