@@ -7,10 +7,8 @@ normal=$(tput sgr0)
 CLI_PATH="/opt/cli"
 MPICH_VERSION="4.0.2"
 MPICH_PATH="/opt/mpich/mpich-$MPICH_VERSION-install"
+MY_PROJECTS_PATH="/home/$USER/my_projects"
 WORKFLOW="mpi"
-
-#get username
-username=$USER
 
 #get hostname
 url="${HOSTNAME}"
@@ -39,7 +37,7 @@ echo "${bold}sgutil validate $WORKFLOW${normal}"
 echo ""
 
 #create mpi directory (we do not know if sgutil new mpi has been run)
-DIR="/home/$username/my_projects/$WORKFLOW"
+DIR="/home/$USER/my_projects/$WORKFLOW"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi

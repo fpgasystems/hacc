@@ -6,10 +6,8 @@ normal=$(tput sgr0)
 #constants
 CLI_PATH="/opt/cli"
 ROCM_PATH="/opt/rocm"
+MY_PROJECTS_PATH="/home/$USER/my_projects"
 WORKFLOW="hip"
-
-#get username
-username=$USER
 
 #get hostname
 url="${HOSTNAME}"
@@ -31,7 +29,7 @@ echo ""
 echo "${bold}sgutil validate $WORKFLOW${normal}"
 
 #create hip directory (we do not know if sgutil new hip has been run)
-DIR="/home/$username/my_projects/$WORKFLOW"
+DIR="/home/$USER/my_projects/$WORKFLOW"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi

@@ -9,12 +9,10 @@ HACC_PATH="/opt/hacc"
 XRT_PATH="/opt/xilinx/xrt"
 VIVADO_DEVICES_MAX=$(cat $CLI_PATH/constants/VIVADO_DEVICES_MAX)
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+MY_PROJECTS_PATH="/home/$USER/my_projects"
 WORKFLOW="coyote"
 BIT_NAME="cyt_top.bit"
 DRIVER_NAME="coyote_drv.ko"
-
-#get username
-username=$USER
 
 #get hostname
 url="${HOSTNAME}"
@@ -57,10 +55,10 @@ MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
 multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 
 #check for vivado_developers
-member=$($CLI_PATH/common/is_member $username vivado_developers)
+member=$($CLI_PATH/common/is_member $USER vivado_developers)
 if [ "$member" = "false" ]; then
     echo ""
-    echo "Sorry, ${bold}$username!${normal} You are not granted to use this command."
+    echo "Sorry, ${bold}$USER!${normal} You are not granted to use this command."
     echo ""
     exit
 fi
@@ -69,7 +67,7 @@ fi
 read -a flags <<< "$@"
 
 #create coyote directory (we do not know if sgutil new coyote has been run)
-DIR="/home/$username/my_projects/$WORKFLOW"
+DIR="/home/$USER/my_projects/$WORKFLOW"
 if ! [ -d "$DIR" ]; then
     mkdir ${DIR}
 fi
@@ -206,7 +204,7 @@ FDEV_NAME=$(echo "$platform" | cut -d'_' -f2)
 project_name="validate_$config.$FDEV_NAME"
 
 #define directories (1)
-DIR="/home/$username/my_projects/$WORKFLOW/$project_name"
+DIR="/home/$USER/my_projects/$WORKFLOW/$project_name"
 SHELL_BUILD_DIR="$DIR/hw/build"
 DRIVER_DIR="$DIR/driver"
 APP_BUILD_DIR="$DIR/sw/examples/$config/build"
@@ -305,7 +303,7 @@ if ! [ -d "$DIR" ]; then
 fi
 
 #check on build_dir.FDEV_NAME
-if ! [ -d "/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME" ]; then
+if ! [ -d "/home/$USER/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME" ]; then
     #bitstream compilation
     echo ""
     echo "${bold}Coyote shell compilation:${normal}"
@@ -348,7 +346,7 @@ if ! [ -d "/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_N
     #copy driver
     cp $DRIVER_DIR/coyote_drv.ko $APP_BUILD_DIR
     #rename folder
-    mv $APP_BUILD_DIR /home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/
+    mv $APP_BUILD_DIR /home/$USER/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/
     #remove all other build temporal folders
     rm -rf $SHELL_BUILD_DIR
     rm $DRIVER_DIR/coyote_drv*
@@ -366,7 +364,7 @@ else
 fi
 
 #define directories (2)
-APP_BUILD_DIR=/home/$username/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/
+APP_BUILD_DIR=/home/$USER/my_projects/$WORKFLOW/$project_name/build_dir.$FDEV_NAME/
 
 #change directory
 cd $APP_BUILD_DIR
