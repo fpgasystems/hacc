@@ -9,12 +9,15 @@ _sgutil_completions()
 
     case ${COMP_CWORD} in
         1)
-            COMPREPLY=($(compgen -W "build examine get new program reboot run set validate --help --version" -- ${cur})) # -h -v
+            COMPREPLY=($(compgen -W "build enable examine get new program reboot run set validate --help --version" -- ${cur})) # -h -v
             ;;
         2)
             case ${prev} in
                 build)
                     COMPREPLY=($(compgen -W "coyote hip mpi vitis --help" -- ${cur})) # -h
+                    ;;
+                enable)
+                    COMPREPLY=($(compgen -W "vitis vivado xrt --help" -- ${cur}))
                     ;;
                 examine)
                     COMPREPLY=($(compgen -W "--help" -- ${cur}))
@@ -55,6 +58,15 @@ _sgutil_completions()
                     ;;
                 vitis) 
                     COMPREPLY=($(compgen -W "--platform --project --target --help" -- ${cur}))
+                    ;;
+                vitis) # enable
+                    COMPREPLY=($(compgen -W "--version --help" -- ${cur})) # -w -h
+                    ;;
+                vivado) 
+                    COMPREPLY=($(compgen -W "--version --help" -- ${cur})) # -w -h
+                    ;;
+                xrt) 
+                    COMPREPLY=($(compgen -W "--version --help" -- ${cur})) # -w -h
                     ;;
                 bdf) # get
                     COMPREPLY=($(compgen -W "--device --help" -- ${cur})) # -w -h

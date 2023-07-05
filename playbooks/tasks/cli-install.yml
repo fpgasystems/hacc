@@ -52,6 +52,11 @@
     path: /opt/cli/constants
     state: directory
 
+- name: create enable directory
+  file:
+    path: /opt/cli/enable
+    state: directory
+
 #sg
 #- name: copy sg
 #  copy:
@@ -371,6 +376,23 @@
     src: "../../cli/constants/XRT_PATH"
     dest: /opt/cli/constants/XRT_PATH
     mode: 0644
+
+#enable
+- name: copy enable/vitis script
+  copy:
+    src: "../../cli/enable/vitis.sh"
+    dest: /opt/cli/enable/vitis
+    mode: 0755
+- name: copy enable/vivado script
+  copy:
+    src: "../../cli/enable/vivado.sh"
+    dest: /opt/cli/enable/vivado
+    mode: 0755
+- name: copy enable/xrt script
+  copy:
+    src: "../../cli/enable/xrt.sh"
+    dest: /opt/cli/enable/xrt
+    mode: 0755
 
 #examine -------------------------------------------------------------------------------------
 

@@ -17,6 +17,7 @@ ${bold}$cli_name [commands] [arguments [flags]] [--help] [--version]${normal}
 
 COMMANDS:
    build           - Creates binaries, bitstreams, and drivers for your accelerated applications.
+   enable          - Enables your favorite development and deployment tools.
    examine         - Status of the system and devices.
    get             - Devices and host information.
    new             - Creates a new project of your choice.
@@ -194,6 +195,65 @@ build_vivado_help() {
     #echo "   -p, --project   - Specifies your Vivado project name."
     echo ""
     echo "   -h, --help      - Help to build a bitstream."
+    echo ""
+    exit 1
+}
+
+#enable
+enable_help() {
+    echo ""
+    echo "${bold}sgutil enable [arguments [flags]] [--help]${normal}"
+    echo ""
+    echo "Enables your favorite development and deployment tools."
+    echo ""
+    echo "ARGUMENTS:"
+    echo "   vitis           - Enables Vitis SDK (Software Development Kit) on your server."
+    echo "   vivado          - Enables Vivado HDI (Hardware Design and Implementation) and HLS (High-Level Synthesis) on your server."
+    echo "   xrt             - Enables Xilinx Runtime (XRT) on your server."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
+enable_vitis_help() {
+    echo ""
+    echo "${bold}sgutil enable vitis [flags] [--help]${normal}"
+    echo ""
+    echo "Enables Vitis SDK (Software Development Kit) on your server."
+    echo ""
+    echo "FLAGS:"
+    echo "   -v, --version   - Vitis version."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
+enable_vivado_help() {
+    echo ""
+    echo "${bold}sgutil enable vivado [flags] [--help]${normal}"
+    echo ""
+    echo "Enables Vivado HDI (Hardware Design and Implementation) and HLS (High-Level Synthesis) on your server."
+    echo ""
+    echo "FLAGS:"
+    echo "   -v, --version   - Vivado version."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
+enable_xrt_help() {
+    echo ""
+    echo "${bold}sgutil enable xrt [flags] [--help]${normal}"
+    echo ""
+    echo "Enables Xilinx Runtime (XRT) on your server."
+    echo ""
+    echo "FLAGS:"
+    echo "   -v, --version   - XRT version."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
     echo ""
     exit 1
 }
@@ -824,6 +884,28 @@ case "$command" in
         ;;
       *)
         build_help
+      ;;  
+    esac
+    ;;
+  enable)
+    case "$arguments" in
+      -h|--help)
+        enable_help
+        ;;
+      vitis) 
+        valid_flags="-v --version -h --help"
+        command_run $command_arguments_flags"@"$valid_flags
+        ;;
+      vivado) 
+        valid_flags="-v --version -h --help" 
+        command_run $command_arguments_flags"@"$valid_flags
+        ;;
+      xrt) 
+        valid_flags="-v --version -h --help" 
+        command_run $command_arguments_flags"@"$valid_flags
+        ;;
+      *)
+        enable_help
       ;;  
     esac
     ;;
