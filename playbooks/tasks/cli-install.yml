@@ -545,6 +545,18 @@
     dest: /opt/cli/common/get_vivado_devices
     mode: 0755
 
+- name: copy common/version_dialog script
+  copy:
+    src: "../../cli/common/version_dialog.sh"
+    dest: /opt/cli/common/version_dialog
+    mode: 0755
+
+- name: copy common/version_dialog_check script
+  copy:
+    src: "../../cli/common/version_dialog_check.sh"
+    dest: /opt/cli/common/version_dialog_check
+    mode: 0755
+
 #get  ----------------------------------------------------------------------------------------
 
 #- name: copy get_from_vars
