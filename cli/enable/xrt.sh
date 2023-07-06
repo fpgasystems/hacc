@@ -24,7 +24,7 @@ hostname="${url%%.*}"
 #    echo ""
 #    echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
 #    echo ""
-#    exit
+#    return
 #fi
 
 #check on valid XRT version
@@ -32,7 +32,7 @@ if [ -n "$XILINX_XRT" ]; then #if [ -z "$(echo $XILINX_XRT)" ]; then
     echo ""
     echo "Xilinx Runtime (XRT) is already active on ${bold}$hostname!${normal}"
     echo ""
-    exit 1
+    exit
 fi
 
 #inputs
@@ -79,9 +79,7 @@ fi
 
 #copy the desired XRT version to user’s local and preserve /opt/xilinx/xrt structure (Xilinx workaroud)
 mkdir -p /local/home/$USER/xrt_${version_name}$XRT_PATH
-cp -r $XRT_PATH"_"${version_name}/* /local/home/$USER/xrt_${version_name}$XRT_PATH
-
-echo "" 
+cp -r $XRT_PATH"_"${version_name}/* /local/home/$USER/xrt_${version_name}$XRT_PATH 
 
 #source xrt
 source /local/home/$USER/xrt_${version_name}$XRT_PATH/setup.sh
