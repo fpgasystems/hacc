@@ -74,6 +74,41 @@ command_run() {
     fi
 }
 
+flags_check() {
+    
+    # we use an @ to separate between command_arguments_flags and the valid_flags
+    read input <<< $@
+    aux_1="${input%%@*}"
+    aux_2="${input##$aux_1@}"
+
+    read -a command_arguments_flags <<< "$aux_1"
+    read -a valid_flags <<< "$aux_2"
+
+    START=2
+    if [ "${command_arguments_flags[$START]}" = "-h" ] || [ "${command_arguments_flags[$START]}" = "--help" ]; then
+      ${command_arguments_flags[0]}_${command_arguments_flags[1]}_help # i.e., validate_iperf_help
+    else
+      flags=""
+      j=0
+      for (( i=$START; i<${#command_arguments_flags[@]}; i++ ))
+      do
+	      if [[ " ${valid_flags[*]} " =~ " ${command_arguments_flags[$i]} " ]]; then
+	        flags+="${command_arguments_flags[$i]} "
+	        i=$(($i+1))
+	        flags+="${command_arguments_flags[$i]} "
+	      else
+          ${command_arguments_flags[0]}_${command_arguments_flags[1]}_help # i.e., validate_iperf_help
+          #echo "-1"
+          #break
+	      fi
+      done
+
+      #/opt/cli/${command_arguments_flags[0]}/${command_arguments_flags[1]} $flags # Example: /opt/cli/validate/iperf -P 6
+      #echo $flags
+
+    fi
+}
+
 xilinx_build_check() {
 
     EMAIL=$(/opt/cli/common/get_email) #"jmoyapaya@ethz.ch"
@@ -903,7 +938,8 @@ case "$command" in
         ;;
       xrt) 
         valid_flags="-v --version -h --help" 
-        command_run $command_arguments_flags"@"$valid_flags
+        flags_check $command_arguments_flags"@"$valid_flags
+        $CLI_PATH/$command/$arguments $flags
         ;;
       *)
         enable_help
