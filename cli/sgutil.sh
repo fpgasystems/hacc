@@ -4,7 +4,8 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
-CLI_WORKDIR="/opt/cli"
+#CLI_WORKDIR="/opt/cli"
+CLI_PATH="$(dirname "$0")"
 
 #inputs
 command=$1
@@ -34,7 +35,7 @@ COMMANDS:
 }
 
 cli_version() {
-    version=$(cat $CLI_WORKDIR/VERSION)
+    version=$(cat $CLI_PATH/VERSION)
     echo ""
     echo "Version              : $version"
     echo ""
