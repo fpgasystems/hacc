@@ -17,12 +17,8 @@ versions=($(ls -d */))
 if [ ${#versions[@]} -eq 1 ]; then
     version_found="1"
     version_name=${versions[0]}
-    #version=${version::-1} # remove the last character, i.e. "/"
 else
-    echo "${bold}Please, choose your Xilinx release branch:${normal}"
-    echo ""
     PS3=""
-    #versions+=("none")
     select version_name in "${versions[@]}"; do
         if [[ -z $version_name ]]; then
             echo "" >&/dev/null
@@ -32,6 +28,9 @@ else
         fi
     done
 fi
+
+#remove the last character, i.e. "/"
+version_name=${version_name::-1}
 
 # Return the values of version_found and version_name
 echo "$version_found"
