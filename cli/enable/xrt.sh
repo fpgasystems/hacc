@@ -38,6 +38,7 @@ if [ "$flags" = "" ]; then
     result=$($CLI_PATH/common/version_dialog $VIVADO_PATH)
     version_found=$(echo "$result" | sed -n '1p')
     version_name=$(echo "$result" | sed -n '2p')
+    echo ""
 else
     #version_dialog_check
     result="$("$CLI_PATH/common/version_dialog_check" "${flags[@]}")"
@@ -59,20 +60,17 @@ source /local/home/$USER/xrt_${version_name}$XRT_PATH/setup.sh
 
 echo ""
 
-#get XRT branch
-branch=$($XILINX_XRT/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
-
 #print message
 echo ""
-if [[ -d $VITIS_PATH/${branch:7:6} ]]; then
+if [[ -d $VITIS_PATH/$version_name ]]; then
     #Vitis is installed
-    echo "The server is ready to work with Xilinx ${bold}${branch:7:6}${normal} release branch:"
+    echo "The server is ready to work with Xilinx ${bold}$version_name${normal} release branch:"
     echo ""
     echo "    Xilinx Board Utility (xbutil)          : ${bold}$XILINX_XRT/bin${normal}"
     echo "    Xilinx Tools (Vivado, Vitis, Vitis_HLS): ${bold}/tools/Xilinx${normal}"
-elif [[ -d $VIVADO_PATH/${branch:7:6} ]]; then
+elif [[ -d $VIVADO_PATH/$version_name ]]; then
     #Vitis is not installed
-    echo "The server is ready to work with Xilinx ${bold}${branch:7:6}${normal} release branch:"
+    echo "The server is ready to work with Xilinx ${bold}$version_name${normal} release branch:"
     echo ""
     echo "    Xilinx Board Utility (xbutil)       : ${bold}$XILINX_XRT/bin${normal}"
     echo "    Xilinx Tools (Vivado, Vitis_HLS)    : ${bold}/tools/Xilinx${normal}"
