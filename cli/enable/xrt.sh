@@ -4,7 +4,7 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
-CLI_PATH="$(dirname "$(dirname "$0")")"
+CLI_PATH="/opt/cli" #"$(dirname "$(dirname "$0")")"
 HACC_PATH="/opt/hacc"
 XRT_PATH="/opt/xilinx/xrt"
 VIVADO_PATH="/tools/Xilinx/Vivado"
@@ -77,17 +77,14 @@ else
     fi
 fi
 
-echo "Ara ve lo bo"
-exit
-
 #copy the desired XRT version to user’s local and preserve /opt/xilinx/xrt structure (Xilinx workaroud)
-mkdir -p /local/home/$USER/xrt_${version}$XRT_PATH
-cp -r $XRT_PATH"_"${version}/* /local/home/$USER/xrt_${version}$XRT_PATH
+mkdir -p /local/home/$USER/xrt_${version_name}$XRT_PATH
+cp -r $XRT_PATH"_"${version_name}/* /local/home/$USER/xrt_${version_name}$XRT_PATH
 
-echo ""
+echo "" 
 
 #source xrt
-source /local/home/$USER/xrt_${version}$XRT_PATH/setup.sh
+source /local/home/$USER/xrt_${version_name}$XRT_PATH/setup.sh
 
 echo ""
 
@@ -114,3 +111,5 @@ else
     echo "${bold}An email has been sent to the person in charge;${normal} we will let you know when XRT is ready to use again."
     echo "Subject: $hostname requires special attention ($username): Xilinx tools are not properly installed" | sendmail $email
 fi
+
+echo ""
