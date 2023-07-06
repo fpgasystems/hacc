@@ -17,7 +17,7 @@
   vars:
     ansible_python_interpreter: /usr/bin/python3
     coyote: false
-    common: false
+    common: true
     enable: true
     examine: false
     hip: false
@@ -72,6 +72,18 @@
       copy:
         src: "../cli/common/ssh_key_add.sh"
         dest: /opt/cli/common/ssh_key_add
+        mode: 0755
+      when: common
+    - name: copy common/version_dialog script
+      copy:
+        src: "../cli/common/version_dialog.sh"
+        dest: /opt/cli/common/version_dialog
+        mode: 0755
+      when: common
+    - name: copy common/version_dialog_check script
+      copy:
+        src: "../cli/common/version_dialog_check.sh"
+        dest: /opt/cli/common/version_dialog_check
         mode: 0755
       when: common
 
