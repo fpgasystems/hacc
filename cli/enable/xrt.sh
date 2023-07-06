@@ -8,24 +8,10 @@ CLI_PATH="/opt/cli" #"$(dirname "$(dirname "$0")")"
 HACC_PATH="/opt/hacc"
 XRT_PATH="/opt/xilinx/xrt"
 VIVADO_PATH="/tools/Xilinx/Vivado"
-#DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
-#MY_PROJECTS_PATH=$($CLI_PATH/common/get_path $CLI_PATH MY_PROJECTS_PATH)
-#WORKFLOW="vitis"
-#TARGET="hw"
 
 #get hostname
 url="${HOSTNAME}"
 hostname="${url%%.*}"
-
-#check on ACAP or FPGA servers (server must have at least one ACAP or one FPGA)
-#acap=$($CLI_PATH/common/is_acap $CLI_PATH $hostname)
-#fpga=$($CLI_PATH/common/is_fpga $CLI_PATH $hostname)
-#if [ "$acap" = "0" ] && [ "$fpga" = "0" ]; then
-#    echo ""
-#    echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
-#    echo ""
-#    return
-#fi
 
 #check on valid XRT version
 if [ -n "$XILINX_XRT" ]; then #if [ -z "$(echo $XILINX_XRT)" ]; then
@@ -42,7 +28,7 @@ read -a flags <<< "$@"
 version_found=""
 version_name=""
 if [ "$flags" = "" ]; then
-    #header (1/2)
+    #header
     echo ""
     echo "${bold}sgutil enable xrt${normal}"
     #version_dialog
@@ -61,19 +47,6 @@ else
     if [ "$version_found" = "1" ] && ([ "$version_name" = "" ] || [ ! -d "$VIVADO_PATH/$version_name" ]); then 
         $CLI_PATH/sgutil enable xrt -h
         exit
-    fi
-    #header (2/2)
-    echo ""
-    echo "${bold}sgutil enable xrt${normal}"
-    echo ""
-    #version_dialog (forgotten mandatory 1)
-    if [[ $version_found = "0" ]]; then
-        #echo ""
-        echo "${bold}Please, choose your XRT version:${normal}"
-        echo ""
-        result=$($CLI_PATH/common/version_dialog $VIVADO_PATH)
-        version_found=$(echo "$result" | sed -n '1p')
-        version_name=$(echo "$result" | sed -n '2p')
     fi
 fi
 
