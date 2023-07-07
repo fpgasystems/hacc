@@ -8,7 +8,7 @@
 
 <code>sgutil enable vitis [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Enables Vitis SDK (Software Development Kit) on your server.
+  &nbsp; &nbsp; Enables Vitis SDK (Software Development Kit) and Vitis_HLS (High-Level Synthesis) on your server.
 </p>
 
 ### Flags

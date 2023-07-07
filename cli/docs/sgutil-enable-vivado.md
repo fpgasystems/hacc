@@ -8,7 +8,7 @@
 
 <code>sgutil enable vivado [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Enables Vivado HDI (Hardware Design and Implementation) and HLS (High-Level Synthesis) on your server.
+  &nbsp; &nbsp; Enables Vivado HDI (Hardware Design and Implementation) on your server.
 </p>
 
 ### Flags
