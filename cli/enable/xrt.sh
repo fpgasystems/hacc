@@ -65,7 +65,7 @@ else
         #Vitis is not installed
         echo "The server is ready to work with ${bold}XRT $version_name${normal} release branch:"
         echo ""
-        echo "    Xilinx Board Utility (xbutil)       : ${bold}$XILINX_XRT/bin${normal}"
+        echo "    Xilinx Board Utility (xbutil): ${bold}$XILINX_XRT/bin${normal}"
         #echo "    Xilinx Tools (Vivado, Vitis_HLS)    : ${bold}/tools/Xilinx${normal}"
         echo ""
     else

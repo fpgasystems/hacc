@@ -64,7 +64,7 @@ else
         #Vitis is installed
         echo "The server is ready to work with ${bold}Vitis $version_name${normal} release branch:"
         echo ""
-        echo "    Xilinx Tools (Vitis, Vitis_HLS)        : ${bold}$VITIS_PATH/$version_name${normal}"
+        echo "    Vitis, Vitis_HLS             : ${bold}$VITIS_PATH/$version_name${normal}"
         echo ""
     else
         echo "The server needs special care to operate with Vitis normally (Xilinx tools are not properly installed)."

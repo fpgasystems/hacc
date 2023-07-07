@@ -63,7 +63,7 @@ else
         #Vivado is installed
         echo "The server is ready to work with ${bold}Vivado $version_name${normal} release branch:"
         echo ""
-        echo "    Xilinx Tools (Vivado)                  : ${bold}$VIVADO_PATH/$version_name${normal}"
+        echo "    Vivado                       : ${bold}$VIVADO_PATH/$version_name${normal}"
         echo ""
     else
         echo "The server needs special care to operate with Vivado normally (Xilinx tools are not properly installed)."
