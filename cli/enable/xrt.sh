@@ -61,7 +61,7 @@ source /local/home/$USER/xrt_${version_name}$XRT_PATH/setup.sh
 echo ""
 
 #print message
-echo ""
+#echo ""
 if [[ -d $VIVADO_PATH/$version_name ]]; then
     #Vitis is not installed
     echo "The server is ready to work with ${bold}XRT $version_name${normal} release branch:"

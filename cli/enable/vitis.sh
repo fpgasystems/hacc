@@ -60,7 +60,7 @@ export XILINX_VITIS=$VITIS_PATH/$version_name
 #echo ""
 
 #print message
-echo ""
+#echo ""
 if [[ -d $VITIS_PATH/$version_name ]]; then
     #Vitis is installed
     echo "The server is ready to work with ${bold}Vitis $version_name${normal} release branch:"

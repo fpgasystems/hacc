@@ -59,7 +59,7 @@ export XILINX_VIVADO=$VIVADO_PATH/$version_name
 #echo ""
 
 #print message
-echo ""
+#echo ""
 if [[ -d $VIVADO_PATH/$version_name ]]; then
     #Vivado is installed
     echo "The server is ready to work with ${bold}Vivado $version_name${normal} release branch:"
