@@ -31,7 +31,7 @@ version_name=""
 if [ "$flags" = "" ]; then
     #header
     echo ""
-    echo "${bold}sgutil enable xrt${normal}"
+    echo "${bold}sgutil enable vivado${normal}"
     #version_dialog
     echo ""
     echo "${bold}Please, choose your Vivado version:${normal}"
@@ -64,7 +64,7 @@ if [[ -d $VIVADO_PATH/$version_name ]]; then
     #Vivado is installed
     echo "The server is ready to work with ${bold}Vivado $version_name${normal} release branch:"
     echo ""
-    echo "    Xilinx Tools (Vivado)                  : ${bold}$XILINX_TOOLS_PATH${normal}
+    echo "    Xilinx Tools (Vivado)                  : ${bold}$VIVADO_PATH/$version_name${normal}"
 else
     echo "The server needs special care to operate with Vivado normally (Xilinx tools are not properly installed)."
     echo ""
