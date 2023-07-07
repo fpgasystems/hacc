@@ -244,7 +244,7 @@ enable_help() {
     echo ""
     echo "ARGUMENTS:"
     echo "   vitis           - Enables Vitis SDK (Software Development Kit) and Vitis_HLS (High-Level Synthesis) on your server."
-    echo "   vivado          - Enables Vivado HDI (Hardware Design and Implementation)"
+    echo "   vivado          - Enables Vivado HDI (Hardware Design and Implementation) on your server."
     echo "   xrt             - Enables Xilinx Runtime (XRT) on your server."
     echo ""
     echo "   -h, --help      - Help to use this command."
