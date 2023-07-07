@@ -8,7 +8,7 @@
 
 <code>sgutil enable [arguments [flags]] [--help]</code>
 <p>
-  &nbsp; &nbsp; Enables your favorite development and deployment tools.
+  &nbsp; &nbsp; Enables your favorite development and deployment tools on your server.
 </p>
 
 ### Arguments

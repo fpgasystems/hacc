@@ -8,7 +8,7 @@
 
 <code>sgutil enable xrt [flags] [--help]</code>
 <p>
-  &nbsp; &nbsp; Enables Xilinx Runtime (XRT) on your server.
+  &nbsp; &nbsp; Enables Xilinx Runtime (XRT).
 </p>
 
 ### Flags
