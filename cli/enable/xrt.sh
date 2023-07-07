@@ -67,11 +67,11 @@ else
         echo ""
         echo "    Xilinx Board Utility (xbutil)       : ${bold}$XILINX_XRT/bin${normal}"
         #echo "    Xilinx Tools (Vivado, Vitis_HLS)    : ${bold}/tools/Xilinx${normal}"
+        echo ""
     else
         echo "The server needs special care to operate with XRT normally (Xilinx tools are not properly installed)."
         echo ""
         echo "${bold}An email has been sent to the person in charge;${normal} we will let you know when XRT is ready to use again."
         echo "Subject: $hostname requires special attention ($username): Xilinx tools are not properly installed" | sendmail $email
     fi
-
 fi
