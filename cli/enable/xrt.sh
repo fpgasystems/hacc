@@ -62,18 +62,12 @@ echo ""
 
 #print message
 echo ""
-if [[ -d $VITIS_PATH/$version_name ]]; then
-    #Vitis is installed
-    echo "The server is ready to work with Xilinx ${bold}$version_name${normal} release branch:"
-    echo ""
-    echo "    Xilinx Board Utility (xbutil)          : ${bold}$XILINX_XRT/bin${normal}"
-    echo "    Xilinx Tools (Vivado, Vitis, Vitis_HLS): ${bold}/tools/Xilinx${normal}"
-elif [[ -d $VIVADO_PATH/$version_name ]]; then
+if [[ -d $VIVADO_PATH/$version_name ]]; then
     #Vitis is not installed
-    echo "The server is ready to work with Xilinx ${bold}$version_name${normal} release branch:"
+    echo "The server is ready to work with ${bold}XRT $version_name${normal} release branch:"
     echo ""
     echo "    Xilinx Board Utility (xbutil)       : ${bold}$XILINX_XRT/bin${normal}"
-    echo "    Xilinx Tools (Vivado, Vitis_HLS)    : ${bold}/tools/Xilinx${normal}"
+    #echo "    Xilinx Tools (Vivado, Vitis_HLS)    : ${bold}/tools/Xilinx${normal}"
 else
     echo "The server needs special care to operate with XRT normally (Xilinx tools are not properly installed)."
     echo ""
