@@ -31,7 +31,7 @@ version_name=""
 if [ "$flags" = "" ]; then
     #header
     echo ""
-    echo "${bold}sgutil enable xrt${normal}"
+    echo "${bold}sgutil enable vitis${normal}"
     #version_dialog
     echo ""
     echo "${bold}Please, choose your Vitis version:${normal}"
@@ -65,7 +65,7 @@ if [[ -d $VITIS_PATH/$version_name ]]; then
     #Vitis is installed
     echo "The server is ready to work with ${bold}Vitis $version_name${normal} release branch:"
     echo ""
-    echo "    Xilinx Tools (Vitis, Vitis_HLS)        : ${bold}$XILINX_TOOLS_PATH${normal}"
+    echo "    Xilinx Tools (Vitis, Vitis_HLS)        : ${bold}$VITIS_PATH/$version_name${normal}"
 else
     echo "The server needs special care to operate with Vitis normally (Xilinx tools are not properly installed)."
     echo ""
