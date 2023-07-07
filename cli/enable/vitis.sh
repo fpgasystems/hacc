@@ -14,7 +14,7 @@ VITIS_PATH="$XILINX_TOOLS_PATH/Vitis"
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#check on valid XRT version
+#check on valid Vitis version
 if [ -n "$XILINX_VITIS" ]; then
     echo ""
     echo "Vitis is already active on ${bold}$hostname!${normal}"
@@ -34,7 +34,7 @@ if [ "$flags" = "" ]; then
     echo "${bold}sgutil enable xrt${normal}"
     #version_dialog
     echo ""
-    echo "${bold}Please, choose your XRT version:${normal}"
+    echo "${bold}Please, choose your Vitis version:${normal}"
     echo ""
     result=$($CLI_PATH/common/version_dialog $VITIS_PATH)
     version_found=$(echo "$result" | sed -n '1p')
@@ -52,10 +52,6 @@ else
     fi
 fi
 
-#copy the desired XRT version to user’s local and preserve /opt/xilinx/xrt structure (Xilinx workaroud)
-#mkdir -p /local/home/$USER/xrt_${version_name}$XRT_PATH
-#cp -r $XRT_PATH"_"${version_name}/* /local/home/$USER/xrt_${version_name}$XRT_PATH 
-
 #source vitis
 source $XILINX_TOOLS_PATH//Vitis/2022.1/.settings64-Vitis.sh
 source $XILINX_TOOLS_PATH//Vitis_HLS/2022.1/.settings64-Vitis_HLS.sh
@@ -69,18 +65,11 @@ if [[ -d $VITIS_PATH/$version_name ]]; then
     #Vitis is installed
     echo "The server is ready to work with ${bold}Vitis $version_name${normal} release branch:"
     echo ""
-    #echo "    Xilinx Board Utility (xbutil)          : ${bold}$XILINX_XRT/bin${normal}"
     echo "    Xilinx Tools (Vitis, Vitis_HLS)        : ${bold}$XILINX_TOOLS_PATH${normal}"
-#elif [[ -d $VITIS_PATH/$version_name ]]; then
-#    #Vitis is not installed
-#    echo "The server is ready to work with Xilinx ${bold}$version_name${normal} release branch:"
-#    echo ""
-#    echo "    Xilinx Board Utility (xbutil)       : ${bold}$XILINX_XRT/bin${normal}"
-#    echo "    Xilinx Tools (Vivado, Vitis_HLS)    : ${bold}$XILINX_TOOLS_PATH${normal}"
 else
-    echo "The server needs special care to operate with XRT normally (Xilinx tools are not properly installed)."
+    echo "The server needs special care to operate with Vitis normally (Xilinx tools are not properly installed)."
     echo ""
-    echo "${bold}An email has been sent to the person in charge;${normal} we will let you know when XRT is ready to use again."
+    echo "${bold}An email has been sent to the person in charge;${normal} we will let you know when Vitis is ready to use again."
     echo "Subject: $hostname requires special attention ($username): Xilinx tools are not properly installed" | sendmail $email
 fi
 

@@ -14,7 +14,7 @@ VIVADO_PATH="$XILINX_TOOLS_PATH/Vivado"
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#check on valid XRT version
+#check on valid Vivado version
 if [ -n "$XILINX_VIVADO" ]; then
     echo ""
     echo "Vivado is already active on ${bold}$hostname!${normal}"
@@ -34,7 +34,7 @@ if [ "$flags" = "" ]; then
     echo "${bold}sgutil enable xrt${normal}"
     #version_dialog
     echo ""
-    echo "${bold}Please, choose your XRT version:${normal}"
+    echo "${bold}Please, choose your Vivado version:${normal}"
     echo ""
     result=$($CLI_PATH/common/version_dialog $VIVADO_PATH)
     version_found=$(echo "$result" | sed -n '1p')
@@ -66,9 +66,9 @@ if [[ -d $VIVADO_PATH/$version_name ]]; then
     echo ""
     echo "    Xilinx Tools (Vivado)                  : ${bold}$XILINX_TOOLS_PATH${normal}
 else
-    echo "The server needs special care to operate with XRT normally (Xilinx tools are not properly installed)."
+    echo "The server needs special care to operate with Vivado normally (Xilinx tools are not properly installed)."
     echo ""
-    echo "${bold}An email has been sent to the person in charge;${normal} we will let you know when XRT is ready to use again."
+    echo "${bold}An email has been sent to the person in charge;${normal} we will let you know when Vivado is ready to use again."
     echo "Subject: $hostname requires special attention ($username): Xilinx tools are not properly installed" | sendmail $email
 fi
 
