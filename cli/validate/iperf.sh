@@ -4,7 +4,7 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
-CLI_PATH="/opt/cli"
+CLI_PATH="$(dirname "$(dirname "$0")")"
 
 echo ""
 
@@ -39,7 +39,7 @@ iperf -s -B $hostname-mellanox-0 -D $udp_server
 echo ""
 
 #get booked machines
-servers=$(sudo /opt/cli/common/get_booking_system_servers_list | tail -n +2)
+servers=$(sudo $CLI_PATH/common/get_booking_system_servers_list | tail -n +2)
 echo ""
 
 #convert string to an array
