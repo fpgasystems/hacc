@@ -17,18 +17,26 @@
   vars:
     ansible_python_interpreter: /usr/bin/python3
     coyote: false
-    common: true
-    enable: true
+    common: false
+    enable: false
     examine: false
+    get: false
     hip: false
     mpi: false
-    get: false
     program: false
     reboot: false
     set: false
-    sgutil: true
+    sgutil: false
+    validate: true
     vitis: false
   tasks:
+    #always added
+    #- name: copy program/reset
+    #  copy:
+    #    src: "../cli/program/reset.sh"
+    #    dest: /opt/cli/program/reset
+    #    mode: 0755
+
     #coyote
     - name: copy new/coyote
       copy:
@@ -58,6 +66,24 @@
       copy:
         src: "../cli/validate/coyote.sh"
         dest: /opt/cli/validate/coyote
+        mode: 0755
+      when: coyote
+    - name: copy program/vivado
+      copy:
+        src: "../cli/program/vivado.sh"
+        dest: /opt/cli/program/vivado
+        mode: 0755
+      when: coyote
+    - name: copy program/revert
+      copy:
+        src: "../cli/program/revert.sh"
+        dest: /opt/cli/program/revert
+        mode: 0755
+      when: coyote
+    - name: copy program/get_N_REGIONS
+      copy:
+        src: "../cli/program/get_N_REGIONS.sh"
+        dest: /opt/cli/program/get_N_REGIONS
         mode: 0755
       when: coyote
 
@@ -114,7 +140,69 @@
         dest: /opt/cli/examine
         mode: 0755
       when: examine
-    
+
+    #get  
+    - name: copy get/bdf
+      copy:
+        src: "../cli/get/bdf.sh"
+        dest: /opt/cli/get/bdf
+        mode: 0755
+      when: get
+    - name: copy get/bus
+      copy:
+        src: "../cli/get/bus.sh"
+        dest: /opt/cli/get/bus
+        mode: 0755
+      when: get
+    - name: copy get/get_fpga_device_param
+      copy:
+        src: "../cli/get/get_fpga_device_param.sh"
+        dest: /opt/cli/get/get_fpga_device_param
+        mode: 0755
+      when: get
+    - name: copy get/get_gpu_device_param
+      copy:
+        src: "../cli/get/get_gpu_device_param.sh"
+        dest: /opt/cli/get/get_gpu_device_param
+        mode: 0755
+      when: get
+    - name: copy get/ifconfig
+      copy:
+        src: "../cli/get/ifconfig.sh"
+        dest: /opt/cli/get/ifconfig
+        mode: 0755
+      when: get
+    - name: copy get/name
+      copy:
+        src: "../cli/get/name.sh"
+        dest: /opt/cli/get/name
+        mode: 0755
+      when: get
+    - name: copy get/network
+      copy:
+        src: "../cli/get/network.sh"
+        dest: /opt/cli/get/network
+        mode: 0755
+      when: get
+    - name: copy get/platform
+      copy:
+        src: "../cli/get/platform.sh"
+        dest: /opt/cli/get/platform
+        mode: 0755
+      when: get
+    - name: copy get/serial
+      copy:
+        src: "../cli/get/serial.sh"
+        dest: /opt/cli/get/serial
+        mode: 0755
+      when: get
+    - name: copy get/workflow
+      copy:
+        src: "../cli/get/workflow.sh"
+        dest: /opt/cli/get/workflow
+        mode: 0755
+      when: get
+
     #hip
     - name: copy new/hip
       copy:
@@ -178,8 +266,6 @@
         dest: /opt/cli/common/ssh_key_add
         mode: 0755
       when: mpi
-
-    #get
 
     #program
     - name: copy program/coyote
@@ -266,6 +352,26 @@
         dest: /usr/share/bash-completion/completions/sgutil
         mode: 0755
       when: sgutil
+
+    #validate
+    - name: copy validate/coyote
+      copy:
+        src: "../cli/validate/coyote.sh"
+        dest: /opt/cli/validate/coyote
+        mode: 0755
+      when: validate
+    - name: copy validate/iperf
+      copy:
+        src: "../cli/validate/iperf.sh"
+        dest: /opt/cli/validate/iperf
+        mode: 0755
+      when: validate
+    - name: copy validate/vitis
+      copy:
+        src: "../cli/validate/vitis.sh"
+        dest: /opt/cli/validate/vitis
+        mode: 0755
+      when: validate
 
     #vitis
     - name: copy new/vitis
