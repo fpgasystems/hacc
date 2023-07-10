@@ -3,6 +3,9 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+#constants
+CLI_PATH="$(dirname "$(dirname "$0")")"
+
 #inputs
 DIR=$1
 
@@ -21,5 +24,5 @@ echo ""
 for (( i = 0; i < $N_REGIONS; i++ ))
 do 
     echo $i
-    sudo /opt/cli/program/fpga_chmod $i
+    sudo $CLI_PATH/program/fpga_chmod $i
 done
