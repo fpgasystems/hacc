@@ -17,7 +17,7 @@
   vars:
     ansible_python_interpreter: /usr/bin/python3
     coyote: false
-    common: false
+    common: true
     enable: false
     examine: false
     get: false
@@ -27,7 +27,7 @@
     reboot: false
     set: false
     sgutil: false
-    validate: true
+    validate: false
     vitis: false
   tasks:
     #always added
@@ -92,6 +92,12 @@
       copy:
         src: "../cli/common/get_booking_system_servers_list.sh"
         dest: /opt/cli/common/get_booking_system_servers_list
+        mode: 0755
+      when: common
+    - name: copy common/project_dialog script
+      copy:
+        src: "../cli/common/project_dialog.sh"
+        dest: /opt/cli/common/project_dialog
         mode: 0755
       when: common
     - name: copy common/ssh_key_add
