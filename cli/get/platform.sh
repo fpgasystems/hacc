@@ -4,7 +4,7 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
-CLI_PATH="/opt/cli"
+CLI_PATH="$(dirname "$(dirname "$0")")"
 HACC_PATH="/opt/hacc"
 XILINX_PLATFORMS_PATH="/opt/xilinx/platforms"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"

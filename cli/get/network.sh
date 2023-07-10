@@ -4,7 +4,7 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
-CLI_PATH="/opt/cli"
+CLI_PATH="$(dirname "$(dirname "$0")")"
 HACC_PATH="/opt/hacc"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 
@@ -50,10 +50,10 @@ if [ "$flags" = "" ]; then
     echo ""
     #print devices information
     for device_index in $(seq 1 $MAX_DEVICES); do 
-        ip=$(/opt/cli/get/get_fpga_device_param $device_index IP)
+        ip=$($CLI_PATH/get/get_fpga_device_param $device_index IP)
         if [ -n "$ip" ]; then
-            mac=$(/opt/cli/get/get_fpga_device_param $device_index MAC)
-            device_type=$(/opt/cli/get/get_fpga_device_param $device_index device_type)
+            mac=$($CLI_PATH/get/get_fpga_device_param $device_index MAC)
+            device_type=$($CLI_PATH/get/get_fpga_device_param $device_index device_type)
             add_0=$(split_addresses $ip $mac 0)
             add_1=$(split_addresses $ip $mac 1)
             name="$device_index" 
@@ -82,9 +82,9 @@ else
         exit
     fi
     #print
-    ip=$(/opt/cli/get/get_fpga_device_param $device_index IP)
-    mac=$(/opt/cli/get/get_fpga_device_param $device_index MAC)
-    device_type=$(/opt/cli/get/get_fpga_device_param $device_index device_type)
+    ip=$($CLI_PATH/get/get_fpga_device_param $device_index IP)
+    mac=$($CLI_PATH/get/get_fpga_device_param $device_index MAC)
+    device_type=$($CLI_PATH/get/get_fpga_device_param $device_index device_type)
     add_0=$(split_addresses $ip $mac 0)
     add_1=$(split_addresses $ip $mac 1)
     name="$device_index"
