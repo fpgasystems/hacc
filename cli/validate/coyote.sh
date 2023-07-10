@@ -4,7 +4,7 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
-CLI_PATH="/opt/cli"
+CLI_PATH="$(dirname "$(dirname "$0")")"
 HACC_PATH="/opt/hacc"
 XRT_PATH="/opt/xilinx/xrt"
 VIVADO_DEVICES_MAX=$(cat $CLI_PATH/constants/VIVADO_DEVICES_MAX)
@@ -197,7 +197,7 @@ done
 device_name=$($CLI_PATH/get/get_fpga_device_param $device_index device_name)
 
 #platform to FDEV_NAME
-platform=$(/opt/cli/get/get_fpga_device_param $device_index platform)
+platform=$($CLI_PATH/get/get_fpga_device_param $device_index platform)
 FDEV_NAME=$(echo "$platform" | cut -d'_' -f2)
 
 #set project name

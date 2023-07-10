@@ -4,7 +4,7 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
-CLI_PATH="/opt/cli"
+CLI_PATH="$(dirname "$(dirname "$0")")"
 HACC_PATH="/opt/hacc"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
 MY_PROJECTS_PATH=$($CLI_PATH/common/get_path $CLI_PATH MY_PROJECTS_PATH)
@@ -179,7 +179,7 @@ fi
 #device_name=$($CLI_PATH/get/get_fpga_device_param $device_index device_name)
 
 #get FDEV_NAME
-platform=$(/opt/cli/get/get_fpga_device_param $device_index platform)
+platform=$($CLI_PATH/get/get_fpga_device_param $device_index platform)
 FDEV_NAME=$(echo "$platform" | cut -d'_' -f2)
 
 #define directories (2)
