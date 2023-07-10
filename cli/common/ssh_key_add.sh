@@ -4,7 +4,7 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
-CLI_PATH=$(../common/get_path ../ CLI_PATH)
+CLI_PATH="$(dirname "$(dirname "$0")")"
 
 # create key
 echo "${bold}Creating id_rsa private and public keys:${normal}"

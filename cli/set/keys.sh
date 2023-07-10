@@ -4,7 +4,7 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
-CLI_PATH="/opt/cli"
+CLI_PATH="$(dirname "$(dirname "$0")")"
 
 #inputs
 read -a flags <<< "$@"

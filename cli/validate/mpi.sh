@@ -4,7 +4,7 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
-CLI_PATH="/opt/cli"
+CLI_PATH="$(dirname "$(dirname "$0")")"
 MPICH_VERSION="4.0.2"
 MPICH_PATH="/opt/mpich/mpich-$MPICH_VERSION-install"
 MY_PROJECTS_PATH=$($CLI_PATH/common/get_path $CLI_PATH MY_PROJECTS_PATH)
@@ -75,20 +75,20 @@ fi
 eval "$CLI_PATH/common/ssh_key_add"
 
 #copy and compile
-cp -rf /opt/cli/templates/$WORKFLOW/hello_world/* $VALIDATION_DIR
+cp -rf $CLI_PATH/templates/$WORKFLOW/hello_world/* $VALIDATION_DIR
 
 #create config
 cp $VALIDATION_DIR/configs/config_000.hpp $VALIDATION_DIR/configs/config_001.hpp
 
 #build (compile)
-/opt/cli/build/$WORKFLOW -p validate_mpi
+$CLI_PATH/build/$WORKFLOW -p validate_mpi
 
 # create hosts file
 echo "${bold}Creating hosts file:${normal}"
 echo ""
 sleep 1
 
-servers=$(sudo /opt/cli/common/get_booking_system_servers_list | tail -n +2) #get booked machines
+servers=$(sudo $CLI_PATH/common/get_booking_system_servers_list | tail -n +2) #get booked machines
 echo ""
 servers=($servers) #convert string to an array
 
