@@ -1,7 +1,9 @@
 #!/bin/bash
 
-username=$1
-workflow=$2
+#username=$1
+#workflow=$2
+
+MY_PROJECTS_WORKFLOW_PATH=$1
 
 # Declare global variables
 declare -g project_found="0"
@@ -9,7 +11,7 @@ declare -g project_name=""
 declare -g multiple_projects="0"
 
 #get projects
-cd /home/$username/my_projects/$workflow/
+cd $MY_PROJECTS_WORKFLOW_PATH #/home/$username/my_projects/$workflow/
 projects=( *"/" )
 
 # delete "common" from projects

@@ -48,7 +48,7 @@ if [ "$flags" = "" ]; then
     echo ""
     echo "${bold}Please, choose your $WORKFLOW project:${normal}"
     echo ""
-    result=$($CLI_PATH/common/project_dialog $USER $WORKFLOW)
+    result=$($CLI_PATH/common/project_dialog $MY_PROJECTS_PATH/$WORKFLOW) #$USER $WORKFLOW
     project_found=$(echo "$result" | sed -n '1p')
     project_name=$(echo "$result" | sed -n '2p')
     multiple_projects=$(echo "$result" | sed -n '3p')
@@ -107,7 +107,7 @@ else
         echo ""
         echo "${bold}Please, choose your $WORKFLOW project:${normal}"
         echo ""
-        result=$($CLI_PATH/common/project_dialog $USER $WORKFLOW)
+        result=$($CLI_PATH/common/project_dialog $MY_PROJECTS_PATH/$WORKFLOW) #$USER $WORKFLOW
         project_found=$(echo "$result" | sed -n '1p')
         project_name=$(echo "$result" | sed -n '2p')
         multiple_projects=$(echo "$result" | sed -n '3p')
