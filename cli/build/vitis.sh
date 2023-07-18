@@ -5,7 +5,7 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="$(dirname "$(dirname "$0")")"
-XILINX_PLATFORMS_PATH="/opt/xilinx/platforms"
+XILINX_PLATFORMS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XILINX_PLATFORMS_PATH)
 XRT_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XRT_PATH)
 MY_PROJECTS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH MY_PROJECTS_PATH)
 WORKFLOW="vitis"
