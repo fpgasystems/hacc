@@ -363,17 +363,25 @@
     dest: /opt/cli/constants/ROCM_PATH
     mode: 0644
 
-- name: copy VITIS_PATH
-  copy:
-    src: "../../cli/constants/VITIS_PATH"
-    dest: /opt/cli/constants/VITIS_PATH
-    mode: 0644
+#- name: copy VITIS_PATH
+#  copy:
+#    src: "../../cli/constants/VITIS_PATH"
+#    dest: /opt/cli/constants/VITIS_PATH
+#    mode: 0644
+- name: remove VITIS_PATH
+  ansible.builtin.file:
+    path: /opt/cli/constants/VITIS_PATH
+    state: absent
 
-- name: copy VIVADO_PATH
-  copy:
-    src: "../../cli/constants/VIVADO_PATH"
-    dest: /opt/cli/constants/VIVADO_PATH
-    mode: 0644
+#- name: copy VIVADO_PATH
+#  copy:
+#    src: "../../cli/constants/VIVADO_PATH"
+#    dest: /opt/cli/constants/VIVADO_PATH
+#    mode: 0644
+- name: remove VIVADO_PATH
+  ansible.builtin.file:
+    path: /opt/cli/constants/VIVADO_PATH
+    state: absent
 
 - name: copy XILINX_PLATFORMS_PATH
   copy:
