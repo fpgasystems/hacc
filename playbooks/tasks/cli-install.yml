@@ -285,10 +285,20 @@
     dest: /opt/cli/common/get_server_type
     mode: 0755
 
-- name: copy common/get_path script
+#- name: copy common/get_path script
+#  copy:
+#    src: "../../cli/common/get_path.sh"
+#    dest: /opt/cli/common/get_path
+#    mode: 0755
+- name: remove common/get_path
+  ansible.builtin.file:
+    path: /opt/cli/common/get_path
+    state: absent
+
+- name: copy common/get_constant script
   copy:
-    src: "../../cli/common/get_path.sh"
-    dest: /opt/cli/common/get_path
+    src: "../../cli/common/get_constant.sh"
+    dest: /opt/cli/common/get_constant
     mode: 0755
 
 #constants -----------------------------------------------------------------------------------
