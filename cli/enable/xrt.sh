@@ -67,7 +67,6 @@ else
         echo "The server is ready to work with ${bold}XRT $version_name${normal} release branch:"
         echo ""
         echo "    Xilinx Board Utility (xbutil): ${bold}$XILINX_XRT/bin${normal}"
-        #echo "    Xilinx Tools (Vivado, Vitis_HLS)    : ${bold}/tools/Xilinx${normal}"
         echo ""
     else
         echo "The server needs special care to operate with XRT normally (Xilinx tools are not properly installed)."
