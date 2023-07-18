@@ -383,6 +383,12 @@
     path: /opt/cli/constants/VIVADO_PATH
     state: absent
 
+- name: copy XILINX_TOOLS_PATH
+  copy:
+    src: "../../cli/constants/XILINX_TOOLS_PATH"
+    dest: /opt/cli/constants/XILINX_TOOLS_PATH
+    mode: 0644
+
 - name: copy XILINX_PLATFORMS_PATH
   copy:
     src: "../../cli/constants/XILINX_PLATFORMS_PATH"
