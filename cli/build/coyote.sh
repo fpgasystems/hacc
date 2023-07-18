@@ -6,7 +6,7 @@ normal=$(tput sgr0)
 #constants
 CLI_PATH="$(dirname "$(dirname "$0")")"
 XILINX_PLATFORMS_PATH="/opt/xilinx/platforms"
-MY_PROJECTS_PATH=$($CLI_PATH/common/get_path $CLI_PATH MY_PROJECTS_PATH)
+MY_PROJECTS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH MY_PROJECTS_PATH)
 WORKFLOW="coyote"
 
 #get hostname
