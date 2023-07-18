@@ -1,23 +1,25 @@
 ---
 
 - hosts:
-    - hacc-build
+    #- hacc-build
     #- alveo-u250
     #- alveo-u280
     #- alveo-u50d
     #- alveo-u55c
     #- versal-vck5000
     #- hacc-boxes
-    - alveo-u55c-01.inf.ethz.ch
+    #- alveo-u55c-01.inf.ethz.ch
+    #- alveo-u55c-02.inf.ethz.ch
     - hacc-box-01.inf.ethz.ch
-    - hacc-box-02.inf.ethz.ch
+    #- hacc-box-02.inf.ethz.ch
   become: true
   become_method: community.general.sudosu
   become_user: root
   vars:
     ansible_python_interpreter: /usr/bin/python3
+    constants: false
+    common: false
     coyote: false
-    common: true
     enable: false
     examine: false
     get: false
@@ -28,14 +30,60 @@
     set: false
     sgutil: false
     validate: false
-    vitis: false
+    vitis: true
   tasks:
     #always added
-    #- name: copy program/reset
+    #- name: copy build/vitis
     #  copy:
-    #    src: "../cli/program/reset.sh"
-    #    dest: /opt/cli/program/reset
+    #    src: "../cli/build/vitis.sh"
+    #    dest: /opt/cli/build/vitis
     #    mode: 0755
+
+    #constants
+    - name: copy XILINX_TOOLS_PATH
+      copy:
+        src: "../cli/constants/XILINX_TOOLS_PATH"
+        dest: /opt/cli/constants/XILINX_TOOLS_PATH
+        mode: 0644
+      when: constants
+
+    #common
+    - name: copy common/get_booking_system_servers_list script
+      copy:
+        src: "../cli/common/get_booking_system_servers_list.sh"
+        dest: /opt/cli/common/get_booking_system_servers_list
+        mode: 0755
+      when: common
+    - name: copy common/project_dialog script
+      copy:
+        src: "../cli/common/project_dialog.sh"
+        dest: /opt/cli/common/project_dialog
+        mode: 0755
+      when: common
+    - name: copy common/ssh_key_add
+      copy:
+        src: "../cli/common/ssh_key_add.sh"
+        dest: /opt/cli/common/ssh_key_add
+        mode: 0755
+      when: common
+    - name: copy common/version_dialog script
+      copy:
+        src: "../cli/common/version_dialog.sh"
+        dest: /opt/cli/common/version_dialog
+        mode: 0755
+      when: common
+    - name: copy common/version_dialog_check script
+      copy:
+        src: "../cli/common/version_dialog_check.sh"
+        dest: /opt/cli/common/version_dialog_check
+        mode: 0755
+      when: common
+    - name: copy common/get_constant
+      copy:
+        src: "../cli/common/get_constant.sh"
+        dest: /opt/cli/common/get_constant
+        mode: 0755
+      when: common
 
     #coyote
     - name: copy new/coyote
@@ -86,38 +134,6 @@
         dest: /opt/cli/program/get_N_REGIONS
         mode: 0755
       when: coyote
-
-    #common
-    - name: copy common/get_booking_system_servers_list script
-      copy:
-        src: "../cli/common/get_booking_system_servers_list.sh"
-        dest: /opt/cli/common/get_booking_system_servers_list
-        mode: 0755
-      when: common
-    - name: copy common/project_dialog script
-      copy:
-        src: "../cli/common/project_dialog.sh"
-        dest: /opt/cli/common/project_dialog
-        mode: 0755
-      when: common
-    - name: copy common/ssh_key_add
-      copy:
-        src: "../cli/common/ssh_key_add.sh"
-        dest: /opt/cli/common/ssh_key_add
-        mode: 0755
-      when: common
-    - name: copy common/version_dialog script
-      copy:
-        src: "../cli/common/version_dialog.sh"
-        dest: /opt/cli/common/version_dialog
-        mode: 0755
-      when: common
-    - name: copy common/version_dialog_check script
-      copy:
-        src: "../cli/common/version_dialog_check.sh"
-        dest: /opt/cli/common/version_dialog_check
-        mode: 0755
-      when: common
 
     #enable
     - name: copy enable/vitis script
@@ -416,634 +432,3 @@
         dest: /opt/cli/common/get_booking_system_servers_list
         mode: 0755
       when: vitis
-
-    # build ---------------------------------------------------------------------
-
-    #- name: copy build/coyote
-    #  copy:
-    #    src: "../cli/build/coyote.sh"
-    #    dest: /opt/cli/build/coyote
-    #    mode: 0755
-
-    #- name: copy build/vitis
-    #  copy:
-    #    src: "../cli/build/vitis.sh"
-    #    dest: /opt/cli/build/vitis
-    #    mode: 0755
-
-    # common ---------------------------------------------------------------------
-    
-    #- name: copy sgutil common
-    #  copy:
-    #    src: "../cli/common/ssh_key_add.sh"
-    #    dest: /opt/cli/common/ssh_key_add
-    #    mode: 0755
-
-    #- name: copy common/is_member script
-    #  copy:
-    #    src: "../cli/common/is_member.sh"
-    #    dest: /opt/cli/common/is_member
-    #    mode: 0755
-
-    #- name: copy common/is_virtualized script
-    #  copy:
-    #    src: "../cli/common/is_virtualized.sh"
-    #    dest: /opt/cli/common/is_virtualized
-    #    mode: 0755
-
-    #- name: copy common/get_email script
-    #  copy:
-    #    src: "../cli/common/get_email.sh"
-    #    dest: /opt/cli/common/get_email
-    #    mode: 0755
-
-    #- name: copy common/get_num_devices script
-    #  copy:
-    #    src: "../cli/common/get_num_devices.sh"
-    #    dest: /opt/cli/common/get_num_devices
-    #    mode: 0755
-
-    #- name: copy common/get_multiple_devices script
-    #  copy:
-    #    src: "../cli/common/get_multiple_devices.sh"
-    #    dest: /opt/cli/common/get_multiple_devices
-    #    mode: 0755
-
-    #- name: copy common/project_dialog script
-    #  copy:
-    #    src: "../cli/common/project_dialog.sh"
-    #    dest: /opt/cli/common/project_dialog
-    #    mode: 0755
-
-    #- name: copy common/project_dialog_check script
-    #  copy:
-    #    src: "../cli/common/project_dialog_check.sh"
-    #    dest: /opt/cli/common/project_dialog_check
-    #    mode: 0755
-
-    #- name: copy common/device_dialog script
-    #  copy:
-    #    src: "../cli/common/device_dialog.sh"
-    #    dest: /opt/cli/common/device_dialog
-    #    mode: 0755
-
-    #- name: copy common/device_dialog_check script
-    #  copy:
-    #    src: "../cli/common/device_dialog_check.sh"
-    #    dest: /opt/cli/common/device_dialog_check
-    #    mode: 0755
-
-    #- name: copy common/get_MAX_DEVICES script
-    #  copy:
-    #    src: "../cli/common/get_MAX_DEVICES.sh"
-    #    dest: /opt/cli/common/get_MAX_DEVICES
-    #    mode: 0755
-
-    #- name: copy devices template to /opt/hacc
-    #  copy:
-    #    src: "../cli/devices"
-    #    dest: /opt/hacc/devices
-    #    mode: 0755
-
-    #- name: copy devices_reconfigurable template to /opt/hacc
-    #  copy:
-    #    src: "../cli/devices_reconfigurable"
-    #    dest: /opt/hacc/devices_reconfigurable
-    #    mode: 0755
-
-    #- name: copy devices_gpu template to /opt/hacc
-    #  copy:
-    #    src: "../cli/devices_gpu"
-    #    dest: /opt/hacc/devices_gpu
-    #    mode: 0755
-
-    #- name: copy common/get_servers script
-    #  copy:
-    #    src: "../cli/common/get_servers.sh"
-    #    dest: /opt/cli/common/get_servers
-    #    mode: 0755
-
-    #- name: copy common/deployment_dialog script
-    #  copy:
-    #    src: "../cli/common/deployment_dialog.sh"
-    #    dest: /opt/cli/common/deployment_dialog
-    #    mode: 0755
-    
-    #- name: copy common/deployment_dialog_check script
-    #  copy:
-    #    src: "../cli/common/deployment_dialog_check.sh"
-    #    dest: /opt/cli/common/deployment_dialog_check
-    #    mode: 0755
-
-    #- name: copy common/device_list_check script
-    #  copy:
-    #    src: "../cli/common/device_list_check.sh"
-    #    dest: /opt/cli/common/device_list_check
-    #    mode: 0755
-
-    #- name: copy common/bitstream_dialog_check script
-    #  copy:
-    #    src: "../cli/common/bitstream_dialog_check.sh"
-    #    dest: /opt/cli/common/bitstream_dialog_check
-    #    mode: 0755
-    
-    #- name: copy common/driver_dialog_check script
-    #  copy:
-    #    src: "../cli/common/driver_dialog_check.sh"
-    #    dest: /opt/cli/common/driver_dialog_check
-    #    mode: 0755
-
-    #- name: copy common/target_dialog script
-    #  copy:
-    #    src: "../cli/common/target_dialog.sh"
-    #    dest: /opt/cli/common/target_dialog
-    #    mode: 0755
-
-    #- name: copy common/target_dialog_check script
-    #  copy:
-    #    src: "../cli/common/target_dialog_check.sh"
-    #    dest: /opt/cli/common/target_dialog_check
-    #    mode: 0755
-
-    #- name: copy common/platform_dialog script
-    #  copy:
-    #    src: "../cli/common/platform_dialog.sh"
-    #    dest: /opt/cli/common/platform_dialog
-    #    mode: 0755
-
-    #- name: copy common/platform_dialog_check script
-    #  copy:
-    #    src: "../cli/common/platform_dialog_check.sh"
-    #    dest: /opt/cli/common/platform_dialog_check
-    #    mode: 0755
-
-    #- name: copy common/device_name_dialog script
-    #  copy:
-    #    src: "../cli/common/device_name_dialog.sh"
-    #    dest: /opt/cli/common/device_name_dialog
-    #    mode: 0755
-
-    #- name: copy common/device_name_dialog_check script
-    #  copy:
-    #    src: "../cli/common/device_name_dialog_check.sh"
-    #    dest: /opt/cli/common/device_name_dialog_check
-    #    mode: 0755
-
-    #- name: copy common/get_vivado_devices script
-    #  copy:
-    #    src: "../cli/common/get_vivado_devices.sh"
-    #    dest: /opt/cli/common/get_vivado_devices
-    #    mode: 0755
-
-    #- name: copy common/is_acap script
-    #  copy:
-    #    src: "../cli/common/is_acap.sh"
-    #    dest: /opt/cli/common/is_acap
-    #    mode: 0755
-
-    #- name: copy common/is_cpu script
-    #  copy:
-    #    src: "../cli/common/is_cpu.sh"
-    #    dest: /opt/cli/common/is_cpu
-    #    mode: 0755
-
-    #- name: copy common/is_fpga script
-    #  copy:
-    #    src: "../cli/common/is_fpga.sh"
-    #    dest: /opt/cli/common/is_fpga
-    #    mode: 0755
-
-    #- name: copy common/is_gpu script
-    #  copy:
-    #    src: "../cli/common/is_gpu.sh"
-    #    dest: /opt/cli/common/is_gpu
-    #    mode: 0755
-
-    #- name: copy common/get_server_type script
-    #  copy:
-    #    src: "../cli/common/get_server_type.sh"
-    #    dest: /opt/cli/common/get_server_type
-    #    mode: 0755
-
-    #- name: copy common/get_path script
-    #  copy:
-    #    src: "../cli/common/get_path.sh"
-    #    dest: /opt/cli/common/get_path
-    #    mode: 0755
-
-    # constants ---------------------------------------------
-
-    #- name: remove BUILD_SERVERS_LIST
-    #  ansible.builtin.file:
-    #    path: /opt/cli/constants/BUILD_SERVERS_LIST
-    #    state: absent
-
-    #- name: copy MY_PROJECTS_PATH
-    #  copy:
-    #    src: "../cli/constants/MY_PROJECTS_PATH"
-    #    dest: /opt/cli/constants/MY_PROJECTS_PATH
-    #    mode: 0644
-
-    # coyote ---------------------------------------------------------------------
-    
-    #- name: copy validate/coyote
-    #  copy:
-    #    src: "../cli/validate/coyote.sh"
-    #    dest: /opt/cli/validate/coyote
-    #    mode: 0755
-    
-    #- name: copy new/coyote
-    #  copy:
-    #    src: "../cli/new/coyote.sh"
-    #    dest: /opt/cli/new/coyote
-    #    mode: 0755
-    
-    #- name: copy build/coyote
-    #  copy:
-    #    src: "../cli/build/coyote.sh"
-    #    dest: /opt/cli/build/coyote
-    #    mode: 0755
-
-    #- name: copy program/coyote
-    #  copy:
-    #    src: "../cli/program/coyote.sh"
-    #    dest: /opt/cli/program/coyote
-    #    mode: 0755
-
-    #- name: copy run/coyote
-    #  copy:
-    #    src: "../cli/run/coyote.sh"
-    #    dest: /opt/cli/run/coyote
-    #    mode: 0755
-
-    #- name: Copy /templates/coyote/hello_world/src
-    #  copy:
-    #    src: "../cli/templates/coyote/hello_world"
-    #    dest: /opt/cli/templates/coyote/
-    #    mode: 0755
-
-    #- name: remove host.cpp
-    #  ansible.builtin.file:
-    #    path: /opt/cli/templates/coyote/hello_world/src/host.cpp
-    #    state: absent
-    
-    #- name: remove vadd.cpp
-    #  ansible.builtin.file:
-    #    path: /opt/cli/templates/coyote/hello_world/src/vadd.cpp
-    #    state: absent
-
-    #- name: copy program/pci_hot_plug
-    #  copy:
-    #    src: "../cli/program/pci_hot_plug.sh"
-    #    dest: /opt/cli/program/pci_hot_plug
-    #    mode: 0755
-
-    #- name: copy program/pci_hot_plug_2
-    #  copy:
-    #    src: "../cli/program/pci_hot_plug_2.sh"
-    #    dest: /opt/cli/program/pci_hot_plug_2
-    #    mode: 0755
-    #- name: remove program/pci_hot_plug_2
-    #  ansible.builtin.file:
-    #    path: /opt/cli/program/pci_hot_plug_2
-    #    state: absent
-
-    # examine ---------------------------------------------------------------------
-    
-    #- name: copy examine
-    #  copy:
-    #    src: "../cli/examine.sh"
-    #    dest: /opt/cli/examine
-    #    mode: 0755
-
-    # get ---------------------------------------------------------------------
-    
-    #- name: copy get/get_from_vars
-    #  copy:
-    #    src: "../cli/get/get_from_vars.sh"
-    #    dest: /opt/cli/get/get_from_vars
-    #    mode: 0755
-
-    #- name: copy get/get_fpga_device_param
-    #  copy:
-    #    src: "../cli/get/get_fpga_device_param.sh"
-    #    dest: /opt/cli/get/get_fpga_device_param
-    #    mode: 0755
-
-    #- name: copy get/get_gpu_device_param
-    #  copy:
-    #    src: "../cli/get/get_gpu_device_param.sh"
-    #    dest: /opt/cli/get/get_gpu_device_param
-    #    mode: 0755
-
-    #- name: copy get/network
-    #  copy:
-    #    src: "../cli/get/network.sh"
-    #    dest: /opt/cli/get/network
-    #    mode: 0755
-
-    #- name: copy get/device
-    #  copy:
-    #    src: "../cli/get/device.sh"
-    #    dest: /opt/cli/get/device
-    #    mode: 0755
-
-    #- name: copy get/serial
-    #  copy:
-    #    src: "../cli/get/serial.sh"
-    #    dest: /opt/cli/get/serial
-    #    mode: 0755
-
-    #- name: copy get/bdf
-    #  copy:
-    #    src: "../cli/get/bdf.sh"
-    #    dest: /opt/cli/get/bdf
-    #    mode: 0755
-
-    #- name: copy get/bus
-    #  copy:
-    #    src: "../cli/get/bus.sh"
-    #    dest: /opt/cli/get/bus
-    #    mode: 0755
-
-    #- name: copy get/ifconfig
-    #  copy:
-    #    src: "../cli/get/ifconfig.sh"
-    #    dest: /opt/cli/get/ifconfig
-    #    mode: 0755
-
-    #- name: copy get/platform
-    #  copy:
-    #    src: "../cli/get/platform.sh"
-    #    dest: /opt/cli/get/platform
-    #    mode: 0755
-
-    #- name: copy get/workflow
-    #  copy:
-    #    src: "../cli/get/workflow.sh"
-    #    dest: /opt/cli/get/workflow
-    #    mode: 0755
-
-    # hip ---------------------------------------------------------------------
-
-    #- name: copy new/hip
-    #  copy:
-    #    src: "../cli/new/hip.sh"
-    #    dest: /opt/cli/new/hip
-    #    mode: 0755
-
-    #- name: copy build/hip
-    #  copy:
-    #    src: "../cli/build/hip.sh"
-    #    dest: /opt/cli/build/hip
-    #    mode: 0755
-
-    #- name: copy run/hip
-    #  copy:
-    #    src: "../cli/run/hip.sh"
-    #    dest: /opt/cli/run/hip
-    #    mode: 0755
-    
-    #- name: copy validate/hip
-    #  copy:
-    #    src: "../cli/validate/hip.sh"
-    #    dest: /opt/cli/validate/hip
-    #    mode: 0755
-    
-    # mpi ---------------------------------------------------------------------
-    
-    #- name: copy validate/mpi
-    #  copy:
-    #    src: "../cli/validate/mpi.sh"
-    #    dest: /opt/cli/validate/mpi
-    #    mode: 0755
-
-    #- name: copy new/mpi
-    #  copy:
-    #    src: "../cli/new/mpi.sh"
-    #    dest: /opt/cli/new/mpi
-    #    mode: 0755
-
-    #- name: Copy cli/templates/mpi/hello_world/src/create_config.cpp
-    #  copy:
-    #    src: "../cli/templates/mpi/hello_world/src/create_config.cpp"
-    #    dest: /opt/cli/templates/mpi/hello_world/src/create_config.cpp
-    #    mode: 0755
-
-    #- name: Copy cli/templates/mpi/hello_world/src/main.cpp
-    #  copy:
-    #    src: "../cli/templates/mpi/hello_world/src/main.cpp"
-    #    dest: /opt/cli/templates/mpi/hello_world/src/main.cpp
-    #    mode: 0755
-
-    #- name: copy build/mpi
-    #  copy:
-    #    src: "../cli/build/mpi.sh"
-    #    dest: /opt/cli/build/mpi
-    #    mode: 0755
-
-    #- name: copy run/mpi
-    #  copy:
-    #    src: "../cli/run/mpi.sh"
-    #    dest: /opt/cli/run/mpi
-    #    mode: 0755
-
-    # program --------------------------------------------------------------------
-
-    #- name: copy program/coyote
-    #  copy:
-    #    src: "../cli/program/coyote.sh"
-    #    dest: /opt/cli/program/coyote
-    #    mode: 0755
-    
-    #- name: copy program/vivado
-    #  copy:
-    #    src: "../cli/program/vivado.sh"
-    #    dest: /opt/cli/program/vivado
-    #    mode: 0755
-
-    #- name: copy program/vitis
-    #  copy:
-    #    src: "../cli/program/vitis.sh"
-    #    dest: /opt/cli/program/vitis
-    #    mode: 0755
-
-    #- name: copy program revert
-    #  copy:
-    #    src: "../cli/program/revert.sh"
-    #    dest: /opt/cli/program/revert
-    #    mode: 0755
-
-    #- name: copy program rescan
-    #  copy:
-    #    src: "../cli/program/rescan.sh"
-    #    dest: /opt/cli/program/rescan
-    #    mode: 0755
-
-    #- name: copy program reset
-    #  copy:
-    #    src: "../cli/program/reset.sh"
-    #    dest: /opt/cli/program/reset
-    #    mode: 0755
-
-    #- name: copy program fpga_chmod
-    #  copy:
-    #    src: "../cli/program/fpga_chmod.sh"
-    #    dest: /opt/cli/program/fpga_chmod
-    #    mode: 0755
-
-    #- name: copy program get_N_REGIONS
-    #  copy:
-    #    src: "../cli/program/get_N_REGIONS.sh"
-    #    dest: /opt/cli/program/get_N_REGIONS
-    #    mode: 0755
-
-    # run ---------------------------------------------------------------------
-
-    #- name: copy run coyote
-    #  copy:
-    #    src: "../cli/run/coyote.sh"
-    #    dest: /opt/cli/run/coyote
-    #    mode: 0755
-
-    #- name: copy run vitis
-    #  copy:
-    #    src: "../cli/run/vitis.sh"
-    #    dest: /opt/cli/run/vitis
-    #    mode: 0755
-
-    #- name: copy run mpi
-    #  copy:
-    #    src: "../cli/run/mpi.sh"
-    #    dest: /opt/cli/run/mpi
-    #    mode: 0755
-    
-    # set ---------------------------------------------------------------------
-    
-    
-    
-    
-
-    # templates ---------------------------------------------------------------
-
-    #- name: Copy cli/templates/coyote/hello_world/src/create_config.cpp
-    #  copy:
-    #    src: "../cli/templates/coyote/hello_world/src/create_config.cpp"
-    #    dest: /opt/cli/templates/coyote/hello_world/src/create_config.cpp
-    #    mode: 0755
-
-    #- name: Copy cli/templates/mpi/hello_world/src/create_config.cpp
-    #  copy:
-    #    src: "../cli/templates/mpi/hello_world/src/create_config.cpp"
-    #    dest: /opt/cli/templates/mpi/hello_world/src/create_config.cpp
-    #    mode: 0755
-      
-    #- name: Copy cli/templates/vitis/hello_world/src/create_config.cpp
-    #  copy:
-    #    src: "../cli/templates/vitis/hello_world/src/create_config.cpp"
-    #    dest: /opt/cli/templates/vitis/hello_world/src/create_config.cpp
-    #    mode: 0755
-
-    #- name: Copy cli/templates/vitis/hello_world/src/vadd.cpp
-    #  copy:
-    #    src: "../cli/templates/vitis/hello_world/src/vadd.cpp"
-    #    dest: /opt/cli/templates/vitis/hello_world/src/vadd.cpp
-    #    mode: 0755
-
-    #- name: Copy cli/templates/vitis/hello_world/src/host.cpp
-    #  copy:
-    #    src: "../cli/templates/vitis/hello_world/src/host.cpp"
-    #    dest: /opt/cli/templates/vitis/hello_world/src/host.cpp
-    #    mode: 0755
-
-    #- name: Copy cli/templates/mpi/hello_world/src/main.cpp
-    #  copy:
-    #    src: "../cli/templates/mpi/hello_world/src/main.cpp"
-    #    dest: /opt/cli/templates/mpi/hello_world/src/main.cpp
-    #    mode: 0755
-
-    # vitis ---------------------------------------------------------------------
-    
-    #- name: copy build/vitis
-    #  copy:
-    #    src: "../cli/build/vitis.sh"
-    #    dest: /opt/cli/build/vitis
-    #    mode: 0755
-
-    #- name: copy program/vitis
-    #  copy:
-    #    src: "../cli/program/vitis.sh"
-    #    dest: /opt/cli/program/vitis
-    #    mode: 0755
-
-    #- name: copy run/vitis
-    #  copy:
-    #    src: "../cli/run/vitis.sh"
-    #    dest: /opt/cli/run/vitis
-    #    mode: 0755
-
-    #- name: Copy /templates/vitis/hello_world/src
-    #  copy:
-    #    src: "../cli/templates/vitis/hello_world/src"
-    #    dest: /opt/cli/templates/vitis/hello_world/
-    #    mode: 0755
-
-    #- name: Copy /templates/vitis/hello_world/configs
-    #  copy:
-    #    src: "../cli/templates/vitis/hello_world/configs"
-    #    dest: /opt/cli/templates/vitis/hello_world/
-    #    mode: 0755
-
-    #- name: Copy /templates/vitis/hello_world/platform_params.hpp
-    #  copy:
-    #    src: "../cli/templates/vitis/hello_world/platform_params.hpp"
-    #    dest: /opt/cli/templates/vitis/hello_world/platform_params.hpp
-    #    mode: 0755
-
-    #- name: copy new/vitis
-    #  copy:
-    #    src: "../cli/new/vitis.sh"
-    #    dest: /opt/cli/new/vitis
-    #    mode: 0755    
-
-    #- name: Copy cli/templates/vitis/hello_world/src/create_config.cpp
-    #  copy:
-    #    src: "../cli/templates/vitis/hello_world/src/create_config.cpp"
-    #    dest: /opt/cli/templates/vitis/hello_world/src/create_config.cpp
-    #    mode: 0755
-
-    #- name: Copy cli/templates/vitis/hello_world/src/host.cpp
-    #  copy:
-    #    src: "../cli/templates/vitis/hello_world/src/host.cpp"
-    #    dest: /opt/cli/templates/vitis/hello_world/src/host.cpp
-    #    mode: 0755
-    
-    #- name: Copy cli/templates/vitis/hello_world/src/vadd.cpp
-    #  copy:
-    #    src: "../cli/templates/vitis/hello_world/src/vadd.cpp"
-    #    dest: /opt/cli/templates/vitis/hello_world/src/vadd.cpp
-    #    mode: 0755
-
-    #- name: copy validate/vitis
-    #  copy:
-    #    src: "../cli/validate/vitis.sh"
-    #    dest: /opt/cli/validate/vitis
-    #    mode: 0755
-
-    #- name: copy validate/hip
-    #  copy:
-    #    src: "../cli/validate/hip.sh"
-    #    dest: /opt/cli/validate/hip
-    #    mode: 0755
-
-    #- name: copy validate/iperf
-    #  copy:
-    #    src: "../cli/validate/iperf.sh"
-    #    dest: /opt/cli/validate/iperf
-    #    mode: 0755
-
-    #- name: copy validate/mpi
-    #  copy:
-    #    src: "../cli/validate/mpi.sh"
-    #    dest: /opt/cli/validate/mpi
-    #    mode: 0755    
