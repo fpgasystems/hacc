@@ -7,6 +7,7 @@ normal=$(tput sgr0)
 CLI_PATH="$(dirname "$(dirname "$0")")"
 XILINX_PLATFORMS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XILINX_PLATFORMS_PATH)
 XRT_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XRT_PATH)
+XILINX_TOOLS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XILINX_TOOLS_PATH)
 MY_PROJECTS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH MY_PROJECTS_PATH)
 WORKFLOW="vitis"
 
@@ -233,9 +234,9 @@ else
     #application compilation
     echo "${bold}Application compilation:${normal}"
     echo ""
-    echo "g++ -o $project_name $MY_PROJECTS_PATH/$WORKFLOW/common/includes/xcl2/xcl2.cpp src/host.cpp -I$XRT_PATH/include -I/tools/Xilinx//Vivado/$branch/include -Wall -O0 -g -std=c++1y -I$MY_PROJECTS_PATH/$WORKFLOW/common/includes/xcl2 -fmessage-length=0 -L$XRT_PATH/lib -pthread -lOpenCL -lrt -lstdc++"
+    echo "g++ -o $project_name $MY_PROJECTS_PATH/$WORKFLOW/common/includes/xcl2/xcl2.cpp src/host.cpp -I$XRT_PATH/include -I$XILINX_TOOLS_PATH//Vivado/$branch/include -Wall -O0 -g -std=c++1y -I$MY_PROJECTS_PATH/$WORKFLOW/common/includes/xcl2 -fmessage-length=0 -L$XRT_PATH/lib -pthread -lOpenCL -lrt -lstdc++"
     echo ""
 
-    g++ -o $project_name $MY_PROJECTS_PATH/$WORKFLOW/common/includes/xcl2/xcl2.cpp src/host.cpp -I$XRT_PATH/include -I/tools/Xilinx//Vivado/$branch/include -Wall -O0 -g -std=c++1y -I$MY_PROJECTS_PATH/$WORKFLOW/common/includes/xcl2 -fmessage-length=0 -L$XRT_PATH/lib -pthread -lOpenCL -lrt -lstdc++
+    g++ -o $project_name $MY_PROJECTS_PATH/$WORKFLOW/common/includes/xcl2/xcl2.cpp src/host.cpp -I$XRT_PATH/include -I$XILINX_TOOLS_PATH//Vivado/$branch/include -Wall -O0 -g -std=c++1y -I$MY_PROJECTS_PATH/$WORKFLOW/common/includes/xcl2 -fmessage-length=0 -L$XRT_PATH/lib -pthread -lOpenCL -lrt -lstdc++
 
 fi
