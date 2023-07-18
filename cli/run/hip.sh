@@ -5,7 +5,7 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="$(dirname "$(dirname "$0")")"
-ROCM_PATH="/opt/rocm"
+ROCM_PATH=$($CLI_PATH/common/get_constant $CLI_PATH ROCM_PATH)
 MY_PROJECTS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH MY_PROJECTS_PATH)
 WORKFLOW="hip"
 
