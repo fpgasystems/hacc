@@ -128,17 +128,8 @@ fi
 echo ""
 echo "${bold}sgutil program vivado${normal}"
 
-#get release branch
-branch=$($XRT_PATH/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
-
-echo $branch
-
-#cd $VIVADO_PATH
-#vivado_version=( *"/" )
-#vivado_version=${vivado_version::-1}
-
+#get Vivado version
 vivado_version=$(find "$VIVADO_PATH" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;)
-echo $vivado_version
 
 #program bitstream
 if [[ $bitstream_found = "1" ]]; then
@@ -156,7 +147,6 @@ if [[ $bitstream_found = "1" ]]; then
 
     echo ""
 	echo "${bold}Programming bitstream:${normal}"
-    #$VIVADO_PATH/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name $bitstream_name
     $VIVADO_PATH/$vivado_version/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name $bitstream_name
 
     #check for virtualized and apply pci_hot_plug (is always needed as we reverted first)
