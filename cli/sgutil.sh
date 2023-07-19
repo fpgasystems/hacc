@@ -929,17 +929,25 @@ case "$command" in
         enable_help
         ;;
       vitis) 
-        valid_flags="-v --version -h --help"
-        command_run $command_arguments_flags"@"$valid_flags
+        valid_flags="-v --version -h --help" 
+        flags_check $command_arguments_flags"@"$valid_flags
+        source $CLI_PATH/$command/$arguments $flags
         ;;
       vivado) 
         valid_flags="-v --version -h --help" 
-        command_run $command_arguments_flags"@"$valid_flags
+        flags_check $command_arguments_flags"@"$valid_flags
+        #source $CLI_PATH/$command/$arguments $flags
+        XILINX_TOOLS_PATH="/tools/Xilinx"
+        version_name="2022.1"
+        echo ""
+        echo "source $XILINX_TOOLS_PATH//Vivado/$version_name/.settings64-Vivado.sh"
+        echo ""
+        source $XILINX_TOOLS_PATH//Vivado/$version_name/.settings64-Vivado.sh
         ;;
       xrt) 
         valid_flags="-v --version -h --help" 
         flags_check $command_arguments_flags"@"$valid_flags
-        $CLI_PATH/$command/$arguments $flags
+        source $CLI_PATH/$command/$arguments $flags
         ;;
       *)
         enable_help
