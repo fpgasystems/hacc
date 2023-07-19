@@ -6,7 +6,6 @@ normal=$(tput sgr0)
 #constants
 CLI_PATH="$(dirname "$(dirname "$0")")"
 HACC_PATH="/opt/hacc"
-XRT_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XRT_PATH)
 XILINX_TOOLS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XILINX_TOOLS_PATH)
 VIVADO_PATH="$XILINX_TOOLS_PATH/Vivado"
 DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
@@ -38,10 +37,13 @@ if [ "$acap" = "0" ] && [ "$fpga" = "0" ]; then
     exit
 fi
 
-#check on valid XRT version
-if [ ! -d $XRT_PATH ]; then
+#get Vivado version
+vivado_version=$(find "$VIVADO_PATH" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;)
+
+#check on valid Vivado version
+if [ ! -d $VIVADO_PATH/$vivado_version ]; then
     echo ""
-    echo "Please, source a valid XRT and Vivado version for ${bold}$hostname!${normal}"
+    echo "Please, source a valid Vivado version for ${bold}$hostname!${normal}"
     echo ""
     exit 1
 fi
@@ -113,13 +115,10 @@ echo "${bold}sgutil program revert${normal}"
 serial_number=$($CLI_PATH/get/serial -d $device_index | awk -F': ' '{print $2}' | grep -v '^$')
 device_name=$($CLI_PATH/get/name -d $device_index | awk -F': ' '{print $2}' | grep -v '^$')
 
-#get release branch
-branch=$($XRT_PATH/bin/xbutil --version | grep -i -w 'Branch' | tr -d '[:space:]')
-
 echo ""
 echo "${bold}Programming XRT shell:${normal}"
 
-$VIVADO_PATH/${branch:7:6}/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_xrt_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name
+$VIVADO_PATH/$vivado_version/bin/vivado -nolog -nojournal -mode batch -source $CLI_PATH/program/flash_xrt_bitstream.tcl -tclargs $SERVERADDR $serial_number $device_name
 
 #hotplug
 root_port=$($CLI_PATH/get/get_fpga_device_param $device_index root_port)
