@@ -5,7 +5,6 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="/opt/cli" #"$(dirname "$(dirname "$0")")"
-HACC_PATH="/opt/hacc"
 XILINX_TOOLS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XILINX_TOOLS_PATH)
 VIVADO_PATH="$XILINX_TOOLS_PATH/Vivado"
 
