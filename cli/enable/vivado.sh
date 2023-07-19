@@ -51,8 +51,7 @@ else
     fi 
 
     #source vivado
-    source $XILINX_TOOLS_PATH//Vivado/2022.1/.settings64-Vivado.sh
-    export XILINX_VIVADO=$VIVADO_PATH/$version_name
+    source $XILINX_TOOLS_PATH//Vivado/$version_name/.settings64-Vivado.sh
 
     #echo ""
 

@@ -51,9 +51,8 @@ else
     fi
 
     #source vitis
-    source $XILINX_TOOLS_PATH//Vitis/2022.1/.settings64-Vitis.sh
-    source $XILINX_TOOLS_PATH//Vitis_HLS/2022.1/.settings64-Vitis_HLS.sh
-    export XILINX_VITIS=$VITIS_PATH/$version_name
+    source $XILINX_TOOLS_PATH//Vitis/$version_name/.settings64-Vitis.sh
+    source $XILINX_TOOLS_PATH//Vitis_HLS/$version_name/.settings64-Vitis_HLS.sh
 
     #echo ""
 
