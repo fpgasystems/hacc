@@ -5,8 +5,7 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="$(dirname "$(dirname "$0")")"
-MPICH_VERSION="4.0.2"
-MPICH_PATH="/opt/mpich/mpich-$MPICH_VERSION-install"
+MPICH_PATH=$($CLI_PATH/common/get_constant $CLI_PATH MPICH_PATH)
 MY_PROJECTS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH MY_PROJECTS_PATH)
 WORKFLOW="mpi"
 
@@ -14,8 +13,11 @@ WORKFLOW="mpi"
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#check on valid MPICH version
-if [ ! -d "$MPICH_PATH" ]; then
+#get MPICH version
+mpich_version=($(find "$MPICH_PATH" -mindepth 1 -maxdepth 1 -type d -name "*-install" -exec basename {} \;))
+
+#check on valid MPICH version (only one should be installed)
+if [ ! -d "$MPICH_PATH/$mpich_version" ]; then
     echo ""
     echo "Please, install a valid MPICH version for ${bold}$hostname!${normal}"
     echo ""
@@ -31,8 +33,8 @@ if ! [ -d "$MY_PROJECTS_PATH/$WORKFLOW/" ]; then
 fi
 
 #set environment
-PATH=$MPICH_PATH/bin:$PATH
-LD_LIBRARY_PATH=$MPICH_PATH/lib:$LD_LIBRARY_PATH
+PATH=$MPICH_PATH/$mpich_version/bin:$PATH
+LD_LIBRARY_PATH=$MPICH_PATH/$mpich_version/lib:$LD_LIBRARY_PATH
 
 #inputs
 read -a flags <<< "$@"
@@ -156,6 +158,6 @@ cd $DIR
 echo "${bold}Compiling main.c:${normal}"
 echo ""
 sleep 1
-echo "mpicc $DIR/src/main.cpp -I $MPICH_PATH/include -L $MPICH_PATH/lib -lstdc++ -o $APP_BUILD_DIR/main"
+echo "mpicc $DIR/src/main.cpp -I $MPICH_PATH/$mpich_version/include -L $MPICH_PATH/$mpich_version/lib -lstdc++ -o $APP_BUILD_DIR/main"
 echo ""
-mpicc $DIR/src/main.cpp -I $MPICH_PATH/include -L $MPICH_PATH/lib -lstdc++ -o $APP_BUILD_DIR/main
+mpicc $DIR/src/main.cpp -I $MPICH_PATH/$mpich_version/include -L $MPICH_PATH/$mpich_version/lib -lstdc++ -o $APP_BUILD_DIR/main
