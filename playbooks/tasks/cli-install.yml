@@ -401,6 +401,12 @@
     dest: /opt/cli/constants/XRT_PATH
     mode: 0644
 
+- name: copy MPICH_PATH
+  copy:
+    src: "../../cli/constants/MPICH_PATH"
+    dest: /opt/cli/constants/MPICH_PATH
+    mode: 0644
+
 #enable
 - name: copy enable/vitis script
   copy:
