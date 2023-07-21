@@ -5,8 +5,7 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="$(dirname "$(dirname "$0")")"
-HACC_PATH="/opt/hacc"
-DEVICES_LIST="$HACC_PATH/devices_gpu"
+DEVICES_LIST="$CLI_PATH/devices_gpu"
 
 #check on DEVICES_LIST
 source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
