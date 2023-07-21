@@ -432,34 +432,38 @@
     dest: /opt/cli/examine
     mode: 0755
 
-- name: create /opt/hacc directory for devices
+#- name: create /opt/hacc directory for devices
+#  file:
+#    path: /opt/hacc
+#    state: directory
+- name: Delete the /opt/hacc folder
   file:
     path: /opt/hacc
-    state: directory
+    state: absent
 
-- name: check on /opt/hacc/devices 
+- name: check on /opt/cli/devices_acap_fpga 
   stat:
-    path: /opt/hacc/devices
+    path: /opt/cli/devices_acap_fpga
   register: get_devices_stat
 
-- name: copy devices template to /opt/hacc
+#- name: copy devices template to /opt/cli
+#  copy:
+#    src: "../../cli/devices"
+#    dest: /opt/cli/devices
+#    mode: 0755
+#  when: not get_devices_stat.stat.exists
+
+- name: copy devices_acap_fpga template to /opt/cli
   copy:
-    src: "../../cli/devices"
-    dest: /opt/hacc/devices
+    src: "../../cli/devices_acap_fpga"
+    dest: /opt/cli/devices_acap_fpga
     mode: 0755
   when: not get_devices_stat.stat.exists
 
-- name: copy devices_reconfigurable template to /opt/hacc
-  copy:
-    src: "../../cli/devices_reconfigurable"
-    dest: /opt/hacc/devices_reconfigurable
-    mode: 0755
-  when: not get_devices_stat.stat.exists
-
-- name: copy devices_gpu template to /opt/hacc
+- name: copy devices_gpu template to /opt/cli
   copy:
     src: "../../cli/devices_gpu"
-    dest: /opt/hacc/devices_gpu
+    dest: /opt/cli/devices_gpu
     mode: 0755
   when: not get_devices_stat.stat.exists
 
