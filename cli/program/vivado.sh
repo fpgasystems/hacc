@@ -5,11 +5,10 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="$(dirname "$(dirname "$0")")"
-HACC_PATH="/opt/hacc"
 XILINX_TOOLS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XILINX_TOOLS_PATH)
 VIVADO_PATH="$XILINX_TOOLS_PATH/Vivado"
 VIVADO_DEVICES_MAX=$(cat $CLI_PATH/constants/VIVADO_DEVICES_MAX)
-DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+DEVICES_LIST="$CLI_PATH/devices_acap_fpga"
 SERVERADDR="localhost"
 
 #get hostname
