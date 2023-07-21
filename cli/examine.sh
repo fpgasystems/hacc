@@ -6,9 +6,9 @@ normal=$(tput sgr0)
 #constants
 CLI_PATH="$(dirname "$0")"
 XRT_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XRT_PATH)
-HACC_PATH=$($CLI_PATH/common/get_constant $CLI_PATH HACC_PATH)
-DEVICE_LIST_FPGA="$HACC_PATH/devices_reconfigurable"
-DEVICE_LIST_GPU="$HACC_PATH/devices_gpu"
+#HACC_PATH=$($CLI_PATH/common/get_constant $CLI_PATH HACC_PATH)
+DEVICE_LIST_FPGA="$CLI_PATH/devices_acap_fpga"
+DEVICE_LIST_GPU="$CLI_PATH/devices_gpu"
 STR_LENGTH=20
 
 split_addresses (){
