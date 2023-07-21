@@ -43,7 +43,7 @@ print_gpu_devices_header (){
 }
 
 #reconfigurable devices
-if [[ -f "$DEVICE_LIST_FPGA" ]]; then
+if [[ -s "$DEVICE_LIST_FPGA" ]]; then
   #print if the first fpga/acap is valid
   device_1=$(head -n 1 "$DEVICE_LIST_FPGA")
   upstream_port_1=$(echo "$device_1" | awk '{print $2}')
@@ -86,7 +86,7 @@ if [[ -f "$DEVICE_LIST_FPGA" ]]; then
 fi
 
 #GPU devices
-if [[ -f "$DEVICE_LIST_GPU" ]]; then
+if [[ -s "$DEVICE_LIST_GPU" ]]; then
   #print if the first fpga/acap is valid
   device_1=$(head -n 1 "$DEVICE_LIST_GPU")
   bus_1=$(echo "$device_1" | awk '{print $2}')
