@@ -5,9 +5,8 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="$(dirname "$(dirname "$0")")"
-HACC_PATH="/opt/hacc"
 XILINX_PLATFORMS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XILINX_PLATFORMS_PATH)
-DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+DEVICES_LIST="$CLI_PATH/devices_acap_fpga"
 
 #get hostname
 url="${HOSTNAME}"
