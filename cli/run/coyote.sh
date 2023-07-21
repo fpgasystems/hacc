@@ -5,8 +5,7 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="$(dirname "$(dirname "$0")")"
-HACC_PATH="/opt/hacc"
-DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+DEVICES_LIST="$CLI_PATH/devices_acap_fpga"
 MY_PROJECTS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH MY_PROJECTS_PATH)
 WORKFLOW="coyote"
 
