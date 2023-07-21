@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#HACC_PATH="/opt/hacc"
-#DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
-
 #constants
 CLI_PATH="$(dirname "$(dirname "$0")")"
 DEVICES_LIST="$CLI_PATH/devices_acap_fpga"
