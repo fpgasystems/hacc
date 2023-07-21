@@ -1,7 +1,11 @@
 #!/bin/bash
 
-HACC_PATH="/opt/hacc"
-DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+#HACC_PATH="/opt/hacc"
+#DEVICES_LIST="$HACC_PATH/devices_reconfigurable"
+
+#constants
+CLI_PATH="$(dirname "$(dirname "$0")")"
+DEVICES_LIST="$CLI_PATH/devices_acap_fpga"
 
 #constants (id upstream_port root_port LinkCtl device_type device_name serial_number IP MAC)
 ID_COLUMN=1
