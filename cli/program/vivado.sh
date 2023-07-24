@@ -77,10 +77,10 @@ else
         exit
     fi
     #device_dialog (forgotten mandatory)
-    if [[ $multiple_devices = "0" ]]; then
-        device_found="1"
-        device_index="1"
-    fi
+    #if [[ $multiple_devices = "0" ]]; then
+    #    device_found="1"
+    #    device_index="1"
+    #fi
     #bitstream_dialog_check
     result="$("$CLI_PATH/common/bitstream_dialog_check" "${flags[@]}")"
     bitstream_found=$(echo "$result" | sed -n '1p')
@@ -100,7 +100,7 @@ else
         exit
     fi
     #forbidden combinations (4)
-    if [ "$bitstream_found" = "1" ] && [[ $device_found = "0" ]]; then # this means bitstream always needs --device 
+    if [ "$multiple_devices" = "1" ] && [ "$bitstream_found" = "1" ] && [ "$device_found" = "0" ]; then # this means bitstream always needs --device when multiple_devices
         $CLI_PATH/sgutil program vivado -h
         exit
     fi
@@ -110,9 +110,14 @@ else
         exit
     fi
     #forbidden combinations (6)
-    if ([ "$driver_found" = "1" ] && [ "$bitstream_found" = "0" ] && [ "$device_found" = "1" ]); then
+    if ([ "$driver_found" = "1" ] && [ "$bitstream_found" = "0" ] && [ "$device_found" = "1" ]); then #the driver alone (without bitstream) does not need --device
         $CLI_PATH/sgutil program vivado -h
         exit
+    fi
+    #device values when there is only a device
+    if [[ $multiple_devices = "0" ]]; then
+        device_found="1"
+        device_index="1"
     fi
     #check on VIVADO_DEVICES_MAX
     if [ "$device_found" = "1" ]; then
