@@ -8,8 +8,9 @@ CLI_PATH="$(dirname "$(dirname "$0")")"
 MY_PROJECTS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH MY_PROJECTS_PATH)
 WORKFLOW="coyote"
 
-echo ""
-echo "${bold}sgutil new coyote${normal}"
+#get hostname
+url="${HOSTNAME}"
+hostname="${url%%.*}"
 
 #check on virtualized servers
 virtualized=$($CLI_PATH/common/is_virtualized $CLI_PATH $hostname)
@@ -21,7 +22,7 @@ if [ "$virtualized" = "1" ]; then
 fi
 
 #check on valid Vivado version
-if [ -z "$(echo $XILINX_XRT)" ]; then
+if [ -z "$(echo $XILINX_VIVADO)" ]; then
     echo ""
     echo "Please, source a valid Vivado version for ${bold}$hostname!${normal}"
     echo ""
@@ -36,6 +37,9 @@ if [ "$member" = "false" ]; then
     echo ""
     exit
 fi
+
+echo ""
+echo "${bold}sgutil new coyote${normal}"
 
 # create my_projects directory
 DIR="$MY_PROJECTS_PATH"
