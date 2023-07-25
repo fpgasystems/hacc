@@ -23,7 +23,7 @@ if [ "$virtualized" = "1" ]; then
 fi
 
 #check on valid Vivado version
-if [ -z "$(echo $XILINX_XRT)" ]; then
+if [ -z "$(echo $XILINX_VIVADO)" ]; then
     echo ""
     echo "Please, source a valid Vivado version for ${bold}$hostname!${normal}"
     echo ""
