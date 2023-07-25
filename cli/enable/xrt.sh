@@ -5,6 +5,7 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="/opt/cli" #"$(dirname "$(dirname "$0")")"
+LOCAL_PATH=$($CLI_PATH/common/get_constant $CLI_PATH LOCAL_PATH)
 XRT_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XRT_PATH)
 XILINX_TOOLS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XILINX_TOOLS_PATH)
 VIVADO_PATH="$XILINX_TOOLS_PATH/Vivado"
@@ -51,11 +52,11 @@ else
     fi
 
     #copy the desired XRT version to user’s local and preserve /opt/xilinx/xrt structure (Xilinx workaroud)
-    mkdir -p /local/home/$USER/xrt_${version_name}$XRT_PATH
-    cp -r $XRT_PATH"_"${version_name}/* /local/home/$USER/xrt_${version_name}$XRT_PATH 
+    mkdir -p $LOCAL_PATH/xrt_${version_name}$XRT_PATH
+    cp -r $XRT_PATH"_"${version_name}/* $LOCAL_PATH/xrt_${version_name}$XRT_PATH 
 
     #source xrt
-    source /local/home/$USER/xrt_${version_name}$XRT_PATH/setup.sh
+    source $LOCAL_PATH/xrt_${version_name}$XRT_PATH/setup.sh
 
     echo ""
 
