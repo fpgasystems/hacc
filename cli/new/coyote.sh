@@ -11,6 +11,23 @@ WORKFLOW="coyote"
 echo ""
 echo "${bold}sgutil new coyote${normal}"
 
+#check on virtualized servers
+virtualized=$($CLI_PATH/common/is_virtualized $CLI_PATH $hostname)
+if [ "$virtualized" = "1" ]; then
+    echo ""
+    echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
+    echo ""
+    exit
+fi
+
+#check on valid Vivado version
+if [ -z "$(echo $XILINX_XRT)" ]; then
+    echo ""
+    echo "Please, source a valid Vivado version for ${bold}$hostname!${normal}"
+    echo ""
+    exit 1
+fi
+
 #check for vivado_developers
 member=$($CLI_PATH/common/is_member $USER vivado_developers)
 if [ "$member" = "false" ]; then

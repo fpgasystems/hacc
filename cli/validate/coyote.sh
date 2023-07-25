@@ -18,19 +18,19 @@ DRIVER_NAME="coyote_drv.ko"
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#check on ACAP or FPGA servers (server must have at least one ACAP or one FPGA)
-acap=$($CLI_PATH/common/is_acap $CLI_PATH $hostname)
-fpga=$($CLI_PATH/common/is_fpga $CLI_PATH $hostname)
-if [ "$acap" = "0" ] && [ "$fpga" = "0" ]; then
+#check on virtualized servers
+virtualized=$($CLI_PATH/common/is_virtualized $CLI_PATH $hostname)
+if [ "$virtualized" = "1" ]; then
     echo ""
     echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
     echo ""
     exit
 fi
 
-#check on virtualized servers
-virtualized=$($CLI_PATH/common/is_virtualized $CLI_PATH $hostname)
-if [ "$virtualized" = "1" ]; then
+#check on ACAP or FPGA servers (server must have at least one ACAP or one FPGA)
+acap=$($CLI_PATH/common/is_acap $CLI_PATH $hostname)
+fpga=$($CLI_PATH/common/is_fpga $CLI_PATH $hostname)
+if [ "$acap" = "0" ] && [ "$fpga" = "0" ]; then
     echo ""
     echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
     echo ""
@@ -48,15 +48,6 @@ if [ ! -d $VIVADO_PATH/$vivado_version ]; then
     exit 1
 fi
 
-#check on DEVICES_LIST
-source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
-
-#get number of fpga and acap devices present
-MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
-
-#check on multiple devices
-multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
-
 #check for vivado_developers
 member=$($CLI_PATH/common/is_member $USER vivado_developers)
 if [ "$member" = "false" ]; then
@@ -65,6 +56,15 @@ if [ "$member" = "false" ]; then
     echo ""
     exit
 fi
+
+#check on DEVICES_LIST
+source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
+
+#get number of fpga and acap devices present
+MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
+
+#check on multiple devices
+multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 
 #inputs
 read -a flags <<< "$@"

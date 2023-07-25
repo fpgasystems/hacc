@@ -5,6 +5,8 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="$(dirname "$(dirname "$0")")"
+XILINX_TOOLS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XILINX_TOOLS_PATH)
+VIVADO_PATH="$XILINX_TOOLS_PATH/Vivado"
 DEVICES_LIST="$CLI_PATH/devices_acap_fpga"
 MY_PROJECTS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH MY_PROJECTS_PATH)
 WORKFLOW="coyote"
@@ -12,6 +14,15 @@ WORKFLOW="coyote"
 #get hostname
 url="${HOSTNAME}"
 hostname="${url%%.*}"
+
+#check on virtualized servers
+virtualized=$($CLI_PATH/common/is_virtualized $CLI_PATH $hostname)
+if [ "$virtualized" = "1" ]; then
+    echo ""
+    echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
+    echo ""
+    exit
+fi
 
 #check on ACAP or FPGA servers (server must have at least one ACAP or one FPGA)
 acap=$($CLI_PATH/common/is_acap $CLI_PATH $hostname)
@@ -23,14 +34,16 @@ if [ "$acap" = "0" ] && [ "$fpga" = "0" ]; then
     exit
 fi
 
-#check on DEVICES_LIST
-source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
+#get Vivado version
+vivado_version=$(find "$VIVADO_PATH" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;)
 
-#get number of fpga and acap devices present
-MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
-
-#check on multiple devices
-multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
+#check on valid Vivado version
+if [ ! -d $VIVADO_PATH/$vivado_version ]; then
+    echo ""
+    echo "Please, source a valid Vivado version for ${bold}$hostname!${normal}"
+    echo ""
+    exit 1
+fi
 
 #check for vivado_developers
 member=$($CLI_PATH/common/is_member $USER vivado_developers)
@@ -48,6 +61,15 @@ if ! [ -d "$MY_PROJECTS_PATH/$WORKFLOW/" ]; then
     echo ""
     exit
 fi
+
+#check on DEVICES_LIST
+source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
+
+#get number of fpga and acap devices present
+MAX_DEVICES=$(grep -E "fpga|acap" $DEVICES_LIST | wc -l)
+
+#check on multiple devices
+multiple_devices=$($CLI_PATH/common/get_multiple_devices $MAX_DEVICES)
 
 #inputs
 read -a flags <<< "$@"
