@@ -32,7 +32,7 @@ fi
 #get Vivado version
 vivado_version=$(find "$VIVADO_PATH" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;)
 
-#check on valid Vivado version
+#check on valid Vivado version (using $XILINX_VIVADO is not possible)
 if [ ! -d $VIVADO_PATH/$vivado_version ]; then
     echo ""
     echo "Please, source a valid Vivado version for ${bold}$hostname!${normal}"
