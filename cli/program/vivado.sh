@@ -5,6 +5,7 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="$(dirname "$(dirname "$0")")"
+LOCAL_PATH=$($CLI_PATH/common/get_constant $CLI_PATH LOCAL_PATH)
 XILINX_TOOLS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XILINX_TOOLS_PATH)
 VIVADO_PATH="$XILINX_TOOLS_PATH/Vivado"
 VIVADO_DEVICES_MAX=$(cat $CLI_PATH/constants/VIVADO_DEVICES_MAX)
@@ -181,10 +182,10 @@ fi
 if [[ $driver_found = "1" ]]; then
     #we need to copy the driver to /local to avoid permission problems
 	echo ""
-    echo "${bold}Copying driver to /local/home/$USER:${normal}"
+    echo "${bold}Copying driver to $LOCAL_PATH:${normal}"
 	echo ""
-    echo "cp -f $driver_name /local/home/$USER"
-    cp -f $driver_name /local/home/$USER
+    echo "cp -f $driver_name $LOCAL_PATH"
+    cp -f $driver_name $LOCAL_PATH
 
     #insert coyote driver
 	echo ""
@@ -198,8 +199,8 @@ if [[ $driver_found = "1" ]]; then
     echo "sudo rmmod $driver_name"
     sudo rmmod $driver_name
     sleep 1
-    echo "sudo insmod /local/home/$USER/$driver_name"
-    sudo insmod /local/home/$USER/$driver_name
+    echo "sudo insmod $LOCAL_PATH/$driver_name"
+    sudo insmod $LOCAL_PATH/$driver_name
     sleep 1
     echo ""
 fi
