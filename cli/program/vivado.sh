@@ -191,6 +191,9 @@ if [[ $driver_found = "1" ]]; then
     echo "${bold}Inserting driver:${normal}"
 	echo ""
 
+    #get actual filename
+    driver_name=$(basename "$driver_name")
+
     #we always remove and insert the driver
     echo "sudo rmmod $driver_name"
     sudo rmmod $driver_name
