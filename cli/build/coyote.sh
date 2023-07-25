@@ -13,10 +13,19 @@ WORKFLOW="coyote"
 url="${HOSTNAME}"
 hostname="${url%%.*}"
 
-#check on valid XRT version
+#check on virtualized servers
+virtualized=$($CLI_PATH/common/is_virtualized $CLI_PATH $hostname)
+if [ "$virtualized" = "1" ]; then
+    echo ""
+    echo "Sorry, this command is not available on ${bold}$hostname!${normal}"
+    echo ""
+    exit
+fi
+
+#check on valid Vivado version
 if [ -z "$(echo $XILINX_XRT)" ]; then
     echo ""
-    echo "Please, source a valid XRT and Vitis version for ${bold}$hostname!${normal}"
+    echo "Please, source a valid Vivado version for ${bold}$hostname!${normal}"
     echo ""
     exit 1
 fi
