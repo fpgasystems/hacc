@@ -4,7 +4,6 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
-#CLI_WORKDIR="/opt/cli"
 CLI_PATH="$(dirname "$0")"
 
 #inputs
@@ -69,7 +68,7 @@ command_run() {
 	      fi
       done
 
-      /opt/cli/${command_arguments_flags[0]}/${command_arguments_flags[1]} $flags # Example: /opt/cli/validate/iperf -P 6
+      $CLI_PATH/${command_arguments_flags[0]}/${command_arguments_flags[1]} $flags # Example: /opt/cli/validate/iperf -P 6
 
     fi
 }
@@ -102,16 +101,12 @@ flags_check() {
           #break
 	      fi
       done
-
-      #/opt/cli/${command_arguments_flags[0]}/${command_arguments_flags[1]} $flags # Example: /opt/cli/validate/iperf -P 6
-      #echo $flags
-
     fi
 }
 
 xilinx_build_check() {
 
-    EMAIL=$(/opt/cli/common/get_email) #"jmoyapaya@ethz.ch"
+    EMAIL=$($CLI_PATH/common/get_email) #"jmoyapaya@ethz.ch"
     username=$USER
     url="${HOSTNAME}"
     hostname="${url%%.*}"
@@ -965,7 +960,7 @@ case "$command" in
           examine_help
           exit 1
         fi
-        /opt/cli/examine
+        $CLI_PATH/examine
         ;;
     esac
     ;;
@@ -1023,28 +1018,28 @@ case "$command" in
           new_coyote_help
           exit 1
         fi
-        /opt/cli/new/coyote
+        $CLI_PATH/new/coyote
         ;;
       hip)
         if [ "$#" -ne 2 ]; then
           new_hpi_help
           exit 1
         fi
-        /opt/cli/new/hip
+        $CLI_PATH/new/hip
         ;;
       mpi)
         if [ "$#" -ne 2 ]; then
           new_mpi_help
           exit 1
         fi
-        /opt/cli/new/mpi
+        $CLI_PATH/new/mpi
         ;;
       vitis)
         if [ "$#" -ne 2 ]; then
           new_vitis_help
           exit 1
         fi
-        /opt/cli/new/vitis
+        $CLI_PATH/new/vitis
         ;;
       *)
         new_help
@@ -1092,7 +1087,7 @@ case "$command" in
           reboot_help
           exit 1
         fi
-        /opt/cli/reboot
+        $CLI_PATH/reboot
         ;;
     esac
     ;;
@@ -1134,7 +1129,7 @@ case "$command" in
           set_keys_help
           exit 1
         fi
-        eval "/opt/cli/set/keys"
+        eval "$CLI_PATH/set/keys"
         ;;
       write) 
         valid_flags="-i --index -h --help"
