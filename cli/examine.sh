@@ -43,6 +43,20 @@ print_gpu_devices_header (){
   echo "${bold}--------------------------------------------------------------------------------------------------------------------------${normal}"
 }
 
+#CPU server (both lists are empty)
+if ! ([[ -s "$DEVICE_LIST_FPGA" ]] && [[ -s "$DEVICE_LIST_GPU" ]]); then
+  echo ""
+  echo "System Configuration"
+  echo "OS Name              : $(uname -s)"
+  echo "Release              : $(uname -r)"
+  echo "Version              : $(uname -v)"
+  echo "Machine              : $(uname -m)"
+  echo "CPU Cores            : $(nproc)"
+  echo "Memory               : $(free -m | awk 'NR==2{print $2}') MB"
+  echo "Distribution         : $(lsb_release -d | awk -F ':\t' '{print $2}' | sed 's/^[ \t]*//')"
+  echo ""
+fi
+
 #reconfigurable devices
 if [[ -s "$DEVICE_LIST_FPGA" ]]; then
   #print if the first fpga/acap is valid
