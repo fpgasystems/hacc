@@ -345,11 +345,11 @@
     dest: /opt/cli/constants/MY_PROJECTS_PATH
     mode: 0644
 
-- name: copy CLI_PATH
-  copy:
-    src: "../../cli/constants/CLI_PATH"
-    dest: /opt/cli/constants/CLI_PATH
-    mode: 0644
+#- name: copy CLI_PATH
+#  copy:
+#    src: "../../cli/constants/CLI_PATH"
+#    dest: /opt/cli/constants/CLI_PATH
+#    mode: 0644
 
 - name: copy HACC_PATH
   copy:
