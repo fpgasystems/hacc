@@ -8,7 +8,8 @@ CLI_PATH="$(dirname "$0")"
 XRT_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XRT_PATH)
 DEVICE_LIST_FPGA="$CLI_PATH/devices_acap_fpga"
 DEVICE_LIST_GPU="$CLI_PATH/devices_gpu"
-STR_LENGTH=20
+DEVICE_TYPE_NAME_STR_LENGTH=20
+NETWORKING_STR_LENGTH=35
 
 split_addresses (){
   #input parameters
@@ -33,13 +34,13 @@ split_addresses (){
 }
 
 print_reconfigurable_devices_header (){
-  echo "${bold}Device Index : Upstream port (BFD) : Device Type (Name)   : Serial Number : Networking                        : Workflow${normal}"
-  echo "${bold}------------------------------------------------------------------------------------------------------------------------${normal}"
+  echo "${bold}Device Index : Upstream port (BFD) : Device Type (Name)   : Serial Number : Networking                          : Workflow${normal}"
+  echo "${bold}--------------------------------------------------------------------------------------------------------------------------${normal}"
 }
 
 print_gpu_devices_header (){
   echo "${bold}Device Index : PCI BUS : Device Type (GPU ID) : Serial Number : Unique ID${normal}"
-  echo "${bold}------------------------------------------------------------------------------------------------------------------------${normal}"
+  echo "${bold}--------------------------------------------------------------------------------------------------------------------------${normal}"
 }
 
 #reconfigurable devices
@@ -69,15 +70,19 @@ if [[ -s "$DEVICE_LIST_FPGA" ]]; then
         workflow=$($CLI_PATH/get/workflow -d $i)
         workflow=$(echo "$workflow" $i | cut -d' ' -f2 | sed '/^\s*$/d')
         bdf="${upstream_port::-1}1"
-        #adjust length
+        #adjust device type and name string length
         aux="$device_type ($device_name)"
-        diff=$(( $STR_LENGTH - ${#aux} ))
-        aux="$aux$(printf '%*s' $diff)"
+        diff=$(( $DEVICE_TYPE_NAME_STR_LENGTH - ${#aux} ))
+        device_type_name="$aux$(printf '%*s' $diff)"
         #split ip
         add_0=$(split_addresses $ip $mac 0)
         add_1=$(split_addresses $ip $mac 1)
+        #adjust networking string length
+        diff=$(( $NETWORKING_STR_LENGTH - ${#add_0} ))
+        add_0="$add_0$(printf '%*s' $diff)"
+        add_1="$add_1$(printf '%*s' $diff)"
         #print row
-        echo "$id            : $upstream_port ($bdf)   : $aux : $serial_number : $add_0 : $workflow"
+        echo "$id            : $upstream_port ($bdf)   : $device_type_name : $serial_number : $add_0 : $workflow"
         echo "                                                                            $add_1"
       fi
     done
