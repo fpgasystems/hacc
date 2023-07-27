@@ -113,12 +113,14 @@ else
         exit
     fi
     #check on VIVADO_DEVICES_MAX
-    vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
-    if ([ "$device_found" = "1" ] && [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]); then
-        echo ""
-        echo "Sorry, you have reached the maximum number of devices in ${bold}Vivado workflow!${normal}"
-        echo ""
-        exit
+    if [ "$device_found" = "1" ]; then
+        vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
+        if [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
+            echo ""
+            echo "Sorry, you have reached the maximum number of devices in ${bold}Vivado workflow!${normal}"
+            echo ""
+            exit
+        fi
     fi
     #check on acap (temporal until Coyote works on Versal)
     device_type=$($CLI_PATH/get/get_fpga_device_param $device_index device_type)
