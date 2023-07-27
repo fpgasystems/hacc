@@ -195,14 +195,10 @@ else
     fi
     #program regions if it is the only flag and exit
     if [ "$project_found" = "0" ] && [ "$device_found" = "0" ] && [ "$deploy_option_found" = "0" ] && [ "$regions_found" = "1" ]; then
-        #similar to get_N_REGIONS
         echo ""
         echo "${bold}Enabling vFPGA regions:${normal}"
-        for (( i = 0; i < $regions_number; i++ ))
-        do 
-            echo $i
-            sudo $CLI_PATH/program/fpga_chmod $i
-        done
+        echo ""
+        $CLI_PATH/program/enable_regions $regions_number
         echo ""
         exit
     fi
@@ -310,11 +306,8 @@ $CLI_PATH/sgutil program vivado --device $device_index -b $BIT_NAME --driver $DR
 if [ "$regions_found" = "1" ]; then
     #similar to get_N_REGIONS
     echo "${bold}Enabling vFPGA regions:${normal}"
-    for (( i = 0; i < $regions_number; i++ ))
-    do 
-        echo $i
-        sudo $CLI_PATH/program/fpga_chmod $i
-    done
+    echo ""
+    $CLI_PATH/program/enable_regions $regions_number
 else
     $CLI_PATH/program/get_N_REGIONS $DIR
 fi

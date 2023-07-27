@@ -7,21 +7,9 @@ normal=$(tput sgr0)
 CLI_PATH="$(dirname "$(dirname "$0")")"
 
 #inputs
-DIR=$1
+regions_number=$1
 
-#get N_REGIONS
-line=$(grep -n "N_REGIONS" $DIR/configs/config_shell.hpp)
-#find equal (=)
-idx=$(sed 's/ /\n/g' <<< "$line" | sed -n "/=/=")
-#get index
-value_idx=$(($idx+1))
-#get data
-N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
-
-#apply fpga_chmod to N_REGIONS
-echo "${bold}Enabling vFPGA regions:${normal}"
-echo ""
-for (( i = 0; i < $N_REGIONS; i++ ))
+for (( i = 0; i < $regions_number; i++ ))
 do 
     echo $i
     sudo $CLI_PATH/program/fpga_chmod $i
