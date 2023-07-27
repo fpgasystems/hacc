@@ -18,8 +18,8 @@ value_idx=$(($idx+1))
 #get data
 N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
 
-#applu fpga_chmod to N_REGIONS
-echo "${bold}Setting read and write permissions:${normal}"
+#apply fpga_chmod to N_REGIONS
+echo "${bold}Enabling vFPGA regions:${normal}"
 echo ""
 for (( i = 0; i < $N_REGIONS; i++ ))
 do 
