@@ -11,6 +11,7 @@ MY_PROJECTS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH MY_PROJECTS_PATH)
 WORKFLOW="coyote"
 BIT_NAME="cyt_top.bit"
 DRIVER_NAME="coyote_drv.ko"
+COYOTE_MAX_REGIONS=16
 
 #get hostname
 url="${HOSTNAME}"
@@ -157,12 +158,14 @@ else
         exit
     fi
     #check on VIVADO_DEVICES_MAX
-    vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
-    if ([ "$device_found" = "1" ] && [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]); then
-        echo ""
-        echo "Sorry, you have reached the maximum number of devices in ${bold}Vivado workflow!${normal}"
-        echo ""
-        exit
+    if [ "$device_found" = "1" ]; then
+        vivado_devices=$($CLI_PATH/common/get_vivado_devices $CLI_PATH $MAX_DEVICES $device_index)
+        if [ $vivado_devices -ge $((VIVADO_DEVICES_MAX)) ]; then
+            echo ""
+            echo "Sorry, you have reached the maximum number of devices in ${bold}Vivado workflow!${normal}"
+            echo ""
+            exit
+        fi
     fi
     #check on acap (temporal until Coyote works on Versal)
     device_type=$($CLI_PATH/get/get_fpga_device_param $device_index device_type)
@@ -179,6 +182,28 @@ else
     #forbidden combinations
     if [ "$deploy_option_found" = "1" ] && { [ "$deploy_option" -ne 0 ] && [ "$deploy_option" -ne 1 ]; }; then #if [ "$deploy_option_found" = "1" ] && [ -n "$deploy_option" ]; then 
         $CLI_PATH/sgutil program coyote -h
+        exit
+    fi
+    #regions_dialog_check    
+    result="$("$CLI_PATH/common/regions_dialog_check" "${flags[@]}")"
+    regions_found=$(echo "$result" | sed -n '1p')
+    regions_number=$(echo "$result" | sed -n '2p')
+    #forbidden combinations
+    if ([ "$regions_found" = "1" ] && [ "$regions_number" = "" ]) || ([ "$regions_found" = "1" ] && ([[ "$regions_number" -gt "$COYOTE_MAX_REGIONS" ]] || [[ "$regions_number" -lt 1 ]])) ; then
+        $CLI_PATH/sgutil program coyote -h
+        exit
+    fi
+    #program regions if it is the only flag and exit
+    if [ "$project_found" = "0" ] && [ "$device_found" = "0" ] && [ "$deploy_option_found" = "0" ] && [ "$regions_found" = "1" ]; then
+        #similar to get_N_REGIONS
+        echo ""
+        echo "${bold}Enabling vFPGA regions:${normal}"
+        for (( i = 0; i < $regions_number; i++ ))
+        do 
+            echo $i
+            sudo $CLI_PATH/program/fpga_chmod $i
+        done
+        echo ""
         exit
     fi
     #header (2/2)
@@ -280,8 +305,19 @@ cd $APP_BUILD_DIR
 echo "Programming local server ${bold}$hostname...${normal}"
 #bitstream and driver
 $CLI_PATH/sgutil program vivado --device $device_index -b $BIT_NAME --driver $DRIVER_NAME
-#get permissions on N_REGIONS
-$CLI_PATH/program/get_N_REGIONS $DIR
+
+#enable vFPGA regions
+if [ "$regions_found" = "1" ]; then
+    #similar to get_N_REGIONS
+    echo "${bold}Enabling vFPGA regions:${normal}"
+    for (( i = 0; i < $regions_number; i++ ))
+    do 
+        echo $i
+        sudo $CLI_PATH/program/fpga_chmod $i
+    done
+else
+    $CLI_PATH/program/get_N_REGIONS $DIR
+fi
 
 #programming remote servers (if applies)
 if [ "$deploy_option" -eq 1 ]; then 

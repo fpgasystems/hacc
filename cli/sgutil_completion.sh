@@ -106,7 +106,7 @@ _sgutil_completions()
                 program)
                     case ${COMP_WORDS[COMP_CWORD-1]} in
                         coyote)
-                            COMPREPLY=($(compgen -W "--device --project --remote --help" -- ${cur}))
+                            COMPREPLY=($(compgen -W "--device --project --regions --remote --help" -- ${cur}))
                             ;;
                         reset)
                             COMPREPLY=($(compgen -W "--device --help" -- ${cur}))
