@@ -193,6 +193,11 @@ else
         $CLI_PATH/sgutil program coyote -h
         exit
     fi
+    #program regions cannot be used combined with others
+    if [ "$regions_found" = "1" ] && ([ "$project_found" = "1" ] || [ "$device_found" = "1" ] || [ "$deploy_option_found" = "1" ]); then
+        $CLI_PATH/sgutil program coyote -h
+        exit
+    fi
     #program regions if it is the only flag and exit
     if [ "$project_found" = "0" ] && [ "$device_found" = "0" ] && [ "$deploy_option_found" = "0" ] && [ "$regions_found" = "1" ]; then
         echo ""
@@ -303,13 +308,13 @@ echo "Programming local server ${bold}$hostname...${normal}"
 $CLI_PATH/sgutil program vivado --device $device_index -b $BIT_NAME --driver $DRIVER_NAME
 
 #enable vFPGA regions
-if [ "$regions_found" = "1" ]; then
-    echo "${bold}Enabling vFPGA regions:${normal}"
-    echo ""
-    $CLI_PATH/program/enable_regions $regions_number
-else
+#if [ "$regions_found" = "1" ]; then
+#    echo "${bold}Enabling vFPGA regions:${normal}"
+#    echo ""
+#    $CLI_PATH/program/enable_regions $regions_number
+#else
     $CLI_PATH/program/enable_N_REGIONS $DIR
-fi
+#fi
 
 #programming remote servers (if applies)
 if [ "$deploy_option" -eq 1 ]; then 
@@ -321,11 +326,11 @@ if [ "$deploy_option" -eq 1 ]; then
         echo "Programming remote server ${bold}$i...${normal}"
         echo ""
         #remotely program bitstream, driver, and run enable_regions/enable_N_REGIONS
-        if [ "$regions_found" = "1" ]; then
-            ssh -t $USER@$i "cd $APP_BUILD_DIR ; $CLI_PATH/program/vivado --device $device_index -b $BIT_NAME --driver $DRIVER_NAME ; $CLI_PATH/program/enable_regions $regions_number"
-        else
+        #if [ "$regions_found" = "1" ]; then
+        #    ssh -t $USER@$i "cd $APP_BUILD_DIR ; $CLI_PATH/program/vivado --device $device_index -b $BIT_NAME --driver $DRIVER_NAME ; $CLI_PATH/program/enable_regions $regions_number"
+        #else
             ssh -t $USER@$i "cd $APP_BUILD_DIR ; $CLI_PATH/program/vivado --device $device_index -b $BIT_NAME --driver $DRIVER_NAME ; $CLI_PATH/program/enable_N_REGIONS $DIR"
-        fi
+        #fi
     done
 fi
 
