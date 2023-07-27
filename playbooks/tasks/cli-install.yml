@@ -852,6 +852,12 @@
     dest: /opt/cli/program/get_N_REGIONS
     mode: 0755
 
+- name: copy program enable_regions
+  copy:
+    src: "../../cli/program/enable_regions.sh"
+    dest: /opt/cli/program/enable_regions
+    mode: 0755
+
 #- name: copy program reboot
 #  copy:
 #    src: "../../cli/program/reboot.sh"
