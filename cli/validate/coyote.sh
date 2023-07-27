@@ -378,21 +378,3 @@ $CLI_PATH/program/get_N_REGIONS $DIR
 #run 
 cd $APP_BUILD_DIR
 ./main
-
-##get BDF (i.e., Bus:Device.Function) 
-#upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
-#bdf="${upstream_port%??}" #i.e., we transform 81:00.0 into 81:00
-
-#program driver
-#if [[ $(lspci | grep Xilinx | grep $bdf | wc -l) = 1 ]]; then 
-#
-#    #program coyote driver
-#    $CLI_PATH/sgutil program vivado --device $device_index --driver $DRIVER_NAME
-#
-#    #get permissions on N_REGIONS
-#    $CLI_PATH/program/get_N_REGIONS $DIR
-#
-#    #run 
-#    cd $APP_BUILD_DIR
-#    ./main
-#fi
