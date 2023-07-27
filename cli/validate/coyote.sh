@@ -373,7 +373,7 @@ cd $APP_BUILD_DIR
 $CLI_PATH/program/vivado --device $device_index -b $BIT_NAME --driver $DRIVER_NAME
 
 #get permissions on N_REGIONS
-$CLI_PATH/program/get_N_REGIONS $DIR
+$CLI_PATH/program/enable_N_REGIONS $DIR
 
 #run 
 cd $APP_BUILD_DIR

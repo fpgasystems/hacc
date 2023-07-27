@@ -846,10 +846,20 @@
     dest: /opt/cli/program/coyote
     mode: 0755
 
-- name: copy program get_N_REGIONS
+#- name: copy program get_N_REGIONS
+#  copy:
+#    src: "../../cli/program/get_N_REGIONS.sh"
+#    dest: /opt/cli/program/get_N_REGIONS
+#    mode: 0755
+- name: remove /opt/cli/program/get_N_REGIONS
+  ansible.builtin.file:
+    path: /opt/cli/program/get_N_REGIONS
+    state: absent
+
+- name: copy program enable_N_REGIONS
   copy:
-    src: "../../cli/program/get_N_REGIONS.sh"
-    dest: /opt/cli/program/get_N_REGIONS
+    src: "../../cli/program/enable_N_REGIONS.sh"
+    dest: /opt/cli/program/enable_N_REGIONS
     mode: 0755
 
 - name: copy program enable_regions
