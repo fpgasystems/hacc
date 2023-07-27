@@ -35,4 +35,6 @@
 ### Examples
 ```
 $ sgutil program coyote
+$ sgutil program coyote -d 1 -p hello_world --remote 0
+$ sgutil program coyote --regions 3
 ```
