@@ -14,7 +14,6 @@
 ### Arguments
 
 * [keys](./sgutil-set-keys.md)
-* [write](./sgutil-set-write.md)
 
 <code>-h, --help</code>
 <p>
