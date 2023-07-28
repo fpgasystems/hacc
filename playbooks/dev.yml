@@ -1,17 +1,15 @@
 ---
 
 - hosts:
-    #- hacc-build
-    #- alveo-u250
-    #- alveo-u280
-    #- alveo-u50d
-    #- alveo-u55c
-    #- versal-vck5000
-    #- hacc-boxes
+    - hacc-build
+    - alveo-u250
+    - alveo-u280
+    - alveo-u50d
+    - alveo-u55c
+    - versal-vck5000
+    - hacc-boxes
     #- alveo-u55c-01.inf.ethz.ch
-    #- alveo-u55c-02.inf.ethz.ch
-    - hacc-box-01.inf.ethz.ch
-    #- hacc-box-02.inf.ethz.ch
+    #- hacc-box-01.inf.ethz.ch
   become: true
   become_method: community.general.sudosu
   become_user: root
@@ -19,7 +17,7 @@
     ansible_python_interpreter: /usr/bin/python3
     constants: false
     common: false
-    coyote: false
+    coyote: true
     enable: false
     examine: false
     get: false
@@ -27,17 +25,22 @@
     mpi: false
     program: false
     reboot: false
+    run: false
     set: false
     sgutil: false
     validate: false
-    vitis: true
+    vitis: false
   tasks:
-    #always added
-    #- name: copy build/vitis
+    #always
+    #- name: copy program/vivado
     #  copy:
-    #    src: "../cli/build/vitis.sh"
-    #    dest: /opt/cli/build/vitis
+    #    src: "../cli/program/vivado.sh"
+    #    dest: /opt/cli/program/vivado
     #    mode: 0755
+    #- name: remove constants/CLI_PATH
+    #  ansible.builtin.file:
+    #    path: /opt/cli/constants/CLI_PATH
+    #    state: absent
 
     #constants
     - name: copy XILINX_TOOLS_PATH
@@ -46,6 +49,18 @@
         dest: /opt/cli/constants/XILINX_TOOLS_PATH
         mode: 0644
       when: constants
+    - name: copy MPICH_PATH
+      copy:
+        src: "../cli/constants/MPICH_PATH"
+        dest: /opt/cli/constants/MPICH_PATH
+        mode: 0644
+      when: constants
+    - name: copy LOCAL_PATH
+      copy:
+        src: "../cli/constants/LOCAL_PATH"
+        dest: /opt/cli/constants/LOCAL_PATH
+        mode: 0644
+      when: constants      
 
     #common
     - name: copy common/get_booking_system_servers_list script
@@ -128,10 +143,16 @@
         dest: /opt/cli/program/revert
         mode: 0755
       when: coyote
-    - name: copy program/get_N_REGIONS
+    - name: copy program/enable_N_REGIONS
       copy:
-        src: "../cli/program/get_N_REGIONS.sh"
-        dest: /opt/cli/program/get_N_REGIONS
+        src: "../cli/program/enable_N_REGIONS.sh"
+        dest: /opt/cli/program/enable_N_REGIONS
+        mode: 0755
+      when: coyote
+    - name: copy program/enable_regions
+      copy:
+        src: "../cli/program/enable_regions.sh"
+        dest: /opt/cli/program/enable_regions
         mode: 0755
       when: coyote
 
@@ -302,10 +323,10 @@
         dest: /opt/cli/program/fpga_chmod
         mode: 0755
       when: program
-    - name: copy program/get_N_REGIONS
+    - name: copy program/enable_N_REGIONS
       copy:
-        src: "../cli/program/get_N_REGIONS.sh"
-        dest: /opt/cli/program/get_N_REGIONS
+        src: "../cli/program/enable_N_REGIONS.sh"
+        dest: /opt/cli/program/enable_N_REGIONS
         mode: 0755
       when: program
     - name: copy program/pci_hot_plug
@@ -338,6 +359,12 @@
         dest: /opt/cli/program/vivado
         mode: 0755
       when: program
+    - name: copy program/enable_regions
+      copy:
+        src: "../cli/program/enable_regions.sh"
+        dest: /opt/cli/program/enable_regions
+        mode: 0755
+      when: program
 
     #reboot
     - name: copy reboot
@@ -347,17 +374,25 @@
         mode: 0755
       when: reboot
 
+    #run
+    - name: copy run/coyote
+      copy:
+        src: "../cli/run/coyote.sh"
+        dest: /opt/cli/run/coyote
+        mode: 0755
+      when: run
+    - name: copy run/vitis
+      copy:
+        src: "../cli/run/vitis.sh"
+        dest: /opt/cli/run/vitis
+        mode: 0755
+      when: run
+    
     #set
     - name: copy set/keys
       copy:
         src: "../cli/set/keys.sh"
         dest: /opt/cli/set/keys
-        mode: 0755
-      when: set
-    - name: copy set/write
-      copy:
-        src: "../cli/set/write.sh"
-        dest: /opt/cli/set/write
         mode: 0755
       when: set
 
