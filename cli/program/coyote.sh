@@ -53,14 +53,6 @@ if [ "$member" = "false" ]; then
     exit
 fi
 
-#check if workflow exists
-#if ! [ -d "$MY_PROJECTS_PATH/$WORKFLOW/" ]; then
-#    echo ""
-#    echo "You must build your project first! Please, use sgutil build coyote"
-#    echo ""
-#    exit
-#fi
-
 #check on DEVICES_LIST
 source "$CLI_PATH/common/device_list_check" "$DEVICES_LIST"
 
@@ -207,29 +199,6 @@ else
         $CLI_PATH/sgutil program coyote -h
         exit
     fi
-    ##regions_dialog_check    
-    #result="$("$CLI_PATH/common/regions_dialog_check" "${flags[@]}")"
-    #regions_found=$(echo "$result" | sed -n '1p')
-    #regions_number=$(echo "$result" | sed -n '2p')
-    #forbidden combinations
-    #if ([ "$regions_found" = "1" ] && [ "$regions_number" = "" ]) || ([ "$regions_found" = "1" ] && ([[ "$regions_number" -gt "$COYOTE_MAX_REGIONS" ]] || [[ "$regions_number" -lt 1 ]])) ; then
-    #    $CLI_PATH/sgutil program coyote -h
-    #    exit
-    #fi
-    #program regions cannot be used combined with others
-    #if [ "$regions_found" = "1" ] && ([ "$project_found" = "1" ] || [ "$device_found" = "1" ] || [ "$deploy_option_found" = "1" ]); then
-    #    $CLI_PATH/sgutil program coyote -h
-    #    exit
-    #fi
-    #program regions if it is the only flag and exit
-    #if [ "$project_found" = "0" ] && [ "$device_found" = "0" ] && [ "$deploy_option_found" = "0" ] && [ "$regions_found" = "1" ]; then
-    #    echo ""
-    #    echo "${bold}Enabling vFPGA regions:${normal}"
-    #    echo ""
-    #    $CLI_PATH/program/enable_regions $regions_number
-    #    echo ""
-    #    exit
-    #fi
     #header (2/2)
     echo ""
     echo "${bold}sgutil program coyote${normal}"
