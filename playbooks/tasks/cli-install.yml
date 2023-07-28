@@ -914,11 +914,15 @@
 
 # set ---------------------------------------------------------------------------------------
 
-- name: copy set/write script
-  copy:
-    src: "../../cli/set/write.sh"
-    dest: /opt/cli/set/write
-    mode: 0755
+#- name: copy set/write script
+#  copy:
+#    src: "../../cli/set/write.sh"
+#    dest: /opt/cli/set/write
+#    mode: 0755
+- name: remove /opt/cli/set/write
+  ansible.builtin.file:
+    path: /opt/cli/set/write
+    state: absent
 
 - name: copy set/keys script
   copy:

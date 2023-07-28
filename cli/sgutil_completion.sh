@@ -37,7 +37,7 @@ _sgutil_completions()
                     COMPREPLY=($(compgen -W "coyote hip mpi vitis --help" -- ${cur}))
                     ;;
                 set)
-                    COMPREPLY=($(compgen -W "keys write --help" -- ${cur}))
+                    COMPREPLY=($(compgen -W "keys --help" -- ${cur})) #write
                     ;;
                 validate)
                     COMPREPLY=($(compgen -W "coyote hip iperf mpi vitis --help" -- ${cur}))
@@ -143,9 +143,9 @@ _sgutil_completions()
                         keys)
                             COMPREPLY=($(compgen -W "--help" -- ${cur})) 
                             ;;
-                        write)
-                            COMPREPLY=($(compgen -W "--index --help" -- ${cur})) 
-                            ;;
+                        #write)
+                        #    COMPREPLY=($(compgen -W "--index --help" -- ${cur})) 
+                        #    ;;
                     esac
                     ;;
                 validate)

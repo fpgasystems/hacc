@@ -721,7 +721,7 @@ set_help() {
     echo ""
     echo "ARGUMENTS:"
     echo "   keys            - Creates your RSA key pairs and adds to authorized_keys and known_hosts."
-    echo "   write           - Assigns writing permissions on a given device."
+    #echo "   write           - Assigns writing permissions on a given device."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -742,19 +742,19 @@ set_keys_help() {
     exit 1
 }
 
-set_write_help() {
-      echo ""
-      echo "${bold}sgutil set write [flags] [--help]${normal}"
-      echo ""
-      echo "Assigns writing permissions to a given device."
-      echo ""
-      echo "FLAGS:"
-      echo "   -i, --index     - PCI device index. See sgutil get devices."
-      echo ""
-      echo "   -h, --help      - Help to use this command."
-      echo ""
-      exit 1
-}
+#set_write_help() {
+#      echo ""
+#      echo "${bold}sgutil set write [flags] [--help]${normal}"
+#      echo ""
+#      echo "Assigns writing permissions to a given device."
+#      echo ""
+#      echo "FLAGS:"
+#      echo "   -i, --index     - PCI device index. See sgutil get devices."
+#      echo ""
+#      echo "   -h, --help      - Help to use this command."
+#      echo ""
+#      exit 1
+#}
 
 # validate -----------------------------------------------------------------------------------------------------------------------
 validate_help() {
@@ -1132,10 +1132,10 @@ case "$command" in
         fi
         eval "$CLI_PATH/set/keys"
         ;;
-      write) 
-        valid_flags="-i --index -h --help"
-        command_run $command_arguments_flags"@"$valid_flags
-        ;;
+      #write) 
+      #  valid_flags="-i --index -h --help"
+      #  command_run $command_arguments_flags"@"$valid_flags
+      #  ;;
       *)
         set_help
       ;;  
