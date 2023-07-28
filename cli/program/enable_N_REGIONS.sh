@@ -21,8 +21,10 @@ N_REGIONS=$(echo $line | awk -v i=$value_idx '{ print $i }' | sed 's/;//' )
 #apply fpga_chmod to N_REGIONS
 echo "${bold}Enabling vFPGA regions:${normal}"
 echo ""
-for (( i = 0; i < $N_REGIONS; i++ ))
-do 
-    echo $i
-    sudo $CLI_PATH/program/fpga_chmod $i
-done
+#for (( i = 0; i < $N_REGIONS; i++ ))
+#do 
+#    echo $i
+#    sudo $CLI_PATH/program/fpga_chmod $i
+#done
+
+$CLI_PATH/program/enable_regions $N_REGIONS
