@@ -154,7 +154,7 @@ _sgutil_completions()
                             COMPREPLY=($(compgen -W "--device --help" -- ${cur}))
                             ;;
                         hip)
-                            COMPREPLY=($(compgen -W "--help" -- ${cur}))
+                            COMPREPLY=($(compgen -W "--device --help" -- ${cur}))
                             ;;
                         iperf)
                             COMPREPLY=($(compgen -W "--bandwidth --parallel --time --udp --help" -- ${cur}))
