@@ -28,18 +28,34 @@ int main( int argc, char* argv[] )
 
     int deviceId = 0; // Default value in case no argument is provided.
 
+    // Convert the first command-line argument (argv[1]) to an integer.
     if (argc > 1) // Ensure that at least one command-line argument is provided.
     {
-        // Convert the first command-line argument (argv[1]) to an integer.
-        // Note: We assume that the provided argument is a valid integer.
         deviceId = std::atoi(argv[1]);
+    }
+
+    // Set the device from the host code
+    hipError_t setDeviceResult = hipSetDevice(deviceId);
+    if (setDeviceResult != hipSuccess) {
+        std::cerr << "Failed to set the device. Error: " << hipGetErrorString(setDeviceResult) << std::endl;
+        return 1;
+    }
+
+    // Check if the device ID was truly set
+    int currentDevice;
+    hipError_t getDeviceResult = hipGetDevice(&currentDevice);
+    if (getDeviceResult != hipSuccess) {
+        std::cerr << "Failed to get the current device. Error: " << hipGetErrorString(getDeviceResult) << std::endl;
+        return 1;
+    }
+
+    if (currentDevice != deviceId) {
+        std::cerr << "The selected deviceId (" << deviceId << ") was not set properly. Current device ID is: " << currentDevice << std::endl;
+        return 1;
     }
 
     // Your program logic using the deviceId goes here.
     std::cout << "Device ID: " << deviceId << std::endl;
-
-    // Set the device from the host code
-    hipSetDevice(deviceId);
 
     // Host input vectors
     double *CPUArrayA;
@@ -66,9 +82,9 @@ int main( int argc, char* argv[] )
     CPUVerifyArrayC = (double*)malloc(bytes);
 
     // Allocate memory for each vector on GPU
-   HIP_ASSERT(hipMalloc(&GPUArrayA, bytes));
-   HIP_ASSERT(hipMalloc(&GPUArrayB, bytes));
-   HIP_ASSERT(hipMalloc(&GPUArrayC, bytes));
+    HIP_ASSERT(hipMalloc(&GPUArrayA, bytes));
+    HIP_ASSERT(hipMalloc(&GPUArrayB, bytes));
+    HIP_ASSERT(hipMalloc(&GPUArrayC, bytes));
  
     int i;
     // Initialize vectors on host
