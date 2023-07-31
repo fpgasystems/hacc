@@ -167,8 +167,8 @@ echo ""
 #run
 echo "${bold}Running HIP:${normal}"
 echo ""
-echo "$APP_BUILD_DIR/main"
+echo "$APP_BUILD_DIR/main $device_index"
 echo ""
-$APP_BUILD_DIR/main
+$APP_BUILD_DIR/main $device_index
 
 echo ""

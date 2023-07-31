@@ -1,6 +1,7 @@
 #include "hip/hip_runtime.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
 #include <math.h>
 #include "../global_params.hpp"
 #include "../configs/config_000.hpp" // config_000.hpp is overwritten with the configuration you select
@@ -24,7 +25,19 @@ int main( int argc, char* argv[] )
 {
     // Size of vectors (replaced by N in config_000)
     //int n = 10240; 
- 
+
+    int deviceId = 0; // Default value in case no argument is provided.
+
+    if (argc > 1) // Ensure that at least one command-line argument is provided.
+    {
+        // Convert the first command-line argument (argv[1]) to an integer.
+        // Note: We assume that the provided argument is a valid integer.
+        deviceId = std::atoi(argv[1]);
+    }
+
+    // Your program logic using the deviceId goes here.
+    std::cout << "Device ID: " << deviceId << std::endl;
+
     // Host input vectors
     double *CPUArrayA;
     double *CPUArrayB;
