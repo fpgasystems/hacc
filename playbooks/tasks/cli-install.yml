@@ -507,6 +507,12 @@
     dest: /opt/cli/common/device_dialog
     mode: 0755
 
+- name: copy common/device_dialog_gpu script
+  copy:
+    src: "../../cli/common/device_dialog_gpu.sh"
+    dest: /opt/cli/common/device_dialog_gpu
+    mode: 0755
+
 - name: copy common/device_dialog_check script
   copy:
     src: "../../cli/common/device_dialog_check.sh"
