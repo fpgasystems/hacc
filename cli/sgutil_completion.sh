@@ -128,7 +128,7 @@ _sgutil_completions()
                             COMPREPLY=($(compgen -W "--device --project --help" -- ${cur})) 
                             ;;
                         hip)
-                            COMPREPLY=($(compgen -W "--project --help" -- ${cur}))
+                            COMPREPLY=($(compgen -W "--device --project --help" -- ${cur}))
                             ;;
                         mpi)
                             COMPREPLY=($(compgen -W "--project --help" -- ${cur}))

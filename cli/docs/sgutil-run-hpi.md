@@ -12,6 +12,11 @@
 </p>
 
 ### Flags
+<code>-d, --device <string></code>
+<p>
+  &nbsp; &nbsp; GPU Device Index (see sgutil examine).
+</p>
+
 <code>-p, --project</code>
 <p>
   &nbsp; &nbsp; Specifies your HIP project name.

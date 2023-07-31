@@ -674,6 +674,7 @@ run_hip_help() {
     echo "Runs your HIP application on a given GPU."
     echo ""
     echo "FLAGS"
+    echo "   -d, --device    - GPU Device Index (see sgutil examine)."
     echo "   -p, --project   - Specifies your HIP project name."
     echo ""
     echo "   -h, --help      - Help to use this command."
@@ -1103,7 +1104,7 @@ case "$command" in
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       hip) 
-        valid_flags="-p --project -h --help" 
+        valid_flags="-d --device -p --project -h --help" 
         command_run $command_arguments_flags"@"$valid_flags
         ;;
       mpi) 
