@@ -9,7 +9,7 @@
 #define HIP_ASSERT(x) (assert((x)==hipSuccess))
 
 // HIP kernel. Each thread takes care of one element of c
-__global__ void vecAdd(double *a, double *b, double *c, int N)
+__global__ void vecAdd(double *a, double *b, double *c, int N, int deviceId)
 {
     // Get our global thread ID
     int id = blockIdx.x*blockDim.x+threadIdx.x;
@@ -37,6 +37,9 @@ int main( int argc, char* argv[] )
 
     // Your program logic using the deviceId goes here.
     std::cout << "Device ID: " << deviceId << std::endl;
+
+    // Set the device from the host code
+    hipSetDevice(deviceId);
 
     // Host input vectors
     double *CPUArrayA;
@@ -88,7 +91,7 @@ int main( int argc, char* argv[] )
     gridSize = (int)ceil((float)N/N_THREADS);
  
     // Execute the kernel
-    vecAdd<<<gridSize,N_THREADS>>>(GPUArrayA,GPUArrayB,GPUArrayC,N);
+    vecAdd<<<gridSize,N_THREADS>>>(GPUArrayA,GPUArrayB,GPUArrayC,N,deviceId);
     hipDeviceSynchronize();
     // Copy array back to host
    HIP_ASSERT(hipMemcpy(CPUArrayC,GPUArrayC, bytes, hipMemcpyDeviceToHost));
