@@ -22,7 +22,7 @@
 
 <!-- Extra line -->
 
-* [hpi](./sgutil-run-hpi.md#sgutil-run-hip)
+* [hip](./sgutil-run-hip.md#sgutil-run-hip)
 
 <code>-h, --help</code>
 <p>
