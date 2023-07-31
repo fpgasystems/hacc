@@ -1,33 +1,34 @@
 ---
 
 - hosts:
-    - hacc-build
-    - alveo-u250
-    - alveo-u280
-    - alveo-u50d
-    - alveo-u55c
-    - versal-vck5000
-    - hacc-boxes
+    #- hacc-build
+    #- alveo-u250
+    #- alveo-u280
+    #- alveo-u50d
+    #- alveo-u55c
+    #- versal-vck5000
+    #- hacc-boxes
     #- alveo-u55c-01.inf.ethz.ch
-    #- hacc-box-01.inf.ethz.ch
+    - hacc-box-01.inf.ethz.ch
   become: true
   become_method: community.general.sudosu
   become_user: root
   vars:
     ansible_python_interpreter: /usr/bin/python3
     constants: false
-    common: false
-    coyote: true
+    common: true
+    coyote: false
     enable: false
     examine: false
     get: false
-    hip: false
+    hip: true
     mpi: false
     program: false
     reboot: false
     run: false
     set: false
     sgutil: false
+    templates: true
     validate: false
     vitis: false
   tasks:
@@ -97,6 +98,12 @@
       copy:
         src: "../cli/common/get_constant.sh"
         dest: /opt/cli/common/get_constant
+        mode: 0755
+      when: common
+    - name: copy common/device_dialog_gpu script
+      copy:
+        src: "../cli/common/device_dialog_gpu.sh"
+        dest: /opt/cli/common/device_dialog_gpu
         mode: 0755
       when: common
 
@@ -409,6 +416,14 @@
         dest: /usr/share/bash-completion/completions/sgutil
         mode: 0755
       when: sgutil
+
+    #templates
+    - name: Copy hip templates
+      copy:
+        src: "../cli/templates/hip"
+        dest: /opt/cli/templates
+        mode: 0755
+      when: templates and hip
 
     #validate
     - name: copy validate/coyote
