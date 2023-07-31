@@ -169,6 +169,9 @@ echo "${bold}Running HIP:${normal}"
 echo ""
 echo "$APP_BUILD_DIR/main $device_index"
 echo ""
+
+#the GPU index starts at 0
+device_index=$(($device_index-1))
 $APP_BUILD_DIR/main $device_index
 
 echo ""
