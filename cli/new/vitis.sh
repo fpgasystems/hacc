@@ -7,6 +7,7 @@ normal=$(tput sgr0)
 CLI_PATH="$(dirname "$(dirname "$0")")"
 MY_PROJECTS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH MY_PROJECTS_PATH)
 WORKFLOW="vitis"
+TEMPLATE_NAME="hello_world"
 
 # create my_projects directory
 DIR="$MY_PROJECTS_PATH"
@@ -43,15 +44,15 @@ while true; do
         # project_name does not exist
         mkdir ${DIR}
         # copy
-        cp -rf $CLI_PATH/templates/$WORKFLOW/hello_world/* $DIR
+        cp -rf $CLI_PATH/templates/$WORKFLOW/$TEMPLATE_NAME/* $DIR
         # we only need makefile_us_alveo.mk (for alveos) and makefile_versal_alveo.mk (for versal)
         rm $DIR/makefile_versal_ps.mk
         rm $DIR/makefile_zynq7000.mk
         rm $DIR/makefile_zynqmp.mk
         # adjust Makefile
-        sed -i "s/hello_world/$project_name/" $DIR/Makefile
-        sed -i "s/hello_world/$project_name/" $DIR/makefile_us_alveo.mk
-        sed -i "s/hello_world/$project_name/" $DIR/makefile_versal_alveo.mk
+        sed -i "s/$TEMPLATE_NAME/$project_name/" $DIR/Makefile
+        sed -i "s/$TEMPLATE_NAME/$project_name/" $DIR/makefile_us_alveo.mk
+        sed -i "s/$TEMPLATE_NAME/$project_name/" $DIR/makefile_versal_alveo.mk
         #compile src
         cd $DIR/src
         g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
@@ -59,5 +60,5 @@ while true; do
     fi
 done
 echo ""
-echo "The project $MY_PROJECTS_PATH/$WORKFLOW/$project_name has been created!"
+echo "The project $MY_PROJECTS_PATH/$WORKFLOW/$project_name ($TEMPLATE_NAME) has been created!"
 echo ""
