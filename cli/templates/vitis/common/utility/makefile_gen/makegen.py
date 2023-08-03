@@ -111,7 +111,7 @@ def mk_run(target, data):
             target.write(arg)
         target.write(" TARGET. Please use the target for running the application)\n")
         target.write("endif\n")
-    target.write("PLATFORM ?= xilinx_u250_gen3x16_xdma_3_1_202020_1\n")
+    target.write("PLATFORM ?= xilinx_u250_gen3x16_xdma_4_1_202210_1\n")
     target.write("DEV_ARCH := $(shell platforminfo -p $(PLATFORM) | grep 'FPGA Family' | sed 's/.*://' | sed '/ai_engine/d' | sed 's/^[[:space:]]*//')\n")
     target.write("CPU_TYPE := $(shell platforminfo -p $(PLATFORM) | grep 'CPU Type' | sed 's/.*://' | sed '/ai_engine/d' | sed 's/^[[:space:]]*//')\n")
     target.write("\n")
@@ -125,16 +125,14 @@ def mk_run(target, data):
     target.write("endif\n")
     target.write("\n")
 
-    makefile_lst = ["makegen_us_alveo.py" , "makegen_versal_alveo.py", "makegen_versal_ps.py", "makegen_zynqmp.py", "makegen_zynq7000.py"]
+    makefile_lst = ["makegen_us_alveo.py" , "makegen_versal_alveo.py", "makegen_versal_ps.py", "makegen_zynqmp.py"]
 
     blocklist = [board for board in data.get("platform_blocklist", [])]
     if ("platform_type" in data and data["platform_type"] == "pcie"):
       makefile_lst.remove("makegen_versal_ps.py")
       makefile_lst.remove("makegen_zynqmp.py")
-      makefile_lst.remove("makegen_zynq7000.py")
     if "zc" in blocklist:
       if "makegen_zynqmp.py" in makefile_lst : makefile_lst.remove("makegen_zynqmp.py")
-      if "makegen_zynq7000.py" in makefile_lst : makefile_lst.remove("makegen_zynq7000.py")
     if "vck" in blocklist:
       if "makegen_versal_ps.py" in makefile_lst : makefile_lst.remove("makegen_versal_ps.py")
       makefile_lst.remove("makegen_versal_alveo.py")
@@ -157,8 +155,6 @@ def mk_run(target, data):
     elif "dma" in blocklist:
       target.write("ifeq ($(DEV_ARCH), zynquplus)\n")
       target.write("include makefile_zynqmp.mk\n")
-      target.write("else ifeq ($(DEV_ARCH), zynq)\n")
-      target.write("include makefile_zynq7000.mk\n")
       target.write("else ifeq ($(DEV_ARCH), versal)\n")
       target.write("include makefile_versal_ps.mk\n")
       target.write("endif\n")
@@ -169,8 +165,6 @@ def mk_run(target, data):
       target.write("else\n")
       target.write("include makefile_us_alveo.mk\n")
       target.write("endif\n")
-      target.write("else ifeq ($(DEV_ARCH), zynq)\n")
-      target.write("include makefile_zynq7000.mk\n")
       target.write("else ifeq ($(DEV_ARCH), versal)\n")
       target.write("ifeq ($(HOST_ARCH), x86)\n")
       target.write("include makefile_versal_alveo.mk\n")
@@ -191,35 +185,35 @@ def mk_help(target):
     target.write("\"\n")
     target.write("\t$(ECHO) \"      Command to generate the design for specified Target and Shell.\"\n")
     target.write("\t$(ECHO) \"\"\n")
-    target.write("\t$(ECHO) \"  make clean \"\n");
-    target.write("\t$(ECHO) \"      Command to remove the generated non-hardware files.\"\n")
-    target.write("\t$(ECHO) \"\"\n")
-    target.write("\t$(ECHO) \"  make cleanall\"\n")
-    target.write("\t$(ECHO) \"      Command to remove all the generated files.\"\n")
-    target.write("\t$(ECHO) \"\"\n")
-    target.write("\t$(ECHO) \"  make test PLATFORM=<FPGA platform>\"\n")    
-    target.write("\t$(ECHO) \"      Command to run the application. This is same as 'run' target but does not have any makefile dependency.\"\n")  
-    target.write("\t$(ECHO) \"\"\n")
-    target.write("\t$(ECHO) \"  make sd_card TARGET=<sw_emu/hw_emu/hw> PLATFORM=<FPGA platform> EDGE_COMMON_SW=<rootfs and kernel image path>\"\n");
-    target.write("\t$(ECHO) \"      Command to prepare sd_card files.\"\n")
-    target.write("\t$(ECHO) \"\"\n")
     target.write("\t$(ECHO) \"  make run TARGET=<sw_emu/hw_emu/hw> PLATFORM=<FPGA platform>");
-    target.write(" EDGE_COMMON_SW=<rootfs and kernel image path>")
+    target.write(" EMU_PS=<X86/QEMU> EDGE_COMMON_SW=<rootfs and kernel image path>")
     target.write("\"\n")
-    target.write("\t$(ECHO) \"      Command to run application in emulation.\"\n")
+    target.write("\t$(ECHO) \"      Command to run application in emulation.Default sw_emu will run on x86 ,to launch on qemu specify EMU_PS=QEMU.\"\n")
     target.write("\t$(ECHO) \"\"\n")
     target.write("\t$(ECHO) \"  make build TARGET=<sw_emu/hw_emu/hw> PLATFORM=<FPGA platform>");
     target.write(" EDGE_COMMON_SW=<rootfs and kernel image path>")
     target.write("\"\n")
     target.write("\t$(ECHO) \"      Command to build xclbin application.\"\n")
     target.write("\t$(ECHO) \"\"\n")
-    target.write("\t$(ECHO) \"  make host");
+    target.write("\t$(ECHO) \"  make host PLATFORM=<FPGA platform>");
     target.write(" EDGE_COMMON_SW=<rootfs and kernel image path>")
     target.write("\"\n")
     target.write("\t$(ECHO) \"      Command to build host application.\"\n")
     target.write("\t$(ECHO) \"      EDGE_COMMON_SW is required for SoC shells. Please download and use the pre-built image from - \"\n")
     target.write("\t$(ECHO) \"      https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html\"\n")
     target.write("\t$(ECHO) \"\"\n")
+    target.write("\t$(ECHO) \"  make sd_card TARGET=<sw_emu/hw_emu/hw> PLATFORM=<FPGA platform> EDGE_COMMON_SW=<rootfs and kernel image path>\"\n");
+    target.write("\t$(ECHO) \"      Command to prepare sd_card files.\"\n")
+    target.write("\t$(ECHO) \"\"\n")
+    target.write("\t$(ECHO) \"  make clean \"\n");
+    target.write("\t$(ECHO) \"      Command to remove the generated non-hardware files.\"\n")
+    target.write("\t$(ECHO) \"\"\n")
+    target.write("\t$(ECHO) \"  make cleanall\"\n")
+    target.write("\t$(ECHO) \"      Command to remove all the generated files.\"\n")
+    target.write("\t$(ECHO) \"\"\n")
+
+
+   
 
 def report_gen(target, data):
     target.write("#+-------------------------------------------------------------------------------\n")
@@ -276,6 +270,24 @@ def device2xsa_gen(target):
     target.write("\n")
 
 def util_checks(target):
+    if "host" in data:
+        if "linker" in data["host"]:
+            if "libraries" in data["host"]["linker"]:
+                if "xrt_coreutil" in data["host"]["linker"]["libraries"] and "uuid" in data["host"]["linker"]["libraries"]:
+                       target.write("#Check OS and setting env for xrt c++ api\n")
+                       target.write("GXX_EXTRA_FLAGS := \n")
+                       target.write("OSDIST = $(shell lsb_release -i |awk -F: '{print tolower($$2)}' | tr -d ' \t' )\n")
+                       target.write("OSREL = $(shell lsb_release -r |awk -F: '{print tolower($$2)}' |tr -d ' \t')\n")
+                       target.write("# for centos and redhat\n")
+                       target.write("ifneq ($(findstring centos,$(OSDIST)),)\n")
+                       target.write("ifeq (7,$(shell echo $(OSREL) | awk -F. '{print tolower($$1)}' ))\n")
+                       target.write("GXX_EXTRA_FLAGS := -D_GLIBCXX_USE_CXX11_ABI=0\n")                       
+                       target.write("endif\n")
+                       target.write("else ifneq ($(findstring redhat,$(OSDIST)),)\n")
+                       target.write("ifeq (7,$(shell echo $(OSREL) | awk -F. '{print tolower($$1)}' ))\n")
+                       target.write("GXX_EXTRA_FLAGS := -D_GLIBCXX_USE_CXX11_ABI=0\n")                                              
+                       target.write("endif\n")
+                       target.write("endif\n")
     target.write("#Setting PLATFORM \n")
     target.write("ifeq ($(PLATFORM),)\n")
     target.write("ifneq ($(DEVICE),)\n")

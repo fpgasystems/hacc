@@ -34,7 +34,7 @@ def create_params(target,data):
     target.write("TARGET := hw\n")
     target.write("SYSROOT := $(EDGE_COMMON_SW)/sysroots/cortexa72-cortexa53-xilinx-linux\n")
     target.write("SD_IMAGE_FILE := $(EDGE_COMMON_SW)/Image\n")
-    target.write("\n")
+    target.write("VPP_LDFLAGS :=\n")
     target.write("include ./utils.mk\n")
     target.write("\n")
     target.write("TEMP_DIR := ./_x.$(TARGET).$(XSA)\n")
@@ -46,6 +46,10 @@ def create_params(target,data):
             target.write("LINK_OUTPUT := $(BUILD_DIR)/")
             target.write(con["name"] + ".link.xclbin\n")
     target.write("\n")
+    target.write("EMU_PS := QEMU\n")
+    target.write("ifeq ($(TARGET), sw_emu)\n")
+    target.write("EMU_PS := X86\n")
+    target.write("endif\n\n")
     target.write("# SoC variables\n")
     target.write("RUN_APP_SCRIPT = ./run_app.sh\n")
     target.write("PACKAGE_OUT = ./package.$(TARGET)\n")
@@ -69,9 +73,28 @@ def create_params(target,data):
     if "config_make" in data:
         target.write("include ")
         target.write(data["config_make"])
-        target.write("\n\n")    
+        target.write("\n\n")
+    target.write("ifeq ($(EMU_PS), X86)\n")
+    target.write("CXXFLAGS += -I$(XILINX_XRT)/include -I$(XILINX_VIVADO)/include -Wall -O0 -g -std=c++1y\n") 
+    if "host" in data:
+        if "linker" in data["host"]:
+            if "libraries" in data["host"]["linker"]:
+                if "xrt_coreutil" in data["host"]["linker"]["libraries"] and "uuid" in data["host"]["linker"]["libraries"]:
+                    target.write("CXXFLAGS += $(GXX_EXTRA_FLAGS)\n")
+    target.write("LDFLAGS += -L$(XILINX_XRT)/lib -pthread -lOpenCL\n")
+    target.write("else\n")       
     target.write("CXXFLAGS += -I$(SYSROOT)/usr/include/xrt -I$(XILINX_VIVADO)/include -Wall -O0 -g -std=c++1y\n")
     target.write("LDFLAGS += -L$(SYSROOT)/usr/lib -pthread -lxilinxopencl\n")
+    target.write("endif\n\n")
+    target.write("ifeq ($(TARGET),$(filter $(TARGET),sw_emu))\n")
+    target.write("VPP_PFLAGS+= --package.emu_ps qemu\n")
+    target.write("endif\n\n")
+    target.write("#Check for EMU_PS\n")
+    target.write("ifeq ($(TARGET), $(filter $(TARGET),hw_emu hw))\n")
+    target.write("ifeq ($(EMU_PS), X86)\n")
+    target.write("$(error For hw_emu and hw, the design has to run on QEMU. Thus, please give EMU_PS=QEMU for these targets.)\n")
+    target.write("endif\n")
+    target.write("endif\n")
 
     blocklist = [board for board in data.get("platform_blocklist", [])]
     forbid_others = False
@@ -146,7 +169,9 @@ def add_host_flags(target, data):
                 target.write(" ")	
                 target.write(opt)
     target.write("\n")
+    target.write("ifneq ($(EMU_PS), X86)\n")
     target.write("LDFLAGS += --sysroot=$(SYSROOT)\n")
+    target.write("endif\n")
 
     return
 
@@ -157,7 +182,7 @@ def add_kernel_flags(target, data):
     if "v++" in data:
         target.write("VPP_FLAGS += \n")
     target.write("VPP_FLAGS += ")
-    target.write("-t $(TARGET) --platform $(PLATFORM) --save-temps \n")  
+    target.write("--save-temps \n")  
     if "containers" in data:
         for con in data["containers"]:
             for acc in con["accelerators"]:
@@ -287,21 +312,19 @@ def building_kernel(target, data):
                         target.write(location)
                         target.write("\n")
                     else:
-                        target.write("\tv++ ")
-                        target.write("$(VPP_FLAGS) ")
+                        target.write("\tv++ -c ")
+                        target.write("$(VPP_FLAGS) -t $(TARGET) --platform $(PLATFORM) ")
                         if "clflags" in acc:
                             target.write("$(VPP_FLAGS_"+acc["name"]+") ")
-                        target.write("-c -k ")
+                        target.write("-k ")
                         target.write(acc["name"])
                         target.write(" --temp_dir ")
                         target.write("$(TEMP_DIR) ")
                         target.write(" -I'$(<D)'")
                         target.write(" -o'$@' '$<'\n")
         target.write("\n")
+        target.write("$(LINK_OUTPUT):")
         for con in data["containers"]:
-            target.write("$(BUILD_DIR)/")
-            target.write(con["name"])
-            target.write(".xclbin:")
             if "accelerators" in con:
                 for acc in con["accelerators"]:
                     if "kernel_type" in acc and acc["kernel_type"] == "SystemC":
@@ -312,20 +335,22 @@ def building_kernel(target, data):
                     target.write(".xo")
             target.write("\n")
             target.write("\tmkdir -p $(BUILD_DIR)\n")
-            target.write("\tv++ $(VPP_FLAGS) -l $(VPP_LDFLAGS) --temp_dir $(TEMP_DIR)")
+            target.write("\tv++ -l $(VPP_FLAGS) $(VPP_LDFLAGS) -t $(TARGET) --platform $(PLATFORM) --temp_dir $(TEMP_DIR)")
             if "ldclflags" in con:
                 target.write(" $(VPP_LDFLAGS_"+con["name"]+")")
             target.write(" -o'$(LINK_OUTPUT)' $(+)\n")
-    target.write("\n")
+        target.write("\n")
+        target.write("ifeq ($(EMU_PS), X86)\n")
+        target.write("\tv++ -p $(LINK_OUTPUT) $(VPP_FLAGS) -t $(TARGET) --platform $(PLATFORM) ")
+        target.write("-o $(BUILD_DIR)/" + con["name"] + ".xclbin\n")
+    target.write("endif\n")
     return
 
 def building_kernel_rtl(target, data):
     target.write("# Building kernel\n")
+    target.write("$(LINK_OUTPUT):")
     if "containers" in data:
         for con in data["containers"]:
-            target.write("$(BUILD_DIR)/")
-            target.write(con["name"])
-            target.write(".xclbin:")
             if "accelerators" in con:
                 for acc in con["accelerators"]:
                     if "kernel_type" in acc and acc["kernel_type"] == "SystemC":
@@ -336,18 +361,32 @@ def building_kernel_rtl(target, data):
                     target.write(".xo")
             target.write("\n")
             target.write("\tmkdir -p $(BUILD_DIR)\n")
-            target.write("\tv++ $(VPP_FLAGS) -l $(VPP_LDFLAGS) --temp_dir $(TEMP_DIR)")
+            target.write("\tv++ -l $(VPP_FLAGS) $(VPP_LDFLAGS) -t $(TARGET) --platform $(PLATFORM) --temp_dir $(TEMP_DIR)")
             if "ldclflags" in con:
                 target.write(" $(VPP_LDFLAGS_"+con["name"]+")")
             target.write(" -o'$(LINK_OUTPUT)' $(+)\n")
+    if "testinfo" in data:
+       if "targets" in data["testinfo"]:
+          if "vitis_sw_emu" in data["testinfo"]["targets"]:
+             if "containers" in data:
+                for con in data["containers"]:
+                    target.write("ifeq ($(EMU_PS), X86)\n")
+                    target.write("\tv++ -p $(LINK_OUTPUT) -t $(TARGET) --platform $(PLATFORM) --package.out_dir $(PACKAGE_OUT) -o ")
+                    target.write("$(BUILD_DIR)/"+ con["name"] + ".xclbin\n")
+                    target.write("endif\n")
     return
 
 def building_host(target, data):
     target.write("############################## Setting Rules for Host (Building Host Executable) ##############################\n")
 
-    target.write("$(EXECUTABLE): $(HOST_SRCS) | check-vitis check_edge_sw\n")
+    target.write("$(EXECUTABLE): $(HOST_SRCS)\n")
+    target.write("ifeq ($(EMU_PS), X86)\n")
+    target.write("\t$(CXX) -o $@ $^ $(CXXFLAGS) $(LDFLAGS)\n")
+    target.write("else\n")
+    target.write("\tmake check_edge_sw\n")
+    target.write("\tmake check-vitis\n")
     target.write("\t$(XILINX_VITIS)/gnu/aarch64/lin/aarch64-linux/bin/aarch64-linux-gnu-g++ -o $@ $^ $(CXXFLAGS) $(LDFLAGS)\n")
-    target.write("\n")
+    target.write("endif\n\n")
     target.write("emconfig:$(EMCONFIG_DIR)/emconfig.json\n")
     target.write("$(EMCONFIG_DIR)/emconfig.json:\n")
     target.write("\temconfigutil --platform $(PLATFORM) --od $(EMCONFIG_DIR)")
@@ -362,7 +401,7 @@ def mk_clean(target, data):
 
     target.write("# Cleaning stuff\n")
     target.write("clean:\n")
-    target.write("\t-$(RMDIR) $(EXECUTABLE) $(XCLBIN)/{*sw_emu*,*hw_emu*} \n")
+    target.write("\t-$(RMDIR) $(EXECUTABLE) *.xclbin/{*sw_emu*,*hw_emu*} \n")
     target.write("\t-$(RMDIR) profile_* TempConfig system_estimate.xtxt *.rpt *.csv \n")
     target.write("\t-$(RMDIR) src/*.ll *v++* .Xil emconfig.json dltmp* xmltmp* *.log *.jou *.wcfg *.wdb\n")
     target.write("\n")
@@ -386,24 +425,20 @@ def mk_clean(target, data):
 def mk_build_all(target, data):
     target.write("############################## Setting Targets ##############################\n")
     target.write(".PHONY: all clean cleanall docs emconfig\n")
-    target.write("all: check-platform check-device check_edge_sw $(EXECUTABLE)")
-    for con in data["containers"]:
-            target.write(" $(BUILD_DIR)/")
-            target.write(con["name"])
-            target.write(".xclbin") 
-    target.write(" emconfig sd_card")
-    target.write("\n\n")
+    target.write("ifeq ($(EMU_PS), X86)\n")
+    target.write("all: check-platform check-device $(EXECUTABLE) $(LINK_OUTPUT)") 
+    target.write(" emconfig\n")
+    target.write("else\n")
+    target.write("all: check-platform check-device check_edge_sw $(EXECUTABLE) $(LINK_OUTPUT)")
+    target.write(" sd_card\n")
+    target.write("endif\n\n")
     
     target.write(".PHONY: host\n")
     target.write("host: $(EXECUTABLE)\n")
     target.write("\n")
     
     target.write(".PHONY: build\n")
-    target.write("build: check-vitis check-device")
-    for con in data["containers"]:
-            target.write(" $(BUILD_DIR)/")
-            target.write(con["name"])
-            target.write(".xclbin")
+    target.write("build: check-vitis check-device $(LINK_OUTPUT)")
     target.write("\n\n")
 
     target.write(".PHONY: xclbin\n")
@@ -432,8 +467,12 @@ def mk_run(target, data):
 
     target.write("run: all\n")
     target.write("ifeq ($(TARGET),$(filter $(TARGET),sw_emu hw_emu))\n")
-    target.write("\t$(LAUNCH_EMULATOR) -run-app $(RUN_APP_SCRIPT) | tee run_app.log; exit $${PIPESTATUS[0]}")
-    target.write("\n")
+    target.write("ifeq ($(EMU_PS), X86)\n")
+    target.write("\tcp -rf $(EMCONFIG_DIR)/emconfig.json .\n")
+    target.write("\tXCL_EMULATION_MODE=$(TARGET) $(EXECUTABLE) $(CMD_ARGS)\n")
+    target.write("else\n")
+    target.write("\tbash -c '$(LAUNCH_EMULATOR) -run-app $(RUN_APP_SCRIPT) | tee run_app.log; exit $${PIPESTATUS[0]}'\n")
+    target.write("endif\n")
 	
     if "post_launch" in data:
         for post_launch in data["post_launch"]:
@@ -466,8 +505,11 @@ def mk_run(target, data):
     target.write(".PHONY: test\n")
     target.write("test: $(EXECUTABLE)\n")
     target.write("ifeq ($(TARGET),$(filter $(TARGET),sw_emu hw_emu))\n")
-    target.write("\t$(LAUNCH_EMULATOR) -run-app $(RUN_APP_SCRIPT) | tee run_app.log; exit $${PIPESTATUS[0]}")
-    target.write("\n")
+    target.write("ifeq ($(EMU_PS), X86)\n")
+    target.write("\tXCL_EMULATION_MODE=$(TARGET) $(EXECUTABLE) $(CMD_ARGS)\n")
+    target.write("else\n")
+    target.write("\tbash -c '$(LAUNCH_EMULATOR) -run-app $(RUN_APP_SCRIPT) | tee run_app.log; exit $${PIPESTATUS[0]}'\n")
+    target.write("endif\n")
 	
     if "post_launch" in data:
         for post_launch in data["post_launch"]:
@@ -505,15 +547,11 @@ def mk_sdcard(target, data):
     target.write("############################## Preparing sdcard ##############################\n")
     target.write(".PHONY: sd_card\n")
     target.write("sd_card:") 
-    target.write(" gen_run_app $(SD_CARD)\n")
+    target.write(" gen_run_app emconfig $(SD_CARD)\n")
     target.write("\n")
 
     target.write("$(SD_CARD):")
-    for con in data["containers"]:
-            target.write(" $(BUILD_DIR)/")
-            target.write(con["name"])
-            target.write(".xclbin")
-    target.write(" $(EXECUTABLE)\n")
+    target.write(" $(EXECUTABLE) $(LINK_OUTPUT)\n")
     extra_file_list = []
     if "launch" in data:	
         if "cmd_args" in data["launch"][0]:
@@ -526,7 +564,7 @@ def mk_sdcard(target, data):
                     extra_file_list.append(arg)  
     if "containers" in data:
         for con in data["containers"]:
-            target.write("\tv++ $(VPP_PFLAGS) -p $(LINK_OUTPUT) $(VPP_FLAGS) ")
+            target.write("\tv++ -p $(VPP_PFLAGS) $(LINK_OUTPUT) $(VPP_FLAGS) -t $(TARGET) --platform $(PLATFORM) ")
             target.write("--package.out_dir $(PACKAGE_OUT) --package.rootfs $(EDGE_COMMON_SW)/rootfs.ext4 --package.sd_file $(SD_IMAGE_FILE) --package.sd_file xrt.ini --package.sd_file $(RUN_APP_SCRIPT) --package.sd_file $(EXECUTABLE) --package.sd_file $(EMCONFIG_DIR)/emconfig.json")
             for extra_filename in extra_file_list:
                 if ('-' not in extra_filename):
@@ -545,36 +583,33 @@ def mk_help(target):
     target.write("\t$(ECHO) \"  make all TARGET=<sw_emu/hw_emu/hw> PLATFORM=<FPGA platform> EDGE_COMMON_SW=<rootfs and kernel image path>.\"\n");
     target.write("\t$(ECHO) \"      Command to generate the design for specified Target and Shell.\"\n")
     target.write("\t$(ECHO) \"\"\n")
-    target.write("\t$(ECHO) \"  make clean \"\n");
-    target.write("\t$(ECHO) \"      Command to remove the generated non-hardware files.\"\n")
-    target.write("\t$(ECHO) \"\"\n")
-    target.write("\t$(ECHO) \"  make cleanall\"\n")
-    target.write("\t$(ECHO) \"      Command to remove all the generated files.\"\n")
-    target.write("\t$(ECHO) \"\"\n")
-    target.write("\t$(ECHO) \"  make test PLATFORM=<FPGA platform>\"\n")    
-    target.write("\t$(ECHO) \"      Command to run the application. This is same as 'run' target but does not have any makefile dependency.\"\n")  
-    target.write("\t$(ECHO) \"\"\n")
-
-    target.write("\t$(ECHO) \"  make sd_card TARGET=<sw_emu/hw_emu/hw> PLATFORM=<FPGA platform> EDGE_COMMON_SW=<rootfs and kernel image path>\"\n");
-    target.write("\t$(ECHO) \"      Command to prepare sd_card files.\"\n")
-    target.write("\t$(ECHO) \"\"\n")
-    target.write("\t$(ECHO) \"  make run TARGET=<sw_emu/hw_emu/hw> PLATFORM=<FPGA platform>");
+    target.write("\t$(ECHO) \"  make run TARGET=<sw_emu/hw_emu/hw> PLATFORM=<FPGA platform> EMU_PS=<X86/QEMU>");
     target.write(" EDGE_COMMON_SW=<rootfs and kernel image path>")
     target.write("\"\n")
-    target.write("\t$(ECHO) \"      Command to run application in emulation.\"\n")
+    target.write("\t$(ECHO) \"      Command to run application in emulation..Default sw_emu will run on x86 ,to launch on qemu specify EMU_PS=QEMU.\"\n")
     target.write("\t$(ECHO) \"\"\n")
     target.write("\t$(ECHO) \"  make build TARGET=<sw_emu/hw_emu/hw> PLATFORM=<FPGA platform>");
     target.write(" EDGE_COMMON_SW=<rootfs and kernel image path>")
     target.write("\"\n")
     target.write("\t$(ECHO) \"      Command to build xclbin application.\"\n")
     target.write("\t$(ECHO) \"\"\n")
-    target.write("\t$(ECHO) \"  make host");
+    target.write("\t$(ECHO) \"  make host PLATFORM=<FPGA platform>");
     target.write(" EDGE_COMMON_SW=<rootfs and kernel image path>")
     target.write("\"\n")
     target.write("\t$(ECHO) \"      Command to build host application.\"\n")
     target.write("\t$(ECHO) \"      EDGE_COMMON_SW is required for SoC shells. Please download and use the pre-built image from - \"\n")
     target.write("\t$(ECHO) \"      https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html\"\n")
     target.write("\t$(ECHO) \"\"\n")
+    target.write("\t$(ECHO) \"  make sd_card TARGET=<sw_emu/hw_emu/hw> PLATFORM=<FPGA platform> EDGE_COMMON_SW=<rootfs and kernel image path>\"\n");
+    target.write("\t$(ECHO) \"      Command to prepare sd_card files.\"\n")
+    target.write("\t$(ECHO) \"\"\n")
+    target.write("\t$(ECHO) \"  make clean \"\n");
+    target.write("\t$(ECHO) \"      Command to remove the generated non-hardware files.\"\n")
+    target.write("\t$(ECHO) \"\"\n")
+    target.write("\t$(ECHO) \"  make cleanall\"\n")
+    target.write("\t$(ECHO) \"      Command to remove all the generated files.\"\n")
+    target.write("\t$(ECHO) \"\"\n")
+
     target.write("endif\n")
     target.write("\n")
 
