@@ -23,9 +23,9 @@ fi
 
 # copy vitis common folder
 DIR="$MY_PROJECTS_PATH/$WORKFLOW/common"
-if ! [ -d "$DIR" ]; then
+#if ! [ -d "$DIR" ]; then
     cp -rf $CLI_PATH/templates/$WORKFLOW/common/ $DIR
-fi
+#fi
 
 # create project
 echo ""
@@ -47,7 +47,7 @@ while true; do
         cp -rf $CLI_PATH/templates/$WORKFLOW/$TEMPLATE_NAME/* $DIR
         # we only need makefile_us_alveo.mk (for alveos) and makefile_versal_alveo.mk (for versal)
         rm $DIR/makefile_versal_ps.mk
-        rm $DIR/makefile_zynq7000.mk
+        #rm $DIR/makefile_zynq7000.mk
         rm $DIR/makefile_zynqmp.mk
         # adjust Makefile
         sed -i "s/$TEMPLATE_NAME/$project_name/" $DIR/Makefile
