@@ -220,7 +220,7 @@ echo ""
 #echo ""
 
 case "$target_name" in
-    sw_emu)
+    sw_emu|hw_emu)
         #echo "./$project_name -x ./build_dir.$target_name.$platform/vadd.xclbin" 
         #echo ""
         #eval "./$project_name -x ./build_dir.$target_name.$platform/vadd.xclbin"
