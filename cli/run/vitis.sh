@@ -206,14 +206,20 @@ echo ""
 echo "We should be running Vitis on device=$device_index"
 echo ""
 
+#get bdf
+upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
+bdf="${upstream_port::-1}1"
+
 #execution
 cd $DIR
 echo "${bold}Running accelerated application:${normal}"
 echo ""
-echo "make run TARGET=$target_name PLATFORM=$platform" 
-echo ""
-eval "make run TARGET=$target_name PLATFORM=$platform"
-echo ""
+#echo "make run TARGET=$target_name PLATFORM=$platform" 
+#echo ""
+#eval "make run TARGET=$target_name PLATFORM=$platform"
+#echo ""
 
-# This is equivalent to do ./$project_name path_to_target_xclbin, i.e.:
-#   ./test_6 ./build_dir.sw_emu.xilinx_u55c_gen3x16_xdma_3_202210_1/vadd.xclbin
+echo "./$project_name -x ./build_dir.$target_name.$platform/vadd.xclbin $bdf" 
+echo ""
+eval "./$project_name -x ./build_dir.$target_name.$platform/vadd.xclbin $bdf"
+echo ""
