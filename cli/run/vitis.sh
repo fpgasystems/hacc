@@ -219,7 +219,21 @@ echo ""
 #eval "make run TARGET=$target_name PLATFORM=$platform"
 #echo ""
 
-echo "./$project_name -x ./build_dir.$target_name.$platform/vadd.xclbin $bdf" 
-echo ""
-eval "./$project_name -x ./build_dir.$target_name.$platform/vadd.xclbin $bdf"
-echo ""
+case "$target_name" in
+    sw_emu)
+        #echo "./$project_name -x ./build_dir.$target_name.$platform/vadd.xclbin" 
+        #echo ""
+        #eval "./$project_name -x ./build_dir.$target_name.$platform/vadd.xclbin"
+        #echo ""
+        echo "make run TARGET=$target_name PLATFORM=$platform" 
+        echo ""
+        eval "make run TARGET=$target_name PLATFORM=$platform"
+        echo ""
+        ;;
+    hw)
+        echo "./$project_name -x ./build_dir.$target_name.$platform/vadd.xclbin $bdf" 
+        echo ""
+        eval "./$project_name -x ./build_dir.$target_name.$platform/vadd.xclbin $bdf"
+        echo ""
+        ;;
+esac

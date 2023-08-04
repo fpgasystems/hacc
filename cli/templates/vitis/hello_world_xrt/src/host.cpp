@@ -37,15 +37,28 @@ int main(int argc, char** argv) {
 
     // Read settings
     std::string binaryFile = parser.value("xclbin_file");
-    int device_index = stoi(parser.value("device_id"));
+    //int device_index = stoi(parser.value("device_id"));
 
     if (argc < 3) {
         parser.printHelp();
         return EXIT_FAILURE;
     }
 
-    std::cout << "Open the device" << device_index << std::endl;
-    auto device = xrt::device(device_index);
+    //assign default (sw_emu)
+    //auto device = xrt::device(device_index);
+
+    // Declare the device outside the conditional blocks
+    xrt::device device;
+
+    //read device BusDeviceFunction if defined
+    if (argc >= 4 && argv[3] != nullptr && argv[3][0] != '\0') { 
+        std::string device_bdf = argv[3]; 
+        std::cout << "Open the device " << device_bdf << std::endl;
+        device = xrt::device(device_bdf);
+    } else {
+        device = xrt::device(0);  // Initialize with device index
+    }
+
     std::cout << "Load the xclbin " << binaryFile << std::endl;
     auto uuid = device.load_xclbin(binaryFile);
 
