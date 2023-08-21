@@ -5,6 +5,7 @@ normal=$(tput sgr0)
 
 #constants
 CLI_PATH="$(dirname "$(dirname "$0")")"
+XILINX_PLATFORMS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XILINX_PLATFORMS_PATH)
 XRT_PATH=$($CLI_PATH/common/get_constant $CLI_PATH XRT_PATH)
 DEVICES_LIST="$CLI_PATH/devices_acap_fpga"
 MY_PROJECTS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH MY_PROJECTS_PATH)
@@ -79,18 +80,36 @@ if [ "$flags" = "" ]; then
     echo "${bold}Please, choose binary's execution target:${normal}"
     echo ""
     target_name=$($CLI_PATH/common/target_dialog)
-    #device_dialog
-    if [[ $multiple_devices = "0" ]]; then
+    #platform or device dialog
+    if [ "$target_name" = "sw_emu" ] || [ "$target_name" = "hw_emu" ]; then
+        #platform_dialog
+        echo ""
+        echo "${bold}Please, choose your platform:${normal}"
+        echo ""
+        result=$($CLI_PATH/common/platform_dialog $XILINX_PLATFORMS_PATH)
+        platform_found=$(echo "$result" | sed -n '1p')
+        platform_name=$(echo "$result" | sed -n '2p')
+        multiple_platforms=$(echo "$result" | sed -n '3p')
+        if [[ $multiple_platforms = "0" ]]; then
+            echo $platform_name
+        fi
+        #set default device
         device_found="1"
         device_index="1"
-    else
-        echo ""
-        echo "${bold}Please, choose your device:${normal}"
-        echo ""
-        result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
-        device_found=$(echo "$result" | sed -n '1p')
-        device_index=$(echo "$result" | sed -n '2p')
-    fi
+    elif [ "$target_name" = "hw" ]; then 
+        #device_dialog
+        if [[ $multiple_devices = "0" ]]; then
+            device_found="1"
+            device_index="1"
+        else
+            echo ""
+            echo "${bold}Please, choose your device:${normal}"
+            echo ""
+            result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
+            device_found=$(echo "$result" | sed -n '1p')
+            device_index=$(echo "$result" | sed -n '2p')
+        fi    
+    fi    
 else
     #project_dialog_check
     result="$("$CLI_PATH/common/project_dialog_check" "${flags[@]}")"
@@ -169,10 +188,12 @@ if ! [ -d "$DIR" ]; then
 fi
 
 #get platform
-platform=$($CLI_PATH/get/get_fpga_device_param $device_index platform)
+if [ "$target_name" = "hw" ]; then 
+    platform_name=$($CLI_PATH/get/get_fpga_device_param $device_index platform)
+fi
 
 #define directories (2)
-APP_BUILD_DIR="$MY_PROJECTS_PATH/$WORKFLOW/$project_name/build_dir.$target_name.$platform"
+APP_BUILD_DIR="$MY_PROJECTS_PATH/$WORKFLOW/$project_name/build_dir.$target_name.$platform_name"
 
 #check for build directory
 if ! [ -d "$APP_BUILD_DIR" ]; then
@@ -214,26 +235,26 @@ bdf="${upstream_port::-1}1"
 cd $DIR
 echo "${bold}Running accelerated application:${normal}"
 echo ""
-#echo "make run TARGET=$target_name PLATFORM=$platform" 
+#echo "make run TARGET=$target_name PLATFORM=$platform_name" 
 #echo ""
-#eval "make run TARGET=$target_name PLATFORM=$platform"
+#eval "make run TARGET=$target_name PLATFORM=$platform_name"
 #echo ""
 
 case "$target_name" in
     sw_emu|hw_emu)
-        #echo "./$project_name -x ./build_dir.$target_name.$platform/vadd.xclbin" 
+        #echo "./$project_name -x ./build_dir.$target_name.$platform_name/vadd.xclbin" 
         #echo ""
-        #eval "./$project_name -x ./build_dir.$target_name.$platform/vadd.xclbin"
+        #eval "./$project_name -x ./build_dir.$target_name.$platform_name/vadd.xclbin"
         #echo ""
-        echo "make run TARGET=$target_name PLATFORM=$platform" 
+        echo "make run TARGET=$target_name PLATFORM=$platform_name" 
         echo ""
-        eval "make run TARGET=$target_name PLATFORM=$platform"
+        eval "make run TARGET=$target_name PLATFORM=$platform_name"
         echo ""
         ;;
     hw)
-        echo "./$project_name -x ./build_dir.$target_name.$platform/vadd.xclbin $bdf" 
+        echo "./$project_name -x ./build_dir.$target_name.$platform_name/vadd.xclbin $bdf" 
         echo ""
-        eval "./$project_name -x ./build_dir.$target_name.$platform/vadd.xclbin $bdf"
+        eval "./$project_name -x ./build_dir.$target_name.$platform_name/vadd.xclbin $bdf"
         echo ""
         ;;
 esac
