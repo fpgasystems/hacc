@@ -147,6 +147,16 @@ else
         $CLI_PATH/sgutil run vitis -h
         exit
     fi
+    #forbidden target/device combinations (1)
+    if [[ "$target_name" = "sw_emu" || "$target_name" = "hw_emu" ]] && [[ "$device_found" = "1" ]]; then
+        $CLI_PATH/sgutil run vitis -h
+        exit
+    fi
+    #forbidden target/device combinations (2)
+    if [[ "$target_name" = "hw" ]] && [[ "$platform_found" = "1" ]]; then
+        $CLI_PATH/sgutil run vitis -h
+        exit
+    fi
     #header (2/2)
     echo ""
     echo "${bold}sgutil run vitis${normal}"
@@ -175,7 +185,7 @@ else
     if [ "$target_name" = "sw_emu" ] || [ "$target_name" = "hw_emu" ]; then
         #platform_dialog (forgotten mandatory emu)
         if [[ $platform_found = "0" ]]; then
-            echo ""
+            #echo ""
             echo "${bold}Please, choose your platform:${normal}"
             echo ""
             result=$($CLI_PATH/common/platform_dialog $XILINX_PLATFORMS_PATH)
