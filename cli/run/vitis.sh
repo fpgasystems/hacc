@@ -55,10 +55,10 @@ read -a flags <<< "$@"
 #check on flags
 project_found=""
 project_name=""
-device_found=""
-device_index=""
 target_found=""
 target_name=""
+device_found=""
+device_index=""
 if [ "$flags" = "" ]; then
     #header (1/2)
     echo ""
@@ -74,6 +74,11 @@ if [ "$flags" = "" ]; then
     if [[ $multiple_projects = "0" ]]; then
         echo $project_name
     fi
+    #target_dialog
+    echo ""
+    echo "${bold}Please, choose binary's execution target:${normal}"
+    echo ""
+    target_name=$($CLI_PATH/common/target_dialog)
     #device_dialog
     if [[ $multiple_devices = "0" ]]; then
         device_found="1"
@@ -86,11 +91,6 @@ if [ "$flags" = "" ]; then
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
     fi
-    #target_dialog
-    echo ""
-    echo "${bold}Please, choose binary's execution target:${normal}"
-    echo ""
-    target_name=$($CLI_PATH/common/target_dialog)
 else
     #project_dialog_check
     result="$("$CLI_PATH/common/project_dialog_check" "${flags[@]}")"
@@ -101,21 +101,21 @@ else
         $CLI_PATH/sgutil run vitis -h
         exit
     fi
-    #device_dialog_check
-    result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
-    device_found=$(echo "$result" | sed -n '1p')
-    device_index=$(echo "$result" | sed -n '2p')
-    #forbidden combinations
-    if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
-        $CLI_PATH/sgutil run vitis -h
-        exit
-    fi
     #target_dialog_check
     result="$("$CLI_PATH/common/target_dialog_check" "${flags[@]}")"
     target_found=$(echo "$result" | sed -n '1p')
     target_name=$(echo "$result" | sed -n '2p')
     #forbidden combinations
     if [[ "$target_found" = "1" && ! ( "$target_name" = "sw_emu" || "$target_name" = "hw_emu" || "$target_name" = "hw" ) ]]; then
+        $CLI_PATH/sgutil run vitis -h
+        exit
+    fi
+    #device_dialog_check
+    result="$("$CLI_PATH/common/device_dialog_check" "${flags[@]}")"
+    device_found=$(echo "$result" | sed -n '1p')
+    device_index=$(echo "$result" | sed -n '2p')
+    #forbidden combinations
+    if ([ "$device_found" = "1" ] && [ "$device_index" = "" ]) || ([ "$device_found" = "1" ] && [ "$multiple_devices" = "0" ] && (( $device_index != 1 ))) || ([ "$device_found" = "1" ] && ([[ "$device_index" -gt "$MAX_DEVICES" ]] || [[ "$device_index" -lt 1 ]])); then
         $CLI_PATH/sgutil run vitis -h
         exit
     fi
@@ -137,6 +137,12 @@ else
         fi
         #echo ""
     fi
+    #target_dialog (forgotten mandatory 3)
+    if [[ $target_found = "0" ]]; then
+        echo "${bold}Please, choose binary's execution target:${normal}"
+        echo ""
+        target_name=$($CLI_PATH/common/target_dialog)
+    fi
     #device_dialog (forgotten mandatory 2)
     if [[ $multiple_devices = "0" ]]; then
         device_found="1"
@@ -148,12 +154,6 @@ else
         device_found=$(echo "$result" | sed -n '1p')
         device_index=$(echo "$result" | sed -n '2p')
         echo ""
-    fi
-    #target_dialog (forgotten mandatory 3)
-    if [[ $target_found = "0" ]]; then
-        echo "${bold}Please, choose binary's execution target:${normal}"
-        echo ""
-        target_name=$($CLI_PATH/common/target_dialog)
     fi
 fi
 
