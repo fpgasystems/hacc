@@ -37,3 +37,13 @@
   ansible.builtin.file:
     path: /opt/cli/templates/coyote/hello_world/src/create_data.cpp
     state: absent
+
+- name: remove Vitis common
+  ansible.builtin.file:
+    path: /opt/cli/templates/vitis/common
+    state: absent
+
+- name: remove Vitis hello_world (opencl) template 
+  ansible.builtin.file:
+    path: /opt/cli/templates/vitis/hello_world
+    state: absent

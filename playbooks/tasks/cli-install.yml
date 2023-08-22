@@ -106,6 +106,16 @@
     path: /opt/cli/templates/vitis/hello_world/configs/template.hpp
     state: absent
 
+- name: remove Vitis common
+  ansible.builtin.file:
+    path: /opt/cli/templates/vitis/common
+    state: absent
+
+- name: remove Vitis hello_world (opencl) template 
+  ansible.builtin.file:
+    path: /opt/cli/templates/vitis/hello_world
+    state: absent
+
 #build ----------------------------------------------------------------------------------------
 
 - name: copy (build) coyote script
