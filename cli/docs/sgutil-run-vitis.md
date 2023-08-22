@@ -17,7 +17,12 @@
   &nbsp; &nbsp; FPGA Device Index (see sgutil examine).
 </p>
 
-<code>-p, --project</code>
+<code>    --platform</code>
+<p>
+  &nbsp; &nbsp; Xilinx platform (according to sgutil get platform).
+</p>
+
+<code>    --project</code>
 <p>
   &nbsp; &nbsp; Specifies your Vitis project name.
 </p>
