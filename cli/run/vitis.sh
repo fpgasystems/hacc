@@ -263,9 +263,6 @@ echo ""
 cat $DIR/configs/config_000.hpp
 echo ""
 
-echo "We should be running Vitis on device=$device_index"
-echo ""
-
 #get bdf
 upstream_port=$($CLI_PATH/get/get_fpga_device_param $device_index upstream_port)
 bdf="${upstream_port::-1}1"
