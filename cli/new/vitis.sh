@@ -16,16 +16,20 @@ if ! [ -d "$DIR" ]; then
 fi
 
 # create vitis directory
-DIR="$MY_PROJECTS_PATH/$WORKFLOW"
-if ! [ -d "$DIR" ]; then
-    mkdir ${DIR}
+VITIS_DIR="$MY_PROJECTS_PATH/$WORKFLOW"
+if ! [ -d "$VITIS_DIR" ]; then
+    mkdir ${VITIS_DIR}
 fi
 
-# copy vitis common folder
-DIR="$MY_PROJECTS_PATH/$WORKFLOW/common"
-#if ! [ -d "$DIR" ]; then
-    cp -rf $CLI_PATH/templates/$WORKFLOW/common/ $DIR
-#fi
+#prepare for wget (1)
+if [ -d "$VITIS_DIR/common" ]; then
+    rm -rf "$VITIS_DIR/common"
+fi
+
+#prepare for wget (2)
+if [ -d "$VITIS_DIR/tmp" ]; then
+    rm -rf "$VITIS_DIR/tmp"
+fi
 
 # create project
 echo ""
@@ -43,7 +47,17 @@ while true; do
     if ! [ -d "$DIR" ]; then
         # project_name does not exist
         mkdir ${DIR}
-        # copy
+        #copy vitis common folder from Vitis_Accel_Examples repository (wget)
+        echo ""
+        echo "${bold}Checking out Vitis_Accel_Examples/common:${normal}"
+        echo ""
+        wget https://github.com/Xilinx/Vitis_Accel_Examples/archive/master.zip -O $VITIS_DIR/master.zip
+        mkdir $VITIS_DIR/tmp
+        unzip -q $VITIS_DIR/master.zip -d $VITIS_DIR/tmp
+        mv -f $VITIS_DIR/tmp/Vitis_Accel_Examples-master/common $VITIS_DIR
+        rm -rf $VITIS_DIR/tmp
+        rm $VITIS_DIR/master.zip
+        #copy
         cp -rf $CLI_PATH/templates/$WORKFLOW/$TEMPLATE_NAME/* $DIR
         # we only need makefile_us_alveo.mk (for alveos) and makefile_versal_alveo.mk (for versal)
         rm $DIR/makefile_versal_ps.mk
@@ -59,6 +73,6 @@ while true; do
         break
     fi
 done
-echo ""
-echo "The project $MY_PROJECTS_PATH/$WORKFLOW/$project_name ($TEMPLATE_NAME) has been created!"
+#echo ""
+echo "The project $VITIS_DIR/$project_name ($TEMPLATE_NAME) has been created!"
 echo ""
