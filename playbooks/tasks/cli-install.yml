@@ -116,6 +116,11 @@
     path: /opt/cli/templates/vitis/hello_world
     state: absent
 
+- name: remove HIP vadd.cpp
+  ansible.builtin.file:
+    path: /opt/cli/templates/hip/hello_world/src/vadd.cpp
+    state: absent
+
 #build ----------------------------------------------------------------------------------------
 
 - name: copy (build) coyote script
