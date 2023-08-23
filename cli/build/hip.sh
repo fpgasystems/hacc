@@ -151,6 +151,10 @@ cd $DIR
 echo "${bold}Compiling vadd.c:${normal}"
 echo ""
 sleep 1
-echo "hipcc $DIR/src/vadd.cpp -o $APP_BUILD_DIR/main"
+#echo "hipcc $DIR/src/vadd.cpp -o $APP_BUILD_DIR/main"
+#echo ""
+#hipcc $DIR/src/vadd.cpp -o $APP_BUILD_DIR/main
+
+echo "hipcc $DIR/src/main.cpp $DIR/src/gpu_kernels/vadd.cpp $DIR/src/gpu_kernels/vsub.cpp -o $APP_BUILD_DIR/main"
 echo ""
-hipcc $DIR/src/vadd.cpp -o $APP_BUILD_DIR/main
+hipcc $DIR/src/main.cpp $DIR/src/gpu_kernels/vadd.cpp $DIR/src/gpu_kernels/vsub.cpp -o $APP_BUILD_DIR/main
