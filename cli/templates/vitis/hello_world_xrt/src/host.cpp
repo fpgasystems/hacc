@@ -22,8 +22,10 @@
 #include "experimental/xrt_bo.h"
 #include "experimental/xrt_device.h"
 #include "experimental/xrt_kernel.h"
+#include "../global_params.hpp"
+#include "../configs/config_000.hpp" // config_000.hpp is overwritten with the configuration you select
 
-#define DATA_SIZE 4096
+//#define DATA_SIZE 4096
 
 int main(int argc, char** argv) {
     // Command Line Parser
@@ -44,6 +46,10 @@ int main(int argc, char** argv) {
         return EXIT_FAILURE;
     }
 
+    // print config values as a test
+    std::cout << "N: ";
+    std::cout << std::to_string(N);
+
     //assign default (sw_emu)
     //auto device = xrt::device(device_index);
 
@@ -62,7 +68,7 @@ int main(int argc, char** argv) {
     std::cout << "Load the xclbin " << binaryFile << std::endl;
     auto uuid = device.load_xclbin(binaryFile);
 
-    size_t vector_size_bytes = sizeof(int) * DATA_SIZE;
+    size_t vector_size_bytes = sizeof(int) * N; //DATA_SIZE
 
     auto krnl = xrt::kernel(device, uuid, "vadd");
 
@@ -75,13 +81,13 @@ int main(int argc, char** argv) {
     auto bo0_map = bo0.map<int*>();
     auto bo1_map = bo1.map<int*>();
     auto bo_out_map = bo_out.map<int*>();
-    std::fill(bo0_map, bo0_map + DATA_SIZE, 0);
-    std::fill(bo1_map, bo1_map + DATA_SIZE, 0);
-    std::fill(bo_out_map, bo_out_map + DATA_SIZE, 0);
+    std::fill(bo0_map, bo0_map + N, 0); // DATA_SIZE
+    std::fill(bo1_map, bo1_map + N, 0); // DATA_SIZE
+    std::fill(bo_out_map, bo_out_map + N, 0); // DATA_SIZE
 
     // Create the test data
-    int bufReference[DATA_SIZE];
-    for (int i = 0; i < DATA_SIZE; ++i) {
+    int bufReference[N]; // DATA_SIZE
+    for (int i = 0; i < N; ++i) { // DATA_SIZE
         bo0_map[i] = i;
         bo1_map[i] = i;
         bufReference[i] = bo0_map[i] + bo1_map[i];
@@ -94,7 +100,7 @@ int main(int argc, char** argv) {
     bo1.sync(XCL_BO_SYNC_BO_TO_DEVICE);
 
     std::cout << "Execution of the kernel\n";
-    auto run = krnl(bo0, bo1, bo_out, DATA_SIZE);
+    auto run = krnl(bo0, bo1, bo_out, N); // DATA_SIZE
     run.wait();
 
     // Get the output;
@@ -102,7 +108,7 @@ int main(int argc, char** argv) {
     bo_out.sync(XCL_BO_SYNC_BO_FROM_DEVICE);
 
     // Validate our results
-    if (std::memcmp(bo_out_map, bufReference, DATA_SIZE))
+    if (std::memcmp(bo_out_map, bufReference, N)) // DATA_SIZE
         throw std::runtime_error("Value read back does not match reference");
 
     std::cout << "TEST PASSED\n";
