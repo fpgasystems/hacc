@@ -57,10 +57,13 @@ Input Vector 2 from Global Memory --->|             |      |__|
 #include <stdint.h>
 #include <hls_stream.h>
 
-#define DATA_SIZE 4096
+#include "../global_params.hpp"
+#include "../configs/config_kernel.hpp" 
+
+//#define DATA_SIZE 4096
 
 // TRIPCOUNT identifier
-const int c_size = DATA_SIZE;
+const int c_size = N_MAX; //DATA_SIZE
 
 static void read_input(unsigned int* in, hls::stream<unsigned int>& inStream, int size) {
 // Auto-pipeline is going to apply pipeline to this loop
