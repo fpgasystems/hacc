@@ -40,7 +40,7 @@ echo ""
 while true; do
     read -p "" project_name
     #project_name cannot start with validate_
-    if  [[ $project_name == validate_* ]]; then
+    if  [[ $project_name == validate_* ]] || [[ $project_name == "test" ]]; then
         project_name=""
     fi
     DIR="$MY_PROJECTS_PATH/$WORKFLOW/$project_name"
