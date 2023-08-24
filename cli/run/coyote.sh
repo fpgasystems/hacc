@@ -227,7 +227,7 @@ echo ""
 cat $DIR/configs/config_000.hpp
 echo ""
 
-echo "We should be running Coyote on device=$device_index"
+echo "We should be running Coyote on device=$device_index" #remove!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 echo ""
     
 #run application
