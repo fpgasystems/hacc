@@ -316,6 +316,12 @@
     dest: /opt/cli/common/get_constant
     mode: 0755
 
+- name: copy common/get_files script
+  copy:
+    src: "../../cli/common/get_files.sh"
+    dest: /opt/cli/common/get_files
+    mode: 0755
+
 #constants -----------------------------------------------------------------------------------
 
 - name: copy ACAP_SERVERS_LIST
