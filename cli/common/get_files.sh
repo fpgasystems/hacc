@@ -13,5 +13,8 @@ while IFS= read -r -d $'\0' file; do
     file_list="${file_list}${file} "
 done < <(find "$DIR" -type f -name "*$EXTENSION" -print0)
 
+# Remove trailing space using parameter expansion
+file_list="${file_list%" "}"
+
 #return list
 echo "$file_list"
