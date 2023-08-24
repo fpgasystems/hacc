@@ -147,14 +147,13 @@ echo "cd $DIR"
 echo ""
 cd $DIR
 
+#get cpp files
+cpp_files=$($CLI_PATH/common/get_files $DIR/src/gpu_kernels .cpp)
+
 #copy and compile
 echo "${bold}Compiling vadd.c:${normal}"
 echo ""
 sleep 1
-#echo "hipcc $DIR/src/vadd.cpp -o $APP_BUILD_DIR/main"
-#echo ""
-#hipcc $DIR/src/vadd.cpp -o $APP_BUILD_DIR/main
-
-echo "hipcc $DIR/src/main.cpp $DIR/src/gpu_kernels/vadd.cpp $DIR/src/gpu_kernels/vsub.cpp -o $APP_BUILD_DIR/main"
+echo "hipcc $DIR/src/main.cpp $cpp_files -o $APP_BUILD_DIR/main"
 echo ""
-hipcc $DIR/src/main.cpp $DIR/src/gpu_kernels/vadd.cpp $DIR/src/gpu_kernels/vsub.cpp -o $APP_BUILD_DIR/main
+hipcc $DIR/src/main.cpp $cpp_files -o $APP_BUILD_DIR/main
