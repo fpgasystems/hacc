@@ -56,16 +56,39 @@ int main(int argc, char** argv) {
     // Declare the device outside the conditional blocks
     xrt::device device;
 
+    //define defaults
+    std::string XCL_EMULATION_MODE="sw_emu";
+    std::string uuid_fpga_str="00000000-0000-0000-0000-000000000000";
+    
     //read device BusDeviceFunction if defined
     if (argc >= 4 && argv[3] != nullptr && argv[3][0] != '\0') { 
         std::string device_bdf = argv[3]; 
         std::cout << "Open the device " << device_bdf << std::endl;
         device = xrt::device(device_bdf);
+        XCL_EMULATION_MODE="hw";
     } else {
         device = xrt::device(0);  // Initialize with device index
     }
 
-    std::cout << "Load the xclbin " << binaryFile << std::endl;
+    //check on existing xclbin
+    if (XCL_EMULATION_MODE == "hw") {
+        //read the xclbin loaded on the device
+        auto uuid_fpga = device.get_xclbin_uuid();
+        
+        //get UUID 
+        //std::string uuid_fpga_str = uuid_fpga.to_string();
+        uuid_fpga_str = uuid_fpga.to_string();
+
+        //check if UUID is still empty (xclbin was not loaded)
+        if (uuid_fpga_str == "00000000-0000-0000-0000-000000000000") {
+            // UUID is equal to zero, so terminate the program
+            std::cout << "\nPlease, load the xclbin first using sgutil program vitis" << std::endl;
+            exit(EXIT_FAILURE); // You can use EXIT_SUCCESS or EXIT_FAILURE based on your needs
+        }
+    }
+
+    //load xclbin after verification
+    std::cout << "Loading the xclbin " << binaryFile << " (" << uuid_fpga_str << ")" << std::endl;
     auto uuid = device.load_xclbin(binaryFile);
 
     size_t vector_size_bytes = sizeof(int) * N; //DATA_SIZE
