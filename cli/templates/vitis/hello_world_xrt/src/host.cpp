@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
     }
 
     // print config values as a test
-    std::cout << "N: ";
+    std::cout << "\nN: ";
     std::cout << std::to_string(N);
 
     //assign default (sw_emu)
@@ -58,37 +58,48 @@ int main(int argc, char** argv) {
 
     //define defaults
     std::string XCL_EMULATION_MODE="sw_emu";
-    std::string uuid_fpga_str="00000000-0000-0000-0000-000000000000";
+    std::string current_uuid_str="00000000-0000-0000-0000-000000000000";
+    std::string new_uuid_str="00000000-0000-0000-0000-000000000000";
     
-    //read device BusDeviceFunction if defined
+    //check on number arguments/target
     if (argc >= 4 && argv[3] != nullptr && argv[3][0] != '\0') { 
+        //target is hw
         std::string device_bdf = argv[3]; 
-        std::cout << "Open the device " << device_bdf << std::endl;
+        std::cout << "Opening the device: " << device_bdf << std::endl;
         device = xrt::device(device_bdf);
         XCL_EMULATION_MODE="hw";
     } else {
-        device = xrt::device(0);  // Initialize with device index
+        //target is sw_emu or hw_emu
+        device = xrt::device(0);
     }
+
+    //get new_uuid_str
+    xrt::xclbin new_xclbin = xrt::xclbin(binaryFile);
+    auto new_uuid = new_xclbin.get_uuid();
+    new_uuid_str = new_uuid.to_string();
+    
+    //print xclbin to be loaded
+    std::cout << "\nFetching xclbin: " << new_uuid_str << std::endl;
 
     //check on existing xclbin
     if (XCL_EMULATION_MODE == "hw") {
         //read the xclbin loaded on the device
-        auto uuid_fpga = device.get_xclbin_uuid();
+        auto current_uuid = device.get_xclbin_uuid();
         
         //get UUID 
-        //std::string uuid_fpga_str = uuid_fpga.to_string();
-        uuid_fpga_str = uuid_fpga.to_string();
+        //std::string current_uuid_str = current_uuid.to_string();
+        current_uuid_str = current_uuid.to_string();
 
-        //check if UUID is still empty (xclbin was not loaded)
-        if (uuid_fpga_str == "00000000-0000-0000-0000-000000000000") {
+        //check if UUID is still empty (xclbin was not loaded) or not matching
+        if (current_uuid_str == "00000000-0000-0000-0000-000000000000" || current_uuid_str != new_uuid_str){
             // UUID is equal to zero, so terminate the program
             std::cout << "\nPlease, load the xclbin first using sgutil program vitis" << std::endl;
-            exit(EXIT_FAILURE); // You can use EXIT_SUCCESS or EXIT_FAILURE based on your needs
+            exit(EXIT_FAILURE);
         }
     }
 
     //load xclbin after verification
-    std::cout << "Loading the xclbin " << binaryFile << " (" << uuid_fpga_str << ")" << std::endl;
+    std::cout << "Loading xclbin: " << binaryFile << " (" << new_uuid_str << ")" << std::endl;
     auto uuid = device.load_xclbin(binaryFile);
 
     size_t vector_size_bytes = sizeof(int) * N; //DATA_SIZE
