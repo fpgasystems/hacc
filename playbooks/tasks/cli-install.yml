@@ -121,6 +121,16 @@
     path: /opt/cli/templates/hip/hello_world/src/vadd.cpp
     state: absent
 
+- name: remove HIP host_kernels.hpp
+  ansible.builtin.file:
+    path: /opt/cli/templates/hip/hello_world/src/host_kernels.hpp
+    state: absent
+
+- name: remove HIP host_kernels folder
+  ansible.builtin.file:
+    path: /opt/cli/templates/hip/hello_world/src/host_kernels
+    state: absent
+
 #build ----------------------------------------------------------------------------------------
 
 - name: copy (build) coyote script
