@@ -185,7 +185,7 @@ else
     if [ "$target_name" = "sw_emu" ] || [ "$target_name" = "hw_emu" ]; then
         #platform_dialog (forgotten mandatory emu)
         if [[ $platform_found = "0" ]]; then
-            #echo ""
+            echo ""
             echo "${bold}Please, choose your platform:${normal}"
             echo ""
             result=$($CLI_PATH/common/platform_dialog $XILINX_PLATFORMS_PATH)
@@ -205,6 +205,7 @@ else
             device_found="1"
             device_index="1"
         elif [[ $device_found = "0" ]]; then
+            echo ""
             echo "${bold}Please, choose your device:${normal}"
             echo ""
             result=$($CLI_PATH/common/device_dialog $CLI_PATH $MAX_DEVICES $multiple_devices)
