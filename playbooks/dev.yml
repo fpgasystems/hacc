@@ -16,12 +16,12 @@
   vars:
     ansible_python_interpreter: /usr/bin/python3
     constants: false
-    common: true
+    common: false
     coyote: false
     enable: false
     examine: false
     get: false
-    hip: true
+    hip: false
     mpi: false
     program: false
     reboot: false
@@ -30,7 +30,7 @@
     sgutil: false
     templates: true
     validate: false
-    vitis: false
+    vitis: true
   tasks:
     #always
     #- name: copy program/vivado
@@ -104,6 +104,12 @@
       copy:
         src: "../cli/common/device_dialog_gpu.sh"
         dest: /opt/cli/common/device_dialog_gpu
+        mode: 0755
+      when: common
+    - name: copy common/get_files script
+      copy:
+        src: "../cli/common/get_files.sh"
+        dest: /opt/cli/common/get_files
         mode: 0755
       when: common
 
@@ -424,6 +430,12 @@
         dest: /opt/cli/templates
         mode: 0755
       when: templates and hip
+    - name: Copy vitis templates
+      copy:
+        src: "../cli/templates/vitis"
+        dest: /opt/cli/templates
+        mode: 0755
+      when: templates and vitis
 
     #validate
     - name: copy validate/coyote
