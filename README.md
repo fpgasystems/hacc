@@ -1,7 +1,7 @@
 <!-- <div id="readme" class="Box-body readme blob js-code-block-container">
 <article class="markdown-body entry-content p-3 p-md-6" itemprop="text"> -->
 <p align="right">
-<a href="https://ethz.ch/en.html">ETH Zürich</a>
+<a href="https://github.com/fpgasystems">fpgasystems</a> <a href="https://github.com/fpgasystems/sgrt">SGRT</a>
 </p>
 
 <p align="center">
@@ -47,7 +47,7 @@ Five HACCs have been established at some of world’s most prestigious universit
 * [Infrastructure validation](/docs/infrastructure-validation.md#infrastructure-validation)
 * [Known limitations](docs/known-limitations.md#known-limitations)
 * [Operating the cluster](docs/operating-the-cluster.md#operating-the-cluster)
-* [SGRT](https://github.com/fpgasystems/sgrt)
+* [Systems Group RunTime](https://github.com/fpgasystems/sgrt)
 * [Technical support](docs/technical-support.md)
 * [Vocabulary](docs/vocabulary.md#vocabulary)
 * [Who does what](docs/who-does-what.md#who-does-what)
