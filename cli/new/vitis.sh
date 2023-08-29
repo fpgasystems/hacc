@@ -67,7 +67,7 @@ fi
 
 #catch gh repo create error (DIR has not been created)
 if ! [ -d "$DIR" ]; then
-    echo "Please, start GitHub CLI first using ${bold}gh auth login${normal}"
+    echo "Please, start GitHub CLI first using sgutil set gh"
     echo ""
     exit
 fi
