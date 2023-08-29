@@ -133,9 +133,10 @@ g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
 #commit files
 if [ "$commit" = "1" ]; then 
     cd $DIR
+    #update README.md 
     echo "# "$project_name >> README.md
-    #git add README.md
-    #git commit README.md -m "Adding README.md"
+    #add gitignore
+    echo ".DS_Store" >> .gitignore
     git add .
     git commit -m "First commit"
     git push --set-upstream origin master
