@@ -13,6 +13,7 @@
 
 ### Arguments
 
+* [gh](./sgutil-set-gh.md)
 * [keys](./sgutil-set-keys.md)
 
 <code>-h, --help</code>
