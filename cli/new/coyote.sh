@@ -101,9 +101,6 @@ if ! [ -d "$DIR" ]; then
     exit
 fi
 
-#
-# project_name does not exist
-#mkdir ${DIR}
 # clone repository
 #echo ""
 echo "${bold}Checking out Coyote:${normal}"
