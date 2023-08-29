@@ -74,10 +74,7 @@ if ! [ -d "$DIR" ]; then
     exit
 fi
 
-#copy files
-# project_name does not exist
-#mkdir ${DIR}
-# copy
+#copy template
 cp -rf $CLI_PATH/templates/$WORKFLOW/hello_world/* $DIR
 #compile src
 cd $DIR/src
