@@ -21,16 +21,6 @@ if ! [ -d "$VITIS_DIR" ]; then
     mkdir ${VITIS_DIR}
 fi
 
-##prepare for wget (1)
-#if [ -d "$VITIS_DIR/common" ]; then
-#    rm -rf "$VITIS_DIR/common"
-#fi
-
-##prepare for wget (2)
-#if [ -d "$VITIS_DIR/tmp" ]; then
-#    rm -rf "$VITIS_DIR/tmp"
-#fi
-
 # create project
 echo ""
 echo "${bold}sgutil new vitis${normal}"
@@ -45,34 +35,6 @@ while true; do
     fi
     DIR="$MY_PROJECTS_PATH/$WORKFLOW/$project_name"
     if ! [ -d "$DIR" ]; then
-        ## project_name does not exist
-        #mkdir ${DIR}
-        ##copy vitis common folder from Vitis_Accel_Examples repository (wget)
-        #echo ""
-        #echo "${bold}Checking out Vitis_Accel_Examples/common:${normal}"
-        #echo ""
-        #wget https://github.com/Xilinx/Vitis_Accel_Examples/archive/master.zip -O $VITIS_DIR/master.zip
-        #mkdir $VITIS_DIR/tmp
-        #unzip -q $VITIS_DIR/master.zip -d $VITIS_DIR/tmp
-        #mv -f $VITIS_DIR/tmp/Vitis_Accel_Examples-master/common $VITIS_DIR
-        #rm -rf $VITIS_DIR/tmp
-        #rm $VITIS_DIR/master.zip
-        ##copy
-        #cp -rf $CLI_PATH/templates/$WORKFLOW/$TEMPLATE_NAME/* $DIR
-        ## we only need makefile_us_alveo.mk (for alveos) and makefile_versal_alveo.mk (for versal)
-        #rm $DIR/makefile_versal_ps.mk
-        ##rm $DIR/makefile_zynq7000.mk
-        #rm $DIR/makefile_zynqmp.mk
-        ## adjust Makefile
-        #sed -i "s/$TEMPLATE_NAME/$project_name/" $DIR/Makefile
-        #sed -i "s/$TEMPLATE_NAME/$project_name/" $DIR/makefile_us_alveo.mk
-        #sed -i "s/$TEMPLATE_NAME/$project_name/" $DIR/makefile_versal_alveo.mk
-        ##delete README
-        #rm $DIR/README.rst
-        ##echo "# $project_name" >> README.md
-        ##compile src
-        #cd $DIR/src
-        #g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
         break
     fi
 done
@@ -88,8 +50,6 @@ if [[ $(which gh) ]]; then
         case $yn in
             "y") 
                 echo ""
-                #run user authentication 
-                #gh auth login
                 #create GitHub repository and clone directory
                 gh repo create $project_name --public --clone
                 commit="1"
@@ -105,7 +65,7 @@ if [[ $(which gh) ]]; then
     echo ""
 fi
 
-#catch gh auth login error (DIR has not been created)
+#catch gh repo create error (DIR has not been created)
 if ! [ -d "$DIR" ]; then
     echo "Please, start GitHub CLI first using ${bold}gh auth login${normal}"
     echo ""
