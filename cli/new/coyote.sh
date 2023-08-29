@@ -55,7 +55,7 @@ fi
 
 # create project
 echo ""
-echo "Please, insert a non-existing name for your Coyote project:"
+echo "${bold}Please, insert a non-existing name for your Coyote project:${normal}"
 echo ""
 while true; do
     read -p "" project_name
@@ -65,27 +65,79 @@ while true; do
     fi
     DIR="$MY_PROJECTS_PATH/$WORKFLOW/$project_name"
     if ! [ -d "$DIR" ]; then
-        # project_name does not exist
-        mkdir ${DIR}
-        # clone repository
-        echo ""
-        echo "${bold}Checking out Coyote:${normal}"
-        echo ""
-        cd ${DIR}
-        git clone https://github.com/fpgasystems/Coyote.git
-        mv Coyote/* .
-        rm -rf Coyote
-        #copy template
-        cp -rf $CLI_PATH/templates/$WORKFLOW/hello_world/* $DIR
-        #replace Makefile (main.cpp specific version)
-        rm $DIR/sw/CMakeLists.txt
-        mv $DIR/CMakeLists.txt $DIR/sw
-        #compile create config
-        cd $DIR/src
-        g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
         break
     fi
 done
+
+#add to GitHub if gh is installed
+commit="0"
+if [[ $(which gh) ]]; then
+    echo ""
+    echo "${bold}Would you like to add the repository to your GitHub account (y/n)?${normal}"
+    while true; do
+        read -p "" yn
+        case $yn in
+            "y") 
+                echo ""
+                #create GitHub repository and clone directory
+                gh repo create $project_name --public --clone
+                commit="1"
+                break
+                ;;
+            "n") 
+                #create plain directory
+                mkdir $DIR
+                break
+                ;;
+        esac
+    done
+    echo ""
+fi
+
+#catch gh repo create error (DIR has not been created)
+if ! [ -d "$DIR" ]; then
+    echo "Please, start GitHub CLI first using sgutil set gh"
+    echo ""
+    exit
+fi
+
+#
+# project_name does not exist
+#mkdir ${DIR}
+# clone repository
+#echo ""
+echo "${bold}Checking out Coyote:${normal}"
 echo ""
-echo "The project $MY_PROJECTS_PATH/$WORKFLOW/$project_name has been created!"
+cd ${DIR}
+git clone https://github.com/fpgasystems/Coyote.git
+mv Coyote/* .
+rm -rf Coyote
+#copy template
+cp -rf $CLI_PATH/templates/$WORKFLOW/hello_world/* $DIR
+#replace Makefile (main.cpp specific version)
+rm $DIR/sw/CMakeLists.txt
+mv $DIR/CMakeLists.txt $DIR/sw
+#compile create config
+cd $DIR/src
+g++ -std=c++17 create_config.cpp -o ../create_config >&/dev/null
+
+#commit files
+if [ "$commit" = "1" ]; then 
+    cd $DIR
+    #update README.md 
+    if [ -e README.md ]; then
+        rm README.md
+    fi
+    echo "# "$project_name >> README.md
+    #add gitignore
+    echo ".DS_Store" >> .gitignore
+    #add, commit, push
+    git add .
+    git commit -m "First commit"
+    git push --set-upstream origin master
+    #echo ""
+fi
+
+echo ""
+echo "The project ${bold}$MY_PROJECTS_PATH/$WORKFLOW/$project_name${normal} has been created!"
 echo ""
