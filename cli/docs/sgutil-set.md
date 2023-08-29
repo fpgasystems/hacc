@@ -8,7 +8,7 @@
 
 <code>sgutil set [arguments [flags]] [--help]</code>
 <p>
-  &nbsp; &nbsp; Changes the configuration of your server or given device.
+  &nbsp; &nbsp; Devices and host configuration.
 </p>
 
 ### Arguments

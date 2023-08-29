@@ -719,7 +719,7 @@ set_help() {
     echo ""
     echo "${bold}sgutil set [arguments [flags]] [--help]${normal}"
     echo ""
-    echo "Changes the configuration of your server or given device."
+    echo "Devices and host configuration."
     echo ""
     echo "ARGUMENTS:"
     echo "   keys            - Creates your RSA key pairs and adds to authorized_keys and known_hosts."
