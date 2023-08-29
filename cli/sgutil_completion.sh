@@ -140,6 +140,9 @@ _sgutil_completions()
                     ;;
                 set)
                     case ${COMP_WORDS[COMP_CWORD-1]} in
+                        gh)
+                            COMPREPLY=($(compgen -W "--help" -- ${cur})) 
+                            ;;
                         keys)
                             COMPREPLY=($(compgen -W "--help" -- ${cur})) 
                             ;;

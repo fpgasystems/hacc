@@ -722,8 +722,23 @@ set_help() {
     echo "Devices and host configuration."
     echo ""
     echo "ARGUMENTS:"
+    echo "   gh              - Enables GitHub CLI on your host."
     echo "   keys            - Creates your RSA key pairs and adds to authorized_keys and known_hosts."
     #echo "   write           - Assigns writing permissions on a given device."
+    echo ""
+    echo "   -h, --help      - Help to use this command."
+    echo ""
+    exit 1
+}
+
+set_gh_help() {
+    echo ""
+    echo "${bold}sgutil set gh [--help]${normal}"
+    echo ""
+    echo "Enables GitHub CLI on your host."
+    echo ""
+    echo "FLAGS:"
+    echo "   This command has no flags."
     echo ""
     echo "   -h, --help      - Help to use this command."
     echo ""
@@ -1126,6 +1141,13 @@ case "$command" in
     case "$arguments" in
       -h|--help)
         set_help
+        ;;
+      gh)
+        if [ "$#" -ne 2 ]; then
+          set_gh_help
+          exit 1
+        fi
+        eval "$CLI_PATH/set/gh"
         ;;
       keys)
         if [ "$#" -ne 2 ]; then

@@ -966,6 +966,12 @@
     dest: /opt/cli/set/keys
     mode: 0755
 
+- name: copy set/gh script
+  copy:
+    src: "../../cli/set/gh.sh"
+    dest: /opt/cli/set/gh
+    mode: 0755
+
 #validate -----------------------------------------------------------------------------------
 
 - name: copy iperf script
