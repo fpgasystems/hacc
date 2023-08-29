@@ -21,15 +21,15 @@ if ! [ -d "$VITIS_DIR" ]; then
     mkdir ${VITIS_DIR}
 fi
 
-#prepare for wget (1)
-if [ -d "$VITIS_DIR/common" ]; then
-    rm -rf "$VITIS_DIR/common"
-fi
+##prepare for wget (1)
+#if [ -d "$VITIS_DIR/common" ]; then
+#    rm -rf "$VITIS_DIR/common"
+#fi
 
-#prepare for wget (2)
-if [ -d "$VITIS_DIR/tmp" ]; then
-    rm -rf "$VITIS_DIR/tmp"
-fi
+##prepare for wget (2)
+#if [ -d "$VITIS_DIR/tmp" ]; then
+#    rm -rf "$VITIS_DIR/tmp"
+#fi
 
 # create project
 echo ""
@@ -88,6 +88,8 @@ if [[ $(which gh) ]]; then
         case $yn in
             "y") 
                 echo ""
+                #run user authentication 
+                #gh auth login
                 #create GitHub repository and clone directory
                 gh repo create $project_name --public --clone
                 commit="1"
@@ -101,6 +103,23 @@ if [[ $(which gh) ]]; then
         esac
     done
     echo ""
+fi
+
+#catch gh auth login error (DIR has not been created)
+if ! [ -d "$DIR" ]; then
+    echo "Please, start GitHub CLI first using ${bold}gh auth login${normal}"
+    echo ""
+    exit
+fi
+
+#prepare for wget (1)
+if [ -d "$VITIS_DIR/common" ]; then
+    rm -rf "$VITIS_DIR/common"
+fi
+
+#prepare for wget (2)
+if [ -d "$VITIS_DIR/tmp" ]; then
+    rm -rf "$VITIS_DIR/tmp"
 fi
 
 #copy files
@@ -137,6 +156,7 @@ if [ "$commit" = "1" ]; then
     echo "# "$project_name >> README.md
     #add gitignore
     echo ".DS_Store" >> .gitignore
+    #add, commit, push
     git add .
     git commit -m "First commit"
     git push --set-upstream origin master
