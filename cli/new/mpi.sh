@@ -6,10 +6,12 @@ normal=$(tput sgr0)
 #constants
 CLI_PATH="$(dirname "$(dirname "$0")")"
 MY_PROJECTS_PATH=$($CLI_PATH/common/get_constant $CLI_PATH MY_PROJECTS_PATH)
+PROCESSES_PER_HOST=2
 WORKFLOW="mpi"
 
-#constants
-PROCESSES_PER_HOST=2
+#get hostname
+url="${HOSTNAME}"
+hostname="${url%%.*}"
 
 # create my_projects directory
 DIR="$MY_PROJECTS_PATH"
