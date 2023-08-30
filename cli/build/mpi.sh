@@ -68,8 +68,8 @@ else
         exit
     fi
     #header (2/2)
-    echo "${bold}sgutil build $WORKFLOW${normal}"
     echo ""
+    echo "${bold}sgutil build $WORKFLOW${normal}"
     #project_dialog (forgotten mandatory 1)
     if [[ $project_found = "0" ]]; then
         #echo ""
