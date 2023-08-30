@@ -22,15 +22,15 @@
     examine: false
     get: false
     hip: false
-    mpi: false
+    mpi: true
     program: false
     reboot: false
     run: false
     set: false
     sgutil: false
-    templates: true
+    templates: false
     validate: false
-    vitis: true
+    vitis: false
   tasks:
     #always
     #- name: copy program/vivado
@@ -406,6 +406,12 @@
       copy:
         src: "../cli/set/keys.sh"
         dest: /opt/cli/set/keys
+        mode: 0755
+      when: set
+    - name: copy set/gh
+      copy:
+        src: "../cli/set/gh.sh"
+        dest: /opt/cli/set/gh
         mode: 0755
       when: set
 
