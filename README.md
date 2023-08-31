@@ -50,7 +50,9 @@ Five HACCs have been established at some of world’s most prestigious universit
 * [Who does what](docs/who-does-what.md#who-does-what)
 
 # Releases
-We use [Ansible Automation Platform (AAP)](docs/vocabulary.md#ansible-automation-platform-aap) for managing Xilinx’s tools versioning according to [XRT’s release schedule](https://github.com/Xilinx/XRT/releases). All servers equipped with an FPGA are associated with a unique software version, including XRT’s Xilinx Board Utility (xbutil), Xilinx tools (Vivado, Vitis_HLS, Vitis), and the flashable partitions (or base shell) running on the FPGA.
+
+## Xilinx Tools
+Xilinx’s tools versioning is according to [XRT’s release schedule](https://github.com/Xilinx/XRT/releases). All servers equipped with Alveo or Versal boards are associated with a unique Xilinx software version, including XRT’s Xilinx Board Utility (xbutil), Xilinx tools (Vivado, Vitis_HLS, Vitis), and the flashable partitions (or base shell) running on the reconfigurable devices.
 
 <table class="tg">
 <thead>
@@ -105,6 +107,11 @@ We use [Ansible Automation Platform (AAP)](docs/vocabulary.md#ansible-automation
 <tfoot><tr><td colspan="5">&#9675; Existing release.</td></tr></tfoot>
 <tfoot><tr><td colspan="5">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
 </table>
+
+## HIP and ROCm Tools
+For GPU accelerators, HIP and ROCm tools versioning is according to [HIP release schedule](https://github.com/ROCm-Developer-Tools/HIP/releases):
+
+
 
 # License
 
