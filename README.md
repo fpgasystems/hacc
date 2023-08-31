@@ -131,14 +131,8 @@ For GPU accelerators, HIP and ROCm tools versioning is according to [HIP release
 </thead>
 <tbody>
   <tr>
-    <td class="tg-0pky"><div align="center">BUILD</div></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" style="text-align:center"> </td>
-  </tr>
-  <tr>
     <td class="tg-0pky"><div align="center">HACC BOXES</div></td>
-    <td class="tg-0pky" align="center">&#9675;</td>
+    <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky">Version 1.1</td>
   </tr>
