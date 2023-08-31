@@ -6,7 +6,7 @@
 
 # Features
 
-## [Systems Group RunTime](https://github.com/fpgasystems/sgrt/tree/main)
+## Systems Group RunTime
 By using [Systems Group RunTime](https://github.com/fpgasystems/sgrt/tree/main), you can easily:
 
 * Validate the basic HACC infrastructure functionality,
