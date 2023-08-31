@@ -52,7 +52,7 @@ Five HACCs have been established at some of world’s most prestigious universit
 # Releases
 
 ## Xilinx Tools
-Xilinx’s tools versioning is according to [XRT’s release schedule](https://github.com/Xilinx/XRT/releases). All servers equipped with Alveo or Versal boards are associated with a unique Xilinx software version, including XRT’s Xilinx Board Utility (xbutil), Xilinx tools (Vivado, Vitis_HLS, Vitis), and the flashable partitions (or base shell) running on the reconfigurable devices.
+For ACAP and FPGAs, Xilinx’s tools versioning is according to [XRT’s release schedule](https://github.com/Xilinx/XRT/releases). All servers equipped with Alveo or Versal boards are associated with a unique Xilinx software version, including XRT’s Xilinx Board Utility (xbutil), Xilinx tools (Vivado, Vitis_HLS, Vitis), and the flashable partitions (or base shell) running on the reconfigurable devices.
 
 <table class="tg">
 <thead>
@@ -103,6 +103,12 @@ Xilinx’s tools versioning is according to [XRT’s release schedule](https://g
     <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky">xilinx_vck5000_gen4x8_qdma_base_2</td>
   </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">HACC BOXES</div></td>
+    <td class="tg-0pky" align="center">&#9675;</td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky">xilinx_u55c_gen3x16_xdma_base_3<br>xilinx_vck5000_gen4x8_qdma_base_2</td>
+  </tr>
 </tbody>
 <tfoot><tr><td colspan="5">&#9675; Existing release.</td></tr></tfoot>
 <tfoot><tr><td colspan="5">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
@@ -111,7 +117,35 @@ Xilinx’s tools versioning is according to [XRT’s release schedule](https://g
 ## HIP and ROCm Tools
 For GPU accelerators, HIP and ROCm tools versioning is according to [HIP release schedule](https://github.com/ROCm-Developer-Tools/HIP/releases):
 
-
+<table class="tg">
+<thead>
+  <tr style="text-align:center">
+    <th class="tg-0pky" rowspan="2"><div align="center">Cluster</div></th>
+    <th class="tg-0pky" colspan="2" style="text-align:center"><div align="center">HIP Release</div></th>
+    <th class="tg-c3ow" rowspan="2">ROCm RunTime</th>
+  </tr>
+  <tr>
+    <th class="tg-0pky" style="text-align:center">5.4.1</th>
+    <th class="tg-0pky" style="text-align:center">5.4.3</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky"><div align="center">BUILD</div></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" style="text-align:center"> </td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">HACC BOXES</div></td>
+    <td class="tg-0pky" align="center">&#9675;</td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky">Version 1.1</td>
+  </tr>
+</tbody>
+<tfoot><tr><td colspan="5">&#9675; Existing release.</td></tr></tfoot>
+<tfoot><tr><td colspan="5">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
+</table>
 
 # License
 
