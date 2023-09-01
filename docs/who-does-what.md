@@ -8,10 +8,10 @@
 The following people are relevant for our ETHZ-Heterogeneous Compute Accelerated Cluster (ETHZ-HACC) project. **For specific technical issues or requests,** please follow our dedicated [Technical support](https://github.com/fpgasystems/hacc/blob/main/docs/technical-support.md#technical-support) page and avoid using the references below.
 
 ## AMD University Program coordinators
-* [Cathal McCabe](https://www.linkedin.com/in/cathalmccabe/), [Xilinx University Program](https://www.xilinx.com/support/university/XUP-HACC.html) Manager EMEA, AMD
+* [Cathal McCabe](https://www.linkedin.com/in/cathalmccabe/), [AMD University Program](https://www.xilinx.com/support/university/XUP-HACC.html) Manager EMEA, AMD
 * [Gustavo Alonso](https://systems.ethz.ch/people/profile.gustavo-alonso.html), Systems Group leader, ETH Zürich 
 * [Javier Moya](https://systems.ethz.ch/people/profile.Mjk5NjU5.TGlzdC8zODkxLDEyOTU2NDI2OTI=.html), ETHZ-[HACC](../README.md) coordinator and [Systems Group RunTime (SGRT)](https://github.com/fpgasystems/sgrt) project leader, ETH Zürich 
-* [Mario Ruiz](https://www.linkedin.com/in/mario-ruiz-noguera/), [Xilinx University Program](https://www.xilinx.com/support/university/XUP-HACC.html) coordinator, AMD
+* [Mario Ruiz](https://www.linkedin.com/in/mario-ruiz-noguera/), [AMD University Program](https://www.xilinx.com/support/university/XUP-HACC.html) coordinator, AMD
 * [Michaela Blott](https://www.linkedin.com/in/michaelablott/?originalSubdomain=ie), Senior Fellow, AMD
 
 ## Operations
