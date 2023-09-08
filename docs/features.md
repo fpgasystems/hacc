@@ -9,15 +9,16 @@
 ## Systems Group RunTime
 By using [Systems Group RunTime](https://github.com/fpgasystems/sgrt/tree/main), you can easily:
 
-* Validate the basic HACC infrastructure functionality,
-* Create your own projects based on multiple-choice dialogs and templates—helping you to develop your accelerated applications more quickly, 
-* [GitHub CLI](https://cli.github.com) integration,
-* Manage any type of accelerators (ACAPs, FPGAs, multi-core CPUs, GPUs) with a device index,
-* Transition between [Vivado and Vitis workflows](./vocabulary.md#vivado-and-vitis-workflows) without the need of rebooting the system,
-* Design, build, and deploy modern FPGA-accelerated applications on top of our [Infrastructure for heterogeneous architectures and hardware acceleration](https://systems.ethz.ch/research/data-processing-on-modern-hardware/hardware-acceleration-infrastructure.html) platform (including ACCL, Coyote, or EasyNet),
-* Learn about model-based design by making use of our *out-of-the-box* examples,
-* Easily create your HIP/ROCm GPU applications with *sgutil new-build-run* hip commands,
-* *Et cetera.*
+* Validate the fundamental HACC infrastructure functionality of your cluster, ensuring its reliability and performance.
+* Expedite project creation through intuitive multiple-choice dialogs and templates, streamlining the development of your accelerated applications.
+* Seamlessly integrate with [GitHub CLI](https://cli.github.com) for efficient version control and collaboration.
+* Effectively manage ACAPs, FPGAs, multi-core CPUs, and GPUs, all through a unified device index.
+* Transition between [Vivado and Vitis workflows](./vocabulary.md#vivado-and-vitis-workflows) effortlessly, eliminating the need for system reboots and enhancing your development agility.
+* Design, build, and deploy modern FPGA-accelerated applications with ease, leveraging your own or third-party integrations, for instance, ACCL, Coyote, or EasyNet (please refer to our [Infrastructure for heterogeneous architectures and hardware acceleration](https://systems.ethz.ch/research/data-processing-on-modern-hardware/hardware-acceleration-infrastructure.html)).
+* Explore model-based design principles with readily available *out-of-the-box* examples.
+* Simplify the creation of HIP/ROCm GPU applications using the *sgutil new-build-run hip* commands.
+
+<!-- This should be consistent with features on the SGRT repository -->
 
 ## Managed platform
 We use [Infrastructure as Code (IaC)](./vocabulary.md#infrastructure-as-code-iac) and [Ansible Automation Platform (AAP)](./vocabulary.md#ansible-automation-platform-aap) to [operate the cluster](../docs/operating-the-cluster.md#operating-the-cluster) efficiently. Under the scope of a [DevOps](./vocabulary.md#devops) methodology, we achieve the following: 
