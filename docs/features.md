@@ -10,13 +10,16 @@
 By using [Systems Group RunTime](https://github.com/fpgasystems/sgrt/tree/main), you can easily:
 
 * Validate the basic HACC infrastructure functionality,
-* Transition between [Vivado and Vitis workflows](./vocabulary.md#vivado-and-vitis-workflows) without the need of rebooting the system,
 * Create your own projects based on multiple-choice dialogs and templates—helping you to develop your accelerated applications more quickly, 
-* Learn about model-based design by making use of our *out-of-the-box* examples,
+* [GitHub CLI](https://cli.github.com) integration,
+* Manage any type of accelerators (ACAPs, FPGAs, multi-core CPUs, GPUs) with a device index,
+* Transition between [Vivado and Vitis workflows](./vocabulary.md#vivado-and-vitis-workflows) without the need of rebooting the system,
 * Design, build, and deploy modern FPGA-accelerated applications on top of our [Infrastructure for heterogeneous architectures and hardware acceleration](https://systems.ethz.ch/research/data-processing-on-modern-hardware/hardware-acceleration-infrastructure.html) platform (including ACCL, Coyote, or EasyNet),
+* Learn about model-based design by making use of our *out-of-the-box* examples,
+* Easily create your HIP/ROCm GPU applications with *sgutil new-build-run* hip commands,
 * *Et cetera.*
 
-## Managed
+## Managed platform
 We use [Infrastructure as Code (IaC)](./vocabulary.md#infrastructure-as-code-iac) and [Ansible Automation Platform (AAP)](./vocabulary.md#ansible-automation-platform-aap) to [operate the cluster](../docs/operating-the-cluster.md#operating-the-cluster) efficiently. Under the scope of a [DevOps](./vocabulary.md#devops) methodology, we achieve the following: 
 
 * Continuos delivery,
