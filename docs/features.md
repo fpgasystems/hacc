@@ -9,7 +9,7 @@
 ## Systems Group RunTime
 By using [Systems Group RunTime](https://github.com/fpgasystems/sgrt/tree/main), you can easily:
 
-* Validate the fundamental HACC infrastructure functionality of your cluster, ensuring its reliability and performance.
+* Validate the fundamental infrastructure functionality of ETHZ-HACC, ensuring its reliability and performance.
 * Expedite project creation through intuitive multiple-choice dialogs and templates, streamlining the development of your accelerated applications.
 * Seamlessly integrate with [GitHub CLI](https://cli.github.com) for efficient version control and collaboration.
 * Effectively manage ACAPs, FPGAs, multi-core CPUs, and GPUs, all through a unified device index.
