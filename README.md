@@ -151,10 +151,10 @@ If you use this repository in your work, we kindly request that you cite it as f
 ### BibTeX
 ```
 @misc{hacc-ethz,
-    author = {Javier Moya (jmoya82)},
-    title = {Heterogeneous Accelerated Compute Cluster - ETH Zürich},
+    author = {Javier Moya},
+    title = {{H}eterogeneous {A}ccelerated {C}ompute {C}luster - {ETH Zürich}},
     howpublished = {\url{https://github.com/fpgasystems/hacc}},
-    year = {2021--\DTMyear},
+    year = {2021},
 }
 ```
 
