@@ -37,14 +37,17 @@ Five HACCs have been established at some of world’s most prestigious universit
 ## Sections
 * [Account renewal](/docs/account-renewal.md#account-renewal)
 * [Booking system](/docs/booking-system.md#booking-system)
+* [Citation](#citation)
 * [Features](docs/features.md#features)
 * [First steps](docs/first-steps.md#first-steps)
 * [Get started](https://www.amd-haccs.io/get-started.html)
 * [Hardware acceleration platform](docs/hardware-acceleration-platform.md#hardware-acceleration-platform)
 * [Infrastructure](docs/infrastructure.md#infrastructure)
 * [Known limitations](docs/known-limitations.md#known-limitations)
+* [License](#license)
 * [Operating the cluster](docs/operating-the-cluster.md#operating-the-cluster)
 * [Playbooks 🔒](https://3.basecamp.com/5241674/buckets/25107010/documents/6507506374)
+* [Releases](#releases)
 * [Systems Group RunTime (SGRT)](https://github.com/fpgasystems/sgrt)
 * [Technical support](docs/technical-support.md)
 * [Vocabulary](docs/vocabulary.md#vocabulary)
@@ -145,7 +148,7 @@ For GPU accelerators, HIP and ROCm tools versioning is according to [HIP release
 # Citation
 If you use this repository in your work, we kindly request that you cite it as follows:
 
-### BibTeX
+## BibTeX
 ```
 @misc{repository_key,
     author = {Javier Moya (jmoya82)},
