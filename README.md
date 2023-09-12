@@ -142,6 +142,21 @@ For GPU accelerators, HIP and ROCm tools versioning is according to [HIP release
 <tfoot><tr><td colspan="5">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
 </table>
 
+## Citation
+If you use this repository in your work, we kindly request that you cite it as follows:
+
+### BibTeX
+```
+@misc{repository_key,
+    author = {Javier Moya (jmoya82)},
+    title = {Heterogeneous Accelerated Compute Cluster - ETH Zürich},
+    howpublished = {\url{https://github.com/fpgasystems/hacc}},
+    year = {2021--\DTMyear},,
+}
+```
+
+Please note that to properly format the citation and display the time period, you will need to have the *datetime2* LaTeX package installed in your LaTeX distribution.
+
 # License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
