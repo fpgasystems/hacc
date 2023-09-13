@@ -148,7 +148,6 @@ For GPU accelerators, HIP and ROCm tools versioning is according to [HIP release
 # Citation
 If you use this repository in your work, we kindly request that you cite it as follows:
 
-### BibTeX
 ```
 @misc{hacc-ethz,
     author = {Javier Moya},
@@ -157,8 +156,6 @@ If you use this repository in your work, we kindly request that you cite it as f
     year = {2021},
 }
 ```
-
-Please note that to properly format the citation and display the time period, you will need to have the *datetime2* LaTeX package installed in your LaTeX distribution.
 
 # License
 
