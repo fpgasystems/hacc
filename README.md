@@ -147,7 +147,7 @@ For GPU accelerators, HIP and ROCm tools versioning is according to [HIP release
 
 # Citation
 
-[![DOI](https://zenodo.org/badge/516718972.svg)](https://zenodo.org/badge/latestdoi/516718972)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8344513.svg)](https://doi.org/10.5281/zenodo.8344513)
 
 If you use this repository in your work, we kindly request that you cite it as follows:
 
@@ -156,7 +156,7 @@ If you use this repository in your work, we kindly request that you cite it as f
     author = {Javier Moya, Matthias Gabathuler, Mario Ruiz, Gustavo Alonso},
     title = {{H}eterogeneous {A}ccelerated {C}ompute {C}luster - {ETH Zürich}},
     howpublished = {\url{https://github.com/fpgasystems/hacc}},
-    doi = {10.5281/zenodo.8340449},
+    doi = {10.5281/zenodo.8344513},
     year = {2022},
 }
 ```
