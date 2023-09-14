@@ -17,9 +17,9 @@ Before continuing, please make sure you have been already accepted on ETH Züric
 ## Setting your passwords
 Once your ETH account has been created, you will need to generate two different passwords: an LDAP/Active directory password and a RADIUS password. The first one is part of your main ETH credentials; the *remote authentication dial-in user service (RADIUS)* password is used for [setting your remote secure access](#setting-your-remote-secure-access). Please, follow these steps to generate them:
 
-1. Visit the ETH Zürich [Web Center](https://iam.password.ethz.ch/authentication/login_en.html),
-2. Click on *Forgot your password* to receive a temporal password to use with [Web Center](https://iam.password.ethz.ch/authentication/login_en.html),
-3. Log in to [Web Center](https://iam.password.ethz.ch/authentication/login_en.html) and click on *Self service/Change password*,
+1. Visit the ETH Zürich [Web Center,](https://iam.password.ethz.ch/authentication/login_en.html)
+2. Click on *Forgot your password* to receive a temporal password to use with Web Center,
+3. Log in to Web Center and click on *Self service/Change password*,
 4. Select the *LDAPS* and *Active Directory* checkboxes and introduce your new password, and
 5. Select the *Radius* checkbox and introduce your new password.
 
