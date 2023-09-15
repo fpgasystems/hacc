@@ -26,10 +26,17 @@ cp ../docs/*.md $DIR
 sed -i '' 's/\[\([^]]*\)\](#\([^)]*\))/\1/g' vocabulary.md
 
 for file in *.md; do
-  # Check if the file exists and is a regular file
   if [[ -f "$file" ]]; then
-    #removing markdown links e.g. [Devops](#devops)
+    #removing markdown links, e.g. [Devops](#devops)
     sed -i '' 's/\[\([^]]*\)\](#\([^)]*\))/\1/g' "$file"
-    #echo "Processed $file"
+    #removing https links, e.g. [Devops](#devops)    
+    sed -i '' 's/\[\([^]]*\)\](https:\/\/[^)]*)/\1/g' "$file"
+    #remove html tags, e.g. <AnyWord>
+    sed -i '' 's/<[^>]*>//g' "$file"
+    #remove "Back to" links
+    #sed -i '' 's/^[^#]*#/#/g' "$file"
   fi
 done
+
+#remove "Back to" links
+awk '/^# / {p=1} p' booking-system.md > newfile.md
