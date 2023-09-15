@@ -4,8 +4,6 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #constants
-#PATH="$(dirname "$0")" #"$(dirname "$(dirname "$0")")"
-
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cd $DIR
@@ -13,16 +11,9 @@ cd $DIR
 #remove all md
 rm *.md
 
-#echo $DIR
-
-#echo ""
-#echo "Copying /docs:"
 #copy all md
 cp ../docs/*.md $DIR
 
-
-#grep -v '#([^)]*)' ./vocabulary.md > ./new_vocabulary.md
-#sed -i 's/\[\([^]]*\)\](#\([^)]*\))/\1/g' vocabulary.md
 sed -i '' 's/\[\([^]]*\)\](#\([^)]*\))/\1/g' vocabulary.md
 
 for file in *.md; do
@@ -35,8 +26,11 @@ for file in *.md; do
     sed -i '' 's/<[^>]*>//g' "$file"
     #remove "Back to" links
     #sed -i '' 's/^[^#]*#/#/g' "$file"
+    #remove "Back to" links
+    #awk '/^# / {p=1} p' booking-system.md > newfile.md
+    #sed -i '/Back to top/ { :a; N; /Back to top\n$/d; ba; }' "$file"
+    grep -v '^Back to top$' "$file" > temp.md && mv temp.md "$file"
+    #remove blank lines on tope
+    awk 'NF{p=1} p' "$file" > temp.md && mv temp.md "$file"
   fi
 done
-
-#remove "Back to" links
-awk '/^# / {p=1} p' booking-system.md > newfile.md

@@ -1,11 +1,5 @@
-<div id="readme" class="Box-body readme blob js-code-block-container">
-<article class="markdown-body entry-content p-3 p-md-6" itemprop="text">
-<p align="right">
-<a href="https://github.com/fpgasystems/hacc#--heterogenous-accelerated-compute-cluster">Back to top</a>
-</p>
-
 # Booking system 
-Before connecting to any HACC servers, you must make a reservation through the [booking system](https://hacc-booking.ethz.ch/login.php). To use the booking system, please remember the following:
+Before connecting to any HACC servers, you must make a reservation through the booking system. To use the booking system, please remember the following:
 
 * You must be connected to the ETH network in order to access it, and
 * Use your **main LDAP/Active directory password** as a part of your credentials.
