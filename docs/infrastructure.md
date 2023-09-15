@@ -5,144 +5,18 @@
 </p>
 
 # Infrastructure
-ETHZ-HACC comprises high-end servers, GPUs, reconfigurable accelerator cards, and high-speed networking. Each accelerator card has all of its Ethernet interfaces connected to a 100 GbE leaf switch to allow exploration of arbitrary network topologies for distributed computing. Additionally, we are offering a build server with development and bitstream compilation purposes. <!-- Our HACC is provisioned and managed based on [Infrastructure as Code](../docs/vocabulary.md#infrastructure-as-code) using [Ansible](../docs/vocabulary.md#ansible). -->
+ETHZ-HACC comprises high-end servers, GPUs, reconfigurable accelerator cards, and high-speed networking. Each accelerator card has all of its Ethernet interfaces connected to a 100 GbE leaf switch to allow exploration of arbitrary network topologies for distributed computing. Additionally, we are offering a build server with development and bitstream compilation purposes.
 
 ![ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.](../imgs/infrastructure.png "ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.")
 *ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.*
 
 There are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including GPUs, FPGAs, and ACAPs (please, see the section [HACC boxes architecture](#hacc-boxes-architecture)). In total, ETHZ-HACC counts twelve GPUs, thirty-one Alveo data center accelerator cards, and seven Versal cards. The following tables give an overview of the **server names** and their **resources:**
 
-<!-- | Cluster | # instances | Booking | Names              | Examples                            |
-|---------|-------------|---------|--------------------|-------------------------------------|
-| Build   | 1           | No      | alveo-build-01     | ssh USERNAME@alveo-build-01.ethz.ch |
-| U250    | 6           | Yes     | alveo-u250-[01:06] | ssh USERNAME@alveo-u250-01.ethz.ch  |
-| U280    | 4           | Yes     | alveo-u280-[01:04] | ssh USERNAME@alveo-u280-01.ethz.ch  |
-| U50D    | 4           | Yes     | alveo-u50d-[01:04] | ssh USERNAME@alveo-u50d-01.ethz.ch  |
-| U55C    | 10          | Yes     | alveo-u55c-[01:10] | ssh USERNAME@alveo-u55c-01.ethz.ch  |
-| Versal  | 1           | Yes     | versal-vck5000-01  | ssh USERNAME@versal-vck5000.ethz.ch | -->
-
 ![ETHZ-HACC server names.](../imgs/server-names.png "ETHZ-HACC server names.")
 *ETHZ-HACC server names.*
 
 ![ETHZ-HACC resources.](../imgs/resources.png "ETHZ-HACC resources.")
 *ETHZ-HACC resources. On the Type - Model column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale).*
-
-<!-- <table>
-<thead>
-  <tr>
-    <th rowspan="2">Cluster</th>
-    <th colspan="4">High-end servers</th>
-    <th colspan="3">Xilinx accelerator card</th>
-    <th colspan="5">FPGA/ACAP</th>
-  </tr>
-  <tr>
-    <th>Family</th>
-    <th>Memory</th>
-    <th>CPU</th>
-    <th>SSD</th>
-    <th>Family</th>
-    <th>DDR</th>
-    <th>FPGA/ACAP</th>
-    <th>LUTs</th>
-    <th>Registers</th>
-    <th>DSPs</th>
-    <th>RAM</th>
-    <th>HBM2</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Build</td>
-    <td>PowerEdge R740</td>
-    <td>394 GB</td>
-    <td>80</td>
-    <td>3 TB</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>U250</td>
-    <td>PowerEdge R740</td>
-    <td>128 GB</td>
-    <td>16</td>
-    <td>200/300 GB</td>
-    <td>Alveo U250</td>
-    <td>64 GB</td>
-    <td>VU13P</td>
-    <td>1’728 K</td>
-    <td>3’456 K</td>
-    <td>12’288</td>
-    <td>UltraRAM: 368.0 Mb</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td>U280</td>
-    <td>PowerEdge R740</td>
-    <td>128 GB</td>
-    <td>16</td>
-    <td>200/300 GB</td>
-    <td>Alveo U280</td>
-    <td>32 GB</td>
-    <td>VU37P</td>
-    <td>1’304 K</td>
-    <td>2’607 K</td>
-    <td>9’024</td>
-    <td>-BRAM: 70.9 Mb<br>-UltraRAM: 270.0 Mb</td>
-    <td>8 GB</td>
-  </tr>
-  <tr>
-    <td>U50D</td>
-    <td>AMD EPYC 7302</td>
-    <td>64 GB</td>
-    <td>32</td>
-    <td>480 GB</td>
-    <td>Alveo U50D</td>
-    <td>-</td>
-    <td>VU35P</td>
-    <td>872 K</td>
-    <td>1’743 K</td>
-    <td>5’952</td>
-    <td>-Distributed RAM: 24.6 Mb<br>-BRAM: 47.3 Mb<br>-UltraRAM: 180.0 Mb</td>
-    <td>8 GB</td>
-  </tr>
-  <tr>
-    <td>U55C</td>
-    <td>AMD EPYC 7302</td>
-    <td>64 GB</td>
-    <td>32</td>
-    <td>1.2 TB</td>
-    <td>Alveo U55C</td>
-    <td>-</td>
-    <td>VU47P</td>
-    <td>1’304 K</td>
-    <td>2’607 K</td>
-    <td>9’024</td>
-    <td>-Distributed RAM: 36.7 Mb<br>-BRAM: 70.9 Mb<br>-UltraRAM: 270.0 Mb</td>
-    <td>16 GB</td>
-  </tr>
-  <tr>
-    <td>Versal</td>
-    <td>PowerEdge R740</td>
-    <td>128 GB</td>
-    <td>16</td>
-    <td>200 GB</td>
-    <td>Versal VCK5000</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-</tbody>
-</table> -->
 
 ## *Build cluster*
 We are offering a *build cluster* for development and bitstream compilation purposes. Multiple users can access this machine simultaneously without booking it first. Please only use the HACC build servers if you do not have access to similar resources at your research institution: too many users running large jobs on this machine will likely cause builds to run slowly—or sometimes to fail. Also, avoid using the build servers for debugging or simulating your hardware.

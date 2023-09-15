@@ -105,6 +105,3 @@ You are ready to go! **After validating the Xilinx accelerator card, we recommen
 
 ## References
 * [1] [Remote Access by Secure Shell (SSH) using a jump host](https://www.isg.inf.ethz.ch/Main/HelpRemoteAccessSSH)
-
-<!-- https://scicomp.ethz.ch/wiki/Accessing_the_cluster
-https://scicomp.ethz.ch/wiki/Accessing_the_clusters#VPN -->

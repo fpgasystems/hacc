@@ -28,11 +28,3 @@ We use [Infrastructure as Code (IaC)](./vocabulary.md#infrastructure-as-code-iac
 * Use declarative definition files helping to document the cluster,
 * Easily follow Xilinx’s tools versioning release schedule, and
 * Deliver stable tests environments rapidly at scale.
-
-<!-- ## You are welcome
-We are glad and welcome you every time you login to one of our servers. Behind the scenes, our *welcome_msg* script performs the following functions:
-
-* Runs a sanity check to verify the correct functioning of the operating system, as well as hardware and software related to Xilinx accelerators,
-* Helps you to choose your environement regarding [Vivado and Vitis workflows](./vocabulary.md#vivado-and-vitis-workflows),
-* It gives you derived information regarding the active *Xilinx release branch, tools, and flashable partitions running on FPGA,* as well as the network information that might be relevant for your accelerated applications,
-* *Et cetera.* -->
