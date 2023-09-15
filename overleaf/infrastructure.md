@@ -1,142 +1,16 @@
 # Infrastructure
-ETHZ-HACC comprises high-end servers, GPUs, reconfigurable accelerator cards, and high-speed networking. Each accelerator card has all of its Ethernet interfaces connected to a 100 GbE leaf switch to allow exploration of arbitrary network topologies for distributed computing. Additionally, we are offering a build server with development and bitstream compilation purposes. 
+ETHZ-HACC comprises high-end servers, GPUs, reconfigurable accelerator cards, and high-speed networking. Each accelerator card has all of its Ethernet interfaces connected to a 100 GbE leaf switch to allow exploration of arbitrary network topologies for distributed computing. Additionally, we are offering a build server with development and bitstream compilation purposes.
 
 ![ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.](../imgs/infrastructure.png "ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.")
 *ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.*
 
 There are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including GPUs, FPGAs, and ACAPs (please, see the section HACC boxes architecture). In total, ETHZ-HACC counts twelve GPUs, thirty-one Alveo data center accelerator cards, and seven Versal cards. The following tables give an overview of the **server names** and their **resources:**
 
-<!-- | Cluster | # instances | Booking | Names              | Examples                            |
-|---------|-------------|---------|--------------------|-------------------------------------|
-| Build   | 1           | No      | alveo-build-01     | ssh USERNAME@alveo-build-01.ethz.ch |
-| U250    | 6           | Yes     | alveo-u250-[01:06] | ssh USERNAME@alveo-u250-01.ethz.ch  |
-| U280    | 4           | Yes     | alveo-u280-[01:04] | ssh USERNAME@alveo-u280-01.ethz.ch  |
-| U50D    | 4           | Yes     | alveo-u50d-[01:04] | ssh USERNAME@alveo-u50d-01.ethz.ch  |
-| U55C    | 10          | Yes     | alveo-u55c-[01:10] | ssh USERNAME@alveo-u55c-01.ethz.ch  |
-| Versal  | 1           | Yes     | versal-vck5000-01  | ssh USERNAME@versal-vck5000.ethz.ch | -->
-
 ![ETHZ-HACC server names.](../imgs/server-names.png "ETHZ-HACC server names.")
 *ETHZ-HACC server names.*
 
 ![ETHZ-HACC resources.](../imgs/resources.png "ETHZ-HACC resources.")
 *ETHZ-HACC resources. On the Type - Model column, VU stands for Virtex Ultrascale+.*
-
-
-
-  
-    Cluster
-    High-end servers
-    Xilinx accelerator card
-    FPGA/ACAP
-  
-  
-    Family
-    Memory
-    CPU
-    SSD
-    Family
-    DDR
-    FPGA/ACAP
-    LUTs
-    Registers
-    DSPs
-    RAM
-    HBM2
-  
-
-
-  
-    Build
-    PowerEdge R740
-    394 GB
-    80
-    3 TB
-    -
-    -
-    -
-    
-    
-    
-    
-    
-  
-  
-    U250
-    PowerEdge R740
-    128 GB
-    16
-    200/300 GB
-    Alveo U250
-    64 GB
-    VU13P
-    1’728 K
-    3’456 K
-    12’288
-    UltraRAM: 368.0 Mb
-    -
-  
-  
-    U280
-    PowerEdge R740
-    128 GB
-    16
-    200/300 GB
-    Alveo U280
-    32 GB
-    VU37P
-    1’304 K
-    2’607 K
-    9’024
-    -BRAM: 70.9 Mb-UltraRAM: 270.0 Mb
-    8 GB
-  
-  
-    U50D
-    AMD EPYC 7302
-    64 GB
-    32
-    480 GB
-    Alveo U50D
-    -
-    VU35P
-    872 K
-    1’743 K
-    5’952
-    -Distributed RAM: 24.6 Mb-BRAM: 47.3 Mb-UltraRAM: 180.0 Mb
-    8 GB
-  
-  
-    U55C
-    AMD EPYC 7302
-    64 GB
-    32
-    1.2 TB
-    Alveo U55C
-    -
-    VU47P
-    1’304 K
-    2’607 K
-    9’024
-    -Distributed RAM: 36.7 Mb-BRAM: 70.9 Mb-UltraRAM: 270.0 Mb
-    16 GB
-  
-  
-    Versal
-    PowerEdge R740
-    128 GB
-    16
-    200 GB
-    Versal VCK5000
-    
-    
-    
-    
-    
-    
-    
-  
-
- -->
 
 ## *Build cluster*
 We are offering a *build cluster* for development and bitstream compilation purposes. Multiple users can access this machine simultaneously without booking it first. Please only use the HACC build servers if you do not have access to similar resources at your research institution: too many users running large jobs on this machine will likely cause builds to run slowly—or sometimes to fail. Also, avoid using the build servers for debugging or simulating your hardware.

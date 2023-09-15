@@ -1,7 +1,7 @@
 # Vocabulary
 
 ## Agile 
-Agile is an iterative project management and software development approach that helps teams deliver value to their customers faster and with fewer headaches. Instead of betting everything on a long-term launch, an agile team provides work in small but consumable increments. Requirements, plans, and results are evaluated continuously, so teams have a natural mechanism for responding to change quickly. Frameworks such as Shape up or DevOps are considered part of Agile methodologies. 
+Agile is an iterative project management and software development approach that helps teams deliver value to their customers faster and with fewer headaches. Instead of betting everything on a long-term launch, an agile team provides work in small but consumable increments. Requirements, plans, and results are evaluated continuously, so teams have a natural mechanism for responding to change quickly. Frameworks such as Shape up or DevOps are considered part of Agile methodologies.
 
 ## Ansible Automation Platform (AAP)
 The Red Hat Ansible Automation Platform (AAP) is an orchestrated and open-source tool for software provisioning, configuration management, and application-deployment automation. Ansible uses its own YAML-based declarative language enabling Infrastructure as Code (IaC).
@@ -17,10 +17,7 @@ Introduced in 2012 by Oracle, infrastructure as a service (IaaS) is a cloud comp
 Platform as a service (PaaS) is a category of cloud computing services that allows customers to provision, instantiate, run, and manage a modular bundle comprising a computing platform and one or more applications, without the complexity of building and maintaining the infrastructure typically associated with developing and launching the application(s); and to allow developers to create, develop, and package such software bundles.
 
 ## DevOps 
-DevOps is a set of practices that combines software development (Dev) and IT operations (Ops). It aims to shorten the systems development life cycle and provide continuous delivery with high software quality. Several DevOps aspects came from the Agile methodology. 
-
-<!-- ## Hello, world!
-A *Hello, world!* program is a piece of code in most general-purpose programming languages used to illustrate a language's basic syntax. Such programs are often the first a student learns to write in a given language. They can also be used as a sanity check to ensure all the required software is correctly installed and its operator understands how to use it. -->
+DevOps is a set of practices that combines software development (Dev) and IT operations (Ops). It aims to shorten the systems development life cycle and provide continuous delivery with high software quality. Several DevOps aspects came from the Agile methodology.
 
 ## PCI hot-plug 
 We refer to the PCIe hot-plug as the process that allows us to transition Xilinx accelerator cards from the Vitis to Vivado workflows or vice-versa. The critical aspect of the process is to use Linux capabilities to re-enumerate PCI devices on the fly without the need for cold or warm rebooting of the system.
@@ -34,8 +31,6 @@ A warm boot restarts the system without the need to interrupt the power. In the 
 ## Infrastructure as Code (IaC)
 Infrastructure as Code (IaC) is the process of provisioning and managing computer data centers through machine- and human-readable YAML definition files—rather than physical hardware configuration or interactive configuration tools. The IT infrastructure managed by this process comprises physical equipment, such as bare-metal servers, virtual machines, and associated configuration resources. The definitions may be in a version control system.
 
-
-
 ### Tools
 There are many tools that fulfill infrastructure automation capabilities and use IaC. Broadly speaking, any framework or tool that performs changes or configures infrastructure declaratively or imperatively based on a programmatic approach can be considered IaC. ETHZ-HACC uses Ansible for defining the cluster infrastructure.
 
@@ -46,10 +41,10 @@ IaC can be a key attribute of enabling best practices in DevOps–developers bec
 Instead of *Scrum,* we use Shape up to shape and build our accelerated applications. To execute the techniques of the method we use Basecamp—a project management tool that puts all our project communication, task management, and documentation in one place (where designers and programmers work seamlessly together). To see how we make that happen, please visit How to implement Shape up in Basecamp.
 
 ## Spine-leaf architecture 
-A spine-leaf architecture is data center network topology that consists of two switching layers—a spine and leaf. The leaf layer consists of access switches that aggregate traffic from servers and connect directly into the spine or network core. Spine switches interconnect all leaf switches in a full-mesh topology. 
+A spine-leaf architecture is data center network topology that consists of two switching layers—a spine and leaf. The leaf layer consists of access switches that aggregate traffic from servers and connect directly into the spine or network core. Spine switches interconnect all leaf switches in a full-mesh topology.
 
 ## Vivado and Vitis workflows
-Vivado offers a hardware-centric approach to designing hardware, while Vitis offers a software-centric approach to developing *both* hardware and software. These perspectives are best represented by the languages used to make things with the two tools. 
+Vivado offers a hardware-centric approach to designing hardware, while Vitis offers a software-centric approach to developing *both* hardware and software. These perspectives are best represented by the languages used to make things with the two tools.
 
 ### Vivado workflow
 Vivado is for creating hardware designs that run in an FPGA. These either consist of a set of hardware description language (HDL, typically Verilog or VHDL) files, or of a block design, which can include a variety of pre-built IP blocks (which at their core abstract away pre-written HDL). If a design includes a processor, Vitis will also be required to write the program to run on the processor, as Vivado only handles the programmable logic.
