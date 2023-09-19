@@ -5,7 +5,6 @@ Our HACC is provisioned and managed based on [Infrastructure as Code (IaC)](../d
 The following figure shows a simplified model of HACC’s Ansible automation platform:
 
 ![Ansible Automation Platform (AAP).](../imgs/ansible.png "Ansible Automation Platform (AAP).")
-*Ansible Automation Platform (AAP).*
 
 The playbooks defining our cluster are grouped into two categories: [IaaS](../docs/vocabulary.md#infrastructure-as-a-service-iaas) and [PaaS](../docs/vocabulary.md#platform-as-a-service-paas) playbooks. We refer the IaaS playbooks to the [YAML](../docs/vocabulary.md#yaml) files describing the infrastructure itself. This relates to the OS installation (including the definitions of partition sizes and similar lower-level attributes), virtual machines, networking setup, load balancers, connection topologies, and Debian package installation. With the PaaS playbooks, we take care of installing the software allowing users to develop their heterogeneous accelerated applications. 
 

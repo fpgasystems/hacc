@@ -2,15 +2,12 @@
 ETHZ-HACC comprises high-end servers, GPUs, reconfigurable accelerator cards, and high-speed networking. Each accelerator card has all of its Ethernet interfaces connected to a 100 GbE leaf switch to allow exploration of arbitrary network topologies for distributed computing. Additionally, we are offering a build server with development and bitstream compilation purposes.
 
 ![ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.](../imgs/infrastructure.png "ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.")
-*ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.*
 
 There are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including GPUs, FPGAs, and ACAPs (please, see the section HACC boxes architecture). In total, ETHZ-HACC counts twelve GPUs, thirty-one Alveo data center accelerator cards, and seven Versal cards. The following tables give an overview of the **server names** and their **resources:**
 
 ![ETHZ-HACC server names.](../imgs/server-names.png "ETHZ-HACC server names.")
-*ETHZ-HACC server names.*
 
 ![ETHZ-HACC resources.](../imgs/resources.png "ETHZ-HACC resources.")
-*ETHZ-HACC resources. On the Type - Model column, VU stands for Virtex Ultrascale+.*
 
 ## *Build cluster*
 We are offering a *build cluster* for development and bitstream compilation purposes. Multiple users can access this machine simultaneously without booking it first. Please only use the HACC build servers if you do not have access to similar resources at your research institution: too many users running large jobs on this machine will likely cause builds to run slowly—or sometimes to fail. Also, avoid using the build servers for debugging or simulating your hardware.
@@ -46,12 +43,10 @@ The USB - JTAG connection allows granted users to interact directly with the FPG
 The following picture details the architecture of the three heterogeneous servers equipped with 2x EPYC Milan CPUs, 4x Instinct MI200 GPUs, 2x Alveo U55C FPGAs, and 2x Versal VCK5000 ACAPs each.
 
 ![HACC boxes architecture.](../imgs/hacc-boxes.png "HACC boxes architecture.")
-*HACC boxes architecture.*
 
 ## Networking
 
 ![Management, access and data networks.](../imgs/networking.png "Management, access and data networks.")
-*Management, access and data networks.*
 
 ### Management network
 We refer to the management network as the infrastructure allowing our IT administrators to manage, deploy, update and monitor our cluster **remotely.**
@@ -63,6 +58,5 @@ The access network is the infrastructure that allows secure remote access to our
 For our **high-speed networking** data network, we are using a [spine-leaf architecture](../docs/vocabulary.md#spine-leaf-architecture) where the L2 leaf layer is built with 100 GbE Cisco Nexus 9336c FX2 switches and active optic cables (AOCs):
 
 ![Spine-leaf data network architecture.](../imgs/spine-leaf.png "Spine-leaf data network architecture.")
-*Spine-leaf data network architecture.*
 
 On the server side, the CPU NICs are ConnectX-5 adaptors. For the servers **with only one accelerator card, only one 100 GbE port is connected to the respective leaf switch.** On the other hand, **the HACC boxes have two 100 GbE ports connected to the respective leaf switch,** offering a total of 200 GbE effective bandwidth.
