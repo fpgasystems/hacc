@@ -9,12 +9,13 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 #change to directory
 cd $DIR
 
-#echo $DIR
+#remove tex directory
+if [ -d "$DIR/tex" ]; then
+    rm -r "$DIR/tex"
+fi
 
-#exit
-
-#delete all existing -tex.md
-find "$DIR" -name '*-tex.md' -type f -delete
+#create tex directory
+mkdir $DIR/tex
 
 #export to tex
 for file in *.md; do  
@@ -33,7 +34,8 @@ for file in *.md; do
     #remove blank lines on top
     awk 'NF{p=1} p' "$new_file" > temp.md && mv temp.md "$new_file"
     #remove italic markdown footnotes *Anyword.*
-    #awk '{gsub(/\*([^*]*)\*/, "\\1")}1' "$new_file" > temp.md && mv temp.md "$new_file"
     awk '/^!\[/ { p = 1; print; next } p && /^\*/ { p = 0; next } { p = 0 } 1' "$new_file" > temp.md && mv temp.md "$new_file"
+    #move to tex folder
+    mv "$new_file" "tex/${new_file//-tex/}"
   fi
 done
