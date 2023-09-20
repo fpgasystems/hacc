@@ -9,15 +9,15 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 #change to directory
 cd $DIR
 
-#remove tex directory
-if [ -d "$DIR/tex" ]; then
-    rm -r "$DIR/tex"
+#remove overleaf directory
+if [ -d "$DIR/overleaf" ]; then
+    rm -r "$DIR/overleaf"
 fi
 
-#create tex directory
-mkdir $DIR/tex
+#create overleaf directory
+mkdir $DIR/overleaf
 
-#export to tex
+#export to overleaf
 for file in *.md; do  
   if [[ -f "$file" ]]; then
     # Create a new file with modified name
@@ -36,6 +36,6 @@ for file in *.md; do
     #remove italic markdown footnotes *Anyword.*
     awk '/^!\[/ { p = 1; print; next } p && /^\*/ { p = 0; next } { p = 0 } 1' "$new_file" > temp.md && mv temp.md "$new_file"
     #move to tex folder
-    mv "$new_file" "tex/${new_file//-tex/}"
+    mv "$new_file" "overleaf/${new_file//-tex/}"
   fi
 done
