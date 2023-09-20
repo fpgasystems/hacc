@@ -26,8 +26,6 @@ You must be connected to the ETH network to access the cluster. If this is not t
 To make use of ETH’s jumphost, first you would need to edit your ```~/.ssh/config``` file by adding the following lines:
 
 ```
-# Remote Access by Secure Shell (SSH) - ETHZ
-
 ServerAliveInterval 300
 ServerAliveCountMax 12
 
