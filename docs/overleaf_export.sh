@@ -35,6 +35,8 @@ for file in *.md; do
     awk 'NF{p=1} p' "$new_file" > temp.md && mv temp.md "$new_file"
     #remove italic markdown footnotes *Anyword.*
     awk '/^!\[/ { p = 1; print; next } p && /^\*/ { p = 0; next } { p = 0 } 1' "$new_file" > temp.md && mv temp.md "$new_file"
+    #replace ../imgs with ./
+    sed -i '' 's/\.\.\/imgs\//\.\//g' "$new_file"
     #move to tex folder
     mv "$new_file" "overleaf/${new_file//-tex/}"
   fi
