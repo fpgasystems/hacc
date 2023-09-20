@@ -17,7 +17,7 @@ Once your ETH account has been created, you will need to generate two different 
 4. Select the *LDAPS* and *Active Directory* checkboxes and introduce your new password, and
 5. Select the *Radius* checkbox and introduce your new password.
 
-![Setting your passwords.](../imgs/passwords.png "Setting your passwords.")
+![Setting your passwords.](./passwords.png "Setting your passwords.")
 
 ## Setting your remote secure access
 You must be connected to the ETH network to access the cluster. If this is not the case, you first need to establish a secure remote connection—either through a jump host [[1]](#references) or a virtual private network (VPN)—before being able to use the HACC servers.
@@ -71,24 +71,24 @@ Please, follow these steps to book a server:
 
 We would like you to follow the [booking rules](../docs/booking-system.md#booking-rules) while you work with the cluster.
 
-![Booking a server.](../imgs/booking-a-server.png "Booking a server.")
+![Booking a server.](./booking-a-server.png "Booking a server.")
 
 ### Accessing a server
 After booking a server—and assuming you are connected to ETH network via VPN— you should be able to access it using ssh, i.e.: ```ssh jmoyapaya@alveo-u50d-05```. Please remember that for accessing a server you should also use your **main LDAP/Active directory password**:
 
-![Accessing a server.](../imgs/accessing-a-server.png "Accessing a server.")
+![Accessing a server.](./accessing-a-server.png "Accessing a server.")
 
 You can also make use of **X11 forwarding** if you need to run graphical applications on the remote server (for instance, Vivado). For this, please add a -X after the ssh command, i.e.: ```ssh -X jmoyapaya@alveo-u50d-05```.
 
 ## Validating a Xilinx accelerator card
 Once you are logged into a server, you should be able to validate server’s accelerator card with ```xbutil validate --device```:
 
-![Validating a Xilinx accelerator card.](../imgs/validating-a-xilinx-accelerator-card.png "Validating a Xilinx accelerator card.")
+![Validating a Xilinx accelerator card.](./validating-a-xilinx-accelerator-card.png "Validating a Xilinx accelerator card.")
 
 ### Reverting to Vitis workflow
 It is possible that when you log on to a server, you may find that the previous user has left the server in *Vivado mode.* In such a situation, you have the opportunity to revert the server to work again with the Vitis workflow by following the instructions on the screen:
 
-![Reverting to Vitis workflow.](../imgs/reverting-to-vitits-workflow.png "Reverting to Vitis workflow.")
+![Reverting to Vitis workflow.](./reverting-to-vitits-workflow.png "Reverting to Vitis workflow.")
 
 You are ready to go! **After validating the Xilinx accelerator card, we recommend you to check out the [Examples](../examples/README.md#examples) section.**
 
