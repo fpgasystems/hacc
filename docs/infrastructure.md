@@ -19,7 +19,7 @@ There are **two types of deployment servers.** The first type of servers are equ
 *ETHZ-HACC resources. On the Type - Model column, VU stands for [Virtex Ultrascale+](#virtex-ultrascale).*
 
 ## *Build cluster*
-We are offering a *build cluster* for development and bitstream compilation purposes. Multiple users can access this machine simultaneously without booking it first. Please only use the HACC build servers if you do not have access to similar resources at your research institution: too many users running large jobs on this machine will likely cause builds to run slowly—or sometimes to fail. Also, avoid using the build servers for debugging or simulating your hardware.
+We are offering a *build cluster* for development and bitstream compilation purposes. Multiple users can access this machine simultaneously **without booking it first.** Please only use the HACC build servers if you do not have access to similar resources at your research institution: too many users running large jobs on this machine will likely cause builds to run slowly—or sometimes to fail. Also, avoid using the build servers for debugging or simulating your hardware.
 
 ## High-end servers and reconfigurable accelerator cards
 ### AMD EPYC
