@@ -36,7 +36,7 @@ Five HACCs have been established at some of world’s most prestigious universit
 
 ## Sections
 * [Account renewal](/docs/account-renewal.md#account-renewal)
-* [Acknowledgment and citation](#acknowledgment)
+* [Acknowledgment and citation](#acknowledgment-and-citation)
 * [Booking system](/docs/booking-system.md#booking-system)
 * [Features](docs/features.md#features)
 * [First steps](docs/first-steps.md#first-steps)
