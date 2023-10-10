@@ -35,9 +35,9 @@ HACCs are equipped with the latest Xilinx hardware and software technologies for
 Five HACCs have been established at some of world’s most prestigious universities. The first of them was assigned to [Prof. Dr. Gustavo Alonso](https://people.inf.ethz.ch/alonso/) of the [Institute for Platform Computing - Systems Group (SG)](https://systems.ethz.ch) at the [Swiss Federal Institute of Technology Zurich (ETH Zürich)](https://ethz.ch/en.html) in 2020.
 
 ## Sections
+* [Acknowledgment and citation](#acknowledgment)
 * [Account renewal](/docs/account-renewal.md#account-renewal)
 * [Booking system](/docs/booking-system.md#booking-system)
-* [Citation](#citation)
 * [Features](docs/features.md#features)
 * [First steps](docs/first-steps.md#first-steps)
 * [Get started](https://www.amd-haccs.io/get-started.html)
@@ -145,11 +145,17 @@ For GPU accelerators, HIP and ROCm tools versioning is according to [HIP release
 <tfoot><tr><td colspan="5">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
 </table>
 
-# Citation
+# Acknowledgment and citation
+
+We encourage users of ETHZ-HACC to acknowledge the support provided by AMD and ETH Zürich for their research in presentations, papers, posters, and press releases. Please use the following acknowledgment statement and citation.
+
+## Acknowledgment
+
+This work was supported in part by AMD under the Heterogeneous Accelerated Compute Clusters (HACC) program (formerly known as the XACC program - Xilinx Adaptive Compute Cluster program)
+
+## Citation
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8344513.svg)](https://doi.org/10.5281/zenodo.8344513)
-
-If you use this repository in your work, we kindly request that you cite it as follows:
 
 ```
 @misc{hacc-ethz,
