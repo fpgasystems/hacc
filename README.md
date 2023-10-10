@@ -147,7 +147,7 @@ For GPU accelerators, HIP and ROCm tools versioning is according to [HIP release
 
 # Acknowledgment and citation
 
-We encourage users of ETHZ-HACC to acknowledge the support provided by AMD and ETH Zürich for their research in presentations, papers, posters, and press releases. Please use the following acknowledgment statement and citation.
+We encourage ETHZ-HACC users to acknowledge the support provided by AMD and ETH Zürich for their research in presentations, papers, posters, and press releases. Please use the following acknowledgment statement and citation.
 
 ## Acknowledgment
 
