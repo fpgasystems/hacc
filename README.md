@@ -56,7 +56,7 @@ Five HACCs have been established at some of world’s most prestigious universit
 # Releases
 
 ## Ubuntu
-For the operating system, Ubuntus versioning is according to [IT Services Group (ISG) D-INFK](https://www.isg.inf.ethz.ch/Main/) release schedule:
+Regarding the operating system, Ubuntu versioning is according to [IT Services Group (ISG) D-INFK](https://www.isg.inf.ethz.ch/Main/) release schedule:
 
 <table class="tg">
 <thead>
