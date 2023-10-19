@@ -55,6 +55,69 @@ Five HACCs have been established at some of world’s most prestigious universit
 
 # Releases
 
+## Ubuntu
+For the operating system, Ubuntus versioning is according to [IT Services Group (ISG) D-INFK](https://www.isg.inf.ethz.ch/Main/) release schedule:
+
+<table class="tg">
+<thead>
+  <tr style="text-align:center">
+    <th class="tg-0pky" rowspan="2"><div align="center">Cluster</div></th>
+    <th class="tg-0pky" colspan="2" style="text-align:center"><div align="center">Release</div></th>
+    <th class="tg-c3ow" rowspan="2">Kernel</th>
+  </tr>
+  <tr>
+    <th class="tg-0pky" style="text-align:center">20.04</th>
+    <th class="tg-0pky" style="text-align:center">22.04</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky"><div align="center">BUILD</div></td>
+    <td class="tg-0pky" align="center">&#9675;</td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center">5.4.0-164-generic</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">U250</div></td>
+    <td class="tg-0pky" align="center">&#9675;</td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center">5.4.0-164-generic<br></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">U280</div></td>
+    <td class="tg-0pky" align="center">&#9675;</td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center">5.4.0-164-generic</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">U50D</div></td>
+    <td class="tg-0pky" align="center">&#9675;</td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center">5.4.0-164-generic</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">U55C</div></td>
+    <td class="tg-0pky" align="center">&#9675;</td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center">5.4.0-164-generic</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">Versal</div></td>
+    <td class="tg-0pky" align="center">&#9675;</td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center">5.4.0-164-generic</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">HACC BOXES</div></td>
+    <td class="tg-0pky" align="center">&#9675;</td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center">5.4.0-164-generic</td>
+  </tr>
+</tbody>
+<tfoot><tr><td colspan="5">&#9675; Existing release.</td></tr></tfoot>
+<tfoot><tr><td colspan="5">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
+</table>
+
 ## Xilinx Tools
 For ACAP and FPGAs, Xilinx’s tools versioning is according to [XRT’s release schedule](https://github.com/Xilinx/XRT/releases). All servers equipped with Alveo or Versal boards are associated with a unique Xilinx software version, including XRT’s Xilinx Board Utility (xbutil), Xilinx tools (Vivado, Vitis_HLS, Vitis), and the flashable partitions (or base shell) running on the reconfigurable devices.
 
@@ -117,6 +180,70 @@ For ACAP and FPGAs, Xilinx’s tools versioning is according to [XRT’s release
 <tfoot><tr><td colspan="5">&#9675; Existing release.</td></tr></tfoot>
 <tfoot><tr><td colspan="5">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
 </table>
+
+### Vitis AI
+
+<table class="tg">
+<thead>
+  <tr style="text-align:center">
+    <th class="tg-0pky" rowspan="3"><div align="center">Cluster</div></th>
+    <th class="tg-0pky" colspan="3" style="text-align:center"><div align="center">Release</div></th>
+  </tr>
+  <tr>
+    <th class="tg-0pky" style="text-align:center">2022.1</th>
+    <th class="tg-0pky" style="text-align:center">2022.2</th>
+    <th class="tg-0pky" style="text-align:center">2023.1</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky"><div align="center">BUILD</div></td>
+    <td class="tg-0pky" align="center"> </td>
+    <td class="tg-0pky" align="center"> </td>
+    <td class="tg-0pky" align="center"> </td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">U250</div></td>
+    <td class="tg-0pky" align="center"> </td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">U280</div></td>
+    <td class="tg-0pky" align="center"> </td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    
+  </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">U50D</div></td>
+    <td class="tg-0pky" align="center"> </td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">U55C</div></td>
+    <td class="tg-0pky" align="center"> </td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center"> </td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">Versal</div></td>
+    <td class="tg-0pky" align="center"> </td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">HACC BOXES</div></td>
+    <td class="tg-0pky" align="center"> </td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+  </tr>
+</tbody>
+<tfoot><tr><td colspan="5">&#9675; Existing release.</td></tr></tfoot>
+<tfoot><tr><td colspan="5">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
+</table>
+
 
 ## HIP and ROCm Tools
 For GPU accelerators, HIP and ROCm tools versioning is according to [HIP release schedule](https://github.com/ROCm-Developer-Tools/HIP/releases):
