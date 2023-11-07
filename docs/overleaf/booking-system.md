@@ -1,5 +1,5 @@
 # Booking system 
-Before connecting to any HACC servers, you must make a reservation through the booking system. To use the booking system, please remember the following:
+Before connecting to any HACC servers, you must make a reservation through the **booking system**. To use the booking system, please remember the following:
 
 * You must be connected to the ETH network in order to access it, and
 * Use your **main LDAP/Active directory password** as a part of your credentials.

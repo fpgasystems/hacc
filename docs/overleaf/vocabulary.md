@@ -4,7 +4,7 @@
 Agile is an iterative project management and software development approach that helps teams deliver value to their customers faster and with fewer headaches. Instead of betting everything on a long-term launch, an agile team provides work in small but consumable increments. Requirements, plans, and results are evaluated continuously, so teams have a natural mechanism for responding to change quickly. Frameworks such as Shape up or DevOps are considered part of Agile methodologies.
 
 ## Ansible Automation Platform (AAP)
-The Red Hat Ansible Automation Platform (AAP) is an orchestrated and open-source tool for software provisioning, configuration management, and application-deployment automation. Ansible uses its own YAML-based declarative language enabling Infrastructure as Code (IaC).
+The Red Hat **Ansible Automation Platform (AAP)** is an orchestrated and open-source tool for software provisioning, configuration management, and application-deployment automation. Ansible uses its own YAML-based declarative language enabling Infrastructure as Code (IaC).
 
 ## DCIM
 Data center infrastructure management (DCIM) is the integration of information technology (IT) and facility management disciplines to centralize monitoring, management and intelligent capacity planning of a data center's critical systems.
@@ -38,7 +38,7 @@ There are many tools that fulfill infrastructure automation capabilities and use
 IaC can be a key attribute of enabling best practices in DevOps–developers become more involved in defining configuration and Ops teams get involved earlier in the development process. Tools that utilize IaC bring visibility to the state and configuration of servers and ultimately provide the visibility to users within the enterprise, aiming to bring teams together to maximize their efforts.
 
 ## Shape up
-Instead of *Scrum,* we use Shape up to shape and build our accelerated applications. To execute the techniques of the method we use Basecamp—a project management tool that puts all our project communication, task management, and documentation in one place (where designers and programmers work seamlessly together). To see how we make that happen, please visit How to implement Shape up in Basecamp.
+Instead of *Scrum,* we use **Shape up** to shape and build our accelerated applications. To execute the techniques of the method we use **Basecamp**—a project management tool that puts all our project communication, task management, and documentation in one place (where designers and programmers work seamlessly together). To see how we make that happen, please visit **How to implement Shape up in Basecamp**.
 
 ## Spine-leaf architecture 
 A spine-leaf architecture is data center network topology that consists of two switching layers—a spine and leaf. The leaf layer consists of access switches that aggregate traffic from servers and connect directly into the spine or network core. Spine switches interconnect all leaf switches in a full-mesh topology.

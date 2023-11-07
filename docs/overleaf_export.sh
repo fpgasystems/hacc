@@ -26,7 +26,7 @@ for file in *.md; do
     # Remove markdown links, e.g., [Devops](#devops)
     sed -i '' 's/\[\([^]]*\)\](#\([^)]*\))/\1/g' "$new_file"
     # Remove https links, e.g., [Devops](https://example.com)
-    sed -i '' 's/\[\([^]]*\)\](https:\/\/[^)]*)/\1/g' "$new_file"
+    sed -i '' 's/\[\([^]]*\)\](https:\/\/[^)]*)/**\1**/g' "$new_file"
     # Remove email links, e.g., [AnyEmailAccount](mailto: AnyEmailAccount)
     sed -i '' 's/\[\([^]]*\)\](mailto:[^)]*)/\1/g' "$new_file"
     # Remove HTML tags, e.g., <AnyWord>

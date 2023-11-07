@@ -1,6 +1,6 @@
 # Technical support
 
-As mentioned here, we do not provide technical support and you should not use any of ETH’s emails with that purpose. Instead, please write to research_clusters@amd.com or join the HACC Slack workspace to interact with other researchers. 
+As mentioned **here,** we do not provide technical support and you should not use any of ETH’s emails with that purpose. Instead, please write to research_clusters@amd.com or join the **HACC Slack workspace** to interact with other researchers. 
 
 ![HACC Slack workspace.](./slack.png "HACC Slack workspace.")
 

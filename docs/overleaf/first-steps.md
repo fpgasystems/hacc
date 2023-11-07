@@ -6,12 +6,12 @@ This guide will help you set up your HACC account, booking and accessing a serve
 * Booking and accessing a server
 * Validating a Xilinx accelerator card 
 
-Before continuing, please make sure you have been already accepted on ETH Zürich HACC program and you have a valid user account. In any other case, please visit Get started.
+Before continuing, please make sure you have been already accepted on ETH Zürich HACC program and you have a valid user account. In any other case, please visit **Get started**.
 
 ## Setting your passwords
 Once your ETH account has been created, you will need to generate two different passwords: an LDAP/Active directory password and a RADIUS password. The first one is part of your main ETH credentials; the *remote authentication dial-in user service (RADIUS)* password is used for setting your remote secure access. Please, follow these steps to generate them:
 
-1. Visit the ETH Zürich Web Center,
+1. Visit the ETH Zürich **Web Center,**
 2. Click on *Forgot your password* to receive a temporal password to use with Web Center,
 3. Log in to Web Center and click on *Self service/Change password*,
 4. Select the *LDAPS* and *Active Directory* checkboxes and introduce your new password, and
@@ -57,12 +57,12 @@ To create your virtual private network connection, please use the following on y
     * Group name: ```student-net```
 
 ## Booking and accessing a server
-After configuring our passwords and virtual private network connection, the next step would be to reserve a server through the booking system and then access it. **Please remember that you must be connected to the ETH network to make use of the booking system.**
+After configuring our passwords and virtual private network connection, the next step would be to reserve a server through the **booking system** and then access it. **Please remember that you must be connected to the ETH network to make use of the booking system.**
 
 ### Booking a server
 Please, follow these steps to book a server:
 
-1. Log in into the booking system using your **main LDAP/Active directory password**,
+1. Log in into the **booking system** using your **main LDAP/Active directory password**,
 2. Once you are on the *Dashoboard* page, please click on *New booking*,
 3. Select the *Time range,* the *Boards* or servers you wish to book, along with a mandatory *Comment* referring to your research activites, and
 4. Press the *Book* button.
@@ -91,4 +91,4 @@ It is possible that when you log on to a server, you may find that the previous 
 You are ready to go! **After validating the Xilinx accelerator card, we recommend you to check out the [Examples](../examples/README.md#examples) section.**
 
 ## References
-* [1] Remote Access by Secure Shell (SSH) using a jump host
+* [1] **Remote Access by Secure Shell (SSH) using a jump host**
