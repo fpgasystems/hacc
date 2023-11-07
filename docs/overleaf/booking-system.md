@@ -4,6 +4,8 @@ Before connecting to any HACC servers, you must make a reservation through the b
 * You must be connected to the ETH network in order to access it, and
 * Use your **main LDAP/Active directory password** as a part of your credentials.
 
+**Please notice that you do not need to book the build servers.**
+
 ![Booking system.](./booking-system.png "Booking system.")
 
 ## Booking rules
