@@ -181,7 +181,7 @@ For ACAP and FPGAs, Xilinx’s tools versioning is according to [XRT’s release
 <tfoot><tr><td colspan="5">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
 </table>
 
-### Vitis AI
+<!-- ### Vitis AI
 
 <table class="tg">
 <thead>
@@ -242,8 +242,7 @@ For ACAP and FPGAs, Xilinx’s tools versioning is according to [XRT’s release
 </tbody>
 <tfoot><tr><td colspan="5">&#9675; Existing release.</td></tr></tfoot>
 <tfoot><tr><td colspan="5">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
-</table>
-
+</table> -->
 
 ## HIP and ROCm Tools
 For GPU accelerators, HIP and ROCm tools versioning is according to [HIP release schedule](https://github.com/ROCm-Developer-Tools/HIP/releases):
