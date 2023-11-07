@@ -11,5 +11,4 @@ The guest account expires after one year. A month before the deadline, you will 
 ![Account renewal.](../imgs/account-renewal.png "Account renewal.")
 *Account renewal.*
 
-Once the account expires, all user data is automatically deleted from its home directory and the account cannot be
-restored.
+Once the account expires, all user data is automatically deleted from its home directory and the account cannot be restored.
