@@ -252,17 +252,19 @@ For GPU accelerators, HIP and ROCm tools versioning is according to [HIP release
 <thead>
   <tr style="text-align:center">
     <th class="tg-0pky" rowspan="2"><div align="center">Cluster</div></th>
-    <th class="tg-0pky" colspan="2" style="text-align:center"><div align="center">HIP Release</div></th>
+    <th class="tg-0pky" colspan="3" style="text-align:center"><div align="center">HIP Release</div></th>
     <th class="tg-c3ow" rowspan="2">ROCm Release</th>
   </tr>
   <tr>
     <th class="tg-0pky" style="text-align:center">5.4.1</th>
     <th class="tg-0pky" style="text-align:center">5.4.3</th>
+    <th class="tg-0pky" style="text-align:center">5.7.1</th>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td class="tg-0pky"><div align="center">HACC BOXES</div></td>
+    <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky" align="center">Version 1.1</td>
