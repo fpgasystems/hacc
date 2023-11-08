@@ -4,7 +4,7 @@ The following people are relevant for our ETHZ-Heterogeneous Compute Accelerated
 ## AMD University Program coordinators
 * **Cathal McCabe**, **AMD University Program** Manager EMEA, AMD
 * **Gustavo Alonso**, Systems Group leader, ETH Zürich 
-* **Javier Moya**, ETHZ-[HACC](../README.md) coordinator, ETH Zürich 
+* **Javier Moya**, ETHZ-HACC coordinator, ETH Zürich 
 * **Mario Ruiz**, **AMD University Program** coordinator, AMD
 * **Michaela Blott**, Senior Fellow, AMD
 
