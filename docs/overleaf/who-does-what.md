@@ -11,10 +11,10 @@ The following people are relevant for our ETHZ-Heterogeneous Compute Accelerated
 ## Operations
 
 ### Systems Group
-* **Kassiem Jacobs**, Systems Administrator, [DCIM](./vocabulary.md#dcim), [Booking system](./booking-system.md#booking-system)
+* **Kassiem Jacobs**, Systems Administrator, **DCIM**
 
 ### IT Service Group (ISG)
 * **Manuel Maestinger**, Linux systems
-* **Matthias Gabathuler**, Cloud technologies, [DevOps](./vocabulary.md#devops)
-* **Martin Sedler**, [DCIM](./vocabulary.md#dcim) leader
+* **Matthias Gabathuler**, Cloud technologies, **DevOps**
+* **Martin Sedler**, **DCIM** leader
 * **Stefan Walter**, Operations coordinator

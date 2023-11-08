@@ -3,7 +3,7 @@ ETHZ-HACC comprises high-end servers, GPUs, reconfigurable accelerator cards, an
 
 ![ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.](./infrastructure.png "ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.")
 
-There are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including GPUs, FPGAs, and ACAPs (please, see the section HACC boxes architecture). In total, ETHZ-HACC counts twelve GPUs, thirty-one Alveo data center accelerator cards, and seven Versal cards. The following tables give an overview of the **server names** and their **resources:**
+There are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including GPUs, FPGAs, and ACAPs (please, see the section **HACC boxes architecture**. In total, ETHZ-HACC counts twelve GPUs, thirty-one Alveo data center accelerator cards, and seven Versal cards. The following tables give an overview of the **server names** and their **resources:**
 
 ![ETHZ-HACC server names.](./server-names.png "ETHZ-HACC server names.")
 
@@ -37,7 +37,7 @@ Each HACC users can store data on the following directories:
 * ```/tmp```: directory on the local server drive accessible by all users on the HACC server. Its content is removed every time the server is restarted.   
 
 ### USB - JTAG connectivity
-The USB - JTAG connection allows granted users to interact directly with the FPGA by downloading bitstreams or updating memory content. The correct setup and access of a USB - JTAG connection is essential developers using working with [Vivado workflow](./vocabulary.md#vivado-workflow).
+The USB - JTAG connection allows granted users to interact directly with the FPGA by downloading bitstreams or updating memory content. The correct setup and access of a USB - JTAG connection is essential developers using working with **Vivado workflow**.
 
 ## HACC boxes architecture
 The following picture details the architecture of the three heterogeneous servers equipped with 2x EPYC Milan CPUs, 4x **Instinct MI200 GPUs,** 2x **Alveo U55C FPGAs,** and 2x **Versal VCK5000 ACAPs** each.
@@ -55,7 +55,7 @@ We refer to the management network as the infrastructure allowing our IT adminis
 The access network is the infrastructure that allows secure remote access to our **users** through SSH.
 
 ### Data network
-For our **high-speed networking** data network, we are using a [spine-leaf architecture](../docs/vocabulary.md#spine-leaf-architecture) where the L2 leaf layer is built with 100 GbE **Cisco Nexus 9336c FX2** switches and active optic cables (AOCs):
+For our **high-speed networking** data network, we are using a **spine-leaf architecture**:
 
 ![Spine-leaf data network architecture.](./spine-leaf.png "Spine-leaf data network architecture.")
 

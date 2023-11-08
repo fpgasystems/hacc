@@ -1,10 +1,10 @@
 # Vocabulary
 
 ## Agile 
-Agile is an iterative project management and software development approach that helps teams deliver value to their customers faster and with fewer headaches. Instead of betting everything on a long-term launch, an agile team provides work in small but consumable increments. Requirements, plans, and results are evaluated continuously, so teams have a natural mechanism for responding to change quickly. Frameworks such as Shape up or DevOps are considered part of Agile methodologies.
+Agile is an iterative project management and software development approach that helps teams deliver value to their customers faster and with fewer headaches. Instead of betting everything on a long-term launch, an agile team provides work in small but consumable increments. Requirements, plans, and results are evaluated continuously, so teams have a natural mechanism for responding to change quickly. Frameworks such as **Shape up** are considered part of Agile methodologies.
 
 ## Ansible Automation Platform (AAP)
-The Red Hat **Ansible Automation Platform (AAP)** is an orchestrated and open-source tool for software provisioning, configuration management, and application-deployment automation. Ansible uses its own YAML-based declarative language enabling Infrastructure as Code (IaC).
+The Red Hat **Ansible Automation Platform (AAP)** is an orchestrated and open-source tool for software provisioning, configuration management, and application-deployment automation. Ansible uses its own **YAML**
 
 ## DCIM
 Data center infrastructure management (DCIM) is the integration of information technology (IT) and facility management disciplines to centralize monitoring, management and intelligent capacity planning of a data center's critical systems.
@@ -17,7 +17,7 @@ Introduced in 2012 by Oracle, infrastructure as a service (IaaS) is a cloud comp
 Platform as a service (PaaS) is a category of cloud computing services that allows customers to provision, instantiate, run, and manage a modular bundle comprising a computing platform and one or more applications, without the complexity of building and maintaining the infrastructure typically associated with developing and launching the application(s); and to allow developers to create, develop, and package such software bundles.
 
 ## DevOps 
-DevOps is a set of practices that combines software development (Dev) and IT operations (Ops). It aims to shorten the systems development life cycle and provide continuous delivery with high software quality. Several DevOps aspects came from the Agile methodology.
+DevOps is a set of practices that combines software development (Dev) and IT operations (Ops). It aims to shorten the systems development life cycle and provide continuous delivery with high software quality. Several DevOps aspects came from the **Agile** methodology.
 
 ## PCI hot-plug 
 We refer to the PCIe hot-plug as the process that allows us to transition Xilinx accelerator cards from the Vitis to Vivado workflows or vice-versa. The critical aspect of the process is to use Linux capabilities to re-enumerate PCI devices on the fly without the need for cold or warm rebooting of the system.
@@ -29,13 +29,13 @@ The process of powering off and on the machine to completely reload the operatin
 A warm boot restarts the system without the need to interrupt the power. In the context of Xilinx Alveo Cards, a warm boot would be required to re-enumarate the number of PCI functions without restoring the base shell. This operation is required to bring a server to the Vivado workflow.
 
 ## Infrastructure as Code (IaC)
-Infrastructure as Code (IaC) is the process of provisioning and managing computer data centers through machine- and human-readable YAML definition files—rather than physical hardware configuration or interactive configuration tools. The IT infrastructure managed by this process comprises physical equipment, such as bare-metal servers, virtual machines, and associated configuration resources. The definitions may be in a version control system.
+Infrastructure as Code (IaC) is the process of provisioning and managing computer data centers through machine- and human-readable **YAML** definition files—rather than physical hardware configuration or interactive configuration tools. The IT infrastructure managed by this process comprises physical equipment, such as bare-metal servers, virtual machines, and associated configuration resources. The definitions may be in a version control system.
 
 ### Tools
-There are many tools that fulfill infrastructure automation capabilities and use IaC. Broadly speaking, any framework or tool that performs changes or configures infrastructure declaratively or imperatively based on a programmatic approach can be considered IaC. ETHZ-HACC uses Ansible for defining the cluster infrastructure.
+There are many tools that fulfill infrastructure automation capabilities and use IaC. Broadly speaking, any framework or tool that performs changes or configures infrastructure declaratively or imperatively based on a programmatic approach can be considered IaC. ETHZ-HACC uses **Ansible** for defining the cluster infrastructure.
 
 ### Relation to DevOps
-IaC can be a key attribute of enabling best practices in DevOps–developers become more involved in defining configuration and Ops teams get involved earlier in the development process. Tools that utilize IaC bring visibility to the state and configuration of servers and ultimately provide the visibility to users within the enterprise, aiming to bring teams together to maximize their efforts.
+IaC can be a key attribute of enabling best practices in **DevOps**–developers become more involved in defining configuration and Ops teams get involved earlier in the development process. Tools that utilize IaC bring visibility to the state and configuration of servers and ultimately provide the visibility to users within the enterprise, aiming to bring teams together to maximize their efforts.
 
 ## Shape up
 Instead of *Scrum,* we use **Shape up** to shape and build our accelerated applications. To execute the techniques of the method we use **Basecamp**—a project management tool that puts all our project communication, task management, and documentation in one place (where designers and programmers work seamlessly together). To see how we make that happen, please visit **How to implement Shape up in Basecamp**.
