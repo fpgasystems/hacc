@@ -23,7 +23,7 @@ Once your ETH account has been created, you will need to generate two different 
 You must be connected to the ETH network to access the cluster. If this is not the case, you first need to establish a secure remote connection—either through a **jump host**—before being able to use the HACC servers.
 
 ### Jump host
-To make use of ETH’s jumphost, first you would need to edit your ```~/.ssh/config``` file by adding the following lines:
+To make use of ETH’s jumphost, first you would need to edit your *~/.ssh/config* file by adding the following lines:
 
 ```
 ServerAliveInterval 300
@@ -37,24 +37,24 @@ Host *.ethz.ch !jumphost.inf.ethz.ch
     ProxyJump jumphost.inf.ethz.ch
 ```
 
-After that, you should be able to access HACC servers with SSH, for instance: ```ssh ETHUSER@alveo-build-01.ethz.ch```. **Please note that for the proposed ssh-configuration file, you must include** ```.ethz.ch``` **when you try to log in to the server.**
+After that, you should be able to access HACC servers with SSH, for instance: *ssh ETHUSER@alveo-build-01.ethz.ch*. **Please note that for the proposed ssh-configuration file, you must include** *.ethz.ch* **when you try to log in to the server.**
 
 ### Virtual private network (VPN)
 To create your virtual private network connection, please use the following on your favourite VPN client: 
 
 * ETH employees and guest accounts:
-    * Server address: ```sslvpn.ethz.ch```
-    * Account name: ```ETHUSER@staff-net.ethz.ch```
-    * Password: ```RADIUS password```
+    * Server address: *sslvpn.ethz.ch*
+    * Account name: *ETHUSER@staff-net.ethz.ch*
+    * Password: *RADIUS password*
     * Shared secret: *According to received information*
-    * Group name: ```staff-net```
+    * Group name: *staff-net*
 
 * ETH students:
-    * Server address: ```sslvpn.ethz.ch```
-    * Account name: ```ETHUSER@student-net.ethz.ch```
-    * Password: ```RADIUS password```
+    * Server address: *sslvpn.ethz.ch*
+    * Account name: *ETHUSER@student-net.ethz.ch*
+    * Password: *RADIUS password*
     * Shared secret: *According to received information*
-    * Group name: ```student-net```
+    * Group name: *student-net*
 
 ## Booking and accessing a server
 After configuring our passwords and virtual private network connection, the next step would be to reserve a server through the **booking system** and then access it. **Please remember that you must be connected to the ETH network to make use of the booking system.**
@@ -72,14 +72,14 @@ We would like you to follow the **booking rules** while you work with the cluste
 ![Booking a server.](./booking-a-server.png "Booking a server.")
 
 ### Accessing a server
-After **booking a server**—and assuming you are connected to ETH network via VPN— you should be able to access it using ssh, i.e.: ```ssh jmoyapaya@alveo-u50d-05```. Please remember that for accessing a server you should also use your **main LDAP/Active directory password**:
+After **booking a server**—and assuming you are connected to ETH network via VPN— you should be able to access it using ssh, i.e.: *ssh jmoyapaya@alveo-u50d-05*. Please remember that for accessing a server you should also use your **main LDAP/Active directory password**:
 
 ![Accessing a server.](./accessing-a-server.png "Accessing a server.")
 
-You can also make use of **X11 forwarding** if you need to run graphical applications on the remote server (for instance, Vivado). For this, please add a -X after the ssh command, i.e.: ```ssh -X jmoyapaya@alveo-u50d-05```.
+You can also make use of **X11 forwarding** if you need to run graphical applications on the remote server (for instance, Vivado). For this, please add a -X after the ssh command, i.e.: *ssh -X jmoyapaya@alveo-u50d-05*.
 
 ## Validating a Xilinx accelerator card
-Once you are logged into a server, you should be able to validate server’s accelerator card with ```xbutil validate --device```:
+Once you are logged into a server, you should be able to validate server’s accelerator card with *xbutil validate --device*:
 
 ![Validating a Xilinx accelerator card.](./validating-a-xilinx-accelerator-card.png "Validating a Xilinx accelerator card.")
 
