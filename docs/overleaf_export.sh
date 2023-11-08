@@ -29,6 +29,8 @@ for file in *.md; do
     sed -i '' 's/\[\([^]]*\)\](https:\/\/[^)]*)/**\1**/g' "$new_file"
     # Remove email links, e.g., [AnyEmailAccount](mailto: AnyEmailAccount)
     sed -i '' 's/\[\([^]]*\)\](mailto:[^)]*)/\1/g' "$new_file"
+    # Add \url to Any.Name@Any.Domain
+    sed -i '' -E 's/([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+)/\\url{\1}/g' "$new_file"
     # Remove HTML tags, e.g., <AnyWord>
     sed -i '' 's/<[^>]*>//g' "$new_file"
     # Remove "Back to" links

@@ -16,4 +16,4 @@ The HACCs are a collaborative hub; many people may want access to the same limit
 3. The default maximum booking time is 5 hours. 
 4. Note that you can book resources for the future if you need the hardware at a particular time.
 5. Don’t assume there will be limited demand for a HACC during the night: other users in different time zones may want to access the HACC.
-6. Do not systematically extend your booking times: if you predict that your experiments will require longer, submit a request to research_clusters@amd.com outlining your needs so we can arrange a plan.
+6. Do not systematically extend your booking times: if you predict that your experiments will require longer, submit a request to \url{research_clusters@amd.com} outlining your needs so we can arrange a plan.
