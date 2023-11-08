@@ -8,4 +8,4 @@ As mentioned **here,** we do not provide technical support and you should not us
 For support related to **accounts and accessibility,** please contact Kassiem Jacobs at kassiem.jacobs@inf.ethz.ch. 
 
 ## Infrastructure
-For support related to the **HACC infrastructure,** please contact Javier Moya at javier.moyapaya@inf.ethz.ch.
+For topics related to the **ETHZ-HACC infrastructure,** please contact Javier Moya at javier.moyapaya@inf.ethz.ch.
