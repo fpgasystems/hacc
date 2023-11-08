@@ -15,4 +15,4 @@ As mentioned [here,](https://www.xilinx.com/member/xup_research_clusters.html) w
 For support related to **accounts and accessibility,** please contact Kassiem Jacobs ([kassiem.jacobs@inf.ethz.ch](mailto:kassiem.jacobs@inf.ethz.ch)). 
 
 ## Infrastructure
-For topics related to the [**Infrastructure,**](./infrastructure.md#infrastructure) please contact Javier Moya ([javier.moyapaya@inf.ethz.ch](mailto:javier.moyapaya@inf.ethz.ch)).
+For topics related to the **infrastructure** please contact Javier Moya ([javier.moyapaya@inf.ethz.ch](mailto:javier.moyapaya@inf.ethz.ch)).

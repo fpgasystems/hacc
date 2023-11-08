@@ -8,4 +8,4 @@ As mentioned **here,** we do not provide technical support and you should not us
 For support related to **accounts and accessibility,** please contact Kassiem Jacobs (kassiem.jacobs@inf.ethz.ch). 
 
 ## Infrastructure
-For topics related to the ****Infrastructure,****.
+For topics related to the **infrastructure** please contact Javier Moya (javier.moyapaya@inf.ethz.ch).
