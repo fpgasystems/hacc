@@ -40,6 +40,7 @@ Versal ACAPs deliver unparalleled application- and system-level value for cloud,
 
 ### Storage
 Each HACC users can store data on the following directories:
+
 * ```/home/USERNAME```: directory on an NFS drive accessible by USERNAME from any the HACC servers.
 * ```/mnt/scratch```: directory on an NFS drive accessible by all users from any of the HACC servers.
 * ```/local/home/USERNAME/```: directory on the local server drive accessible by USERNAME on the HACC server.
