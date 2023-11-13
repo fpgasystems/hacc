@@ -25,17 +25,15 @@ You must be connected to the ETH network to access the cluster. If this is not t
 ### Jump host
 To make use of ETH’s jumphost, first you would need to edit your **~/.ssh/config** file by adding the following lines:
 
-***
-ServerAliveInterval 300
-ServerAliveCountMax 12
-
-Host jumphost.inf.ethz.ch
-    User ETHUSER
-
-Host *.ethz.ch !jumphost.inf.ethz.ch
-    User ETHUSER
-    ProxyJump jumphost.inf.ethz.ch
-***
+**ServerAliveInterval 300**
+**ServerAliveCountMax 12**
+****
+**Host jumphost.inf.ethz.ch**
+**    User ETHUSER**
+****
+**Host *.ethz.ch !jumphost.inf.ethz.ch**
+**    User ETHUSER**
+**    ProxyJump jumphost.inf.ethz.ch**
 
 After that, you should be able to access HACC servers with SSH, for instance: **ssh ETHUSER@alveo-build-01.ethz.ch**. **Please note that for the proposed ssh-configuration file, you must include** **.ethz.ch** **when you try to log in to the server.**
 
