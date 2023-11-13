@@ -42,7 +42,7 @@ Host *.ethz.ch !jumphost.inf.ethz.ch
     ProxyJump jumphost.inf.ethz.ch
 ```
 
-After that, you should be able to access HACC servers with SSH, for instance: ```ssh ETHUSER@alveo-build-01.ethz.ch```. **Please note that for the proposed ssh-configuration file, you must include** ```.ethz.ch``` **when you try to log in to the server.**
+After that, you should be able to access HACC servers with SSH, for instance: ```ssh ETHUSER@alveo-build-01.ethz.ch```. **Please note that for the proposed ssh-configuration file, you must include the whole domain when you try to log in to the server.**
 
 ### Virtual private network (VPN)
 To create your virtual private network connection, please use the following on your favourite VPN client: 
