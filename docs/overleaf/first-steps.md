@@ -27,10 +27,8 @@ To make use of ETH’s jumphost, first you would need to edit your **~/.ssh/conf
 
 * **ServerAliveInterval 300**
 * **ServerAliveCountMax 12**
-* ****
 * **Host jumphost.inf.ethz.ch**
 * **    User ETHUSER**
-* ****
 * **Host *.ethz.ch !jumphost.inf.ethz.ch**
 * **    User ETHUSER**
 * **    ProxyJump jumphost.inf.ethz.ch**
