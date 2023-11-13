@@ -42,23 +42,10 @@ for file in *.md; do
     # Replace ```AnyString``` with bold **AnyString**
     sed -i '' 's/```\([^`]*\)```/**\1**/g' "$new_file"
     awk '/^```$/{f=!f; next} f{print "* **" $0 "**"; next} 1' "$new_file" > tmpfile && mv tmpfile "$new_file"
-    
     # scape * in *.ethz.ch
     sed -i '' 's/\*\.ethz\.ch/\\*\.ethz\.ch/g' "$new_file"
-    
-    # Replace blank spaces with &nbsp;
-    #sed -i '' 's/\*\*    /&nbsp;&nbsp;&nbsp;&nbsp;/g' "$new_file"
+    # Replace blank spaces
     sed -i '' 's/\*\*    / **/g' "$new_file"
-
-
-
-
-
-
-
-
-
-
     # Replace ../imgs with ./
     sed -i '' 's/\.\.\/imgs\//\.\//g' "$new_file"
     # Move to the tex folder
