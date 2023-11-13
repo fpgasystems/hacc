@@ -286,12 +286,14 @@ This work was supported in part by AMD under the Heterogeneous Accelerated Compu
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8340448.svg)](https://doi.org/10.5281/zenodo.8340448)
 
 ```
-@misc{hacc-ethz,
-    author = {Javier Moya, Matthias Gabathuler, Mario Ruiz, Gustavo Alonso},
-    title = {{H}eterogeneous {A}ccelerated {C}ompute {C}luster - {ETH Zürich}},
-    howpublished = {\url{https://github.com/fpgasystems/hacc}},
-    doi = {10.5281/zenodo.8340448},
-    year = {2022},
+@misc{moya2023hacc,
+  author       = {Javier Moya, Matthias Gabathuler, Mario Ruiz, Gustavo Alonso},
+  title        = {fpgasystems/hacc: ETHZ-HACC 2022.1},
+  howpublished = {Zenodo},
+  year         = {2023},
+  month        = sep,
+  note         = {\url{https://doi.org/10.5281/zenodo.8344513}},
+  doi          = {10.5281/zenodo.8340448}
 }
 ```
 
