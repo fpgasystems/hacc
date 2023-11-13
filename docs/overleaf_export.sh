@@ -41,9 +41,6 @@ for file in *.md; do
     awk '/^!\[/ { p = 1; print; next } p && /^\*/ { p = 0; next } { p = 0 } 1' "$new_file" > temp.md && mv temp.md "$new_file"
     # Replace ```AnyString``` with bold **AnyString**
     sed -i '' 's/```\([^`]*\)```/**\1**/g' "$new_file"
-    #sed -i '' '/^```$/s/```/***/' "$new_file"
-    awk '/^```$/{f=!f; next} f{print "**"$0"**"; next} 1' "$new_file" > tmpfile && mv tmpfile "$new_file"
-
     # Replace ../imgs with ./
     sed -i '' 's/\.\.\/imgs\//\.\//g' "$new_file"
     # Move to the tex folder
