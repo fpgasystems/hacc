@@ -55,7 +55,7 @@ Five HACCs have been established at some of world’s most prestigious universit
 
 # Releases
 
-## Ubuntu
+<!-- ## Ubuntu
 Regarding the operating system, Ubuntu versioning is according to [IT Services Group (ISG) D-INFK](https://www.isg.inf.ethz.ch/Main/) release schedule:
 
 <table class="tg">
@@ -116,7 +116,7 @@ Regarding the operating system, Ubuntu versioning is according to [IT Services G
 </tbody>
 <tfoot><tr><td colspan="5">&#9675; Existing release.</td></tr></tfoot>
 <tfoot><tr><td colspan="5">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
-</table>
+</table> -->
 
 ## Xilinx Tools
 For ACAP and FPGAs, Xilinx’s tools versioning is according to [XRT’s release schedule](https://github.com/Xilinx/XRT/releases). All servers equipped with Alveo or Versal boards are associated with a unique Xilinx software version, including XRT’s Xilinx Board Utility (xbutil), Xilinx tools (Vivado, Vitis_HLS, Vitis), and the flashable partitions (or base shell) running on the reconfigurable devices.
@@ -283,17 +283,21 @@ This work was supported in part by AMD under the Heterogeneous Accelerated Compu
 
 ## Citation
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8344513.svg)](https://doi.org/10.5281/zenodo.8344513)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8340448.svg)](https://doi.org/10.5281/zenodo.8340448)
 
 ```
 @misc{hacc-ethz,
     author = {Javier Moya, Matthias Gabathuler, Mario Ruiz, Gustavo Alonso},
     title = {{H}eterogeneous {A}ccelerated {C}ompute {C}luster - {ETH Zürich}},
     howpublished = {\url{https://github.com/fpgasystems/hacc}},
-    doi = {10.5281/zenodo.8344513},
+    doi = {10.5281/zenodo.8340448},
     year = {2022},
 }
 ```
+
+### Get the PDF
+
+To get a printed copy of cited resource, please follow [this link.](https://public.3.basecamp.com/p/nEfuexnX55Q1ys7gAUQLjEsN) 
 
 # License
 
