@@ -295,7 +295,7 @@ This work was supported in part by AMD under the Heterogeneous Accelerated Compu
 }
 ```
 
-## Download
+### Download
 
 To get a printed copy of cited resource, please follow [this link.](https://public.3.basecamp.com/p/nEfuexnX55Q1ys7gAUQLjEsN) 
 
