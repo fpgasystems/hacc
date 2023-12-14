@@ -45,21 +45,7 @@ Host *.ethz.ch !jumphost.inf.ethz.ch
 After that, you should be able to access HACC servers with SSH, for instance: ```ssh ETHUSER@alveo-build-01.ethz.ch```. **Please note that for the proposed ssh-configuration file, you must include the whole domain when you try to log in to the server.**
 
 ### Virtual private network (VPN)
-To create your virtual private network connection, please use the following on your favourite VPN client: 
-
-* ETH employees and guest accounts:
-    * Server address: ```sslvpn.ethz.ch```
-    * Account name: ```ETHUSER@staff-net.ethz.ch```
-    * Password: ```RADIUS password```
-    * Shared secret: *According to received information*
-    * Group name: ```staff-net```
-
-* ETH students:
-    * Server address: ```sslvpn.ethz.ch```
-    * Account name: ```ETHUSER@student-net.ethz.ch```
-    * Password: ```RADIUS password```
-    * Shared secret: *According to received information*
-    * Group name: ```student-net```
+Accessing the HACC via VPN connection will exclusively be through the **Cisco Secure Client** client. Please follow the [How to set up VPN](https://unlimited.ethz.ch/display/itkb/VPN) section for a proper configuration. Remember to make use of your **RADIUS password.**
 
 ## Booking and accessing a server
 After configuring our passwords and virtual private network connection, the next step would be to reserve a server through the [booking system](https://alveo-booking.ethz.ch/login.php) and then access it. **Please remember that you must be connected to the ETH network to make use of the booking system.**
