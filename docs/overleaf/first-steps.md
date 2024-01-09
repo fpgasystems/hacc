@@ -36,21 +36,7 @@ To make use of ETH’s jumphost, first you would need to edit your **~/.ssh/conf
 After that, you should be able to access HACC servers with SSH, for instance: **ssh ETHUSER@alveo-build-01.ethz.ch**. **Please note that for the proposed ssh-configuration file, you must include the whole domain when you try to log in to the server.**
 
 ### Virtual private network (VPN)
-To create your virtual private network connection, please use the following on your favourite VPN client: 
-
-* ETH employees and guest accounts:
-    * Server address: **sslvpn.ethz.ch**
-    * Account name: **ETHUSER@staff-net.ethz.ch**
-    * Password: **RADIUS password**
-    * Shared secret: *According to received information*
-    * Group name: **staff-net**
-
-* ETH students:
-    * Server address: **sslvpn.ethz.ch**
-    * Account name: **ETHUSER@student-net.ethz.ch**
-    * Password: **RADIUS password**
-    * Shared secret: *According to received information*
-    * Group name: **student-net**
+Accessing the HACC via VPN connection will exclusively be through the **Cisco Secure Client** client. Please follow the **How to set up VPN** section for a proper configuration. **Remember to make use of your RADIUS password!**
 
 ## Booking and accessing a server
 After configuring our passwords and virtual private network connection, the next step would be to reserve a server through the **booking system** and then access it. **Please remember that you must be connected to the ETH network to make use of the booking system.**
@@ -83,8 +69,6 @@ Once you are logged into a server, you should be able to validate server’s acc
 It is possible that when you log on to a server, you may find that the previous user has left the server in *Vivado mode.* In such a situation, you have the opportunity to revert the server to work again with the Vitis workflow by following the instructions on the screen:
 
 ![Reverting to Vitis workflow.](./reverting-to-vitits-workflow.png "Reverting to Vitis workflow.")
-
-You are ready to go! **After validating the Xilinx accelerator card, we recommend you to check out the **Examples** section.**
 
 ## References
 * [1] **Remote Access by Secure Shell (SSH) using a jump host**
