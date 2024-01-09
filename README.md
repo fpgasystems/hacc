@@ -1,7 +1,7 @@
 <!-- <div id="readme" class="Box-body readme blob js-code-block-container">
 <article class="markdown-body entry-content p-3 p-md-6" itemprop="text"> -->
 <p align="right">
-<a href="https://github.com/fpgasystems">fpgasystems</a> <a href="https://github.com/fpgasystems/sgrt">SGRT</a>
+<a href="https://github.com/fpgasystems">fpgasystems</a> <a href="https://github.com/fpgasystems/hacc-platform">HACC Platform</a> <a href="https://github.com/fpgasystems/sgrt">SGRT</a>
 </p>
 
 <p align="center">
@@ -41,7 +41,7 @@ Five HACCs have been established at some of world’s most prestigious universit
 * [Features](docs/features.md#features)
 * [First steps](docs/first-steps.md#first-steps)
 * [Get started](https://www.amd-haccs.io/get-started.html)
-* [Hardware acceleration platform](https://github.com/fpgasystems/hacc-platform)
+* [Hardware ACCeleration Platform (HACC Platform)](https://github.com/fpgasystems/hacc-platform)
 * [Infrastructure](docs/infrastructure.md#infrastructure)
 * [Known limitations](docs/known-limitations.md#known-limitations)
 * [License](#license)
