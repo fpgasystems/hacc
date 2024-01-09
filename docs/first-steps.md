@@ -83,7 +83,5 @@ It is possible that when you log on to a server, you may find that the previous 
 ![Reverting to Vitis workflow.](../imgs/reverting-to-vitits-workflow.png "Reverting to Vitis workflow.")
 *Reverting to Vitis workflow is based on the [hot-plug boot](https://github.com/fpgasystems/hacc/blob/main/docs/vocabulary.md#pci-hot-plug) process.*
 
-You are ready to go! **After validating the Xilinx accelerator card, we recommend you to check out the [Examples](../examples/README.md#examples) section.**
-
 ## References
 * [1] [Remote Access by Secure Shell (SSH) using a jump host](https://www.isg.inf.ethz.ch/Main/HelpRemoteAccessSSH)
