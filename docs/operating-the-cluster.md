@@ -16,3 +16,12 @@ The following figure shows a simplified model of HACC’s Ansible automation pla
 The playbooks defining our cluster are grouped into two categories: [IaaS](../docs/vocabulary.md#infrastructure-as-a-service-iaas) and [PaaS](../docs/vocabulary.md#platform-as-a-service-paas) playbooks. We refer the IaaS playbooks to the [YAML](../docs/vocabulary.md#yaml) files describing the infrastructure itself. This relates to the OS installation (including the definitions of partition sizes and similar lower-level attributes), virtual machines, networking setup, load balancers, connection topologies, and Debian package installation. With the PaaS playbooks, we take care of installing the software allowing users to develop their heterogeneous accelerated applications. 
 
 **Thanks to IaC and AAP, we can easily follow Xilinx’s tools versioning release schedule as mentioned in [Releases.](../README.md#releases)**
+
+## Daily pipeline
+
+In order to maintain the health and performance of our cluster, two different pipelines are executed to ensure servers sanity and optimal functionality: 
+
+* Weekly pipeline on build servers: Deals with memory leak mitigation, resource cleanup, consistent performance, and improved reliability.
+* Daily pipeline on deployment servers: In addition, ensures that all servers are reverted to the [Vitis Workflow](vocabulary.md#vitis-workflow) *at the beginning of the day.*
+
+The exact pipeline execution times are reflected on the [booking system](https://hacc-booking.ethz.ch/login.php) itself. 
