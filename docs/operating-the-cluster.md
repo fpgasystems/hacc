@@ -17,7 +17,7 @@ The playbooks defining our cluster are grouped into two categories: [IaaS](../do
 
 **Thanks to IaC and AAP, we can easily follow Xilinx’s tools versioning release schedule as mentioned in [Releases.](../README.md#releases)**
 
-## Daily pipeline
+## Pipelines
 
 In order to maintain the health and performance of our cluster, two different pipelines are executed to ensure servers sanity and optimal functionality: 
 
