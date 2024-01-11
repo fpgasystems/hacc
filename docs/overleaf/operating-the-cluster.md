@@ -14,7 +14,7 @@ The playbooks defining our cluster are grouped into two categories: **IaaS**, vi
 
 In order to maintain the health and performance of our cluster, two different pipelines are executed to ensure servers sanity and optimal functionality: 
 
-* **Weekly pipeline on build servers:** Deals with memory leak mitigation, resource cleanup, consistent performance, and improved reliability.
-* **Daily pipeline on deployment servers:** In addition, ensures that all servers are reverted to the **Vitis Workflow** *at the beginning of the day.*
+* Weekly pipeline on build servers: Deals with memory leak mitigation, resource cleanup, consistent performance, and improved reliability.
+* Daily pipeline on deployment servers: In addition, ensures that all servers are reverted to the **Vitis Workflow** *at the beginning of the day.*
 
 The exact pipeline execution times are reflected on the **booking system** itself. 
