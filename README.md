@@ -125,10 +125,11 @@ For ACAP and FPGAs, Xilinx’s tools versioning is according to [XRT’s release
 <thead>
   <tr style="text-align:center">
     <th class="tg-0pky" rowspan="2"><div align="center">Cluster</div></th>
-    <th class="tg-0pky" colspan="2" style="text-align:center"><div align="center">Release</div></th>
+    <th class="tg-0pky" colspan="3" style="text-align:center"><div align="center">Release</div></th>
     <th class="tg-c3ow" rowspan="2">Base shell</th>
   </tr>
   <tr>
+    <th class="tg-0pky" style="text-align:center">2021.2</th>
     <th class="tg-0pky" style="text-align:center">2022.1</th>
     <th class="tg-0pky" style="text-align:center">2022.2</th>
   </tr>
@@ -138,28 +139,33 @@ For ACAP and FPGAs, Xilinx’s tools versioning is according to [XRT’s release
     <td class="tg-0pky"><div align="center">BUILD</div></td>
     <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky" style="text-align:center"> </td>
   </tr>
   <tr>
     <td class="tg-0pky"><div align="center">U250</div></td>
+    <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky" align="center"> </td>
     <td class="tg-0pky">xilinx_u250_gen3x16_base_4<br>xilinx_u250_gen3x16_xdma_shell_4_1<br></td>
   </tr>
   <tr>
     <td class="tg-0pky"><div align="center">U280</div></td>
+    <td class="tg-0pky" align="center">&#9675;</td>
     <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky" align="center"> </td>
     <td class="tg-0pky">xilinx_u280_gen3x16_xdma_base_1</td>
   </tr>
   <tr>
     <td class="tg-0pky"><div align="center">U50D</div></td>
+    <td class="tg-0pky" align="center">&#9675;</td>
     <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky" align="center">&#9675;</td>
     <td class="tg-0pky" style="text-align:center">xilinx_u50_gen3x16_xdma_base_5</td>
   </tr>
   <tr>
     <td class="tg-0pky"><div align="center">U55C</div></td>
+    <td class="tg-0pky" align="center">&#9675;</td>
     <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky" align="center">&#9675;</td>
     <td class="tg-0pky">xilinx_u55c_gen3x16_xdma_base_3</td>
@@ -167,11 +173,13 @@ For ACAP and FPGAs, Xilinx’s tools versioning is according to [XRT’s release
   <tr>
     <td class="tg-0pky"><div align="center">Versal</div></td>
     <td class="tg-0pky" align="center">&#9675;</td>
+    <td class="tg-0pky" align="center">&#9675;</td>
     <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky">xilinx_vck5000_gen4x8_qdma_base_2</td>
   </tr>
   <tr>
     <td class="tg-0pky"><div align="center">HACC BOXES</div></td>
+    <td class="tg-0pky" align="center">&#9675;</td>
     <td class="tg-0pky" align="center">&#9675;</td>
     <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky">xilinx_u55c_gen3x16_xdma_base_3<br>xilinx_vck5000_gen4x8_qdma_base_2</td>
