@@ -50,6 +50,7 @@ Five HACCs have been established at some of world’s most prestigious universit
 * [Releases](#releases)
 * [Systems Group RunTime (SGRT)](https://github.com/fpgasystems/sgrt)
 * [Technical support](docs/technical-support.md)
+* [Usage guidance](#usage-guidance)
 * [Vocabulary](docs/vocabulary.md#vocabulary)
 * [Who does what](docs/who-does-what.md#who-does-what)
 
@@ -119,7 +120,7 @@ Regarding the operating system, Ubuntu versioning is according to [IT Services G
 </table> -->
 
 ## Xilinx Tools
-For ACAP and FPGAs, Xilinx’s tools versioning is according to [XRT’s release schedule](https://github.com/Xilinx/XRT/releases). All servers equipped with Alveo or Versal boards are associated with a unique Xilinx software version, including XRT’s Xilinx Board Utility (xbutil), Xilinx tools (Vivado, Vitis_HLS, Vitis), and the flashable partitions (or base shell) running on the reconfigurable devices.
+Xilinx's tool versioning for ACAP and FPGAs follows [XRT’s release schedule.](https://github.com/Xilinx/XRT/releases) All servers equipped with Alveo or Versal boards (referred to as deployment servers) are associated with a unique Xilinx software version. This includes XRT's Xilinx Board Utility (xbutil), Vivado, Vitis_HLS, and the flashable partitions (or base shell) running on the reconfigurable devices.
 
 <table class="tg">
 <thead>
@@ -188,6 +189,11 @@ For ACAP and FPGAs, Xilinx’s tools versioning is according to [XRT’s release
 <tfoot><tr><td colspan="5">&#9675; Existing release.</td></tr></tfoot>
 <tfoot><tr><td colspan="5">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
 </table>
+
+Some deployment servers also feature Vitis installed. Pay attention to the **welcome message,** as it will indicate the installed tools and their locations.
+
+![Installed Xilinx Tools.](../imgs/installed-xilinx-tools.png "Installed Xilinx Tools.")
+*Installed Xilinx Tools.*
 
 <!-- ### Vitis AI
 
@@ -280,6 +286,17 @@ For GPU accelerators, HIP and ROCm tools versioning is according to [HIP release
 <tfoot><tr><td colspan="5">&#9675; Existing release.</td></tr></tfoot>
 <tfoot><tr><td colspan="5">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
 </table>
+
+# Usage guidance
+When utilizing the HACC, please adhere to the following guidelines:
+
+* **Deployment servers:** Utilize deployment servers exclusively for testing and verification purposes. Refrain from utilizing them for any software builds. Restrict your usage on these machines to Vitis and HIP runtime.
+
+* **Software builds:** For software building tasks, utilize the HACC BUILD cluster instead. This machine allows multiple users simultaneous access without requiring booking. Only resort to this node if you lack local access to suitable servers for running builds in your institute.
+
+* **Tool installations:** Users are only permitted to use preinstalled tools on the system. Avoid installing external tools without prior approval from the HACC manager. If utilizing PYNQ, you may install packages using pip3, ensuring the package is system-wide installed beforehand. For any special requirements, contact [research_clusters@amd.com,](mailto:research_clusters@amd.com) and we will endeavor to accommodate your needs.
+
+* Lastly, ensure compliance with the [Booking rules.](./docs/booking-system.md#booking-rules)
 
 # Acknowledgment and citation
 
