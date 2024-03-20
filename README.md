@@ -192,7 +192,7 @@ Xilinx's tool versioning for ACAP and FPGAs follows [XRT’s release schedule.](
 
 Some deployment servers also feature Vitis installed. Pay attention to the **welcome message,** as it will indicate the installed tools and their locations.
 
-![Installed Xilinx Tools.](../imgs/installed-xilinx-tools.png "Installed Xilinx Tools.")
+![Installed Xilinx Tools.](./imgs/installed-xilinx-tools.png "Installed Xilinx Tools.")
 *Installed Xilinx Tools.*
 
 <!-- ### Vitis AI
