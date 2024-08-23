@@ -136,7 +136,7 @@ Some deployment servers also feature Vitis installed. Pay attention to the **wel
 
 AMD has officially announced the end-of-life (EOL) for its Alveo U250 and U280 data center accelerator cards. As a consequence, **we will no longer update tools or provide support for these devices.** The current tools will be frozen at version 2022.1, and no further updates will be released for these platforms.
 
-Users of the U250 and U280 are encouraged to plan for migration to alternative solutions within AMD's portfolio or other supported products. For more details, please refer to the official AMD documentation and support channels.
+Users of the U250 and U280 are encouraged to plan for migration to alternative solutions within AMD's portfolio or other supported products. Please refer to the official AMD documentation and support channels for more details.
 
 <!-- ### Vitis AI
 
