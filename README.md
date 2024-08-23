@@ -123,8 +123,8 @@ AMD's tool versioning for ACAP and FPGAs follows [XRT’s release schedule.](htt
     <td class="tg-0pky">xilinx_u55c_gen3x16_xdma_base_3<br>xilinx_vck5000_gen4x8_qdma_base_2</td>
   </tr>
 </tbody>
-<tfoot><tr><td colspan="5">&#9675; Existing release.</td></tr></tfoot>
-<tfoot><tr><td colspan="5">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
+<tfoot><tr><td colspan="6">&#9675; Existing release.</td></tr></tfoot>
+<tfoot><tr><td colspan="6">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
 </table>
 
 Some deployment servers also feature Vitis installed. Pay attention to the **welcome message,** as it will indicate the installed tools and their locations.
