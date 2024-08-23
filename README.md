@@ -132,9 +132,9 @@ Some deployment servers also feature Vitis installed. Pay attention to the **wel
 ![Installed AMD Tools.](./imgs/installed-xilinx-tools.png "Installed AMD Tools.")
 *Installed AMD Tools.*
 
-### Important Notice: Alveo U250 and U280 End-of-Life (EOL)
+### Alveo U250 and U280 End-of-Life (EOL)
 
-AMD has officially announced the end-of-life (EOL) for its Alveo U250 and U280 data center accelerator cards. As a consequence, we will no longer update tools or provide support for these devices. The current tools will be frozen at version 2022.1, and no further updates will be released for these platforms.
+AMD has officially announced the end-of-life (EOL) for its Alveo U250 and U280 data center accelerator cards. As a consequence, **we will no longer update tools or provide support for these devices.** The current tools will be frozen at version 2022.1, and no further updates will be released for these platforms.
 
 Users of the U250 and U280 are encouraged to plan for migration to alternative solutions within AMD's portfolio or other supported products. For more details, please refer to the official AMD documentation and support channels.
 
