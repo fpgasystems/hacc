@@ -228,8 +228,8 @@ For GPU accelerators, HIP and ROCm tools versioning is according to [HIP release
     <td class="tg-0pky" align="center">Version 1.13</td>
   </tr>
 </tbody>
-<tfoot><tr><td colspan="5">&#9675; Existing release.</td></tr></tfoot>
-<tfoot><tr><td colspan="5">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
+<tfoot><tr><td colspan="6">&#9675; Existing release.</td></tr></tfoot>
+<tfoot><tr><td colspan="6">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
 </table>
 
 # Usage guidance
