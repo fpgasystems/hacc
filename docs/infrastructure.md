@@ -10,7 +10,7 @@ ETHZ-HACC comprises high-end servers, GPUs, reconfigurable accelerator cards, an
 ![ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.](../imgs/infrastructure.png "ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.")
 *ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.*
 
-There are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including GPUs, FPGAs, and ACAPs (please, see the section [HACC boxes architecture](#hacc-boxes-architecture)). In total, ETHZ-HACC counts twelve GPUs, thirty-one Alveo data center accelerator cards, and seven Versal cards. The following tables give an overview of the **server names** and their **resources:**
+There are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including GPUs, FPGAs, and Adaptive SoCs (please, see the section [HACC boxes architecture](#hacc-boxes-architecture)). In total, ETHZ-HACC counts twelve GPUs, thirty-one Alveo data center accelerator cards, and seven Versal cards. The following tables give an overview of the **server names** and their **resources:**
 
 ![ETHZ-HACC server names.](../imgs/server-names.png "ETHZ-HACC server names.")
 *ETHZ-HACC server names.*
@@ -33,8 +33,8 @@ Virtex UltraScale+ devices provide the highest performance and integration capab
 * [Alveo U50D](https://www.xilinx.com/products/boards-and-kits/alveo/u50.html)
 * [Alveo U55C](https://www.xilinx.com/applications/data-center/high-performance-computing/u55c.html)
 
-### Versal ACAP
-Versal ACAPs deliver unparalleled application- and system-level value for cloud, network, and edge applications​. The disruptive 7nm architecture combines heterogeneous compute engines with a breadth of hardened memory and interfacing technologies for superior performance/watt over competing 10nm FPGAs.
+### Versal Adaptive SoCs
+Versal Adaptive SoCs deliver unparalleled application- and system-level value for cloud, network, and edge applications​. The disruptive 7nm architecture combines heterogeneous compute engines with a breadth of hardened memory and interfacing technologies for superior performance/watt over competing 10nm FPGAs.
 
 * [Versal VCK5000](https://www.xilinx.com/products/boards-and-kits/vck5000.html)
 
@@ -50,7 +50,7 @@ Each HACC users can store data on the following directories:
 The USB - JTAG connection allows granted users to interact directly with the FPGA by downloading bitstreams or updating memory content. The correct setup and access of a USB - JTAG connection is essential developers using working with [Vivado workflow](./vocabulary.md#vivado-workflow).
 
 ## HACC boxes architecture
-The following picture details the architecture of the three heterogeneous servers equipped with 2x EPYC Milan CPUs, 4x [Instinct MI210 GPUs,](https://www.amd.com/system/files/documents/amd-instinct-mi210-brochure.pdf) 2x [Alveo U55C FPGAs,](https://www.xilinx.com/applications/data-center/high-performance-computing/u55c.html) and 2x [Versal VCK5000 ACAPs](https://www.xilinx.com/products/boards-and-kits/vck5000.html) each.
+The following picture details the architecture of the three heterogeneous servers equipped with 2x EPYC Milan CPUs, 4x [Instinct MI210 GPUs,](https://www.amd.com/system/files/documents/amd-instinct-mi210-brochure.pdf) 2x [Alveo U55C FPGAs,](https://www.xilinx.com/applications/data-center/high-performance-computing/u55c.html) and 2x [Versal VCK5000 Adaptive SoCs](https://www.xilinx.com/products/boards-and-kits/vck5000.html) each.
 
 ![HACC boxes architecture.](../imgs/hacc-boxes.png "HACC boxes architecture.")
 *HACC boxes architecture.*
