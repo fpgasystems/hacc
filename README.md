@@ -1,7 +1,7 @@
 <!-- <div id="readme" class="Box-body readme blob js-code-block-container">
 <article class="markdown-body entry-content p-3 p-md-6" itemprop="text"> -->
 <p align="right">
-<a href="https://github.com/fpgasystems">fpgasystems</a> <a href="https://github.com/fpgasystems/hacc-platform">HACC Platform</a> <a href="https://github.com/fpgasystems/sgrt">SGRT</a>
+<a href="https://github.com/fpgasystems">fpgasystems</a> <a href="https://github.com/fpgasystems/hdev">hdev</a>
 </p>
 
 <p align="center">
@@ -16,7 +16,7 @@ Under the scope of the <a href="https://www.xilinx.com/support/university/XUP-HA
 
 HACCs are equipped with the latest AMD hardware and software technologies for adaptive compute acceleration research. Each cluster is specially configured to enable some of the world’s foremost academic teams to conduct state-of-the-art HPC research. 
 
-Five HACCs have been established at some of world’s most prestigious universities. The first of them was assigned to [Prof. Dr. Gustavo Alonso](https://people.inf.ethz.ch/alonso/) of the [Institute for Platform Computing - Systems Group (SG)](https://systems.ethz.ch) at the [Swiss Federal Institute of Technology Zurich (ETH Zürich)](https://ethz.ch/en.html) in 2020.
+Five HACCs have been established at some of world’s most prestigious universities. The first of them was assigned to [Prof. Dr. Gustavo Alonso](https://people.inf.ethz.ch/alonso/) of the [Institute for Platform Computing - Systems Group (SG)](https://systems.ethz.ch) at the [Swiss Federal Institute of Technology Zurich (ETH Zurich, ETHZ)](https://ethz.ch/en.html) in 2020.
 
 ## Sections
 * [Account renewal](/docs/account-renewal.md#account-renewal)
