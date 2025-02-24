@@ -41,7 +41,7 @@ Deployment servers feature high-end multi-core processors, one or more accelerat
   </tr>
 </thead>
 <tbody>
-  <tr>
+  <!-- <tr>
     <td class="tg-0pky"><div align="center">BUILD</div></td>
     <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center"></td>
@@ -52,7 +52,7 @@ Deployment servers feature high-end multi-core processors, one or more accelerat
     <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center">hacc-build-01</td>
-  </tr>
+  </tr> -->
   <tr>
     <td class="tg-0pky"><div align="center">U50D</div></td>
     <td class="tg-0pky" align="center"></td>
@@ -121,7 +121,9 @@ Deployment servers feature high-end multi-core processors, one or more accelerat
 </tbody>
 </table>
 
-As shown by the table above, there are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including  Adaptive SoCs, FPGA, and GPUs (please, see the section [HACC boxes architecture](#hacc-boxes-architecture)). Additionally, reconfigurable accelerator cards have all of their Ethernet interfaces connected to a 100 GbE leaf switch (or 200 GbE in the case of the Alveo V80 compute accelerator cards), enabling the exploration of arbitrary network topologies for distributed computing.
+As shown by the table above, there are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including  Adaptive SoCs, FPGA, and GPUs (please, see the section [HACC boxes architecture](#hacc-boxes-architecture)). 
+
+Additionally, reconfigurable accelerator cards have all of their Ethernet interfaces connected to a 100 GbE leaf switch (or 200 GbE in the case of the Alveo V80 compute accelerator cards), enabling the exploration of arbitrary network topologies for distributed computing.
 
 ### AMD EPYC
 EPYC is the world’s highest-performing x86 server processor with faster performance for cloud, enterprise, and HPC workloads. To learn more about it, please refer to the [AMD EPYC processors website](https://www.amd.com/en/processors/epyc-server-cpu-family) and its [data sheet.](https://www.amd.com/system/files/documents/amd-epyc-7003-series-datasheet.pdf)
@@ -138,6 +140,11 @@ Virtex UltraScale+ devices provide the highest performance and integration capab
 Versal Adaptive SoCs deliver unparalleled application- and system-level value for cloud, network, and edge applications​. The disruptive 7nm architecture combines heterogeneous compute engines with a breadth of hardened memory and interfacing technologies for superior performance/watt over competing 10nm FPGAs.
 
 * [Versal VCK5000](https://www.xilinx.com/products/boards-and-kits/vck5000.html)
+
+### Alveo V80 Compute Accelerator Cards
+The AMD Alveo™ V80 compute accelerator brings massive hardware parallelism and memory bandwidth for workloads with large data sets. The card offers the highest logic density, network throughput, and memory bandwidth in the AMD Alveo portfolio.
+
+* [Alveo V80](https://www.amd.com/en/products/accelerators/alveo/v80.html)
 
 ### Storage
 Each HACC users can store data on the following directories:
