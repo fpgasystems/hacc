@@ -42,7 +42,20 @@ Five HACCs have been established at some of world’s most prestigious universit
 Ubuntu releases are according to [IT Service Group of the Department of Computer Science](https://www.isg.inf.ethz.ch/Main/ServicesDesktopsAndLaptopsLinux) release schedule.
 
 ## AMD Tools
-AMD's tool versioning for ACAP and FPGAs follows [XRT’s release schedule.](https://github.com/Xilinx/XRT/releases) All servers equipped with Alveo or Versal boards (referred to as deployment servers) are associated with a unique AMD software version. This includes XRT's Xilinx Board Utility (xbutil), Vivado, Vitis_HLS, and the flashable partitions (or base shell) running on the reconfigurable devices. For GPU accelerators, HIP and ROCm tools versioning is according to [HIP release schedule](https://github.com/ROCm-Developer-Tools/HIP/releases).
+### Reconfigurable devices
+AMD's tool versioning for ASoCs and FPGAs follows [XRT’s release schedule.](https://github.com/Xilinx/XRT/releases) All servers equipped with Alveo or Versal boards (referred to as deployment servers) are associated with a unique AMD software version. This includes XRT's Xilinx Board Utility (xbutil), Vivado, Vitis_HLS, and the flashable partitions (or base shell) running on the reconfigurable devices. Some deployment servers also feature Vitis installed. Pay attention to the **welcome message,** as it will indicate the installed tools and their locations.
+
+![Installed AMD Tools.](./imgs/installed-xilinx-tools.png "Installed AMD Tools.")
+*Installed AMD Tools.*
+
+### Alveo U250 and U280 End-of-Life (EOL)
+
+AMD has officially announced the end-of-life (EOL) for its Alveo U250 and U280 data center accelerator cards. As a consequence, **we will no longer update tools or provide support for these devices.** The current tools will be **frozen at version 2023.2 (running on Ubuntu 22.04),** and no further updates will be released for these platforms.
+
+Users of the U250 and U280 are encouraged to plan for migration to alternative solutions within AMD's portfolio or other supported products. Please refer to the official AMD documentation and support channels for more details.
+
+### Graphic Processing Units (GPUs)
+For GPU accelerators, HIP and ROCm tools versioning is according to [HIP release schedule](https://github.com/ROCm-Developer-Tools/HIP/releases).
 
 <table class="tg">
 <thead>
@@ -128,17 +141,6 @@ AMD's tool versioning for ACAP and FPGAs follows [XRT’s release schedule.](htt
 <tfoot><tr><td colspan="6">&#9675; Existing release.</td></tr></tfoot>
 <tfoot><tr><td colspan="6">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
 </table>
-
-Some deployment servers also feature Vitis installed. Pay attention to the **welcome message,** as it will indicate the installed tools and their locations.
-
-![Installed AMD Tools.](./imgs/installed-xilinx-tools.png "Installed AMD Tools.")
-*Installed AMD Tools.*
-
-### Alveo U250 and U280 End-of-Life (EOL)
-
-AMD has officially announced the end-of-life (EOL) for its Alveo U250 and U280 data center accelerator cards. As a consequence, **we will no longer update tools or provide support for these devices.** The current tools will be **frozen at version 2023.2 (running on Ubuntu 22.04),** and no further updates will be released for these platforms.
-
-Users of the U250 and U280 are encouraged to plan for migration to alternative solutions within AMD's portfolio or other supported products. Please refer to the official AMD documentation and support channels for more details.
 
 # Usage guidance
 When utilizing the HACC, please adhere to the following guidelines:
