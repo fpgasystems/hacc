@@ -27,7 +27,6 @@ Five HACCs have been established at some of world’s most prestigious universit
 * [Get started](https://www.amd-haccs.io/get-started.html)
 * [HACC Development (hdev)](https://github.com/fpgasystems/hdev)
 * [Infrastructure](docs/infrastructure.md#infrastructure)
-* [Known limitations](docs/known-limitations.md#known-limitations)
 * [License](#license)
 * [Operating the cluster](docs/operating-the-cluster.md#operating-the-cluster)
 * [Playbooks 🔒](https://3.basecamp.com/5241674/buckets/25107010/documents/6507506374)
