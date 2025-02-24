@@ -54,8 +54,8 @@ The table below provides an overview of the current ETHZ-HACC setup across diffe
     <th class="tg-0pky" style="text-align:center">22.04</th>
     <th class="tg-0pky" style="text-align:center">2023.2</th>
     <th class="tg-0pky" style="text-align:center">2024.1</th>
-    <th class="tg-0pky" style="text-align:center">6.1.2</th>
     <th class="tg-0pky" style="text-align:center">6.2.2</th>
+    <th class="tg-0pky" style="text-align:center">6.3.3</th>
   </tr>
 </thead>
 <tbody>
@@ -103,7 +103,7 @@ The table below provides an overview of the current ETHZ-HACC setup across diffe
     <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky" align="center"> </td>
+    <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center"></td>
     <!-- <td class="tg-0pky">Alveo U250<br> Alveo U280</td> xilinx_vck5000_gen4x8_qdma_base_2 -->
@@ -114,13 +114,13 @@ The table below provides an overview of the current ETHZ-HACC setup across diffe
     <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center">&#9675;</td>
     <!-- <td class="tg-0pky">Alveo U55C (2)<br>Versal VCK500 (2)<br>Instinct MI210 (4)</td>  xilinx_u55c_gen3x16_xdma_base_3 <br> xilinx_vck5000_gen4x8_qdma_base_2 -->
   </tr>
 </tbody>
-<!-- <tfoot><tr><td colspan="8">&#9675; Existing release.</td></tr></tfoot>
-<tfoot><tr><td colspan="8">&#9679; Existing release installed on the cluster.</td></tr></tfoot> -->
+<tfoot><tr><td colspan="7">&#9675; Existing release.</td></tr></tfoot>
+<tfoot><tr><td colspan="7">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
 </table>
 
 ## Ubuntu
