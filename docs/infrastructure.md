@@ -12,6 +12,110 @@ ETHZ-HACC comprises high-end servers, GPUs, reconfigurable accelerator cards, an
 
 There are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including GPUs, FPGAs, and Adaptive SoCs (please, see the section [HACC boxes architecture](#hacc-boxes-architecture)). In total, ETHZ-HACC counts twelve GPUs, thirty-one Alveo data center accelerator cards, and seven Versal cards. The following tables give an overview of the **server names** and their **resources:**
 
+<table class="tg">
+<thead>
+  <tr style="text-align:center">
+    <th class="tg-0pky" rowspan="2"><div align="center">Cluster</div></th>
+    <th class="tg-0pky" colspan="2"><div align="center">ASoCs</div></th>
+    <th class="tg-0pky" colspan="4" style="text-align:center"><div align="center">FPGAs</div></th>
+    <th class="tg-0pky" colspan="2" style="text-align:center"><div align="center">GPUs</div></th>
+    <th class="tg-0pky" rowspan="2"><div align="center">Servers</div></th>
+    <!-- <th class="tg-c3ow" rowspan="2">Accelerators</th> -->
+  </tr>
+  <tr>
+    <th class="tg-0pky" style="text-align:center">VCK5000</th>
+    <th class="tg-0pky" style="text-align:center">V80</th>
+    <th class="tg-0pky" style="text-align:center">U250</th>
+    <th class="tg-0pky" style="text-align:center">U280</th>
+    <th class="tg-0pky" style="text-align:center">U50D</th>
+    <th class="tg-0pky" style="text-align:center">U55C</th>
+    <th class="tg-0pky" style="text-align:center">MI100</th>
+    <th class="tg-0pky" style="text-align:center">MI210</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky"><div align="center">BUILD</div></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center">hacc-build-01</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">U50D</div></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center">alveo-u50d-[01:02]</td>
+    <!--<td class="tg-0pky" style="text-align:center">Alveo U50D</td>  xilinx_u50_gen3x16_xdma_base_5 -->
+  </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">U55C</div></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center">alveo-u55c-[01:10]</td>
+    <!-- <td class="tg-0pky">Alveo U55C</td> xilinx_u55c_gen3x16_xdma_base_3 -->
+  </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">V80</div></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"> </td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center">alveo-v80-01</td>
+    <!-- <td class="tg-0pky" >Alveo V80</td> -->
+  </tr>
+  <tr>
+    <td class="tg-0pky"><div align="center">ALVEO BOXES</div></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center">&#9679;</td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center"></td>
+    <td class="tg-0pky" align="center">alveo-box-[01:02]</td>
+    <!-- <td class="tg-0pky">Alveo U250<br> Alveo U280</td> xilinx_vck5000_gen4x8_qdma_base_2 -->
+  </tr>
+  <tr>
+    <td class="tg-0pky" ><div align="center">HACC BOXES</div></td>
+    <td class="tg-0pky" align="center">&#9679;</br>&#9679;</br>&nbsp;</td>
+    <td class="tg-0pky" align="center">&nbsp;</br>&nbsp;</br>&#9679;</td>
+    <td class="tg-0pky" align="center">&nbsp;</br>&nbsp;</br>&nbsp;</td>
+    <td class="tg-0pky" align="center">&nbsp;</br>&nbsp;</br>&nbsp;</td>
+    <td class="tg-0pky" align="center">&nbsp;</br>&nbsp;</br>&nbsp;</td>
+    <td class="tg-0pky" align="center">&#9679;</br>&#9679;</br>&nbsp;</td>
+    <td class="tg-0pky" align="center">&nbsp;</br>&#9679;</br>&nbsp;</td>
+    <td class="tg-0pky" align="center">&#9679;</br>&#9679;</br>&#9679;</td>
+    <td class="tg-0pky" align="center">hacc-box-[01:02]</br>hacc-box-03</br>hacc-box-[04:05]</td>
+    <!-- <td class="tg-0pky">Alveo U55C (2)<br>Versal VCK500 (2)<br>Instinct MI210 (4)</td>  xilinx_u55c_gen3x16_xdma_base_3 <br> xilinx_vck5000_gen4x8_qdma_base_2 -->
+  </tr>
+</tbody>
+<tfoot><tr><td colspan="7">&#9675; Existing release.</td></tr></tfoot>
+<tfoot><tr><td colspan="7">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
+</table>
+
 ![ETHZ-HACC server names.](../imgs/server-names.png "ETHZ-HACC server names.")
 *ETHZ-HACC server names.*
 
