@@ -23,6 +23,6 @@ By using [HACC Development (hdev)](https://github.com/fpgasystems/hdev), you can
 * Seamlessly integrate with [GitHub CLI](https://cli.github.com) for efficient version control and collaboration.
 * Effectively manage ASoCs, FPGAs, multi-core CPUs, and GPUs, all through a unified device index.
 * Transition between [Vivado and Vitis workflows](./vocabulary.md#vivado-and-vitis-workflows) effortlessly, eliminating the need for system reboots and enhancing your development agility.
-* Easily design, build, and deploy modern accelerated applications using our development templates, which integrate a variety of open-source frameworks and provide pre-configured projects.
+* Design, build, and deploy modern accelerated applications with ease, leveraging your own or third-party integrations.
 
 <!-- This should be consistent with features on the hdev repository -->
