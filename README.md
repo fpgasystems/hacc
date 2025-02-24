@@ -47,7 +47,7 @@ The table below provides an overview of the current ETHZ-HACC setup across diffe
     <th class="tg-0pky" colspan="2"><div align="center">Ubuntu</div></th>
     <th class="tg-0pky" colspan="2" style="text-align:center"><div align="center">Vivado</div></th>
     <th class="tg-0pky" colspan="2" style="text-align:center"><div align="center">HIP/ROCm</div></th>
-    <th class="tg-c3ow" rowspan="2">Accelerators</th>
+    <!-- <th class="tg-c3ow" rowspan="2">Accelerators</th> -->
   </tr>
   <tr>
     <th class="tg-0pky" style="text-align:center">20.04</th>
@@ -77,7 +77,7 @@ The table below provides an overview of the current ETHZ-HACC setup across diffe
     <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" style="text-align:center">Alveo U50D</td> <!--  xilinx_u50_gen3x16_xdma_base_5 -->
+    <!--<td class="tg-0pky" style="text-align:center">Alveo U50D</td>  xilinx_u50_gen3x16_xdma_base_5 -->
   </tr>
   <tr>
     <td class="tg-0pky"><div align="center">U55C</div></td>
@@ -87,7 +87,7 @@ The table below provides an overview of the current ETHZ-HACC setup across diffe
     <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky">Alveo U55C</td> <!--  xilinx_u55c_gen3x16_xdma_base_3 -->
+    <!-- <td class="tg-0pky">Alveo U55C</td> xilinx_u55c_gen3x16_xdma_base_3 -->
   </tr>
   <tr>
     <td class="tg-0pky"><div align="center">V80</div></td>
@@ -97,7 +97,7 @@ The table below provides an overview of the current ETHZ-HACC setup across diffe
     <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" >Alveo V80</td>
+    <!-- <td class="tg-0pky" >Alveo V80</td> -->
   </tr>
   <tr>
     <td class="tg-0pky"><div align="center">ALVEO BOXES</div></td>
@@ -107,7 +107,7 @@ The table below provides an overview of the current ETHZ-HACC setup across diffe
     <td class="tg-0pky" align="center"> </td>
     <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky">Alveo U250<br> Alveo U280</td> <!--  xilinx_vck5000_gen4x8_qdma_base_2 -->
+    <!-- <td class="tg-0pky">Alveo U250<br> Alveo U280</td> xilinx_vck5000_gen4x8_qdma_base_2 -->
   </tr>
   <tr>
     <td class="tg-0pky"><div align="center">HACC BOXES</div></td>
@@ -117,7 +117,7 @@ The table below provides an overview of the current ETHZ-HACC setup across diffe
     <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky">Alveo U55C (2)<br>Versal VCK500 (2)<br>Instinct MI210 (4)</td> <!--  xilinx_u55c_gen3x16_xdma_base_3 <br> xilinx_vck5000_gen4x8_qdma_base_2 -->
+    <!-- <td class="tg-0pky">Alveo U55C (2)<br>Versal VCK500 (2)<br>Instinct MI210 (4)</td>  xilinx_u55c_gen3x16_xdma_base_3 <br> xilinx_vck5000_gen4x8_qdma_base_2 -->
   </tr>
 </tbody>
 <!-- <tfoot><tr><td colspan="8">&#9675; Existing release.</td></tr></tfoot>
