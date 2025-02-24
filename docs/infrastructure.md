@@ -5,10 +5,10 @@
 </p>
 
 # Infrastructure
-The ETHZ-HACC comprises build and deployment servers. Build servers are dedicated to development and bitstream compilation, providing a robust environment for software and hardware design. Deployment servers, on the other hand, host one or more acceleration devices, enabling high-performance execution of workloads. This separation ensures an efficient workflow, allowing developers to compile and test their applications on build servers before deploying them to accelerator-equipped machines for execution.
+The ETHZ-HACC comprises build and deployment servers. **Build servers are dedicated to development and bitstream compilation,** providing a robust environment for software and hardware design. **Deployment servers,** on the other hand, host one or more acceleration devices, enabling **high-performance execution of workloads.** This separation ensures an efficient workflow, allowing developers to compile and test their applications on build servers before deploying them to accelerator-equipped machines for execution.
 
-![Deployment servers host one or more acceleration devices.](../imgs/infrastructure.png "Deployment servers host one or more acceleration devices.")
-*Deployment servers host one or more acceleration devices.*
+![Infrastructure.](../imgs/infrastructure.png "Infrastructure.")
+*Infrastructure.*
 
 ## Build servers
 Build servers are dedicated for development and bitstream compilation purposes. Multiple users can access this machine simultaneously **without booking it first.** Please only use the HACC build servers if you do not have access to similar resources at your research institution: too many users running large jobs on this machine will likely cause builds to run slowly—or sometimes to fail. Also, avoid using the build servers for debugging or simulating your hardware.
@@ -17,11 +17,7 @@ Build servers are dedicated for development and bitstream compilation purposes. 
 
 ## Deployment servers
 <!-- Deployment servers are composed of high-end multi-core processors, one or more acceleration cards (like GPUs or reconfigurable accelerator cards), and high-speed networking. Reconfigurable accelerator cards have all of its Ethernet interfaces connected to a 100 (or 200) GbE leaf switch to allow exploration of arbitrary network topologies for distributed computing.  -->
-Deployment servers feature high-end multi-core processors, one or more accelerator cards—such as GPUs or reconfigurable accelerator cards—and high-speed networking. These servers are categorized into two types: the first type is equipped with a single accelerator card, while the second hosts a heterogeneous mix of accelerators, including Adaptive SoCs, FPGAs, and GPUs (see section [HACC boxes architecture](#hacc-boxes-architecture)). Additionally, reconfigurable accelerator cards have all of their Ethernet interfaces connected to a 100 (or 200) GbE leaf switch, enabling the exploration of arbitrary network topologies for distributed computing.
-
-<!-- There are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including  Adaptive SoCs, FPGA, and GPUs (please, see the section [HACC boxes architecture](#hacc-boxes-architecture)).  -->
-
-The following table gives an overview of the **server names** and their **resources:**
+Deployment servers feature high-end multi-core processors, one or more accelerator cards—such as GPUs or reconfigurable accelerator cards—and high-speed networking. There are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including  Adaptive SoCs, FPGA, and GPUs (please, see the section [HACC boxes architecture](#hacc-boxes-architecture)). The following table gives an overview of the devices installed on each of them:
 
 <table class="tg">
 <thead>
@@ -124,6 +120,8 @@ The following table gives an overview of the **server names** and their **resour
   </tr>
 </tbody>
 </table>
+
+Additionally, reconfigurable accelerator cards have all of their Ethernet interfaces connected to a 100 GbE (or 200 GbE in the case of the Alveo V80 cards) leaf switch, enabling the exploration of arbitrary network topologies for distributed computing.
 
 ### AMD EPYC
 EPYC is the world’s highest-performing x86 server processor with faster performance for cloud, enterprise, and HPC workloads. To learn more about it, please refer to the [AMD EPYC processors website](https://www.amd.com/en/processors/epyc-server-cpu-family) and its [data sheet.](https://www.amd.com/system/files/documents/amd-epyc-7003-series-datasheet.pdf)
