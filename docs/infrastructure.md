@@ -121,7 +121,7 @@ Deployment servers feature high-end multi-core processors, one or more accelerat
 </tbody>
 </table>
 
-As shown by the table above, there are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including  Adaptive SoCs, FPGA, and GPUs (please, see the section [HACC boxes architecture](#hacc-boxes-architecture)). 
+As shown by the table above, there are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including  Adaptive SoCs, FPGAs, and GPUs (please, see the section [HACC boxes architecture](#hacc-boxes-architecture)). 
 
 Additionally, reconfigurable accelerator cards have all of their Ethernet interfaces connected to a 100 GbE leaf switch (or 200 GbE in the case of the Alveo V80 compute accelerator cards), enabling the exploration of arbitrary network topologies for distributed computing.
 
@@ -158,10 +158,10 @@ Each HACC users can store data on the following directories:
 The USB - JTAG connection allows granted users to interact directly with the FPGA by downloading bitstreams or updating memory content. The correct setup and access of a USB - JTAG connection is essential developers using working with [Vivado workflow.](./vocabulary.md#vivado-workflow)
 
 ## HACC boxes architecture
-The following picture details the architecture of the one of our heterogeneous servers equipped with 2x EPYC Milan CPUs, 4x [Instinct MI210 GPUs,](https://www.amd.com/system/files/documents/amd-instinct-mi210-brochure.pdf) 2x [Alveo U55C FPGAs,](https://www.xilinx.com/applications/data-center/high-performance-computing/u55c.html) and 2x [Versal VCK5000 Adaptive SoCs](https://www.xilinx.com/products/boards-and-kits/vck5000.html) each.
+The following picture details the architecture of the one of our heterogeneous servers (specifically, hacc-box-01) equipped with 2x EPYC Milan CPUs, 4x [Instinct MI210 GPUs,](https://www.amd.com/system/files/documents/amd-instinct-mi210-brochure.pdf) 2x [Alveo U55C FPGAs,](https://www.xilinx.com/applications/data-center/high-performance-computing/u55c.html) and 2x [Versal VCK5000 Adaptive SoCs](https://www.xilinx.com/products/boards-and-kits/vck5000.html) each.
 
-![HACC boxes architecture.](../imgs/hacc-boxes.png "HACC boxes architecture.")
-*HACC boxes architecture.*
+![Server architecture of hacc-box-01.](../imgs/hacc-boxes.png "Server architecture of hacc-box-01.")
+*Server architecture of hacc-box-01.*
 
 ## Networking
 
