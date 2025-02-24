@@ -97,7 +97,7 @@ The table below provides an overview of the current ETHZ-HACC setup across diffe
     <td class="tg-0pky" align="center">&#9679;</td>
     <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center">Alveo V80</td>
+    <td class="tg-0pky" >Alveo V80</td>
   </tr>
   <tr>
     <td class="tg-0pky"><div align="center">ALVEO BOXES</div></td>
