@@ -38,6 +38,8 @@ Five HACCs have been established at some of world’s most prestigious universit
 
 # Releases
 
+The table below provides an overview of the current ETHZ-HACC setup across different releases:
+
 <table class="tg">
 <thead>
   <tr style="text-align:center">
@@ -96,7 +98,6 @@ Five HACCs have been established at some of world’s most prestigious universit
     <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center"></td>
     <td class="tg-0pky" align="center">Alveo V80</td>
-    <td class="tg-0pky"> </td>
   </tr>
   <tr>
     <td class="tg-0pky"><div align="center">ALVEO BOXES</div></td>
@@ -133,99 +134,12 @@ AMD's tool versioning for ASoCs and FPGAs follows [XRT’s release schedule.](ht
 ![Installed AMD Tools.](./imgs/installed-xilinx-tools.png "Installed AMD Tools.")
 *Installed AMD Tools.*
 
-### Alveo U250 and U280 End-of-Life (EOL)
+<!-- ### Alveo U250 and U280 End-of-Life (EOL) -->
 
-AMD has officially announced the end-of-life (EOL) for its Alveo U250 and U280 data center accelerator cards. As a consequence, **we will no longer update tools or provide support for these devices.** The current tools will be **frozen at version 2023.2 (running on Ubuntu 22.04),** and no further updates will be released for these platforms.
-
-Users of the U250 and U280 are encouraged to plan for migration to alternative solutions within AMD's portfolio or other supported products. Please refer to the official AMD documentation and support channels for more details.
+AMD has officially announced the end-of-life (EOL) for its Alveo U250 and U280 data center accelerator cards. As a consequence, **we will no longer update tools or provide support for these devices.** The current tools will be **frozen at version 2023.2 (running on Ubuntu 22.04),** and no further updates will be released for these platforms. Users of the U250 and U280 are encouraged to plan for migration to alternative solutions within AMD's portfolio or other supported products. Please refer to the official AMD documentation and support channels for more details.
 
 ### Graphic Processing Units (GPUs)
 For GPU accelerators, HIP and ROCm tools versioning is according to [HIP release schedule](https://github.com/ROCm-Developer-Tools/HIP/releases).
-
-<table class="tg">
-<thead>
-  <tr style="text-align:center">
-    <th class="tg-0pky" rowspan="2"><div align="center">Cluster</div></th>
-    <th class="tg-0pky" colspan="2"><div align="center">Ubuntu</div></th>
-    <th class="tg-0pky" colspan="2" style="text-align:center"><div align="center">Vivado</div></th>
-    <th class="tg-0pky" colspan="2" style="text-align:center"><div align="center">ROCm</div></th>
-    <th class="tg-c3ow" rowspan="2">Accelerators</th>
-  </tr>
-  <tr>
-    <th class="tg-0pky" style="text-align:center">20.04</th>
-    <th class="tg-0pky" style="text-align:center">22.04</th>
-    <th class="tg-0pky" style="text-align:center">2023.2</th>
-    <th class="tg-0pky" style="text-align:center">2024.1</th>
-    <th class="tg-0pky" style="text-align:center">6.1.2</th>
-    <th class="tg-0pky" style="text-align:center">6.2.2</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td class="tg-0pky"><div align="center">BUILD</div></td>
-    <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" style="text-align:center"> </td>
-  </tr>
-  <tr>
-    <td class="tg-0pky"><div align="center">U50D</div></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" style="text-align:center">Alveo U50D</td> <!--  xilinx_u50_gen3x16_xdma_base_5 -->
-  </tr>
-  <tr>
-    <td class="tg-0pky"><div align="center">U55C</div></td>
-    <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky">Alveo U55C</td> <!--  xilinx_u55c_gen3x16_xdma_base_3 -->
-  </tr>
-  <tr>
-    <td class="tg-0pky"><div align="center">V80</div></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky" align="center"> </td>
-    <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center">Alveo V80</td>
-    <td class="tg-0pky"> </td>
-  </tr>
-  <tr>
-    <td class="tg-0pky"><div align="center">ALVEO BOXES</div></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky" align="center"> </td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky">Alveo U250<br> Alveo U280</td> <!--  xilinx_vck5000_gen4x8_qdma_base_2 -->
-  </tr>
-  <tr>
-    <td class="tg-0pky"><div align="center">HACC BOXES</div></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky" align="center">&#9675;</td>
-    <td class="tg-0pky" align="center">&#9679;</td>
-    <td class="tg-0pky">Alveo U55C (2)<br>Versal VCK500 (2)<br>Instinct MI210 (4)</td> <!--  xilinx_u55c_gen3x16_xdma_base_3 <br> xilinx_vck5000_gen4x8_qdma_base_2 -->
-  </tr>
-</tbody>
-<tfoot><tr><td colspan="8">&#9675; Existing release.</td></tr></tfoot>
-<tfoot><tr><td colspan="8">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
-</table>
 
 # Usage guidance
 When utilizing the HACC, please adhere to the following guidelines:
