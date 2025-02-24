@@ -18,11 +18,11 @@ We use [Infrastructure as Code (IaC)](./vocabulary.md#infrastructure-as-code-iac
 ## HACC Development (hdev)
 By using [HACC Development (hdev)](https://github.com/fpgasystems/hdev), you can easily:
 
-* Validate the fundamental infrastructure functionality of ETHZ-HACC, ensuring its reliability and performance.
-* Expedite project creation through intuitive multiple-choice dialogs and templates, streamlining the development of your accelerated applications.
-* Seamlessly integrate with [GitHub CLI](https://cli.github.com) for efficient version control and collaboration.
-* Effectively manage ASoCs, FPGAs, multi-core CPUs, and GPUs, all through a unified device index.
+* **Validate the fundamental functionality** of ETHZ-HACC, ensuring its reliability and performance.
+* Expedite project creation through intuitive multiple-choice dialogs and templates, **streamlining the development of your accelerated applications.**
+* Seamlessly integrate with [GitHub CLI](https://cli.github.com) for efficient **version control and collaboration.**
+* Effectively manage ASoCs, FPGAs, multi-core CPUs, and GPUs, **all through a unified device index.**
 * Transition between [Vivado and Vitis workflows](./vocabulary.md#vivado-and-vitis-workflows) effortlessly, eliminating the need for system reboots and enhancing your development agility.
-* Design, build, and deploy modern accelerated applications with ease, leveraging your own or third-party integrations.
+* **Design, build, and deploy modern accelerated applications with ease,** leveraging your own or third-party integrations.
 
 <!-- This should be consistent with features on the hdev repository -->
