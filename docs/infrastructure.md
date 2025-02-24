@@ -142,7 +142,7 @@ Versal Adaptive SoCs deliver unparalleled application- and system-level value fo
 * [Versal VCK5000](https://www.xilinx.com/products/boards-and-kits/vck5000.html)
 
 ### Alveo V80 Compute Accelerator Cards
-The AMD Alveo™ V80 compute accelerator brings massive hardware parallelism and memory bandwidth for workloads with large data sets. The card offers the highest logic density, network throughput, and memory bandwidth in the AMD Alveo portfolio.
+Alveo V80 compute accelerator cards provide exceptional performance for data center, AI, and high-performance computing workloads. Built on advanced 7nm technology, they integrate high-bandwidth memory, optimized compute engines, and low-latency interconnects to deliver superior throughput and efficiency compared to previous-generation accelerators.
 
 * [Alveo V80](https://www.amd.com/en/products/accelerators/alveo/v80.html)
 
