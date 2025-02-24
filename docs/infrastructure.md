@@ -5,12 +5,14 @@
 </p>
 
 # Infrastructure
-ETHZ-HACC comprises high-end servers, GPUs, reconfigurable accelerator cards, and high-speed networking. Each accelerator card has all of its Ethernet interfaces connected to a 100 GbE leaf switch to allow exploration of arbitrary network topologies for distributed computing. Additionally, we are offering a build server with development and bitstream compilation purposes.
+ETHZ-HACC comprises high-end servers, GPUs, reconfigurable accelerator cards, and high-speed networking. Each accelerator card has all of its Ethernet interfaces connected to a 100 (or 200) GbE leaf switch to allow exploration of arbitrary network topologies for distributed computing. Additionally, we are offering a build server with development and bitstream compilation purposes.
 
 ![ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.](../imgs/infrastructure.png "ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.")
 *ETHZ-HACC is comprised of high-​end servers, reconfigurable accelerator cards, and high-​speed networking.*
 
-There are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including GPUs, FPGAs, and Adaptive SoCs (please, see the section [HACC boxes architecture](#hacc-boxes-architecture)). In total, ETHZ-HACC counts twelve GPUs, thirty-one Alveo data center accelerator cards, and seven Versal cards. The following tables give an overview of the **server names** and their **resources:**
+There are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including  Adaptive SoCs, FPGA, and GPUs (please, see the section [HACC boxes architecture](#hacc-boxes-architecture)). 
+
+The following table gives an overview of the **server names** and their **resources:**
 
 <table class="tg">
 <thead>
@@ -112,8 +114,6 @@ There are **two types of deployment servers.** The first type of servers are equ
     <!-- <td class="tg-0pky">Alveo U55C (2)<br>Versal VCK500 (2)<br>Instinct MI210 (4)</td>  xilinx_u55c_gen3x16_xdma_base_3 <br> xilinx_vck5000_gen4x8_qdma_base_2 -->
   </tr>
 </tbody>
-<tfoot><tr><td colspan="7">&#9675; Existing release.</td></tr></tfoot>
-<tfoot><tr><td colspan="7">&#9679; Existing release installed on the cluster.</td></tr></tfoot>
 </table>
 
 ## *Build cluster*
