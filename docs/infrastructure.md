@@ -123,8 +123,6 @@ Deployment servers feature high-end multi-core processors, one or more accelerat
 
 As shown by the table above, there are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including  Adaptive SoCs, FPGAs, and GPUs (please, see the section [HACC boxes architecture](#hacc-boxes-architecture)). 
 
-Additionally, reconfigurable accelerator cards have all of their Ethernet interfaces connected to a 100 GbE leaf switch (or 200 GbE in the case of the Alveo V80 compute accelerator cards), enabling the exploration of arbitrary network topologies for distributed computing.
-
 ### AMD EPYC
 EPYC is the world’s highest-performing x86 server processor with faster performance for cloud, enterprise, and HPC workloads. To learn more about it, please refer to the [AMD EPYC processors website](https://www.amd.com/en/processors/epyc-server-cpu-family) and its [data sheet.](https://www.amd.com/system/files/documents/amd-epyc-7003-series-datasheet.pdf)
 
@@ -165,6 +163,8 @@ The following picture details the architecture of the one of our heterogeneous s
 
 ## Networking
 
+Each server has at least three connections: one to the **management network,** one to the **access network,** and one to the high-speed **data network.** Additionally, all Ethernet interfaces of reconfigurable accelerator cards are connected to a 100 GbE leaf switch (or 200 GbE for Alveo V80 compute accelerator cards), enabling the exploration of arbitrary network topologies for distributed computing.
+
 ![Management, access and data networks.](../imgs/networking.png "Management, access and data networks.")
 *Management, access and data networks.*
 
@@ -175,9 +175,9 @@ We refer to the management network as the infrastructure allowing our IT adminis
 The access network is the infrastructure that allows secure remote access to our **users** through SSH.
 
 ### Data network
-For our **high-speed networking** data network, we are using a [spine-leaf architecture](../docs/vocabulary.md#spine-leaf-architecture) where the L2 leaf layer is built with 100 GbE [Cisco Nexus 9336c FX2](https://www.cisco.com/c/en/us/products/switches/nexus-9336c-fx2-switch/index.html) switches and active optic cables (AOCs):
+For our **high-speed networking** data network, we are using a [spine-leaf architecture](../docs/vocabulary.md#spine-leaf-architecture) where the L2 leaf layer is built with 100 GbE [Cisco Nexus 9336c FX2](https://www.cisco.com/c/en/us/products/switches/nexus-9336c-fx2-switch/index.html) and 200 GbE [Spectrum SN3000 Open](https://www.nvidia.com/en-in/networking/ethernet-switching/spectrum-sn3000/) switches and active optic cables (AOCs):
 
 ![Spine-leaf data network architecture.](../imgs/spine-leaf.png "Spine-leaf data network architecture.")
 *Spine-leaf data network architecture.*
 
-On the server side, the CPU NICs are [ConnectX-5](https://www.nvidia.com/en-us/networking/ethernet/connectx-5/) adaptors. For the servers **with only one accelerator card, only one 100 GbE port is connected to the respective leaf switch.** On the other hand, **the HACC boxes have two 100 GbE ports connected to the respective leaf switch,** offering a total of 200 GbE effective bandwidth.
+<!-- On the server side, the CPU NICs are [ConnectX-5](https://www.nvidia.com/en-us/networking/ethernet/connectx-5/) adaptors. For the servers **with only one accelerator card, only one 100 GbE port is connected to the respective leaf switch.** On the other hand, **the HACC boxes have two 100 GbE ports connected to the respective leaf switch,** offering a total of 200 GbE effective bandwidth. -->
