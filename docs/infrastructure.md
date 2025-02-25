@@ -145,7 +145,7 @@ Each HACC users can store data on the following directories:
 The USB - JTAG connection allows granted users to interact directly with the FPGA by downloading bitstreams or updating memory content. The correct setup and access of a USB - JTAG connection is essential developers using working with [Vivado workflow.](./vocabulary.md#vivado-workflow)
 
 ### HACC boxes architecture
-The following picture details the architecture of the one of our heterogeneous servers (specifically, hacc-box-01), which is equipped with 2x EPYC Milan CPUs, 4x [Instinct MI210 GPUs,](https://www.amd.com/system/files/documents/amd-instinct-mi210-brochure.pdf) 1x 100 GbE NIC, 2x [Alveo U55C FPGAs,](https://www.xilinx.com/applications/data-center/high-performance-computing/u55c.html) and 2x [Versal VCK5000 Adaptive SoCs](https://www.xilinx.com/products/boards-and-kits/vck5000.html).
+The following picture details the architecture of the one of our heterogeneous servers (specifically, hacc-box-01), which is equipped with 2x EPYC Milan CPUs, 4x [Instinct MI210 GPUs,](https://www.amd.com/system/files/documents/amd-instinct-mi210-brochure.pdf) 1x 100 GbE NIC, 2x [Alveo U55C FPGAs,](https://www.xilinx.com/applications/data-center/high-performance-computing/u55c.html) and 2x [Versal VCK5000 Adaptive SoCs](https://www.xilinx.com/products/boards-and-kits/vck5000.html). **The diagram can be used as a reference for the configuration of other HACC boxes.**
 
 ![Server architecture of hacc-box-01. This diagram is for illustrative purposes and may be subject to change.](../imgs/hacc-boxes.png "Server architecture of hacc-box-01. This diagram is for illustrative purposes and may be subject to change.")
 *Server architecture of hacc-box-01. This diagram is for illustrative purposes and may be subject to change.*
@@ -166,7 +166,7 @@ The access network is the infrastructure that allows secure remote access to our
 ### Data network
 For our **high-speed networking** data network, we are using a [spine-leaf architecture](../docs/vocabulary.md#spine-leaf-architecture) where the L2 leaf layer is built with 100 and 200 GbE [Cisco Nexus 9000 Series](https://www.cisco.com/c/en/us/support/switches/nexus-9000-series-switches/series.html) switches, and active optic cables (AOCs):
 
-![Spine-leaf data network architecture.](../imgs/spine-leaf.png "Spine-leaf data network architecture.")
-*Spine-leaf data network architecture.*
+![Spine-leaf data network architecture. This diagram is for illustrative purposes and may be subject to change.](../imgs/spine-leaf.png "Spine-leaf data network architecture. This diagram is for illustrative purposes and may be subject to change.")
+*Spine-leaf data network architecture. This diagram is for illustrative purposes and may be subject to change.*
 
 <!-- On the server side, the CPU NICs are [ConnectX-5](https://www.nvidia.com/en-us/networking/ethernet/connectx-5/) adaptors. For the servers **with only one accelerator card, only one 100 GbE port is connected to the respective leaf switch.** On the other hand, **the HACC boxes have two 100 GbE ports connected to the respective leaf switch,** offering a total of 200 GbE effective bandwidth. -->
