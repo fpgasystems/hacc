@@ -147,8 +147,8 @@ The USB - JTAG connection allows granted users to interact directly with the FPG
 ### HACC boxes architecture
 The following picture details the architecture of the one of our heterogeneous servers (specifically, hacc-box-01), which is equipped with 2x EPYC Milan CPUs, 4x [Instinct MI210 GPUs,](https://www.amd.com/system/files/documents/amd-instinct-mi210-brochure.pdf) 1x 100 GbE NIC, 2x [Alveo U55C FPGAs,](https://www.xilinx.com/applications/data-center/high-performance-computing/u55c.html) and 2x [Versal VCK5000 Adaptive SoCs](https://www.xilinx.com/products/boards-and-kits/vck5000.html).
 
-![Server architecture of hacc-box-01. This diagram can also serve as a reference for the architecture of other HACC boxes.](../imgs/hacc-boxes.png "Server architecture of hacc-box-01. This diagram can also serve as a reference for the architecture of other HACC boxes.")
-*Server architecture of hacc-box-01. This diagram can also serve as a reference for the architecture of other HACC boxes.*
+![Server architecture of hacc-box-01. This diagram is for illustrative purposes and may be subject to change.](../imgs/hacc-boxes.png "Server architecture of hacc-box-01. This diagram is for illustrative purposes and may be subject to change.")
+*Server architecture of hacc-box-01. This diagram is for illustrative purposes and may be subject to change.*
 
 ## Networking
 
