@@ -154,8 +154,8 @@ The following picture details the architecture of the one of our heterogeneous s
 
 Each server has at least three connections: one to the **management network,** one to the **access network,** and one to the high-speed **data network.** Additionally, all Ethernet interfaces of reconfigurable accelerator cards are connected to a 100 GbE leaf switch (or 200 GbE for Alveo V80 compute accelerator cards), enabling the exploration of arbitrary network topologies for distributed computing.
 
-![Management, access and data networks.](../imgs/networking.png "Management, access and data networks.")
-*Management, access and data networks.*
+![Management, access and data networks. This diagram is for illustrative purposes and may be subject to change.](../imgs/networking.png "Management, access and data networks. This diagram is for illustrative purposes and may be subject to change.")
+*Management, access and data networks. This diagram is for illustrative purposes and may be subject to change.*
 
 ### Management network
 We refer to the management network as the infrastructure allowing our IT administrators to manage, deploy, update and monitor our cluster **remotely.**
@@ -164,7 +164,7 @@ We refer to the management network as the infrastructure allowing our IT adminis
 The access network is the infrastructure that allows secure remote access to our **users** through SSH.
 
 ### Data network
-For our **high-speed networking** data network, we are using a [spine-leaf architecture](../docs/vocabulary.md#spine-leaf-architecture) where the L2 leaf layer is built with 100 GbE [Cisco Nexus 9336c FX2](https://www.cisco.com/c/en/us/products/switches/nexus-9336c-fx2-switch/index.html) and 200 GbE [Spectrum SN3000 Open](https://www.nvidia.com/en-in/networking/ethernet-switching/spectrum-sn3000/) switches and active optic cables (AOCs):
+For our **high-speed networking** data network, we are using a [spine-leaf architecture](../docs/vocabulary.md#spine-leaf-architecture) where the L2 leaf layer is built with 100 and 200 GbE [Cisco Nexus 9000 Series](https://www.cisco.com/c/en/us/support/switches/nexus-9000-series-switches/series.html) switches, and active optic cables (AOCs):
 
 ![Spine-leaf data network architecture.](../imgs/spine-leaf.png "Spine-leaf data network architecture.")
 *Spine-leaf data network architecture.*
