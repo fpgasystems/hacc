@@ -29,7 +29,6 @@ Five HACCs have been established at some of world’s most prestigious universit
 * [Infrastructure](docs/infrastructure.md#infrastructure)
 * [License](#license)
 * [Operating the cluster](docs/operating-the-cluster.md#operating-the-cluster)
-* [Playbooks 🔒](https://3.basecamp.com/5241674/buckets/25107010/documents/6507506374)
 * [Releases](#releases)
 * [Technical support](docs/technical-support.md)
 * [Usage guidance](#usage-guidance)
