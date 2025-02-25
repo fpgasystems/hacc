@@ -7,8 +7,8 @@
 # Infrastructure
 The ETHZ-HACC comprises build and deployment servers. **Build servers are dedicated to development and bitstream compilation,** providing a robust environment for software and hardware design. **Deployment servers,** on the other hand, host one or more acceleration devices, enabling **high-performance execution of workloads.** This separation ensures an efficient workflow, allowing developers to compile and test their applications on build servers before deploying them to accelerator-equipped machines for execution.
 
-![ETHZ-HACC infrastructure. This diagram is for illustrative purposes and may be subject to change. Please refer to the table below for the specific server configuration](../imgs/infrastructure.png "ETHZ-HACC infrastructure. This diagram is for illustrative purposes and may be subject to change. Please refer to the table below for the specific server configuration")
-*ETHZ-HACC infrastructure. This diagram is for illustrative purposes and may be subject to change. Please refer to the table below for the specific server configuration*
+![ETHZ-HACC infrastructure. This diagram is for illustrative purposes and may be subject to change. Please refer to the table below for the specific server configuration.](../imgs/infrastructure.png "ETHZ-HACC infrastructure. This diagram is for illustrative purposes and may be subject to change. Please refer to the table below for the specific server configuration.")
+*ETHZ-HACC infrastructure. This diagram is for illustrative purposes and may be subject to change. Please refer to the table below for the specific server configuration.*
 
 ## Build servers
 Build servers are dedicated for development and bitstream compilation purposes. Multiple users can access this machine simultaneously **without booking it first.** Please only use the HACC build servers if you do not have access to similar resources at your research institution: too many users running large jobs on this machine will likely cause builds to run slowly—or sometimes to fail. Also, avoid using the build servers for debugging or simulating your hardware.
@@ -158,10 +158,8 @@ The USB - JTAG connection allows granted users to interact directly with the FPG
 ### HACC boxes architecture
 The following picture details the architecture of the one of our heterogeneous servers (specifically, hacc-box-01), which is equipped with 2x EPYC Milan CPUs, 4x [Instinct MI210 GPUs,](https://www.amd.com/system/files/documents/amd-instinct-mi210-brochure.pdf) 1x 100 GbE NIC, 2x [Alveo U55C FPGAs,](https://www.xilinx.com/applications/data-center/high-performance-computing/u55c.html) and 2x [Versal VCK5000 Adaptive SoCs](https://www.xilinx.com/products/boards-and-kits/vck5000.html).
 
-![Server architecture of hacc-box-01.](../imgs/hacc-boxes.png "Server architecture of hacc-box-01.")
-*Server architecture of hacc-box-01.*
-
-This diagram can also serve as a reference for the architecture of other HACC boxes.
+![Server architecture of hacc-box-01. This diagram can also serve as a reference for the architecture of other HACC boxes.](../imgs/hacc-boxes.png "Server architecture of hacc-box-01. This diagram can also serve as a reference for the architecture of other HACC boxes.")
+*Server architecture of hacc-box-01. This diagram can also serve as a reference for the architecture of other HACC boxes.*
 
 ## Networking
 
