@@ -6,7 +6,7 @@
 
 # Operating the cluster
 
-Our HACC is provisioned and managed based on [Infrastructure as Code (IaC)](../docs/vocabulary.md#infrastructure-as-code-iac) and [Ansible Automation Platform (AAP)](../docs/vocabulary.md#ansible-automation-platform-aap). Just as the same source code always generates the same binary, an IaC model generates the same environment every time it deploys. This allows us to reset the whole infrastructure to a defined state at any time. In fact, we can re-install and set up from scratch—without other interaction—all of the servers in our cluster in about an hour.
+The ETHZ-HACC is provisioned and managed based on [Infrastructure as Code (IaC)](../docs/vocabulary.md#infrastructure-as-code-iac) and [Ansible Automation Platform (AAP)](../docs/vocabulary.md#ansible-automation-platform-aap). Just as the same source code always generates the same binary, an IaC model generates the same environment every time it deploys. This allows us to reset the whole infrastructure to a defined state at any time. In fact, we can re-install and set up from scratch—without other interaction—all of the servers in our cluster in about an hour.
 
 The following figure shows a simplified model of HACC’s Ansible automation platform:
 
