@@ -41,18 +41,6 @@ Deployment servers feature high-end multi-core processors, one or more accelerat
   </tr>
 </thead>
 <tbody>
-  <!-- <tr>
-    <td class="tg-0pky"><div align="center">BUILD</div></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center"></td>
-    <td class="tg-0pky" align="center">hacc-build-01</td>
-  </tr> -->
   <tr>
     <td class="tg-0pky"><div align="center">U50D</div></td>
     <td class="tg-0pky" align="center"></td>
@@ -107,18 +95,19 @@ Deployment servers feature high-end multi-core processors, one or more accelerat
   </tr>
   <tr>
     <td class="tg-0pky" ><div align="center">HACC BOXES</div></td>
-    <td class="tg-0pky" align="center">&#9679;</br>&#9679;</br>&nbsp;</td>
-    <td class="tg-0pky" align="center">&nbsp;</br>&nbsp;</br>&#9679;</td>
-    <td class="tg-0pky" align="center">&nbsp;</br>&nbsp;</br>&nbsp;</td>
-    <td class="tg-0pky" align="center">&nbsp;</br>&nbsp;</br>&nbsp;</td>
-    <td class="tg-0pky" align="center">&nbsp;</br>&nbsp;</br>&nbsp;</td>
-    <td class="tg-0pky" align="center">&#9679;</br>&#9679;</br>&nbsp;</td>
-    <td class="tg-0pky" align="center">&nbsp;</br>&#9679;</br>&nbsp;</td>
-    <td class="tg-0pky" align="center">&#9679;</br>&#9679;</br>&#9679;</td>
-    <td class="tg-0pky" align="center">hacc-box-[01:02]</br>hacc-box-03</br>hacc-box-[04:05]</td>
+    <td class="tg-0pky" align="center">&#9679; &#9679;                </br>&#9679;                        </br>&nbsp;                         </br>&nbsp;         </td>
+    <td class="tg-0pky" align="center">&nbsp;                         </br>&nbsp;                         </br>&#9679; &#9679;                </br>&#9679; &#9679;</td>
+    <td class="tg-0pky" align="center">&nbsp;                         </br>&nbsp;                         </br>&nbsp;                         </br>&nbsp;         </td>
+    <td class="tg-0pky" align="center">&nbsp;                         </br>&nbsp;                         </br>&nbsp;                         </br>&nbsp;         </td>
+    <td class="tg-0pky" align="center">&nbsp;                         </br>&nbsp;                         </br>&nbsp;                         </br>&nbsp;         </td>
+    <td class="tg-0pky" align="center">&#9679; &#9679;                </br>&#9679; &#9679;                </br>&nbsp;                         </br>&nbsp;         </td>
+    <td class="tg-0pky" align="center">&nbsp;                         </br>&#9679;                        </br>&nbsp;                         </br>&nbsp;         </td>
+    <td class="tg-0pky" align="center">&#9679; &#9679; &#9679; &#9679;</br>&#9679; &#9679; &#9679; &#9679;</br>&#9679; &#9679; &#9679; &#9679;</br>&#9679; &#9679;</td>
+    <td class="tg-0pky" align="center">hacc-box-[01:02]               </br>                    hacc-box-03</br>                    hacc-box-04</br>    hacc-box-05</td>
     <!-- <td class="tg-0pky">Alveo U55C (2)<br>Versal VCK500 (2)<br>Instinct MI210 (4)</td>  xilinx_u55c_gen3x16_xdma_base_3 <br> xilinx_vck5000_gen4x8_qdma_base_2 -->
   </tr>
 </tbody>
+<tfoot><tr><td colspan="10">&#9679; Number of devices.</td></tr></tfoot>
 </table>
 
 As shown by the table above, there are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including  Adaptive SoCs, FPGAs, and GPUs (please, see the section [HACC boxes architecture](#hacc-boxes-architecture)). 
