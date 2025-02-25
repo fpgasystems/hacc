@@ -155,11 +155,13 @@ Each HACC users can store data on the following directories:
 ### USB - JTAG connectivity
 The USB - JTAG connection allows granted users to interact directly with the FPGA by downloading bitstreams or updating memory content. The correct setup and access of a USB - JTAG connection is essential developers using working with [Vivado workflow.](./vocabulary.md#vivado-workflow)
 
-## HACC boxes architecture
-The following picture details the architecture of the one of our heterogeneous servers (specifically, hacc-box-01) equipped with 2x EPYC Milan CPUs, 4x [Instinct MI210 GPUs,](https://www.amd.com/system/files/documents/amd-instinct-mi210-brochure.pdf) 2x [Alveo U55C FPGAs,](https://www.xilinx.com/applications/data-center/high-performance-computing/u55c.html) and 2x [Versal VCK5000 Adaptive SoCs](https://www.xilinx.com/products/boards-and-kits/vck5000.html) each.
+### HACC boxes architecture
+The following picture details the architecture of the one of our heterogeneous servers (specifically, hacc-box-01), which is equipped with 2x EPYC Milan CPUs, 4x [Instinct MI210 GPUs,](https://www.amd.com/system/files/documents/amd-instinct-mi210-brochure.pdf) 2x [Alveo U55C FPGAs,](https://www.xilinx.com/applications/data-center/high-performance-computing/u55c.html) and 2x [Versal VCK5000 Adaptive SoCs](https://www.xilinx.com/products/boards-and-kits/vck5000.html).
 
 ![Server architecture of hacc-box-01.](../imgs/hacc-boxes.png "Server architecture of hacc-box-01.")
 *Server architecture of hacc-box-01.*
+
+This diagram can also serve as a reference for the architecture of other HACC boxes.
 
 ## Networking
 
