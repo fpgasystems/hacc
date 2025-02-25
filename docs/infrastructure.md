@@ -110,7 +110,7 @@ Deployment servers feature high-end multi-core processors, one or more accelerat
 <tfoot><tr><td colspan="10">&#9679; Number of devices.</td></tr></tfoot>
 </table>
 
-As shown by the table above, there are **two types of deployment servers.** The first type of servers are equipped with only one accelerator card; the second are servers equipped with an heterogeneous variety of accelerators including  Adaptive SoCs, FPGAs, and GPUs (please, see the section [HACC boxes architecture](#hacc-boxes-architecture)). 
+As shown in the table above, some servers are equipped with a single accelerator card, while others feature a heterogeneous mix of accelerators, including Adaptive SoCs, FPGAs, and GPUs. The section [HACC boxes architecture](#hacc-boxes-architecture) provides details on a representative heterogeneous configuration.
 
 ### AMD EPYC
 EPYC is the world’s highest-performing x86 server processor with faster performance for cloud, enterprise, and HPC workloads. To learn more about it, please refer to the [AMD EPYC processors website](https://www.amd.com/en/processors/epyc-server-cpu-family) and its [data sheet.](https://www.amd.com/system/files/documents/amd-epyc-7003-series-datasheet.pdf)
