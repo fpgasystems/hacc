@@ -16,7 +16,7 @@ We use [Infrastructure as Code (IaC)](./vocabulary.md#infrastructure-as-code-iac
 * Deliver stable tests environments rapidly at scale.
 
 ## HACC Development (hdev)
-By using [HACC Development (hdev)](https://github.com/fpgasystems/hdev), you can easily:
+By using [HACC Development (hdev),](https://github.com/fpgasystems/hdev) you can easily:
 
 * **Validate the fundamental functionality** of ETHZ-HACC, ensuring its reliability and performance.
 * Expedite project creation through intuitive multiple-choice dialogs and templates, **streamlining the development of your accelerated applications.**
