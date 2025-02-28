@@ -11,4 +11,4 @@ As mentioned [here,](https://www.xilinx.com/member/xup_research_clusters.html) w
 ![HACC Slack workspace.](../imgs/slack.png "HACC Slack workspace.")
 *HACC Slack workspace.*
 
-For support related to **accounts and accessibility** or **ETHZ-HACC infrastructure,** please contact us at [hacc@ethz.ch](hacc@ethz.ch). 
+For support related to **accounts and accessibility** or **ETHZ-HACC infrastructure,** please contact [hacc@ethz.ch.](hacc@ethz.ch) 
