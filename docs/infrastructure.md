@@ -113,7 +113,7 @@ Deployment servers feature high-end multi-core processors, one or more accelerat
 As shown in the table above, some servers are equipped with a single accelerator card, while others feature a heterogeneous mix of accelerators, including Adaptive SoCs, FPGAs, and GPUs. The section [HACC boxes architecture](#hacc-boxes-architecture) provides details on a representative heterogeneous configuration.
 
 ### AMD EPYC
-EPYC is the world’s highest-performing x86 server processor with faster performance for cloud, enterprise, and HPC workloads. To learn more about it, please refer to the [AMD EPYC processors website](https://www.amd.com/en/processors/epyc-server-cpu-family) and its [data sheet.](https://www.amd.com/system/files/documents/amd-epyc-7003-series-datasheet.pdf)
+EPYC is the world’s highest-performing x86 server processor with faster performance for cloud, enterprise, and HPC workloads. To learn more about it, please refer to the [AMD EPYC processors website](https://www.amd.com/en/products/processors/server/epyc.html) and its [data sheet.](https://www.amd.com/content/dam/amd/en/documents/epyc-business-docs/datasheets/amd-epyc-7003-series-product-datasheet.pdf)
 
 ### Virtex Ultrascale+
 Virtex UltraScale+ devices provide the highest performance and integration capabilities in a 14nm/16nm FinFET node. It also provides registered inter-die routing lines enabling >600 MHz operation, with abundant and flexible clocking to deliver a virtual monolithic design experience. As the industry’s most capable FPGA family, the devices are ideal for compute-intensive applications ranging from 1+Tb/s networking and machine learning to radar/early-warning systems.
@@ -136,16 +136,16 @@ Alveo V80 compute accelerator cards provide exceptional performance for data cen
 ### Storage
 Each HACC users can store data on the following directories:
 
-* ```/home/USERNAME```: directory on an NFS drive accessible by USERNAME from any the HACC servers.
+* ```/home/USERNAME```: directory on an NFS drive accessible by USERNAME from any of the HACC servers.
 * ```/mnt/scratch```: directory on an NFS drive accessible by all users from any of the HACC servers.
 * ```/local/home/USERNAME/```: directory on the local server drive accessible by USERNAME on the HACC server.
 * ```/tmp```: directory on the local server drive accessible by all users on the HACC server. Its content is removed every time the server is restarted.   
 
 ### USB - JTAG connectivity
-The USB - JTAG connection allows granted users to interact directly with the FPGA by downloading bitstreams or updating memory content. The correct setup and access of a USB - JTAG connection is essential developers using working with [Vivado workflow.](./vocabulary.md#vivado-workflow)
+The USB - JTAG connection allows granted users to interact directly with the FPGA by downloading bitstreams or updating memory content. The correct setup and access of a USB - JTAG connection is essential for developers working with the [Vivado workflow.](./vocabulary.md#vivado-workflow)
 
 ### HACC boxes architecture
-The following picture details the architecture of the one of our heterogeneous servers (specifically, hacc-box-01), which is equipped with 2x EPYC Milan CPUs, 4x [Instinct MI210 GPUs,](https://www.amd.com/system/files/documents/amd-instinct-mi210-brochure.pdf) 1x 100 GbE NIC, 2x [Alveo U55C FPGAs,](https://www.xilinx.com/applications/data-center/high-performance-computing/u55c.html) and 2x [Versal VCK5000 Adaptive SoCs](https://www.xilinx.com/products/boards-and-kits/vck5000.html). **The diagram can be used as a reference for the configuration of other HACC boxes.**
+The following picture details the architecture of one of our heterogeneous servers (specifically, hacc-box-01), which is equipped with 2x EPYC Milan CPUs, 4x [Instinct MI210 GPUs,](https://www.amd.com/content/dam/amd/en/documents/instinct-business-docs/product-briefs/instinct-mi210-brochure.pdf) 1x 100 GbE NIC, 2x [Alveo U55C FPGAs,](https://www.xilinx.com/applications/data-center/high-performance-computing/u55c.html) and 2x [Versal VCK5000 Adaptive SoCs](https://www.xilinx.com/products/boards-and-kits/vck5000.html). **The diagram can be used as a reference for the configuration of other HACC boxes.**
 
 ![Server architecture of hacc-box-01. This diagram is for illustrative purposes and may be subject to change.](../imgs/hacc-boxes.png "Server architecture of hacc-box-01. This diagram is for illustrative purposes and may be subject to change.")
 *Server architecture of hacc-box-01. This diagram is for illustrative purposes and may be subject to change.*
