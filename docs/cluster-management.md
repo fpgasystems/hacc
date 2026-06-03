@@ -1,10 +1,4 @@
-<div id="readme" class="Box-body readme blob js-code-block-container">
-<article class="markdown-body entry-content p-3 p-md-6" itemprop="text">
-<p align="right">
-<a href="https://github.com/fpgasystems/hacc#--heterogenous-accelerated-compute-cluster">Back to top</a>
-</p>
-
-# Operating the cluster
+# Cluster Management
 
 The ETHZ-HACC is provisioned and managed based on [Infrastructure as Code (IaC)](../docs/vocabulary.md#infrastructure-as-code-iac) and [Ansible Automation Platform (AAP)](../docs/vocabulary.md#ansible-automation-platform-aap). Just as the same source code always generates the same binary, an IaC model generates the same environment every time it deploys. This allows us to reset the whole infrastructure to a defined state at any time. In fact, we can re-install and set up from scratch—without other interaction—all of the servers in our cluster in about an hour.
 
