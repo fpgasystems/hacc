@@ -47,15 +47,17 @@ Be sure to review the [cluster rules](#docs/cluster-rules.md) before starting.
 ## Documentation
 
 ### The Cluster
-* [Cluster Rules](docs/cluster-rules.md)  TODO
-* [Booking system](docs/booking-system.md)  TODO
-* [Infrastructure](docs/infrastructure.md)  TODO
-* [Devices](docs/devices.md)
-* [Software](docs/software-tools.md)  TODO
-* [Cluster Management](docs/cluster-management.md)  TODO
+* [Cluster guidelines](docs/cluster-guidelines.md)
+* [Booking system](docs/booking-system.md)
+* **Infrastructure**
+    * [Devices](docs/devices.md)
+    * [Topology](docs/topology.md)
+    * [Storage](docs/storage.md)
+    * [Software](docs/software-tools.md)  (coming soon)
+    * [Cluster Management](docs/cluster-management.md)  (coming soon)
 ### Access
 * [Getting Access](#getting-started)
-* [Account Renewal](docs/account-renewal.md)  TODO
+* [Account Renewal](docs/account-renewal.md)
 * [Remote Access](docs/remote-access.md)
 ### Other
 * [Contact](docs/contact.md)
@@ -63,26 +65,10 @@ Be sure to review the [cluster rules](#docs/cluster-rules.md) before starting.
 
 # Acknowledgment and citation
 
-We encourage ETHZ-HACC users to acknowledge the support provided by AMD and ETH Zürich for their research in presentations, papers, posters, and press releases. Please use the following acknowledgment statement and citation.
+We encourage ETHZ-HACC users to acknowledge the support provided by AMD and ETH Zürich for their research in presentations, papers, posters, and press releases. Please use the following acknowledgment statement or similar.
 
-## Acknowledgment
-
-This work was supported in part by AMD under the Heterogeneous Accelerated Compute Clusters (HACC) program (formerly known as the XACC program - Xilinx Adaptive Compute Cluster program)
-
-## Citation
-
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8340448.svg)](https://doi.org/10.5281/zenodo.8340448)
-
-```
-@misc{moya2023hacc,
-  author       = {Javier Moya, Matthias Gabathuler, Mario Ruiz, Gustavo Alonso},
-  title        = {fpgasystems/hacc: ETHZ-HACC},
-  howpublished = {Zenodo},
-  year         = {2023},
-  month        = sep,
-  note         = {\url{https://doi.org/10.5281/zenodo.8340448}},
-  doi          = {10.5281/zenodo.8340448}
-}
+```plain
+This work was supported in part by AMD and ETH Zürich, who provided access to the Heterogeneous Accelerated Compute Cluster (HACC) at ETHZ.
 ```
 
 ## License
