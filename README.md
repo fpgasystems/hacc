@@ -33,7 +33,7 @@ After AMD approves your application, an ETH guest account will be created. You m
 
 Once your ETH account is active, you can access HACC. To reach the cluster, you must be connected to the ETH network, either:
 - On-site at ETH, or
-- Via the ETH VPN (see [Remote Access](#docs/remote-access.md) documentation)
+- Via the ETH VPN (see [Remote Access](docs/remote-access.md) documentation)
 
 #### 4. Using build and experiment servers
 
@@ -41,7 +41,7 @@ When you are connected to the ETH network, you can:
 - SSH directly to one of the build servers, or
 - [Book a time slot](https://hacc-booking.inf.ethz.ch) on one of the experiment servers and then SSH into it during your reservation.
 
-Be sure to review the [cluster rules](#docs/cluster-rules.md) before starting.
+Be sure to review the [cluster rules](docs/cluster-guidelines.md) before starting.
 
 
 ## Documentation
