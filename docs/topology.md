@@ -58,8 +58,8 @@ Our servers are split in two main groups: **build servers and experiment servers
       <td>&nbsp;                         </td>
       <td>&nbsp;                         </td>
       <td>&#9679; </br>  &#9679;         </td>
-      <td>(&#9679; &#9679; &#9679; &#9679;)</br>
-          (&#9679; &#9679;) (&#9679; &#9679;)</td>
+      <td>{&#9679; &#9679; &#9679; &#9679;}</br>
+          {&#9679; &#9679;} {&#9679; &#9679;}</td>
       <td>&nbsp;                         </td>
       <td>&#9679; </br>  &#9679;         </td>
     </tr>
@@ -70,7 +70,7 @@ Our servers are split in two main groups: **build servers and experiment servers
       <td>&#9679; &#9679;                </td>
       <td>&#9679; &#9679;                </td>
       <td>&nbsp;                         </td>
-      <td>(&#9679; &#9679;)              </td>
+      <td>{&#9679; &#9679;}              </td>
       <td>&#9679;</td>
       <td></td>
     </tr>
@@ -90,7 +90,7 @@ Our servers are split in two main groups: **build servers and experiment servers
     <tr>
       <td colspan="10">
         &#9679; Number of devices.<br/>
-        (...) GPU groupings using AMD Infinity Fabric<sup>TM</sup> Link Bridge: 2 port or 4 port versions
+        {...} GPU groupings using AMD Infinity Fabric<sup>TM</sup> Link Bridge: 2 port or 4 port versions
       </td>
     </tr>
   </tfoot>
@@ -116,19 +116,19 @@ All of our FPGAs have an USB-JTAG connection to their host server. This allows u
 
 Our servers connect to multiple networks, each with their intended purpose: management network, access network and data network.
 
-![Management, access and data networks. This diagram is for illustrative purposes and may be subject to change.](../imgs/networking.png "Management, access and data networks. This diagram is for illustrative purposes and may be subject to change.")
+![Management, access and data networks. This diagram is for illustrative purposes and may be subject to change.](../imgs/hacc-network-infrastructure.png "Management, access and data networks. This diagram is for illustrative purposes and may be subject to change.")
 *Management, access and data networks. This diagram is for illustrative purposes and may be subject to change.*
 
-### Management network
-The management network connects to the Board Management Controllers (BMCs) of the servers giving us remote lights-out control, including turning a server on/off without physical presence. This network is not accessible for HACC users.
-
 ### Access network
-The access network is a 10Gbit network that only should be used to reach our servers using SSH. Please avoid this network for any experiment traffic.
+The access network is a 10Gbit network that you can use to reach the servers in the HACC. Please avoid this network for any experiment traffic, use the Data network instead.
+
+### Management network
+The management network connects to the Board Management Controllers (BMCs) of the servers giving us remote lights-out control. This includes turning a server on/off without physical presence. This network is not accessible for HACC users.
 
 ### Data network
 The data network is our **high-speed network intended for experiments**. It consists of a 2-tier Clos network (leaf-spine) underlay with a VXLAN overlay. We tend to connect our high-speed network interfaces to two separate leaf switches to allow for maximum path flexibility (for ECMP experiments). We also aim to support RoCEv2 with congestion signals like ECN. The switches in our experiment network are a mix of 100Gbit and 400Gbit switches.
 
 The interfaces of the high-speed NICs have consistent names: `data1`, `data2`, etc. Currently all interfaces in the data network have an IP address in the same subnet. Tooling is being developed to allow moving an interface to a separate subnet. This will enable routed paths and ECMP experiments.
 
-![Experiment network with leaf-spine architecture](../imgs/hacc-experiment-network.png "Spine-leaf data network architecture. This diagram is for illustrative purposes and may be subject to change.")
+![Experiment network with leaf-spine architecture](../imgs/data-network-topology.png "Spine-leaf data network architecture. This diagram is for illustrative purposes and may be subject to change.")
 *Experiment network with leaf-spine architecture (Still work in progress)*
