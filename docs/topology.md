@@ -40,7 +40,7 @@ Our servers are split in two main groups: **build servers and experiment servers
       <td></td>
     </tr>
     <tr class="tg-0pky" align="center">
-      <td>hacc-u55c-[01:13]</td>
+      <td>hacc-u55c-[01:12]</td>
       <td></td>
       <td></td>
       <td>&#9679;</td>
@@ -51,15 +51,17 @@ Our servers are split in two main groups: **build servers and experiment servers
       <td></td>
     </tr>
     <tr class="tg-0pky" align="center">
-      <td>hacc-gpu-v80-[01:04]           </td>
+      <td>hacc-gpu-v80-[01:02]           </br>
+          hacc-gpu-v80-[03:04]           </td>
       <td>&nbsp;                         </td>
       <td>&nbsp;                         </td>
       <td>&nbsp;                         </td>
       <td>&nbsp;                         </td>
-      <td>&#9679;                        </td>
-      <td>&#9679; &#9679; &#9679; &#9679;<sup>1</sup></td>
+      <td>&#9679; </br>  &#9679;         </td>
+      <td>(&#9679; &#9679; &#9679; &#9679;)</br>
+          (&#9679; &#9679;) (&#9679; &#9679;)</td>
       <td>&nbsp;                         </td>
-      <td>&#9679;</td>
+      <td>&#9679; </br>  &#9679;         </td>
     </tr>
     <tr class="tg-0pky" align="center">
       <td>hacc-gpu-u55c-01               </td>
@@ -68,7 +70,7 @@ Our servers are split in two main groups: **build servers and experiment servers
       <td>&#9679; &#9679;                </td>
       <td>&#9679; &#9679;                </td>
       <td>&nbsp;                         </td>
-      <td>&#9679; &#9679;<sup>2</sup>    </td>
+      <td>(&#9679; &#9679;)              </td>
       <td>&#9679;</td>
       <td></td>
     </tr>
@@ -77,7 +79,7 @@ Our servers are split in two main groups: **build servers and experiment servers
       <td>&#9679;</td>
       <td>&#9679;</td>
       <td></td>
-      <td>&#9679;</td>
+      <td></td>
       <td></td>
       <td></td>
       <td>&#9679;</td>
@@ -88,8 +90,7 @@ Our servers are split in two main groups: **build servers and experiment servers
     <tr>
       <td colspan="10">
         &#9679; Number of devices.<br/>
-        <sup>1</sup> All 4 GPUs are connected using a 4P Infinity Fabric<sup>TM</sup> Link Bridge <br/>
-        <sup>2</sup> GPUs are connected in groups of 2 using a 2P Infinity Fabric<sup>TM</sup> Link Bridge <br/>
+        (...) GPU groupings using AMD Infinity Fabric<sup>TM</sup> Link Bridge: 2 port or 4 port versions
       </td>
     </tr>
   </tfoot>
