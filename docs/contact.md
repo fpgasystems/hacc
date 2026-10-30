@@ -9,6 +9,7 @@ Write an email to `hacc@ethz.ch` and be sure to **use a fitting tag in the subje
 Write your emails with one of the following tags in your subject line, like this: `[Issue]: Can't reach hacc-build-01`.
 
 - `[Issue]`: For issues regarding ETH Accounts, accessing the cluster or a specific server.
+- `[Access]`: For requests to get membership in an existing Linux group or for other permissions.
 - `[Feature]`: For feature requests for the cluster (see note below).
 - `[Info]`: For requesting info about the infrastucutre.
 - `[Account]`: For requests regarding your ETH account, see [Account Renewal](./account-renewal.md).

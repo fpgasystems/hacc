@@ -41,7 +41,15 @@ When you are connected to the ETH network, you can:
 - SSH directly to one of the build servers, or
 - [Book a time slot](https://hacc-booking.inf.ethz.ch) on one of the experiment servers and then SSH into it during your reservation.
 
-Be sure to review the [cluster rules](docs/cluster-guidelines.md) before starting.
+> [!NOTE]
+> Write the full domain name of a server when connecting to the servers over SSH, ie. `ssh username@hacc-build-01.inf.ethz.ch` and `ssh username@hacc-u55c-03.inf.ethz.ch`.
+
+> [!IMPORTANT]
+> Be sure to review the [cluster rules](docs/cluster-guidelines.md) before starting.
+
+#### 5. Elevated privileges
+
+By default all users of the HACC can use the GPUs using ROCm and the FPGAs using XRT. If you'd like to use [Coyote](https://github.com/fpgasystems/Coyote) or another alternative shell, you'll need to request access to the JTAG to allow you to upload these custom bitstreams to the FPGA. These permissions are controlled by our `vivado_developers` group. Write us an email using the `[Access]` email tag as defined in [our contact page](docs/contact.md)
 
 
 ## Documentation
